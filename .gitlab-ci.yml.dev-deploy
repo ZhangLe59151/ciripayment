@@ -1,0 +1,45 @@
+image: node:8.12.0-alpine
+
+before_script:
+  - "which ssh-agent || ( apk update && apk add openssh-client )"
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - ssh-keyscan -H $DEPLOY_SERVER_DEV >> ~/.ssh/known_hosts
+
+stages:
+  - build
+  - deploy
+build:
+  stage: build
+  script:
+    #- rm -rf frontend
+    - npm install
+    - npm run build
+    - tar -zcvf frontend.tar.gz ./dist/*
+    - mkdir -p build
+    - mv frontend.tar.gz ./build/
+    - scp ./build/frontend.tar.gz silot@$DEPLOY_SERVER_DEV:/silot/mvp/self/
+
+  artifacts:
+    name: "mvp-frontend"
+    paths:
+      - $PWD/build/frontend.tar.gz
+  #when: manual
+  only:
+    # - deploy
+    - dev-deploy
+
+deploy:
+  stage: deploy
+  script:
+    - ls -la
+    - cd scripts
+    - ls -la
+    - sh deploy.sh
+    - exit
+  #when: manual
+  only:
+    # - deploy
+    - dev-deploy

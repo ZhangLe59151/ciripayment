@@ -1,0 +1,6 @@
+{
+  "noSelectServiceErrorMsg": "Select at least one service to proceed.",
+  "noSelectPaymentChannelErrorMsg": "At least one payment channel needs to be selected.",
+  "marketingServiceErrorMsg": "There are errors in your form. Please correct them before trying again.",
+  "OTPErrorMsg": "OTP request too frequent. Please wait for a minute and try again."
+}

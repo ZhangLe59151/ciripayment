@@ -1,0 +1,172 @@
+export var MCC = {
+  "mcc-07": [
+    { name: "Landscaping and Horticulture", id: "0780" },
+    { name: "Veterinary Services", id: "0742" }
+  ],
+  "mcc-15": [
+    { name: "Carpentry Contractor", id: "1750" },
+    { name: "Concrete Work Contractor", id: "1771" },
+    { name: "General Contractors - Residential and Commercial", id: "1520" }
+  ],
+  "mcc-17": [
+    { name: "Electrical Contractor", id: "1731" },
+    { name: "Heating, Plumbing and Aircondition Contractor", id: "1711" },
+    { name: "Mansonry, Stonework, Tile Setting, Plastering and Insulation Contractor", id: "1740" },
+    { name: "Roofing, Siding and Sheetmetal Work Constructor", id: "1761" },
+    { name: "Special Trade Contractor (Not Elsewhere Classified)", id: "1799" }
+  ],
+  "mcc-23": [
+    { name: "Tailors, Seamstresses, Mending, and Alteration", id: "5967" }
+  ],
+  "mcc-25": [
+    { name: "Office and Commercial Furniture", id: "5697" }
+  ],
+  "mcc-27": [
+    { name: "Digital Goods - Applications (Excludes Game)", id: "5817" },
+    { name: "Digital Goods - Large Digital Goods Merchant", id: "5818" },
+    { name: "Digital Goods Media - Books, Movie, Music", id: "5815" },
+    { name: "Miscellaneous Publish", id: "2731" }
+  ],
+  "mcc-28": [
+    { name: "Specialty Cleaning, Polishing and Sanitization Preparation", id: "2842" }
+  ],
+  "mcc-37": [
+    { name: "Motor Vehicle Supplies and New Parts", id: "5013" }
+  ],
+  "mcc-38": [
+    { name: "Medical, Dental, Opthalmic and Hospital Equipment and Supplies", id: "5047" }
+  ],
+  "mcc-48": [
+    { name: "Cable, Satellite, and Other Pay Television / Streaming Services", id: "4899" }
+  ],
+  "mcc-52": [
+    { name: "Glass, Paint, and Wallpaper Store", id: "5231" },
+    { name: "Hardware Store", id: "5251" },
+    { name: "Lumber and Other Building Materials", id: "5211" },
+    { name: "Nurseries and Lawn and Garden Supply Store", id: "5261" }
+  ],
+  "mcc-53": [
+    { name: "Discount Store", id: "5310" },
+    { name: "Miscellaneous General Merchandise", id: "5399" },
+    { name: "Variety Stores", id: "5331" }
+  ],
+  "mcc-54": [
+    { name: "Bakeries", id: "5462" },
+    { name: "Candy, Nut and Confectionery Store", id: "5441" },
+    { name: "Dairy Products Store", id: "5451" },
+    { name: "Miscellaneous Food Stores - Convenience Stores and Specialty Market", id: "5499" }
+  ],
+  "mcc-55": [
+    { name: "Boat Dealers", id: "5551" },
+    { name: "Car and Truck Dealers (Used Only) Sales", id: "5521" },
+    { name: "Car and Truck Dealers (New / Used) Sales, Service, Repairs, Parts, Leasing", id: "5511" },
+    { name: "Home Supply Warehouse Store", id: "5200" },
+    { name: "Motorcycle Shops and Dealers", id: "5571" }
+  ],
+  "mcc-56": [
+    { name: "Children's and Infants' Wear Store", id: "5642" },
+    { name: "Family Clothing Store", id: "5651" },
+    { name: "Floor Covering Store", id: "5713" },
+    { name: "Furries and Fur Shop", id: "5581" },
+    { name: "Sports and Riding Apparel Store", id: "5655" },
+    { name: "Shoe Store", id: "5661" },
+    { name: "Men's and Boys' Clothing and Accessories Stores", id: "5611" },
+    { name: "Men's and Women's Clothing Store", id: "5691" },
+    { name: "Miscellaneous Apparel and Accessory Shop", id: "5699" },
+    { name: "Wig and Toupee", id: "5698" },
+    { name: "Women's Accessory and Specialty Shop", id: "5631" },
+    { name: "Women's Ready-To-Wear Store", id: "5621" }
+  ],
+  "mcc-57": [
+    { name: "Computer Software Store", id: "5734" },
+    { name: "Drapery, Window Covering and Upholstery Store", id: "5714" },
+    { name: "Furniture, Home Furnishings and Equipment Stores, Except Appliances", id: "5722" },
+    { name: "Household Appliance Store", id: "5734" },
+    { name: "Miscellaneous Home Furnishing Speciality Store", id: "5719" },
+    { name: "Music Stores - Musical Instruments, Pianos, and Sheet Music", id: "5733" },
+    { name: "Record Store", id: "5735" }
+  ],
+  "mcc-58": [
+    { name: "Drinking Places (Alcoholic Beverages) - Bars, Tavern, Nightclubs, Cocktail Lounges and Discotheques", id: "5813" },
+    { name: "Eating Place and Restaurant", id: "5812" },
+    { name: "Fast Food Restaurants", id: "5814" }
+  ],
+  "mcc-59": [
+    { name: "Antique Shop - Sales, Repairs and Restoration Services", id: "5932" },
+    { name: "Art Dealer and Gallery", id: "5971" },
+    { name: "Artist's Supply and Craft Shop", id: "5970" },
+    { name: "Bicycle Shops - Sales and Services", id: "5940" },
+    { name: "Book Store", id: "5942" },
+    { name: "Camera and Photographic Supply Store", id: "5946" },
+    { name: "Cigar Store and Stand", id: "5993" },
+    { name: "Duty Free Store", id: "5309" },
+    { name: "Drug Store and Pharmacy", id: "5912" },
+    { name: "Electronic Store", id: "5732" },
+    { name: "Florist", id: "5992" },
+    { name: "Hobby, Toy and Game Shop", id: "5945" },
+    { name: "Luggage and Leather Godds Store", id: "5948" },
+    { name: "Miscellaneous and Specialty Retail Store", id: "5999" },
+    { name: "News Dealer and Newsstand", id: "5994" },
+    { name: "Opticians, Optic Goods, and Eyeglasses", id: "8043" },
+    { name: "Package Store - Beer, Wine, and Liquor", id: "5921" },
+    { name: "Pawn Shop", id: "5933" },
+    { name: "Religious Goods Store", id: "5973" },
+    { name: "Stationery Store, Office and School Supply Store", id: "5943" },
+    { name: "Used Merchandise and Secondhand Stores", id: "5931" }
+  ],
+  "mcc-72": [
+    { name: "Carpet and Upholstery Cleaning", id: "7217" },
+    { name: "Clothing Rental - Costumes, Uniforms, Formal Wear", id: "7296" },
+    { name: "Dating Services", id: "7273" },
+    { name: "Dry Cleaner", id: "7216" },
+    { name: "Health and Beauty Spas", id: "7298" },
+    { name: "Laundry, Cleaning, and Garment Services", id: "7210" },
+    { name: "Massage Parlor", id: "7297" },
+    { name: "Miscellaneous Personal Services", id: "7299" },
+    { name: "Photographic Studio", id: "7221" },
+    { name: "Shoe Repair Shops, Shoe Shine Parlar, and Hat Cleaning Shop", id: "7251" },
+    { name: "Tax Preparation Services", id: "7276" }
+  ],
+  "mcc-73": [
+    { name: "Business Services (Not Elsewhere Classified)", id: "7399" },
+    { name: "Commercial Photography, Art, and Graphics", id: "7333" },
+    { name: "Computer Maintanence, Repair and Services (Not Elsewhere Classifed)", id: "7379" },
+    { name: "Computer Programming, Data Processing, and Integrated System Design Services", id: "7372" },
+    { name: "Exterminating and Disinfecting Services", id: "7342" },
+    { name: "Information Retreival Services", id: "7375" },
+    { name: "Quick Copy, Reproduction, and Bluepriting Services", id: "7338" }
+  ],
+  "mcc-75": [
+    { name: "Automotive Paint Shop", id: "7535" },
+    { name: "Automotive Service Shop", id: "7538" },
+    { name: "Car Washes", id: "7542" },
+    { name: "Tire Retreading and Repair Shop", id: "7534" }
+  ],
+  "mcc-76": [
+    { name: "Antique Reproduction", id: "5937" },
+    { name: "Air Conditioning and Refridgeration Repari Shop", id: "7623" },
+    { name: "Electronics Repair Shop", id: "7622" },
+    { name: "Electrical and Small Appliance Repair Shop", id: "7629" },
+    { name: "Furniture - Reupholstery, Repair, and Refinishing", id: "7641" },
+    { name: "Sporting Goods Store", id: "5941" },
+    { name: "Watch, Clock and Jewelry", id: "7631" },
+    { name: "Welding Services", id: "7692" }
+  ],
+  "mcc-78": [
+    { name: "DVD / Video Tape Rental Store", id: "7841" }
+  ],
+  "mcc-79": [
+    { name: "Billard and Pool Establishment", id: "7932" },
+    { name: "Boat Rental and Leasing", id: "4457" },
+    { name: "Bowling Alley", id: "7933" }
+  ],
+  "mcc-80": [
+    { name: "Chiropractor", id: "8041" },
+    { name: "Dentist and Orthodentist", id: "8021" },
+    { name: "Doctors and Physicians (Not Elsewhere Specified)", id: "8042" },
+    { name: "Medical Services and Health Practitioner", id: "8099" },
+    { name: "Optometrist and Ophthalmologist", id: "8042" },
+    { name: "Osteopath", id: "8031" },
+    { name: "Podiatrist and Chiropodist", id: "8049" }
+  ]
+}

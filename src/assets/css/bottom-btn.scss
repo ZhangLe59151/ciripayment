@@ -1,0 +1,52 @@
+.bottom-btn-fixed {
+  position: fixed;
+  bottom: 100px;
+  left: 10%;
+  width: 80%;
+  border-radius: 50px;
+  background-color: #053c5e;
+  color: #fff;
+}
+
+.bottom-btn {
+  margin: 20px 10%;
+  width: 80%;
+  border-radius: 50px;
+  background-color: #053c5e;
+  color: #fff;
+  &.btn-cancel {
+    background-color: #fff;
+    color: #053c5e;
+    border: 1px solid #053c5e;
+    margin-bottom: 15px;
+  }
+
+}
+.bottom-btn-stackable {
+  margin: 10px;
+  width: 80%;
+  border-radius: 50px;
+  background-color: #053c5e;
+  color: #fff;
+  &.btn-cancel {
+    background-color: #fff;
+    color: #053c5e;
+    border: 1px solid #053c5e;
+    margin-bottom: 15px;
+  }
+}
+
+
+.bottom-btn-boxed {
+  margin-top: 15px;
+  width: 80%;
+  border-radius: 4px;
+  background-color: #053c5e;
+  color: #fff;
+  &.btn-cancel {
+    background-color: #fff;
+    color: #053c5e;
+    border: 1px solid #053c5e;
+    margin-bottom: 15px;
+  }
+}

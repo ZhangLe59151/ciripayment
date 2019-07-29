@@ -1,0 +1,118 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Avenir-Book, "Source Sans Pro", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+}
+
+.box {
+  width: 80%;
+  padding: 33px 0;
+  margin-left: 10%;
+  border: 1px solid #053c5e;
+  margin-top: 20px;
+  border-radius: 60px;
+  font-size: 17px;
+  color: #053c5e;
+}
+
+.el-input--small .el-input__inner {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+}
+
+.van-nav-bar .van-icon,
+.van-nav-bar__text {
+  color: #929292;
+}
+
+.bottom-btn {
+  border-radius: 50px;
+  background-color: #053c5e;
+  color: #fff;
+}
+
+.el-form--label-top label.el-form-item__label {
+  // margin-left: 10%;
+  padding: 0;
+}
+
+.spec-mobile.el-form-item--small .el-form-item__content {
+  display: inline-block;
+}
+
+.van-button.van-button--primary {
+  background-color: #ffffff;
+  border: 1px solid #053c5e;
+  color: #053c5e;
+  border-radius: 50px;
+}
+
+.van-checkbox__label {
+  color: #606266;
+  margin-left: 0;
+  position: relative;
+  top: -22px;
+  left: 22px;
+  font-size: 13px;
+}
+
+.van-checkbox__icon--round .van-icon {
+  border-radius: 0;
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+}
+
+.el-step__icon.is-text {
+  border: 0 !important;
+}
+
+.el-step__line {
+  width: 70%;
+  margin-left: 15%;
+}
+
+.el-step__main {
+  .el-step__title {
+    color: #929292;
+    font-size: 11px;
+    font-weight: normal !important;
+  }
+
+  .el-step__title.is-process,
+  .el-step__title.is-finish {
+    color: #26c485;
+    border-color: #26c485;
+  }
+}
+
+.el-step .el-step__head.is-finish {
+  border-color: #26c485;
+}
+
+.el-step__head.is-finish .el-step__line {
+  background-color: #26c485;
+}
+
+#app {
+
+  // modify van steps style
+  .el-step__title {
+    font-size: 12px;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 20ssspx;
+  }
+
+  // modify textarea style in enter-info
+  .enter-info .el-textarea__inner {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0px;
+  }
+}
