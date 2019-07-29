@@ -241,7 +241,7 @@
       </el-form>
     </div>
 
-    <div  class="Settlement">
+    <div  class="settlement">
       <el-form
         label-width="0px"
         status-icon
@@ -254,7 +254,23 @@
         <el-card class="box-card">
           <div class="title">Settlement</div>
           <div class="title-line"></div>
-          Choose how you want to receive your revenue.
+          <div class="description" style="text-align: center; display: block;">
+            Choose how you want to receive your revenue.
+          </div>
+          <el-radio-group v-model="settlement" size="medium" fill="#0AA877">
+            <el-radio :label="1">
+                Manual Settlement (Recommended)
+              <div class="description">
+                Manually transfer all revenue into your balance. Enjoy 10% lower servicing fee on all payment channels.
+              </div>
+            </el-radio>
+            <el-radio :label="2">
+                Auto Settlement
+              <div class="description">
+                Automatically transfer all revenue into your balance at the end of each day.
+              </div>
+            </el-radio>
+          </el-radio-group>
         </el-card>
 
       </el-form>
@@ -294,7 +310,8 @@ export default {
       shopUrl: this.$store.state.form.shopUrl,
       shopSize: this.$store.state.form.shopSize,
       shopStatus: this.$store.state.form.shopUrl ? 2 : 0,
-      ls: window.localStorage
+      ls: window.localStorage,
+      settlement: 0
     };
   },
   computed: {
@@ -779,6 +796,15 @@ export default {
         top: 16px;
         margin-left: 5px;
       }
+    }
+  }
+
+  .settlement {
+    .description {
+      color: #68737D;
+      font-size: 14px;
+      line-height: 22px;
+      margin: 10px 0;
     }
   }
 
