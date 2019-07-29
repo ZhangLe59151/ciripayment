@@ -79,7 +79,7 @@ export default {
     return {
       show: false,
       form: {},
-      phoneValidationPattern: this.$store.state.phone.thaiExp,
+      phoneValidationPattern: this.$store.state.phone.thaiExp
     };
   },
   methods: {
