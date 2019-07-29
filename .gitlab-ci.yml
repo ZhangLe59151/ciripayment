@@ -22,7 +22,7 @@ build:
     - scp ./build/frontend.tar.gz silot@$DEPLOY_SERVER_DEV:/silot/mvp/self/
 
   artifacts:
-    name: "mvp-frontend"
+    name: "merchant-portal"
     paths:
       - $PWD/build/frontend.tar.gz
   #when: manual
