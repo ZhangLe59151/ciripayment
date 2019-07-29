@@ -240,6 +240,25 @@
 
       </el-form>
     </div>
+
+    <div  class="Settlement">
+      <el-form
+        label-width="0px"
+        status-icon
+        :model="form"
+        ref="elFormMarketing"
+        size="small"
+        label-position="top"
+        style="width: 90%; margin-left: 5%; margin-top: 10px;"
+      >
+        <el-card class="box-card">
+          <div class="title">Settlement</div>
+          <div class="title-line"></div>
+          Choose how you want to receive your revenue.
+        </el-card>
+
+      </el-form>
+    </div>
     <van-button
       size="large"
       class="bottom-btn"
