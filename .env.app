@@ -1,0 +1,2 @@
+VUE_APP_ROUTEMODE=hash
+VUE_APP_OUTPUTDIR=../mota/www

@@ -1,7 +1,7 @@
-import Vue from "vue"
-import Router from "vue-router"
+import Vue from "vue";
+import Router from "vue-router";
 
-Vue.use(Router)
+Vue.use(Router);
 
 const routeArr = [
   {
@@ -176,28 +176,27 @@ const routeArr = [
     name: "PageNotFound",
     component: () => import("@/views/404.vue")
   }
-]
+];
 
 const router = new Router({
-  mode: "history",
+  mode: process.env.VUE_APP_ROUTEMODE,
   base: process.env.BASE_URL,
   routes: routeArr,
   redirectToHome(message) {
-    this.push({ name: "Welcome" })
+    this.push({ name: "Welcome" });
   },
   redirectToLoginView(message) {
-    this.push({ name: "Login" })
+    this.push({ name: "Login" });
   }
-
 });
 
 router.beforeEach((to, from, next) => {
   // the pages can enter directly without logined
   if (["PageNotFound", "ServerError"].includes(to.name)) {
-    next()
-    return false
+    next();
+    return false;
   }
-  next()
-})
+  next();
+});
 
-export default router
+export default router;
