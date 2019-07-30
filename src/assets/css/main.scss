@@ -10,6 +10,8 @@ body {
   text-align: center;
 }
 
+@import "../../assets//iconfont/iconfont.css";
+
 [class*=van-hairline]::after {
   border: 2px solid #ebedf0;
 }

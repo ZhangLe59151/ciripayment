@@ -6,8 +6,7 @@ Vue.use(Router);
 const routeArr = [
   {
     path: "/",
-    name: "Welcome",
-    component: () => import("@/views/Welcome.vue")
+    redirect: "/home"
   },
   // Standard Product
   {
@@ -23,7 +22,8 @@ const routeArr = [
   {
     path: "/verified-first-time",
     name: "VerifiedFirstTime",
-    component: () => import("@/views-standard-product/VerifiedFirstTimeLogin.vue")
+    component: () =>
+      import("@/views-standard-product/VerifiedFirstTimeLogin.vue")
   },
   {
     path: "/create-password-sp",
@@ -206,7 +206,18 @@ const routeArr = [
     path: "/server-error",
     name: "ServerError",
     component: () => import("@/views/500.vue")
-  },
+  }
+];
+
+const AppRouteArr = [
+  {
+    path: "/home",
+    name: "Home",
+    component: () => import("@/views-standard-product/Home.vue")
+  }
+];
+
+const ErrorRouteArr = [
   {
     path: "/*",
     name: "PageNotFound",
@@ -217,7 +228,7 @@ const routeArr = [
 const router = new Router({
   mode: process.env.VUE_APP_ROUTEMODE,
   base: process.env.BASE_URL,
-  routes: routeArr,
+  routes: routeArr.concat(AppRouteArr, ErrorRouteArr),
   redirectToHome(message) {
     this.push({ name: "Welcome" });
   },

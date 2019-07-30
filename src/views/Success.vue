@@ -118,7 +118,6 @@ export default {
 @import "../assets/css/bottom-btn.scss";
 .success-page {
   text-align: center;
-  // margin-top: 30%;
   font-size: 120px;
   position: relative;
   top: 40px;
