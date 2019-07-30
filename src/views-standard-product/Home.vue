@@ -1,11 +1,16 @@
 <template>
   <div class="app-home">
     <app-home-header @ShowPopup="ShowPopup"></app-home-header>
-    <app-home-balance :settlementType="settlementType"></app-home-balance>
+    <app-home-balance
+      :settlementType="settlementType"
+      v-if="$store.state.deviceType === 'APP'"
+    />
     <app-home-progress
       :status="applicationStatus"
       :class="appPosition"
     />
+
+    <app-home-download />
     <app-tab-bar></app-tab-bar>
 
   </div>
@@ -17,7 +22,7 @@ import AppTabBar from "@/components/AppTabBar";
 import AppHomeHeader from "@/components/AppHomeHeader";
 import AppHomeBalance from "@/components/AppHomeBalance";
 import AppHomeProgress from "@/components/AppHomeProgress";
-
+import AppHomeDownload from "@/components/AppHomeDownload";
 export default {
   name: "AppHome",
 
@@ -25,7 +30,8 @@ export default {
     AppTabBar,
     AppHomeHeader,
     AppHomeBalance,
-    AppHomeProgress
+    AppHomeProgress,
+    AppHomeDownload
   },
   data() {
     return {
@@ -40,6 +46,9 @@ export default {
   },
   computed: {
     appPosition() {
+      if (this.$store.state.deviceType !== "APP") {
+        return "app-position-web";
+      }
       return this.settlementType === "1"
         ? "app-position-auto-settlement"
         : "app-position";
@@ -60,6 +69,11 @@ export default {
 
   .app-position-auto-settlement {
     margin-top: 98px;
+  }
+
+  .app-position-web {
+    position: relative;
+    top: -60px;
   }
 }
 </style>

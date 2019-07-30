@@ -5,7 +5,10 @@
       Welcome
     </div>
 
-    <div class="icon">
+    <div
+      class="icon"
+      v-if="$store.state.deviceType === 'APP'"
+    >
 
       <i
         class="iconfont iconQR"

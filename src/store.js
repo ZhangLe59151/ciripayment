@@ -1,16 +1,32 @@
-import Vue from "vue"
-import Vuex from "vuex"
+import Vue from "vue";
+import Vuex from "vuex";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    deviceType: process.env.VUE_APP_DEVICETYPE,
     clientInfo: {
       bankName: "ABC Bank"
     },
     serviceOverviewVo: {},
     form: {},
-    nationalCodeList: ["+66", "+65", "+62", "+880", "+855", "+86", "+852", "+91", "+81", "+82", "+60", "+63", "+84", "+95"],
+    nationalCodeList: [
+      "+66",
+      "+65",
+      "+62",
+      "+880",
+      "+855",
+      "+86",
+      "+852",
+      "+91",
+      "+81",
+      "+82",
+      "+60",
+      "+63",
+      "+84",
+      "+95"
+    ],
     nationalCode: require("@/assets/data/nationalCode.json"),
     phone: {
       regExp: /^(0[1-9]{1}[0-9]{8}|[1-9]{1}[0-9]{8}|[1-9]{1}[0-9]{7})$/,
@@ -168,18 +184,18 @@ export default new Vuex.Store({
   },
   mutations: {
     InitForm(state) {
-      var originForm = state.form !== null ? state.form : {}
-      var formString = window.localStorage.getItem("form")
-      formString = formString !== null ? formString : "{}"
-      state.form = Object.assign(originForm, JSON.parse(formString))
+      var originForm = state.form !== null ? state.form : {};
+      var formString = window.localStorage.getItem("form");
+      formString = formString !== null ? formString : "{}";
+      state.form = Object.assign(originForm, JSON.parse(formString));
     },
     UpdateForm(state, updateForm) {
-      state.form = Object.assign(state.form, updateForm)
-      window.localStorage.setItem("form", JSON.stringify(state.form))
+      state.form = Object.assign(state.form, updateForm);
+      window.localStorage.setItem("form", JSON.stringify(state.form));
     },
     ClearForm(state) {
-      state.form = {}
-      window.localStorage.clear()
+      state.form = {};
+      window.localStorage.clear();
     },
     removeUselessForm(state) {
       var keys = [
@@ -189,18 +205,18 @@ export default new Vuex.Store({
         "nationalCode",
         "phone",
         "serviceType"
-      ]
-      var form = {}
+      ];
+      var form = {};
       // eslint-disable-next-line semi-spacing
       for (var i = 0; i < keys.length; i++) {
         if (state.form[`${keys[i]}`]) {
-          form[`${keys[i]}`] = state.form[`${keys[i]}`]
+          form[`${keys[i]}`] = state.form[`${keys[i]}`];
         }
       }
-      state.form = form
-      window.localStorage.clear()
-      window.localStorage.setItem("form", JSON.stringify(form))
+      state.form = form;
+      window.localStorage.clear();
+      window.localStorage.setItem("form", JSON.stringify(form));
     }
   },
   actions: {}
-})
+});
