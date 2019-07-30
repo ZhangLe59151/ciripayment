@@ -35,7 +35,7 @@
           >
               <span
                 style="margin: 0 10px;"
-              >+66</span>
+              >{{form.nationalCode}}</span>
             <i class="el-icon-caret-bottom" style="color: #929292"></i>
           </span>
             <el-input
@@ -74,7 +74,7 @@
         </el-form-item>
       </el-form>
 
-      <div class="resend-active">
+      <div class="resend-active" @click="handleForgot">
         Forgot Password?
       </div>
     </div>
@@ -232,6 +232,11 @@ export default {
         this.passwordType = "text";
       }
       this.showingPassword = !this.showingPassword;
+    },
+    handleForgot() {
+      this.$router.push({
+        name: "ForgotPasswordSP"
+      });
     }
   },
   created() {

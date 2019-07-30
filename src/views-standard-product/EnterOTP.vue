@@ -35,7 +35,7 @@
           >
               <span
                 style="margin: 0 10px;"
-              >+66</span>
+              >{{form.nationalCode}}</span>
             <i class="el-icon-caret-bottom" style="color: #929292"></i>
           </span>
             <el-input
@@ -58,7 +58,6 @@
         class="tips-error"
       >{{otpErrorMsg}}
       </div>
-      <div class="phone">{{this.$store.state.form.nationalCode}} {{this.$store.state.form.phone}}</div>
       <div class="sub-tips">Enter OTP</div>
 
       <van-password-input
@@ -85,7 +84,7 @@
       <van-button
         size="large"
         class="bottom-btn"
-        @click=""
+        @click="handleVerifyMock"
       >
         Create Account
       </van-button>
@@ -282,6 +281,30 @@ export default {
     onDelete() {
       this.value = this.value.slice(0, this.value.length - 1);
     },
+
+    handleVerifyMock() {
+      var otpCodeErrorMessage =
+        "Incorrect OTP. Please double check and try again.";
+      if (this.value === "" || this.value.length !== 6) {
+        this.$notify({
+          message: otpCodeErrorMessage,
+          duration: 1000
+        });
+        return false;
+      }
+      this.$api
+        .verifyOtp({
+          phoneNumber:
+            this.$store.state.form.nationalCode + this.$store.state.form.phone,
+          otpCode: this.value
+        })
+        .then(res => {
+          if (res.data.code === 200) {
+            this.$router.push({ name: "CreatePasswordSP" });
+          }
+        });
+    },
+
     handleVerify() {
       var otpCodeErrorMessage =
           "Incorrect OTP. Please double check and try again.";
@@ -343,10 +366,10 @@ export default {
                         })
                         .then(res => {
                           if (res.data.code === 10050) {
-                            this.$router.push({ name: "CreatePassword" });
+                            this.$router.push({ name: "CreatePasswordSP" });
                           }
                         });
-                      this.$router.push({ name: "MerchantPortal" });
+                      this.$router.push({ name: "EnterPasswordSP" });
                     });
 
                   return false;

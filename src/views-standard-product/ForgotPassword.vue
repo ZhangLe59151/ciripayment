@@ -29,7 +29,7 @@
           >
               <span
                 style="margin: 0 10px;"
-              >+66</span>
+              >{{form.nationalCode}}</span>
             <i class="el-icon-caret-bottom" style="color: #929292"></i>
           </span>
           <el-input
@@ -93,6 +93,17 @@ export default {
     onDelete() {
       this.value = this.value.slice(0, this.value.length - 1);
     }
+  },
+  created() {
+    // Reset form content to clear previous submitted information
+    this.$store.commit("InitForm");
+    const form = Object.assign({}, this.$store.state.form);
+    Object.keys(form).map(item => {
+      if (!form[`${item}`]) {
+        form[`${item}`] = "";
+      }
+    });
+    this.form = Object.assign({}, form);
   }
 }
 </script>
