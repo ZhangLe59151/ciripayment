@@ -7,12 +7,29 @@
 
     <div class="icon">
 
-      <i class="iconfont iconQR"></i>
-      <i class="iconfont iconscan"></i>
+      <i
+        class="iconfont iconQR"
+        @click="handleClick"
+      />
+      <i
+        class="iconfont iconscan"
+        @click="handleClick"
+      />
 
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    handleClick() {
+      this.$emit("ShowPopup");
+    }
+  }
+};
+</script>
+
 
 <style lang="scss" scoped>
 @mixin item-position {
