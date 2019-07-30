@@ -40,9 +40,9 @@ export default {
           label: "Services"
         },
         {
-          to: "/profiles",
-          class: "iconfont iconprofile",
-          label: "Profile"
+          to: "/settings",
+          class: "iconfont iconsetting",
+          label: "Settings"
         }
       ]
     };
