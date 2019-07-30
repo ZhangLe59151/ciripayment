@@ -1,5 +1,8 @@
 <template>
-  <div class="app-home-balance">
+  <div
+    class="app-home-balance"
+    v-if="settlementType === '0'"
+  >
     <div
       class="balance"
       v-for="item in list"
@@ -10,6 +13,18 @@
       <div class="unit">THB</div>
     </div>
   </div>
+  <div
+    v-else
+    class="app-home-balance app-home-auto-settle"
+  >
+    <div class="balance">
+      <div class="label">{{autoSettle.label}}</div>
+      <div class="value">{{autoSettle.value}}</div>
+      <div class="unit">THB</div>
+      <div class="time">Next Settlement: {{autoSettle.time}}</div>
+
+    </div>
+  </div>
 </template>
 
 <script>
@@ -18,7 +33,7 @@ export default {
 
   props: {
     settlementType: {
-      default: "0",
+      default: "1",
       type: String
     }
   },
@@ -33,7 +48,12 @@ export default {
           label: "Incoming Balance",
           value: "0.00"
         }
-      ]
+      ],
+      autoSettle: {
+        label: "To-Be Settled Amount",
+        value: "10,000,000.00",
+        time: "2 July 2019, 12:00"
+      }
     };
   }
 };
@@ -48,8 +68,20 @@ export default {
   box-shadow: 0 2px 4px 0 rgba(160, 180, 192, 0.2);
   border-radius: 4px;
   position: absolute;
-  top: 72px;
+  top: 78px;
   display: flex;
+  &.app-home-auto-settle {
+    top: 70px;
+    height: 140px;
+    .balance {
+      width: 100%;
+      text-align: center;
+      margin: 16px 0;
+      &:first-child {
+        border-right: none;
+      }
+    }
+  }
 
   .balance {
     width: 50%;
@@ -73,6 +105,13 @@ export default {
       font-size: 12px;
       color: #68737d;
       margin-top: 4px;
+    }
+
+    .time {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #87929d;
+      letter-spacing: 0;
     }
   }
 }

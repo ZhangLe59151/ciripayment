@@ -8,43 +8,6 @@ const routeArr = [
     path: "/",
     redirect: "/home"
   },
-  // Standard Product
-  {
-    path: "/landing-page",
-    name: "LandingPage",
-    component: () => import("@/views-standard-product/LandingPage.vue")
-  },
-  {
-    path: "/enter-otp-sp",
-    name: "EnterOtp",
-    component: () => import("@/views-standard-product/EnterOTP.vue")
-  },
-  {
-    path: "/verified-first-time",
-    name: "VerifiedFirstTime",
-    component: () =>
-      import("@/views-standard-product/VerifiedFirstTimeLogin.vue")
-  },
-  {
-    path: "/create-password-sp",
-    name: "CreatePasswordSP",
-    component: () => import("@/views-standard-product/CreatePassword.vue")
-  },
-  {
-    path: "/enter-password-sp",
-    name: "EnterPasswordSP",
-    component: () => import("@/views-standard-product/EnterPassword.vue")
-  },
-  {
-    path: "/forgot-password-sp",
-    name: "ForgotPasswordSP",
-    component: () => import("@/views-standard-product/ForgotPassword.vue")
-  },
-  {
-    path: "/reset-password-sp",
-    name: "ResetPasswordSP",
-    component: () => import("@/views-standard-product/ResetPassword.vue")
-  },
   {
     path: "/choose-service",
     name: "ChooseService",
@@ -214,6 +177,44 @@ const AppRouteArr = [
     path: "/home",
     name: "Home",
     component: () => import("@/views-standard-product/Home.vue")
+  },
+
+  // Standard Product
+  {
+    path: "/landing-page",
+    name: "LandingPage",
+    component: () => import("@/views-standard-product/LandingPage.vue")
+  },
+  {
+    path: "/enter-otp-sp",
+    name: "EnterOtp",
+    component: () => import("@/views-standard-product/EnterOTP.vue")
+  },
+  {
+    path: "/verified-first-time",
+    name: "VerifiedFirstTime",
+    component: () =>
+      import("@/views-standard-product/VerifiedFirstTimeLogin.vue")
+  },
+  {
+    path: "/create-password-sp",
+    name: "CreatePasswordSP",
+    component: () => import("@/views-standard-product/CreatePassword.vue")
+  },
+  {
+    path: "/enter-password-sp",
+    name: "EnterPasswordSP",
+    component: () => import("@/views-standard-product/EnterPassword.vue")
+  },
+  {
+    path: "/forgot-password-sp",
+    name: "ForgotPasswordSP",
+    component: () => import("@/views-standard-product/ForgotPassword.vue")
+  },
+  {
+    path: "/reset-password-sp",
+    name: "ResetPasswordSP",
+    component: () => import("@/views-standard-product/ResetPassword.vue")
   }
 ];
 

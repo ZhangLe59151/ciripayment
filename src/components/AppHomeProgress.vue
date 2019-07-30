@@ -71,7 +71,6 @@ export default {
 
 <style lang="scss" scoped>
 .app-home-progress {
-  margin-top: 78px;
   position: relative;
 
   .regular-progress {

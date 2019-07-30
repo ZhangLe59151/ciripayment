@@ -61,7 +61,6 @@ export default {
   margin: 16px;
   width: calc(100% - 56px);
   background-color: #ffffff;
-
   box-shadow: 0 2px 8px -4px rgba(4, 43, 68, 0.2);
   border-radius: 4px;
   position: relative;
