@@ -8,10 +8,11 @@
       right-text="Discard"
       @click-right="handleDiscard"
       :border="false"
-      style="background-color: #ffffff">
+      style="background-color: #ffffff"
+    >
       <div
-            slot="title"
-            class="header-title"
+        slot="title"
+        class="header-title"
       >
         <span><b>New Application</b></span>
       </div>
@@ -30,7 +31,7 @@
           width="20rem"
         >
       </el-step>
-      <el-step title="Services">
+      <el-step title="Payment Service">
         <img
           :src="servicesInfoActive"
           alt
@@ -47,7 +48,7 @@
         ref="elFormPayment"
         size="small"
         label-position="top"
-        style="width: 90%; margin-left: 5%; margin-top: 10px;"
+        style="width: 100%;  margin-top: 10px;"
       >
         <div class="heading">
           <h1>Payment Channel Services</h1>
@@ -149,7 +150,7 @@
         ref="elFormMarketing"
         size="small"
         label-position="top"
-        style="width: 90%; margin-left: 5%; margin-top: 10px;"
+        style="width: 100%;  margin-top: 10px;"
       >
         <div class="heading">
           <h1>Marketing Services</h1>
@@ -241,7 +242,7 @@
       </el-form>
     </div>
 
-    <div  class="settlement">
+    <div class="settlement">
       <el-form
         label-width="0px"
         status-icon
@@ -249,31 +250,40 @@
         ref="elFormSettlement"
         size="small"
         label-position="top"
-        style="width: 90%; margin-left: 5%; margin-top: 10px;"
+        style="width: 100%; "
       >
         <el-card class="box-card">
           <div class="title">Settlement</div>
           <div class="title-line"></div>
-          <div class="settlement-desc" style="text-align: center; display: block;">
+          <div
+            class="settlement-desc"
+            style="display: block;"
+          >
             Choose how you want to receive your revenue.
           </div>
-          <el-radio-group v-model="form.settlement" size="medium" fill="#0AA877">
+          <el-radio-group
+            v-model="form.settlement"
+            size="medium"
+            fill="#0AA877"
+          >
             <el-radio :label="1">
               <div style="display: inline-block">
                 Manual Settlement (Recommended)
               </div>
-              <div class="settlement-desc">
-                Manually transfer all revenue into your balance. Enjoy 10% lower servicing fee on all payment channels.
-              </div>
+
             </el-radio>
+            <div class="settlement-desc">
+              Manually transfer all revenue into your balance. Enjoy 10% lower servicing fee on all payment channels.
+            </div>
             <el-radio :label="2">
-              <div style="display: inline-block">
+              <div style="display: inline-block; margin-top: 20px;">
                 Auto Settlement
               </div>
-              <div class="settlement-desc">
-                Automatically transfer all revenue into your balance at the end of each day.
-              </div>
+
             </el-radio>
+            <div class="settlement-desc">
+              Automatically transfer all revenue into your balance at the end of each day.
+            </div>
           </el-radio-group>
         </el-card>
 
@@ -295,7 +305,7 @@ import { mapState } from "vuex";
 import { Idle } from "idlejs/dist";
 import util from "@/util.js";
 export default {
-  name: "ServicesInfo.vue",
+  name: "ServicesInfo",
   idleTimer: null,
   data() {
     return {
@@ -304,9 +314,7 @@ export default {
       servicesInfoActive: require("@/assets/imgs/stepper_active.png"),
       active: 1,
       logo: require("@/assets/imgs/logo.png"),
-      form: {
-        settlement: "0"
-      },
+      form: {},
       dialog: false,
       checkList:
         this.$store.state.form.paymentChannelList !== undefined
@@ -539,7 +547,7 @@ export default {
   },
   created() {
     this.$store.commit("InitForm");
-    const form = Object.assign({}, this.$store.state.form);
+    const form = Object.assign({ settlement: 1 }, this.$store.state.form);
     Object.keys(form).map(item => {
       if (!form[`${item}`]) {
         form[`${item}`] = "";
@@ -662,7 +670,7 @@ export default {
   }
   .box-card {
     padding-bottom: 10px;
-    margin: 30px 0;
+    // margin: 30px 0;
     .query-item {
       padding-left: 10px;
     }
@@ -791,7 +799,7 @@ export default {
         font-size: 16px;
         line-height: 22px;
         display: inline-block;
-        margin-left: 14px;
+        margin-left: 90px;
         position: relative;
         top: 8px;
       }
@@ -805,15 +813,17 @@ export default {
       img {
         width: 70px;
         vertical-align: middle;
-        top: 16px;
-        margin-left: 5px;
+        top: 10px;
+        // margin-left: 5px;
+        position: absolute;
+        left: 0;
       }
     }
   }
 
   .settlement {
     .settlement-desc {
-      color: #68737D;
+      color: #68737d;
       font-size: 14px;
       line-height: 22px;
       margin: 10px 0;
@@ -828,8 +838,14 @@ export default {
   }
 
   .payment-dialog-link {
+    position: relative;
+    top: 12px;
+    text-decoration: underline;
+    font-size: 14px;
+    color: #1f73b7;
+    letter-spacing: 0;
     text-align: center;
-    color: #0059ff;
+    line-height: 20px;
   }
 }
 </style>

@@ -44,9 +44,7 @@ export default {
       this.copyToClipboard(this.$store.state.lineCode);
       this.$dialog
         .confirm({
-          message: `"Your code: ${
-            this.$store.state.lineCode
-          } has been copied. Add Silot Bank as a friend on LINE and paste your code in chat to start receiving updates on your application."`,
+          message: `"Your code: ${this.$store.state.lineCode} has been copied. Add Silot Bank as a friend on LINE and paste your code in chat to start receiving updates on your application."`,
           title: "Connecting with LINE",
           confirmButtonText: "Go To LINE",
           cancelButtonText: "Cancel",
@@ -117,11 +115,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/css/bottom-btn.scss";
-  .success-page {
+@import "../assets/css/bottom-btn.scss";
+.success-page {
   text-align: center;
-  margin-top: 30%;
+  // margin-top: 30%;
   font-size: 120px;
+  position: relative;
+  top: 40px;
   .title {
     font-size: 27px;
   }
@@ -139,6 +139,5 @@ export default {
       text-align: center;
     }
   }
-
 }
 </style>

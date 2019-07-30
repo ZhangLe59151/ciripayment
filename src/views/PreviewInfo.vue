@@ -23,7 +23,7 @@
     </div>
 
     <div class="section-header">
-      Application
+      Merchant Profile
       <el-button @click="$router.push({name: 'EnterInfo'})">Edit
       </el-button>
     </div>
@@ -308,13 +308,22 @@
           <div class="settlement-text desc">
             Settlement option:
           </div>
-          <div class="settlement-text val" v-if="$store.state.form.settlementType === '1'">
+          <div
+            class="settlement-text val"
+            v-if="$store.state.form.settlementType === '1'"
+          >
             Auto
           </div>
-          <div class="settlement-text val" v-else-if="$store.state.form.settlementType === '2'">
+          <div
+            class="settlement-text val"
+            v-else-if="$store.state.form.settlementType === '2'"
+          >
             Manual
           </div>
-          <div class="settlement-text val" v-else>
+          <div
+            class="settlement-text val"
+            v-else
+          >
             Undefined
           </div>
         </van-cell-group>
@@ -375,13 +384,15 @@
           id="clearBtn"
           size="small"
           @click="clear"
+          type="primary"
         >Clear
         </van-button>
         <van-button
           v-if="!picESignature"
-          id="confirmBtn"
           size="small"
           @click="confirmSignature"
+          class="bottom-btn"
+          style="width: 60px;margin: 0"
         >Confirm
         </van-button>
       </div>
@@ -737,7 +748,7 @@ export default {
     text-align: center;
     font-size: 20px;
     text-align: center;
-    margin: 20px 20px 0 20px;
+    margin: 20px;
     font-weight: bolder;
     position: relative;
     > button {
@@ -749,7 +760,7 @@ export default {
   }
 
   .box-card {
-    margin: 30px 30px;
+    // margin: 30px 30px;
     > h3 {
       alignment: center;
     }
@@ -763,7 +774,8 @@ export default {
         font-weight: bold;
       }
       &.val {
-        text-align: right;
+        position: absolute;
+        right: 0;
       }
     }
   }

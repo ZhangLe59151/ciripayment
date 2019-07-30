@@ -11,9 +11,10 @@
 .bottom-btn {
   margin: 20px 10%;
   width: 80%;
-  border-radius: 50px;
+  border-radius: 4px;
   background-color: #053c5e;
   color: #fff;
+
   &.btn-cancel {
     background-color: #fff;
     color: #053c5e;
@@ -22,12 +23,14 @@
   }
 
 }
+
 .bottom-btn-stackable {
   margin: 10px;
   width: 80%;
   border-radius: 50px;
   background-color: #053c5e;
   color: #fff;
+
   &.btn-cancel {
     background-color: #fff;
     color: #053c5e;
@@ -43,6 +46,7 @@
   border-radius: 4px;
   background-color: #053c5e;
   color: #fff;
+
   &.btn-cancel {
     background-color: #fff;
     color: #053c5e;

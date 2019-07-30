@@ -21,7 +21,7 @@
           width="20px"
         >
       </el-step>
-      <el-step title="Services">
+      <el-step title="Payment Service">
         <img
           :src="servicesInfoDefault"
           alt
@@ -43,7 +43,7 @@
       ref="elForm"
       size="small"
       label-position="top"
-      style="width: 90%; margin-left: 5%; margin-top: 10px;"
+      style="width: 100%; margin-top: 10px;"
     >
       <el-card class="box-card">
         <!-- applicant information -->
@@ -966,7 +966,7 @@ export default {
 
   .box-card {
     padding: 10px;
-    margin: 30px 10px;
+    // margin: 30px 10px;
   }
 
   .tips {

@@ -5,16 +5,17 @@ body {
   font-family: "Helvetica Neue", Avenir-Book, "Source Sans Pro", Helvetica,
     Arial, sans-serif;
 }
+
 .center {
   text-align: center;
 }
 
- [class*=van-hairline]::after {
+[class*=van-hairline]::after {
   border: 2px solid #ebedf0;
 }
 
 .itemlanding {
-  .el-form-item__label{
+  .el-form-item__label {
     border: 0.0625rem solid #DCDFE6;
     border-top: none;
     border-left: none;
@@ -24,12 +25,13 @@ body {
 }
 
 .enterotp {
-  .el-form-item__label{
+  .el-form-item__label {
     background-color: lightgrey;
     border-color: #e4e7ed;
     border-radius: 4px;
     color: #c0c4cc;
     cursor: not-allowed;
+
     span {
       color: #c0c4cc;
     }
@@ -144,5 +146,9 @@ body {
     border-left: none;
     border-right: none;
     border-radius: 0px;
+  }
+
+  .van-button {
+    border-radius: 4px;
   }
 }
