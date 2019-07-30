@@ -35,16 +35,14 @@
           >
               <span
                 style="margin: 0 10px;"
-              >+66</span>
-            <i class="el-icon-caret-bottom" style="color: #053C5E"></i>
+              >{{form.nationalCode}}</span>
+            <i class="el-icon-caret-bottom" style="color: #929292"></i>
           </span>
             <el-input
               v-model="form.phone"
-              placeholder="08 1234 1234"
               :maxlength="this.$store.state.phone.maxLen"
               :minlength="this.$store.state.phone.minLen"
               disabled
-              style="margin-left:15px"
             ></el-input>
           </el-form-item>
         </el-form>
@@ -60,17 +58,15 @@
         class="tips-error"
       >{{otpErrorMsg}}
       </div>
-      <div class="phone">{{this.$store.state.form.nationalCode}} {{this.$store.state.form.phone}}</div>
       <div class="sub-tips">Enter OTP</div>
 
       <van-password-input
-        :value="value"
+        :value="displayOTP"
         info
         @focus="showKeyboard = true"
         :mask="false"
         :length="6"
-        :gutter="15"
-        style="margin-left: -15px"
+        style="margin-left: -15px ; color : #929292;"
       />
 
       <div
@@ -88,7 +84,7 @@
       <van-button
         size="large"
         class="bottom-btn"
-        @click=""
+        @click="handleVerifyMock"
       >
         Create Account
       </van-button>
@@ -114,7 +110,8 @@
     .van-nav-bar {
       background-color: transparent;
       .Silot {
-        padding-top: 10px;
+        position: relative;
+        top: 10px;
       }
     }
 
@@ -146,16 +143,6 @@
       font-size: 20px;
       padding: 20px;
       color: #dd1111;
-    }
-
-    .disabled-field{
-      background-color: #f5f7fa;
-      border-color: #e4e7ed;
-      color: #c0c4cc;
-      cursor: not-allowed;
-      span {
-        color: #c0c4cc;
-      }
     }
 
     .sub-tips {
@@ -224,6 +211,9 @@ export default {
   computed: {
     serviceType() {
       return this.$store.state.form.serviceType;
+    },
+    displayOTP() {
+      return (this.value == "") ? "000000" : this.value;
     }
   },
   created() {
@@ -291,6 +281,30 @@ export default {
     onDelete() {
       this.value = this.value.slice(0, this.value.length - 1);
     },
+
+    handleVerifyMock() {
+      var otpCodeErrorMessage =
+        "Incorrect OTP. Please double check and try again.";
+      if (this.value === "" || this.value.length !== 6) {
+        this.$notify({
+          message: otpCodeErrorMessage,
+          duration: 1000
+        });
+        return false;
+      }
+      this.$api
+        .verifyOtp({
+          phoneNumber:
+            this.$store.state.form.nationalCode + this.$store.state.form.phone,
+          otpCode: this.value
+        })
+        .then(res => {
+          if (res.data.code === 200) {
+            this.$router.push({ name: "CreatePasswordSP" });
+          }
+        });
+    },
+
     handleVerify() {
       var otpCodeErrorMessage =
           "Incorrect OTP. Please double check and try again.";
@@ -352,10 +366,10 @@ export default {
                         })
                         .then(res => {
                           if (res.data.code === 10050) {
-                            this.$router.push({ name: "CreatePassword" });
+                            this.$router.push({ name: "CreatePasswordSP" });
                           }
                         });
-                      this.$router.push({ name: "MerchantPortal" });
+                      this.$router.push({ name: "EnterPasswordSP" });
                     });
 
                   return false;

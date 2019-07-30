@@ -19,13 +19,12 @@
         Enter last 4 digits of your National ID
       </div>
       <van-password-input
-        :value="value"
+        :value="displayOTP"
         info
         @focus="showKeyboard = true"
         :mask="false"
         :length="4"
-        :gutter="15"
-        style="margin-left: -15px"
+        style="margin-left: -15px ; color : #929292;"
       />
 
     </div>
@@ -47,8 +46,13 @@ export default {
   data() {
     return {
       showKeyboard: true,
-      value: "",
+      value: ""
     };
+  },
+  computed: {
+    displayOTP() {
+      return (this.value === "") ? "0000" : this.value;
+    }
   },
   methods: {
     onInput(key) {

@@ -113,18 +113,21 @@ export default {
     onCancel() {
       this.show = false;
     },
-    handleNext() {
+    handleStart() {
       this.$refs["elForm"].validate(valid => {
         if (valid) {
+          this.$store.commit("UpdateForm", {
+            applicantPhoneNumber: this.form.nationalCode + this.form.phone,
+            nationalCode: this.form.nationalCode,
+            phone: this.form.phone
+          });
           this.sendOtp();
         } else {
           return false;
         }
       });
     },
-    handleStart() {
 
-    },
     sendOtp() {
       this.$api
         .sendOtp({
@@ -138,11 +141,7 @@ export default {
             return;
           }
           this.$router.push({
-            name: "VerifyLoginOtp",
-            query: {
-              phone: this.form.phone,
-              nationalCode: this.form.nationalCode
-            }
+            name: "EnterOtp"
           });
         });
     }
@@ -158,7 +157,11 @@ export default {
   .landing-page {
     background: url("../assets/imgs/MP-background.png");
     min-height: 100vh;
-    padding-top:50px;
+
+    .Silot{
+      position: relative;
+      top: 20px;
+    }
     .landingPageContent{
       position: fixed;
       bottom: 0;

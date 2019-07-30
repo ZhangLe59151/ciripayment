@@ -1,3 +1,5 @@
+@import "../../assets//iconfont/iconfont.css";
+
 html,
 body {
   margin: 0;
@@ -10,12 +12,34 @@ body {
   text-align: center;
 }
 
-@import "../../assets//iconfont/iconfont.css";
+.forgotWrapper,
+.welcomeWrapper {
 
-[class*=van-hairline]::after {
-  border: 2px solid #ebedf0;
+  // change width of one box
+  .van-password-input__security {
+    width: 75%;
+  }
 }
 
+.forgotWrapper,
+.enterOtpWrapper,
+.welcomeWrapper {
+
+  // create new border
+  .van-hairline {
+    border: 1px solid #929292;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+
+  //change the original border to white
+  .van-hairline::after,
+  .van-hairline--surround::after {
+    border: 0px solid #ffffff;
+  }
+}
+
+// for landing page label
 .itemlanding {
   .el-form-item__label {
     border: 0.0625rem solid #DCDFE6;
@@ -26,17 +50,34 @@ body {
   }
 }
 
-.enterotp {
+
+// for enterotp, enterpassword and forgotpassword page
+.enterotp,
+.forgotpassword,
+.enterpassword {
   .el-form-item__label {
-    background-color: lightgrey;
+    background-color: #dcdcdc;
     border-color: #e4e7ed;
     border-radius: 4px;
-    color: #c0c4cc;
+    color: #929292;
     cursor: not-allowed;
 
     span {
-      color: #c0c4cc;
+      color: #929292;
     }
+  }
+
+  .el-input {
+    margin-left: 15px;
+  }
+
+  .el-input__inner {
+    background-color: #dcdcdc !important;
+    border-color: #e4e7ed;
+    border-radius: 4px !important;
+    color: #929292 !important;
+    cursor: not-allowed;
+    width: 93%;
   }
 }
 
@@ -68,6 +109,7 @@ body {
   background-color: #053c5e;
   color: #fff;
 }
+
 
 .el-form--label-top label.el-form-item__label {
   // margin-left: 10%;

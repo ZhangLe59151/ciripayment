@@ -41,7 +41,8 @@ export default new Vuex.Store({
       lowercase: /[a-z]/,
       uppercase: /[A-Z]/,
       number: /\d/,
-      specialChar: /\W|_/
+      specialChar: /[!@#$%^\-&*)(_+=]/,
+      noSpace: /^\S+$/
     },
     applicationStatus: {
       pending: "0",
