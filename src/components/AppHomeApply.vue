@@ -1,6 +1,6 @@
 <template>
   <div class="app-home-apply">
-    <img src="@/assets/imgs/money-0.png">
+    <img :src="require('@/assets/imgs/money-0.png')">
     <div class="status">
       <div class="title">{{progress.label}}</div>
       <div class="des">{{progress.des}}</div>
@@ -14,11 +14,11 @@
           What's required:
         </li>
         <li>
-          <van-icon name="close" />
+          <i class="iconfont icondocument" />
           National ID
         </li>
         <li>
-          <van-icon name="close" />
+          <i class="iconfont icontime" />
           Approximately <strong>5 minutes</strong>
         </li>
       </ul>
