@@ -763,7 +763,7 @@ export default {
         font-weight: bold;
       }
       &.val {
-        alignment: right;
+        text-align: right;
       }
     }
   }
