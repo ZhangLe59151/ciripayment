@@ -254,7 +254,7 @@
         <el-card class="box-card">
           <div class="title">Settlement</div>
           <div class="title-line"></div>
-          <div class="description" style="text-align: center; display: block;">
+          <div class="settlement-desc" style="text-align: center; display: block;">
             Choose how you want to receive your revenue.
           </div>
           <el-radio-group v-model="form.settlement" size="medium" fill="#0AA877">
@@ -262,7 +262,7 @@
               <div style="display: inline-block">
                 Manual Settlement (Recommended)
               </div>
-              <div class="description" style="width: inherit">
+              <div class="settlement-desc">
                 Manually transfer all revenue into your balance. Enjoy 10% lower servicing fee on all payment channels.
               </div>
             </el-radio>
@@ -270,7 +270,7 @@
               <div style="display: inline-block">
                 Auto Settlement
               </div>
-              <div class="description">
+              <div class="settlement-desc">
                 Automatically transfer all revenue into your balance at the end of each day.
               </div>
             </el-radio>
@@ -812,11 +812,12 @@ export default {
   }
 
   .settlement {
-    .description {
+    .settlement-desc {
       color: #68737D;
       font-size: 14px;
       line-height: 22px;
       margin: 10px 0;
+      font-weight: normal;
     }
   }
 
