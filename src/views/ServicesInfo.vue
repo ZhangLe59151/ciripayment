@@ -246,7 +246,7 @@
         label-width="0px"
         status-icon
         :model="form"
-        ref="elFormMarketing"
+        ref="elFormSettlement"
         size="small"
         label-position="top"
         style="width: 90%; margin-left: 5%; margin-top: 10px;"
@@ -258,14 +258,18 @@
             Choose how you want to receive your revenue.
           </div>
           <el-radio-group v-model="settlement" size="medium" fill="#0AA877">
-            <el-radio :label="1">
+            <el-radio :label=1>
+              <div style="display: inline-block">
                 Manual Settlement (Recommended)
-              <div class="description">
+              </div>
+              <div class="description" style="width: inherit">
                 Manually transfer all revenue into your balance. Enjoy 10% lower servicing fee on all payment channels.
               </div>
             </el-radio>
-            <el-radio :label="2">
+            <el-radio :label=2>
+              <div style="display: inline-block">
                 Auto Settlement
+              </div>
               <div class="description">
                 Automatically transfer all revenue into your balance at the end of each day.
               </div>
@@ -495,11 +499,18 @@ export default {
           shopStatus: this.shopStatus
         });
       }
+      this.$store.commit("UpdateForm", {
+        settlementType: this.settlement
+      });
       this.ls.setItem("form", JSON.stringify(this.$store.state.form));
     },
     handleNext() {
       if (this.serviceType.includes("0") && this.checkList.length === 0) {
         this.$notify(this.$t("noSelectPaymentChannelErrorMsg"));
+        return false;
+      }
+      if (this.settlement === 0) {
+        this.$notify(this.$t("noSelectSettlementErrorMsg"));
         return false;
       }
 

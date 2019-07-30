@@ -513,6 +513,7 @@ export default {
       form.shopUrl = storedForm.shopUrl;
       form.shopSize = storedForm.shopSize;
       form.shopStatus = storedForm.shopStatus;
+      form.settlementType = storedForm.settlementType;
 
       console.log(form);
       this.$api.submitAppliction(form).then(res => {

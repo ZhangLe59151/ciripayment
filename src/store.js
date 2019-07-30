@@ -59,6 +59,16 @@ export default new Vuex.Store({
       approved: "APPROVED",
       rejected: "REJECTED"
     },
+    settlementType: [
+      {
+        id: "1",
+        label: "Manual"
+      },
+      {
+        id: "2",
+        label: "Auto"
+      }
+    ],
     paymentChannelIds: {
       visa: "1",
       mastercard: "2",
