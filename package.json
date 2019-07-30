@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --mode web",
     "build": "vue-cli-service build --mode web",
     "build-app": "vue-cli-service build --mode app",
     "lint": "vue-cli-service lint"
