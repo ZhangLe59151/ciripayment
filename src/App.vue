@@ -9,6 +9,7 @@ html,
 body,
 #app {
   position: relative;
+  min-height: 100vh;
 }
 </style>
 

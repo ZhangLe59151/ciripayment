@@ -1,0 +1,211 @@
+<template>
+  <div class="landing-page">
+    <div class="Silot center"><img src="../assets/imgs/Silot-logo.svg"></div>
+<div class="landingPageContent">
+  <div class="slogan-title center">
+    Grow Your Business with Moon Merchant Portal.
+  </div>
+  <div class="slogan-sub center">
+    Managing finances for your business has never been easier.
+  </div>
+  <div class="loginWrapper">
+    <div class="tips">
+      Your mobile number
+    </div>
+
+    <div class="otp landing">
+      <el-form
+        label-width="0px"
+        :model="form"
+        ref="elForm"
+        size="small"
+        style="margin-top: 15px;"
+      >
+        <el-form-item
+          label-width="80px"
+          prop="phone"
+          class="itemlanding"
+          :rules="[
+            {  message: 'Please enter a valid phone number', trigger: 'blur' },
+            {pattern: phoneValidationPattern, message: 'Please enter a valid phone number', trigger: 'blur'}
+          ]"
+        >
+          <span
+            slot="label"
+            @click="show = true"
+          >
+            <span style="margin-right: 40px">{{form.nationalCode}}</span>
+            <i class="el-icon-caret-bottom" style="color: #053C5E"></i>
+          </span>
+          <el-input
+            v-model="form.phone"
+            placeholder=""
+            :maxlength="this.$store.state.phone.maxLen"
+            :minlength="this.$store.state.phone.minLen"
+            style="margin-left: 15px; width:90% ; color: lightgrey"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+    </div>
+
+    <van-button
+      size="large"
+      class="bottom-btn"
+      @click="handleStart"
+    >
+      Get started
+    </van-button>
+
+  </div>
+
+</div>
+
+    <van-popup
+      v-model="show"
+      position="bottom"
+      :overlay="false"
+    >
+      <van-picker
+        show-toolbar
+        title="National code"
+        :columns="columns"
+        @cancel="onCancel"
+        @confirm="onConfirm"
+      />
+    </van-popup>
+  </div>
+</template>
+
+<script>
+import { mapState } from "vuex";
+
+export default {
+  name: "landing-page",
+  computed: {
+    ...mapState({
+      columns: "nationalCodeList",
+      nationCode: "nationalCode"
+    })
+  },
+  data() {
+    return {
+      show: false,
+      form: {},
+      phoneValidationPattern: this.$store.state.phone.thaiExp
+    };
+  },
+  methods: {
+    setPattern(nationalCode) {
+      const item = this.nationCode.find(test => test.code === nationalCode);
+      const expName = item ? item.nation + "Exp" : "sgExp";
+      if (this.$store.state.phone[expName] !== undefined) {
+        this.phoneValidationPattern = this.$store.state.phone[expName];
+      } else {
+        this.phoneValidationPattern = this.$store.state.phone.sgExp;
+      }
+      console.log(this.phoneValidationPattern)
+    },
+    onConfirm(value, index) {
+      this.form.nationalCode = value;
+      this.setPattern(value);
+      this.show = false;
+    },
+    onCancel() {
+      this.show = false;
+    },
+    handleNext() {
+      this.$refs["elForm"].validate(valid => {
+        if (valid) {
+          this.sendOtp();
+        } else {
+          return false;
+        }
+      });
+    },
+    handleStart() {
+
+    },
+    sendOtp() {
+      this.$api
+        .sendOtp({
+          phoneNumber: this.form.nationalCode + this.form.phone
+        })
+        .then(res => {
+          if (res.data.code !== 200) {
+            this.$notify(
+              res.data.code === 10003 ? this.$t("OTPErrorMsg") : res.data.msg
+            );
+            return;
+          }
+          this.$router.push({
+            name: "VerifyLoginOtp",
+            query: {
+              phone: this.form.phone,
+              nationalCode: this.form.nationalCode
+            }
+          });
+        });
+    }
+  },
+  created() {
+    this.form.nationalCode = this.columns[0];
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+  @import "../assets/css/bottom-btn";
+  .landing-page {
+    background: url("../assets/imgs/MP-background.png");
+    min-height: 100vh;
+    padding-top:50px;
+    .landingPageContent{
+      position: fixed;
+      bottom: 0;
+      .loginWrapper{
+        padding-top: 30px;
+        background-color: white;
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+        padding-left: 5%;
+        padding-right: 5%;
+      }
+    }
+
+    .slogan-title {
+      text-align: center;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      width: 80%;
+      margin-left: 10%;
+    }
+    .slogan-sub  {
+      text-align: center;
+      color: white;
+      font-size: 16px;
+      margin-bottom: 20px;
+      width: 80%;
+      margin-left: 8%;
+    }
+    .title {
+      font-size: 20px;
+      padding: 20px;
+    }
+    .tips {
+      font-size: 14px;
+    }
+
+    .otp {
+      text-align: left;
+      font-size: 15px;
+    }
+    .bottom-btn {
+      background-color: #053C5E;
+      border-radius: 4px;
+       margin: 1.25rem 0;
+       width: 100%;
+    }
+  }
+</style>

@@ -10,6 +10,8 @@ module.exports = {
     } else {
       // mutate for development...
     }
-  }
-}
-// proxy: "https://mvp.silot.tech/"
+  },
+  publicPath: "",
+  outputDir: process.env.VUE_APP_OUTPUTDIR,
+  runtimeCompiler: true
+};

@@ -1,13 +1,49 @@
-import Vue from "vue"
-import Router from "vue-router"
+import Vue from "vue";
+import Router from "vue-router";
 
-Vue.use(Router)
+Vue.use(Router);
 
 const routeArr = [
   {
     path: "/",
     name: "Welcome",
     component: () => import("@/views/Welcome.vue")
+  },
+  // Standard Product
+  {
+    path: "/landing-page",
+    name: "LandingPage",
+    component: () => import("@/views-standard-product/LandingPage.vue")
+  },
+  {
+    path: "/enter-otp-sp",
+    name: "EnterOtp",
+    component: () => import("@/views-standard-product/EnterOTP.vue")
+  },
+  {
+    path: "/verified-first-time",
+    name: "VerifiedFirstTime",
+    component: () => import("@/views-standard-product/VerifiedFirstTimeLogin.vue")
+  },
+  {
+    path: "/create-password-sp",
+    name: "CreatePasswordSP",
+    component: () => import("@/views-standard-product/CreatePassword.vue")
+  },
+  {
+    path: "/enter-password-sp",
+    name: "EnterPasswordSP",
+    component: () => import("@/views-standard-product/EnterPassword.vue")
+  },
+  {
+    path: "/forgot-password-sp",
+    name: "ForgotPasswordSP",
+    component: () => import("@/views-standard-product/ForgotPassword.vue")
+  },
+  {
+    path: "/reset-password-sp",
+    name: "ResetPasswordSP",
+    component: () => import("@/views-standard-product/ResetPassword.vue")
   },
   {
     path: "/choose-service",
@@ -176,28 +212,27 @@ const routeArr = [
     name: "PageNotFound",
     component: () => import("@/views/404.vue")
   }
-]
+];
 
 const router = new Router({
-  mode: "history",
+  mode: process.env.VUE_APP_ROUTEMODE,
   base: process.env.BASE_URL,
   routes: routeArr,
   redirectToHome(message) {
-    this.push({ name: "Welcome" })
+    this.push({ name: "Welcome" });
   },
   redirectToLoginView(message) {
-    this.push({ name: "Login" })
+    this.push({ name: "Login" });
   }
-
 });
 
 router.beforeEach((to, from, next) => {
   // the pages can enter directly without logined
   if (["PageNotFound", "ServerError"].includes(to.name)) {
-    next()
-    return false
+    next();
+    return false;
   }
-  next()
-})
+  next();
+});
 
-export default router
+export default router;
