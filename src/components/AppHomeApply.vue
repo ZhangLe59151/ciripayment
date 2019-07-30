@@ -75,7 +75,7 @@ export default {
 
   .status {
     display: inline-block;
-    width: 230px;
+    width: calc(100% - 90px);
     .title {
       font-size: 16px;
       color: #053c5e;

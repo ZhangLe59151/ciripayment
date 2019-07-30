@@ -9,11 +9,11 @@
 
       <i
         class="iconfont iconQR"
-        @click="handleClick"
+        @click="$router.push({name: 'Qrcode'})"
       />
       <i
         class="iconfont iconscan"
-        @click="handleClick"
+        @click="$router.push({name: 'Scan'})"
       />
 
     </div>

@@ -178,6 +178,16 @@ const AppRouteArr = [
     name: "Home",
     component: () => import("@/views-standard-product/Home.vue")
   },
+  {
+    path: "/qrcode",
+    name: "Qrcode",
+    component: () => import("@/views-standard-product/Qrcode.vue")
+  },
+  {
+    path: "/scan",
+    name: "Scan",
+    component: () => import("@/views-standard-product/Scan.vue")
+  },
 
   // Standard Product
   {

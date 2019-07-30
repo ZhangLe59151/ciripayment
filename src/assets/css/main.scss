@@ -4,8 +4,8 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: "Helvetica Neue", Avenir-Book, "Source Sans Pro", Helvetica,
-    Arial, sans-serif;
+  font-family: HelveticaNeue, "Helvetica Neue", Avenir-Book, "Source Sans Pro", Helvetica,
+    Arial, sans-serif !important;
 }
 
 .center {
@@ -194,5 +194,26 @@ body {
 
   .van-button {
     border-radius: 4px;
+  }
+
+  .van-nav-bar {
+    background: #053C5E;
+
+    .van-icon,
+    .van-nav-bar__text {
+      font-size: 16px;
+      color: #FFFFFF;
+      letter-spacing: 0;
+    }
+
+    .van-nav-bar__title {
+      font-size: 16px;
+      color: #FFFFFF;
+      letter-spacing: 0;
+      text-align: left;
+      position: relative;
+      left: -30px;
+    }
+
   }
 }
