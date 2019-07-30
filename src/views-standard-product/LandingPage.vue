@@ -158,7 +158,11 @@ export default {
   .landing-page {
     background: url("../assets/imgs/MP-background.png");
     min-height: 100vh;
-    padding-top:50px;
+
+    .Silot{
+      position: relative;
+      top: 20px;
+    }
     .landingPageContent{
       position: fixed;
       bottom: 0;

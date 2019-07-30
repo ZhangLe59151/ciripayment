@@ -36,15 +36,13 @@
               <span
                 style="margin: 0 10px;"
               >+66</span>
-            <i class="el-icon-caret-bottom" style="color: #053C5E"></i>
+            <i class="el-icon-caret-bottom" style="color: #929292"></i>
           </span>
             <el-input
               v-model="form.phone"
-              placeholder="08 1234 1234"
               :maxlength="this.$store.state.phone.maxLen"
               :minlength="this.$store.state.phone.minLen"
               disabled
-              style="margin-left:15px"
             ></el-input>
           </el-form-item>
         </el-form>
@@ -64,13 +62,12 @@
       <div class="sub-tips">Enter OTP</div>
 
       <van-password-input
-        :value="value"
+        :value="displayOTP"
         info
         @focus="showKeyboard = true"
         :mask="false"
         :length="6"
-        :gutter="15"
-        style="margin-left: -15px"
+        style="margin-left: -15px ; color : #929292;"
       />
 
       <div
@@ -114,7 +111,8 @@
     .van-nav-bar {
       background-color: transparent;
       .Silot {
-        padding-top: 10px;
+        position: relative;
+        top: 10px;
       }
     }
 
@@ -146,16 +144,6 @@
       font-size: 20px;
       padding: 20px;
       color: #dd1111;
-    }
-
-    .disabled-field{
-      background-color: #f5f7fa;
-      border-color: #e4e7ed;
-      color: #c0c4cc;
-      cursor: not-allowed;
-      span {
-        color: #c0c4cc;
-      }
     }
 
     .sub-tips {
@@ -224,6 +212,9 @@ export default {
   computed: {
     serviceType() {
       return this.$store.state.form.serviceType;
+    },
+    displayOTP() {
+      return (this.value == "") ? "000000" : this.value;
     }
   },
   created() {

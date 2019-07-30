@@ -27,7 +27,7 @@
         >
           <el-form-item
             label-width="80px"
-            class="disabled-field"
+            class="enterpassword"
             prop="phone"
           >
           <span
@@ -36,11 +36,11 @@
               <span
                 style="margin: 0 10px;"
               >+66</span>
-            <i class="el-icon-caret-bottom" style="color: #053C5E"></i>
+            <i class="el-icon-caret-bottom" style="color: #929292"></i>
           </span>
             <el-input
               v-model="form.phone"
-              placeholder="08 1234 1234"
+              placeholder=""
               :maxlength="this.$store.state.phone.maxLen"
               :minlength="this.$store.state.phone.minLen"
               disabled
@@ -48,7 +48,6 @@
           </el-form-item>
         </el-form>
       </div>
-
 
       <el-form
         label-width="0px"
@@ -66,9 +65,12 @@
         >
           <el-input
             v-model="password"
-            type="password"
+            :type="passwordType"
             :maxlength="25"
-          ></el-input>
+          >
+            <img v-if="!showingPassword" @click="toggleShowingPassword" slot="suffix" src="../assets/imgs/hide.svg" class="showingPasswordIcon" />
+            <img v-else slot="suffix" @click="toggleShowingPassword" src="../assets/imgs/reveal.svg" class="showingPasswordIcon" />
+          </el-input>
         </el-form-item>
       </el-form>
 
@@ -131,6 +133,11 @@
       padding-left: 5%;
       padding-right: 5%;
       padding-top:20px;
+      .showingPasswordIcon {
+        width: auto;
+        height: 100% ;
+        color:#A0B4C0;
+      }
     }
 
     .tips {
@@ -142,16 +149,6 @@
       font-size: 20px;
       padding: 20px;
       color: #dd1111;
-    }
-
-    .disabled-field{
-      background-color: #f5f7fa;
-      border-color: #e4e7ed;
-      color: #c0c4cc;
-      cursor: not-allowed;
-      span {
-        color: #c0c4cc;
-      }
     }
 
     .sub-tips {
@@ -199,8 +196,54 @@ export default {
   data() {
     return {
       form: {},
-      password: ""
+      password: "",
+      showingPassword: false,
+      passwordType: "password",
+      passwordError: false,
+      passwordErrorMsg: "Invalid password. Please try again."
     };
+  },
+  methods: {
+    handleNext() {
+      if (this.password === "" || !this.$store.state.password.regExp.test(this.password)) {
+        this.passwordError = true;
+        return false;
+      } else {
+        this.passwordError = false;
+      }
+      this.$api
+        .merchantLoginPassword({
+          phoneNumber: this.$store.state.form.applicantPhoneNumber,
+          password: this.password
+        })
+        .then(res => {
+          if (res.data.code === 200) {
+            this.$emit("verifyPass", true);
+          } else {
+            this.passwordError = true;
+            return false;
+          }
+        });
+    },
+    toggleShowingPassword() {
+      if (this.showingPassword) {
+        this.passwordType = "password";
+      } else {
+        this.passwordType = "text";
+      }
+      this.showingPassword = !this.showingPassword;
+    }
+  },
+  created() {
+    // Reset form content to clear previous submitted information
+    this.$store.commit("InitForm");
+    const form = Object.assign({}, this.$store.state.form);
+    Object.keys(form).map(item => {
+      if (!form[`${item}`]) {
+        form[`${item}`] = "";
+      }
+    });
+    this.form = Object.assign({}, form);
   }
 
 };

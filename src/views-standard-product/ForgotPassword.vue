@@ -21,7 +21,7 @@
       >
         <el-form-item
           label-width="80px"
-          class="disabled-field"
+          class="forgotpassword"
           prop="phone"
         >
           <span
@@ -30,11 +30,11 @@
               <span
                 style="margin: 0 10px;"
               >+66</span>
-            <i class="el-icon-caret-bottom" style="color: #053C5E"></i>
+            <i class="el-icon-caret-bottom" style="color: #929292"></i>
           </span>
           <el-input
             v-model="form.phone"
-            placeholder="08 1234 1234"
+            placeholder=""
             :maxlength="this.$store.state.phone.maxLen"
             :minlength="this.$store.state.phone.minLen"
             disabled
@@ -50,13 +50,12 @@
         Enter last 4 digits of your National ID
       </div>
       <van-password-input
-        :value="value"
+        :value="displayOTP"
         info
         @focus="showKeyboard = true"
         :mask="false"
         :length="4"
-        :gutter="15"
-        style="margin-left: -15px"
+        style="margin-left: -15px; color : #929292"
       />
 
     </div>
@@ -79,8 +78,13 @@ export default {
     return {
       showKeyboard: true,
       value: "",
-      form: {},
+      form: {}
     };
+  },
+  computed: {
+    displayOTP() {
+      return (this.value == "") ? "0000" : this.value;
+    }
   },
   methods: {
     onInput(key) {
@@ -111,16 +115,6 @@ export default {
       color: #2F3941;
       margin-bottom: 10px;
     }
-    .disabled-field{
-      background-color: #f5f7fa;
-      border-color: #e4e7ed;
-      color: #c0c4cc;
-      cursor: not-allowed;
-      span {
-        color: #c0c4cc;
-      }
-    }
-
 
   }
 
