@@ -298,6 +298,29 @@
         </van-cell-group>
       </el-card>
     </div>
+
+    <div>
+      <el-card class="box-card">
+        <!-- payment channels -->
+        <div class="title">Settlement</div>
+        <div class="title-line"></div>
+        <van-cell-group class="form">
+          <div class="settlement-text desc">
+            Settlement option:
+          </div>
+          <div class="settlement-text val" v-if="$store.state.form.settlementType === '1'">
+            Auto
+          </div>
+          <div class="settlement-text val" v-else-if="$store.state.form.settlementType === '2'">
+            Manual
+          </div>
+          <div class="settlement-text val" v-else>
+            Undefined
+          </div>
+        </van-cell-group>
+      </el-card>
+    </div>
+
     <div
       class="img-list"
       style="margin-top: 15px;"
@@ -729,6 +752,19 @@ export default {
     margin: 30px 30px;
     > h3 {
       alignment: center;
+    }
+
+    .settlement-text {
+      font-size: 16px;
+      line-height: 24px;
+      display: inline-block;
+      margin: 10px 10px;
+      &.desc {
+        font-weight: bold;
+      }
+      &.val {
+        alignment: right;
+      }
     }
   }
 

@@ -257,8 +257,8 @@
           <div class="description" style="text-align: center; display: block;">
             Choose how you want to receive your revenue.
           </div>
-          <el-radio-group v-model="settlement" size="medium" fill="#0AA877">
-            <el-radio :label=1>
+          <el-radio-group v-model="form.settlement" size="medium" fill="#0AA877">
+            <el-radio :label="1">
               <div style="display: inline-block">
                 Manual Settlement (Recommended)
               </div>
@@ -266,7 +266,7 @@
                 Manually transfer all revenue into your balance. Enjoy 10% lower servicing fee on all payment channels.
               </div>
             </el-radio>
-            <el-radio :label=2>
+            <el-radio :label="2">
               <div style="display: inline-block">
                 Auto Settlement
               </div>
@@ -304,7 +304,9 @@ export default {
       servicesInfoActive: require("@/assets/imgs/stepper_active.png"),
       active: 1,
       logo: require("@/assets/imgs/logo.png"),
-      form: {},
+      form: {
+        settlement: "0"
+      },
       dialog: false,
       checkList:
         this.$store.state.form.paymentChannelList !== undefined
@@ -314,8 +316,7 @@ export default {
       shopUrl: this.$store.state.form.shopUrl,
       shopSize: this.$store.state.form.shopSize,
       shopStatus: this.$store.state.form.shopUrl ? 2 : 0,
-      ls: window.localStorage,
-      settlement: 0
+      ls: window.localStorage
     };
   },
   computed: {
@@ -500,7 +501,7 @@ export default {
         });
       }
       this.$store.commit("UpdateForm", {
-        settlementType: this.settlement
+        settlementType: String(this.form.settlement)
       });
       this.ls.setItem("form", JSON.stringify(this.$store.state.form));
     },
@@ -509,7 +510,7 @@ export default {
         this.$notify(this.$t("noSelectPaymentChannelErrorMsg"));
         return false;
       }
-      if (this.settlement === 0) {
+      if (this.form.settlement === "0") {
         this.$notify(this.$t("noSelectSettlementErrorMsg"));
         return false;
       }
