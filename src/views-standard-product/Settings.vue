@@ -16,18 +16,19 @@
 import AppTabBar from "@/components/AppTabBar";
 import AppSettingHeader from "@/components/AppSettingHeader";
 import AppSettingList from "@/components/AppSettingList";
-import AppHomeProgress from "@/components/AppHomeProgress";
-import AppHomeDownload from "@/components/AppHomeDownload";
 export default {
   name: "AppHome",
 
   components: {
     AppTabBar,
     AppSettingHeader,
-    AppSettingList,
-    AppHomeProgress,
-    AppHomeDownload
+    AppSettingList
   },
+  data() {
+    return {
+
+    }
+  }
 }
 </script>
 

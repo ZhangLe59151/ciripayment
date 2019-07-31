@@ -189,6 +189,11 @@ const AppRouteArr = [
     component: () => import("@/views-standard-product/Scan.vue")
   },
   {
+    path: "/settings/profile",
+    name: "SettingsProfile",
+    component: () => import("@/views-standard-product/SettingsProfile.vue")
+  },
+  {
     path: "/settings",
     name: "Settings",
     component: () => import("@/views-standard-product/Settings.vue")
