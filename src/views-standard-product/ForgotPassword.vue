@@ -3,7 +3,7 @@
     <WapHeader :right="true" />
     <div class="forgotWrapper">
       <div class="forgot-title">
-        Forgot Password
+        {{loggedIn ? 'Reset' : 'Forgot'}} Password
       </div>
 
       <el-form
@@ -79,6 +79,11 @@ export default {
       form: {}
     };
   },
+  computed: {
+    loggedIn() {
+      return this.$store.state.logInWithPassword;
+    }
+  },
   watch: {
     value(val) {
       if (this.value.length === 4) {
@@ -86,7 +91,7 @@ export default {
           if (res.data.code === 200 && res.data.data.same) {
             this.$router.push({ name: "ResetPasswordSP" });
           } else {
-            //FIXME: not implemented yet, the api return when error
+            // FIXME: not implemented yet, the api return when error
             this.$toast(res.data.msg);
           }
         });
@@ -102,7 +107,6 @@ export default {
     }
   },
   created() {
-    // Reset form content to clear previous submitted information
     this.$store.commit("InitForm");
     const form = Object.assign({}, this.$store.state.form);
     Object.keys(form).map(item => {

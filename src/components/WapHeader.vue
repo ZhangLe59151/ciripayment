@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import util from "@/util.js";
 export default {
   name: "WapHeader",
   props: {
@@ -22,6 +23,8 @@ export default {
     },
     clickRight() {
       this.$store.commit("ClearForm");
+      this.$store.commit("logOut");
+      util.removeCookies("SSID");
       this.$router.push({ name: "LandingPage" });
     }
   }

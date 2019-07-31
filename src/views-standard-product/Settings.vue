@@ -33,6 +33,7 @@ export default {
   methods: {
     handleLogout() {
       util.removeCookies("SSID");
+      this.$store.commit("logOut");
       localStorage.clear();
       this.$router.push({ name: "LandingPage" });
     }
