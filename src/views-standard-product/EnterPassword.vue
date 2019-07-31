@@ -65,6 +65,11 @@
             <img v-else slot="suffix" @click="toggleShowingPassword" src="../assets/imgs/reveal.svg" class="showingPasswordIcon" />
           </el-input>
         </el-form-item>
+        <div
+          v-if="passwordError === true"
+          class="tips-error"
+        >{{passwordErrorMsg}}
+        </div>
       </el-form>
 
       <div class="resend-active" @click="handleForgot">
@@ -74,15 +79,13 @@
 
     <van-button
       size="large"
-      class="bottom-btn"
-      @click=""
+      class="bottom-btn-password"
+      @click="handleLogin"
       style="width:80%"
     >
       Log In
     </van-button>
 
-    <!--    <div class="page">3/3</div>-->
-    <!--    &lt;!&ndash; 数字键盘 &ndash;&gt;-->
   </div>
 </template>
 
@@ -92,21 +95,6 @@
   .enter-password {
     background: url("../assets/imgs/MP-background.png");
     min-height: 100vh;
-    .van-nav-bar {
-      background-color: transparent;
-      .Silot {
-        padding-top: 10px;
-      }
-    }
-
-    .bottom-btn{
-      background-color: #053C5E;
-      border-radius: 4px;
-      width: 100%;
-      position:fixed;
-      bottom: 0;
-
-    }
 
     .login-title {
       font-size: 24px;
@@ -139,8 +127,7 @@
       margin-bottom: 2.25rem;
     }
     .tips-error {
-      font-size: 20px;
-      padding: 20px;
+      font-size: 14px;
       color: #dd1111;
     }
 
@@ -201,7 +188,7 @@ export default {
     };
   },
   methods: {
-    handleNext() {
+    handleLogin() {
       if (this.password === "" || !this.$store.state.password.regExp.test(this.password)) {
         this.passwordError = true;
         return false;
@@ -215,7 +202,7 @@ export default {
         })
         .then(res => {
           if (res.data.code === 200) {
-            this.$emit("verifyPass", true);
+            this.$router.push({ name: "Home" });
           } else {
             this.passwordError = true;
             return false;
@@ -234,7 +221,7 @@ export default {
       this.$router.push({
         name: "ForgotPasswordSP"
       });
-    },
+    }
   },
   created() {
     // Reset form content to clear previous submitted information
