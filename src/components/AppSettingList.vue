@@ -127,10 +127,6 @@ export default {
   margin: 10px 0;
   position: relative;
 
-  .van-cell {
-    margin-top: 20px;
-  }
-
   .dialog-title {
     font-size: 24px;
     color: #000000;
@@ -139,6 +135,9 @@ export default {
     margin-bottom: 20px;
   }
 
+  .van-cell-group {
+    margin-top: 20px;
+  }
   .dialog-des {
     font-size: 16px;
     color: #000000;
