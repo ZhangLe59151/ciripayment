@@ -1,7 +1,7 @@
 <template>
   <div class="app-setting-header">
     <div class="title">
-      Welcome
+      Settings
     </div>
   </div>
 </template>
