@@ -1,12 +1,6 @@
 <template>
   <div class="enter-otp">
-    <van-nav-bar
-      left-arrow
-      @click-left="$router.back()"
-      :border="false"
-    >
-      <div slot="title" class="Silot center"><img src="../assets/imgs/Silot-logo.svg"></div>
-    </van-nav-bar>
+    <WapHeader :left="true" :center="true" />
 
     <div class="login-title center">
       Log In
@@ -61,7 +55,17 @@
       <div class="sub-tips">Enter OTP</div>
 
       <van-password-input
-        :value="displayOTP"
+        v-if="form.accountVerified"
+        :value="value"
+        info
+        @focus="showKeyboard = true"
+        :mask="false"
+        :length="6"
+        style="margin-left: -15px ; color : #929292;"
+      />
+      <van-password-input
+        v-else
+        :value="value"
         info
         @focus="showKeyboard = true"
         :mask="false"
@@ -82,11 +86,12 @@
       </div>
 
       <van-button
+        v-if="!form.accountVerified"
         size="large"
         class="bottom-btn"
-        @click="handleVerifyMock"
+        @click="handleVerifyOtpUnverifiedAccount"
       >
-        Create Account
+        Continue
       </van-button>
     </div>
 
@@ -107,14 +112,6 @@
   .enter-otp {
     background: url("../assets/imgs/MP-background.png");
     min-height: 100vh;
-    .van-nav-bar {
-      background-color: transparent;
-      .Silot {
-        position: relative;
-        top: 10px;
-      }
-    }
-
     .login-title {
       font-size: 24px;
       color: white;
@@ -163,6 +160,7 @@
       margin: 20px 0;
       text-decoration: none;
       font-size: 14px;
+      color: #87929D;
     }
     .resend-active{
       margin: 20px 0;
@@ -189,9 +187,12 @@
 <script>
 // @ is an alias to /src
 import util from "@/util.js";
-
+import WapHeader from "@/components/WapHeader";
 export default {
   name: "enter-otp",
+  components: {
+    WapHeader
+  },
   data() {
     return {
       active: 2,
@@ -211,9 +212,14 @@ export default {
   computed: {
     serviceType() {
       return this.$store.state.form.serviceType;
-    },
-    displayOTP() {
-      return (this.value == "") ? "000000" : this.value;
+    }
+  },
+  watch: {
+    value: function(val) {
+      // watch input if verified account
+      if (this.form.accountVerified) {
+        this.handleVerifyOtpVerifiedAccount();
+      }
     }
   },
   created() {
@@ -282,7 +288,43 @@ export default {
       this.value = this.value.slice(0, this.value.length - 1);
     },
 
-    handleVerifyMock() {
+    handleVerifyOtpVerifiedAccount() {
+      console.log("on input");
+      var otpCodeErrorMessage =
+        "Incorrect OTP. Please double check and try again.";
+      if (this.value.length === 6) {
+        console.log("begin verify");
+        this.$api
+          .verifyOtp({
+            phoneNumber:
+              this.$store.state.form.nationalCode + this.$store.state.form.phone,
+            otpCode: this.value
+          })
+          .then(res => {
+            if (res.data.code === 200) {
+              // check password
+              this.$api.checkPasswordExistence({ params: {
+                phoneNumber: this.form.applicantPhoneNumber }
+              }).then(res => {
+                // merchant password not found
+                if (res.data.code === 10050) {
+                  this.$router.push({ name: "VerifiedFirstTime" });
+                } // merchant password found
+                else {
+                  this.$router.push({ name: "EnterPasswordSP" });
+                }
+              })
+            } else {
+              this.$notify({
+                message: otpCodeErrorMessage,
+                duration: 1000
+              });
+            }
+          });
+      }
+    },
+
+    handleVerifyOtpUnverifiedAccount() {
       var otpCodeErrorMessage =
         "Incorrect OTP. Please double check and try again.";
       if (this.value === "" || this.value.length !== 6) {
@@ -295,12 +337,18 @@ export default {
       this.$api
         .verifyOtp({
           phoneNumber:
-            this.$store.state.form.nationalCode + this.$store.state.form.phone,
+              this.$store.state.form.nationalCode + this.$store.state.form.phone,
           otpCode: this.value
         })
         .then(res => {
           if (res.data.code === 200) {
-            this.$router.push({ name: "CreatePasswordSP" });
+            //
+            this.$router.push({ name: "Home" });
+          } else {
+            this.$notify({
+              message: otpCodeErrorMessage,
+              duration: 1000
+            });
           }
         });
     },

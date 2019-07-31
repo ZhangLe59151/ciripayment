@@ -1,13 +1,6 @@
 <template>
   <div class="enter-password">
-    <van-nav-bar
-      left-arrow
-      @click-left="$router.back()"
-      :border="false"
-    >
-      <div slot="title" class="Silot center"><img src="../assets/imgs/Silot-logo.svg"></div>
-    </van-nav-bar>
-
+    <WapHeader :center="true" :right="true" />
     <div class="login-title center">
       Log In
     </div>
@@ -190,9 +183,13 @@
 <script>
 // @ is an alias to /src
 import util from "@/util.js";
+import WapHeader from "@/components/WapHeader";
 
 export default {
   name: "enter-password",
+  components: {
+    WapHeader
+  },
   data() {
     return {
       form: {},
@@ -237,7 +234,7 @@ export default {
       this.$router.push({
         name: "ForgotPasswordSP"
       });
-    }
+    },
   },
   created() {
     // Reset form content to clear previous submitted information

@@ -1,11 +1,6 @@
 <template>
   <div class="verified-first-time">
-    <van-nav-bar
-      @click-right="$router.back()"
-      :border="false"
-    >
-      <van-icon name="cross" slot="right" />
-    </van-nav-bar>
+    <WapHeader :right="true" />
 
     <div class="welcomeWrapper">
       <div class="welcome-title">
@@ -19,7 +14,7 @@
         Enter last 4 digits of your National ID
       </div>
       <van-password-input
-        :value="displayOTP"
+        :value="value"
         info
         @focus="showKeyboard = true"
         :mask="false"
@@ -41,18 +36,18 @@
 </template>
 
 <script>
+import WapHeader from "@/components/WapHeader";
+
 export default {
   name: "VerifiedFirstTimeLogin",
+  components: {
+    WapHeader
+  },
   data() {
     return {
       showKeyboard: true,
       value: ""
     };
-  },
-  computed: {
-    displayOTP() {
-      return (this.value === "") ? "0000" : this.value;
-    }
   },
   methods: {
     onInput(key) {

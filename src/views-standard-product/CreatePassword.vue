@@ -1,12 +1,6 @@
 <template>
   <div class="create-password">
-    <van-nav-bar
-      @click-right="$router.back()"
-      :border="false"
-    >
-      <van-icon name="cross" slot="right" />
-    </van-nav-bar>
-
+    <WapHeader :right="true" />
     <div class="createPassWrapper">
       <div class="title">
         Create Password
@@ -223,8 +217,13 @@
 </template>
 
 <script>
+import WapHeader from "@/components/WapHeader";
+
 export default {
   name: "CreatePassword",
+  components: {
+    WapHeader
+  },
   data() {
     return {
       form: {},

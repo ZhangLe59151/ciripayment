@@ -1,12 +1,6 @@
 <template>
   <div class="forgot-password">
-    <van-nav-bar
-      @click-right="$router.back()"
-      :border="false"
-    >
-      <van-icon name="cross" slot="right" />
-    </van-nav-bar>
-
+    <WapHeader :right="true" />
     <div class="forgotWrapper">
       <div class="forgot-title">
         Forgot Password
@@ -50,7 +44,7 @@
         Enter last 4 digits of your National ID
       </div>
       <van-password-input
-        :value="displayOTP"
+        :value="value"
         info
         @focus="showKeyboard = true"
         :mask="false"
@@ -72,19 +66,19 @@
 </template>
 
 <script>
+import WapHeader from "@/components/WapHeader";
+
 export default {
   name: "ForgotPassword",
+  components: {
+    WapHeader
+  },
   data() {
     return {
       showKeyboard: true,
       value: "",
       form: {}
     };
-  },
-  computed: {
-    displayOTP() {
-      return (this.value == "") ? "0000" : this.value;
-    }
   },
   methods: {
     onInput(key) {

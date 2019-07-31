@@ -1,12 +1,6 @@
 <template>
   <div class="reset-password">
-    <van-nav-bar
-      @click-right="$router.back()"
-      :border="false"
-    >
-      <van-icon name="cross" slot="right" />
-    </van-nav-bar>
-
+    <WapHeader :right="true" />
     <div class="resetPassWrapper">
       <div class="title">
         Reset Password
@@ -220,8 +214,13 @@
 </template>
 
 <script>
+import WapHeader from "@/components/WapHeader";
+
 export default {
   name: "ResetPassword",
+  components: {
+    WapHeader
+  },
   data() {
     return {
       form: {},

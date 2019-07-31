@@ -12,9 +12,19 @@ body {
   text-align: center;
 }
 
+.web-nav {
+    background: transparent !important;
+    .van-icon,
+    .van-nav-bar__text {
+      color: #dcdcdc !important;
+    }
+    .van-nav-bar__title {
+      left: 0 !important;
+    }
+}
+
 .forgotWrapper,
 .welcomeWrapper {
-
   // change width of one box
   .van-password-input__security {
     width: 75%;
@@ -30,6 +40,9 @@ body {
     border: 1px solid #929292;
     border-radius: 4px;
     margin-right: 10px;
+    max-width: 40px;
+    max-height: 40px;
+    box-sizing: border-box;
   }
 
   //change the original border to white
@@ -37,6 +50,10 @@ body {
   .van-hairline--surround::after {
     border: 0px solid #ffffff;
   }
+
+.van-password-input__security li{
+  line-height: 37px;
+}
 }
 
 // for landing page label
@@ -78,6 +95,7 @@ body {
     color: #929292 !important;
     cursor: not-allowed;
     width: 93%;
+    font-size: 14px;
   }
 }
 

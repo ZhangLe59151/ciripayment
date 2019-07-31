@@ -1,6 +1,6 @@
 <template>
   <div class="landing-page">
-    <div class="Silot center"><img src="../assets/imgs/Silot-logo.svg"></div>
+    <WapHeader :center="true" />
 <div class="landingPageContent">
   <div class="slogan-title center">
     Grow Your Business with Moon Merchant Portal.
@@ -53,7 +53,7 @@
       class="bottom-btn"
       @click="handleStart"
     >
-      Get started
+      Get Started
     </van-button>
 
   </div>
@@ -78,9 +78,12 @@
 
 <script>
 import { mapState } from "vuex";
-
+import WapHeader from "@/components/WapHeader";
 export default {
   name: "landing-page",
+  components:{
+    WapHeader
+  },
   computed: {
     ...mapState({
       columns: "nationalCodeList",
@@ -140,6 +143,8 @@ export default {
             );
             return;
           }
+          console.log(res.data);
+          this.$store.commit("UpdateForm", { accountVerified: res.data.data.exist });
           this.$router.push({
             name: "EnterOtp"
           });
@@ -157,11 +162,6 @@ export default {
   .landing-page {
     background: url("../assets/imgs/MP-background.png");
     min-height: 100vh;
-
-    .Silot{
-      position: relative;
-      top: 20px;
-    }
     .landingPageContent{
       position: fixed;
       bottom: 0;
