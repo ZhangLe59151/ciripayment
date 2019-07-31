@@ -2,7 +2,7 @@
   <div class="app-setting-list">
     <el-card class="box-card app-menu">
       Profile
-      <img :src="nextIcon" alt>
+      <img :src="nextIcon" alt @click="$router.push({name: 'SettingsProfile'})">
     </el-card>
 
     <el-card class="box-card app-menu">

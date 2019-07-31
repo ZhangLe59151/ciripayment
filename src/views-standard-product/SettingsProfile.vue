@@ -1,11 +1,15 @@
 <template>
-
+  <div class="app-setting-profile">
+    <app-setting-profile-header></app-setting-profile-header>
+  </div>
 </template>
 
 <script>
-  export default {
-    name: "SettingsProfile"
-  }
+import AppSettingProfileHeader from "../components/AppSettingProfileHeader";
+export default {
+  name: "SettingsProfile",
+  components: { AppSettingProfileHeader }
+}
 </script>
 
 <style scoped>
