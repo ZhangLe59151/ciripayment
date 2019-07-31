@@ -77,11 +77,12 @@ export default {
     }
 
     .van-tabbar-item__text {
-      font-size: 12px;
+      font-size: 10px;
     }
-  }
-  &.van-tabbar {
-    height: 64px;
+
+    .van-tabbar-item__icon {
+      margin-bottom: 0;
+    }
   }
 }
 </style>

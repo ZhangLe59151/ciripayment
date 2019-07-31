@@ -83,7 +83,9 @@ export default {
   },
   methods: {
     handleClose() {
+      this.value = "";
       this.profileDialog = false;
+      this.showKeyboard = false;
     },
     verifyIdentity() {
       this.profileDialog = true;
@@ -99,12 +101,13 @@ export default {
       this.value = this.value.slice(0, this.value.length - 1);
     },
     checkNationalId(val) {
-      this.$api.checkNationID(val).then(res => {
+      this.$api.checkNationId({ nationalId: val }).then(res => {
         if (res.data.code === 200) {
           if (res.data.data.same == true) {
             this.$router.push({ name: "Profile" });
           } else {
             this.$toast("The national id is wrong.");
+            this.handleClose();
           }
         }
       });

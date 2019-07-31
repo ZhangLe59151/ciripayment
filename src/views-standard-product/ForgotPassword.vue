@@ -18,13 +18,12 @@
           class="forgotpassword"
           prop="phone"
         >
-          <span
-            slot="label"
-          >
-              <span
-                style="margin: 0 10px;"
-              >{{form.nationalCode}}</span>
-            <i class="el-icon-caret-bottom" style="color: #929292"></i>
+          <span slot="label">
+            <span style="margin: 0 10px;">{{form.nationalCode}}</span>
+            <i
+              class="el-icon-caret-bottom"
+              style="color: #929292"
+            ></i>
           </span>
           <el-input
             v-model="form.phone"
@@ -81,16 +80,16 @@ export default {
     };
   },
   watch: {
-    value() {
+    value(val) {
       if (this.value.length === 4) {
-        this.$api.checkNationID(this.value).then(res => {
+        this.$api.checkNationId({ nationalId: val }).then(res => {
           if (res.data.code === 200 && res.data.data.same) {
-            this.$router.push({ name: "ResetPasswordSP" })
+            this.$router.push({ name: "ResetPasswordSP" });
           } else {
             //FIXME: not implemented yet, the api return when error
             this.$toast(res.data.msg);
           }
-        })
+        });
       }
     }
   },
@@ -113,28 +112,26 @@ export default {
     });
     this.form = Object.assign({}, form);
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  .forgotWrapper{
-    padding: 5%;
-    padding: 5%;
-    .forgot-title{
-      font-size: 24px;
-      font-weight: bold;
-      margin-top:50px;
-      margin-bottom: 25px;
-    }
-    .sub{
-      margin-bottom: 25px;
-      color: #2F3941;
-    }
-    .instruction{
-      color: #2F3941;
-      margin-bottom: 10px;
-    }
-
+.forgotWrapper {
+  padding: 5%;
+  padding: 5%;
+  .forgot-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: 25px;
   }
-
+  .sub {
+    margin-bottom: 25px;
+    color: #2f3941;
+  }
+  .instruction {
+    color: #2f3941;
+    margin-bottom: 10px;
+  }
+}
 </style>

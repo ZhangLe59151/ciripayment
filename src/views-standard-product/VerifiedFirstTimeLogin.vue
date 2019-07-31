@@ -50,16 +50,16 @@ export default {
     };
   },
   watch: {
-    value() {
+    value(val) {
       if (this.value.length === 4) {
-        this.$api.checkNationID(this.value).then(res => {
+        this.$api.checkNationId({ nationalId: val }).then(res => {
           if (res.data.code === 200 && res.data.data.same) {
-            this.$router.push({ name: "CreatePasswordSP" })
+            this.$router.push({ name: "CreatePasswordSP" });
           } else {
             //FIXME: not implemented yet, the api return when error
             this.$toast(res.data.msg);
           }
-        })
+        });
       }
     }
   },
@@ -71,27 +71,26 @@ export default {
       this.value = this.value.slice(0, this.value.length - 1);
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  .welcomeWrapper{
-    padding: 5%;
-    padding: 5%;
-    .welcome-title{
-      font-size: 24px;
-      font-weight: bold;
-      margin-top:50px;
-      margin-bottom: 25px;
-    }
-    .sub{
-      margin-bottom: 25px;
-      color: #2F3941;
-    }
-    .instruction{
-      color: #2F3941;
-      margin-bottom: 10px;
-    }
+.welcomeWrapper {
+  padding: 5%;
+  padding: 5%;
+  .welcome-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: 25px;
   }
-
+  .sub {
+    margin-bottom: 25px;
+    color: #2f3941;
+  }
+  .instruction {
+    color: #2f3941;
+    margin-bottom: 10px;
+  }
+}
 </style>
