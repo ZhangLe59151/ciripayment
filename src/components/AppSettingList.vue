@@ -88,12 +88,20 @@ export default {
       this.showKeyboard = false;
     },
     verifyIdentity() {
-      this.profileDialog = true;
-      this.showKeyboard = true;
+      this.$api.checkApplictionStatus().then(res => {
+        if (res.data.code === 200) {
+          this.profileDialog = true;
+          this.showKeyboard = true;
+        } else {
+          this.$router.push({
+            name: "Profile",
+            query: { applicationStatus: "no" }
+            // 'no' means the user does not have an application.
+          });
+        }
+      });
     },
-    handleNext() {
-      this.$router.push({ name: "SettingsProfile" });
-    },
+
     onInput(key) {
       this.value = (this.value + key).slice(0, 4);
     },

@@ -1,17 +1,32 @@
 <template>
-  <div class="app-profile">
-    <app-profile-header
-      :class="haveStatusForHeader"
-      :info.sync="info"
-    />
-    <app-profile-progress :status.sync="info.applicationStatus + ''" />
-    <app-profile-content
-      :class="haveStatusForCnt"
-      :info.sync="info"
-    />
-    <app-tab-bar :active="3" />
+  <div v-if="$route.query.applicationStatus === 'no'">
+    <app-setting-profile-header />
+    <app-setting-profile-progress status="0" />
+  </div>
+
+  <div
+    class="app-profile"
+    v-else
+  >
+    <template v-if="info.applicationStatus + '' === '0'">
+      <app-setting-profile-header />
+      <app-setting-profile-progress status="1" />
+    </template>
+    <template v-else>
+      <app-profile-header
+        :class="haveStatusForHeader"
+        :info.sync="info"
+      />
+      <app-profile-progress :status.sync="info.applicationStatus + ''" />
+      <app-profile-content
+        :class="haveStatusForCnt"
+        :info.sync="info"
+      />
+      <app-tab-bar :active="3" />
+    </template>
 
   </div>
+
 </template>
 
 <script>
@@ -19,12 +34,16 @@ import AppProfileHeader from "@/components/AppProfileHeader";
 import AppProfileContent from "@/components/AppProfileContent";
 import AppTabBar from "@/components/AppTabBar";
 import AppProfileProgress from "@/components/AppProfileProgress";
+import AppSettingProfileHeader from "@/components/AppSettingProfileHeader";
+import AppSettingProfileProgress from "@/components/AppSettingProfileProgress";
 export default {
   components: {
     AppProfileHeader,
     AppProfileContent,
     AppTabBar,
-    AppProfileProgress
+    AppProfileProgress,
+    AppSettingProfileHeader,
+    AppSettingProfileProgress
   },
   data() {
     return {
@@ -43,7 +62,7 @@ export default {
   },
   methods: {
     haveStatus(className) {
-      return ["0", "1"].includes(this.info.applicationStatus + "")
+      return ["0", "2"].includes(this.info.applicationStatus + "")
         ? className
         : "";
     },

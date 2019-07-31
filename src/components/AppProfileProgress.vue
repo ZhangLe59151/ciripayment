@@ -37,10 +37,10 @@ export default {
           icon: require("@/assets/imgs/money-01.png")
         },
         {
-          label: "Verification In Progress",
-          des: "We’ll notify you when we’re done verifying.",
-          status: "0",
-          icon: require("@/assets/imgs/money-00.png")
+          label: "Update Request Rejected",
+          des: "There may be insufficient information. Try update again.",
+          status: "2",
+          icon: require("@/assets/imgs/profile-04.png")
         }
       ]
     };
