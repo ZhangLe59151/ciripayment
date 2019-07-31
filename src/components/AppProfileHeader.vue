@@ -1,7 +1,10 @@
 <template>
   <div class="app-profile-header">
     <div class="title">
-      <van-icon name="arrow-left" />
+      <van-icon
+        name="arrow-left"
+        @click="$router.push({name: 'Settings'})"
+      />
       <span>Brandon's Burgers</span>
 
       <div class="info">

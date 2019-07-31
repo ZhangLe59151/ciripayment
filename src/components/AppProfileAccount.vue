@@ -15,7 +15,7 @@
     class="bank-box"
     v-else
   >
-    <img :src="require('@/assets/imgs/ico-alipay.png')">
+    <img :src="require('@/assets/imgs/ico_bank.png')">
     <div class="acc-info">
       <div>ABC Bank</div>
       <div>

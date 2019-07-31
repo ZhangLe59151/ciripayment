@@ -1,11 +1,19 @@
 @import "../../assets//iconfont/iconfont.css";
 
+@mixin fontFamily {
+  font-family: HelveticaNeue, "Helvetica Neue", Avenir-Book, "Source Sans Pro", Helvetica,
+    Arial, sans-serif !important;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
-  font-family: HelveticaNeue, "Helvetica Neue", Avenir-Book, "Source Sans Pro", Helvetica,
-    Arial, sans-serif !important;
+  @include fontFamily;
+
+  .van-tabbar-item__text {
+    @include fontFamily;
+  }
 }
 
 .center {
@@ -13,18 +21,21 @@ body {
 }
 
 .web-nav {
-    background: transparent !important;
-    .van-icon,
-    .van-nav-bar__text {
-      color: #dcdcdc !important;
-    }
-    .van-nav-bar__title {
-      left: 0 !important;
-    }
+  background: transparent !important;
+
+  .van-icon,
+  .van-nav-bar__text {
+    color: #dcdcdc !important;
+  }
+
+  .van-nav-bar__title {
+    left: 0 !important;
+  }
 }
 
 .forgotWrapper,
 .welcomeWrapper {
+
   // change width of one box
   .van-password-input__security {
     width: 75%;
@@ -51,9 +62,9 @@ body {
     border: 0px solid #ffffff;
   }
 
-.van-password-input__security li{
-  line-height: 37px;
-}
+  .van-password-input__security li {
+    line-height: 37px;
+  }
 }
 
 // for landing page label
