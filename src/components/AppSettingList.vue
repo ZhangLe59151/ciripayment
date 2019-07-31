@@ -42,12 +42,18 @@
       </div>
 
       <van-password-input
-        :value="nationalID"
+        :value="value"
         :length="4"
         :gutter="15"
         @focus="showKeyboard = true"
       />
     </el-dialog>
+    <van-number-keyboard
+      :show="showKeyboard"
+      @input="onInput"
+      @delete="onDelete"
+      @blur="showKeyboard = false"
+    />
   </div>
 </template>
 
@@ -58,7 +64,8 @@ export default {
     return {
       nextIcon: require("@/assets/imgs/next.svg"),
       profileDialog: false,
-      nationalID: ""
+      showKeyboard: false,
+      value: ""
     }
   },
   methods: {
@@ -70,6 +77,12 @@ export default {
     },
     handleNext() {
       this.$router.push({ name: "SettingsProfile" });
+    },
+    onInput(key) {
+      this.value = (this.value + key).slice(0, 4);
+    },
+    onDelete() {
+      this.value = this.value.slice(0, this.value.length - 1);
     }
   }
 }
