@@ -2,6 +2,9 @@
   <div class="app-setting">
     <app-setting-header></app-setting-header>
     <app-setting-list></app-setting-list>
+    <div class="logout">
+      <el-link type="primary">Log Out</el-link>
+    </div>
     <div class="version">
       version 1.1.0
     </div>
@@ -33,6 +36,12 @@ export default {
     background-color: #f0f7fb;
     min-height: 100vh;
     position: relative;
+
+    .logout {
+      width: 100%;
+      margin-top: 30px;
+      text-align: center;
+    }
 
     .version {
       font-size: 14px;
