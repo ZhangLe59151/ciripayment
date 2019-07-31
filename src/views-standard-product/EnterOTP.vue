@@ -1,6 +1,9 @@
 <template>
   <div class="enter-otp">
-    <WapHeader :left="true" :center="true" />
+    <WapHeader
+      :left="true"
+      :center="true"
+    />
 
     <div class="login-title center">
       Log In
@@ -24,14 +27,13 @@
             class="enterotp"
             prop="phone"
           >
-          <span
-            slot="label"
-          >
-              <span
-                style="margin: 0 10px;"
-              >{{form.nationalCode}}</span>
-            <i class="el-icon-caret-bottom" style="color: #929292"></i>
-          </span>
+            <span slot="label">
+              <span style="margin: 0 10px;">{{form.nationalCode}}</span>
+              <i
+                class="el-icon-caret-bottom"
+                style="color: #929292"
+              ></i>
+            </span>
             <el-input
               v-model="form.phone"
               :maxlength="this.$store.state.phone.maxLen"
@@ -95,8 +97,8 @@
       </van-button>
     </div>
 
-<!--    <div class="page">3/3</div>-->
-<!--    &lt;!&ndash; 数字键盘 &ndash;&gt;-->
+    <!--    <div class="page">3/3</div>-->
+    <!--    &lt;!&ndash; 数字键盘 &ndash;&gt;-->
     <van-number-keyboard
       :show="showKeyboard"
       @input="onInput"
@@ -107,81 +109,81 @@
 </template>
 
 <style lang="scss" scoped>
-  @import "../assets/css/bottom-btn.scss";
+@import "../assets/css/bottom-btn.scss";
 
-  .enter-otp {
-    background: url("../assets/imgs/MP-background.png");
-    min-height: 100vh;
-    .login-title {
-      font-size: 24px;
-      color: white;
-      font-weight: bold;
-      margin-top: 3.25rem;
-    }
-
-    .enterOtpWrapper{
-      background-color:white;
-      position: fixed;
-      bottom: 0;
-      height: 70%;
-      border-top-left-radius: 16px;
-      border-top-right-radius: 16px;
-      padding-left: 5%;
-      padding-right: 5%;
-      padding-top:20px;
-    }
-
-    .tips {
-      font-size: 16px;
-      margin-top: 2.25rem;
-      margin-bottom: 2.25rem;
-    }
-    .tips-error {
-      font-size: 20px;
-      padding: 20px;
-      color: #dd1111;
-    }
-
-    .sub-tips {
-      font-size: 14px;
-      margin: 10px 0;
-    }
-
-    .phone {
-      font-size: 27px;
-      text-decoration: underline;
-    }
-
-    .otp {
-      text-align: left;
-    }
-
-    .resend {
-      margin: 20px 0;
-      text-decoration: none;
-      font-size: 14px;
-      color: #87929D;
-    }
-    .resend-active{
-      margin: 20px 0;
-      text-decoration: none;
-      font-size: 14px;
-      color:#037AFF;
-    }
-
-    .page {
-      position: fixed;
-      width: 100%;
-      text-align: center;
-      bottom: 20px;
-    }
-    .bottom-btn {
-      background-color: #053C5E;
-      border-radius: 4px;
-      margin: 22vh 0 1.25rem 0;
-      width: 100%;
-    }
+.enter-otp {
+  background: url("../assets/imgs/MP-background.png");
+  min-height: 100vh;
+  .login-title {
+    font-size: 24px;
+    color: white;
+    font-weight: bold;
+    margin-top: 3.25rem;
   }
+
+  .enterOtpWrapper {
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    height: 70%;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 20px;
+  }
+
+  .tips {
+    font-size: 16px;
+    margin-top: 2.25rem;
+    margin-bottom: 2.25rem;
+  }
+  .tips-error {
+    font-size: 20px;
+    padding: 20px;
+    color: #dd1111;
+  }
+
+  .sub-tips {
+    font-size: 14px;
+    margin: 10px 0;
+  }
+
+  .phone {
+    font-size: 27px;
+    text-decoration: underline;
+  }
+
+  .otp {
+    text-align: left;
+  }
+
+  .resend {
+    margin: 20px 0;
+    text-decoration: none;
+    font-size: 14px;
+    color: #87929d;
+  }
+  .resend-active {
+    margin: 20px 0;
+    text-decoration: none;
+    font-size: 14px;
+    color: #037aff;
+  }
+
+  .page {
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    bottom: 20px;
+  }
+  .bottom-btn {
+    background-color: #053c5e;
+    border-radius: 4px;
+    margin: 22vh 0 1.25rem 0;
+    width: 100%;
+  }
+}
 </style>
 
 <script>
@@ -272,7 +274,7 @@ export default {
       this.$api
         .sendOtp({
           phoneNumber:
-              this.$store.state.form.nationalCode + this.$store.state.form.phone
+            this.$store.state.form.nationalCode + this.$store.state.form.phone
         })
         .then(res => {
           if (res.data.code !== 200) {
@@ -297,23 +299,27 @@ export default {
         this.$api
           .verifyOtp({
             phoneNumber:
-              this.$store.state.form.nationalCode + this.$store.state.form.phone,
+              this.$store.state.form.nationalCode +
+              this.$store.state.form.phone,
             otpCode: this.value
           })
           .then(res => {
             if (res.data.code === 200) {
               // check password
-              this.$api.checkPasswordExistence({ params: {
-                phoneNumber: this.form.applicantPhoneNumber }
-              }).then(res => {
-                // merchant password not found
-                if (res.data.code === 10050) {
-                  this.$router.push({ name: "VerifiedFirstTime" });
-                } // merchant password found
-                else {
-                  this.$router.push({ name: "EnterPasswordSP" });
-                }
-              })
+              this.$api
+                .checkPasswordExistence({
+                  params: {
+                    phoneNumber: this.form.applicantPhoneNumber
+                  }
+                })
+                .then(res => {
+                  this.$router.push({
+                    name:
+                      res.data.code === 10050
+                        ? "VerifiedFirstTime"
+                        : "EnterPasswordSP"
+                  });
+                });
             } else {
               this.$notify({
                 message: otpCodeErrorMessage,
@@ -337,7 +343,7 @@ export default {
       this.$api
         .verifyOtp({
           phoneNumber:
-              this.$store.state.form.nationalCode + this.$store.state.form.phone,
+            this.$store.state.form.nationalCode + this.$store.state.form.phone,
           otpCode: this.value
         })
         .then(res => {
@@ -355,7 +361,7 @@ export default {
 
     handleVerify() {
       var otpCodeErrorMessage =
-          "Incorrect OTP. Please double check and try again.";
+        "Incorrect OTP. Please double check and try again.";
       if (this.value === "" || this.value.length !== 6) {
         this.$notify({
           message: otpCodeErrorMessage,
@@ -366,7 +372,7 @@ export default {
       this.$api
         .verifyOtp({
           phoneNumber:
-              this.$store.state.form.nationalCode + this.$store.state.form.phone,
+            this.$store.state.form.nationalCode + this.$store.state.form.phone,
           otpCode: this.value
         })
         .then(res => {
@@ -375,13 +381,16 @@ export default {
             this.$api.serviceOverview().then(res => {
               if (
                 res.data.code === 200 &&
-                  res.data.data.applicationStatus !== 2
+                res.data.data.applicationStatus !== 2
               ) {
                 let marketingEnabled = false;
                 let paymentEnabled = false;
                 if (this.serviceType.includes("0")) {
                   if (res.data.data.paymentChannelOverviewVo !== undefined) {
-                    res.data.data.paymentChannelOverviewVo.forEach(function(paymentChannel, index) {
+                    res.data.data.paymentChannelOverviewVo.forEach(function(
+                      paymentChannel,
+                      index
+                    ) {
                       console.log(paymentChannel, index);
                       if (paymentChannel.status === 1) {
                         paymentEnabled = true;
@@ -403,14 +412,16 @@ export default {
                   this.$dialog
                     .alert({
                       message:
-                          "It looks like you already have services enabled with us.\n" +
-                          "Log in to your Merchant Portal to manage them or apply for more services."
+                        "It looks like you already have services enabled with us.\n" +
+                        "Log in to your Merchant Portal to manage them or apply for more services."
                     })
                     .then(() => {
                       this.$store.state.serviceOverviewVo = res.data.data;
                       this.$api
-                        .checkPasswordExistence({ params: {
-                          phoneNumber: this.form.applicantPhoneNumber }
+                        .checkPasswordExistence({
+                          params: {
+                            phoneNumber: this.form.applicantPhoneNumber
+                          }
                         })
                         .then(res => {
                           if (res.data.code === 10050) {
@@ -426,7 +437,7 @@ export default {
                 this.$dialog
                   .alert({
                     message:
-                        "You have applied for the services. Go to your merchant portal to check out the status and enjoy your services now."
+                      "You have applied for the services. Go to your merchant portal to check out the status and enjoy your services now."
                   })
                   .then(() => {
                     this.$store.state.serviceOverviewVo = res.data.data;

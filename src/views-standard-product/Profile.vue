@@ -38,9 +38,17 @@ export default {
   methods: {
     haveStatus(className) {
       return ["0", "1"].includes(this.info.status) ? className : "";
+    },
+    fetchData() {
+      this.$api.checkApplictionStatus().then(res => {
+        if (res.data.code === 200) {
+        }
+      });
     }
   },
-  created() {}
+  created() {
+    this.fetchData();
+  }
 };
 </script>
 
