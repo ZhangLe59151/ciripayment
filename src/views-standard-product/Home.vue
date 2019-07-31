@@ -41,6 +41,9 @@ export default {
   methods: {
     ShowPopup() {
       this.popupStatus = true;
+    },
+    fetchData() {
+      // this.$api.check
     }
   },
   computed: {

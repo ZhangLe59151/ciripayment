@@ -19,6 +19,7 @@
 <script>
 export default {
   name: "AppTabBar",
+  props: ["activeMenu"],
 
   props: {
     active: {
