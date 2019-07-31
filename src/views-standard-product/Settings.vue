@@ -1,6 +1,7 @@
 <template>
   <div class="app-setting">
     <app-setting-header></app-setting-header>
+    <app-tab-bar v-bind:activeMenu="3"></app-tab-bar>
   </div>
 </template>
 

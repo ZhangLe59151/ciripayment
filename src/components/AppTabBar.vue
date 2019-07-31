@@ -19,10 +19,11 @@
 <script>
 export default {
   name: "AppTabBar",
+  props: ["activeMenu"],
 
   data() {
     return {
-      active: 0,
+      active: this.activeMenu || 0,
       tabbarList: [
         {
           to: "/home",
