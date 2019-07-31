@@ -47,11 +47,13 @@ export default {
   deleteApplication(params) {
     return Vue.axios.post("/api/admin/deleteApplication", params)
   },
-
   checkDuplicate(params) {
     return Vue.axios.post(
       "/api/self-onboarding/application/check-duplicate",
       params
     )
+  },
+  checkNationID(params) {
+    return Vue.axios.post(`/api/self-onboarding/application/check-nationalId?nationalId=${params}`)
   }
 }

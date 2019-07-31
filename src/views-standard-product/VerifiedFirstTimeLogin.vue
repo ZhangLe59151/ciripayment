@@ -49,6 +49,20 @@ export default {
       value: ""
     };
   },
+  watch: {
+    value() {
+      if (this.value.length === 4) {
+        this.$api.checkNationID(this.value).then(res => {
+          if (res.data.code === 200 && res.data.data.same) {
+            this.$router.push({ name: "CreatePasswordSP" })
+          } else {
+            //FIXME: not implemented yet, the api return when error
+            this.$toast(res.data.msg);
+          }
+        })
+      }
+    }
+  },
   methods: {
     onInput(key) {
       this.value = (this.value + key).slice(0, 6);
