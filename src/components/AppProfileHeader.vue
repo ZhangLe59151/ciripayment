@@ -5,16 +5,19 @@
         name="arrow-left"
         @click="$router.push({name: 'Settings'})"
       />
-      <span>Brandon's Burgers</span>
+      <span>{{info.bizNameEn}}</span>
 
       <div class="info">
         <div class="status">
           <div>
             <van-icon name="checked" /> <span class="verified">Verified</span>
           </div>
-          <div class="time">Last Updated: {{info.time}}</div>
+          <div class="time">Last Updated: {{convertUTCTimeToLocalTime(info.modifyTime)}}</div>
         </div>
-        <div class="btn">
+        <div
+          class="btn"
+          v-if="showUpdateBtn"
+        >
           <van-button
             type="default"
             size="small"
@@ -34,18 +37,30 @@
 </template>
 
 <script>
-const info = {
-  time: "28 Jul 2019, 12:00"
-};
+import util from "@/util";
 export default {
+  props: {
+    info: {
+      default: {},
+      required: true,
+      type: Object
+    }
+  },
   data() {
-    return {
-      info: info
-    };
+    return {};
   },
   methods: {
     handleClick() {
       this.$emit("ShowPopup");
+    },
+    convertUTCTimeToLocalTime(dateTime) {
+      return util.convertUTCTimeToLocalTime(dateTime);
+    }
+  },
+  computed: {
+    showUpdateBtn() {
+      // show this ele when application status != submitted
+      return this.info.applicationStatus + "" !== "0";
     }
   },
   created() {}

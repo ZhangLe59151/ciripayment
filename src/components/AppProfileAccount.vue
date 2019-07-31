@@ -23,7 +23,7 @@
           Savings Account
         </span>
         <span>
-          *** **** 0000
+          {{bankAccValue}}
         </span>
       </div>
     </div>
@@ -33,9 +33,20 @@
 <script>
 export default {
   props: {
-    haveBankAccount: {
-      default: true,
-      type: Boolean
+    bankAccount: {
+      default: "",
+      type: String,
+      required: true
+    }
+  },
+  computed: {
+    bankAccValue() {
+      return this.bankAccount
+        ? "***********" + this.bankAccount.slice(this.bankAccount.length - 4)
+        : "";
+    },
+    haveBankAccount() {
+      return this.bankAccount !== "";
     }
   }
 };

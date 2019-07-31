@@ -1,16 +1,7 @@
 <template>
   <div class="app-profile-progress">
-
-    <div
-      class="regular-progress"
-      v-if="status !== '2'"
-    >
+    <div class="regular-progress">
       <img :src="progress.icon">
-      <!-- <van-icon
-        name="cross"
-        class="close-icon"
-        @click="handleClose"
-      /> -->
       <div class="status">
         <div class="title">{{progress.label}}</div>
         <div class="des">{{progress.des}}</div>

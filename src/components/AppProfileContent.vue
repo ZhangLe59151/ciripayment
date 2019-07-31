@@ -1,10 +1,10 @@
 <template>
   <div class="app-profile-cnt">
     <div class="block">
-      <div class="title">{{info.title}}</div>
+      <div class="title">{{userName}}</div>
       <div class="label">
         <span>Mobile Number</span>
-        <span>{{info.title}}</span>
+        <span>{{info.contactPersonPhoneNumber}}</span>
       </div>
       <div class="label">
         <span>National ID</span>
@@ -38,43 +38,31 @@
       style="margin-top: 20px;"
     >
       <div class="title">Bank Account</div>
-      <app-profile-account />
+      <app-profile-account :bankAccount.sync="info.bankAccount" />
     </div>
   </div>
 </template>
 
 <script>
 import AppProfileAccount from "@/components/AppProfileAccount";
+import util from "@/util";
 const nationalIdStar = "**************";
 export default {
   components: {
     AppProfileAccount
   },
+
+  props: {
+    info: {
+      default: {},
+      required: true,
+      type: Object
+    }
+  },
   data() {
     return {
       iconName: "iconhide",
-      info: {
-        title: "Brandon Tam",
-        nationalId: "123333"
-      },
-      bizInfo: [
-        {
-          label: "Business Category",
-          value: "Retail Services  - Eating and Drinking Places"
-        },
-        {
-          label: "Business Address",
-          value: "2 Venture Drive #08-08, Vision Exchange"
-        },
-        {
-          label: "Province",
-          value: "Bangkok"
-        },
-        {
-          label: "Postal Code",
-          value: "12333"
-        }
-      ]
+      mcc: require("@/assets/data/mcc").MCC
     };
   },
 
@@ -82,7 +70,33 @@ export default {
     nationalId() {
       return this.iconName === "iconhide"
         ? nationalIdStar
-        : this.info.nationalId;
+        : this.info.applicantNationalId;
+    },
+    userName() {
+      return (
+        this.info.contactPersonFirstName + " " + this.info.contactPersonLastName
+      );
+    },
+
+    bizInfo() {
+      return [
+        {
+          label: "Business Category",
+          value: util.convertToCategoryName(this.info.mcc, this.mcc, 2)
+        },
+        {
+          label: "Business Address",
+          value: this.info.branchAddr
+        },
+        {
+          label: "Province",
+          value: this.info.province
+        },
+        {
+          label: "Postal Code",
+          value: this.info.postalCode
+        }
+      ];
     }
   },
 

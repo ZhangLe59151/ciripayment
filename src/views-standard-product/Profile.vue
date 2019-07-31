@@ -1,8 +1,14 @@
 <template>
   <div class="app-profile">
-    <app-profile-header :class="haveStatusForHeader" />
-    <app-profile-progress :status="info.status" />
-    <app-profile-content :class="haveStatusForCnt" />
+    <app-profile-header
+      :class="haveStatusForHeader"
+      :info.sync="info"
+    />
+    <app-profile-progress :status.sync="info.applicationStatus + ''" />
+    <app-profile-content
+      :class="haveStatusForCnt"
+      :info.sync="info"
+    />
     <app-tab-bar :active="3" />
 
   </div>
@@ -23,7 +29,7 @@ export default {
   data() {
     return {
       info: {
-        status: "0"
+        applicationStatus: "0"
       }
     };
   },
@@ -37,13 +43,19 @@ export default {
   },
   methods: {
     haveStatus(className) {
-      return ["0", "1"].includes(this.info.status) ? className : "";
+      return ["0", "1"].includes(this.info.applicationStatus + "")
+        ? className
+        : "";
     },
     fetchData() {
       this.$api.checkApplictionStatus().then(res => {
         if (res.data.code === 200) {
+          this.info = this.transformData(res.data.data);
         }
       });
+    },
+    transformData(data) {
+      return Object.assign({}, data, data.branchVos[0]);
     }
   },
   created() {

@@ -1,8 +1,8 @@
 module.exports = {
   devServer: {
     // proxy: "https://mvp.silot.tech/"
-    proxy: "http://13.251.81.240:15005/"
-    // proxy: "http://localhost:15005/"
+    // proxy: "http://13.251.81.240:15005/"
+    proxy: "http://localhost:15005/"
   },
   configureWebpack: config => {
     if (process.env.NODE_ENV === "production") {
