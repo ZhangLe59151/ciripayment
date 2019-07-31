@@ -11,7 +11,7 @@
     />
 
     <app-home-download />
-    <app-tab-bar></app-tab-bar>
+    <app-tab-bar />
 
   </div>
 </template>

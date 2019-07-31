@@ -20,9 +20,15 @@
 export default {
   name: "AppTabBar",
 
+  props: {
+    active: {
+      default: 0,
+      type: Number
+    }
+  },
+
   data() {
     return {
-      active: 0,
       tabbarList: [
         {
           to: "/home",

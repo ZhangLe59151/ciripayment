@@ -10,36 +10,36 @@
       :border="false"
     />
 
-<!--    <el-steps-->
-<!--      :active="active"-->
-<!--      style="width: 80%; margin-left: 10%;"-->
-<!--      align-center-->
-<!--    >-->
-<!--      <el-step title="Enter Info">-->
-<!--        <img-->
-<!--          :src="enterInfoActive"-->
-<!--          alt-->
-<!--          slot="icon"-->
-<!--          width="20rem"-->
-<!--        >-->
-<!--      </el-step>-->
-<!--      <el-step title="Upload">-->
-<!--        <img-->
-<!--          :src="uploadActive"-->
-<!--          alt-->
-<!--          slot="icon"-->
-<!--          width="20rem"-->
-<!--        >-->
-<!--      </el-step>-->
-<!--      <el-step title="Preview">-->
-<!--        <img-->
-<!--          :src="reviewDefault"-->
-<!--          alt-->
-<!--          slot="icon"-->
-<!--          width="20rem"-->
-<!--        >-->
-<!--      </el-step>-->
-<!--    </el-steps>-->
+    <!--    <el-steps-->
+    <!--      :active="active"-->
+    <!--      style="width: 80%; margin-left: 10%;"-->
+    <!--      align-center-->
+    <!--    >-->
+    <!--      <el-step title="Enter Info">-->
+    <!--        <img-->
+    <!--          :src="enterInfoActive"-->
+    <!--          alt-->
+    <!--          slot="icon"-->
+    <!--          width="20rem"-->
+    <!--        >-->
+    <!--      </el-step>-->
+    <!--      <el-step title="Upload">-->
+    <!--        <img-->
+    <!--          :src="uploadActive"-->
+    <!--          alt-->
+    <!--          slot="icon"-->
+    <!--          width="20rem"-->
+    <!--        >-->
+    <!--      </el-step>-->
+    <!--      <el-step title="Preview">-->
+    <!--        <img-->
+    <!--          :src="reviewDefault"-->
+    <!--          alt-->
+    <!--          slot="icon"-->
+    <!--          width="20rem"-->
+    <!--        >-->
+    <!--      </el-step>-->
+    <!--    </el-steps>-->
 
     <!-- personal information -->
     <div class="heading">
@@ -336,7 +336,11 @@ export default {
     },
     uploadImg(param) {
       var vm = this;
-      var UploadApi = "/api/self-onboarding/image/upload";
+      const url = "/api/self-onboarding/image/upload";
+      var UploadApi =
+        process.env.VUE_APP_DEVICETYPE === "APP"
+          ? process.env.VUE_APP_BASEURL + url
+          : url;
       var fileObj = param.file;
       var originalFileName = fileObj.name;
       var originalFileSizeMb = util.byteToMb(fileObj.size);
@@ -504,8 +508,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/css/bottom-btn.scss";
-  .upload-info {
+@import "../assets/css/bottom-btn.scss";
+.upload-info {
   background-color: #f2f2f2;
   .van-nav-bar {
     background-color: #f2f2f2;
