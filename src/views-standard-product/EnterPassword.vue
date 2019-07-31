@@ -234,7 +234,7 @@ export default {
       this.$router.push({
         name: "ForgotPasswordSP"
       });
-    },
+    }
   },
   created() {
     // Reset form content to clear previous submitted information

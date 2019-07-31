@@ -52,7 +52,6 @@ export default {
 };
 </script>
 
-
 <style lang="scss" scoped>
 .bank-box {
   background: #ffffff;
@@ -116,4 +115,3 @@ export default {
   }
 }
 </style>
-

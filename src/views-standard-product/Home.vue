@@ -10,12 +10,11 @@
       :class="appPosition"
     />
 
-    <app-home-download />
+    <app-home-download v-if="$store.state.deviceType === 'WEB'" />
     <app-tab-bar />
 
   </div>
 </template>
-
 
 <script>
 import AppTabBar from "@/components/AppTabBar";
@@ -77,4 +76,3 @@ export default {
   }
 }
 </style>
-

@@ -24,9 +24,9 @@ axios.interceptors.response.use(
         message: "You have been inactive for a while. Please login again.",
         confirmButtonText: "Go to Login",
         callback: action => {
-          console.log("back to login");
+          console.log("back to LandingPage");
           window.localStorage.clear();
-          router.push({ name: "Login" });
+          router.push({ name: "LandingPage" });
         }
       });
       return error.response;

@@ -10,7 +10,6 @@
   </div>
 </template>
 
-
 <style lang="scss" scoped>
 .app-home-download {
   width: calc(100% - 60px);

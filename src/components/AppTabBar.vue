@@ -56,7 +56,6 @@ export default {
 };
 </script>
 
-
 <style lang="scss" >
 .app-tabbar {
   .van-tabbar-item {
@@ -77,4 +76,3 @@ export default {
   }
 }
 </style>
-

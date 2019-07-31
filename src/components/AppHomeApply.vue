@@ -54,7 +54,6 @@ export default {
 };
 </script>
 
-
 <style lang="scss" scoped>
 .app-home-apply {
   padding: 12px;

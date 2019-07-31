@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --mode web",
+    "serve-app": "vue-cli-service serve --mode app",
     "build": "vue-cli-service build --mode web",
     "build-app": "vue-cli-service build --mode app",
     "lint": "vue-cli-service lint"

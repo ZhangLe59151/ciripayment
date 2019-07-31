@@ -81,7 +81,7 @@ import { mapState } from "vuex";
 import WapHeader from "@/components/WapHeader";
 export default {
   name: "landing-page",
-  components:{
+  components: {
     WapHeader
   },
   computed: {
