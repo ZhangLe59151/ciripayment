@@ -3,12 +3,12 @@
     <app-setting-header></app-setting-header>
     <app-setting-list></app-setting-list>
     <div class="logout">
-      <el-link type="primary">Log Out</el-link>
+      <span @click="handleLogout">Log Out</span>
     </div>
     <div class="version">
       version 1.1.0
     </div>
-    <app-tab-bar v-bind:activeMenu="3"></app-tab-bar>
+    <app-tab-bar :active="active" />
   </div>
 </template>
 
@@ -16,8 +16,9 @@
 import AppTabBar from "@/components/AppTabBar";
 import AppSettingHeader from "@/components/AppSettingHeader";
 import AppSettingList from "@/components/AppSettingList";
+import util from "@/util";
 export default {
-  name: "AppHome",
+  name: "AppSettings",
 
   components: {
     AppTabBar,
@@ -26,31 +27,45 @@ export default {
   },
   data() {
     return {
-
+      active: 3
+    };
+  },
+  methods: {
+    handleLogout() {
+      util.removeCookies("SSID");
+      localStorage.clear();
+      this.$router.push({ name: "LandingPage" });
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  .app-setting {
-    background-color: #f0f7fb;
-    min-height: 100vh;
-    position: relative;
+.app-setting {
+  background-color: #f0f7fb;
+  min-height: 100vh;
+  position: relative;
 
-    .logout {
-      width: 100%;
-      margin-top: 30px;
-      text-align: center;
-    }
-
-    .version {
+  .logout {
+    width: 100%;
+    margin-top: 30px;
+    text-align: center;
+    > span {
       font-size: 14px;
-      color: #C2C8CC;
-      position: absolute;
-      bottom: 80px;
-      width: 100%;
+      color: #037aff;
+      letter-spacing: 0;
       text-align: center;
+      line-height: 24px;
     }
   }
+
+  .version {
+    font-size: 14px;
+    color: #c2c8cc;
+    position: absolute;
+    bottom: 80px;
+    width: 100%;
+    text-align: center;
+  }
+}
 </style>

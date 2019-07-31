@@ -11,7 +11,7 @@
     />
 
     <app-home-download v-if="$store.state.deviceType === 'WEB'" />
-    <app-tab-bar />
+    <app-tab-bar :active="0" />
 
   </div>
 </template>

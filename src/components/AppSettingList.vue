@@ -1,33 +1,46 @@
 <template>
   <div class="app-setting-list">
-    <el-card class="box-card app-menu">
-      Profile
-      <img :src="nextIcon" alt @click="verifyIdentity">
-    </el-card>
 
-    <el-card class="box-card app-menu">
-      Currency
-      <div class="preview-value">
-        THB
-      </div>
-      <img :src="nextIcon" alt>
-      <el-divider></el-divider>
-      Language
-      <div class="preview-value">
-        English
-      </div>
-      <img :src="nextIcon" alt>
-    </el-card>
+    <van-cell-group>
+      <van-cell
+        title="Profile"
+        is-link
+        @click="verifyIdentity"
+        value=""
+      />
+    </van-cell-group>
 
-    <el-card class="box-card app-menu">
-      Change Password
-      <img :src="nextIcon" alt>
-    </el-card>
+    <van-cell-group>
+      <van-cell
+        title="Currency"
+        is-link
+        value="THB"
+      />
+      <van-cell
+        title="Language"
+        is-link
+        value="English"
+      />
+    </van-cell-group>
 
-    <el-card class="box-card app-menu">
-      Terms & Conditions
-      <img :src="nextIcon" alt>
-    </el-card>
+    <van-cell-group>
+      <van-cell
+        title="Change Password"
+        is-link
+        value=""
+        :to="{name: 'ResetPasswordSP'}"
+      />
+    </van-cell-group>
+
+    <van-cell-group>
+      <van-cell
+        title="Terms & Conditions"
+        is-link
+        value=""
+        :to="{name: 'TermsAndConditions'}"
+      />
+    </van-cell-group>
+
     <el-dialog
       :visible="profileDialog"
       :before-close="handleClose"
@@ -46,6 +59,7 @@
         :length="4"
         :gutter="15"
         @focus="showKeyboard = true"
+        style="margin-left: -15px ; color : #929292;"
       />
     </el-dialog>
     <van-number-keyboard
@@ -62,11 +76,10 @@ export default {
   name: "AppSettingList",
   data() {
     return {
-      nextIcon: require("@/assets/imgs/next.svg"),
       profileDialog: false,
       showKeyboard: false,
       value: ""
-    }
+    };
   },
   methods: {
     handleClose() {
@@ -74,6 +87,7 @@ export default {
     },
     verifyIdentity() {
       this.profileDialog = true;
+      this.showKeyboard = true;
     },
     handleNext() {
       this.$router.push({ name: "SettingsProfile" });
@@ -83,50 +97,88 @@ export default {
     },
     onDelete() {
       this.value = this.value.slice(0, this.value.length - 1);
+    },
+    checkNationalId(val) {
+      this.$api.checkNationID(val).then(res => {
+        if (res.data.code === 200) {
+          if (res.data.data.same == true) {
+            this.$router.push({ name: "Profile" });
+          } else {
+            this.$toast("The national id is wrong.");
+          }
+        }
+      });
+    }
+  },
+  watch: {
+    value: {
+      handler(val, oldVal) {
+        if (val.length === 4) {
+          this.checkNationalId(val);
+        }
+      }
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  .app-setting-list {
-    margin: 10px 0;
-    position: relative;
-    .app-menu {
-      margin: 10px 0;
+.app-setting-list {
+  margin: 10px 0;
+  position: relative;
+
+  .van-cell {
+    margin-top: 20px;
+  }
+
+  .dialog-title {
+    font-size: 24px;
+    color: #000000;
+    line-height: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .dialog-des {
+    font-size: 16px;
+    color: #000000;
+    margin-bottom: 20px;
+  }
+
+  .dialog-tip {
+    font-size: 14px;
+    color: #000000;
+    margin-bottom: 20px;
+  }
+  .van-number-keyboard {
+    z-index: 3001 !important;
+  }
+}
+</style>
+
+
+<style lang="scss" >
+.app-setting-list {
+  .van-password-input__security {
+    height: 40px;
+
+    li {
       font-size: 14px;
-      img {
-        position: absolute;
-        right: 30px;
-      }
-
-      .preview-value {
-        position: absolute;
-        right: 50px;
-        display: inline-block;
-        color: #87929D;
-      }
-    }
-
-    .dialog-title {
-      font-size: 24px;
-      color: #000000;
-      line-height: 36px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-
-    .dialog-des {
-      font-size: 16px;
-      color: #000000;
-      margin-bottom: 20px;
-
-    }
-
-    .dialog-tip {
-      font-size: 14px;
-      color: #000000;
-      margin-bottom: 20px;
+      color: #87929d;
+      letter-spacing: 0;
+      text-align: center;
+      border: 1px solid #c8c8c8;
+      height: 40px;
+      line-height: 40px;
+      width: 40px;
+      flex: none;
+      margin-right: 10px;
+      border-radius: 4px;
     }
   }
+
+  .van-password-input__security::after {
+    border: none;
+  }
+}
 </style>

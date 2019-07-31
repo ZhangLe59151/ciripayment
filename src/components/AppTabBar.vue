@@ -1,6 +1,6 @@
 <template>
   <van-tabbar
-    v-model="active"
+    v-model="currentTabbar"
     class="app-tabbar"
   >
     <van-tabbar-item
@@ -19,7 +19,6 @@
 <script>
 export default {
   name: "AppTabBar",
-  props: ["activeMenu"],
 
   props: {
     active: {
@@ -53,6 +52,15 @@ export default {
         }
       ]
     };
+  },
+  computed: {
+    currentTabbar: {
+      get() {
+        return this.active;
+      },
+
+      set(val) {}
+    }
   }
 };
 </script>
