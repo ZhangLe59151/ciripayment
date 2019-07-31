@@ -11,19 +11,19 @@
       <div class="description">
         This password will be used for future logins.
       </div>
-      <WapPasswordForm />
+      <WapPasswordSetForm />
     </div>
 
   </div>
 </template>
 
 <script>
-import WapPasswordForm from "@/components/WapPasswordForm";
+import WapPasswordSetForm from "@/components/WapPasswordSetForm";
 import WapHeader from "@/components/WapHeader";
 export default {
   name: "CreatePassword",
   components: {
-    WapPasswordForm,
+    WapPasswordSetForm,
     WapHeader
   }
 }

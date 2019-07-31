@@ -8,18 +8,18 @@
       <div class="description">
         Create a new password and try not to forget it this time.
       </div>
-      <WapPasswordForm />
+      <WapPasswordSetForm />
     </div>
   </div>
 </template>
 
 <script>
 import WapHeader from "@/components/WapHeader";
-import WapPasswordForm from "@/components/WapPasswordForm";
+import WapPasswordSetForm from "@/components/WapPasswordSetForm";
 export default {
   name: "ResetPassword",
   components: {
-    WapPasswordForm,
+    WapPasswordSetForm,
     WapHeader
   }
 }
