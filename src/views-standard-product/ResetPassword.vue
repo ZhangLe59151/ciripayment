@@ -22,28 +22,30 @@ export default {
     WapPasswordSetForm,
     WapHeader
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/css/bottom-btn.scss";
-  .reset-password {
-    .resetPassWrapper{
-      padding-left: 5%;
-      padding-right: 5%;
-    }
-    .title {
-      margin-top: 50px;
-      font-size: 24px;
-      text-align: left;
-      font-weight: bold;
-    }
-
-    .description {
-      font-size: 16px;
-      line-height: 24px;
-      color: #2F3941;
-      margin-top:25px;
-    }
+@import "../assets/css/bottom-btn.scss";
+.reset-password {
+  .resetPassWrapper {
+    height: calc(100vh - 50px);
+    overflow: hidden;
+    padding-left: 5%;
+    padding-right: 5%;
   }
+  .title {
+    margin-top: 50px;
+    font-size: 24px;
+    text-align: left;
+    font-weight: bold;
+  }
+
+  .description {
+    font-size: 16px;
+    line-height: 24px;
+    color: #2f3941;
+    margin-top: 25px;
+  }
+}
 </style>

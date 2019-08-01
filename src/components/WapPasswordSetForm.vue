@@ -37,7 +37,7 @@
             </el-input>
           </el-form-item>
         </el-form>
-        <div>
+        <div v-if="showValidateSection">
           <div class="password-specification">
             At least:
           </div>
@@ -206,6 +206,7 @@
               :type="confirmPasswordType"
               :maxlength="25"
               @focus="activateErrorCheck()"
+              @blur="showValidateSection = true;"
               @change="checkSamePassword()"
             >
               <img
@@ -238,6 +239,7 @@
       size="large"
       v-bind:class="[(passwordAccepted && (password === confirmPass)) ? 'bottom-btn-password' : 'bottom-btn-password disabled']"
       @click="handleLogin"
+      v-show="showLoginBtn"
     >
       Log In
     </van-button>
@@ -260,7 +262,9 @@ export default {
       checkboxInactive: require("@/assets/imgs/oval.svg"),
       checkboxError: require("@/assets/imgs/red-oval.svg"),
       showPasswordError: false,
-      showConfirmPassError: false
+      showConfirmPassError: false,
+      showLoginBtn: true,
+      showValidateSection: true
     };
   },
   watch: {
@@ -311,6 +315,7 @@ export default {
       return true;
     },
     activateErrorCheck() {
+      this.showValidateSection = false;
       this.showPasswordError = true;
     },
     handleLogin() {
@@ -356,6 +361,17 @@ export default {
       }
     });
     this.form = Object.assign({}, form);
+    this.clientHeight = document.documentElement.clientHeight;
+    const vm = this; // 安卓手机键盘吊起挡住输入框
+    window.onresize = function() {
+      if (document.documentElement.clientHeight < vm.clientHeight) {
+        // scrollVal为负值
+        let scrollVal = document.documentElement.clientHeight - vm.clientHeight;
+        vm.showLoginBtn = false;
+      } else {
+        vm.showLoginBtn = true;
+      }
+    };
   }
 };
 </script>
