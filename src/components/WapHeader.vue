@@ -17,15 +17,24 @@ export default {
     center: Boolean,
     right: Boolean
   },
+  computed: {
+    logInWithPassword() {
+      return this.$store.state.logInWithPassword;
+    }
+  },
   methods: {
     clickLeft() {
       this.$router.back()
     },
     clickRight() {
-      this.$store.commit("ClearForm");
-      this.$store.commit("logOut");
-      util.removeCookies("SSID");
-      this.$router.push({ name: "LandingPage" });
+      if (this.logInWithPassword) {
+        this.$router.back();
+      } else {
+        this.$store.commit("ClearForm");
+        this.$store.commit("logOut");
+        util.removeCookies("SSID");
+        this.$router.push({ name: "LandingPage" });
+      }
     }
   }
 }

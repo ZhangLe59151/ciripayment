@@ -224,6 +224,11 @@ export default {
       showConfirmPassError: false
     }
   },
+  watch: {
+    password(val) {
+      this.confirmPass = "";
+    }
+  },
   computed: {
     passwordMinLengthCorrect() {
       return this.password.length >= this.$store.state.password.minLen;
