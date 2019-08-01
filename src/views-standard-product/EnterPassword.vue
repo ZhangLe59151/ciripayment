@@ -1,6 +1,9 @@
 <template>
   <div class="enter-password">
-    <WapHeader :center="true" :right="true" />
+    <WapHeader
+      :center="true"
+      :right="true"
+    />
     <div class="login-title center">
       Log In
     </div>
@@ -23,14 +26,13 @@
             class="enterpassword"
             prop="phone"
           >
-          <span
-            slot="label"
-          >
-              <span
-                style="margin: 0 10px;"
-              >{{form.nationalCode}}</span>
-            <i class="el-icon-caret-bottom" style="color: #929292"></i>
-          </span>
+            <span slot="label">
+              <span style="margin: 0 10px;">{{form.nationalCode}}</span>
+              <i
+                class="el-icon-caret-bottom"
+                style="color: #929292"
+              ></i>
+            </span>
             <el-input
               v-model="form.phone"
               placeholder=""
@@ -60,9 +62,22 @@
             v-model="password"
             :type="passwordType"
             :maxlength="25"
+            @keyup.native.enter="handleLogin"
           >
-            <img v-if="!showingPassword" @click="toggleShowingPassword" slot="suffix" src="../assets/imgs/hide.svg" class="showingPasswordIcon" />
-            <img v-else slot="suffix" @click="toggleShowingPassword" src="../assets/imgs/reveal.svg" class="showingPasswordIcon" />
+            <img
+              v-if="!showingPassword"
+              @click="toggleShowingPassword"
+              slot="suffix"
+              src="../assets/imgs/hide.svg"
+              class="showingPasswordIcon"
+            />
+            <img
+              v-else
+              slot="suffix"
+              @click="toggleShowingPassword"
+              src="../assets/imgs/reveal.svg"
+              class="showingPasswordIcon"
+            />
           </el-input>
         </el-form-item>
         <div
@@ -72,7 +87,10 @@
         </div>
       </el-form>
 
-      <div class="resend-active" @click="handleForgot">
+      <div
+        class="resend-active"
+        @click="handleForgot"
+      >
         Forgot Password?
       </div>
     </div>
@@ -90,81 +108,80 @@
 </template>
 
 <style lang="scss" scoped>
-  @import "../assets/css/bottom-btn.scss";
+@import "../assets/css/bottom-btn.scss";
 
-  .enter-password {
-    background: url("../assets/imgs/MP-background.png");
-    min-height: 100vh;
+.enter-password {
+  background: url("../assets/imgs/MP-background.png");
+  min-height: 100vh;
 
-    .login-title {
-      font-size: 24px;
-      color: white;
-      font-weight: bold;
-      margin-top: 3.25rem;
-    }
-
-    .enterPassWrapper{
-      width: 90%;
-      background-color:white;
-      position: fixed;
-      bottom: 0;
-      height: 70%;
-      border-top-left-radius: 16px;
-      border-top-right-radius: 16px;
-      padding-left: 5%;
-      padding-right: 5%;
-      padding-top:20px;
-      .showingPasswordIcon {
-        width: auto;
-        height: 100% ;
-        color:#A0B4C0;
-      }
-    }
-
-    .tips {
-      font-size: 16px;
-      margin-top: 2.25rem;
-      margin-bottom: 2.25rem;
-    }
-    .tips-error {
-      font-size: 14px;
-      color: #dd1111;
-    }
-
-    .sub-tips {
-      font-size: 14px;
-      margin: 10px 0;
-    }
-
-    .phone {
-      font-size: 27px;
-      text-decoration: underline;
-    }
-
-    .otp {
-      text-align: left;
-    }
-
-    .resend {
-      margin: 20px 0;
-      text-decoration: none;
-      font-size: 14px;
-    }
-    .resend-active{
-      margin: 20px 0;
-      text-decoration: none;
-      font-size: 14px;
-      color:#037AFF;
-    }
-
-    .page {
-      position: fixed;
-      width: 100%;
-      text-align: center;
-      bottom: 20px;
-    }
-
+  .login-title {
+    font-size: 24px;
+    color: white;
+    font-weight: bold;
+    margin-top: 3.25rem;
   }
+
+  .enterPassWrapper {
+    width: 90%;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    height: 70%;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 20px;
+    .showingPasswordIcon {
+      width: auto;
+      height: 100%;
+      color: #a0b4c0;
+    }
+  }
+
+  .tips {
+    font-size: 16px;
+    margin-top: 2.25rem;
+    margin-bottom: 2.25rem;
+  }
+  .tips-error {
+    font-size: 14px;
+    color: #dd1111;
+  }
+
+  .sub-tips {
+    font-size: 14px;
+    margin: 10px 0;
+  }
+
+  .phone {
+    font-size: 27px;
+    text-decoration: underline;
+  }
+
+  .otp {
+    text-align: left;
+  }
+
+  .resend {
+    margin: 20px 0;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .resend-active {
+    margin: 20px 0;
+    text-decoration: none;
+    font-size: 14px;
+    color: #037aff;
+  }
+
+  .page {
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    bottom: 20px;
+  }
+}
 </style>
 
 <script>
@@ -189,7 +206,10 @@ export default {
   },
   methods: {
     handleLogin() {
-      if (this.password === "" || !this.$store.state.password.regExp.test(this.password)) {
+      if (
+        this.password === "" ||
+        !this.$store.state.password.regExp.test(this.password)
+      ) {
         this.passwordError = true;
         return false;
       } else {
@@ -235,6 +255,5 @@ export default {
     });
     this.form = Object.assign({}, form);
   }
-
 };
 </script>

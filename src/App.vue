@@ -14,5 +14,7 @@ body,
 </style>
 
 <script>
-export default {};
+export default {
+  created() {}
+};
 </script>
