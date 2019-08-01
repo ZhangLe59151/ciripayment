@@ -56,18 +56,18 @@
 }
 
 
-  .bottom-btn-password {
-    background-color: #053C5E;
-    border-radius: 4px;
-    width: 80%;
-    position: fixed;
-    left: 0px;
-    bottom: 30px;
-    margin: 0 10%;
-    color: #fff;
-  }
+.bottom-btn-password {
+  background-color: #053C5E;
+  border-radius: 4px;
+  width: calc(100% - 40px);
+  position: absolute;
+  left: 0px;
+  bottom: 30px;
+  margin: 0 20px;
+  color: #fff;
+}
 
-  .disabled {
-    background-color: #DCDCDC;
-    color: #929292;
-  }
+.disabled {
+  background-color: #DCDCDC;
+  color: #929292;
+}

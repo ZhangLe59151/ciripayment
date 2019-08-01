@@ -116,21 +116,19 @@
   min-height: 100vh;
   .login-title {
     font-size: 24px;
-    color: white;
+    color: #ffffff;
     font-weight: bold;
     margin-top: 3.25rem;
   }
 
   .enterOtpWrapper {
-    background-color: white;
+    background-color: #ffffff;
     position: fixed;
     bottom: 0;
-    height: 70%;
+    height: 72vh;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-top: 20px;
+    padding: 20px 20px 0;
   }
 
   .tips {
@@ -180,8 +178,11 @@
   .bottom-btn {
     background-color: #053c5e;
     border-radius: 4px;
-    margin: 22vh 0 1.25rem 0;
-    width: 100%;
+    margin: 0;
+    width: calc(100% - 40px);
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
   }
 }
 </style>

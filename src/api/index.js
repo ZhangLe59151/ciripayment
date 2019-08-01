@@ -61,5 +61,8 @@ export default {
       "/api/self-onboarding/application/check-nationalId",
       params
     );
+  },
+  getProfileInfo() {
+    return Vue.axios.get("/api/self-onboarding/application/profile");
   }
 };

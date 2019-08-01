@@ -99,7 +99,6 @@
       size="large"
       class="bottom-btn-password"
       @click="handleLogin"
-      style="width:80%"
     >
       Log In
     </van-button>

@@ -67,14 +67,11 @@ export default {
         : "";
     },
     fetchData() {
-      this.$api.checkApplictionStatus().then(res => {
+      this.$api.getProfileInfo().then(res => {
         if (res.data.code === 200) {
-          this.info = this.transformData(res.data.data);
+          this.info = res.data.data;
         }
       });
-    },
-    transformData(data) {
-      return Object.assign({}, data, data.branchVos[0]);
     }
   },
   created() {

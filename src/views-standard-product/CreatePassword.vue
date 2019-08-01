@@ -5,12 +5,16 @@
       <div class="title">
         Create Password
       </div>
-      <div class="description">
-        Great! Now set up a password to secure your account.
-      </div>
-      <div class="description">
-        This password will be used for future logins.
-      </div>
+      <transition name="el-zoom-in-top">
+        <div v-show="showComponents">
+          <div class="description">
+            Great! Now set up a password to secure your account.
+          </div>
+          <div class="description">
+            This password will be used for future logins.
+          </div>
+        </div>
+      </transition>
       <WapPasswordSetForm />
     </div>
 
@@ -25,15 +29,20 @@ export default {
   components: {
     WapPasswordSetForm,
     WapHeader
+  },
+  data() {
+    return {
+      showComponents: true
+    };
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  .create-password{
-    .createPassWrapper{
-      padding-left: 5%;
-      padding-right: 5%;
+.create-password {
+  .createPassWrapper {
+    padding-left: 5%;
+    padding-right: 5%;
     .title {
       margin-top: 50px;
       font-size: 24px;
@@ -43,10 +52,9 @@ export default {
     .description {
       font-size: 16px;
       line-height: 24px;
-      color: #2F3941;
-      margin-top:25px;
+      color: #2f3941;
+      margin-top: 25px;
     }
   }
 }
-
 </style>

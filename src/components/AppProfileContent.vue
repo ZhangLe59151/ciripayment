@@ -4,7 +4,7 @@
       <div class="title">{{userName}}</div>
       <div class="label">
         <span>Mobile Number</span>
-        <span>{{info.contactPersonPhoneNumber}}</span>
+        <span>{{info.applicantPhoneNumber}}</span>
       </div>
       <div class="label">
         <span>National ID</span>
@@ -73,9 +73,7 @@ export default {
         : this.info.applicantNationalId;
     },
     userName() {
-      return (
-        this.info.contactPersonFirstName + " " + this.info.contactPersonLastName
-      );
+      return this.info.applicantFirstName + " " + this.info.applicantLastName;
     },
 
     bizInfo() {
@@ -86,7 +84,7 @@ export default {
         },
         {
           label: "Business Address",
-          value: this.info.branchAddr
+          value: this.info.bizAddr
         },
         {
           label: "Province",

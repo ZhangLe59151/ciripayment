@@ -13,16 +13,27 @@
           <el-form-item
             label="Password"
             prop="password"
-            :rules="[
-      ]"
+            :rules="[]"
           >
             <el-input
               v-model="password"
               :type="passwordType"
               :maxlength="25"
             >
-              <img v-if="!showingPassword" @click="toggleShowingPassword" slot="suffix" src="../assets/imgs/hide.svg" class="showingPasswordIcon" />
-              <img v-else slot="suffix" @click="toggleShowingPassword" src="../assets/imgs/reveal.svg" class="showingPasswordIcon" />
+              <img
+                v-if="!showingPassword"
+                @click="toggleShowingPassword"
+                slot="suffix"
+                src="../assets/imgs/hide.svg"
+                class="showingPasswordIcon"
+              />
+              <img
+                v-else
+                slot="suffix"
+                @click="toggleShowingPassword"
+                src="../assets/imgs/reveal.svg"
+                class="showingPasswordIcon"
+              />
             </el-input>
           </el-form-item>
         </el-form>
@@ -30,7 +41,10 @@
           <div class="password-specification">
             At least:
           </div>
-          <div class="password-specification" v-bind:class="{ passed: passwordMinLengthCorrect ,error: !passwordMinLengthCorrect&&showPasswordError}">
+          <div
+            class="password-specification"
+            v-bind:class="{ passed: passwordMinLengthCorrect ,error: !passwordMinLengthCorrect&&showPasswordError}"
+          >
             <img
               v-if="passwordMinLengthCorrect"
               :src="checkboxActive"
@@ -38,7 +52,7 @@
               slot="icon"
             >
             <img
-              v-else-if ="showPasswordError"
+              v-else-if="showPasswordError"
               :src="checkboxError"
               alt
               slot="icon"
@@ -51,7 +65,10 @@
             >
             8 Characters
           </div>
-          <div class="password-specification" v-bind:class="{ passed: containsUppercase, error: !containsUppercase&&showPasswordError}">
+          <div
+            class="password-specification"
+            v-bind:class="{ passed: containsUppercase, error: !containsUppercase&&showPasswordError}"
+          >
             <img
               v-if="containsUppercase"
               :src="checkboxActive"
@@ -59,7 +76,7 @@
               slot="icon"
             >
             <img
-              v-else-if ="showPasswordError"
+              v-else-if="showPasswordError"
               :src="checkboxError"
               alt
               slot="icon"
@@ -72,7 +89,10 @@
             >
             1 Uppercase character
           </div>
-          <div class="password-specification" v-bind:class="{ passed: containsLowercase, error: !containsLowercase&&showPasswordError}">
+          <div
+            class="password-specification"
+            v-bind:class="{ passed: containsLowercase, error: !containsLowercase&&showPasswordError}"
+          >
             <img
               v-if="containsLowercase"
               :src="checkboxActive"
@@ -80,7 +100,7 @@
               slot="icon"
             >
             <img
-              v-else-if ="showPasswordError"
+              v-else-if="showPasswordError"
               :src="checkboxError"
               alt
               slot="icon"
@@ -93,7 +113,10 @@
             >
             1 Lowercase character
           </div>
-          <div class="password-specification" v-bind:class="{ passed:containsNumber, error: !containsNumber&&showPasswordError}">
+          <div
+            class="password-specification"
+            v-bind:class="{ passed:containsNumber, error: !containsNumber&&showPasswordError}"
+          >
             <img
               v-if="containsNumber"
               :src="checkboxActive"
@@ -101,7 +124,7 @@
               slot="icon"
             >
             <img
-              v-else-if ="showPasswordError"
+              v-else-if="showPasswordError"
               :src="checkboxError"
               alt
               slot="icon"
@@ -114,7 +137,10 @@
             >
             1 Number
           </div>
-          <div class="password-specification" v-bind:class="{ passed: containsSpecialChar, error: !containsSpecialChar&&showPasswordError}">
+          <div
+            class="password-specification"
+            v-bind:class="{ passed: containsSpecialChar, error: !containsSpecialChar&&showPasswordError}"
+          >
             <img
               v-if="containsSpecialChar"
               :src="checkboxActive"
@@ -122,7 +148,7 @@
               slot="icon"
             >
             <img
-              v-else-if ="showPasswordError"
+              v-else-if="showPasswordError"
               :src="checkboxError"
               alt
               slot="icon"
@@ -135,7 +161,10 @@
             >
             1 Special character (!@#$%^&*()-_+=)
           </div>
-          <div class="password-specification" v-bind:class="{ passed: containsNoSpace, error: !containsNoSpace&&showPasswordError}">
+          <div
+            class="password-specification"
+            v-bind:class="{ passed: containsNoSpace, error: !containsNoSpace&&showPasswordError}"
+          >
             <img
               v-if="containsNoSpace"
               :src="checkboxActive"
@@ -143,7 +172,7 @@
               slot="icon"
             >
             <img
-              v-else-if ="showPasswordError"
+              v-else-if="showPasswordError"
               :src="checkboxError"
               alt
               slot="icon"
@@ -179,8 +208,20 @@
               @focus="activateErrorCheck()"
               @change="checkSamePassword()"
             >
-              <img v-if="!showingConfirmPassword" @click="toggleShowingConfirmPassword" slot="suffix" src="../assets/imgs/hide.svg" class="showingPasswordIcon" />
-              <img v-else slot="suffix" @click="toggleShowingConfirmPassword" src="../assets/imgs/reveal.svg" class="showingPasswordIcon" />
+              <img
+                v-if="!showingConfirmPassword"
+                @click="toggleShowingConfirmPassword"
+                slot="suffix"
+                src="../assets/imgs/hide.svg"
+                class="showingPasswordIcon"
+              />
+              <img
+                v-else
+                slot="suffix"
+                @click="toggleShowingConfirmPassword"
+                src="../assets/imgs/reveal.svg"
+                class="showingPasswordIcon"
+              />
             </el-input>
             <div
               v-if="showConfirmPassError"
@@ -197,7 +238,6 @@
       size="large"
       v-bind:class="[(passwordAccepted && (password === confirmPass)) ? 'bottom-btn-password' : 'bottom-btn-password disabled']"
       @click="handleLogin"
-      style="width: 80%"
     >
       Log In
     </van-button>
@@ -205,7 +245,6 @@
 </template>
 
 <script>
-
 export default {
   name: "WapPasswordForm",
   data() {
@@ -222,7 +261,7 @@ export default {
       checkboxError: require("@/assets/imgs/red-oval.svg"),
       showPasswordError: false,
       showConfirmPassError: false
-    }
+    };
   },
   watch: {
     password(val) {
@@ -249,9 +288,13 @@ export default {
       return this.$store.state.password.noSpace.test(this.password);
     },
     passwordAccepted() {
-      return this.passwordMinLengthCorrect &&
-          this.containsUppercase && this.containsLowercase &&
-          this.containsNumber && this.containsSpecialChar;
+      return (
+        this.passwordMinLengthCorrect &&
+        this.containsUppercase &&
+        this.containsLowercase &&
+        this.containsNumber &&
+        this.containsSpecialChar
+      );
     }
   },
   methods: {
@@ -314,45 +357,44 @@ export default {
     });
     this.form = Object.assign({}, form);
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/css/bottom-btn.scss";
-  .passwordFormAndBtn{
-    margin-top:20px;
-    .passwordForm {
-      .password-box {
-        .showingPasswordIcon {
-          width: auto;
-          height: 100% ;
-          color:#A0B4C0;
-        }
-        .password-specification {
-          font-size: 12px;
-          line-height: 17px;
-          color: #929292;
-          margin: 5px 0;
-          img {
-            width: 12px;
-            height: 12px;
-          }
-        }
-        .error {
-          color: #BD0000;
-        }
-        .passed {
-          color: #04A777;
-        }
-        .tips-error {
-          font-size: 14px;
-          color: #dd1111;
-        }
-        .tips-error:before {
-          content: url(../assets/imgs/error.svg)
+@import "../assets/css/bottom-btn.scss";
+.passwordFormAndBtn {
+  margin-top: 20px;
+  .passwordForm {
+    .password-box {
+      .showingPasswordIcon {
+        width: auto;
+        height: 100%;
+        color: #a0b4c0;
+      }
+      .password-specification {
+        font-size: 12px;
+        line-height: 17px;
+        color: #929292;
+        margin: 5px 0;
+        img {
+          width: 12px;
+          height: 12px;
         }
       }
+      .error {
+        color: #bd0000;
+      }
+      .passed {
+        color: #04a777;
+      }
+      .tips-error {
+        font-size: 14px;
+        color: #dd1111;
+      }
+      .tips-error:before {
+        content: url(../assets/imgs/error.svg);
+      }
     }
-
   }
+}
 </style>
