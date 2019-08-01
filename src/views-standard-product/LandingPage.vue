@@ -5,14 +5,17 @@
       style="top: 34px"
     />
     <div class="landingPageContent">
-      <template v-if="$store.state.deviceType && showComponents">
-        <div class="slogan-title center">
-          Grow Your Business with Moon Merchant Portal.
+
+      <transition name="el-zoom-in-top">
+        <div v-show="$store.state.deviceType && showComponents">
+          <div class="slogan-title center">
+            Grow Your Business with Moon Merchant Portal.
+          </div>
+          <div class="slogan-sub center">
+            Managing finances for your business has never been easier.
+          </div>
         </div>
-        <div class="slogan-sub center">
-          Managing finances for your business has never been easier.
-        </div>
-      </template>
+      </transition>
 
       <div class="loginWrapper">
         <div class="tips">
