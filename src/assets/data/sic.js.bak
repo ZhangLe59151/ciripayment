@@ -1,8 +1,0 @@
-export var SIC = [
-  { name: "Agriculture, Forestry, Fishing", id: "1" },
-  { name: "Construction", id: "3" },
-  { name: "Manufacturing", id: "4" },
-  { name: "Retail Trade", id: "7" },
-  { name: "Services", id: "9" },
-  { name: "Transportation & Public Utilites", id: "5" }
-]
