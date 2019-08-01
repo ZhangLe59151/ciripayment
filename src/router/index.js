@@ -180,6 +180,11 @@ const AppRouteArr = [
     component: () => import("@/views-standard-product/Home.vue")
   },
   {
+    path: "/services",
+    name: "Services",
+    component: () => import("@/views-standard-product/Services.vue")
+  },
+  {
     path: "/qrcode",
     name: "Qrcode",
     component: () => import("@/views-standard-product/Qrcode.vue")
