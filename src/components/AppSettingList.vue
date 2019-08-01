@@ -166,7 +166,6 @@ export default {
 }
 </style>
 
-
 <style lang="scss" >
 .app-setting-list {
   .van-password-input__security {

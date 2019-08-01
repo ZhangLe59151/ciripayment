@@ -177,81 +177,80 @@ const AppRouteArr = [
   {
     path: "/home",
     name: "Home",
-    component: () => import("@/views-standard-product/Home.vue")
+    component: () => import("@/views-app/Home.vue")
   },
   {
     path: "/services",
     name: "Services",
-    component: () => import("@/views-standard-product/Services.vue")
+    component: () => import("@/views-app/Services.vue")
   },
   {
     path: "/manage-settlement",
     name: "ManageSettlement",
-    component: () => import("@/views-standard-product/ManageSettlement.vue")
+    component: () => import("@/views-app/ManageSettlement.vue")
   },
   {
     path: "/manage-channels",
     name: "ManageChannels",
-    component: () => import("@/views-standard-product/ManageChannels.vue")
+    component: () => import("@/views-app/ManageChannels.vue")
   },
   {
     path: "/qrcode",
     name: "Qrcode",
-    component: () => import("@/views-standard-product/Qrcode.vue")
+    component: () => import("@/views-app/Qrcode.vue")
   },
   {
     path: "/scan",
     name: "Scan",
-    component: () => import("@/views-standard-product/Scan.vue")
+    component: () => import("@/views-app/Scan.vue")
   },
 
   {
     path: "/settings",
     name: "Settings",
-    component: () => import("@/views-standard-product/Settings.vue")
+    component: () => import("@/views-app/Settings.vue")
   },
   {
     path: "/profile",
     name: "Profile",
-    component: () => import("@/views-standard-product/Profile.vue")
+    component: () => import("@/views-app/Profile.vue")
   },
 
   // Standard Product
   {
     path: "/landing-page",
     name: "LandingPage",
-    component: () => import("@/views-standard-product/LandingPage.vue")
+    component: () => import("@/views-app/LandingPage.vue")
   },
   {
     path: "/enter-otp-sp",
     name: "EnterOtp",
-    component: () => import("@/views-standard-product/EnterOTP.vue")
+    component: () => import("@/views-app/EnterOTP.vue")
   },
   {
     path: "/verified-first-time",
     name: "VerifiedFirstTime",
-    component: () =>
-      import("@/views-standard-product/VerifiedFirstTimeLogin.vue")
+    component: () => import("@/views-app/VerifiedFirstTimeLogin.vue")
   },
   {
     path: "/create-password-sp",
     name: "CreatePasswordSP",
-    component: () => import("@/views-standard-product/CreatePassword.vue")
+    component: () => import("@/views-app/CreatePassword.vue")
   },
   {
     path: "/enter-password-sp",
     name: "EnterPasswordSP",
-    component: () => import("@/views-standard-product/EnterPassword.vue")
+    component: () => import("@/views-app/EnterPassword.vue")
   },
   {
     path: "/forgot-password-sp",
     name: "ForgotPasswordSP",
-    component: () => import("@/views-standard-product/ForgotPassword.vue")
+    component: () => import("@/views-app/ForgotPassword.vue")
   },
   {
     path: "/reset-password-sp",
     name: "ResetPasswordSP",
-    component: () => import("@/views-standard-product/ResetPassword.vue")
+    component: () => import("@/views-app/ResetPassword.vue")
   }
 ];
 
