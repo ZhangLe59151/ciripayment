@@ -202,6 +202,7 @@ export default {
         })
         .then(res => {
           if (res.data.code === 200) {
+            this.$store.commit("logInWithPassword");
             this.$router.push({ name: "Home" });
           } else {
             this.passwordError = true;

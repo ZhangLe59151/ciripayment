@@ -56,7 +56,6 @@ export default {
       params
     );
   },
-
   checkNationId(params) {
     return Vue.axios.post(
       "/api/self-onboarding/application/check-nationalId",

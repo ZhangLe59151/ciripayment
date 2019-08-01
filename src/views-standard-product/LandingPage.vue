@@ -1,6 +1,6 @@
 <template>
   <div class="landing-page">
-    <WapHeader :center="true" />
+    <WapHeader :center="true" style="top: 34px" />
 <div class="landingPageContent">
   <div class="slogan-title center">
     Grow Your Business with Moon Merchant Portal.

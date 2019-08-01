@@ -22,7 +22,8 @@ body {
 
 .web-nav {
   background: transparent !important;
-
+  position: relative;
+  top: 10px;
   .van-icon,
   .van-nav-bar__text {
     color: #dcdcdc !important;

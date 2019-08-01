@@ -174,13 +174,13 @@
           >
             <el-input
               v-model="confirmPass"
-              :type="passwordType"
+              :type="confirmPasswordType"
               :maxlength="25"
               @focus="activateErrorCheck()"
               @change="checkSamePassword()"
             >
-              <img v-if="!showingPassword" @click="toggleShowingPassword" slot="suffix" src="../assets/imgs/hide.svg" class="showingPasswordIcon" />
-              <img v-else slot="suffix" @click="toggleShowingPassword" src="../assets/imgs/reveal.svg" class="showingPasswordIcon" />
+              <img v-if="!showingConfirmPassword" @click="toggleShowingConfirmPassword" slot="suffix" src="../assets/imgs/hide.svg" class="showingPasswordIcon" />
+              <img v-else slot="suffix" @click="toggleShowingConfirmPassword" src="../assets/imgs/reveal.svg" class="showingPasswordIcon" />
             </el-input>
             <div
               v-if="showConfirmPassError"
@@ -214,12 +214,19 @@ export default {
       password: "",
       confirmPass: "",
       showingPassword: false,
+      showingConfirmPassword: false,
       passwordType: "password",
+      confirmPasswordType: "password",
       checkboxActive: require("@/assets/imgs/success.svg"),
       checkboxInactive: require("@/assets/imgs/oval.svg"),
       checkboxError: require("@/assets/imgs/red-oval.svg"),
       showPasswordError: false,
       showConfirmPassError: false
+    }
+  },
+  watch: {
+    password(val) {
+      this.confirmPass = "";
     }
   },
   computed: {
@@ -271,6 +278,7 @@ export default {
         })
         .then(res => {
           if (res.data.code === 200) {
+            this.$store.commit("logInWithPassword");
             this.$router.push({ name: "Home" });
           } else {
             this.$toast(res.data.msg);
@@ -285,6 +293,14 @@ export default {
         this.passwordType = "text";
       }
       this.showingPassword = !this.showingPassword;
+    },
+    toggleShowingConfirmPassword() {
+      if (this.showingConfirmPassword) {
+        this.confirmPasswordType = "password";
+      } else {
+        this.confirmPasswordType = "text";
+      }
+      this.showingConfirmPassword = !this.showingConfirmPassword;
     }
   },
   created() {

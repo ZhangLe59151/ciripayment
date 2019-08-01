@@ -180,7 +180,8 @@ export default new Vuex.Store({
     messages: {
       idleTimeout:
         "You’ve been inactive for too long. For security reasons, please start your application over again."
-    }
+    },
+    logInWithPassword: false
   },
   mutations: {
     InitForm(state) {
@@ -196,6 +197,12 @@ export default new Vuex.Store({
     ClearForm(state) {
       state.form = {};
       window.localStorage.clear();
+    },
+    logInWithPassword(state) {
+      state.logInWithPassword = true;
+    },
+    logOut(state) {
+      state.logInWithPassword = false;
     },
     removeUselessForm(state) {
       var keys = [
