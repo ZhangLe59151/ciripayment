@@ -295,6 +295,8 @@ export default {
       img {
         width: 12px;
         height: 12px;
+        position: relative;
+        top: 1px;
       }
     }
     .error {
