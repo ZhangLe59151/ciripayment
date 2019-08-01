@@ -187,7 +187,10 @@ export default new Vuex.Store({
       idleTimeout:
         "You’ve been inactive for too long. For security reasons, please start your application over again."
     },
-    logInWithPassword: localStorage.getItem("logInWithPassword") === "true"
+    logInWithPassword: localStorage.getItem("logInWithPassword") === "true",
+    workingChannels: [],
+    appliedChannels: [],
+    recommendChannels: []
   },
   mutations: {
     InitForm(state) {
@@ -211,6 +214,19 @@ export default new Vuex.Store({
     logOut(state) {
       state.logInWithPassword = false;
       localStorage.setItem("logInWithPassword", "false");
+    },
+    // This is for services
+    initWorkingChannels(state, channels) {
+      state.workingChannels = channels;
+    },
+    updateWorkingChannels(state, channels) {
+      state.workingChannels = [...state.workingChannels, channels];
+    },
+    initAppliedChannels(state, channels) {
+      state.appliedChannels = channels;
+    },
+    initRecommendChannels(state, channels) {
+      state.recommendChannels = channels;
     },
     removeUselessForm(state) {
       var keys = [

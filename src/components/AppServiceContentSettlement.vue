@@ -9,6 +9,7 @@
     <van-button
       size="small"
       class="bottom-btn"
+      @click="navigateToMgtSettlement"
     >
       Manage Settlement
     </van-button>
@@ -18,7 +19,13 @@
 
 <script>
 export default {
-  name: "AppServiceContentSettlement"
+  name: "AppServiceContentSettlement",
+  methods:
+    {
+      navigateToMgtSettlement() {
+        this.$router.push({ name: "ManageSettlement" });
+      }
+    }
 }
 </script>
 

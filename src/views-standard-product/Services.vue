@@ -1,6 +1,6 @@
 <template>
   <div class="app-service">
-    <app-services-header :applicationStatus="applicationStatus" ></app-services-header>
+    <app-service-header :applicationStatus="applicationStatus" ></app-service-header>
     <app-home-apply
       v-if="applicationStatus === '2'"
       :class="appPosition"
@@ -18,13 +18,13 @@
 <script>
 import AppTabBar from "@/components/AppTabBar";
 import AppHomeApply from "@/components/AppHomeApply";
-import AppServicesHeader from "@/components/AppServicesHeader";
+import AppServiceHeader from "@/components/AppServiceHeader";
 import AppServiceContentSettlement from "@/components/AppServiceContentSettlement";
 import AppServiceContentChannels from "@/components/AppServiceContentChannels";
 export default {
   name: "Services",
   components: {
-    AppServicesHeader,
+    AppServiceHeader,
     AppTabBar,
     AppHomeApply,
     AppServiceContentSettlement,
