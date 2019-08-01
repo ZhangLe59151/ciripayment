@@ -7,7 +7,7 @@
       :class="item.class"
       replace
       :to="item.to"
-      v-for="item in tabbarList"
+      v-for="item in ($store.state.deviceType === 'APP' ? tabbarList : tabbarListWAP)"
       :key="item.label"
     >
       {{item.label}}
@@ -39,6 +39,23 @@ export default {
           to: "/records",
           class: "iconfont iconrecords",
           label: "Records"
+        },
+        {
+          to: "/services",
+          class: "iconfont iconservices",
+          label: "Services"
+        },
+        {
+          to: "/settings",
+          class: "iconfont iconsetting",
+          label: "Settings"
+        }
+      ],
+      tabbarListWAP: [
+        {
+          to: "/home",
+          class: "iconfont iconhome",
+          label: "Home"
         },
         {
           to: "/services",

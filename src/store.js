@@ -134,6 +134,12 @@ export default new Vuex.Store({
         name: "rejected",
         label: "REJECTED",
         color: "red"
+      },
+      {
+        value: "3",
+        name: "disabled",
+        label: "DISABLED",
+        color: "gray"
       }
     ],
     paymentChannelList: [
