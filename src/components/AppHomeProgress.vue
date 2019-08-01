@@ -3,7 +3,7 @@
     <app-home-apply v-if="status === '2'"></app-home-apply>
     <div
       class="regular-progress"
-      v-if="status !== '2'"
+      v-if="status !== '2' && showBox"
     >
       <img :src="progress.icon">
       <van-icon
@@ -40,6 +40,7 @@ export default {
 
   data() {
     return {
+      showBox: true,
       list: [
         {
           label: "Payment Service Enabled",
@@ -64,7 +65,9 @@ export default {
   },
 
   methods: {
-    handleClose() {}
+    handleClose() {
+      this.showBox = false;
+    }
   }
 };
 </script>
