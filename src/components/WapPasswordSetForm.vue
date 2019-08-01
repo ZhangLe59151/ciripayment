@@ -384,7 +384,7 @@ export default {
     .password-box {
       .showingPasswordIcon {
         width: auto;
-        height: 100%;
+        height: 24px;
         color: #a0b4c0;
       }
       .password-specification {

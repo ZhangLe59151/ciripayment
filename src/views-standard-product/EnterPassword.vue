@@ -133,7 +133,7 @@
     padding-top: 20px;
     .showingPasswordIcon {
       width: auto;
-      height: 100%;
+      height: 24px;
       color: #a0b4c0;
     }
   }
