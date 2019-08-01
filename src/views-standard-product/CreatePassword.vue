@@ -10,9 +10,6 @@
           <div class="description">
             Great! Now set up a password to secure your account.
           </div>
-          <div class="description">
-            This password will be used for future logins.
-          </div>
         </div>
       </transition>
       <WapPasswordSetForm />
