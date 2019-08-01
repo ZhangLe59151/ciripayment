@@ -46,9 +46,7 @@ export default {
   },
   methods: {
     handleNext() {
-      console.log("====================================");
-      console.log("handleNext");
-      console.log("====================================");
+      this.$router.push({ name: "EnterInfo" });
     }
   }
 };

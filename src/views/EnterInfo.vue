@@ -431,7 +431,6 @@
       size="large"
       class="bottom-btn"
       @click="handleNext"
-      style="margin-bottom:100px;"
     >
       Next
     </van-button>
@@ -902,7 +901,7 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/css/bottom-btn.scss";
 .enter-info {
-  background-color: #f2f2f2;
+  background-color: #ffffff;
   .spec-mobile {
     background-color: #f5f7fa;
     border-color: #e4e7ed;
