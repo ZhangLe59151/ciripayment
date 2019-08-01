@@ -1,64 +1,75 @@
 <template>
   <div class="landing-page">
-    <WapHeader :center="true" style="top: 34px" />
-<div class="landingPageContent">
-  <div class="slogan-title center">
-    Grow Your Business with Moon Merchant Portal.
-  </div>
-  <div class="slogan-sub center">
-    Managing finances for your business has never been easier.
-  </div>
-  <div class="loginWrapper">
-    <div class="tips">
-      Your mobile number
-    </div>
+    <WapHeader
+      :center="true"
+      style="top: 34px"
+    />
+    <div class="landingPageContent">
+      <template v-if="$store.state.deviceType && showComponents">
+        <div class="slogan-title center">
+          Grow Your Business with Moon Merchant Portal.
+        </div>
+        <div class="slogan-sub center">
+          Managing finances for your business has never been easier.
+        </div>
+      </template>
 
-    <div class="otp landing">
-      <el-form
-        label-width="0px"
-        :model="form"
-        ref="elForm"
-        size="small"
-        style="margin-top: 15px;"
-      >
-        <el-form-item
-          label-width="80px"
-          prop="phone"
-          class="itemlanding"
-          :rules="[
+      <div class="loginWrapper">
+        <div class="tips">
+          Your mobile number
+        </div>
+
+        <div class="otp landing">
+          <el-form
+            label-width="0px"
+            :model="form"
+            ref="elForm"
+            size="small"
+            style="margin-top: 15px;"
+          >
+            <el-form-item
+              label-width="80px"
+              prop="phone"
+              class="itemlanding"
+              :rules="[
             {  message: 'Please enter a valid phone number', trigger: 'blur' },
             {pattern: phoneValidationPattern, message: 'Please enter a valid phone number', trigger: 'blur'}
           ]"
+            >
+              <span
+                slot="label"
+                @click="show = true"
+              >
+                <span style="margin-right: 40px">{{form.nationalCode}}</span>
+                <i
+                  class="el-icon-caret-bottom"
+                  style="color: #053C5E"
+                ></i>
+              </span>
+              <el-input
+                v-model="form.phone"
+                placeholder=""
+                :maxlength="this.$store.state.phone.maxLen"
+                :minlength="this.$store.state.phone.minLen"
+                style="margin-left: 15px; width:90% ; color: lightgrey"
+                @focus="showComponents = false;"
+                @blur="showComponents = true"
+              ></el-input>
+            </el-form-item>
+          </el-form>
+        </div>
+
+        <van-button
+          size="large"
+          class="bottom-btn"
+          @click="handleStart"
         >
-          <span
-            slot="label"
-            @click="show = true"
-          >
-            <span style="margin-right: 40px">{{form.nationalCode}}</span>
-            <i class="el-icon-caret-bottom" style="color: #053C5E"></i>
-          </span>
-          <el-input
-            v-model="form.phone"
-            placeholder=""
-            :maxlength="this.$store.state.phone.maxLen"
-            :minlength="this.$store.state.phone.minLen"
-            style="margin-left: 15px; width:90% ; color: lightgrey"
-          ></el-input>
-        </el-form-item>
-      </el-form>
+          Get Started
+        </van-button>
+
+      </div>
+
     </div>
-
-    <van-button
-      size="large"
-      class="bottom-btn"
-      @click="handleStart"
-    >
-      Get Started
-    </van-button>
-
-  </div>
-
-</div>
 
     <van-popup
       v-model="show"
@@ -94,7 +105,8 @@ export default {
     return {
       show: false,
       form: {},
-      phoneValidationPattern: this.$store.state.phone.thaiExp
+      phoneValidationPattern: this.$store.state.phone.thaiExp,
+      showComponents: true
     };
   },
   methods: {
@@ -106,7 +118,7 @@ export default {
       } else {
         this.phoneValidationPattern = this.$store.state.phone.sgExp;
       }
-      console.log(this.phoneValidationPattern)
+      console.log(this.phoneValidationPattern);
     },
     onConfirm(value, index) {
       this.form.nationalCode = value;
@@ -144,7 +156,9 @@ export default {
             return;
           }
           console.log(res.data);
-          this.$store.commit("UpdateForm", { accountVerified: res.data.data.exist });
+          this.$store.commit("UpdateForm", {
+            accountVerified: res.data.data.exist
+          });
           this.$router.push({
             name: "EnterOtp"
           });
@@ -158,57 +172,58 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/css/bottom-btn";
-  .landing-page {
-    background: url("../assets/imgs/MP-background.png");
-    min-height: 100vh;
-    .landingPageContent{
-      position: fixed;
-      bottom: 0;
-      .loginWrapper{
-        padding-top: 30px;
-        background-color: white;
-        border-top-left-radius: 16px;
-        border-top-right-radius: 16px;
-        padding-left: 5%;
-        padding-right: 5%;
-      }
-    }
-
-    .slogan-title {
-      text-align: center;
-      color: white;
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      width: 80%;
-      margin-left: 10%;
-    }
-    .slogan-sub  {
-      text-align: center;
-      color: white;
-      font-size: 16px;
-      margin-bottom: 20px;
-      width: 80%;
-      margin-left: 8%;
-    }
-    .title {
-      font-size: 20px;
-      padding: 20px;
-    }
-    .tips {
-      font-size: 14px;
-    }
-
-    .otp {
-      text-align: left;
-      font-size: 15px;
-    }
-    .bottom-btn {
-      background-color: #053C5E;
-      border-radius: 4px;
-       margin: 1.25rem 0;
-       width: 100%;
+@import "../assets/css/bottom-btn";
+.landing-page {
+  background: url("../assets/imgs/MP-background.png");
+  min-height: 100vh;
+  .landingPageContent {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    .loginWrapper {
+      padding-top: 30px;
+      background-color: white;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      padding-left: 5%;
+      padding-right: 5%;
     }
   }
+
+  .slogan-title {
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    width: 80%;
+    margin-left: 10%;
+  }
+  .slogan-sub {
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 20px;
+    width: 80%;
+    margin-left: 8%;
+  }
+  .title {
+    font-size: 20px;
+    padding: 20px;
+  }
+  .tips {
+    font-size: 14px;
+  }
+
+  .otp {
+    text-align: left;
+    font-size: 15px;
+  }
+  .bottom-btn {
+    background-color: #053c5e;
+    border-radius: 4px;
+    margin: 1.25rem 0;
+    width: 100%;
+  }
+}
 </style>

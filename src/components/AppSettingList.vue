@@ -28,7 +28,7 @@
         title="Change Password"
         is-link
         value=""
-        :to="{name: 'ResetPasswordSP'}"
+        :to="{name: 'ForgotPasswordSP'}"
       />
     </van-cell-group>
 

@@ -261,6 +261,7 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
+  // these pages can enter directly without logined
   if (
     !store.state.logInWithPassword &&
     ![
@@ -270,17 +271,15 @@ router.beforeEach((to, from, next) => {
       "CreatePasswordSP",
       "EnterPasswordSP",
       "ForgotPasswordSP",
-      "ResetPasswordSP"
+      "ResetPasswordSP",
+      "PageNotFound",
+      "ServerError"
     ].includes(to.name)
   ) {
     next({ name: "LandingPage" });
     return false;
   }
-  // the pages can enter directly without logined
-  if (["PageNotFound", "ServerError"].includes(to.name)) {
-    next();
-    return false;
-  }
+
   next();
 });
 

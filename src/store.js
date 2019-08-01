@@ -181,7 +181,7 @@ export default new Vuex.Store({
       idleTimeout:
         "You’ve been inactive for too long. For security reasons, please start your application over again."
     },
-    logInWithPassword: false
+    logInWithPassword: localStorage.getItem("logInWithPassword") === "true"
   },
   mutations: {
     InitForm(state) {
@@ -200,9 +200,11 @@ export default new Vuex.Store({
     },
     logInWithPassword(state) {
       state.logInWithPassword = true;
+      localStorage.setItem("logInWithPassword", "true");
     },
     logOut(state) {
       state.logInWithPassword = false;
+      localStorage.setItem("logInWithPassword", "false");
     },
     removeUselessForm(state) {
       var keys = [
