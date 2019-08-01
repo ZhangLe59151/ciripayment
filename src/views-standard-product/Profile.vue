@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     haveStatus(className) {
-      return ["0", "2"].includes(this.info.applicationStatus + "")
+      return ["1", "2"].includes(this.info.applicationStatus + "")
         ? className
         : "";
     },
