@@ -39,20 +39,26 @@
       </div>
 
       <div class="button-group">
-        <van-button
-          size="small"
-          class="bottom-btn plain"
-          @click="handleCancel"
-        >
-          Cancel
-        </van-button>
-        <van-button
-          size="small"
-          class="bottom-btn"
-          @click="handleSave"
-        >
-          Save Settings
-        </van-button>
+        <van-row gutter="8">
+          <van-col span="12"><van-button
+            size="small"
+            class="bottom-btn plain"
+            @click="handleCancel"
+          >
+            Cancel
+          </van-button>
+          </van-col>
+          <van-col span="12" offset="0">
+            <van-button
+              size="small"
+              class="bottom-btn"
+              @click="handleSave"
+            >
+              Save Settings
+            </van-button>
+          </van-col>
+        </van-row>
+
       </div>
     </div>
 <!--    End of Settlement-->
@@ -90,22 +96,30 @@
       </span>
       </div>
       <div class="button-group">
-        <van-button
-          size="small"
-          class="bottom-btn plain"
-          @click="handleCancel"
-        >
-          Cancel
-        </van-button>
-        <van-button
-          size="small"
-          class="bottom-btn"
-          @click="handleSave"
-        >
-          Save Settings
-        </van-button>
-      </div>
+        <van-row gutter="8">
+          <van-col span="12"><van-button
+            size="small"
+            class="bottom-btn plain"
+            @click="handleCancel"
+          >
+            Cancel
+          </van-button>
+          </van-col>
+          <van-col span="12" offset="0">
+            <van-button
+              size="small"
+              class="bottom-btn"
+              @click="handleSave"
+            >
+              Save Settings
+            </van-button>
+          </van-col>
+        </van-row>
 
+      </div>
+      <div class="view-pmt-detail">
+        Click here to view payment channel details.
+      </div>
     </div>
 <!--    End of Channels-->
   </div>
@@ -234,12 +248,13 @@ export default {
           }
         }
       }
-    }
-    .channel-img {
-      margin-right:20px;
-      width: 48px;
-      height: 24px;
-      display: inline-block;
+      .channel-img {
+        margin-right:20px;
+        width: 48px;
+        height: 24px;
+        display: inline-block;
+      }
+
     }
     .warning{
       margin-top: 32px;
@@ -252,17 +267,23 @@ export default {
     .button-group{
       margin-top:32px;
       .bottom-btn{
-        width: 165px;
-        height:34px;
+        width: 100%;
+        height: auto;
       }
       .plain{
         color: #053C5E;
         background-color: #ffffff ;
         border-color: #053C5E;
-        margin-right: 13px;
       }
     }
-
+    .view-pmt-detail{
+      color: #037AFF;
+      font-size: 12px;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      margin-left: -116px;
+    }
   }
 </style>
 
