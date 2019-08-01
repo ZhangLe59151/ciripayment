@@ -180,9 +180,19 @@ const AppRouteArr = [
     component: () => import("@/views-app/Home.vue")
   },
   {
+    path: "/records",
+    name: "Records",
+    component: () => import("@/views-app/Records.vue")
+  },
+  {
     path: "/services",
     name: "Services",
     component: () => import("@/views-app/Services.vue")
+  },
+  {
+    path: "/settings",
+    name: "Settings",
+    component: () => import("@/views-app/Settings.vue")
   },
   {
     path: "/manage-settlement",
@@ -205,11 +215,6 @@ const AppRouteArr = [
     component: () => import("@/views-app/Scan.vue")
   },
 
-  {
-    path: "/settings",
-    name: "Settings",
-    component: () => import("@/views-app/Settings.vue")
-  },
   {
     path: "/profile",
     name: "Profile",
