@@ -28,6 +28,7 @@
         <van-button
           size="small"
           class="bottom-btn plain"
+          @click="navigateToManageChannels"
         >
           Manage Channels
         </van-button>
@@ -109,18 +110,20 @@ export default {
           "channelId": "5",
           "status": "3"
         }
-      ],
-      workingChannels: [{ id: "4", status: "1" }, { id: "5", status: "3" }],
-      appliedChannels: [{ id: "1", status: "0" }, { id: "3", status: "2" }],
-      recommendChannels: [{ id: "2" }]
+      ]
+      // workingChannels: [{ id: "4", status: "1" }, { id: "5", status: "3" }],
+      // appliedChannels: [{ id: "1", status: "0" }, { id: "3", status: "2" }],
+      // recommendChannels: [{ id: "2" }]
     }
   },
   computed: {
     ...mapState({
       totalPaymentChannelList: "paymentChannelList",
-      paymentChannelStatus: "paymentChannelStatus"
+      paymentChannelStatus: "paymentChannelStatus",
+      workingChannels: "workingChannels",
+      appliedChannels: "appliedChannels",
+      recommendChannels: "recommendChannels"
     })
-    // TODO: This to be replace by fetching data
   },
   methods: {
     formatChannelLabel(item) {
@@ -128,7 +131,20 @@ export default {
     },
     formatStatus(channel) {
       return this.paymentChannelStatus.filter(status => status.value === channel.status)[0];
+    },
+    navigateToManageChannels() {
+      this.$router.push({ name: "ManageChannels" })
     }
+
+  },
+  created() {
+    // TODO: This to be replace by fetching data
+    let workingChannels = [{ id: "4", status: "1" }, { id: "5", status: "3" }];
+    let appliedChannels = [{ id: "1", status: "0" }, { id: "3", status: "2" }];
+    let recommendChannels = [{ id: "2" }];
+    this.$store.commit("initWorkingChannels", workingChannels);
+    this.$store.commit("initAppliedChannels", appliedChannels);
+    this.$store.commit("initRecommendChannels", recommendChannels);
   }
 }
 </script>

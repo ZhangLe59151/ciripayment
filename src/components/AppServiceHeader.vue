@@ -1,5 +1,5 @@
 <template>
-  <div :class="(applicationStatus === '2')?'app-services-header':'app-services-header paymentEnabled'">
+  <div :class="(applicationStatus === '2')?'app-service-header':'app-service-header paymentEnabled'">
     <div class="title">
       <!-- it decided by application status -->
       {{(applicationStatus === '2')?'Services':'Payment Service'}}
@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: "AppServicesHeader",
+  name: "AppServiceHeader",
   props: {
     applicationStatus: String
   },
@@ -46,7 +46,7 @@ export default {
     display: inline-block;
   }
 
-  .app-services-header {
+  .app-service-header {
     background: #053c5e;
     height: 130px;
     width: 100%;

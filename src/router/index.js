@@ -185,6 +185,16 @@ const AppRouteArr = [
     component: () => import("@/views-standard-product/Services.vue")
   },
   {
+    path: "/manage-settlement",
+    name: "ManageSettlement",
+    component: () => import("@/views-standard-product/ManageSettlement.vue")
+  },
+  {
+    path: "/manage-channels",
+    name: "ManageChannels",
+    component: () => import("@/views-standard-product/ManageChannels.vue")
+  },
+  {
     path: "/qrcode",
     name: "Qrcode",
     component: () => import("@/views-standard-product/Qrcode.vue")
@@ -284,7 +294,6 @@ router.beforeEach((to, from, next) => {
     next({ name: "LandingPage" });
     return false;
   }
-
   next();
 });
 
