@@ -220,6 +220,11 @@ const AppRouteArr = [
     name: "Profile",
     component: () => import("@/views-app/Profile.vue")
   },
+  {
+    path: "/select-bank",
+    name: "SelectBank",
+    component: () => import("@/views-app/SelectBank.vue")
+  },
 
   // Standard Product
   {
