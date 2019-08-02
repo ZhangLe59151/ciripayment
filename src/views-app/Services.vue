@@ -36,11 +36,6 @@ export default {
       applicationStatus: "1"
     };
   },
-  methods: {
-    fetchData() {
-      // this.$api.check
-    }
-  },
   computed: {
     appPosition() {
       if (this.$store.state.deviceType !== "APP") {
@@ -48,6 +43,29 @@ export default {
       }
       return "app-position"
     }
+  },
+  methods: {
+    fetchData() {
+      // this.$api.check
+    // fetching channels
+      this.$api.serviceOverview().then(res => {
+        if (res.data.code === 200) {
+          let channelList = res.data.data.paymentChannelOverviewVo;
+          let workingChannels = channelList.filter(channel => [1, 3].includes(channel.status));
+          let appliedChannels = channelList.filter(channel => [0, 2].includes(channel.status));
+          let recommendChannels = channelList.filter(channel => [-1].includes(channel.status));
+
+          this.$store.commit("initWorkingChannels", workingChannels);
+          this.$store.commit("initAppliedChannels", appliedChannels);
+          this.$store.commit("initRecommendChannels", recommendChannels);
+
+        }
+      });
+    }
+
+  },
+  created() {
+    this.fetchData();
   }
 }
 </script>

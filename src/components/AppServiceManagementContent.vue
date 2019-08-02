@@ -117,9 +117,10 @@
         </van-row>
 
       </div>
-      <div class="view-pmt-detail">
+      <div class="view-pmt-detail" @click="openViewChannelsDetailDialog">
         Click here to view payment channel details.
       </div>
+      <payment-channel-list :paymentChannelList="totalPaymentChannelList" :dialog="dialog" @closeDialog="closeViewChannelsDetailDialog"/>
     </div>
 <!--    End of Channels-->
   </div>
@@ -128,13 +129,18 @@
 
 <script>
 import { mapState } from "vuex";
+import PaymentChannelList from "@/components/PaymentChannelList";
 export default {
   name: "AppServiceManagementContent",
   props: {
     serviceType: String
   },
+  components: {
+    PaymentChannelList
+  },
   data() {
     return {
+      dialog: false,
       settlement: 1
     }
   },
@@ -147,16 +153,22 @@ export default {
   },
   methods: {
     formatChannelLabel(item) {
-      return this.totalPaymentChannelList.filter(channel => channel.id === item.id)[0];
+      return this.totalPaymentChannelList.filter(channel => String(channel.id) === String(item.channelId))[0];
     },
     formatStatus(channel) {
-      return this.paymentChannelStatus.filter(status => status.value === channel.status)[0];
+      return this.paymentChannelStatus.filter(status => String(status.value) === String(channel.status))[0];
     },
     handleCancel() {
       this.$router.back();
     },
     handleSave() {
       this.$router.back();
+    },
+    openViewChannelsDetailDialog() {
+      this.dialog = true;
+    },
+    closeViewChannelsDetailDialog() {
+      this.dialog = false;
     }
   }
 }

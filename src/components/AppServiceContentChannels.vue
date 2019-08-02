@@ -76,9 +76,8 @@
           Apply now
         </van-button>
       </div>
-      <div class="view-pmt-detail">
-        Click here to view payment channel details.
-      </div>
+<!--      This to avoid the footer cover the app-->
+      <div style="height:50px; width:100%; clear:both;"></div>
     </div>
   </div>
 </template>
@@ -89,31 +88,6 @@ export default {
   name: "AppServiceContentChannels",
   data() {
     return {
-      channelOverView: [
-        {
-          "channelId": "1",
-          "status": "0"
-        },
-        {
-          "channelId": "2",
-          "status": "-1"
-        },
-        {
-          "channelId": "3",
-          "status": "2"
-        },
-        {
-          "channelId": "4",
-          "status": "1"
-        },
-        {
-          "channelId": "5",
-          "status": "3"
-        }
-      ]
-      // workingChannels: [{ id: "4", status: "1" }, { id: "5", status: "3" }],
-      // appliedChannels: [{ id: "1", status: "0" }, { id: "3", status: "2" }],
-      // recommendChannels: [{ id: "2" }]
     }
   },
   computed: {
@@ -127,24 +101,14 @@ export default {
   },
   methods: {
     formatChannelLabel(item) {
-      return this.totalPaymentChannelList.filter(channel => channel.id === item.id)[0];
+      return this.totalPaymentChannelList.filter(channel => String(channel.id) === String(item.channelId))[0];
     },
     formatStatus(channel) {
-      return this.paymentChannelStatus.filter(status => status.value === channel.status)[0];
+      return this.paymentChannelStatus.filter(status => String(status.value) === String(channel.status))[0];
     },
     navigateToManageChannels() {
-      this.$router.push({ name: "ManageChannels" })
+      this.$router.push({ name: "ManageChannels" });
     }
-
-  },
-  created() {
-    // TODO: This to be replace by fetching data
-    let workingChannels = [{ id: "4", status: "1" }, { id: "5", status: "3" }];
-    let appliedChannels = [{ id: "1", status: "0" }, { id: "3", status: "2" }];
-    let recommendChannels = [{ id: "2" }];
-    this.$store.commit("initWorkingChannels", workingChannels);
-    this.$store.commit("initAppliedChannels", appliedChannels);
-    this.$store.commit("initRecommendChannels", recommendChannels);
   }
 }
 </script>
@@ -153,7 +117,6 @@ export default {
   .app-service-cnt-channels {
     margin-top:16px;
     padding: 16px;
-    margin-bottom: 50px;
     .block {
 
       .title {
@@ -227,7 +190,7 @@ export default {
       .bottom-btn {
         font-size: 14px;
         width: 100%;
-        margin: 12px 10px 31px 0;
+        margin: 12px 10px 0 0;
         height: 34px;
       }
       .plain{
@@ -237,7 +200,7 @@ export default {
       }
     }
 
-    .recommend-channels{
+    .applied-channels,.recommend-channels{
       margin-top: 16px;
     }
     .channel-img {
@@ -250,6 +213,7 @@ export default {
     .view-pmt-detail{
       color: #037AFF;
       font-size: 12px;
+      margin-top: 31px;
       text-align: center;
     }
   }
