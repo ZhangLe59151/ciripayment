@@ -694,7 +694,11 @@ export default {
           phone: this.$store.state.form.phone,
           nationalCode: this.$store.state.form.nationalCode
         },
-        this.form
+        this.form,
+        {
+          serviceType: "0"
+          // only show the payment service currently. war room 3 version
+        }
       );
       console.log("====================================");
       console.log(reqForm);
@@ -767,7 +771,11 @@ export default {
     },
     uploadImg(param) {
       var vm = this;
-      var UploadApi = "/api/self-onboarding/image/upload";
+      const baseUrl =
+        this.$store.state.deviceType === "APP"
+          ? process.env.VUE_APP_BASEURL
+          : "";
+      var UploadApi = baseUrl + "/api/self-onboarding/image/upload";
       var fileObj = param.file;
       var originalFileName = fileObj.name;
       var originalFileSizeMb = util.byteToMb(fileObj.size);

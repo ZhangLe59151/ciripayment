@@ -27,7 +27,7 @@
     <van-button
       size="large"
       class="bottom-btn"
-      @click="$router.push({name: 'Welcome'})"
+      @click="$router.push({name: 'Home'})"
     >Done</van-button>
   </div>
 </template>

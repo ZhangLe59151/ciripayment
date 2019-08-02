@@ -91,6 +91,7 @@
         v-model="dialog"
         scroll=paper
         class="scroll-dialog"
+        :showConfirmButton="false"
       >
         <div
           class="heading"
@@ -117,10 +118,10 @@
                 <div class="left-desc">Service Fee </div>
               </el-col>
               <el-col :span="12">
-                <div class="right-desc">0.3%</div>
+                <div class="right-desc">0.1 - 0.3%</div>
               </el-col>
             </el-row>
-            <el-row>
+            <!-- <el-row>
               <el-col :span="12">
                 <div class="left-desc">Settlement Date</div>
               </el-col>
@@ -136,7 +137,7 @@
               >
                 <div class="right-desc">1 day</div>
               </el-col>
-            </el-row>
+            </el-row> -->
           </div>
         </div>
       </van-dialog>
@@ -580,7 +581,9 @@ export default {
 @import "../assets/css/bottom-btn.scss";
 .services-info {
   background-color: #f2f2f2;
-
+  .van-dialog__footer {
+    display: none;
+  }
   .van-nav-bar {
     background-color: #f2f2f2;
   }
@@ -614,16 +617,19 @@ export default {
   .heading {
     text-align: center;
     position: relative;
+
     .description {
       margin: 0 10px 0 10px;
     }
     > h1 {
       padding: 0 20px;
+      font-size: 24px;
+      color: #2f3941;
     }
     > i {
       position: absolute;
-      top: -18px;
-      right: 20px;
+      top: -14px;
+      right: 14px;
     }
   }
   .box-popup {
@@ -832,9 +838,10 @@ export default {
   }
 
   .scroll-dialog {
-    height: 80vh;
+    height: 90vh;
     padding: 10px 0;
     overflow: scroll;
+    width: 90%;
   }
 
   .payment-dialog-link {
