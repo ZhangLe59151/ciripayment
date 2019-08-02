@@ -62,7 +62,7 @@ export default {
 <style lang="scss" scoped>
 .app-home {
   background-color: #f0f7fb;
-  min-height: 100vh;
+  height: 100vh;
   position: relative;
 
   .app-position {

@@ -1,21 +1,24 @@
 <template>
   <div class="app-home-progress">
     <app-home-apply v-if="status === '2'"></app-home-apply>
-    <div
-      class="regular-progress"
-      v-if="status !== '2' && showBox"
-    >
-      <img :src="progress.icon">
-      <van-icon
-        name="cross"
-        class="close-icon"
-        @click="handleClose"
-      />
-      <div class="status">
-        <div class="title">{{progress.label}}</div>
-        <div class="des">{{progress.des}}</div>
+
+    <transition name="el-zoom-in-center">
+      <div
+        class="regular-progress"
+        v-if="status !== '2' && showBox"
+      >
+        <img :src="progress.icon">
+        <van-icon
+          name="cross"
+          class="close-icon"
+          @click="handleClose"
+        />
+        <div class="status">
+          <div class="title">{{progress.label}}</div>
+          <div class="des">{{progress.des}}</div>
+        </div>
       </div>
-    </div>
+    </transition>
   </div>
 
 </template>
