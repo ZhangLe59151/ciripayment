@@ -9,7 +9,7 @@
         <el-button
           type="primary"
           class="server-error-btn"
-          @click="$router.replace({name: 'Welcome'})"
+          @click="$router.replace({name: 'Home'})"
         >Return to Home</el-button>
       </el-col>
 

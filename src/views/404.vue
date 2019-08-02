@@ -9,7 +9,7 @@
         <el-button
           type="primary"
           class="not-existing-btn"
-          @click="$router.replace({name: 'Welcome'})"
+          @click="$router.replace({name: 'Home'})"
         >Return to Home</el-button>
       </el-col>
 

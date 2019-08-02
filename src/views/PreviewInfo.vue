@@ -624,7 +624,7 @@ export default {
     },
     uploadSign(fileObj) {
       var vm = this;
-      var UploadApi = "/api/self-onboarding/image/upload";
+      var UploadApi = this.$store.state.uploadImgUrl;
       var form = new FormData();
       form.append("file", fileObj);
       form.append("type", "signature");

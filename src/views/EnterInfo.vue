@@ -771,11 +771,7 @@ export default {
     },
     uploadImg(param) {
       var vm = this;
-      const baseUrl =
-        this.$store.state.deviceType === "APP"
-          ? process.env.VUE_APP_BASEURL
-          : "";
-      var UploadApi = baseUrl + "/api/self-onboarding/image/upload";
+      var UploadApi = this.$store.state.uploadImgUrl;
       var fileObj = param.file;
       var originalFileName = fileObj.name;
       var originalFileSizeMb = util.byteToMb(fileObj.size);

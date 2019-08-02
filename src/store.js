@@ -190,7 +190,11 @@ export default new Vuex.Store({
     logInWithPassword: localStorage.getItem("logInWithPassword") === "true",
     workingChannels: [],
     appliedChannels: [],
-    recommendChannels: []
+    recommendChannels: [],
+    uploadImgUrl:
+      process.env.VUE_APP_DEVICETYPE === "APP"
+        ? process.env.VUE_APP_BASEURL + "/api/self-onboarding/image/upload"
+        : "/api/self-onboarding/image/upload"
   },
   mutations: {
     InitForm(state) {
