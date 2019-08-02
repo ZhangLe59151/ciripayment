@@ -194,7 +194,8 @@ export default new Vuex.Store({
     uploadImgUrl:
       process.env.VUE_APP_DEVICETYPE === "APP"
         ? process.env.VUE_APP_BASEURL + "/api/self-onboarding/image/upload"
-        : "/api/self-onboarding/image/upload"
+        : "/api/self-onboarding/image/upload",
+    bankList: require("./assets/data/bankInfo.json").list
   },
   mutations: {
     InitForm(state) {

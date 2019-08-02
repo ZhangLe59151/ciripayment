@@ -8,7 +8,8 @@
       type="default"
       size="small"
       class="link-btn"
-    >Update Profile</van-button>
+      @click="handleLinkBankAccount"
+    >Link Bank Account</van-button>
   </div>
 
   <div
@@ -47,6 +48,11 @@ export default {
     },
     haveBankAccount() {
       return this.bankAccount !== "";
+    }
+  },
+  methods: {
+    handleLinkBankAccount() {
+      this.$router.push({ name: "SelectBank" });
     }
   }
 };
