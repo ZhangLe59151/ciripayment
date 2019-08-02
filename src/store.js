@@ -190,7 +190,8 @@ export default new Vuex.Store({
     logInWithPassword: localStorage.getItem("logInWithPassword") === "true",
     workingChannels: [],
     appliedChannels: [],
-    recommendChannels: []
+    recommendChannels: [],
+    bankList: require("./assets/data/bankInfo.json").list
   },
   mutations: {
     InitForm(state) {

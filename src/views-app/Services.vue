@@ -58,7 +58,6 @@ export default {
           this.$store.commit("initWorkingChannels", workingChannels);
           this.$store.commit("initAppliedChannels", appliedChannels);
           this.$store.commit("initRecommendChannels", recommendChannels);
-
         }
       });
     }

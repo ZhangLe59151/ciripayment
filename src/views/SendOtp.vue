@@ -84,7 +84,7 @@
 // @ is an alias to /src
 import util from "@/util.js";
 import { mapState } from "vuex";
-import { find } from "lodash";
+// import { find } from "lodash";
 
 export default {
   name: "send-otp",

@@ -225,6 +225,11 @@ const AppRouteArr = [
     name: "SelectBank",
     component: () => import("@/views-app/SelectBank.vue")
   },
+  {
+    path: "/select-bank/:id",
+    name: "BankDetails",
+    component: () => import("@/views-app/BankDetails.vue")
+  },
 
   // Standard Product
   {
