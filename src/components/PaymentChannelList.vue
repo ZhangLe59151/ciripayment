@@ -1,6 +1,6 @@
 <template>
   <van-dialog
-    v-model="showing"
+    v-model="dialog"
     scroll=paper
     class="scroll-dialog"
     :show-confirm-button="false"
@@ -59,21 +59,11 @@ export default {
     paymentChannelList: Array,
     dialog: Boolean
   },
-  data() {
-    return {
-      showing: this.dialog
-    };
-  },
   methods: {
     closeDialog() {
-      this.showing = false;
-      this.$emit("closeDialog");
+      this.$emit("update:dialog", false)
     }
-  },
-  watch: {
-    dialog(val) {
-      this.showing = val;
-    }
+
   }
 }
 </script>

@@ -120,7 +120,7 @@
       <div class="view-pmt-detail" @click="openViewChannelsDetailDialog">
         Click here to view payment channel details.
       </div>
-      <payment-channel-list :paymentChannelList="totalPaymentChannelList" :dialog="dialog" @closeDialog="closeViewChannelsDetailDialog"/>
+      <payment-channel-list :paymentChannelList="totalPaymentChannelList" v-bind:dialog.sync="dialog" />
     </div>
 <!--    End of Channels-->
   </div>
