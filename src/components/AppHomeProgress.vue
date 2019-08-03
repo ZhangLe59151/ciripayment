@@ -1,11 +1,11 @@
 <template>
   <div class="app-home-progress">
-    <app-home-apply v-if="status === '2'"></app-home-apply>
+    <app-home-apply v-if="status === 'NOAPPLICATION'"></app-home-apply>
 
     <transition name="el-zoom-in-center">
       <div
         class="regular-progress"
-        v-if="status !== '2' && showBox"
+        v-if="status !== 'NOAPPLICATION' && showBox"
       >
         <img :src="progress.icon">
         <van-icon

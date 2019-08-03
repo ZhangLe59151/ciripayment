@@ -6,7 +6,7 @@
       v-if="$store.state.deviceType === 'APP'"
     />
     <app-home-progress
-      :status="applicationStatus"
+      :status.sync="applicationStatus"
       :class="appPosition"
     />
 
@@ -22,6 +22,7 @@ import AppHomeHeader from "@/components/AppHomeHeader";
 import AppHomeBalance from "@/components/AppHomeBalance";
 import AppHomeProgress from "@/components/AppHomeProgress";
 import AppHomeDownload from "@/components/AppHomeDownload";
+import { mapState } from "vuex";
 export default {
   name: "AppHome",
 
@@ -34,30 +35,17 @@ export default {
   },
   data() {
     return {
-      settlementType: "0",
       applicationStatus: "0"
     };
   },
-  methods: {
-    ShowPopup() {
-      this.popupStatus = true;
-    },
-    fetchData() {
-      // using api to fetch the merchant Profile
-      this.$api.getMerchantProfile({ params: {
-        phoneNumber: this.$store.state.form.applicantPhoneNumber
-      } }).then(res => {
-        if (res.data.code === 200) {
-          this.$store.commit("initMerchantProfile", res.data.data);
-        }
-      });
-    }
-  },
-  created() {
-    this.$store.commit("InitForm");
-    this.fetchData();
-  },
   computed: {
+    ...mapState({
+      settlementType(state) {
+        return state.merchantProfile.merchantSettlementConfigVo
+          ? state.merchantProfile.merchantSettlementConfigVo.settlementType + ""
+          : "0";
+      }
+    }),
     appPosition() {
       if (this.$store.state.deviceType !== "APP") {
         return "app-position-web";
@@ -66,6 +54,39 @@ export default {
         ? "app-position-auto-settlement"
         : "app-position";
     }
+  },
+  methods: {
+    ShowPopup() {
+      this.popupStatus = true;
+    },
+    fetchData(cb) {
+      // using api to fetch the merchant Profile
+      this.$api
+        .getMerchantProfile({
+          params: {
+            phoneNumber: this.$store.state.form.applicantPhoneNumber
+          }
+        })
+        .then(res => {
+          if (res.data.code === 200) {
+            this.$store.commit("initMerchantProfile", res.data.data);
+          }
+          if (cb) {
+            cb();
+          }
+        });
+    },
+    fetchApplicationStatus() {
+      this.$api.getApplictionStatus().then(res => {
+        if (res.data.code === 200) {
+          this.applicationStatus = res.data.data.applicationStatus + "";
+        }
+      });
+    }
+  },
+  created() {
+    this.$store.commit("InitForm");
+    this.fetchData(this.fetchApplicationStatus);
   }
 };
 </script>

@@ -227,7 +227,7 @@ export default {
     },
 
     checkDuplicate() {
-      this.$api.checkApplictionStatus().then(res => {
+      this.$api.getApplictionStatus().then(res => {
         if (res.data.code === 200) {
           var appStatus = res.data.data.applicationStatus + "";
           if (appStatus === this.$store.state.applicationStatus.approved) {

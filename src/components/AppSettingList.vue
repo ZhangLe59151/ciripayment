@@ -88,7 +88,7 @@ export default {
       this.showKeyboard = false;
     },
     verifyIdentity() {
-      this.$api.checkApplictionStatus().then(res => {
+      this.$api.getApplictionStatus().then(res => {
         if (res.data.code === 200) {
           this.profileDialog = true;
           this.showKeyboard = true;

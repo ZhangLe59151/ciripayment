@@ -21,23 +21,23 @@
       >
         <el-form-item
           label="Name on Bank Account"
-          prop="bankAccountName"
-          :rules="[{ required: true, message: 'This field is required.', trigger: 'blur' },{ validator: checkSpecificKey, message: 'Please enter a valid Last Name', trigger: 'blur'}]"
+          prop="accountName"
+          :rules="[{ required: true, message: 'This field is required.', trigger: 'blur' },{ validator: checkSpecificKey, message: 'Please enter a valid Account Name', trigger: 'blur'}]"
         >
           <el-input
-            v-model="form.bankAccountName"
+            v-model="form.accountName"
             placeholder=""
-            :maxlength="25"
+            :maxlength="50"
           ></el-input>
         </el-form-item>
         <el-form-item
           label="Bank Account Number"
-          prop="bankAccount"
+          prop="accountNo"
           :rules="[{ required: true, message: 'This field is required.', trigger: 'blur' },
-      { pattern: this.$store.state.validationPatterns.bankAccount, message: 'Please enter a valid Personal Account No.', trigger: 'blur'}]"
+      { pattern: this.$store.state.validationPatterns.bankAccount, message: 'Please enter a valid Account No.', trigger: 'blur'}]"
         >
           <el-input
-            v-model="form.bankAccount"
+            v-model="form.accountNo"
             placeholder="Personal Account No."
             :maxlength="20"
           ></el-input>
@@ -103,7 +103,12 @@ export default {
       });
     },
     submit() {
-      this.$router.push({ name: "Profile" });
+      this.updateBankAcc(this.form).then(res => {
+        if (res.data.code === 200) {
+          this.$toast("Update Bank Account Successful!");
+          this.$router.push({ name: "Profile" });
+        }
+      });
     }
   }
 };

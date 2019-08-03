@@ -26,7 +26,8 @@ export default {
   serviceOverview(params) {
     return Vue.axios.get("/api/self-onboarding/application/service-overview");
   },
-  checkApplictionStatus(params) {
+  getApplictionStatus(params) {
+    // it use in Setting page & home page
     return Vue.axios.get("/api/self-onboarding/application/status", params);
   },
   getAccountInfo(params) {
@@ -70,5 +71,8 @@ export default {
   },
   updateMerchantSettlement(params) {
     return Vue.axios.post("/api/merchant/settlement/update", params);
+  },
+  updateBankAcc(params) {
+    return Vue.axios.post("/api/merchant/bank-account/update", params);
   }
 };

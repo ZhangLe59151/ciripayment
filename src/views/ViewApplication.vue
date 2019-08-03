@@ -126,20 +126,20 @@ export default {
       const item = find(this.paymentChannelStatus, { value: status + "" });
       return item
         ? {
-          label: item.label,
-          color: item.color
-        }
+            label: item.label,
+            color: item.color
+          }
         : {
-          label: status,
-          color: ""
-        };
+            label: status,
+            color: ""
+          };
     },
     findIconUrl(id) {
       const item = find(this.paymentChannelList, { id: id + "" });
       return item.img;
     },
     getApplications() {
-      this.$api.checkApplictionStatus().then(res => {
+      this.$api.getApplictionStatus().then(res => {
         if (res.data.code === 200) {
           this.page = "1";
           this.name = res.data.data.bizNameEn;
