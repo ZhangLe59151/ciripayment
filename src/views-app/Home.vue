@@ -43,8 +43,20 @@ export default {
       this.popupStatus = true;
     },
     fetchData() {
-      // this.$api.check
+      // using api to fetch the merchant Profile
+      this.$api.getMerchantProfile({ params: {
+        phoneNumber: this.$store.state.form.applicantPhoneNumber
+      } }).then(res => {
+        if (res.data.code === 200) {
+          console.log(res.data.data);
+          this.$store.commit("initMerchantProfile", res.data.data);
+        }
+      });
     }
+  },
+  created() {
+    this.$store.commit("InitForm");
+    this.fetchData();
   },
   computed: {
     appPosition() {

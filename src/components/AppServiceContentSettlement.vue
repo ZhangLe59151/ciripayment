@@ -4,7 +4,7 @@
     <div class="title">Settlement</div>
     <div class="label">
       <span>Settlement option:</span>
-      <span>Manual</span>
+      <span>{{settlementType === 1 ? "Manual" : "Auto"}}</span>
     </div>
     <van-button
       size="small"
@@ -18,8 +18,19 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "AppServiceContentSettlement",
+  computed: mapState({
+    settlementType: state => {
+      if (state.merchantProfile.merchantSettlementConfigVo) {
+        return state.merchantProfile.merchantSettlementConfigVo.settlementType
+      } else {
+        // Not found settlement type
+        return 0;
+      }
+    }
+  }),
   methods:
     {
       navigateToMgtSettlement() {

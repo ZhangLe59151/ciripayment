@@ -21,7 +21,7 @@
           </div>
         </span>
           <span>
-            <div :class="formatStatus(item).color + ' status-adjust-height'">{{formatStatus(item).label}}
+            <div :class="formatStatusWorking(item).color + ' status-adjust-height'">{{formatStatusWorking(item).label}}
           </div>
           </span>
         </div>
@@ -52,7 +52,7 @@
           </div>
         </span>
           <span>
-            <div :class="formatStatus(item).color + ' status-adjust-height'">{{formatStatus(item).label}}
+            <div :class="formatStatusApplied(item).color + ' status-adjust-height'">{{formatStatusApplied(item).label}}
           </div>
           </span>
         </div>
@@ -88,27 +88,65 @@ export default {
   name: "AppServiceContentChannels",
   data() {
     return {
+      workingChannels: [],
+      appliedChannels: [],
+      recommendChannels: [{
+        channelId: 1
+      },{
+        channelId: 2
+      },{
+        channelId: 3
+      },{
+        channelId: 4
+      },{
+        channelId: 5
+      }]
     }
   },
   computed: {
     ...mapState({
       totalPaymentChannelList: "paymentChannelList",
       paymentChannelStatus: "paymentChannelStatus",
-      workingChannels: "workingChannels",
-      appliedChannels: "appliedChannels",
-      recommendChannels: "recommendChannels"
+      merchantWorkingChannelStatus: "merchantWorkingChannelStatus",
+      // workingChannels: "workingChannels",
+      // appliedChannels: "appliedChannels",
+      // recommendChannels: "recommendChannels"
     })
   },
   methods: {
     formatChannelLabel(item) {
+      // console.log(this.totalPaymentChannelList.filter(channel => String(channel.id) === String(item.channelId))[0]);
       return this.totalPaymentChannelList.filter(channel => String(channel.id) === String(item.channelId))[0];
     },
-    formatStatus(channel) {
-      return this.paymentChannelStatus.filter(status => String(status.value) === String(channel.status))[0];
+    formatStatusWorking(channel) {
+      return this.merchantWorkingChannelStatus.filter(status => String(status.value) === String(channel.channelStatus))[0];
+    },
+    formatStatusApplied(channel) {
+      return this.paymentChannelStatus.filter(status => String(status.value) === String(channel.applicationStatus))[0];
     },
     navigateToManageChannels() {
       this.$router.push({ name: "ManageChannels" });
+    },
+    fetchData() {
+      let channelList = this.$store.state.merchantProfile.merchantChannelConfigVoList;
+      // Get list of working channels and remove from recommend
+      this.workingChannels = channelList.filter(channel => {
+        if ([1].includes(channel.applicationStatus)) {
+          this.recommendChannels = this.recommendChannels.filter(rec => String(rec.channelId) !== String(channel.channelId));
+        }
+        return [1].includes(channel.applicationStatus)
+      });
+      // Get list of working channels and remove from recommend
+      this.appliedChannels = channelList.filter(channel => {
+        if ([0, 2, 4].includes(channel.applicationStatus)) {
+          this.recommendChannels = this.recommendChannels.filter(rec => String(rec.channelId) !== String(channel.channelId));
+        }
+        return [0, 2, 4].includes(channel.applicationStatus)
+      });
     }
+  },
+  created() {
+    this.fetchData();
   }
 }
 </script>

@@ -1,69 +1,5 @@
 <template>
-  <div class="app-service-management-content">
-<!--    This is for settlement-->
-    <div v-if="serviceType==='Settlement'" class="app-service-mgt-settlement-content">
-      <div class="instruction">
-        Choose how you want to receive your revenue.
-      </div>
-      <div class="settlement">
-        <el-radio-group
-          v-model="settlement"
-        >
-          <el-radio :label="1">
-            <div class="settlement-choice">
-              Manual Settlement (Recommended)
-            </div>
-
-          </el-radio>
-          <div class="settlement-desc">
-            Manually transfer all revenue into your balance. Enjoy 10% lower servicing fee on all payment channels.
-          </div>
-          <el-radio :label="2">
-            <div class="settlement-choice" style="margin-top: 20px;">
-              Auto Settlement
-            </div>
-
-          </el-radio>
-          <div class="settlement-desc">
-            Automatically transfer all revenue into your balance at the end of each day.
-          </div>
-        </el-radio-group>
-      </div>
-      <div class="warning">
-        <van-row>
-          <van-col span="2"><i class="iconfont iconalert"></i>
-          </van-col>
-          <van-col span="22"><div class="warning-msg">Auto Settlement may incur a higher service fee.</div>
-          </van-col>
-        </van-row>
-      </div>
-
-      <div class="button-group">
-        <van-row gutter="8">
-          <van-col span="12"><van-button
-            size="small"
-            class="bottom-btn plain"
-            @click="handleCancel"
-          >
-            Cancel
-          </van-button>
-          </van-col>
-          <van-col span="12" offset="0">
-            <van-button
-              size="small"
-              class="bottom-btn"
-              @click="handleSave"
-            >
-              Save Settings
-            </van-button>
-          </van-col>
-        </van-row>
-
-      </div>
-    </div>
-<!--    End of Settlement-->
-<!--    This is for Channels-->
-    <div v-else class="app-service-mgt-channels-content">
+    <div class="app-service-mgt-channels">
       <div class="channels">
         <div v-if="workingChannels.length !== 0" class="working-channels">
           <div
@@ -122,16 +58,13 @@
       </div>
       <payment-channel-list :paymentChannelList="totalPaymentChannelList" v-bind:dialog.sync="dialog" />
     </div>
-<!--    End of Channels-->
-  </div>
-
 </template>
 
 <script>
 import { mapState } from "vuex";
 import PaymentChannelList from "@/components/PaymentChannelList";
 export default {
-  name: "AppServiceManagementContent",
+  name: "AppServiceManageChannels",
   props: {
     serviceType: String
   },
@@ -141,15 +74,19 @@ export default {
   data() {
     return {
       dialog: false,
-      settlement: 1
+      workingChannels:[],
     }
   },
   computed: {
     ...mapState({
+      merchantId: state => state.merchantProfile.id,
       totalPaymentChannelList: "paymentChannelList",
       paymentChannelStatus: "paymentChannelStatus",
-      workingChannels: "workingChannels"
+      merchantWorkingChannelStatus: "merchantWorkingChannelStatus",
     })
+  },
+  created() {
+    this.$store.commit("fetchMerchantProfileFromLocal");
   },
   methods: {
     formatChannelLabel(item) {
@@ -166,39 +103,18 @@ export default {
     },
     openViewChannelsDetailDialog() {
       this.dialog = true;
-    },
-    closeViewChannelsDetailDialog() {
-      this.dialog = false;
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .app-service-management-content{
+  .app-service-mgt-channels{
     padding: 24px 16px 16px 16px;
     .instruction{
       margin-top: 8px;
       color: #68737D;
       font-size: 14px;
-    }
-    .settlement {
-      margin-top:32px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid #e9ebed;
-      .settlement-choice{
-        display: inline-block;
-        color: black;
-        font-size: 16px;
-        margin-left: 8px
-      }
-      .settlement-desc {
-        color: #68737d;
-        font-size: 14px;
-        line-height: 22px;
-        margin: 10px 0 10px 34px;
-        font-weight: normal;
-      }
     }
     .channels{
       .label {

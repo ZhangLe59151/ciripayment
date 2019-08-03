@@ -134,10 +134,18 @@ export default new Vuex.Store({
         name: "rejected",
         label: "REJECTED",
         color: "red"
+      }
+    ],
+    merchantWorkingChannelStatus: [
+      {
+        value: "1",
+        name: "enabled",
+        label: "ENABLED",
+        color: "green"
       },
       {
-        value: "3",
-        name: "disabled",
+        value: "2",
+        name: "diabled",
         label: "DISABLED",
         color: "gray"
       }
@@ -188,14 +196,12 @@ export default new Vuex.Store({
         "You’ve been inactive for too long. For security reasons, please start your application over again."
     },
     logInWithPassword: localStorage.getItem("logInWithPassword") === "true",
-    workingChannels: [],
-    appliedChannels: [],
-    recommendChannels: [],
     uploadImgUrl:
       process.env.VUE_APP_DEVICETYPE === "APP"
         ? process.env.VUE_APP_BASEURL + "/api/self-onboarding/image/upload"
         : "/api/self-onboarding/image/upload",
-    bankList: require("./assets/data/bankInfo.json").list
+    bankList: require("./assets/data/bankInfo.json").list,
+    merchantProfile: {}
   },
   mutations: {
     InitForm(state) {
@@ -221,17 +227,25 @@ export default new Vuex.Store({
       localStorage.setItem("logInWithPassword", "false");
     },
     // This is for services
-    initWorkingChannels(state, channels) {
-      state.workingChannels = channels;
-    },
     updateWorkingChannels(state, channels) {
       state.workingChannels = [...state.workingChannels, channels];
     },
-    initAppliedChannels(state, channels) {
-      state.appliedChannels = channels;
+    // This is for settlement
+    updateSettlement(state, settlement) {
+      state.merchantProfile.merchantSettlementConfigVo.settlementType = settlement;
+      localStorage.setItem("merchantProfile", JSON.stringify(state.merchantProfile));
     },
-    initRecommendChannels(state, channels) {
-      state.recommendChannels = channels;
+    // Fetch merchant profile
+    initMerchantProfile(state, merchantProfile) {
+      state.merchantProfile = merchantProfile;
+      localStorage.setItem("merchantProfile", JSON.stringify(merchantProfile));
+    },
+    // if there is no merchant profile in store, try to look in storage
+    fetchMerchantProfileFromLocal(state) {
+      if (Object.keys(state.merchantProfile).length === 0 && localStorage.getItem("merchantProfile")) {
+        let localMerchantProfile = JSON.parse(localStorage.getItem("merchantProfile"));
+        state.merchantProfile = { ...state.merchantProfile, ...localMerchantProfile };
+      }
     },
     removeUselessForm(state) {
       var keys = [
