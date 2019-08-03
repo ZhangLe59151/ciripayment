@@ -60,7 +60,7 @@ export default {
     return {
       currentTab: this.$route.query.currentTab || "0",
       transactionList: require("@/mockData/transactions.json").list,
-      settlementList: require("@/mockData/transactions.json").list
+      settlementList: require("@/mockData/settlements.json").list
     };
   }
 };
