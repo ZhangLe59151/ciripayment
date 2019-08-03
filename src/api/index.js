@@ -64,5 +64,11 @@ export default {
   },
   getProfileInfo() {
     return Vue.axios.get("/api/self-onboarding/application/profile");
+  },
+  getMerchantProfile(params) {
+    return Vue.axios.get("/api/merchant/profile", params);
+  },
+  updateMerchantSettlement(params) {
+    return Vue.axios.post("/api/merchant/settlement/update", params);
   }
 };

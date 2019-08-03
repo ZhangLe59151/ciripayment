@@ -36,16 +36,6 @@
             <div class="right-desc">0.1 – 0.3%</div>
           </el-col>
         </el-row>
-        <el-row>
-          <el-col :span="12">
-            <div class="left-desc">Settlement Date</div>
-          </el-col>
-          <el-col
-            :span="12"
-          >
-            <div class="right-desc">1 – 3 days</div>
-          </el-col>
-        </el-row>
       </div>
     </div>
   </van-dialog>

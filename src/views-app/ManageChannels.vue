@@ -1,20 +1,20 @@
 <template>
   <div class="manage-channels">
     <app-service-management-header :service-type="'Channels'" />
-    <app-service-management-content :service-type="'Channels'"/>
+    <app-service-manage-channels />
   </div>
 
 </template>
 
 <script>
 import AppServiceManagementHeader from "@/components/AppServiceManagementHeader";
-import AppServiceManagementContent from "@/components/AppServiceManagementContent";
+import AppServiceManageChannels from "@/components/AppServiceManageChannels";
 
 export default {
   name: "ManageChannels",
   components: {
     AppServiceManagementHeader,
-    AppServiceManagementContent
+    AppServiceManageChannels
   }
 }
 </script>
