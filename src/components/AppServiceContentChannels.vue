@@ -106,7 +106,7 @@ export default {
   computed: {
     ...mapState({
       totalPaymentChannelList: "paymentChannelList",
-      paymentChannelStatus: "paymentChannelStatus",
+      merchantApplyingChannelStatus: "merchantApplyingChannelStatus",
       merchantWorkingChannelStatus: "merchantWorkingChannelStatus",
       // workingChannels: "workingChannels",
       // appliedChannels: "appliedChannels",
@@ -122,7 +122,7 @@ export default {
       return this.merchantWorkingChannelStatus.filter(status => String(status.value) === String(channel.channelStatus))[0];
     },
     formatStatusApplied(channel) {
-      return this.paymentChannelStatus.filter(status => String(status.value) === String(channel.applicationStatus))[0];
+      return this.merchantApplyingChannelStatus.filter(status => String(status.value) === String(channel.applicationStatus))[0];
     },
     navigateToManageChannels() {
       this.$router.push({ name: "ManageChannels" });

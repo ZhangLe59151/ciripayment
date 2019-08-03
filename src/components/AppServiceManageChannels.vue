@@ -1,9 +1,9 @@
 <template>
     <div class="app-service-mgt-channels">
       <div class="channels">
-        <div v-if="workingChannels.length !== 0" class="working-channels">
+        <div v-if="workingChannelsForm.length !== 0" class="working-channels-form">
           <van-row
-            v-for="item in workingChannels"
+            v-for="item in workingChannelsForm"
             :key="item.id"
             class="label"
           >
@@ -91,14 +91,18 @@ export default {
   data() {
     return {
       dialog: false,
-      workingChannels: []
+      workingChannelsForm: [],
+      updateChannels: []
     }
   },
   computed: {
     ...mapState({
       merchantId: state => state.merchantProfile.id,
+      originalWorkingChannels: state =>
+        (state.merchantProfile.merchantChannelConfigVoList)
+          ? state.merchantProfile.merchantChannelConfigVoList.filter(channel => [1].includes(channel.applicationStatus))
+          : [],
       totalPaymentChannelList: "paymentChannelList",
-      paymentChannelStatus: "paymentChannelStatus",
       merchantWorkingChannelStatus: "merchantWorkingChannelStatus"
     })
   },
@@ -108,10 +112,15 @@ export default {
   },
   methods: {
     fetchData() {
-      let channelList = this.$store.state.merchantProfile.merchantChannelConfigVoList;
-
-      // Get list of working channels
-      this.workingChannels = channelList.filter(channel => [1].includes(channel.applicationStatus));
+      // Get list of workingChannelsForm channels
+      this.workingChannelsForm = this.originalWorkingChannels
+        .map(channel => ({
+          applicationStatus: 1,
+          id: channel.id,
+          mdr: 12,
+          merchantId: channel.merchantId,
+          channelId: channel.channelId,
+          channelStatus: channel.channelStatus }));
     },
     formatChannelLabel(item) {
       return this.totalPaymentChannelList.filter(channel => String(channel.id) === String(item.channelId))[0];
@@ -121,16 +130,29 @@ export default {
       return status.label;
     },
     handleEnable(item) {
-
+      if (item.channelStatus === 2) {
+        item.channelStatus = 1;
+      }
     },
     handleDisable(item) {
-
+      if (item.channelStatus === 1) {
+        item.channelStatus = 2;
+      }
     },
     handleCancel() {
       this.$router.back();
     },
     handleSave() {
-      this.$router.back();
+      console.log(this.workingChannelsForm);
+      this.$api.updateMerchantChannels(this.workingChannelsForm).then(
+        res => {
+          if (res.data.code === 200) {
+            // update Form
+            this.$store.commit("updateChannels", this.workingChannelsForm);
+            this.$router.back();
+          }
+        }
+      );
     },
     openViewChannelsDetailDialog() {
       this.dialog = true;

@@ -150,6 +150,38 @@ export default new Vuex.Store({
         color: "gray"
       }
     ],
+    merchantApplyingChannelStatus: [
+      {
+        value: "-1",
+        name: "default",
+        label: "N/A",
+        color: "gray"
+      },
+      {
+        value: "0",
+        name: "pending",
+        label: "UNDER REVIEW",
+        color: "blue"
+      },
+      {
+        value: "1",
+        name: "approved",
+        label: "APPROVED",
+        color: "green"
+      },
+      {
+        value: "2",
+        name: "rejected",
+        label: "REJECTED",
+        color: "red"
+      },
+      {
+        value: "4",
+        name: "on_hold",
+        label: "ON HOLD",
+        color: "gray"
+      }
+    ],
     paymentChannelList: [
       {
         id: "1",
@@ -226,13 +258,21 @@ export default new Vuex.Store({
       state.logInWithPassword = false;
       localStorage.setItem("logInWithPassword", "false");
     },
-    // This is for services
-    updateWorkingChannels(state, channels) {
-      state.workingChannels = [...state.workingChannels, channels];
-    },
     // This is for settlement
     updateSettlement(state, settlement) {
       state.merchantProfile.merchantSettlementConfigVo.settlementType = settlement;
+      localStorage.setItem("merchantProfile", JSON.stringify(state.merchantProfile));
+    },
+    // This is for channels
+    updateChannels(state, channels) {
+      for (var channelIndex in channels) {
+        for (var i in state.merchantProfile.merchantChannelConfigVoList) {
+          if (state.merchantProfile.merchantChannelConfigVoList[i].channelId === channels[channelIndex].channelId) {
+            state.merchantProfile.merchantChannelConfigVoList[i].channelStatus = channels[channelIndex].channelStatus;
+            break;
+          }
+        }
+      }
       localStorage.setItem("merchantProfile", JSON.stringify(state.merchantProfile));
     },
     // Fetch merchant profile

@@ -74,5 +74,8 @@ export default {
   },
   updateBankAcc(params) {
     return Vue.axios.post("/api/merchant/bank-account/update", params);
+  },
+  updateMerchantChannels(params) {
+    return Vue.axios.post("/api/merchant/channels/update", params);
   }
 };
