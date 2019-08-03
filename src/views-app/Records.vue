@@ -4,7 +4,7 @@
     <div class="records-search">
       <van-search
         placeholder="Search by Transaction ID"
-        v-model="searchValue"
+        @focus="$router.push({name: 'Search', query: {currentTab: currentTab}})"
       />
       <i class="iconfont iconFilter"></i>
     </div>
@@ -25,8 +25,14 @@
         </div>
       </div>
       <div class="records-tab-cnt">
-        <app-records-transactions v-show="currentTab === '0'" />
-        <app-records-settlements v-show="currentTab === '1'" />
+        <app-records-transactions
+          v-show="currentTab === '0'"
+          :originalList.sync="transactionList"
+        />
+        <app-records-settlements
+          v-show="currentTab === '1'"
+          :originalList.sync="settlementList"
+        />
       </div>
     </div>
 
@@ -52,8 +58,9 @@ export default {
 
   data() {
     return {
-      searchValue: "",
-      currentTab: "0"
+      currentTab: this.$route.query.currentTab || "0",
+      transactionList: require("@/mockData/transactions.json").list,
+      settlementList: require("@/mockData/transactions.json").list
     };
   }
 };

@@ -230,6 +230,11 @@ const AppRouteArr = [
     name: "BankDetails",
     component: () => import("@/views-app/BankDetails.vue")
   },
+  {
+    path: "/search",
+    name: "Search",
+    component: () => import("@/views-app/Search.vue")
+  },
 
   // Standard Product
   {

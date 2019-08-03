@@ -2,7 +2,7 @@
   <div>
     <div
       class="empty-box"
-      v-if="list.length === 0"
+      v-if="list.length === 0 && type === 'NORMAL'"
     >
       Your settlement records will appear here once <br>you start withdrawing to your linked account.
     </div>
@@ -12,9 +12,9 @@
         :key="item.id"
         class="tbox"
       >
-        <img :src="require('@/assets/imgs/stepper_active.png')">
+        <img :src="require('@/assets/imgs/settlement.png')">
         <div class="cell">
-          <div class="name">Settlement</div>
+          <div class="name">{{item.name}}</div>
           <div class="time">{{item.time}}</div>
         </div>
         <div
@@ -30,7 +30,10 @@
       </div>
     </van-list>
 
-    <div class="withdraw-box">
+    <div
+      class="withdraw-box"
+      v-if="type === 'NORMAL'"
+    >
       <div class="left-box">
         <div class="name">
           Available Balance (THB)
@@ -56,6 +59,19 @@
 import { mapState } from "vuex";
 import { find } from "lodash";
 export default {
+  props: {
+    searchValue: {
+      default: "",
+      type: String
+    },
+    originalList: {
+      type: Array
+    },
+    type: {
+      default: "NORMAL",
+      type: String
+    }
+  },
   data() {
     return {
       list: [],
@@ -77,6 +93,10 @@ export default {
       return item ? item.img : "";
     },
     getNameByType(type, id) {
+      if (this.type === "NORMAL") {
+        return "Settlement";
+      }
+
       const typeList = [
         {
           id: "0",
@@ -89,7 +109,7 @@ export default {
       ];
 
       const item = find(typeList, { id: type });
-      return item ? item.label + " - " + id : id;
+      return this.type === "NORMAL" ? "Settlement" : "Settlement" + " - " + id;
     },
 
     getRealValbyType(type, value) {
@@ -126,6 +146,7 @@ export default {
           item,
           this.getRealValbyType(item.type, item.value),
           {
+            name: this.getNameByType(item.type, item.id),
             statusLabel: this.getStatueLabelbyStatus(item.status)
           }
         );
@@ -135,9 +156,14 @@ export default {
       return newList;
     }
   },
-  created() {
-    const mockList = require("@/mockData/transactions.json").list;
-    this.list = this.list.concat(this.transformData(mockList));
+
+  watch: {
+    originalList: {
+      handler(val, oldVal) {
+        this.list = this.transformData(val);
+      },
+      immediate: true
+    }
   }
 };
 </script>

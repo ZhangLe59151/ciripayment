@@ -1,7 +1,8 @@
 <template>
+
   <div
     class="empty-box"
-    v-if="list.length === 0"
+    v-if="list.length === 0 && type === 'NORMAL'"
   >
     Your transactions will appear here once you <br> start collecting payments.
   </div>
@@ -38,6 +39,19 @@
 import { mapState } from "vuex";
 import { find } from "lodash";
 export default {
+  props: {
+    searchValue: {
+      default: "",
+      type: String
+    },
+    originalList: {
+      type: Array
+    },
+    type: {
+      default: "NORMAL",
+      type: String
+    }
+  },
   data() {
     return {
       list: [],
@@ -70,7 +84,8 @@ export default {
       ];
 
       const item = find(typeList, { id: type });
-      return item ? item.label + " - " + id : id;
+
+      return this.type === "NORMAL" ? item.label : item.label + " - " + id;
     },
 
     getRealValbyType(type, value) {
@@ -118,9 +133,14 @@ export default {
       return newList;
     }
   },
-  created() {
-    const mockList = require("@/mockData/transactions.json").list;
-    this.list = this.list.concat(this.transformData(mockList));
+
+  watch: {
+    originalList: {
+      handler(val, oldVal) {
+        this.list = this.transformData(val);
+      },
+      immediate: true
+    }
   }
 };
 </script>
