@@ -48,7 +48,6 @@ export default {
         phoneNumber: this.$store.state.form.applicantPhoneNumber
       } }).then(res => {
         if (res.data.code === 200) {
-          console.log(res.data.data);
           this.$store.commit("initMerchantProfile", res.data.data);
         }
       });

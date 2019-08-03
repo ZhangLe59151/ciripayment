@@ -2,23 +2,40 @@
     <div class="app-service-mgt-channels">
       <div class="channels">
         <div v-if="workingChannels.length !== 0" class="working-channels">
-          <div
+          <van-row
             v-for="item in workingChannels"
             :key="item.id"
             class="label"
           >
-        <span>
+        <van-col span="12">
           <img :src="formatChannelLabel(item).img"
                class="channel-img">
           <div class="channel-label">
           {{formatChannelLabel(item).label}}
           </div>
-        </span>
-            <span>
-            <div :class="formatStatus(item).color + ' status-adjust-height'">{{formatStatus(item).label}}
-          </div>
-          </span>
-          </div>
+        </van-col>
+        <van-col span="10" offset="2">
+          <van-row type="flex" justify="end">
+            <van-col span="12"><div
+              size="small"
+              :class= "formatStatusButton(item) === 'ENABLED' ? 'btn enable-btn active-btn' : 'btn enable-btn'"
+              @click="handleEnable(item)"
+            >
+              ENABLE
+            </div>
+            </van-col>
+            <van-col span="12" offset="0">
+              <div
+                size="small"
+                :class= "formatStatusButton(item) === 'ENABLED' ? 'btn disable-btn' : 'btn disable-btn active-btn'"
+                @click="handleDisable(item)"
+              >
+                DISABLE
+              </div>
+            </van-col>
+          </van-row>
+        </van-col>
+          </van-row>
         </div>
       </div>
       <div class="warning">
@@ -74,7 +91,7 @@ export default {
   data() {
     return {
       dialog: false,
-      workingChannels:[],
+      workingChannels: []
     }
   },
   computed: {
@@ -82,18 +99,32 @@ export default {
       merchantId: state => state.merchantProfile.id,
       totalPaymentChannelList: "paymentChannelList",
       paymentChannelStatus: "paymentChannelStatus",
-      merchantWorkingChannelStatus: "merchantWorkingChannelStatus",
+      merchantWorkingChannelStatus: "merchantWorkingChannelStatus"
     })
   },
   created() {
     this.$store.commit("fetchMerchantProfileFromLocal");
+    this.fetchData();
   },
   methods: {
+    fetchData() {
+      let channelList = this.$store.state.merchantProfile.merchantChannelConfigVoList;
+
+      // Get list of working channels
+      this.workingChannels = channelList.filter(channel => [1].includes(channel.applicationStatus));
+    },
     formatChannelLabel(item) {
       return this.totalPaymentChannelList.filter(channel => String(channel.id) === String(item.channelId))[0];
     },
-    formatStatus(channel) {
-      return this.paymentChannelStatus.filter(status => String(status.value) === String(channel.status))[0];
+    formatStatusButton(channel) {
+      let status = this.merchantWorkingChannelStatus.filter(status => String(status.value) === String(channel.channelStatus))[0];
+      return status.label;
+    },
+    handleEnable(item) {
+
+    },
+    handleDisable(item) {
+
     },
     handleCancel() {
       this.$router.back();
@@ -122,11 +153,6 @@ export default {
         min-height: 16px;
         display: flex;
         border-bottom: 1px solid #e9ebed;
-
-        > span {
-          display: inline-block;
-          width: 50%;
-
           .channel-label{
             color: #2F3941;
             font-size: 14px;
@@ -162,25 +188,35 @@ export default {
             margin-left: 8px;
           }
 
-          &:first-child {
-            font-size: 14px;
-            color: #87929d;
-            letter-spacing: 0;
-          }
-
-          &:last-child {
-            font-size: 14px;
-            color: #2f3941;
-            letter-spacing: 0;
-            text-align: right;
-          }
-        }
       }
       .channel-img {
         margin-right:20px;
         width: 48px;
         height: 24px;
         display: inline-block;
+      }
+      .enable-btn,.disable-btn {
+        padding: 3px 5px 2px 8px ;
+        text-align: center;
+        border: 1px solid #053C5E;
+        font-size: 12px;
+
+      }
+      .disable-btn{
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
+      .enable-btn{
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+      }
+      .active-btn {
+        background: #053C5E !important;
+        color:white !important;
+      }
+      btn{
+        background: #ffffff;
+        color: #053C5E;
       }
 
     }
