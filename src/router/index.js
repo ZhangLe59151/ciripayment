@@ -296,18 +296,29 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   // these pages can enter directly without logined
-  if (
-    !store.state.logInWithPassword &&
+  // if (
+  //   !store.state.logInWithPassword &&
+  //   ![
+  //     "LandingPage",
+  //     "EnterOtp",
+  //     "VerifiedFirstTime",
+  //     "CreatePasswordSP",
+  //     "EnterPasswordSP",
+  //     "ForgotPasswordSP",
+  //     "ResetPasswordSP",
+  //     "PageNotFound",
+  //     "ServerError"
+  //   ].includes(to.name)
+  // ) {
+  //   next({ name: "LandingPage" });
+  //   return false;
+  // }
+
+  // These page can go without OTP Verified
+  if (!store.state.OTPVerified &&
     ![
       "LandingPage",
-      "EnterOtp",
-      "VerifiedFirstTime",
-      "CreatePasswordSP",
-      "EnterPasswordSP",
-      "ForgotPasswordSP",
-      "ResetPasswordSP",
-      "PageNotFound",
-      "ServerError"
+      "EnterOtp"
     ].includes(to.name)
   ) {
     next({ name: "LandingPage" });

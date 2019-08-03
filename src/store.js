@@ -227,6 +227,7 @@ export default new Vuex.Store({
       idleTimeout:
         "You’ve been inactive for too long. For security reasons, please start your application over again."
     },
+    OTPVerified: localStorage.getItem("OTPVerified") === "true",
     logInWithPassword: localStorage.getItem("logInWithPassword") === "true",
     uploadImgUrl:
       process.env.VUE_APP_DEVICETYPE === "APP"
@@ -250,13 +251,18 @@ export default new Vuex.Store({
       state.form = {};
       window.localStorage.clear();
     },
+    OTPVerified(state) {
+      state.OTPVerified = true;
+      localStorage.setItem("OTPVerified", "true");
+    },
     logInWithPassword(state) {
       state.logInWithPassword = true;
       localStorage.setItem("logInWithPassword", "true");
     },
     logOut(state) {
+      state.OTPVerified = false;
       state.logInWithPassword = false;
-      localStorage.setItem("logInWithPassword", "false");
+      localStorage.clear();
     },
     // This is for settlement
     updateSettlement(state, settlement) {

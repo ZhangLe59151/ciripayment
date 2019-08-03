@@ -306,6 +306,8 @@ export default {
           })
           .then(res => {
             if (res.data.code === 200) {
+              // Verified OTP
+              this.$store.commit("OTPVerified");
               // check password
               this.$api
                 .checkPasswordExistence({
@@ -349,7 +351,8 @@ export default {
         })
         .then(res => {
           if (res.data.code === 200) {
-            //
+            //Verify OTP success
+            this.$store.commit("OTPVerified");
             this.$router.push({ name: "Home" });
           } else {
             this.$notify({

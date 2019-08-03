@@ -72,11 +72,15 @@
         <van-button
           size="small"
           class="bottom-btn"
+          @click="openSelectChannelDialog"
         >
           Apply now
         </van-button>
       </div>
-<!--      This to avoid the footer cover the app-->
+
+      <select-payment-channel-dialog :paymentChannelList="recommendChannels" v-bind:dialog.sync="dialog" />
+
+      <!--      This to avoid the footer cover the app-->
       <div style="height:50px; width:100%; clear:both;"></div>
     </div>
   </div>
@@ -84,30 +88,57 @@
 
 <script>
 import { mapState } from "vuex";
+import SelectPaymentChannelDialog from "@/components/SelectPaymentChannelDialog";
+
 export default {
   name: "AppServiceContentChannels",
+  components: {
+    SelectPaymentChannelDialog
+  },
   data() {
     return {
+      dialog: false,
       workingChannels: [],
       appliedChannels: [],
-      recommendChannels: [{
-        channelId: 1
-      },{
-        channelId: 2
-      },{
-        channelId: 3
-      },{
-        channelId: 4
-      },{
-        channelId: 5
-      }]
+      recommendChannels: [
+        {
+          channelId: "1",
+          name: "alipay",
+          img: require("@/assets/imgs/ico-alipay.png"),
+          label: "Alipay"
+        },
+        {
+          channelId: "3",
+          name: "wechatpay",
+          img: require("@/assets/imgs/ico-wechat.png"),
+          label: "WeChat Pay"
+        },
+        {
+          channelId: "2",
+          name: "promptpay",
+          img: require("@/assets/imgs/ico-promptpay.png"),
+          label: "Prompt Pay"
+        },
+        {
+          channelId: "4",
+          name: "visa",
+          img: require("@/assets/imgs/ico-visa.png"),
+          label: "VISA"
+        },
+        {
+          channelId: "5",
+          name: "mastercard",
+          img: require("@/assets/imgs/ico-mastercard.png"),
+          label: "Mastercard"
+        }
+      ]
     }
   },
   computed: {
     ...mapState({
       totalPaymentChannelList: "paymentChannelList",
       merchantApplyingChannelStatus: "merchantApplyingChannelStatus",
-      merchantWorkingChannelStatus: "merchantWorkingChannelStatus",
+      merchantWorkingChannelStatus: "merchantWorkingChannelStatus"
       // workingChannels: "workingChannels",
       // appliedChannels: "appliedChannels",
       // recommendChannels: "recommendChannels"
@@ -143,6 +174,9 @@ export default {
         }
         return [0, 2, 4].includes(channel.applicationStatus)
       });
+    },
+    openSelectChannelDialog() {
+      this.dialog = true;
     }
   },
   created() {
