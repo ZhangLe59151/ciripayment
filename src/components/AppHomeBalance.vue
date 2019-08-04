@@ -1,7 +1,7 @@
 <template>
   <div
     class="app-home-balance"
-    v-if="settlementType === '0'"
+    v-if="settlementType == '1'"
   >
     <div
       class="balance"

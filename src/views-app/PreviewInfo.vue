@@ -64,14 +64,7 @@
           title="* Business Name (English)"
           :desc="$store.state.form.bizNameEn"
         />
-        <van-panel
-          title="* Business Name (Thai)"
-          :desc="$store.state.form.bizNameTh"
-        />
-        <van-panel
-          title="Business Registration Number"
-          :desc="$store.state.form.bizRegNumber || '-'"
-        />
+
         <van-panel
           title="* Business Category"
           :desc="$store.state.form.mccName"
@@ -514,7 +507,7 @@ export default {
 
       form.mcc = storedForm.mccID;
       form.bizNameEn = storedForm.bizNameEn;
-      form.bizNameTh = storedForm.bizNameTh;
+      form.bizNameTh = "bizName";
       form.bizAddr = storedForm.bizAddr;
       form.bizRegNumber = storedForm.bizRegNumber
         ? storedForm.bizRegNumber
