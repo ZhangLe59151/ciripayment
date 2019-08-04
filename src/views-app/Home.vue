@@ -46,14 +46,14 @@ export default {
       settlementType(state) {
         return state.merchantProfile.merchantSettlementConfigVo
           ? state.merchantProfile.merchantSettlementConfigVo.settlementType + ""
-          : "0";
+          : "1";
       }
     }),
     appPosition() {
       if (this.$store.state.deviceType !== "APP") {
         return "app-position-web";
       }
-      return this.settlementType === "1"
+      return this.settlementType === "2"
         ? "app-position-auto-settlement"
         : "app-position";
     },

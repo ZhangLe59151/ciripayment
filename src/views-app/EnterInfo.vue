@@ -142,35 +142,6 @@
           ></el-input>
         </el-form-item>
 
-        <el-form-item
-          label="Business Name (Thai)"
-          prop="bizNameTh"
-          :rules="[
-      { required: true, message: 'This field is required.', trigger: 'blur' },
-      { validator: checkSpecificKey, message: 'Please enter a valid business name in Thai', trigger: 'blur'}
-    ]"
-        >
-          <el-input
-            v-model="form.bizNameTh"
-            placeholder="Business Name(Thai)"
-            :maxlength="60"
-          ></el-input>
-        </el-form-item>
-        <el-form-item
-          label="Business Registration Number"
-          prop="bizRegNumber"
-          :rules="[
-        { required: false, message: 'This field is required.', trigger: 'blur' },
-        { pattern: this.$store.state.validationPatterns.nationaldID, message: 'Please enter a valid Business Registration Number', trigger: 'blur'}
-    ]"
-        >
-          <!-- v-show="$store.state.form.haveBizReg === '1'" -->
-          <el-input
-            v-model="form.bizRegNumber"
-            placeholder="Business Registration Number"
-            :maxlength="13"
-          ></el-input>
-        </el-form-item>
         <div
           class="inner-tips"
           style="font-size:11px;color: #929292;"
