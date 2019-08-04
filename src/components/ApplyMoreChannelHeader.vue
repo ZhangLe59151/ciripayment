@@ -3,7 +3,7 @@
     <van-nav-bar class="web-nav"
                  :border="false"
     >
-      <van-icon name="arrow-left" slot="left" @click="clickLeft"/>
+      <van-icon v-if="step==='2'" name="arrow-left" slot="left" @click="clickLeft"/>
       <div slot="title" class="center">Apply More</div>
       <div class="right" slot="right" @click="clickRight">Discard</div>
     </van-nav-bar>
