@@ -14,6 +14,8 @@
     />
 
     <app-home-download v-if="$store.state.deviceType === 'WEB'" />
+
+    <app-home-transaction :originalList="this.applicationStatus + '' === '1' ? transactionList.slice(0,5) : []" />
     <app-tab-bar :active="0" />
 
   </div>
@@ -25,7 +27,9 @@ import AppHomeHeader from "@/components/AppHomeHeader";
 import AppHomeBalance from "@/components/AppHomeBalance";
 import AppHomeProgress from "@/components/AppHomeProgress";
 import AppHomeDownload from "@/components/AppHomeDownload";
+import AppHomeTransaction from "@/components/AppHomeTransaction";
 import { mapState } from "vuex";
+
 export default {
   name: "AppHome",
 
@@ -34,11 +38,13 @@ export default {
     AppHomeHeader,
     AppHomeBalance,
     AppHomeProgress,
-    AppHomeDownload
+    AppHomeDownload,
+    AppHomeTransaction
   },
   data() {
     return {
-      applicationStatus: this.$store.state.application.applicationStatus
+      applicationStatus: this.$store.state.application.applicationStatus,
+      transactionList: require("@/mockData/transactions.json").list
     };
   },
   computed: {
@@ -98,11 +104,13 @@ export default {
   created() {
     this.$store.commit("InitUserInfo");
     console.log(this.$store.state.userInfo);
-    if (Object.entries(this.$store.state.userInfo).length === 0 && this.$store.state.userInfo.constructor === Object) {
-
+    if (
+      Object.entries(this.$store.state.userInfo).length === 0 &&
+      this.$store.state.userInfo.constructor === Object
+    ) {
       this.$router.push({ name: "LandingPage" });
     } else {
-      this.fetchData(this.fetchApplicationStatus)
+      this.fetchData(this.fetchApplicationStatus);
     }
   }
 };
