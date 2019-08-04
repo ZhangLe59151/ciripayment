@@ -128,13 +128,13 @@ export default {
       ]
     }
   },
-  computed: {
-    ...mapState({
-      totalPaymentChannelList: "paymentChannelList",
-      merchantApplyingChannelStatus: "merchantApplyingChannelStatus",
-      merchantWorkingChannelStatus: "merchantWorkingChannelStatus"
-    })
-  },
+  computed:
+    mapState({
+      applicationStatus: state => state.application.applicationStatus,
+      totalPaymentChannelList: state => state.paymentChannelList,
+      merchantApplyingChannelStatus: state => state.merchantApplyingChannelStatus,
+      merchantWorkingChannelStatus: state => state.merchantWorkingChannelStatus
+    }),
   methods: {
     formatChannelLabel(item) {
       // console.log(this.totalPaymentChannelList.filter(channel => String(channel.id) === String(item.channelId))[0]);
@@ -172,7 +172,11 @@ export default {
       this.dialog = true;
     },
     navigateToApplyMoreChannel() {
-      this.$router.push({ name: "ApplyMoreChannel" });
+      if (String(this.applicationStatus) === "1") {
+        this.$router.push({ name: "ApplyMoreChannel" });
+      } else {
+        this.$router.push({ name: "EnterInfo" });
+      }
     }
   },
   created() {
