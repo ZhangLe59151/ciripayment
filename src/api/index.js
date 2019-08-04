@@ -77,5 +77,8 @@ export default {
   },
   updateMerchantChannels(params) {
     return Vue.axios.post("/api/merchant/channels/update", params);
+  },
+  submitMerchantChannels(params) {
+    return Vue.axios.post("/api/merchant/channels/submit", params);
   }
 };

@@ -87,6 +87,11 @@ const AppRouteArr = [
     component: () => import("@/views-app/Services.vue")
   },
   {
+    path: "/services-apply-more-channel",
+    name: "ApplyMoreChannel",
+    component: () => import("@/views-app/ApplyMoreChannel.vue")
+  },
+  {
     path: "/settings",
     name: "Settings",
     component: () => import("@/views-app/Settings.vue")

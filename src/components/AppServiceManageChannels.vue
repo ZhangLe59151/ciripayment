@@ -148,7 +148,7 @@ export default {
         res => {
           if (res.data.code === 200) {
             // update Form
-            this.$store.commit("updateChannels", this.workingChannelsForm);
+            this.$store.commit("updateChannels", res.data.data.merchantChannelConfigVoList);
             this.$router.back();
           }
         }

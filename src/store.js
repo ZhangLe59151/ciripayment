@@ -235,7 +235,8 @@ export default new Vuex.Store({
         ? process.env.VUE_APP_BASEURL + "/api/self-onboarding/image/upload"
         : "/api/self-onboarding/image/upload",
     bankList: require("./assets/data/bankInfo.json").list,
-    merchantProfile: {}
+    merchantProfile: {},
+    recommendChannelsStore: [],
   },
   mutations: {
     InitForm(state) {
@@ -274,23 +275,15 @@ export default new Vuex.Store({
       );
     },
     // This is for channels
-    updateChannels(state, channels) {
-      for (var channelIndex in channels) {
-        for (var i in state.merchantProfile.merchantChannelConfigVoList) {
-          if (
-            state.merchantProfile.merchantChannelConfigVoList[i].channelId ===
-            channels[channelIndex].channelId
-          ) {
-            state.merchantProfile.merchantChannelConfigVoList[i].channelStatus =
-              channels[channelIndex].channelStatus;
-            break;
-          }
-        }
-      }
+    updateChannels(state, newList) {
+      state.merchantProfile.merchantChannelConfigVoList = newList;
       localStorage.setItem(
         "merchantProfile",
         JSON.stringify(state.merchantProfile)
       );
+    },
+    updateRecommendChannel(state, channels) {
+      state.recommendChannelsStore = channels;
     },
     // Fetch merchant profile
     initMerchantProfile(state, merchantProfile) {

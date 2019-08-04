@@ -44,12 +44,7 @@ export default {
       return "app-position"
     }
   },
-  methods: {
-    fetchData() {
-    }
-  },
   created() {
-    this.fetchData();
     this.$store.commit("fetchMerchantProfileFromLocal");
   }
 }

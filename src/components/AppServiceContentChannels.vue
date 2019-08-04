@@ -72,13 +72,11 @@
         <van-button
           size="small"
           class="bottom-btn"
-          @click="openSelectChannelDialog"
+          @click="navigateToApplyMoreChannel"
         >
           Apply now
         </van-button>
       </div>
-
-      <select-payment-channel-dialog :paymentChannelList="recommendChannels" v-bind:dialog.sync="dialog" />
 
       <!--      This to avoid the footer cover the app-->
       <div style="height:50px; width:100%; clear:both;"></div>
@@ -88,13 +86,9 @@
 
 <script>
 import { mapState } from "vuex";
-import SelectPaymentChannelDialog from "@/components/SelectPaymentChannelDialog";
 
 export default {
   name: "AppServiceContentChannels",
-  components: {
-    SelectPaymentChannelDialog
-  },
   data() {
     return {
       dialog: false,
@@ -139,9 +133,6 @@ export default {
       totalPaymentChannelList: "paymentChannelList",
       merchantApplyingChannelStatus: "merchantApplyingChannelStatus",
       merchantWorkingChannelStatus: "merchantWorkingChannelStatus"
-      // workingChannels: "workingChannels",
-      // appliedChannels: "appliedChannels",
-      // recommendChannels: "recommendChannels"
     })
   },
   methods: {
@@ -162,21 +153,26 @@ export default {
       let channelList = this.$store.state.merchantProfile.merchantChannelConfigVoList;
       // Get list of working channels and remove from recommend
       this.workingChannels = channelList.filter(channel => {
-        if ([1].includes(channel.applicationStatus)) {
+        if ([1].includes(channel.applicationStatus) && !!channel.channelId) {
           this.recommendChannels = this.recommendChannels.filter(rec => String(rec.channelId) !== String(channel.channelId));
         }
-        return [1].includes(channel.applicationStatus)
+        return [1].includes(channel.applicationStatus) && !!channel.channelId
       });
       // Get list of working channels and remove from recommend
       this.appliedChannels = channelList.filter(channel => {
-        if ([0, 2, 4].includes(channel.applicationStatus)) {
+        if ([0, 2, 4].includes(channel.applicationStatus) && !!channel.channelId) {
           this.recommendChannels = this.recommendChannels.filter(rec => String(rec.channelId) !== String(channel.channelId));
         }
-        return [0, 2, 4].includes(channel.applicationStatus)
+        return [0, 2, 4].includes(channel.applicationStatus) && !!channel.channelId
       });
+      // pass to store to retrieve from apply more page
+      this.$store.commit("updateRecommendChannel", this.recommendChannels);
     },
     openSelectChannelDialog() {
       this.dialog = true;
+    },
+    navigateToApplyMoreChannel() {
+      this.$router.push({ name: "ApplyMoreChannel" });
     }
   },
   created() {
