@@ -3,7 +3,7 @@
     <app-search-header title="Search Records" />
     <div class="records-search">
       <van-search
-        placeholder="Search by Transaction ID"
+        :placeholder="placeholder"
         v-model="searchValue"
         @keypress.enter="handleSearch"
       />
@@ -47,6 +47,13 @@ export default {
       list: [],
       searching: false
     };
+  },
+  computed: {
+    placeholder() {
+      return this.currentTab === "0"
+        ? "Search by Transaction ID"
+        : "Search by Settlement ID";
+    }
   },
   methods: {
     handleSearch() {

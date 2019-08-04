@@ -31,24 +31,27 @@
     </van-list>
 
     <div
-      class="withdraw-box"
+      class="withdraw-section"
       v-if="type === 'NORMAL'"
     >
-      <div class="left-box">
-        <div class="name">
-          Available Balance (THB)
+      <div class="withdraw-box">
+        <div class="left-box">
+          <div class="name">
+            Available Balance (THB)
+          </div>
+          <div class="amount">{{balance}}</div>
         </div>
-        <div class="amount">1000</div>
-      </div>
 
-      <div class="right-box">
-        <van-button
-          size="small"
-          class="withdraw-btn"
-          @click="handleWithdraw"
-        >
-          Withdraw
-        </van-button>
+        <div class="right-box">
+          <van-button
+            size="small"
+            class="withdraw-btn"
+            :disabled="balance == 0"
+            @click="handleWithdraw"
+          >
+            Withdraw
+          </van-button>
+        </div>
       </div>
     </div>
   </div>
@@ -76,7 +79,8 @@ export default {
     return {
       list: [],
       loading: false,
-      finished: false
+      finished: false,
+      balance: 0
     };
   },
 
@@ -181,16 +185,21 @@ export default {
   line-height: 20px;
 }
 
+.withdraw-section {
+  background: #ffffff;
+  position: fixed;
+  bottom: 50px;
+  width: 100%;
+  height: 80px;
+}
 .withdraw-box {
   height: 36px;
-  margin: 10px 16px;
+  margin: 0 16px;
   width: calc(100% - 60px);
   background: #ffffff;
   border: 1px solid #e9ebed;
   box-shadow: 0 3px 8px -4px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
-  position: fixed;
-  bottom: 60px;
   padding: 14px;
   .left-box {
     width: 50%;

@@ -14,6 +14,14 @@ body {
   .van-tabbar-item__text {
     @include fontFamily;
   }
+
+
+  .van-button--disabled {
+    background: #E9EBED !important;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10) !important;
+    color: #87929D !important;
+  }
+
 }
 
 .center {
@@ -24,6 +32,7 @@ body {
   background: transparent !important;
   position: relative;
   top: 10px;
+
   .van-icon,
   .van-nav-bar__text {
     color: #dcdcdc !important;

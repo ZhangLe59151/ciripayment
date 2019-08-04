@@ -3,7 +3,7 @@
     <app-records-header />
     <div class="records-search">
       <van-search
-        placeholder="Search by Transaction ID"
+        placeholder="Search"
         @focus="$router.push({name: 'Search', query: {currentTab: currentTab}})"
       />
       <i class="iconfont iconFilter"></i>
