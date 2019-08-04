@@ -2,14 +2,17 @@
   <div class="sic">
     <van-nav-bar
       title="Business Category"
-      left-text="Back"
+      left-text=""
       left-arrow
       @click-left="$router.push({name: 'EnterInfo',query: {flag: 'back', position: $route.query.position}})"
       @click-right="$router.push({name: 'SubSIC',query: {sic: sic, position: $route.query.position}})"
       :border="false"
     ></van-nav-bar>
 
-    <van-list :finished="finished" @load="onLoad">
+    <van-list
+      :finished="finished"
+      @load="onLoad"
+    >
       <div class="category">
         <span></span>
         <span class="header-line">{{sic}}</span>
@@ -21,7 +24,11 @@
         :title="item.name"
         @click="handleClick(item)"
       >
-        <van-icon slot="right-icon" name="play" color="grey"/>
+        <van-icon
+          slot="right-icon"
+          name="play"
+          color="grey"
+        />
       </van-cell>
     </van-list>
   </div>

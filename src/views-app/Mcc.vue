@@ -2,7 +2,7 @@
   <div class="sic">
     <van-nav-bar
       title="Business Category"
-      left-text="Back"
+      left-text=""
       left-arrow
       right-text="Confirm"
       @click-left="$router.back()"

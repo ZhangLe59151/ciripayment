@@ -56,7 +56,7 @@
 
     <el-card class="box-card">
       <!-- business information -->
-      <div class="title">Merchant Information</div>
+      <div class="title">Business Information</div>
       <div class="title-line"></div>
 
       <van-cell-group class="form">

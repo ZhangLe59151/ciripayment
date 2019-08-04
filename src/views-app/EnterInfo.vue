@@ -124,7 +124,7 @@
 
       <el-card class="box-card">
         <!-- merchant information -->
-        <div class="title">Merchant Information</div>
+        <div class="title">Business Information</div>
         <div class="title-line"></div>
 
         <el-form-item
@@ -132,7 +132,7 @@
           prop="bizNameEn"
           :rules="[
       { required: true, message: 'This field is required.', trigger: 'blur' },
-      { validator: checkSpecificKey, message: 'Please enter a valid Last Name', trigger: 'blur'}
+      { validator: checkSpecificKey, message: 'Please enter a valid business name in English', trigger: 'blur'}
     ]"
         >
           <el-input
@@ -147,7 +147,7 @@
           prop="bizNameTh"
           :rules="[
       { required: true, message: 'This field is required.', trigger: 'blur' },
-      { validator: checkSpecificKey, message: 'Please enter a valid Last Name', trigger: 'blur'}
+      { validator: checkSpecificKey, message: 'Please enter a valid business name in Thai', trigger: 'blur'}
     ]"
         >
           <el-input

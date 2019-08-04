@@ -2,7 +2,7 @@
   <div class="sic">
     <van-nav-bar
       title="Business Category"
-      left-text="Back"
+      left-text=""
       left-arrow
       @click-left="$router.back()"
       :border="false"
@@ -12,7 +12,10 @@
         <span class="header-line">{{$route.query.sicName}} > {{subsicName}}</span>
       </div>
     </div>
-    <van-list :finished="finished" @load="onLoad">
+    <van-list
+      :finished="finished"
+      @load="onLoad"
+    >
       <van-cell
         v-for="item in list"
         :key="item.id"
@@ -20,7 +23,11 @@
         :title="item.name"
         @click="handleClick(item)"
       >
-        <van-icon slot="right-icon" name="play" color="grey"/>
+        <van-icon
+          slot="right-icon"
+          name="play"
+          color="grey"
+        />
       </van-cell>
     </van-list>
   </div>
