@@ -11,6 +11,7 @@ export default new Vuex.Store({
     },
     serviceOverviewVo: {},
     form: {},
+    userInfo: {},
     nationalCodeList: [
       "+66",
       "+65",
@@ -312,7 +313,21 @@ export default new Vuex.Store({
       state.form = form;
       window.localStorage.clear();
       window.localStorage.setItem("form", JSON.stringify(form));
-    }
+    },
+    InitUserInfo(state) {
+      var originUserInfo = state.userInfo !== null ? state.userInfo : {};
+      var userInfoString = window.localStorage.getItem("UserInfo");
+      userInfoString = userInfoString !== null ? userInfoString : "{}";
+      state.userInfo = Object.assign(originUserInfo, JSON.parse(userInfoString));
+    },
+    UpdateUserInfo(state, updateUserInfo) {
+      state.userInfo = Object.assign(state.userInfo, updateUserInfo);
+      window.localStorage.setItem("userInfo", JSON.stringify(state.userInfo));
+    },
+    ClearUserInfo(state) {
+      state.userInfo = {};
+      window.localStorage.setItem("userInfo", "{}");
+    },
   },
   actions: {}
 });

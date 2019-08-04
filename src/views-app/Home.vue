@@ -64,7 +64,7 @@ export default {
       this.$api
         .getMerchantProfile({
           params: {
-            phoneNumber: this.$store.state.form.applicantPhoneNumber
+            phoneNumber: this.$store.state.userInfo.applicantPhoneNumber
           }
         })
         .then(res => {
@@ -85,8 +85,13 @@ export default {
     }
   },
   created() {
-    this.$store.commit("InitForm");
-    this.fetchData(this.fetchApplicationStatus);
+    this.$store.commit("InitUserInfo");
+    console.log(this.$store.state.userInfo);
+    if (Object.entries(this.$store.state.userInfo).length === 0 && this.$store.state.userInfo.constructor === Object) {
+      this.$router.push({ name: "LandingPage" });
+    } else {
+      this.fetchData(this.fetchApplicationStatus)
+    }
   }
 };
 </script>

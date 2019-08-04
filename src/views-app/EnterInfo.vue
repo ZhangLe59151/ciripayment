@@ -569,7 +569,9 @@ export default {
         })
         .then(() => {
           this.$store.commit("ClearForm");
-          util.redirectToHome(this);
+          // TODO: close the app and return to the previous page.
+          this.$router.push({ name: "Home" });
+          // util.redirectToHome(this); 
         })
         .catch(() => {
           // on cancel
@@ -711,7 +713,7 @@ export default {
       });
     },
 
-    // From UploadInfo.vue,
+    // From UploadInfo.vue, - obsolete, not using now.
     handleDiscard() {
       this.$dialog
         .confirm({
