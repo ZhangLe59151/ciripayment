@@ -134,7 +134,7 @@ export default {
     handleStart() {
       this.$refs["elForm"].validate(valid => {
         if (valid) {
-          this.$store.commit("UpdateForm", {
+          this.$store.commit("UpdateUserInfo", {
             applicantPhoneNumber: this.form.nationalCode + this.form.phone,
             nationalCode: this.form.nationalCode,
             phone: this.form.phone
@@ -160,7 +160,7 @@ export default {
           }
           console.log(res.data);
           // FIXME: Wrong logic of account Verified
-          this.$store.commit("UpdateForm", {
+          this.$store.commit("UpdateUserInfo", {
             accountVerified: res.data.data.applicationExist
           });
           this.$router.push({

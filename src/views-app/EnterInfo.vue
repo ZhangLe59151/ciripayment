@@ -494,7 +494,7 @@ export default {
   },
   created() {
     this.$store.commit("InitForm");
-    const form = Object.assign({}, this.$store.state.form);
+    const form = Object.assign({}, this.$store.state.form, this.$store.state.userInfo);
     Object.keys(form).map(item => {
       if (!form[`${item}`]) {
         form[`${item}`] = "";
@@ -551,7 +551,9 @@ export default {
         })
         .then(() => {
           this.$store.commit("ClearForm");
-          util.redirectToHome(this);
+          // TODO: close the app and return to the previous page.
+          this.$router.push({ name: "Home" });
+          // util.redirectToHome(this); 
         })
         .catch(() => {
           // on cancel
@@ -693,7 +695,7 @@ export default {
       });
     },
 
-    // From UploadInfo.vue,
+    // From UploadInfo.vue, - obsolete, not using now.
     handleDiscard() {
       this.$dialog
         .confirm({
