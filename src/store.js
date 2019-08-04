@@ -69,7 +69,8 @@ export default new Vuex.Store({
       invalidCharset: "~`!@#$%^&*()_-+=",
       nationaldID: /[0-9]{13}/,
       bankAccount: /^[0-9A-Za-z]{5,20}$/,
-      postalCode: /[0-9]{5}/
+      postalCode: /[0-9]{5}/,
+      englishAlphabetAndThai: /^[a-z\u0E00-\u0E7F]+$/i
     },
     applicationStatusWording: {
       pending: "UNDER REVIEW",
@@ -267,19 +268,29 @@ export default new Vuex.Store({
     // This is for settlement
     updateSettlement(state, settlement) {
       state.merchantProfile.merchantSettlementConfigVo.settlementType = settlement;
-      localStorage.setItem("merchantProfile", JSON.stringify(state.merchantProfile));
+      localStorage.setItem(
+        "merchantProfile",
+        JSON.stringify(state.merchantProfile)
+      );
     },
     // This is for channels
     updateChannels(state, channels) {
       for (var channelIndex in channels) {
         for (var i in state.merchantProfile.merchantChannelConfigVoList) {
-          if (state.merchantProfile.merchantChannelConfigVoList[i].channelId === channels[channelIndex].channelId) {
-            state.merchantProfile.merchantChannelConfigVoList[i].channelStatus = channels[channelIndex].channelStatus;
+          if (
+            state.merchantProfile.merchantChannelConfigVoList[i].channelId ===
+            channels[channelIndex].channelId
+          ) {
+            state.merchantProfile.merchantChannelConfigVoList[i].channelStatus =
+              channels[channelIndex].channelStatus;
             break;
           }
         }
       }
-      localStorage.setItem("merchantProfile", JSON.stringify(state.merchantProfile));
+      localStorage.setItem(
+        "merchantProfile",
+        JSON.stringify(state.merchantProfile)
+      );
     },
     // Fetch merchant profile
     initMerchantProfile(state, merchantProfile) {
@@ -288,9 +299,17 @@ export default new Vuex.Store({
     },
     // if there is no merchant profile in store, try to look in storage
     fetchMerchantProfileFromLocal(state) {
-      if (Object.keys(state.merchantProfile).length === 0 && localStorage.getItem("merchantProfile")) {
-        let localMerchantProfile = JSON.parse(localStorage.getItem("merchantProfile"));
-        state.merchantProfile = { ...state.merchantProfile, ...localMerchantProfile };
+      if (
+        Object.keys(state.merchantProfile).length === 0 &&
+        localStorage.getItem("merchantProfile")
+      ) {
+        let localMerchantProfile = JSON.parse(
+          localStorage.getItem("merchantProfile")
+        );
+        state.merchantProfile = {
+          ...state.merchantProfile,
+          ...localMerchantProfile
+        };
       }
     },
     removeUselessForm(state) {

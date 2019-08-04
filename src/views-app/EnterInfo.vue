@@ -54,7 +54,7 @@
           prop="applicantFirstName"
           :rules="[
         { required: true, message: 'This field is required.', trigger: 'blur' },
-        { validator: checkSpecificKey, message: 'Please enter a valid First Name', trigger: 'blur'}
+        { validator: this.$store.state.validationPatterns.englishAlphabetAndThai, message: 'Please enter a valid First Name', trigger: 'blur'}
       ]"
         >
           <el-input
@@ -69,7 +69,7 @@
           prop="applicantLastName"
           :rules="[
       { required: true, message: 'This field is required.', trigger: 'blur' },
-      { validator: checkSpecificKey, message: 'Please enter a valid Last Name', trigger: 'blur'}
+      { validator: this.$store.state.validationPatterns.englishAlphabetAndThai, message: 'Please enter a valid Last Name', trigger: 'blur'}
     ]"
         >
           <el-input
