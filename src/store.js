@@ -12,6 +12,7 @@ export default new Vuex.Store({
     serviceOverviewVo: {},
     form: {},
     userInfo: {},
+    application: {},
     nationalCodeList: [
       "+66",
       "+65",
@@ -316,7 +317,7 @@ export default new Vuex.Store({
     },
     InitUserInfo(state) {
       var originUserInfo = state.userInfo !== null ? state.userInfo : {};
-      var userInfoString = window.localStorage.getItem("UserInfo");
+      var userInfoString = window.localStorage.getItem("userInfo");
       userInfoString = userInfoString !== null ? userInfoString : "{}";
       state.userInfo = Object.assign(originUserInfo, JSON.parse(userInfoString));
     },
@@ -327,6 +328,14 @@ export default new Vuex.Store({
     ClearUserInfo(state) {
       state.userInfo = {};
       window.localStorage.setItem("userInfo", "{}");
+    },
+    UpdateApplicationInfo(state, applicationInfo) {
+      state.application = Object.assign(state.application, applicationInfo);
+      window.localStorage.setItem("application", JSON.stringify(state.application));
+    },
+    ClearApplicationInfo(state) {
+      state.application = {};
+      window.localStorage.setItem("application", "{}");
     },
   },
   actions: {}

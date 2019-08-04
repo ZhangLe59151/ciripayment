@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      applicationStatus: "0"
+      applicationStatus: this.$store.state.application.applicationStatus
     };
   },
   computed: {
@@ -80,6 +80,7 @@ export default {
       this.$api.getApplictionStatus().then(res => {
         if (res.data.code === 200) {
           this.applicationStatus = res.data.data.applicationStatus + "";
+          this.$store.commit("UpdateApplicationInfo", res.data.data);
         }
       });
     }
@@ -88,6 +89,7 @@ export default {
     this.$store.commit("InitUserInfo");
     console.log(this.$store.state.userInfo);
     if (Object.entries(this.$store.state.userInfo).length === 0 && this.$store.state.userInfo.constructor === Object) {
+
       this.$router.push({ name: "LandingPage" });
     } else {
       this.fetchData(this.fetchApplicationStatus)

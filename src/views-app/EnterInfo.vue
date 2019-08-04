@@ -512,7 +512,7 @@ export default {
   },
   created() {
     this.$store.commit("InitForm");
-    const form = Object.assign({}, this.$store.state.form);
+    const form = Object.assign({}, this.$store.state.form, this.$store.state.userInfo);
     Object.keys(form).map(item => {
       if (!form[`${item}`]) {
         form[`${item}`] = "";
