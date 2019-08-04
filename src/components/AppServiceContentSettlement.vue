@@ -1,5 +1,5 @@
 <template>
-<div class="app-service-cnt-settlement">
+<div v-if="String(applicationStatus) === '1'" class="app-service-cnt-settlement">
   <div class="block">
     <div class="title">Settlement</div>
     <div class="label">
@@ -29,7 +29,8 @@ export default {
         // Not found settlement type
         return 0;
       }
-    }
+    },
+    applicationStatus: state => state.application.applicationStatus
   }),
   methods:
     {

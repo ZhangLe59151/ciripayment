@@ -293,7 +293,8 @@ export default new Vuex.Store({
       localStorage.setItem("merchantProfile", JSON.stringify(merchantProfile));
     },
     // if there is no merchant profile in store, try to look in storage
-    fetchMerchantProfileFromLocal(state) {
+    fetchDataFromLocal(state) {
+      // fetch merchant profile
       if (
         Object.keys(state.merchantProfile).length === 0 &&
         localStorage.getItem("merchantProfile")
@@ -304,6 +305,19 @@ export default new Vuex.Store({
         state.merchantProfile = {
           ...state.merchantProfile,
           ...localMerchantProfile
+        };
+      }
+      // fetch application
+      if (
+        Object.keys(state.application).length === 0 &&
+        localStorage.getItem("application")
+      ) {
+        let localApplication = JSON.parse(
+          localStorage.getItem("application")
+        );
+        state.application = {
+          ...state.application,
+          ...localApplication
         };
       }
     },

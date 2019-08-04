@@ -124,7 +124,7 @@
           />
         </div>
 
-        <van-row type="flex" justify="center">
+        <van-row v-if="!picESignature" type="flex" justify="center">
           <van-col span="7"><van-button
             id="clearBtn"
             size="small"
@@ -137,7 +137,6 @@
           </van-col>
           <van-col span="7" >
             <van-button
-              v-if="!picESignature"
               size="small"
               @click="confirmSignature"
               class="confirm-btn bottom-btn"
@@ -146,12 +145,26 @@
             </van-button>
           </van-col>
         </van-row>
+
+        <van-row v-else type="flex" justify="center">
+          <van-col span="7"><van-button
+            id="clearBtn"
+            size="small"
+            @click="clear"
+            type="primary"
+            class="clear-btn plain bottom-btn"
+          >
+            Clear
+          </van-button>
+          </van-col>
+        </van-row>
       </el-card>
 
       <van-button
         size="small"
         class="bottom-btn next"
         @click="handleSubmit"
+        :disabled="!checked || !picESignature"
       >
         Next
       </van-button>
@@ -163,6 +176,7 @@
 import { mapState } from "vuex";
 import SignaturePad from "signature_pad";
 import PaymentChannelList from "@/components/PaymentChannelList";
+
 export default {
   name: "ApplyMoreChannelContent",
   props: {
@@ -272,6 +286,15 @@ export default {
           this.uploadSign(this.dataURItoBlob(data));
         }
       }
+    },
+    dataURItoBlob(dataURI) {
+      var byteString = atob(dataURI.split(",")[1]);
+      var ab = new ArrayBuffer(byteString.length);
+      var ia = new Uint8Array(ab);
+      for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+      return new Blob([ab], { type: "image/jpeg" });
     },
     clear() {
       var signaturePad = this.$refs.signaturePad;
@@ -428,6 +451,10 @@ export default {
       margin-top: 40px;
       margin-bottom: 80px;
       font-size:14px;
+    }
+
+    .clear-btn,.confirm-btn {
+      margin-bottom: 0px !important;
     }
 
     .next {

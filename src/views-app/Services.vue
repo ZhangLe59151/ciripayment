@@ -49,7 +49,7 @@ export default {
     }
   },
   created() {
-    this.$store.commit("fetchMerchantProfileFromLocal");
+    this.$store.commit("fetchDataFromLocal");
   }
 }
 </script>
