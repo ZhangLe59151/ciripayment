@@ -214,7 +214,7 @@ export default {
   },
   computed: {
     serviceType() {
-      return this.$store.state.form.serviceType;
+      return this.$store.state.userInfo.serviceType;
     }
   },
   watch: {
@@ -227,8 +227,8 @@ export default {
   },
   created() {
     this.countTime();
-    this.$store.commit("InitForm");
-    const form = Object.assign({}, this.$store.state.form);
+    this.$store.commit("InitUserInfo");
+    const form = Object.assign({}, this.$store.state.userInfo);
     Object.keys(form).map(item => {
       if (!form[`${item}`]) {
         form[`${item}`] = "";
@@ -275,7 +275,7 @@ export default {
       this.$api
         .sendOtp({
           phoneNumber:
-            this.$store.state.form.nationalCode + this.$store.state.form.phone
+            this.$store.state.userInfo.nationalCode + this.$store.state.userInfo.phone
         })
         .then(res => {
           if (res.data.code !== 200) {
@@ -300,8 +300,8 @@ export default {
         this.$api
           .verifyOtp({
             phoneNumber:
-              this.$store.state.form.nationalCode +
-              this.$store.state.form.phone,
+              this.$store.state.userInfo.nationalCode +
+              this.$store.state.userInfo.phone,
             otpCode: this.value
           })
           .then(res => {
@@ -346,7 +346,7 @@ export default {
       this.$api
         .verifyOtp({
           phoneNumber:
-            this.$store.state.form.nationalCode + this.$store.state.form.phone,
+            this.$store.state.userInfo.nationalCode + this.$store.state.userInfo.phone,
           otpCode: this.value
         })
         .then(res => {
@@ -376,7 +376,7 @@ export default {
       this.$api
         .verifyOtp({
           phoneNumber:
-            this.$store.state.form.nationalCode + this.$store.state.form.phone,
+            this.$store.state.userInfo.nationalCode + this.$store.state.userInfo.phone,
           otpCode: this.value
         })
         .then(res => {

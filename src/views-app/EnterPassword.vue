@@ -216,7 +216,7 @@ export default {
       }
       this.$api
         .merchantLoginPassword({
-          phoneNumber: this.$store.state.form.applicantPhoneNumber,
+          phoneNumber: this.$store.state.userInfo.applicantPhoneNumber,
           password: this.password
         })
         .then(res => {
@@ -245,8 +245,8 @@ export default {
   },
   created() {
     // Reset form content to clear previous submitted information
-    this.$store.commit("InitForm");
-    const form = Object.assign({}, this.$store.state.form);
+    this.$store.commit("InitUserInfo");
+    const form = Object.assign({}, this.$store.state.userInfo);
     Object.keys(form).map(item => {
       if (!form[`${item}`]) {
         form[`${item}`] = "";
