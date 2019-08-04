@@ -9,167 +9,64 @@ const routeArr = [
     path: "/",
     redirect: "/home"
   },
-  {
-    path: "/choose-service",
-    name: "ChooseService",
-    component: () => import("@/views/ChooseService.vue")
-  },
-  {
-    path: "/select-payment-channels",
-    name: "SelectPaymentChannels",
-    component: () => import("@/views/SelectPaymentChannels.vue")
-  },
-  {
-    path: "/account-question",
-    name: "HaveAccount",
-    component: () => import("@/views/HaveAccount.vue")
-  },
-  {
-    path: "/biz-reg-question",
-    name: "BusinessRegister",
-    component: () => import("@/views/BusinessRegister.vue")
-  },
-  {
-    path: "/send-otp",
-    name: "SendOtp",
-    component: () => import("@/views/SendOtp.vue")
-  },
-  {
-    path: "/verify-otp",
-    name: "VerifyOtp",
-    component: () => import("@/views/VerifyOtp.vue")
-  },
-  {
-    path: "/documents",
-    name: "DocumentsPrepare",
-    component: () => import("@/views/DocumentsPrepare.vue")
-  },
+
   {
     path: "/enter-info",
     name: "EnterInfo",
-    component: () => import("@/views/EnterInfo.vue")
+    component: () => import("@/views-app/EnterInfo.vue")
   },
-  {
-    path: "/services-info",
-    name: "ServicesInfo",
-    component: () => import("@/views/ServicesInfo.vue")
-  },
-  {
-    path: "/upload-info",
-    name: "UploadInfo",
-    component: () => import("@/views/UploadInfo.vue")
-  },
-  {
-    path: "/preview-info",
-    name: "PreviewInfo",
-    component: () => import("@/views/PreviewInfo.vue")
-  },
+
   {
     path: "/sic",
     name: "SIC",
-    component: () => import("@/views/Sic.vue")
+    component: () => import("@/views-app/Sic.vue")
   },
   {
     path: "/subsic",
     name: "SubSIC",
-    component: () => import("@/views/SubSic.vue")
+    component: () => import("@/views-app/SubSic.vue")
   },
   {
     path: "/mcc",
     name: "MCC",
-    component: () => import("@/views/Mcc.vue")
+    component: () => import("@/views-app/Mcc.vue")
   },
   {
     path: "/province",
     name: "Province",
-    component: () => import("@/views/Province.vue")
+    component: () => import("@/views-app/Province.vue")
   },
   {
     path: "/success",
     name: "Success",
-    component: () => import("@/views/Success.vue")
-  },
-  {
-    path: "/login",
-    name: "Login",
-    component: () => import("@/views/LoginOtp.vue")
-  },
-  {
-    path: "/verify-login",
-    name: "VerifyLoginOtp",
-    component: () => import("@/views/VerifyLoginOtp.vue")
+    component: () => import("@/views-app/Success.vue")
   },
   {
     path: "/view-application",
     name: "ViewApplication",
-    component: () => import("@/views/ViewApplication.vue")
-  },
-  {
-    path: "/service-overview",
-    name: "ServiceOverview",
-    component: () => import("@/views/ServiceOverview.vue")
-  },
-  {
-    path: "/account-login",
-    name: "AccountLogin",
-    component: () => import("@/views/AccountLogin.vue")
-  },
-  {
-    path: "/payment-login",
-    name: "PaymentLogin",
-    component: () => import("@/views/PaymentLogin.vue")
-  },
-  {
-    path: "/check-payment-channel",
-    name: "CheckPaymentChannel",
-    component: () => import("@/views/CheckPaymentChannel.vue")
-  },
-  {
-    path: "/account-info",
-    name: "AccountInfo",
-    component: () => import("@/views/AccountInfo.vue")
+    component: () => import("@/views-app/ViewApplication.vue")
   },
   {
     path: "/tc",
     name: "TermsAndConditions",
-    component: () => import("@/views/TermsAndConditions.vue")
+    component: () => import("@/views-app/TermsAndConditions.vue")
   },
   {
-    path: "/application-success",
-    name: "ApplicationSuccess",
-    component: () => import("@/views/ApplicationSuccess.vue")
+    path: "/preview-info",
+    name: "PreviewInfo",
+    component: () => import("@/views-app/PreviewInfo.vue")
   },
-  // Merchant Area
+
   {
-    path: "/merchant-portal",
-    name: "MerchantPortal",
-    component: () => import("@/views-mp/Portal.vue")
-  },
-  {
-    path: "/merchant-login",
-    name: "MerchantLogin",
-    component: () => import("@/views-mp/MerchantLogin.vue")
-  },
-  {
-    path: "/welcome-guide",
-    name: "WelcomeGuide",
-    component: () => import("@/views-mp/WelcomeGuide.vue")
-  },
-  {
-    path: "/create-password",
-    name: "CreatePassword",
-    component: () => import("@/views-mp/CreatePassword.vue")
+    path: "/services-info",
+    name: "ServicesInfo",
+    component: () => import("@/views-app/ServicesInfo.vue")
   },
   // Other Area
   {
     path: "/admin",
     name: "Admin",
-    component: () => import("@/views/Admin.vue")
-  },
-  {
-    path: "/server-error",
-    name: "ServerError",
-    component: () => import("@/views/500.vue")
+    component: () => import("@/views-app/Admin.vue")
   }
 ];
 
@@ -278,7 +175,12 @@ const ErrorRouteArr = [
   {
     path: "/*",
     name: "PageNotFound",
-    component: () => import("@/views/404.vue")
+    component: () => import("@/views-app/404.vue")
+  },
+  {
+    path: "/server-error",
+    name: "ServerError",
+    component: () => import("@/views-app/500.vue")
   }
 ];
 

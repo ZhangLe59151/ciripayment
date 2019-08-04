@@ -126,13 +126,13 @@ export default {
       const item = find(this.paymentChannelStatus, { value: status + "" });
       return item
         ? {
-            label: item.label,
-            color: item.color
-          }
+          label: item.label,
+          color: item.color
+        }
         : {
-            label: status,
-            color: ""
-          };
+          label: status,
+          color: ""
+        };
     },
     findIconUrl(id) {
       const item = find(this.paymentChannelList, { id: id + "" });

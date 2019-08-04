@@ -351,7 +351,7 @@ export default {
         })
         .then(res => {
           if (res.data.code === 200) {
-            //Verify OTP success
+            // Verify OTP success
             this.$store.commit("OTPVerified");
             this.$router.push({ name: "Home" });
           } else {
