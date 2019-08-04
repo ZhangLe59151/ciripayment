@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       settlementType: "0",
-      applicationStatus: isEmpty(this.$store.state.userInfo.applicationStatus) ? 0 : this.$store.state.userInfo.applicationStatus
+      applicationStatus: isEmpty(this.$store.state.userInfo.applicationStatus) ? "0" : this.$store.state.userInfo.applicationStatus
     };
   },
   computed: {
