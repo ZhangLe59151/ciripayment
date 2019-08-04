@@ -86,6 +86,8 @@ export default {
     width: 54px;
     height: 54px;
     margin: 18px 18px 0 12px;
+    position: absolute;
+    top: 0;
   }
   .close-icon {
     position: absolute;
@@ -96,7 +98,10 @@ export default {
 
   .status {
     display: inline-block;
-    width: 230px;
+    width: calc(100% - 100px);
+    position: relative;
+    left: 90px;
+    top: 10px;
     .title {
       font-size: 16px;
       color: #053c5e;
