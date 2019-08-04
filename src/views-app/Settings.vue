@@ -37,6 +37,9 @@ export default {
       localStorage.clear();
       this.$router.push({ name: "LandingPage" });
     }
+  },
+  created() {
+    // debugger;
   }
 };
 </script>
