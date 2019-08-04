@@ -1,14 +1,13 @@
 <template>
   <div class="services-info">
     <van-nav-bar
-      title
-      left-text="Back"
+      title="New Application"
+      left-text=""
       left-arrow
       @click-left="$router.back()"
       right-text="Discard"
       @click-right="handleDiscard"
       :border="false"
-      style="background-color: #ffffff"
     >
       <div
         slot="title"
@@ -28,7 +27,7 @@
           :src="merchantProfileInfoActive"
           alt
           slot="icon"
-          width="20rem"
+          width="20px"
         >
       </el-step>
       <el-step title="Payment Service">
@@ -36,7 +35,7 @@
           :src="servicesInfoActive"
           alt
           slot="icon"
-          width="20rem"
+          width="20px"
         >
       </el-step>
     </el-steps>
@@ -331,9 +330,7 @@ export default {
   computed: {
     ...mapState({
       paymentChannelList: "paymentChannelList",
-      serviceType() {
-        return this.$store.state.form.serviceType;
-      }
+      serviceType: state => state.form.serviceType
     })
   },
   methods: {
@@ -554,25 +551,7 @@ export default {
         form[`${item}`] = "";
       }
     });
-    this.form = Object.assign({}, form);
-  },
-  mounted() {
-    window.scrollTo(0, 0);
-    if (!this.idleTimer) {
-      this.idleTimer = new Idle()
-        .whenNotInteractive()
-        .within(this.$store.state.idleTime, 1000) // minute
-        .do(() => {
-          console.log("EnterInfo page idle");
-          util.redirectToHome(this, this.$store.state.messages.idleTimeout);
-        });
-    }
-    this.idleTimer.start();
-  },
-  beforeDestroy() {
-    if (this.idleTimer) {
-      this.idleTimer.stop();
-    }
+    this.form = Object.assign({}, form, this.$store.state.form);
   }
 };
 </script>
