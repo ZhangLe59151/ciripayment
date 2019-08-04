@@ -44,13 +44,13 @@
       </el-form>
       <van-button
         size="small"
-        :class="(checkList.length >0 )?'bottom-btn':'bottom-btn disabled'"
+        :class="(checkList.length >0 )?'bottom-btn next':'bottom-btn next disabled'"
         :disabled="checkList.length <=0"
         @click="handleNext"
       >
         Next
       </van-button>
-      <payment-channel-list :recommendChannelsStore="totalPaymentChannelList" v-bind:dialog.sync="dialog" />
+      <payment-channel-list :paymentChannelList="recommendChannelsStore" v-bind:dialog.sync="dialog" />
     </div>
     <div v-else>
       <el-form
@@ -84,7 +84,6 @@
       <van-checkbox
         v-model="checked"
         id="checkb"
-        style="margin-top:40px"
       >
         <div
           @click="stopDefault"
@@ -151,7 +150,7 @@
 
       <van-button
         size="small"
-        class="bottom-btn"
+        class="bottom-btn next"
         @click="handleSubmit"
       >
         Next
@@ -327,9 +326,9 @@ export default {
 
 <style lang="scss" scoped>
   .apply-more-channel-content{
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 100px);
     background-color: #F8F9F9;
-    padding: 24px 15px 0 15px;
+    padding: 24px 0 0 0 ;
     .title {
       font-size: 17px;
       padding: 20px 10%;
@@ -407,6 +406,12 @@ export default {
       }
     }
 
+    #checkb{
+      margin-top: 40px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
     .payment-dialog-link {
       position: relative;
       top: 12px;
@@ -423,6 +428,11 @@ export default {
       margin-top: 40px;
       margin-bottom: 80px;
       font-size:14px;
+    }
+
+    .next {
+      width: 328px;
+      margin-left: calc(50% - 164px);
     }
 
     .disabled {

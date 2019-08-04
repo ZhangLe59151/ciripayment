@@ -238,6 +238,7 @@
     <van-button
       size="large"
       v-bind:class="[(passwordAccepted && (password === confirmPass)) ? 'bottom-btn-password' : 'bottom-btn-password disabled']"
+      :disabled="!(passwordAccepted && (password === confirmPass))"
       @click="handleLogin"
       v-show="showLoginBtn"
     >
@@ -321,7 +322,7 @@ export default {
     handleLogin() {
       this.$api
         .merchantCreateNewPassword({
-          phoneNumber: this.$store.state.form.applicantPhoneNumber,
+          phoneNumber: this.$store.state.userInfo.applicantPhoneNumber,
           password: this.password
         })
         .then(res => {
@@ -354,7 +355,7 @@ export default {
   created() {
     // Reset form content to clear previous submitted information
     this.$store.commit("InitForm");
-    const form = Object.assign({}, this.$store.state.form);
+    const form = Object.assign({}, this.$store.state.userInfo);
     Object.keys(form).map(item => {
       if (!form[`${item}`]) {
         form[`${item}`] = "";

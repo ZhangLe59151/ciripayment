@@ -35,7 +35,7 @@ export default {
 
   props: {
     status: {
-      default: "2",
+      default: "NOAPPLICATION",
       required: true,
       type: String
     }

@@ -507,7 +507,7 @@ export default {
 
       form.mcc = storedForm.mccID;
       form.bizNameEn = storedForm.bizNameEn;
-      form.bizNameTh = "bizName";
+      form.bizNameTh = "bizName"; // fake name
       form.bizAddr = storedForm.bizAddr;
       form.bizRegNumber = storedForm.bizRegNumber
         ? storedForm.bizRegNumber
