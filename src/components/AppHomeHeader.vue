@@ -10,14 +10,21 @@
       v-if="$store.state.deviceType === 'APP'"
     >
 
-      <i
-        class="iconfont iconQR"
-        @click="$router.push({name: 'Qrcode'})"
-      />
-      <i
-        class="iconfont iconscan"
-        @click="$router.push({name: 'Scan'})"
-      />
+      <template v-if="canClick">
+        <i
+          class="iconfont iconQR"
+          @click="$router.push({name: 'Qrcode'})"
+        />
+        <i
+          class="iconfont iconscan"
+          @click="$router.push({name: 'Scan'})"
+        />
+      </template>
+
+      <template v-else>
+        <i class="iconfont iconQR" />
+        <i class="iconfont iconscan" />
+      </template>
 
     </div>
   </div>
@@ -25,6 +32,12 @@
 
 <script>
 export default {
+  props: {
+    canClick: {
+      default: true,
+      type: Boolean
+    }
+  },
   methods: {
     handleClick() {
       this.$emit("ShowPopup");

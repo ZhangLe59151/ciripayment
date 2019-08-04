@@ -1,6 +1,9 @@
 <template>
   <div class="app-home">
-    <app-home-header @ShowPopup="ShowPopup"></app-home-header>
+    <app-home-header
+      @ShowPopup="ShowPopup"
+      :canClick.sync="canClick"
+    ></app-home-header>
     <app-home-balance
       :settlementType="settlementType"
       v-if="$store.state.deviceType === 'APP'"
@@ -53,6 +56,9 @@ export default {
       return this.settlementType === "1"
         ? "app-position-auto-settlement"
         : "app-position";
+    },
+    canClick() {
+      return this.applicationStatus === "NOAPPLICATION";
     }
   },
   methods: {
