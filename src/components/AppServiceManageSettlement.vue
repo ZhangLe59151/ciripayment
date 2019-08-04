@@ -66,7 +66,8 @@ export default {
   },
   computed: {
     ...mapState({
-      merchantId: state => state.merchantProfile.id
+      merchantId: state => state.merchantProfile.id,
+      settlementId: state => state.merchantProfile.merchantSettlementConfigVo.id
     }),
     settlementType: {
       get() {
@@ -94,7 +95,7 @@ export default {
       this.$router.back();
     },
     handleSaveSettlement() {
-      this.$api.updateMerchantSettlement({ id: this.merchantId, settlementType: this.settlementChoosing }).then(
+      this.$api.updateMerchantSettlement({ id: this.settlementId, settlementType: this.settlementChoosing }).then(
         res => {
           if (res.data.code === 200) {
             this.$store.commit("updateSettlement", this.settlementChoosing);
