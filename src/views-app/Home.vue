@@ -81,6 +81,10 @@ export default {
         if (res.data.code === 200) {
           this.applicationStatus = res.data.data.applicationStatus + "";
         }
+
+        if (res.data.code === 10021) {
+          this.applicationStatus = "NOAPPLICATION";
+        }
       });
     }
   },
