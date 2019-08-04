@@ -63,7 +63,14 @@ export default {
 
   computed: {
     progress() {
-      return find(this.list, { status: this.status });
+      const item = find(this.list, { status: this.status });
+      return item
+        ? item
+        : {
+            label: "",
+            des: "",
+            icon: ""
+          };
     }
   },
 

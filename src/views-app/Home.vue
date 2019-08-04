@@ -43,7 +43,7 @@ export default {
   },
   data() {
     return {
-      applicationStatus: this.$store.state.application.applicationStatus,
+      applicationStatus: this.$store.state.application.applicationStatus + "",
       transactionList: require("@/mockData/transactions.json").list
     };
   },
