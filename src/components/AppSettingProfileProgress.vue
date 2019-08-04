@@ -9,7 +9,7 @@
       </div>
       <van-button
         class="bottom-btn-boxed update-button"
-        @click="handleVerify"
+        @click="handleUpdateNow"
         v-if="progress.status === '0'"
       >
         Update Now
@@ -56,7 +56,9 @@ export default {
     }
   },
   methods: {
-    handleVerify() {}
+    handleUpdateNow() {
+      this.$router.push({ name: "EnterInfo" });
+    }
   }
 };
 </script>
