@@ -1,9 +1,8 @@
 <template>
   <div class="preview-info">
     <van-nav-bar
-      style="background-color: #ffffff"
-      title
-      left-text="Back"
+      title="New Application"
+      left-text=""
       left-arrow
       @click-left="$router.back()"
       right-text="Discard"
