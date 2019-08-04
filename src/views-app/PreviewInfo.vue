@@ -302,13 +302,13 @@
             class="settlement-text val"
             v-if="$store.state.form.settlementType === '1'"
           >
-            Auto
+            Manual
           </div>
           <div
             class="settlement-text val"
             v-else-if="$store.state.form.settlementType === '2'"
           >
-            Manual
+            Auto
           </div>
           <div
             class="settlement-text val"

@@ -225,7 +225,8 @@ router.beforeEach((to, from, next) => {
   if (!store.state.OTPVerified &&
     ![
       "LandingPage",
-      "EnterOtp"
+      "EnterOtp",
+      "Admin"
     ].includes(to.name)
   ) {
     next({ name: "LandingPage" });

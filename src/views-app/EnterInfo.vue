@@ -471,6 +471,7 @@ export default {
         form[`${item}`] = "";
       }
     });
+    this.$store.commit("UpdateForm", form);
     this.form = Object.assign(form);
   },
   mounted() {
