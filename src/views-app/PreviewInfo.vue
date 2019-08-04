@@ -50,10 +50,7 @@
           title="* National ID"
           :desc="$store.state.form.applicantNationalId"
         />
-        <van-panel
-          title="Personal Account Number"
-          :desc="$store.state.form.bankAccount || '-'"
-        />
+
       </van-cell-group>
     </el-card>
 
@@ -514,7 +511,7 @@ export default {
       form.applicantLastName = storedForm.applicantLastName;
       form.applicantNationalId = storedForm.applicantNationalId;
       form.applicantEmail = storedForm.applicantEmail;
-      form.bankAccount = storedForm.bankAccount ? storedForm.bankAccount : null; // convert "" to null
+
       form.mcc = storedForm.mccID;
       form.bizNameEn = storedForm.bizNameEn;
       form.bizNameTh = storedForm.bizNameTh;
@@ -532,7 +529,7 @@ export default {
       form.picNationalIdBack = storedForm.backUrl;
       form.picNationalIdFrontWithFace = storedForm.faceUrl;
       form.picESignature = this.picESignature;
-      form.haveBankAccount = storedForm.haveBankAccount;
+
       form.haveBizReg = storedForm.haveBizReg;
       form.agreeTc = "1";
       form.serviceType = storedForm.serviceType;

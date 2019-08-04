@@ -120,24 +120,6 @@
           ></el-input>
         </el-form-item>
 
-        <el-form-item
-          label="Personal Account No"
-          prop="bankAccount"
-          :rules="[
-        { pattern: this.$store.state.validationPatterns.bankAccount, message: 'Please enter a valid Personal Account No.', trigger: 'blur'}
-        ]"
-        >
-          <el-input
-            v-model="form.bankAccount"
-            placeholder="Personal Account No."
-            :maxlength="20"
-          ></el-input>
-        </el-form-item>
-
-        <div
-          class="tips"
-          style="font-size:11px;color: #929292;"
-        >If you have an exsiting account with Silot bank, please enter it above.</div>
       </el-card>
 
       <el-card class="box-card">
