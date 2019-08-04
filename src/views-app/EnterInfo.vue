@@ -196,7 +196,7 @@
           prop="postal"
           :rules="[
         { required: true, message: 'This field is required.', trigger: 'blur' },
-        { pattern: this.$store.state.validationPatterns.postalCode, message: 'Please enter a valid postal code', trigger: 'blur'},
+        { pattern: this.$store.state.validationPatterns.postalCode, message: 'Please enter a valid Postal Code', trigger: 'blur'},
         { validator: validateProvince, trigger: 'blur'}
     ]"
         >
@@ -455,7 +455,7 @@ export default {
       provinceError: "",
       validateProvince: (rule, value, callback) => {
         if (!this.isProvinceValid()) {
-          callback(new Error("Please enter a valid postal code"));
+          callback(new Error("Please enter a valid Postal Code"));
           // show error;
         } else {
           callback();
@@ -560,7 +560,7 @@ export default {
       if (this.form.postal && this.form.postal) {
         if (!this.isProvinceValid()) {
           this.provinceHasError = true;
-          this.provinceError = "Please enter a valid postal code";
+          this.provinceError = "Please enter a valid Postal Code";
           // show error;
         }
       }

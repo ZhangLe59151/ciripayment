@@ -36,7 +36,7 @@
               class="itemlanding"
               :rules="[
             {  message: 'Please enter a valid phone number', trigger: 'blur' },
-            {pattern: phoneValidationPattern, message: 'Please enter a valid phone number', trigger: 'blur'}
+            {pattern: phoneValidationPattern, message: 'Incorrect mobile format. Please try again.', trigger: 'blur'}
           ]"
             >
               <span

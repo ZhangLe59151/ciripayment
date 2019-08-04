@@ -4,7 +4,7 @@
       title=""
       left-text="Scan For Payment"
       left-arrow
-      @click-left="$router.push({name: 'Home'})"
+      @click-left="$router.back()"
       :z-index="3000"
     >
       <i
