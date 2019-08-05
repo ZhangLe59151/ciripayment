@@ -8,7 +8,7 @@
     <div class="version">
       version 1.1.0
     </div>
-    <app-tab-bar :active="active" />
+    <app-tab-bar :active="($store.state.deviceType === 'APP' ? 3 : 2 )" />
   </div>
 </template>
 

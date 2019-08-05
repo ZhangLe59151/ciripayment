@@ -188,33 +188,33 @@ export default new Vuex.Store({
     paymentChannelList: [
       {
         id: "1",
-        name: "alipay",
-        img: require("@/assets/imgs/ico-alipay.png"),
-        label: "Alipay"
-      },
-      {
-        id: "3",
-        name: "wechatpay",
-        img: require("@/assets/imgs/ico-wechat.png"),
-        label: "WeChat Pay"
+        name: "visa",
+        img: require("@/assets/imgs/ico-visa.png"),
+        label: "VISA"
       },
       {
         id: "2",
+        name: "mastercard",
+        img: require("@/assets/imgs/ico-mastercard.png"),
+        label: "Mastercard"
+      },
+      {
+        id: "3",
         name: "promptpay",
         img: require("@/assets/imgs/ico-promptpay.png"),
         label: "Prompt Pay"
       },
       {
         id: "4",
-        name: "visa",
-        img: require("@/assets/imgs/ico-visa.png"),
-        label: "VISA"
+        name: "alipay",
+        img: require("@/assets/imgs/ico-alipay.png"),
+        label: "Alipay"
       },
       {
         id: "5",
-        name: "mastercard",
-        img: require("@/assets/imgs/ico-mastercard.png"),
-        label: "Mastercard"
+        name: "wechatpay",
+        img: require("@/assets/imgs/ico-wechat.png"),
+        label: "WeChat Pay"
       }
     ],
     paymentChannelStatusWording: {

@@ -73,8 +73,8 @@
           size="small"
           class="bottom-btn"
           @click="navigateToApplyMoreChannel"
+          :text="formatApplyBtn()"
         >
-          Apply now
         </van-button>
       </div>
 
@@ -144,38 +144,78 @@ export default {
       return this.merchantWorkingChannelStatus.filter(status => String(status.value) === String(channel.channelStatus))[0];
     },
     formatStatusApplied(channel) {
-      return this.merchantApplyingChannelStatus.filter(status => String(status.value) === String(channel.applicationStatus))[0];
+      // if have merchant profile (application apprived )
+      if (Object.keys(this.$store.state.merchantProfile).length > 0) {
+        return this.merchantApplyingChannelStatus.filter(status =>
+          String(status.value) === String(channel.applicationStatus))[0];
+      }
+      // if no merchant profile ( application not approved yet )
+      return this.merchantApplyingChannelStatus.filter(status =>
+        String(status.value) === String(channel.channelStatus))[0];
     },
     navigateToManageChannels() {
       this.$router.push({ name: "ManageChannels" });
     },
     fetchData() {
-      let channelList = this.$store.state.merchantProfile.merchantChannelConfigVoList;
-      // Get list of working channels and remove from recommend
-      this.workingChannels = channelList.filter(channel => {
-        if ([1].includes(channel.applicationStatus) && !!channel.channelId) {
-          this.recommendChannels = this.recommendChannels.filter(rec => String(rec.channelId) !== String(channel.channelId));
-        }
-        return [1].includes(channel.applicationStatus) && !!channel.channelId
-      });
-      // Get list of working channels and remove from recommend
-      this.appliedChannels = channelList.filter(channel => {
-        if ([0, 2, 4].includes(channel.applicationStatus) && !!channel.channelId) {
-          this.recommendChannels = this.recommendChannels.filter(rec => String(rec.channelId) !== String(channel.channelId));
-        }
-        return [0, 2, 4].includes(channel.applicationStatus) && !!channel.channelId
-      });
+      // if have merchant profile
+      if (Object.keys(this.$store.state.merchantProfile).length > 0) {
+        let channelList = this.$store.state.merchantProfile.merchantChannelConfigVoList;
+        // Get list of working channels and remove from recommend
+        this.workingChannels = channelList.filter(channel => {
+          if ([1].includes(channel.applicationStatus) && !!channel.channelId) {
+            this.recommendChannels = this.recommendChannels.filter(rec => String(rec.channelId) !== String(channel.channelId));
+          }
+          return [1].includes(channel.applicationStatus) && !!channel.channelId
+        });
+        // Get list of applied channels and remove from recommend
+        this.appliedChannels = channelList.filter(channel => {
+          if ([0, 2, 4].includes(channel.applicationStatus) && !!channel.channelId) {
+            this.recommendChannels = this.recommendChannels.filter(rec => String(rec.channelId) !== String(channel.channelId));
+          }
+          return [0, 2, 4].includes(channel.applicationStatus) && !!channel.channelId
+        });
+      } // no merchant profile, get details from application table, and put all under review
+      else {
+        let channelList = this.$store.state.application.branchVos[0].applicationPaymentChannelVoList;
+        // Get list of applied channels and remove from recommend
+        this.appliedChannels = channelList.filter(channel => {
+          if ([0].includes(channel.channelStatus) && !!channel.channelId) {
+            this.recommendChannels = this.recommendChannels.filter(rec => String(rec.channelId) !== String(channel.channelId));
+          }
+          return [0].includes(channel.channelStatus) && !!channel.channelId;
+        });
+      }
       // pass to store to retrieve from apply more page
       this.$store.commit("updateRecommendChannel", this.recommendChannels);
     },
     openSelectChannelDialog() {
       this.dialog = true;
     },
+    formatApplyBtn() {
+      if (["0", "1"].includes(String(this.applicationStatus))) {
+        return "Apply More"
+      }
+      return "Apply Now"
+    },
     navigateToApplyMoreChannel() {
-      if (String(this.applicationStatus) === "1") {
-        this.$router.push({ name: "ApplyMoreChannel" });
-      } else {
-        this.$router.push({ name: "EnterInfo" });
+      // if (String(this.applicationStatus) === "1") {
+      //   this.$router.push({ name: "ApplyMoreChannel" });
+      // } else {
+      //   this.$router.push({ name: "EnterInfo" });
+      // }
+      switch (String(this.applicationStatus)) {
+        case "0": { // just submitted application
+          break;
+        }
+        case "1": {
+          // approved app
+          this.$router.push({ name: "ApplyMoreChannel" });
+          break;
+        }
+        default: {
+          this.$router.push({ name: "EnterInfo" });
+          break;
+        }
       }
     }
   },

@@ -11,7 +11,7 @@
       <app-service-content-channels />
     </div>
 
-    <app-tab-bar :active="2" />
+    <app-tab-bar :active="($store.state.deviceType === 'APP' ? 2 : 1 )" />
 
   </div>
 </template>
