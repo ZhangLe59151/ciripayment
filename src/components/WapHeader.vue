@@ -28,7 +28,7 @@ export default {
     },
     clickRight() {
       if (this.logInWithPassword) {
-        this.$router.back();
+        this.$router.push({ name: "Settings" });
       } else {
         this.$store.commit("ClearForm");
         this.$store.commit("logOut");

@@ -93,15 +93,16 @@
       >
         Forgot Password?
       </div>
-    </div>
 
-    <van-button
-      size="large"
-      class="bottom-btn-password"
-      @click="handleLogin"
-    >
-      Log In
-    </van-button>
+      <van-button
+        size="large"
+        class="bottom-btn-password"
+        @click="handleLogin"
+      >
+        Log In
+      </van-button>
+
+    </div>
 
   </div>
 </template>
@@ -121,6 +122,7 @@
   }
 
   .enterPassWrapper {
+    overflow: scroll;
     width: 90%;
     background-color: white;
     position: fixed;
@@ -179,6 +181,28 @@
     width: 100%;
     text-align: center;
     bottom: 20px;
+  }
+
+  @media screen and (min-height: 400px) {
+    .bottom-btn-password {
+      background-color: #053C5E;
+      border-radius: 4px;
+      width: calc(100% - 40px);
+      position: fixed;
+      left: 0px;
+      bottom: 30px;
+      margin: 0 20px;
+      display: block !important;
+      color: #fff;
+    }
+  }
+  @media screen and (max-height: 400px) {
+    .bottom-btn-password {
+      background-color: #053C5E;
+      border-radius: 4px;
+      display: block !important;
+      color: #fff;
+    }
   }
 }
 </style>

@@ -29,7 +29,7 @@ export default {
 @import "../assets/css/bottom-btn.scss";
 .reset-password {
   .resetPassWrapper {
-    height: calc(100vh - 50px);
+    /*height: calc(100vh - 50px);*/
     overflow: hidden;
     padding-left: 5%;
     padding-right: 5%;
