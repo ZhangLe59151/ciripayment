@@ -57,7 +57,7 @@ export default {
             this.$router.push({ name: "CreatePasswordSP" });
           } else {
             // FIXME: not implemented yet, the api return when error
-            this.$toast(res.data.msg);
+            this.$toast("Last 4 digits of Nation ID do not match.");
           }
         });
       }
