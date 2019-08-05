@@ -62,6 +62,11 @@ const routeArr = [
     name: "ServicesInfo",
     component: () => import("@/views-app/ServicesInfo.vue")
   },
+  {
+    path: "/update-profile",
+    name: "UpdateProfile",
+    component: () => import("@/views-app/UpdateProfile.vue")
+  },
   // Other Area
   {
     path: "/admin",
@@ -222,12 +227,9 @@ router.beforeEach((to, from, next) => {
   // }
 
   // These page can go without OTP Verified
-  if (!store.state.OTPVerified &&
-    ![
-      "LandingPage",
-      "EnterOtp",
-      "Admin"
-    ].includes(to.name)
+  if (
+    !store.state.OTPVerified &&
+    !["LandingPage", "EnterOtp", "Admin"].includes(to.name)
   ) {
     next({ name: "LandingPage" });
     return false;

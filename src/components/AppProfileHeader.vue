@@ -22,6 +22,7 @@
             type="default"
             size="small"
             class="update-btn"
+            @click="$router.push({name: 'UpdateProfile'})"
           >Update Profile</van-button>
         </div>
       </div>
