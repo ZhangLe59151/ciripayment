@@ -2,7 +2,7 @@
   <div class="province">
     <van-nav-bar
       title="Province"
-      left-text="Back"
+      left-text=""
       left-arrow
       right-text="Confirm"
       @click-left="$router.back()"

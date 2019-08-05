@@ -2,7 +2,7 @@
   <div class="update-profile">
     <van-nav-bar
       right-text="Discard"
-      @click-right="handleCancel"
+      @click-right="handleDiscard"
       @click-left="$router.back()"
       title="Update Profile"
       left-arrow
@@ -387,7 +387,7 @@ export default {
     },
     ...mapState({
       columns: "nationalCodeList",
-      merchantId: state => state.merchantProfile.id
+      applicationInfoId: state => state.merchantProfile.applicationInfoId
     })
   },
   data() {
@@ -468,9 +468,6 @@ export default {
 
     this.idleTimer.start();
 
-    // var icon = document.querySelector("#checkb > div > i");
-    // icon.style.borderColor = "#222222";
-
     // scroll to saved position
     if (this.$route.query.position) {
       var savedPosition = this.$route.query.position;
@@ -488,11 +485,7 @@ export default {
     }
   },
   methods: {
-    stopDefault(event) {
-      event.preventDefault();
-      event.stopPropagation();
-    },
-    handleCancel() {
+    handleDiscard() {
       this.$dialog
         .confirm({
           title: "Discard application? ",
@@ -629,7 +622,7 @@ export default {
         picNationalIdFrontWithFace: form.faceUrl,
         picNationalIdFrontName: form.frontName,
         picNationalIdFront: form.frontUrl,
-        merchantId: this.merchantId
+        parentId: this.applicationInfoId
       };
 
       this.$api.updateBusinessProfile(params).then(res => {
