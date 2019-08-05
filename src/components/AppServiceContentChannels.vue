@@ -159,8 +159,6 @@ export default {
     fetchData() {
       // if have merchant profile
       if (Object.keys(this.$store.state.merchantProfile).length > 0) {
-        console.log("yes");
-
         let channelList = this.$store.state.merchantProfile.merchantChannelConfigVoList;
         // Get list of working channels and remove from recommend
         this.workingChannels = channelList.filter(channel => {
@@ -171,17 +169,13 @@ export default {
         });
         // Get list of applied channels and remove from recommend
         this.appliedChannels = channelList.filter(channel => {
-          console.log("yes", channel.channelId);
           if ([0, 2, 4].includes(channel.applicationStatus) && !!channel.channelId) {
-            console.log("yes", channel.channelId);
             this.recommendChannels = this.recommendChannels.filter(rec => String(rec.channelId) !== String(channel.channelId));
           }
           return [0, 2, 4].includes(channel.applicationStatus) && !!channel.channelId
         });
       } // no merchant profile, get details from application table, and put all under review
       else {
-        console.log("no",this.$store.state.merchantProfile, Object.keys(this.$store.state.merchantProfile).length > 0);
-
         let channelList = this.$store.state.application.branchVos[0].applicationPaymentChannelVoList;
         // Get list of applied channels and remove from recommend
         this.appliedChannels = channelList.filter(channel => {
