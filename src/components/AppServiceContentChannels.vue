@@ -57,7 +57,7 @@
           </span>
         </div>
       </div>
-      <div v-if="recommendChannels.length !== 0" class="recommend-channels">
+      <div v-if="recommendChannels.length !== 0 && String(applicationStatus) === '1'" class="recommend-channels">
         <div class="label no-border">
           <span>More Channels</span>
           <span></span>
@@ -97,33 +97,33 @@ export default {
       recommendChannels: [
         {
           channelId: "1",
-          name: "alipay",
-          img: require("@/assets/imgs/ico-alipay.png"),
-          label: "Alipay"
-        },
-        {
-          channelId: "3",
-          name: "wechatpay",
-          img: require("@/assets/imgs/ico-wechat.png"),
-          label: "WeChat Pay"
+          name: "visa",
+          img: require("@/assets/imgs/ico-visa.png"),
+          label: "VISA"
         },
         {
           channelId: "2",
+          name: "mastercard",
+          img: require("@/assets/imgs/ico-mastercard.png"),
+          label: "Mastercard"
+        },
+        {
+          channelId: "3",
           name: "promptpay",
           img: require("@/assets/imgs/ico-promptpay.png"),
           label: "Prompt Pay"
         },
         {
           channelId: "4",
-          name: "visa",
-          img: require("@/assets/imgs/ico-visa.png"),
-          label: "VISA"
+          name: "alipay",
+          img: require("@/assets/imgs/ico-alipay.png"),
+          label: "Alipay"
         },
         {
           channelId: "5",
-          name: "mastercard",
-          img: require("@/assets/imgs/ico-mastercard.png"),
-          label: "Mastercard"
+          name: "wechatpay",
+          img: require("@/assets/imgs/ico-wechat.png"),
+          label: "WeChat Pay"
         }
       ]
     }
