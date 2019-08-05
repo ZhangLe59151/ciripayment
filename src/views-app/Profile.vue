@@ -21,6 +21,7 @@
       <app-profile-content
         :class="haveStatusForCnt"
         :info.sync="info"
+        :bankInfo.sync="bankInfo"
       />
       <app-tab-bar :active="3" />
     </template>
@@ -49,7 +50,8 @@ export default {
     return {
       info: {
         applicationStatus: "0"
-      }
+      },
+      bankInfo: {}
     };
   },
   computed: {
@@ -72,10 +74,28 @@ export default {
           this.info = res.data.data;
         }
       });
+    },
+    fetchBankInfo(cb) {
+      this.$api
+        .getMerchantProfile({
+          params: {
+            phoneNumber: this.$store.state.userInfo.applicantPhoneNumber
+          }
+        })
+        .then(res => {
+          if (res.data.code === 200) {
+            // this.bankInfo = res.data.data.bankAccountVoList[0];
+            this.$store.commit("initMerchantProfile", res.data.data);
+          }
+          if (cb) {
+            cb();
+          }
+        });
     }
   },
   created() {
     this.fetchData();
+    this.fetchBankInfo();
   }
 };
 </script>

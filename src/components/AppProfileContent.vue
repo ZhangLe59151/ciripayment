@@ -38,7 +38,7 @@
       style="margin-top: 20px;"
     >
       <div class="title">Bank Account</div>
-      <app-profile-account :bankAccount.sync="info.bankAccount" />
+      <app-profile-account />
     </div>
   </div>
 </template>

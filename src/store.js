@@ -238,7 +238,7 @@ export default new Vuex.Store({
         : "/api/self-onboarding/image/upload",
     bankList: require("./assets/data/bankInfo.json").list,
     merchantProfile: {},
-    recommendChannelsStore: [],
+    recommendChannelsStore: []
   },
   mutations: {
     InitForm(state) {
@@ -312,9 +312,7 @@ export default new Vuex.Store({
         Object.keys(state.application).length === 0 &&
         localStorage.getItem("application")
       ) {
-        let localApplication = JSON.parse(
-          localStorage.getItem("application")
-        );
+        let localApplication = JSON.parse(localStorage.getItem("application"));
         state.application = {
           ...state.application,
           ...localApplication
@@ -345,7 +343,10 @@ export default new Vuex.Store({
       var originUserInfo = state.userInfo !== null ? state.userInfo : {};
       var userInfoString = window.localStorage.getItem("userInfo");
       userInfoString = userInfoString !== null ? userInfoString : "{}";
-      state.userInfo = Object.assign(originUserInfo, JSON.parse(userInfoString));
+      state.userInfo = Object.assign(
+        originUserInfo,
+        JSON.parse(userInfoString)
+      );
     },
     UpdateUserInfo(state, updateUserInfo) {
       state.userInfo = Object.assign(state.userInfo, updateUserInfo);
@@ -357,12 +358,15 @@ export default new Vuex.Store({
     },
     UpdateApplicationInfo(state, applicationInfo) {
       state.application = Object.assign(state.application, applicationInfo);
-      window.localStorage.setItem("application", JSON.stringify(state.application));
+      window.localStorage.setItem(
+        "application",
+        JSON.stringify(state.application)
+      );
     },
     ClearApplicationInfo(state) {
       state.application = {};
       window.localStorage.setItem("application", "{}");
-    },
+    }
   },
   actions: {}
 });

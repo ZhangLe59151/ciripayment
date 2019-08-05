@@ -74,7 +74,8 @@ export default {
       bankName(state) {
         const item = find(state.bankList, { id: this.$route.params.id });
         return item ? item.name : "";
-      }
+      },
+      bankInfo: state => state.merchantProfile.bankAccountVoList[0]
     })
   },
   methods: {
@@ -103,7 +104,14 @@ export default {
       });
     },
     submit() {
-      this.updateBankAcc(this.form).then(res => {
+      const params = Object.assign({}, this.form, {
+        bankCode: this.$route.params.id,
+        bankName: this.bankName,
+        refId: this.bankInfo.refId,
+        refType: this.bankInfo.refType,
+        id: this.bankInfo.id
+      });
+      this.$api.updateBankAcc(params).then(res => {
         if (res.data.code === 200) {
           this.$toast("Update Bank Account Successful!");
           this.$router.push({ name: "Profile" });

@@ -16,9 +16,9 @@
     class="bank-box"
     v-else
   >
-    <img :src="require('@/assets/imgs/ico_bank.png')">
+    <img :src="compareImgUrl(bankInfo.bankCode)">
     <div class="acc-info">
-      <div>ABC Bank</div>
+      <div>{{bankInfo.bankName}}</div>
       <div>
         <span>
           Savings Account
@@ -32,27 +32,41 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
-  props: {
-    bankAccount: {
-      default: "",
-      type: String,
-      required: true
-    }
+  data() {
+    return {
+      imgList: {
+        bank00: require("@/assets/imgs/bank00.png"),
+        bank01: require("@/assets/imgs/bank01.png"),
+        bank02: require("@/assets/imgs/bank02.png"),
+        bank03: require("@/assets/imgs/bank03.png"),
+        bank04: require("@/assets/imgs/bank04.png")
+      }
+    };
   },
   computed: {
+    ...mapState({
+      bankInfo: state => state.merchantProfile.bankAccountVoList[0]
+    }),
+
     bankAccValue() {
-      return this.bankAccount
-        ? "***********" + this.bankAccount.slice(this.bankAccount.length - 4)
+      return this.bankInfo.accountNo
+        ? "***********" +
+            this.bankInfo.accountNo.slice(this.bankInfo.accountNo.length - 4)
         : "";
     },
     haveBankAccount() {
-      return this.bankAccount !== "";
+      return this.bankInfo.accountNo !== "";
     }
   },
   methods: {
     handleLinkBankAccount() {
       this.$router.push({ name: "SelectBank" });
+    },
+    compareImgUrl(id) {
+      return this.imgList[`bank0${id}`];
     }
   }
 };
