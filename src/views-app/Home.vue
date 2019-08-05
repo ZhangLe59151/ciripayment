@@ -103,7 +103,6 @@ export default {
   },
   created() {
     this.$store.commit("InitUserInfo");
-    console.log(this.$store.state.userInfo);
     if (
       Object.entries(this.$store.state.userInfo).length === 0 &&
       this.$store.state.userInfo.constructor === Object
