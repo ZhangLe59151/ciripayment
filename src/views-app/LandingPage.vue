@@ -42,11 +42,12 @@
               <span
                 slot="label"
                 @click="show = true"
+                style="display: flex;justify-content: space-between;"
               >
-                <span style="margin-right: 40px">{{form.nationalCode}}</span>
+                <span>{{form.nationalCode}}</span>
                 <i
                   class="el-icon-caret-bottom"
-                  style="color: #053C5E"
+                  style="color: #053C5E; height: 14px; width: 14px; position: relative; top: 9px;"
                 ></i>
               </span>
               <el-input
