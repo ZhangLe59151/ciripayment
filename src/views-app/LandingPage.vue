@@ -231,3 +231,12 @@ export default {
   }
 }
 </style>
+
+<style lang="scss">
+  .loginWrapper {
+    .el-form-item__error {
+      position: relative;
+      left: 15px;
+    }
+  }
+</style>
