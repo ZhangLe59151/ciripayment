@@ -1,6 +1,10 @@
 <template>
   <div class="app-home-apply">
-    <img :src="require('@/assets/imgs/money-0.png')">
+
+    <img
+      :src="progress.icon"
+      :class="{'no-top': progress.status === '2'}"
+    >
     <div class="status">
       <div class="title">{{progress.label}}</div>
       <div class="des">{{progress.des}}</div>
@@ -34,15 +38,38 @@
 </template>
 
 <script>
+import { find } from "lodash";
 export default {
+  props: {
+    status: {
+      default: "NOAPPLICATION",
+      required: true,
+      type: String
+    }
+  },
   data() {
     return {
-      progress: {
-        label: "Apply For Payment Service",
-        des:
-          "Once your payment service is enabled, you will be able to start collecting payments via QR instantly."
-      }
+      list: [
+        {
+          label: "Payment Service Rejected",
+          des: "There may be insufficient information. Please apply again.",
+          status: "2",
+          icon: require("@/assets/imgs/money-02.png")
+        },
+        {
+          label: "Apply For Payment Service",
+          des:
+            "Once your payment service is enabled, you will be able to start collecting payments via QR instantly.",
+          status: "NOAPPLICATION",
+          icon: require("@/assets/imgs/money-0.png")
+        }
+      ]
     };
+  },
+  computed: {
+    progress() {
+      return find(this.list, { status: this.status });
+    }
   },
   methods: {
     handleNext() {
@@ -68,6 +95,9 @@ export default {
     margin: 18px 18px 0 12px;
     position: relative;
     top: -36px;
+    &.no-top {
+      top: 0;
+    }
   }
 
   .status {
