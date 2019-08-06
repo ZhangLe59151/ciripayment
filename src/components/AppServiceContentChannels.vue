@@ -57,7 +57,7 @@
           </span>
         </div>
       </div>
-      <div v-if="recommendChannels.length !== 0 && String(applicationStatus) === '1'" class="recommend-channels">
+      <div v-if="recommendChannels.length !== 0 && (String(applicationStatus) === '1' || applicationStatus === undefined )" class="recommend-channels">
         <div class="label no-border">
           <span>More Channels</span>
           <span></span>

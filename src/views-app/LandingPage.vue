@@ -160,9 +160,8 @@ export default {
             return;
           }
           console.log(res.data);
-          // FIXME: Wrong logic of account Verified
           this.$store.commit("UpdateUserInfo", {
-            accountVerified: res.data.data.applicationExist
+            accountVerified: res.data.data.merchantExist
           });
           this.$router.push({
             name: "EnterOtp"
