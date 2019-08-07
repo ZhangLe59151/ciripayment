@@ -4,7 +4,7 @@
       title="Business Category"
       left-text=""
       left-arrow
-      @click-left="$router.push({name: 'EnterInfo',query: {flag: 'back', position: $route.query.position}})"
+      @click-left="$router.push({name: $route.query.origin, query: {flag: 'back', position: $route.query.position}})"
       @click-right="$router.push({name: 'SubSIC',query: {sic: sic, position: $route.query.position}})"
       :border="false"
     ></van-nav-bar>
@@ -60,7 +60,8 @@ export default {
         query: {
           sicId: this.sic.id,
           sicName: value.name,
-          position: this.$route.query.position
+          position: this.$route.query.position,
+          origin: this.$route.query.origin
         }
       });
     }

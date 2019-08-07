@@ -253,7 +253,8 @@ export default new Vuex.Store({
     },
     ClearForm(state) {
       state.form = {};
-      window.localStorage.clear();
+      // window.localStorage.clear();
+      window.localStorage.setItem("form", "{}");
     },
     OTPVerified(state) {
       state.OTPVerified = true;
@@ -336,7 +337,7 @@ export default new Vuex.Store({
         }
       }
       state.form = form;
-      window.localStorage.clear();
+      // window.localStorage.clear();
       window.localStorage.setItem("form", JSON.stringify(form));
     },
     InitUserInfo(state) {

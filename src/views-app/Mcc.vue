@@ -97,7 +97,7 @@ export default {
         sic: this.subsicId
       });
       this.$router.push({
-        name: "EnterInfo",
+        name: this.$route.query.origin,
         query: { flag: "back", position: this.$route.query.position }
       });
     }

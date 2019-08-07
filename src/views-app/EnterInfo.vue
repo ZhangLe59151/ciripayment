@@ -1,11 +1,18 @@
 <template>
   <div class="enter-info">
+<!--    <van-nav-bar-->
+<!--      right-text="Discard"-->
+<!--      @click-right="handleCancel"-->
+<!--      @click-left="$router.back()"-->
+<!--      title="New Application"-->
+<!--      left-arrow-->
+<!--    />-->
+
+<!--    Remove the left arrow for now because same purpose as Discard-->
     <van-nav-bar
       right-text="Discard"
       @click-right="handleCancel"
-      @click-left="$router.back()"
       title="New Application"
-      left-arrow
     />
 
     <el-steps
@@ -525,7 +532,7 @@ export default {
           this.$store.commit("ClearForm");
           // TODO: close the app and return to the previous page.
           this.$router.push({ name: "Home" });
-          // util.redirectToHome(this); 
+          // util.redirectToHome(this);
         })
         .catch(() => {
           // on cancel
@@ -540,7 +547,8 @@ export default {
       this.$router.push({
         name: "SIC",
         query: {
-          position: savedPosition
+          position: savedPosition,
+          origin: "EnterInfo"
         }
       });
     },
@@ -552,7 +560,8 @@ export default {
       this.$router.push({
         name: "Province",
         query: {
-          position: savedPosition
+          position: savedPosition,
+          origin: "EnterInfo"
         }
       });
     },

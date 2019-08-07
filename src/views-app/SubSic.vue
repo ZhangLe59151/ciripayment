@@ -64,7 +64,8 @@ export default {
           sicName: this.$route.query.sicName,
           subsicId: this.subsicId,
           subsicName: this.subsicName,
-          position: this.$route.query.position
+          position: this.$route.query.position,
+          origin: this.$route.query.origin
         }
       });
     }

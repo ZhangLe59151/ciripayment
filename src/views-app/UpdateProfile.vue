@@ -1,11 +1,18 @@
 <template>
   <div class="update-profile">
+<!--    <van-nav-bar-->
+<!--      right-text="Discard"-->
+<!--      @click-right="handleDiscard"-->
+<!--      @click-left="$router.back()"-->
+<!--      title="Update Profile"-->
+<!--      left-arrow-->
+<!--    />-->
+
+<!--    Remove the left arrow now because same purpose as Discard-->
     <van-nav-bar
       right-text="Discard"
       @click-right="handleDiscard"
-      @click-left="$router.back()"
       title="Update Profile"
-      left-arrow
     />
 
     <div class="heading">
@@ -512,7 +519,8 @@ export default {
       this.$router.push({
         name: "SIC",
         query: {
-          position: savedPosition
+          position: savedPosition,
+          origin: "UpdateProfile"
         }
       });
     },
@@ -524,7 +532,8 @@ export default {
       this.$router.push({
         name: "Province",
         query: {
-          position: savedPosition
+          position: savedPosition,
+          origin: "UpdateProfile"
         }
       });
     },
@@ -609,7 +618,7 @@ export default {
         applicantFirstName: form.applicantFirstName,
         applicantLastName: form.applicantLastName,
         applicantNationalId: form.applicantNationalId,
-        applicantPhoneNumber: form.nationalCode + form.applicantPhoneNumber,
+        applicantPhoneNumber: form.applicantPhoneNumber,
         bizNameEn: form.bizNameEn,
         bizNameTh: "",
         mcc: form.mccID,
