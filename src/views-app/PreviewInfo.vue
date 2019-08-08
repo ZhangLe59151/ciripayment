@@ -347,8 +347,8 @@
       <div class="title-line"></div>
       <div class="canvas-image-wrapper">
         <img
-          v-if="picESignature"
-          :src="picESignature"
+          v-if="picSignature"
+          :src="picSignature"
           alt
           class="canvas-image"
         >
@@ -360,7 +360,7 @@
         ></canvas>
         <VueSignaturePad
           id="pad"
-          v-show="!picESignature"
+          v-show="!picSignature"
           width="100%"
           height="200px"
           class="sign-canvas"
@@ -377,7 +377,7 @@
         >Clear
         </van-button>
         <van-button
-          v-if="!picESignature"
+          v-if="!picSignature"
           size="small"
           @click="confirmSignature"
           class="bottom-btn"
@@ -421,7 +421,7 @@ export default {
       reviewActive: ReviewActive,
       serviceType: this.$store.state.form.serviceType || ["0", "1"],
       bizRegNumber: this.$store.state.form.bizRegNumber + "",
-      picESignature: this.$store.state.form.picESignature || "",
+      picSignature: this.$store.state.form.picSignature || "",
       signaturePad: null,
       signatureLocked: false,
       color: "white"
@@ -486,7 +486,7 @@ export default {
         return false;
       }
 
-      if (!this.picESignature) {
+      if (!this.picSignature) {
         this.$notify(
           "E-Signature required. Please provide your e-Signature before submitting your application."
         );
@@ -520,7 +520,7 @@ export default {
       form.picNationalIdFront = storedForm.frontUrl;
       form.picNationalIdBack = storedForm.backUrl;
       form.picNationalIdFrontWithFace = storedForm.faceUrl;
-      form.picESignature = this.picESignature;
+      form.picSignature = this.picSignature;
 
       form.haveBizReg = storedForm.haveBizReg;
       form.agreeTc = "1";
@@ -588,7 +588,7 @@ export default {
     },
     clear() {
       var signaturePad = this.$refs.signaturePad;
-      this.picESignature = "";
+      this.picSignature = "";
       signaturePad.clearSignature();
       signaturePad.openSignaturePad();
       this.signatureLocked = false;
@@ -626,7 +626,7 @@ export default {
         console.log(res);
 
         if (res.code === 200) {
-          vm.picESignature = res.data.url;
+          vm.picSignature = res.data.url;
           vm.$toast("success");
           vm.$refs.signaturePad.lockSignaturePad();
           vm.signatureLocked = true;
@@ -646,7 +646,7 @@ export default {
       event.preventDefault();
       this.$store.commit("UpdateForm", {
         signData: this.signData,
-        picESignature: this.picESignature
+        picSignature: this.picSignature
       });
       this.$router.push({ name: "TermsAndConditions" });
     },
