@@ -502,8 +502,8 @@ export default {
         })
         .then(() => {
           this.$store.commit("ClearForm");
-          // TODO: close the app and return to the previous page.
-          this.$router.push({ name: "Home" });
+          // TODO: close the form and return to the previous page.
+          this.$router.push({ name: "Settings" });
           // util.redirectToHome(this);
         })
         .catch(() => {
@@ -645,23 +645,23 @@ export default {
     },
 
     // From UploadInfo.vue, - obsolete, not using now.
-    handleDiscard() {
-      this.$dialog
-        .confirm({
-          title: "Discard application? ",
-          message: "All entered and uploaded information will be lost.",
-          confirmButtonText: "Discard",
-          cancelButtonText: "Cancel"
-        })
-        .then(() => {
-          this.$store.commit("ClearForm");
-          util.redirectToHome(this, this.$store.state.messages.idleTimeout);
-        })
-        .catch(() => {
-          // on cancel
-          this.$dialog.close();
-        });
-    },
+    // handleDiscard() {
+    //   this.$dialog
+    //     .confirm({
+    //       title: "Discard application? ",
+    //       message: "All entered and uploaded information will be lost.",
+    //       confirmButtonText: "Discard",
+    //       cancelButtonText: "Cancel"
+    //     })
+    //     .then(() => {
+    //       this.$store.commit("ClearForm");
+    //       util.redirectToHome(this, this.$store.state.messages.idleTimeout);
+    //     })
+    //     .catch(() => {
+    //       // on cancel
+    //       this.$dialog.close();
+    //     });
+    // },
     handleBack() {
       this.commitForm();
       this.$router.back();
