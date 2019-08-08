@@ -327,8 +327,14 @@ export default {
         })
         .then(res => {
           if (res.data.code === 200) {
-            this.$store.commit("logInWithPassword");
-            this.$router.push({ name: "Home" });
+            // If changing password, return back to Settings
+            if (this.$store.state.logInWithPassword) {
+              this.$router.push({ name: "Settings" });
+            } else {
+              // If forgot password, go to home after login
+              this.$store.commit("logInWithPassword");
+              this.$router.push({ name: "Home" });
+            }
           } else {
             this.$toast(res.data.msg);
             return false;
