@@ -1,0 +1,24 @@
+{
+  "tabbar": [
+    {
+      "to": "/home",
+      "class": "iconfont iconhome",
+      "label": "Home"
+    },
+    {
+      "to": "/records",
+      "class": "iconfont iconrecords",
+      "label": "Records"
+    },
+    {
+      "to": "/services",
+      "class": "iconfont iconservices",
+      "label": "Loan"
+    },
+    {
+      "to": "/settings",
+      "class": "iconfont iconsetting",
+      "label": "Settings"
+    }
+  ]
+}

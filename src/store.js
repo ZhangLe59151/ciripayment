@@ -5,6 +5,10 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    Config:
+      process.env.VUE_APP_DEVICETYPE === "APP"
+        ? require("@/config/AppConfig")
+        : require("@/config/WapConfig"),
     deviceType: process.env.VUE_APP_DEVICETYPE,
     clientInfo: {
       bankName: "ABC Bank"

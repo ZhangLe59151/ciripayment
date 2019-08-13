@@ -7,7 +7,7 @@
       :class="item.class"
       replace
       :to="item.to"
-      v-for="item in ($store.state.deviceType === 'APP' ? tabbarList : tabbarListWAP)"
+      v-for="item in tabbar"
       :key="item.label"
     >
       {{item.label}}
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "AppTabBar",
 
@@ -28,49 +29,12 @@ export default {
   },
 
   data() {
-    return {
-      tabbarList: [
-        {
-          to: "/home",
-          class: "iconfont iconhome",
-          label: "Home"
-        },
-        {
-          to: "/records",
-          class: "iconfont iconrecords",
-          label: "Records"
-        },
-        {
-          to: "/services",
-          class: "iconfont iconservices",
-          label: "Services"
-        },
-        {
-          to: "/settings",
-          class: "iconfont iconsetting",
-          label: "Settings"
-        }
-      ],
-      tabbarListWAP: [
-        {
-          to: "/home",
-          class: "iconfont iconhome",
-          label: "Home"
-        },
-        {
-          to: "/services",
-          class: "iconfont iconservices",
-          label: "Services"
-        },
-        {
-          to: "/settings",
-          class: "iconfont iconsetting",
-          label: "Settings"
-        }
-      ]
-    };
+    return {};
   },
   computed: {
+    ...mapState({
+      tabbar: state => state.Config.tabbar
+    }),
     currentTabbar: {
       get() {
         return this.active;
