@@ -54,7 +54,7 @@ export default {
     letter-spacing: 0;
     line-height: 20px;
     &.van-tabbar-item--active {
-      color: #053c5e;
+      color: #FF8600;
     }
 
     .van-tabbar-item__text {

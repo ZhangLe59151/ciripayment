@@ -570,7 +570,7 @@ export default {
     font-size: 17px;
     padding: 20px 10%;
     text-align: center;
-    color: #053c5e;
+    color: #FF8600;
     text-transform: uppercase;
     font-weight: bold;
   }
@@ -676,7 +676,7 @@ export default {
   .label-title {
     font-size: 14px;
     line-height: 24px;
-    color: #053c5e;
+    color: #FF8600;
     &.required:before {
       color: #f56c6c;
       content: "*";

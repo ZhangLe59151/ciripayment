@@ -45,7 +45,7 @@ export default {
 }
 
 .app-records-header {
-  background: #053c5e;
+  background: #FF8600;
   height: 68px;
   width: 100%;
 

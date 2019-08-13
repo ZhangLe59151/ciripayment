@@ -706,7 +706,7 @@ export default {
     font-size: 17px;
     padding: 20px 10%;
     text-align: center;
-    color: #053c5e;
+    color: #FF8600;
     text-transform: uppercase;
     font-weight: bold;
   }

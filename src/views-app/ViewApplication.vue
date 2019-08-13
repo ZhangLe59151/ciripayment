@@ -234,7 +234,7 @@ export default {
       position: absolute;
       &:first-child {
         font-size: 15px;
-        color: #053c5e;
+        color: #FF8600;
         letter-spacing: 0;
         left: 10px;
         font-weight: bold;
@@ -242,7 +242,7 @@ export default {
 
       &:last-child {
         font-size: 13px;
-        color: #053c5e;
+        color: #FF8600;
         letter-spacing: 0;
         right: 10px;
         &.green {
@@ -270,7 +270,7 @@ export default {
       text-align: left;
       font-weight: bold;
       font-size: 15px;
-      color: #053c5e;
+      color: #FF8600;
       letter-spacing: 0;
     }
 

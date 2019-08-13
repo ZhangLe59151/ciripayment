@@ -185,7 +185,7 @@
 
   @media screen and (min-height: 400px) {
     .bottom-btn-password {
-      background-color: #053C5E;
+      background-color: #FF8600;
       border-radius: 4px;
       width: calc(100% - 40px);
       position: fixed;
@@ -198,7 +198,7 @@
   }
   @media screen and (max-height: 400px) {
     .bottom-btn-password {
-      background-color: #053C5E;
+      background-color: #FF8600;
       border-radius: 4px;
       display: block !important;
       color: #fff;

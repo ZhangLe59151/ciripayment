@@ -29,7 +29,7 @@ export default {
   }
 
   .app-setting-profile-header {
-    background: #053c5e;
+    background: #FF8600;
     height: 130px;
     width: 100%;
     position: relative;

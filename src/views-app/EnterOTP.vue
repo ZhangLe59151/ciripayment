@@ -176,7 +176,7 @@
     bottom: 20px;
   }
   .bottom-btn {
-    background-color: #053c5e;
+    background-color: #FF8600;
     border-radius: 4px;
     margin: 0;
     width: calc(100% - 40px);

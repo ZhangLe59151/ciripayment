@@ -88,18 +88,18 @@ export default {
       margin-left: 5%;
       height: 40px;
       line-height: 40px;
-      border-bottom: 2px solid #053c5e;
+      border-bottom: 2px solid #FF8600;
       font-size: 17px;
       // overflow: scroll;
 
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      color: #053c5e;
+      color: #FF8600;
     }
   }
   .list-item-title {
-    color: #053c5e;
+    color: #FF8600;
     font-size: 17px;
   }
 }

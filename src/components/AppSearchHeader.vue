@@ -41,7 +41,7 @@ export default {
 }
 
 .app-search-header {
-  background: #053c5e;
+  background: #ff8600;
   height: 68px;
   width: 100%;
   position: relative;

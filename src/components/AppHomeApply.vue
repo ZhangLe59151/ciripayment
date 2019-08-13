@@ -105,7 +105,7 @@ export default {
     width: calc(100% - 90px);
     .title {
       font-size: 16px;
-      color: #053c5e;
+      color: #FF8600;
       letter-spacing: 0;
       font-weight: bold;
     }

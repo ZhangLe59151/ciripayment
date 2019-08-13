@@ -47,7 +47,7 @@
                 <span>{{form.nationalCode}}</span>
                 <i
                   class="el-icon-caret-bottom"
-                  style="color: #053C5E; height: 14px; width: 14px; position: relative; top: 9px;"
+                  style="color: #FF8600; height: 14px; width: 14px; position: relative; top: 9px;"
                 ></i>
               </span>
               <el-input
@@ -224,7 +224,7 @@ export default {
     font-size: 15px;
   }
   .bottom-btn {
-    background-color: #053c5e;
+    background-color: #FF8600;
     border-radius: 4px;
     margin: 1.25rem 0;
     width: 100%;

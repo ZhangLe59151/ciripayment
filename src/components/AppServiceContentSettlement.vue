@@ -87,9 +87,9 @@ export default {
         width: 100%;
         margin: 0 10px 15px 0;
         height: 34px;
-        color: #053C5E;
+        color: #FF8600;
         background-color: #ffffff ;
-        border-color: #053C5E;
+        border-color: #FF8600;
       }
     }
   }

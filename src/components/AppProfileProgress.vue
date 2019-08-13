@@ -90,7 +90,7 @@ export default {
     width: 230px;
     .title {
       font-size: 16px;
-      color: #053c5e;
+      color: #FF8600;
       letter-spacing: 0;
       font-weight: bold;
       position: relative;
