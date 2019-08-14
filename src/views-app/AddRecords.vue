@@ -1,40 +1,9 @@
 <template>
   <div>
     <app-records-header />
-    <div class="records-search">
-      <van-search
-        placeholder="Search"
-        @focus="$router.push({name: 'Search', query: {currentTab: currentTab}})"
-      />
-      <i class="iconfont iconFilter"></i>
-    </div>
+    
 
-    <div class="records-tab">
-      <div class="records-tab-header">
-        <div
-          :class="currentTab === '0' ? 'tab-active': ''"
-          @click="currentTab = '0'"
-        >
-          Transactions
-        </div>
-        <div
-          :class="currentTab === '1' ? 'tab-active': ''"
-          @click="currentTab = '1'"
-        >
-          Settlements
-        </div>
-      </div>
-      <div class="records-tab-cnt">
-        <app-records-transactions
-          v-show="currentTab === '0'"
-          :originalList.sync="transactionList"
-        />
-        <app-records-settlements
-          v-show="currentTab === '1'"
-          :originalList.sync="settlementList"
-        />
-      </div>
-    </div>
+    
 
     <app-tab-bar :active="1" />
 
@@ -44,23 +13,17 @@
 <script>
 import AppTabBar from "@/components/AppTabBar";
 import AppRecordsHeader from "@/components/AppRecordsHeader";
-import AppRecordsTransactions from "@/components/AppRecordsTransactions";
-import AppRecordsSettlements from "@/components/AppRecordsSettlements";
 export default {
   name: "AppRecords",
 
   components: {
     AppTabBar,
-    AppRecordsHeader,
-    AppRecordsTransactions,
-    AppRecordsSettlements
+    AppRecordsHeader
   },
 
   data() {
     return {
       currentTab: this.$route.query.currentTab || "0",
-      transactionList: require("@/mockData/transactions.json").list,
-      settlementList: require("@/mockData/settlements.json").list
     };
   }
 };
