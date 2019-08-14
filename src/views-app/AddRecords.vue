@@ -1,10 +1,75 @@
 <template>
   <div>
     <app-records-header />
-    <app-pick-date />
-    <app-input-income />
+    <div class="app-pick-date">
+      <!-- <div class="pick_date">Today, 13 Aug 2019</div> -->
+      <van-row class="select_date">
+        <van-col span="12">Date</van-col>
+        <van-col span="12" class="link_view_history">View Record History</van-col>
+      </van-row>
+      <van-row class="pick_date">
+        <van-col span="22">Today, 13 Aug 2019</van-col>
+        <van-col span="2"><van-icon name="arrow-down" /></van-col>
+      </van-row>
+    </div>
 
-    
+    <div class="app-pick-date">
+      <van-row class="select_date">
+        Income
+      </van-row>
+
+      <van-row class="input_number">
+        <van-col span="2">
+          <label class="plus">+</label>
+        </van-col>
+        <van-col span="20">
+          <input 
+            class="income"
+            :value="income"
+            @touchstart.stop="show = true"
+            maxlength=“13”
+            placeholder="" />
+        </van-col>
+        <van-col span="2">
+          <label class="currency">฿</label>
+        </van-col>
+      </van-row>
+
+    </div>
+
+    <div class="app-pick-date">
+      <van-row class="select_date">
+        Expense
+      </van-row>
+
+      <van-row class="input_number">
+        <van-col span="2">
+          <label class="minus">-</label>
+        </van-col>
+        <van-col span="20">
+          <input 
+            class="expense"
+            @touchstart.stop="show = true"
+            :value="expense"
+            maxlength=“13”
+            placeholder="" />
+        </van-col>
+        <van-col span="2">
+          <label class="currency">฿</label>
+        </van-col>
+      </van-row>
+
+    </div>
+
+
+    <van-number-keyboard
+      :show="show"
+      extra-key="."
+      close-button-text="Done"
+      @blur="show = false"
+      @input="onInput"
+      @delete="onDelete"
+    />
 
     <app-tab-bar :active="1" />
 
@@ -13,64 +78,95 @@
 
 <script>
 import AppTabBar from "@/components/AppTabBar";
-import AppRecordsHeader from "@/components/AppRecordsHeader";
-import AppPickDate from "@/components/AppPickDate";
-import AppInputIncome from "@/components/AppInputIncome";
+import AppRecordsHeader from "@/components/AppRecordsHeader"
+
 
 export default {
   name: "AppRecords",
 
   components: {
     AppTabBar,
-    AppRecordsHeader,
-    AppPickDate,
-    AppInputIncome
+    AppRecordsHeader
   },
 
   data() {
     return {
       currentTab: this.$route.query.currentTab || "0",
+      income: '',
+      show: false
     };
+  },
+
+  methods: {
+    onInput(value) {
+      this.income = this.income + value;
+    },
+    onDelete() {
+      //this.income = this.income.Substring(0,this.income.Length-1)
+    }
   }
+
 };
 </script>
 
 <style lang="scss" scoped>
-.records-search {
-  position: relative;
+.app-pick-date {
+  margin-top:16px;
+    margin-right:16px;
+    margin-left:16px;
+    height: 64px;
 
-  .van-search {
-    position: relative;
-    width: 90%;
-  }
-
-  .iconFilter {
-    position: absolute;
-    top: 20px;
-    right: 5%;
-  }
-}
-
-.records-tab {
-  .records-tab-header {
-    margin: 0 16px;
-    font-size: 14px;
-    color: #87929d;
-    text-align: center;
-    display: flex;
-    border-bottom: 1px solid #87929d;
-    > div {
-      width: 50%;
-      padding: 10px 0;
-
-      &.tab-active {
+    .select_date {
+        height: 20px;
         font-size: 14px;
-        color: #1f73b7;
-        letter-spacing: 0;
-        text-align: center;
-        border-bottom: 2px solid #1f73b7;
-      }
+
+        .link_view_history{
+            font-size: 14px;
+            color: #FF8600;
+            text-align: right;
+            height: auto;
+        }
     }
-  }
+
+    .pick_date {
+        top: 4px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .input_number {
+        height: 40px;
+        font-size: 40px;
+        
+        .plus {
+          bottom: 0px;
+          font-size: 16px;
+          color: #04A777;
+        }
+
+        .income {
+          top: 4px;
+          color: #04A777;
+        }
+
+        .minus {
+          bottom: 0px;
+          font-size: 16px;
+          color: #B41800;
+        }
+
+        .expense {
+          top: 4px;
+          color: #B41800;
+        }
+
+        .currency {
+          bottom: 0px;
+          font-size: 16px;
+          color: #2F3941;
+        }
+
+    }
+
 }
 </style>
