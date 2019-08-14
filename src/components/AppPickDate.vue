@@ -6,17 +6,17 @@
         <van-col span="12" class="link_view_history">View Record History</van-col>
     </van-row>
     <van-row class="pick_date">
-        <van-col span="12">Today, 13 Aug 2019</van-col>
-        <van-col span="12">down</van-col>
+        <van-col span="22">Today, 13 Aug 2019</van-col>
+        <van-col span="2"><van-icon name="arrow-down" /></van-col>
     </van-row>
   </div>
 </template>
 
 <script>
 import Vue from 'vue';
-import { Row, Col, Image } from 'vant';
+import { Row, Col, Icon } from 'vant';
 
-Vue.use(Row).use(Col);
+Vue.use(Row).use(Col).use(Icon);
 
 export default {
   name: "AppPickDate",
