@@ -182,6 +182,11 @@ const AppRouteArr = [
     path: "/reset-password-sp",
     name: "ResetPasswordSP",
     component: () => import("@/views-app/ResetPassword.vue")
+  },
+  {
+    path: "/fortunetelling-result",
+    name: "FortunetellingResult",
+    component: () => import("@/views-app/FortunetellingResult.vue")
   }
 ];
 
