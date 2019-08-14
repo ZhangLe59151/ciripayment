@@ -3,19 +3,12 @@
     <app-home-header
       @ShowPopup="ShowPopup"
       :canClick.sync="canClick"
-    ></app-home-header>
-    <app-home-balance
-      :settlementType="settlementType"
-      v-if="$store.state.deviceType === 'APP'"
     />
-    <app-home-progress
-      :status.sync="applicationStatus"
-      :class="appPosition"
-    />
+
+    <app-home-loan />
 
     <app-home-download v-if="$store.state.deviceType === 'WEB'" />
 
-    <app-home-transaction :originalList="this.applicationStatus + '' === '1' ? transactionList.slice(0,5) : []" />
     <app-tab-bar :active="0" />
 
   </div>
@@ -23,11 +16,11 @@
 
 <script>
 import AppTabBar from "@/components/AppTabBar";
+import AppHomeLoan from "@/components/AppHomeLoan";
 import AppHomeHeader from "@/components/AppHomeHeader";
-import AppHomeBalance from "@/components/AppHomeBalance";
-import AppHomeProgress from "@/components/AppHomeProgress";
+
 import AppHomeDownload from "@/components/AppHomeDownload";
-import AppHomeTransaction from "@/components/AppHomeTransaction";
+
 import { mapState } from "vuex";
 
 export default {
@@ -36,10 +29,8 @@ export default {
   components: {
     AppTabBar,
     AppHomeHeader,
-    AppHomeBalance,
-    AppHomeProgress,
     AppHomeDownload,
-    AppHomeTransaction
+    AppHomeLoan
   },
   data() {
     return {
