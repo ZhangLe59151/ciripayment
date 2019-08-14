@@ -2,6 +2,7 @@
   <div>
     <app-records-header />
     <app-pick-date />
+    <app-input-income />
 
     
 
@@ -14,6 +15,7 @@
 import AppTabBar from "@/components/AppTabBar";
 import AppRecordsHeader from "@/components/AppRecordsHeader";
 import AppPickDate from "@/components/AppPickDate";
+import AppInputIncome from "@/components/AppInputIncome";
 
 export default {
   name: "AppRecords",
@@ -21,7 +23,8 @@ export default {
   components: {
     AppTabBar,
     AppRecordsHeader,
-    AppPickDate
+    AppPickDate,
+    AppInputIncome
   },
 
   data() {
