@@ -1,7 +1,7 @@
 <template>
   <div>
     <app-records-header />
-    
+    <app-pick-date />
 
     
 
@@ -13,12 +13,15 @@
 <script>
 import AppTabBar from "@/components/AppTabBar";
 import AppRecordsHeader from "@/components/AppRecordsHeader";
+import AppPickDate from "@/components/AppPickDate";
+
 export default {
   name: "AppRecords",
 
   components: {
     AppTabBar,
-    AppRecordsHeader
+    AppRecordsHeader,
+    AppPickDate
   },
 
   data() {
