@@ -87,6 +87,11 @@ const AppRouteArr = [
     component: () => import("@/views-app/Records.vue")
   },
   {
+    path: "/addrecord",
+    name: "Records",
+    component: () => import("@/views-app/AddRecords.vue")
+  },
+  {
     path: "/services",
     name: "Services",
     component: () => import("@/views-app/Services.vue")
