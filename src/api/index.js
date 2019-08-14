@@ -83,5 +83,8 @@ export default {
   },
   submitMerchantChannels(params) {
     return Vue.axios.post("/api/merchant/channels/submit", params);
+  },
+  getHomePageInfo() {
+    return Vue.axios.get("/api/homepage");
   }
 };

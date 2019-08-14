@@ -40,25 +40,11 @@ export default {
   data() {
     return {
       applicationStatus: this.$store.state.application.applicationStatus + "",
-      transactionList: require("@/mockData/transactions.json").list
+
+      hasLoan: false
     };
   },
   computed: {
-    ...mapState({
-      settlementType(state) {
-        return state.merchantProfile.merchantSettlementConfigVo
-          ? state.merchantProfile.merchantSettlementConfigVo.settlementType + ""
-          : "1";
-      }
-    }),
-    appPosition() {
-      if (this.$store.state.deviceType !== "APP") {
-        return "app-position-web";
-      }
-      return this.settlementType === "2"
-        ? "app-position-auto-settlement"
-        : "app-position";
-    },
     canClick() {
       return this.applicationStatus === "NOAPPLICATION";
     }
@@ -95,10 +81,18 @@ export default {
           this.applicationStatus = "NOAPPLICATION";
         }
       });
+    },
+    fetchHomePageData() {
+      this.$api.getHomePageInfo().then(res => {
+        if (res.data.code === 200) {
+          this.hasLoan = res.data.data.hasLoan;
+        }
+      });
     }
   },
-  created() {
+  mounted() {
     this.$store.commit("InitUserInfo");
+    this.fetchHomePageData();
     if (
       Object.entries(this.$store.state.userInfo).length === 0 &&
       this.$store.state.userInfo.constructor === Object
