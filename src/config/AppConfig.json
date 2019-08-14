@@ -6,7 +6,7 @@
       "label": "Home"
     },
     {
-      "to": "/services",
+      "to": "/loan",
       "class": "iconfont iconservices",
       "label": "Loan"
     },

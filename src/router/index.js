@@ -92,6 +92,11 @@ const AppRouteArr = [
     component: () => import("@/views-app/Services.vue")
   },
   {
+    path: "/loan",
+    name: "Loan",
+    component: () => import("@/views-app/Loan.vue")
+  },
+  {
     path: "/services-apply-more-channel",
     name: "ApplyMoreChannel",
     component: () => import("@/views-app/ApplyMoreChannel.vue")
@@ -143,7 +148,6 @@ const AppRouteArr = [
     component: () => import("@/views-app/Search.vue")
   },
 
-  // Standard Product
   {
     path: "/landing-page",
     name: "LandingPage",
