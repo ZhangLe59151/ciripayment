@@ -242,7 +242,12 @@ export default new Vuex.Store({
         : "/api/self-onboarding/image/upload",
     bankList: require("./assets/data/bankInfo.json").list,
     merchantProfile: {},
-    recommendChannelsStore: []
+    recommendChannelsStore: [],
+    fortunetelling: {
+      luckyNumber: "-",
+      luckyWords: "-",
+      luckySales: "-"
+    }
   },
   mutations: {
     InitForm(state) {

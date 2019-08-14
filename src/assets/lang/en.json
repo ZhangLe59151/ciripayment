@@ -4,5 +4,10 @@
   "noSelectSettlementErrorMsg": "Please select one of the settlement options to proceed.",
   "marketingServiceErrorMsg": "There are errors in your form. Please correct them before trying again.",
   "OTPErrorMsg": "OTP request too frequent. Please wait for a minute and try again.",
-  "AppHomeLoan": "Tap here to enjoy a pre-approved loan up to"
+  "AppHomeLoan": "Tap here to enjoy a pre-approved loan up to",
+  "LuckyNumberLabel": "Lucky Number",
+  "LuckyWordsLabel": "Lucky Words",
+  "LuckyDescription": "I am thankful for all of those who said NO to me. It's because of them I'm doing it myself.",
+  "LuckySalesLabel": "Sales Lucky Today",
+  "LuckySalesDescription": "Record your daily income for better predictions."
 }

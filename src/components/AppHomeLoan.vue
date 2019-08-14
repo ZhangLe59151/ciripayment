@@ -1,14 +1,7 @@
 <template>
-  <div
-    class="app-home-lucky"
-    @click="$router.push({name: 'Home'})"
-  >
-    <div class="des">
-      {{$t("AppHomeLoan")}}
-    </div>
-    <div class="amount">
-      100,000 ฿
-    </div>
+  <div class="app-home-lucky" @click="$router.push({name: 'Home'})">
+    <div class="des">{{$t("AppHomeLoan")}}</div>
+    <div class="amount">100,000 ฿</div>
   </div>
 </template>
 
@@ -42,4 +35,3 @@ export default {
   }
 }
 </style>
-
