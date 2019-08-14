@@ -6,9 +6,10 @@
     />
 
     <app-home-loan />
+    <app-home-lucky />
 
     <app-home-download v-if="$store.state.deviceType === 'WEB'" />
-
+    <app-home-info />
     <app-tab-bar :active="0" />
 
   </div>
@@ -18,6 +19,8 @@
 import AppTabBar from "@/components/AppTabBar";
 import AppHomeLoan from "@/components/AppHomeLoan";
 import AppHomeHeader from "@/components/AppHomeHeader";
+import AppHomeInfo from "@/components/AppHomeInfo";
+import AppHomeLucky from "@/components/AppHomeLucky";
 
 import AppHomeDownload from "@/components/AppHomeDownload";
 
@@ -30,30 +33,18 @@ export default {
     AppTabBar,
     AppHomeHeader,
     AppHomeDownload,
-    AppHomeLoan
+    AppHomeLoan,
+    AppHomeInfo,
+    AppHomeLucky
   },
   data() {
     return {
       applicationStatus: this.$store.state.application.applicationStatus + "",
-      transactionList: require("@/mockData/transactions.json").list
+
+      hasLoan: false
     };
   },
   computed: {
-    ...mapState({
-      settlementType(state) {
-        return state.merchantProfile.merchantSettlementConfigVo
-          ? state.merchantProfile.merchantSettlementConfigVo.settlementType + ""
-          : "1";
-      }
-    }),
-    appPosition() {
-      if (this.$store.state.deviceType !== "APP") {
-        return "app-position-web";
-      }
-      return this.settlementType === "2"
-        ? "app-position-auto-settlement"
-        : "app-position";
-    },
     canClick() {
       return this.applicationStatus === "NOAPPLICATION";
     }
@@ -90,10 +81,18 @@ export default {
           this.applicationStatus = "NOAPPLICATION";
         }
       });
+    },
+    fetchHomePageData() {
+      this.$api.getHomePageInfo().then(res => {
+        if (res.data.code === 200) {
+          this.hasLoan = res.data.data.hasLoan;
+        }
+      });
     }
   },
-  created() {
+  mounted() {
     this.$store.commit("InitUserInfo");
+    this.fetchHomePageData();
     if (
       Object.entries(this.$store.state.userInfo).length === 0 &&
       this.$store.state.userInfo.constructor === Object
@@ -109,8 +108,9 @@ export default {
 <style lang="scss" scoped>
 .app-home {
   background-color: #f0f7fb;
-  height: 100vh;
+  // height: 100vh;
   position: relative;
+  margin-bottom: 50px;
 
   .app-position {
     margin-top: 78px;

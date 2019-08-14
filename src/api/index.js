@@ -86,5 +86,8 @@ export default {
   },
   getFortunetelling() {
     return Vue.axios.post("/api/fortunetelling");
+  },
+  getHomePageInfo() {
+    return Vue.axios.get("/api/homepage");
   }
 };

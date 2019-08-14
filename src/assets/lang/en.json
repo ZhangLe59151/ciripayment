@@ -9,5 +9,8 @@
   "LuckyWordsLabel": "Lucky Words",
   "LuckyDescription": "I am thankful for all of those who said NO to me. It's because of them I'm doing it myself.",
   "LuckySalesLabel": "Sales Lucky Today",
-  "LuckySalesDescription": "Record your daily income for better predictions."
+  "LuckySalesDescription": "Record your daily income for better predictions.",
+  "Income": "INCOME",
+  "Expenses": "EXPENSES",
+  "AppHomeInfo": "Relevant To Your Business"
 }
