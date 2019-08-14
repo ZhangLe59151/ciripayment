@@ -34,20 +34,7 @@ export default {
       luckyWords: "--"
     };
   },
-  computed: {},
-  methods: {
-    getFortunetelling() {
-      console.log("123");
-      // this.$api.getFortunetelling().then(res => {
-      //   if (res.data.code === 200) {
-      //     this.$store.commit("updateSettlement", this.settlementChoosing);
-      //   }
-      // });
-    }
-  },
-  mounted() {
-    this.getFortunetelling();
-  }
+  computed: {}
 };
 </script>
 
@@ -56,7 +43,7 @@ export default {
   background: red;
 }
 .fortunetelling-result-lucky {
-  padding: 24px 20px;
+  padding: 24px 15px;
   background: #ffffff;
   border: 1px solid #e9ebed;
   box-shadow: 0 3px 8px -4px rgba(0, 0, 0, 0.2);
@@ -81,7 +68,7 @@ export default {
     color: #87929d;
     font-size: 14px;
     font-style: italic;
-    padding: 16px 4px 0px 4px;
+    padding: 0 4px 0 4px;
   }
 }
 </style>
