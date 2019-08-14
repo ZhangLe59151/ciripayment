@@ -6,9 +6,10 @@
     />
 
     <app-home-loan />
+    <app-home-lucky />
 
     <app-home-download v-if="$store.state.deviceType === 'WEB'" />
-
+    <app-home-info />
     <app-tab-bar :active="0" />
 
   </div>
@@ -18,6 +19,8 @@
 import AppTabBar from "@/components/AppTabBar";
 import AppHomeLoan from "@/components/AppHomeLoan";
 import AppHomeHeader from "@/components/AppHomeHeader";
+import AppHomeInfo from "@/components/AppHomeInfo";
+import AppHomeLucky from "@/components/AppHomeLucky";
 
 import AppHomeDownload from "@/components/AppHomeDownload";
 
@@ -30,7 +33,9 @@ export default {
     AppTabBar,
     AppHomeHeader,
     AppHomeDownload,
-    AppHomeLoan
+    AppHomeLoan,
+    AppHomeInfo,
+    AppHomeLucky
   },
   data() {
     return {
@@ -109,8 +114,9 @@ export default {
 <style lang="scss" scoped>
 .app-home {
   background-color: #f0f7fb;
-  height: 100vh;
+  // height: 100vh;
   position: relative;
+  margin-bottom: 50px;
 
   .app-position {
     margin-top: 78px;
