@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <app-records-header />
     <div class="app-pick-date">
       <!-- <div class="pick_date">Today, 13 Aug 2019</div> -->
@@ -61,7 +61,31 @@
 
     </div>
 
+    <div class="app-pick-date">
+      <van-row class="select_date">
+        Note (Optional)
+      </van-row>
 
+      <van-row class="input_note">
+        <van-col span="24">
+          <input 
+            :value="note"
+            @touchstart.stop="show = true"
+            maxlength=“100”
+            placeholder="Add Nte" />
+        </van-col>
+      </van-row>
+
+      <van-row class="input_note">
+        <van-col span="24">
+          <button 
+            class="update_btn" >Update Records</button>
+        </van-col>
+      </van-row>
+
+    </div>
+
+    
     <van-number-keyboard
       :show="show"
       extra-key="."
@@ -70,6 +94,8 @@
       @input="onInput"
       @delete="onDelete"
     />
+
+
 
     <app-tab-bar :active="1" />
 
@@ -166,6 +192,19 @@ export default {
           color: #2F3941;
         }
 
+    }
+
+    .input_note {
+        height: 40px;
+        font-size: 24px;
+    }
+
+    .update_btn {
+        border-radius: 4;
+        background-color: #FF8600;
+        border: none;
+        color: white;
+        font-size: 16px;
     }
 
 }
