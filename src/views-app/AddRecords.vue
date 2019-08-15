@@ -13,14 +13,19 @@
         </van-col>
       </van-row>
       <van-row class="pick_date">
+
         <van-col span="22">
+
           <input
+            class="input"
             type="text"
             v-model="form.date"
+            readonly
             confirm-button-text="confirm"
             cancel-button-text="cancel"
             @focus="appear = true"
-          >
+          />
+
         </van-col>
       </van-row>
     </div>
@@ -242,7 +247,7 @@ export default {
   height: 64px;
 
   .select_date {
-    height: 20px;
+    height: 40px;
     font-size: 14px;
 
     .link_view_history {
@@ -258,6 +263,15 @@ export default {
     height: 40px;
     font-size: 16px;
     width: 100%;
+
+    .input {
+      width: 100%;
+    }
+  }
+
+  .income {
+    top: 4px;
+    color: #04a777;
   }
 
   .input_number {
@@ -275,54 +289,38 @@ export default {
       color: #04a777;
     }
 
-    .input_number {
-      height: 40px;
-      font-size: 40px;
-
-      .plus {
-        bottom: 0px;
-        font-size: 16px;
-        color: #04a777;
-      }
-
-      .income {
-        top: 4px;
-        color: #04a777;
-      }
-
-      .minus {
-        bottom: 0px;
-        font-size: 16px;
-        color: #b41800;
-      }
-
-      .expense {
-        top: 4px;
-        color: #b41800;
-      }
-
-      .currency {
-        bottom: 0px;
-        font-size: 16px;
-        color: #2f3941;
-      }
-    }
-
-    .input_note {
-      height: 40px;
-      font-size: 24px;
-    }
-
-    .update_btn {
-      border-radius: 4;
-      background-color: #ff8600;
-      border: none;
-      color: white;
+    .minus {
+      bottom: 0px;
       font-size: 16px;
-      width: 100%;
-      height: 40px;
-      margin-top: 16px;
+      color: #b41800;
     }
+
+    .expense {
+      top: 4px;
+      color: #b41800;
+    }
+
+    .currency {
+      bottom: 0px;
+      font-size: 16px;
+      color: #2f3941;
+    }
+  }
+
+  .input_note {
+    height: 40px;
+    font-size: 24px;
+  }
+
+  .update_btn {
+    border-radius: 4;
+    background-color: #ff8600;
+    border: none;
+    color: white;
+    font-size: 16px;
+    width: 100%;
+    height: 40px;
+    margin-top: 16px;
   }
 }
 </style>
