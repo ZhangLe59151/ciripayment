@@ -89,5 +89,11 @@ export default {
   },
   getHomePageInfo() {
     return Vue.axios.get("/api/homepage");
+  },
+  applyLoan(params) {
+    return Vue.axios.post("/api/loan-application", params);
+  },
+  getLoanProfile(params) {
+    return Vue.axios.post("/api/loan/view", params);
   }
 };

@@ -17,6 +17,10 @@ export default {
     AppTabBar,
     AppLoanHeader,
     AppLoanOverview
+  },
+  name: "Loan",
+  created() {
+    this.$store.commit("fetchDataFromLocal");
   }
 };
 </script>

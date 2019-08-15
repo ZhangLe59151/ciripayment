@@ -6,8 +6,8 @@
       "label": "Home"
     },
     {
-      "to": "/services",
-      "class": "iconfont iconservices",
+      "to": "/loan",
+      "class": "iconfont iconmoneybag",
       "label": "Loan"
     },
     {
