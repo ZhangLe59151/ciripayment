@@ -11,11 +11,13 @@
         </van-col>
       </van-row>
       <van-row class="pick_date">
+        
         <van-col span="22"> 
           
-              <input
+              <input class="input"
                 type="text"
                 v-model="form.date"
+                readonly
                 confirm-button-text="confirm"
                 cancel-button-text="cancel"
                 @focus="appear = true"
@@ -235,7 +237,7 @@ export default {
     height: 64px;
 
     .select_date {
-        height: 20px;
+        height: 40px;
         font-size: 14px;
 
         .link_view_history{
@@ -251,6 +253,10 @@ export default {
         height: 40px;
         font-size: 16px;
         width: 100%;
+
+        .input {
+          width: 100%;
+        }
     }
 
     .input_number {
