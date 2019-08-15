@@ -7,7 +7,9 @@
       <!-- <div class="pick_date">Today, 13 Aug 2019</div> -->
       <van-row class="select_date">
         <van-col span="12">Date</van-col>
-        <van-col span="12" class="link_view_history">View Record History</van-col>
+        <van-col span="12" class="link_view_history">
+          <button v-on:click="view_history">View Record History</button>
+        </van-col>
       </van-row>
       <van-row class="pick_date">
         <van-col span="22">
@@ -84,7 +86,8 @@
       <van-row class="input_note">
         <van-col span="24">
           <button
-            class="update_btn" >Update Records</button>
+            class="update_btn"
+            v-on:click="update_btn" >Update Records</button>
         </van-col>
       </van-row>
 
@@ -131,7 +134,7 @@ export default {
     return {
       currentTab: this.$route.query.currentTab || "0",
       form: {
-        date_selected: "Today, 13 Aug 2019",
+        dateselected: "Today, 13 Aug 2019",
         income: "",
         expense: "",
         note: "",
@@ -151,9 +154,12 @@ export default {
     update_btn() {
       this.$store.commit("UpdateRecord", this.form);
     },
+    view_history() {
+      this.$router.push({ name: "RecordList" });
+    },
     onChange(picker, values) {
       picker.setColumnValues(1, dateInMonth[values[0]]);
-      this.form.date_selected = values;
+      this.form.dateselected = values;
     }
   }
 
