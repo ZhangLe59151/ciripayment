@@ -45,6 +45,9 @@ export default {
 
 <style lang="scss" scoped>
   .app-loan {
+    min-height: 100vh;
+    display:flex;
+    flex-direction: column;
     .header-title {
       font-size: 20px;
       color: white;
