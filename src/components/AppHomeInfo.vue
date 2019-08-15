@@ -56,13 +56,13 @@ export default {
     .van-col--8 {
       text-align: right;
       img {
-        height: 84px;
-        width: 84px;
+        height: 100%;
+        width: 88px;
       }
     }
 
     .arc-title {
-      margin: 18px 8px 18px 16px;
+      margin: 25px 8px 25px 16px;
       font-size: 16px;
       color: #2f3941;
       font-weight: bold;
