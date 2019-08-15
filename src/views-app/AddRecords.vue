@@ -12,7 +12,7 @@
       </van-row>
       <van-row class="pick_date">
         <van-col span="22"> 
-          <div class="pick_date">
+          
               <input
                 type="text"
                 v-model="form.date"
@@ -20,7 +20,7 @@
                 cancel-button-text="cancel"
                 @focus="appear = true"
                 />
-            </div>
+            
         </van-col>
         <van-col span="2"><van-icon name="arrow-down" /></van-col>
       </van-row>
@@ -153,14 +153,15 @@ export default {
     return {
       currentTab: this.$route.query.currentTab || "0",
       form: {
-        date: this.formatDate(new Date()),
+        date: new Date().toDateString(),
         income: "",
         expense: "",
         note: "",
       },
       show: false,
       type: "income",
-      appear: false
+      appear: false,
+      minDate: new Date("Jan 01,2018")
     };
   },
 
@@ -177,8 +178,9 @@ export default {
       this.form[this.type] = kbt.length ? kbt.substring(0, kbt.length -1) : kbt;
     },
     update_btn() {
+      this.form.date = this.formatDate(this.form.date);
       this.$store.commit("UpdateRecord", this.form);
-      this.form.date = new Date();
+      this.form.date = new Date().toDateString();
       this.form.income = "";
       this.form.expense = "";
       this.form.note = "";
@@ -192,20 +194,9 @@ export default {
     },
     setDate(value) {
       this.appear = false;
-      this.form.date = valuel;
+      this.form.date = valuel.toDateString();
     },
     formatDate(date) {
-      var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-      if (month.length < 2) month = '0' + month;
-      if (day.length < 2) day = '0' + day;
-
-      return year.toString()+month.toString()+day.toString();
-    },
-    formatDisplayDate(date) {
       var d = new Date(date),
         month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
@@ -244,6 +235,7 @@ export default {
         top: 4px;
         height: 40px;
         font-size: 16px;
+        width: 100%;
     }
 
     .input_number {
