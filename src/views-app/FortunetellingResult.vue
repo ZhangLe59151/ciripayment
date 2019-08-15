@@ -1,23 +1,14 @@
 <template>
   <div class="fortunetelling-result">
-    <app-lucky-header :center="true" />
-    <section
-      v-for="(item,index) in fortunetellingFrame[today]"
-      :key="index"
-    >
-      <app-fortunetelling-result-lucky
-        :luckyArr.sync="item.luckyArr"
-        :des.sync="item.des"
-      />
+    <app-lucky-header :center="true"/>
+    <section v-for="(item,index) in fortunetellingFrame" :key="index">
+      <app-fortunetelling-result-lucky :luckyArr.sync="item.luckyArr" :des.sync="item.des"/>
     </section>
     <div v-if="!isRecord">
-      <app-fortunetelling-result-sales-record />
+      <app-fortunetelling-result-sales-record/>
     </div>
     <div class="bg-image-div">
-      <img
-        :src="bgImageUrl"
-        class="bg-image"
-      >
+      <img :src="bgImageUrl" class="bg-image">
     </div>
   </div>
 </template>
@@ -27,6 +18,7 @@ import AppLuckyHeader from "@/components/AppLuckyHeader";
 import AppFortunetellingResultLucky from "@/components/AppFortunetellingResultLucky";
 import AppFortunetellingResultSalesRecord from "@/components/AppFortunetellingResultSalesRecord";
 import { mapState } from "vuex";
+import { find } from "lodash";
 export default {
   components: {
     AppLuckyHeader,
@@ -35,28 +27,54 @@ export default {
   },
   data() {
     return {
-      bgImageUrl: require("@/assets/imgs/fortunetelling_results_pg.png"),
-      isRecord: false
+      bgImageUrl: require("@/assets/imgs/fortunetelling_results_pg.png")
     };
   },
   computed: {
     ...mapState({
-      fortunetellingFrame: state => state.fortunetellingFrame
-    })
-  },
-  methods: {
-    checkIsRecord() {
+      fortunetellingFrame(state) {
+        const fortunetellingFrame =
+          state.fortunetellingFrame[this.$moment().format("YYYYMMDD")];
+
+        let resultArray = [
+          {
+            luckyArr: [
+              {
+                label: this.$t("LuckyNumberLabel"),
+                value: fortunetellingFrame.luckyNumber
+              },
+              {
+                label: this.$t("LuckyWordsLabel"),
+                value: fortunetellingFrame.luckyWords
+              }
+            ],
+            des: fortunetellingFrame.luckyDescription
+          }
+        ];
+        if (this.isRecord) {
+          resultArray.push({
+            luckyArr: [
+              {
+                label: this.$t("LuckySalesLabel"),
+                value: fortunetellingFrame.luckySales
+              }
+            ],
+            des: this.$t("LuckySalesDescription")
+          });
+        }
+        return resultArray;
+      },
+      recordList: state => state.recordList
+    }),
+    isRecord() {
       const yesterday = this.$moment()
         .subtract(1, "days")
         .format("YYYYMMDD");
-      this.isRecord = localStorage.getItem(yesterday);
-      console.log(this.isRecord);
+      return find(this.recordList, { date: yesterday }) ? true : !true;
     }
   },
-  created() {
-    this.today = this.$moment().format("YYYYMMDD");
-    this.checkIsRecord();
-  }
+  methods: {},
+  created() {}
 };
 </script>
 

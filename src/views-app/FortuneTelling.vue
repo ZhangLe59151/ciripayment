@@ -28,13 +28,13 @@ export default {
     return {
       status: 0,
       minOpeningAnimateDuration: 3000,
-      animateStartTime: 0,
-      today: ""
+      animateStartTime: 0
     };
   },
   computed: {
     ...mapState({
-      fortunetellingFrame: state => state.fortunetellingFrame
+      fortunetellingFrame: state => state.fortunetellingFrame,
+      recordList: state => state.recordList
     }),
     statusEnum() {
       return {
@@ -42,6 +42,9 @@ export default {
         opening: 1,
         finish: 2
       };
+    },
+    today() {
+      return this.$moment().format("YYYYMMDD");
     }
   },
   methods: {
@@ -61,65 +64,62 @@ export default {
       }, timeout);
     },
     getFortunetelling() {
-      this.checkIsRecord();
       this.getFortunetellingByAPI();
     },
     getFortunetellingByAPI() {
       this.$api.getFortunetelling().then(res => {
         if (res.data.code === 200) {
           let fortunetellingFrame = res.data.data;
-          fortunetellingFrame["luckyDescription"] = res.data.data.luckyWords[0]["value"];
-          fortunetellingFrame["luckyWords"] = res.data.data.luckyWords[0]["key"];
+          fortunetellingFrame["luckyDescription"] =
+            res.data.data.luckyWords[0]["value"];
+          fortunetellingFrame["luckyWords"] =
+            res.data.data.luckyWords[0]["key"];
           this.$store.commit("SaveFortunetellingResult", {
-            [this.today]: this.buildFortunetellingFrame(fortunetellingFrame)
+            [this.today]: fortunetellingFrame
           });
-          this.showResult()
+          this.showResult();
         } else {
-          this.status = this.statusEnum.normal
+          this.status = this.statusEnum.normal;
         }
       });
-    },
-    buildFortunetellingFrame(fortunetellingFrame) {
-      let resultArray = [
-        {
-          luckyArr: [
-            {
-              label: this.$t("LuckyNumberLabel"),
-              value: fortunetellingFrame.luckyNumber
-            },
-            {
-              label: this.$t("LuckyWordsLabel"),
-              value: fortunetellingFrame.luckyWords
-            }
-          ],
-          des: fortunetellingFrame.luckyDescription
-        }
-      ];
-      if (this.isYesterdayRecord) {
-        resultArray.push({
-          luckyArr: [
-            {
-              label: this.$t("LuckySalesLabel"),
-              value: fortunetellingFrame.luckySales
-            }
-          ],
-          des: this.$t("LuckySalesDescription")
-        })
-      }
-      return resultArray;
-    },
-    checkIsRecord() {
-      const yesterday = this.$moment().subtract(1, "days").format("YYYYMMDD");
-      this.isYesterdayRecord = localStorage.getItem(yesterday);
     }
+    //   buildFortunetellingFrame(fortunetellingFrame) {
+    //     let resultArray = [
+    //       {
+    //         luckyArr: [
+    //           {
+    //             label: this.$t("LuckyNumberLabel"),
+    //             value: fortunetellingFrame.luckyNumber
+    //           },
+    //           {
+    //             label: this.$t("LuckyWordsLabel"),
+    //             value: fortunetellingFrame.luckyWords
+    //           }
+    //         ],
+    //         des: fortunetellingFrame.luckyDescription
+    //       }
+    //     ];
+    //     console.log(this.isYesterdayRecord);
+    //     if (this.isYesterdayRecord) {
+    //       resultArray.push({
+    //         luckyArr: [
+    //           {
+    //             label: this.$t("LuckySalesLabel"),
+    //             value: fortunetellingFrame.luckySales
+    //           }
+    //         ],
+    //         des: this.$t("LuckySalesDescription")
+    //       });
+    //     }
+    //     return resultArray;
+    //   }
   },
   mounted() {
-    this.today = this.$moment().format("YYYYMMDD");
     if (this.fortunetellingFrame[this.today]) {
       this.status = this.statusEnum.finish;
     }
   }
-}
+};
 </script>
 
 <style scoped>
