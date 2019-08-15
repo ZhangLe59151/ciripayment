@@ -10,7 +10,7 @@
           {{$t("Home.income")}}
         </div>
         <div class="income-value">
-          <span>+10000000</span>
+          <span>+{{info.income}}</span>
           <span class="income-currency">฿</span>
         </div>
       </van-col>
@@ -19,7 +19,7 @@
           {{$t("Expenses")}}
         </div>
         <div class="expenses-value">
-          <span>-10000</span>
+          <span>-{{info.expense}}</span>
           <span class="expenses-currency">฿</span>
         </div>
       </van-col>

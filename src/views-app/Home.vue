@@ -3,6 +3,7 @@
     <app-home-header
       @ShowPopup="ShowPopup"
       :canClick.sync="canClick"
+      :info.sync="records"
     />
 
     <app-home-loan />
@@ -41,7 +42,11 @@ export default {
     return {
       applicationStatus: this.$store.state.application.applicationStatus + "",
 
-      hasLoan: false
+      hasLoan: false,
+      records: {
+        income: 0,
+        expense: 0
+      }
     };
   },
   computed: {
@@ -88,11 +93,28 @@ export default {
           this.hasLoan = res.data.data.hasLoan;
         }
       });
+    },
+    getRecordsInfo() {
+      const recordList = [
+        { date: "20190815", income: "1000", expense: "200", note: "" }
+      ];
+
+      const month = this.$moment().format("YYYYMM");
+      console.log("====================================");
+      console.log(month);
+      console.log("====================================");
+      recordList.map(item => {
+        if (item.date.includes(month)) {
+          this.records.income += Number(item.income);
+          this.records.expense += Number(item.expense);
+        }
+      });
     }
   },
   mounted() {
     // this.$store.commit("InitUserInfo");
-    // this.fetchHomePageData();
+    this.fetchHomePageData();
+    this.getRecordsInfo();
     // if (
     //   Object.entries(this.$store.state.userInfo).length === 0 &&
     //   this.$store.state.userInfo.constructor === Object
