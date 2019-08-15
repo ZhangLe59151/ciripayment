@@ -27,8 +27,7 @@ export default {
   data() {
     return {
       bgImageUrl: require("@/assets/imgs/fortunetelling_results_pg.png"),
-      isRecord: false,
-      today: ""
+      isRecord: false
     };
   },
   computed: {
@@ -37,10 +36,17 @@ export default {
     })
   },
   methods: {
-
+    checkIsRecord() {
+      const yesterday = this.$moment()
+        .subtract(1, "days")
+        .format("YYYYMMDD");
+      this.isRecord = localStorage.getItem(yesterday);
+      console.log(this.isRecord);
+    }
   },
   created() {
     this.today = this.$moment().format("YYYYMMDD");
+    this.checkIsRecord();
   }
 };
 </script>

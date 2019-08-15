@@ -245,7 +245,8 @@ export default new Vuex.Store({
     recommendChannelsStore: [],
     completeLoanProfile: false,
     loanProfile: {},
-    fortunetellingFrame: []
+    fortunetellingFrame: [],
+    todayDate: ""
   },
   mutations: {
     InitForm(state) {
@@ -400,6 +401,10 @@ export default new Vuex.Store({
     ClearFortunetellingResult(state) {
       state.fortunetellingFrame = [];
       window.localStorage.removeItem("fortunetellingFrame");
+    },
+    SetTodayDate(state) {
+      state.todayDate = this.$moment().format("YYYYMMDD");;
+      window.localStorage.setItem("todayDate", state.todayDate);
     }
   },
   actions: {}
