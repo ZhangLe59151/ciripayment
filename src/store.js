@@ -374,6 +374,7 @@ export default new Vuex.Store({
       window.localStorage.setItem("application", "{}");
     },
     SaveFortunetellingResult(state, fortunetellingFrame) {
+      console.log(fortunetellingFrame);
       state.fortunetellingFrame = fortunetellingFrame;
       window.localStorage.setItem("fortunetellingFrame", JSON.stringify(fortunetellingFrame));
     },

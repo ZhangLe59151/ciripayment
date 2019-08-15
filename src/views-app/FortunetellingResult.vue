@@ -1,7 +1,7 @@
 <template>
   <div class="fortunetelling-result">
     <app-lucky-header :center="true"/>
-    <section v-for="(item,index) in luckyComponentArr" :key="index">
+    <section v-for="(item,index) in fortunetellingFrame[today]" :key="index">
       <app-fortunetelling-result-lucky :luckyArr.sync="item.luckyArr" :des.sync="item.des"/>
     </section>
     <div v-if="!isRecord">
@@ -33,7 +33,7 @@ export default {
   },
   computed: {
     ...mapState({
-      luckyComponentArr: state => state.luckyComponentArr
+      fortunetellingFrame: state => state.fortunetellingFrame
     })
   },
   methods: {
