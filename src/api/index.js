@@ -95,5 +95,8 @@ export default {
   },
   getLoanProfile() {
     return Vue.axios.get("/api/loan/view");
+  },
+  getHomeInformation() {
+    return Vue.axios.get("/api/information");
   }
 };

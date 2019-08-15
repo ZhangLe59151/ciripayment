@@ -13,7 +13,7 @@
       >
         <van-col span="16">
           <div class="arc-title">{{item.title}}</div>
-          <div class="arc-des">{{item.des}}</div>
+          <!-- <div class="arc-des">{{item.des}}</div> -->
         </van-col>
         <van-col span="8">
           <img :src="item.icon">
@@ -24,11 +24,19 @@
 </template>
 
 <script>
+const list = require("@/mockData/info.json").list;
 export default {
   data() {
     return {
-      arr: require("@/mockData/info.json").list
+      arr: []
     };
+  },
+  created() {
+    this.$api.getHomeInformation().then(res => {
+      if (res.data.code === 200) {
+        this.arr = res.data.data.articleVOList;
+      }
+    });
   }
 };
 </script>
@@ -57,11 +65,16 @@ export default {
         width: 84px;
       }
     }
+
     .arc-title {
-      margin: 13px 8px 8px 16px;
+      margin: 18px 8px 18px 16px;
       font-size: 16px;
       color: #2f3941;
       font-weight: bold;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
     }
 
     .arc-des {
