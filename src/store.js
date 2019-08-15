@@ -243,11 +243,7 @@ export default new Vuex.Store({
     bankList: require("./assets/data/bankInfo.json").list,
     merchantProfile: {},
     recommendChannelsStore: [],
-    fortunetelling: {
-      luckyNumber: "-",
-      luckyWords: "-",
-      luckySales: "-"
-    }
+    fortunetellingFrame: []
   },
   mutations: {
     InitForm(state) {
@@ -376,6 +372,14 @@ export default new Vuex.Store({
     ClearApplicationInfo(state) {
       state.application = {};
       window.localStorage.setItem("application", "{}");
+    },
+    SaveFortunetellingResult(state, fortunetellingFrame) {
+      state.fortunetellingFrame = fortunetellingFrame;
+      window.localStorage.setItem("fortunetellingFrame", JSON.stringify(fortunetellingFrame));
+    },
+    ClearFortunetellingResult(state) {
+      state.fortunetellingFrame = [];
+      window.localStorage.removeItem("fortunetellingFrame");
     }
   },
   actions: {}
