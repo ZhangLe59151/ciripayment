@@ -176,10 +176,11 @@ export default {
         this.$set(this.form,"date", val ? val.toDateString() : "")
         //this.form.date = "Today ," + val
         console.log( this.$moment(val).format("YYYYMMDD"))
-        if (this.$moment(val).format("YYYYMMDD") == this.$moment(today).format("YYYYMMDD")) {
-          this.form.date = "Today ," + val
+        console.log( this.$moment(new Date()).format("YYYYMMDD"))
+        if (this.$moment(val).format("YYYYMMDD") == this.$moment(new Date()).format("YYYYMMDD")) {
+          this.form.currentDate = "Today ," + val
         }
-        if (new Date(val).getTime() == today.setDate(today.getDate()-1)) {
+        if (this.$moment(val).format("YYYYMMDD") == this.$moment(today.setDate(today.getDate()-1)).format("YYYYMMDD")) {
           this.form.date = "Yesterday ," + val
         }
       }
