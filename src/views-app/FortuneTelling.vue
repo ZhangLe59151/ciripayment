@@ -106,6 +106,7 @@ export default {
           des: this.$t("LuckySalesDescription")
         })
       }
+      return resultArray;
     },
     checkIsRecord() {
       const yesterday = this.$moment().subtract(1, "days").format("YYYYMMDD");
@@ -115,7 +116,7 @@ export default {
   mounted() {
     this.today = this.$moment().format("YYYYMMDD");
     if (this.fortunetellingFrame[this.today]) {
-      this.status = this.statusEnum.finish
+      this.status = this.statusEnum.finish;
     }
   }
 }
