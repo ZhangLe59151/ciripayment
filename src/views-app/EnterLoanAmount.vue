@@ -173,6 +173,12 @@ export default {
       this.$api.applyLoan(this.$store.state.form.loanAmount).then(
         res => {
           if (res.data.code === 200 && res.data.data === true) {
+            let successMsg = "Application Sent Successfully";
+            this.$notify({
+              message: successMsg,
+              duration: 5000,
+              background: "#04A777"
+            });
             this.$router.push({ name: "Loan" });
           }
         }
