@@ -17,7 +17,7 @@
           <input
             class="input"
             type="text"
-            v-model="form.date"
+            :value="form.date"
             readonly
             confirm-button-text="confirm"
             cancel-button-text="cancel"
@@ -95,21 +95,19 @@
       </van-row>
     </div>
 
-    <div>
-      <van-row>
-        <van-col span="24">
-          <van-datetime-picker
-            v-show="appear"
-            v-model="currentDate"
-            type="date"
-            :min-date="minDate"
-            :max-date="maxDate"
-            @cancel="appear = false"
-            @confirm="setDate"
-          />
-        </van-col>
-      </van-row>
-    </div>
+    <van-row>
+      <van-col span="24">
+        <van-datetime-picker
+          v-show="appear"
+          v-model="currentDate"
+          type="date"
+          :min-date="minDate"
+          :max-date="maxDate"
+          @cancel="appear = false"
+          @confirm="setDate"
+        />
+      </van-col>
+    </van-row>
 
     <van-number-keyboard
       :show="show"
@@ -131,7 +129,7 @@ import AppCommonHeader from "@/components/AppCommonHeader";
 import { mapState } from "vuex";
 
 const today = new Date();
-
+const startDate = new Date("2019/01/01");
 export default {
   name: "AppRecords",
 
@@ -150,11 +148,7 @@ export default {
     return {
       currentTab: this.$route.query.currentTab || "0",
       form: {
-        date: this.$route.query.date
-          ? this.$moment(today.setDate(today.getDate() - 1)).format(
-              "D MMM YYYY"
-            )
-          : this.$moment(today).format("D MMM YYYY"),
+        date: "",
         income: "",
         expense: "",
         note: ""
@@ -162,37 +156,35 @@ export default {
       show: false,
       type: "income",
       appear: false,
-      minDate: new Date("Jan 01,2018"),
+      minDate: startDate,
       maxDate: today,
-      currentDate: today,
-      dispaly: false
+      currentDate: today
     };
   },
   watch: {
     currentDate: {
+      immediate: true,
       handler(val, oldVal) {
-        this.$set(
-          this.form,
-          "date",
-          val ? this.$moment(val).format("D MMM YYYY") : ""
-        );
-        //this.$set(this.form,"date", val ? val.toDateString() : "")
-        //this.form.date = "Today ," + val
+        let formDate = this.$moment(val).format("D MMM YYYY");
+        let prefix = "";
+
         if (
-          this.$moment(val).format("YYYYMMDD") ==
-          this.$moment(new Date()).format("YYYYMMDD")
+          this.$moment(val).format("YYYYMMDD") ===
+          this.$moment().format("YYYYMMDD")
         ) {
-          this.form.date = "Today ," + val;
-        } else if (
-          this.$moment(val).format("YYYYMMDD") ==
-          this.$moment(today.setDate(today.getDate() - 1)).format("YYYYMMDD")
-        ) {
-          this.form.date = "Yesterday ," + val;
-        } else {
-          this.form.date = this.form.date
-            .replace("Today ,", "")
-            .replace("Yesterday ,", "");
+          prefix = "Today ,";
         }
+
+        if (
+          this.$moment(val).format("YYYYMMDD") ===
+          this.$moment()
+            .subtract(1, "days")
+            .format("YYYYMMDD")
+        ) {
+          prefix = "Yesterday ,";
+        }
+
+        this.$set(this.form, "date", val ? prefix + formDate : "");
       }
     }
   },
@@ -203,13 +195,9 @@ export default {
       this.type = type;
     },
     onInput(value) {
-      if (this.form[this.type].indexOf(".") != -1 && value == ".") {
-        return false;
+      if (true) {
+        this.form[this.type] += value;
       }
-      if (this.form[this.type] == "" && value == ".") {
-        return false;
-      }
-      this.form[this.type] += value;
     },
     onDelete() {
       let kbt = this.form[this.type].toString();
@@ -223,11 +211,18 @@ export default {
       this.appear = false;
       const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
       if (regex.test(form[this.type])) {
-        this.$store.commit("UpdateRecord", form);
+        this.$store.commit("UpdateRecord", this.convertForm(form));
         this.$toast("Update succeed!");
         return false;
       }
       this.$toast("Pls input valid amount.");
+    },
+    convertForm(form) {
+      const _date = form.date.includes(",")
+        ? form.date.split(", ")[1]
+        : form.date;
+      form.date = this.$moment(_date).format("YYYYMMDD");
+      return form;
     },
     view_history() {
       this.$router.push({ name: "RecordList" });
@@ -333,5 +328,8 @@ export default {
     height: 40px;
     margin-top: 16px;
   }
+}
+.van-picker {
+  z-index: 2000;
 }
 </style>
