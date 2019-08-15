@@ -1,114 +1,125 @@
 <template>
- <div v-if="!loanProfile || Object.keys(loanProfile).length === 0" class="app-loan-overview">
-   <div class="banner">
-     <div class="banner-title">
-       {{$t("AppLoanOverview.bannerTitle")}}
+  <div v-if="!loanProfile || Object.keys(loanProfile).length === 0" class="app-loan-overview">
+     <div class="banner">
+       <div class="banner-title">
+         {{$t("AppLoanOverview.bannerTitle")}}
+       </div>
+       <div class="banner-number">
+         100,000 ฿
+       </div>
      </div>
-     <div class="banner-number">
-       100,000 ฿
+     <div class="ribbon">
+      <div class="lower-rate">
+        <i
+          class="iconfont iconcheck"
+        />
+        <div>{{$t("AppLoanOverview.lowerRate")}}</div>
+      </div>
+       <div class="higher-limit">
+         <i
+           class="iconfont iconcheck"
+         />
+         <div>{{$t("AppLoanOverview.higherLimit")}}</div>
+       </div>
+       <div class="faster-approval">
+         <i
+           class="iconfont iconcheck"
+         />
+         <div>{{$t("AppLoanOverview.fasterApproval")}}</div>
+       </div>
+     </div>
+     <div class="instruction">
+      <div class="instruction-title">
+        {{$t("AppLoanOverview.instructionTitle")}}
+      </div>
+       <div class="instruction-content-1">
+         {{$t("AppLoanOverview.instructionContent1")}}
+       </div>
+       <ul class="instruction-content-2">
+         <li><span>{{$t("AppLoanOverview.instructionContent2.personalDetails")}}</span></li>
+         <li><span>{{$t("AppLoanOverview.instructionContent2.bizInfo")}}</span></li>
+         <li><span>{{$t("AppLoanOverview.instructionContent2.photos")}}</span></li>
+       </ul>
+       <div class="instruction-content-3">
+         Tap <span style="font-weight: bold">Start Now</span> to begin applying!
+       </div>
+     </div>
+     <div class="loan-terms">
+       <div class="loan-terms-title">
+         Loan Terms
+       </div>
+       <div class="loan-terms-content-1">
+         The base loan amount is <b>5,000 ฿</b> without any profile information.
+       </div>
+       <div class="loan-terms-content-2">
+         Low interest rates from <b>3.7% p.a. (EIR 7% p.a.).</b>
+       </div>
+       <div class="loan-terms-content-3">
+         From <b>1 minute</b> approval in-principle.
+       </div>
+       <van-button
+         size="small"
+         class="bottom-btn"
+         @click="handleStart"
+       >
+         Start Now
+       </van-button>
+       <div class="consent-agreement">
+         By submitting an application, you consent to the use of all submitted information by Silot AI for loan application and marketing purposes.
+       </div>
      </div>
    </div>
-   <div class="ribbon">
-    <div class="lower-rate">
-      <i
-        class="iconfont iconcheck"
-      />
-      <div>{{$t("AppLoanOverview.lowerRate")}}</div>
-    </div>
-     <div class="higher-limit">
-       <i
-         class="iconfont iconcheck"
-       />
-       <div>{{$t("AppLoanOverview.higherLimit")}}</div>
-     </div>
-     <div class="faster-approval">
-       <i
-         class="iconfont iconcheck"
-       />
-       <div>{{$t("AppLoanOverview.fasterApproval")}}</div>
-     </div>
-   </div>
-   <div class="instruction">
-    <div class="instruction-title">
-      {{$t("AppLoanOverview.instructionTitle")}}
-    </div>
-     <div class="instruction-content-1">
-       {{$t("AppLoanOverview.instructionContent1")}}
-     </div>
-     <ul class="instruction-content-2">
-       <li><span>{{$t("AppLoanOverview.instructionContent2.personalDetails")}}</span></li>
-       <li><span>{{$t("AppLoanOverview.instructionContent2.bizInfo")}}</span></li>
-       <li><span>{{$t("AppLoanOverview.instructionContent2.photos")}}</span></li>
-     </ul>
-     <div class="instruction-content-3">
-       Tap <span style="font-weight: bold">Start Now</span> to begin applying!
-     </div>
-   </div>
-   <div class="loan-terms">
-     <div class="loan-terms-title">
-       Loan Terms
-     </div>
-     <div class="loan-terms-content-1">
-       The base loan amount is <b>5,000 ฿</b> without any profile information.
-     </div>
-     <div class="loan-terms-content-2">
-       Low interest rates from <b>3.7% p.a. (EIR 7% p.a.).</b>
-     </div>
-     <div class="loan-terms-content-3">
-       From <b>1 minute</b> approval in-principle.
-     </div>
-     <van-button
-       size="small"
-       class="bottom-btn"
-       @click="handleStart"
-     >
-       Start Now
-     </van-button>
-   </div>
- </div>
   <div v-else class="app-loan-overview">
-    <div class="loan-applied-wrapper">
-      <div>
-        <van-row type="flex" justify="space-between">
-          <van-col class="loan-heading" span="12">
-            Your Application
-          </van-col>
-          <van-col :class="formatStatus(loanProfile.status).color +' loan-status'">
-            {{formatStatus(loanProfile.status).label}}
-          </van-col>
-        </van-row>
+      <div class="loan-applied-wrapper">
+        <div>
+          <van-row type="flex" justify="space-between">
+            <van-col class="loan-heading" span="12">
+              Your Application
+            </van-col>
+            <van-col :class="formatStatus(loanProfile.status).color +' loan-status'">
+              {{formatStatus(loanProfile.status).label}}
+            </van-col>
+          </van-row>
 
-      </div>
-      <div>
-        <van-row class="loan-details" type="flex" justify="space-between">
-          <van-col class="label" span="12">
-            Applicant Mobile Number
-          </van-col>
-          <van-col class="info" span="12">
-            {{loanProfile.phoneNumber}}
-          </van-col>
-        </van-row>
+        </div>
+        <div>
+          <van-row class="loan-details" type="flex" justify="space-between">
+            <van-col class="label" span="12">
+              Applicant Mobile Number
+            </van-col>
+            <van-col class="info" span="12">
+              {{loanProfile.phoneNumber}}
+            </van-col>
+          </van-row>
 
-        <van-row class="loan-details" type="flex" justify="space-between">
-          <van-col class="label" span="12">
-            Application Time
-          </van-col>
-          <van-col class="info" span="12">
-            {{this.$moment(loanProfile.createTime).format("DD MMM YYYY, HH:ss")}}
-          </van-col>
-        </van-row>
+          <van-row class="loan-details" type="flex" justify="space-between">
+            <van-col class="label" span="12">
+              Application Time
+            </van-col>
+            <van-col class="info" span="12">
+              {{this.$moment(loanProfile.createTime).format("DD MMM YYYY, HH:ss")}}
+            </van-col>
+          </van-row>
 
-        <van-row class="loan-details" type="flex" justify="space-between">
-          <van-col class="label" span="12">
-            Application Amount
-          </van-col>
-          <van-col class="info" span="12">
-            {{formatCurrency(loanProfile.amount)}} ฿
-          </van-col>
-        </van-row>
+          <van-row class="loan-details" type="flex" justify="space-between">
+            <van-col class="label" span="12">
+              Application Amount
+            </van-col>
+            <van-col class="info" span="12">
+              {{formatCurrency(loanProfile.amount)}} ฿
+            </van-col>
+          </van-row>
+        </div>
+        <van-button
+          v-if="$route.query.justSubmitted"
+          size="small"
+          class="back-to-home-btn bottom-btn"
+          @click="$router.push({name: 'Home'})"
+        >
+          Back To Home
+        </van-button>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -283,7 +294,7 @@ export default {
         margin-top: 8px;
       }
       .loan-terms-content-3{
-        margin-bottom: 52px;
+        margin-bottom: 32px;
       }
       .bottom-btn {
         background-color: #FF8600;
@@ -291,7 +302,13 @@ export default {
         width: 100%;
         height: 40px;
         font-size: 14px;
-        margin-bottom: 16px;
+        margin-bottom: 12px;
+      }
+      .consent-agreement{
+        text-align: center;
+        font-size: 10px;
+        color: #68737D;
+        margin-bottom:12px;
       }
     }
 
@@ -337,8 +354,15 @@ export default {
           font-size: 14px;
         }
       }
+      .back-to-home-btn {
+        width: calc(100vw - 32px);
+        font-size: 14px;
+        height:40px;
+        position:fixed;
+        bottom: 16px;
+        left: 16px;
+      }
     }
-
 
   }
 </style>

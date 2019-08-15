@@ -1,8 +1,20 @@
 <template>
   <div class="app-loan">
-    <app-loan-header />
+    <app-loan-header v-if="!$route.query.origin" />
+    <van-nav-bar v-else
+      :left-arrow = "!!$route.query.origin"
+      @click-left="$router.push({name: 'Home'})"
+      :border="false"
+    >
+      <div
+        slot="title"
+        class="header-title"
+      >
+        Instant Loan
+      </div>
+    </van-nav-bar>
     <app-loan-overview />
-    <app-tab-bar :active="1" />
+    <app-tab-bar :active="1" v-if="!$route.query.origin && !$route.query.justSubmitted "/>
   </div>
 
 </template>
@@ -30,3 +42,13 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  .app-loan {
+    .header-title {
+      font-size: 20px;
+      color: white;
+      font-weight: bold;
+    }
+  }
+</style>
