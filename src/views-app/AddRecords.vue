@@ -13,11 +13,7 @@
       <van-row class="pick_date">
         <van-col span="22"> 
           <div class="pick_date">
-            <van-datetime-picker
-              v-model="currentDate"
-              type="date"
-              :min-date="minDate"
-            /></div>
+            </div>
         </van-col>
         <van-col span="2"><van-icon name="arrow-down" /></van-col>
       </van-row>
@@ -104,6 +100,12 @@
       @delete="onDelete"
     />
 
+    <van-datetime-picker
+      :show="appear"
+      v-model="currentDate"
+      type="date"
+      :min-date="minDate"
+    />
 
 
     <app-tab-bar :active="1" />
@@ -143,6 +145,7 @@ export default {
       },
       show: false,
       type: "income",
+      appear: false,
       currentDate: new Date()
     };
   },
