@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-records-header />
+    <app-common-header title="Records" />
 
     <div class="app-pick-date">
       <van-row class="select_date">
@@ -13,9 +13,7 @@
         </van-col>
       </van-row>
       <van-row class="pick_date">
-
         <van-col span="22">
-
           <input
             class="input"
             type="text"
@@ -25,7 +23,6 @@
             cancel-button-text="cancel"
             @focus="appear = true"
           />
-
         </van-col>
       </van-row>
     </div>
@@ -133,7 +130,8 @@
 
 <script>
 import AppTabBar from "@/components/AppTabBar";
-import AppRecordsHeader from "@/components/AppRecordsHeader";
+import AppCommonHeader from "@/components/AppCommonHeader";
+
 import { mapState } from "vuex";
 
 const today = new Date();
@@ -143,7 +141,7 @@ export default {
 
   components: {
     AppTabBar,
-    AppRecordsHeader
+    AppCommonHeader
   },
 
   computed: {

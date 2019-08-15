@@ -4,18 +4,23 @@
     <van-list
       v-model="loading"
       :finished="finished"
-      finished-text="没有更多了"
+      finished-text="no more"
       @load="onLoad"
     >
       <van-cell
         v-for="(item) in list"
         :key="item.date"
-        :title="item.date"
+        :title="formatDate(item.date)"
       >
         <template slot="default">
-          <span class="custom-title">Income: {{item.income}}</span>
-          <br>
-          <span class="custom-title">Expenses: {{item.expense}}</span>
+          <div>
+            Income: <span class="custom-income">+{{item.income}}</span>
+          </div>
+
+          <div>
+            Expenses: <span class="custom-expense"> -{{item.expense}}</span>
+          </div>
+
         </template>
       </van-cell>
     </van-list>
@@ -24,47 +29,46 @@
 
 <script>
 import AppCommonHeader from "@/components/AppCommonHeader";
-const recordList = [
-  {
-    date: "20190917",
-    income: "+100",
-    expense: "-50"
-  },
-  {
-    date: "20190918",
-    income: "+100",
-    expense: "-50"
-  },
-  {
-    date: "20190919",
-    income: "+100",
-    expense: "-50"
-  }
-];
+import { mapState } from "vuex";
+
 export default {
   components: {
     AppCommonHeader
   },
   data() {
     return {
-      list: recordList,
+      list: [],
       loading: false,
-      finished: false
+      finished: false,
+      currentNo: 0
     };
   },
 
+  computed: {
+    ...mapState({
+      recordList: state => state.recordList
+    })
+  },
+
   methods: {
+    formatDate(val) {
+      return this.$moment(val).format("dd MM YYYY");
+    },
     onLoad() {
       // 异步更新数据
       setTimeout(() => {
-        for (let i = 0; i < 10; i++) {
-          this.list.push(this.list.length + 1);
-        }
+        const endNo =
+          this.currentNo + 10 < this.recordList.length
+            ? this.currentNo + 10
+            : this.recordList.length;
+        const startNo = this.currentNo;
+
+        this.list = this.list.concat(this.recordList.slice(startNo, endNo));
         // 加载状态结束
         this.loading = false;
 
         // 数据全部加载完成
-        if (this.list.length >= recordList.length) {
+        if (this.list.length >= this.recordList.length) {
           this.finished = true;
         }
       }, 500);
@@ -77,5 +81,20 @@ export default {
 <style lang="scss" scoped>
 .van-nav-bar {
   height: 44px;
+}
+.van-cell {
+  .van-cell__title > span {
+    position: relative;
+    top: 14px;
+  }
+}
+
+.custom-income {
+  font-size: 16px;
+  color: #04a777;
+}
+.custom-expense {
+  font-size: 16px;
+  color: #b41800;
 }
 </style>

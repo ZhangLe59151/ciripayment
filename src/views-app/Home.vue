@@ -1,10 +1,6 @@
 <template>
   <div class="app-home">
-    <app-home-header
-      @ShowPopup="ShowPopup"
-      :canClick.sync="canClick"
-      :info.sync="records"
-    />
+    <app-home-header :info.sync="records" />
 
     <app-home-loan />
     <app-home-lucky />
@@ -42,17 +38,31 @@ export default {
     return {
       applicationStatus: this.$store.state.application.applicationStatus + "",
 
-      hasLoan: false,
-      records: {
-        income: 0,
-        expense: 0
-      }
+      hasLoan: false
     };
   },
   computed: {
     canClick() {
       return this.applicationStatus === "NOAPPLICATION";
-    }
+    },
+    ...mapState({
+      records(state) {
+        const recordList = state.recordList;
+        const month = this.$moment().format("YYYYMM");
+        const records = {
+          income: 0,
+          expense: 0
+        };
+        recordList.map(item => {
+          if (item.date.includes(month)) {
+            records.income += Number(item.income);
+            records.expense += Number(item.expense);
+          }
+        });
+
+        return records;
+      }
+    })
   },
   methods: {
     ShowPopup() {
@@ -93,28 +103,12 @@ export default {
           this.hasLoan = res.data.data.hasLoan;
         }
       });
-    },
-    getRecordsInfo() {
-      const recordList = [
-        { date: "20190815", income: "1000", expense: "200", note: "" }
-      ];
-
-      const month = this.$moment().format("YYYYMM");
-      console.log("====================================");
-      console.log(month);
-      console.log("====================================");
-      recordList.map(item => {
-        if (item.date.includes(month)) {
-          this.records.income += Number(item.income);
-          this.records.expense += Number(item.expense);
-        }
-      });
     }
   },
   mounted() {
     // this.$store.commit("InitUserInfo");
     this.fetchHomePageData();
-    this.getRecordsInfo();
+
     // if (
     //   Object.entries(this.$store.state.userInfo).length === 0 &&
     //   this.$store.state.userInfo.constructor === Object
