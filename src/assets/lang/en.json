@@ -4,6 +4,28 @@
   "noSelectSettlementErrorMsg": "Please select one of the settlement options to proceed.",
   "marketingServiceErrorMsg": "There are errors in your form. Please correct them before trying again.",
   "OTPErrorMsg": "OTP request too frequent. Please wait for a minute and try again.",
+  "AppHomeLoan": "Tap here to enjoy a pre-approved loan up to",
+  "LuckyNumberLabel": "Lucky Number",
+  "LuckyWordsLabel": "Lucky Words",
+  "LuckyDescription": "I am thankful for all of those who said NO to me. It's because of them I'm doing it myself.",
+  "LuckySalesLabel": "Sales Lucky Today",
+  "LuckySalesDescription": "Record your daily income for better predictions.",
+  "Income": "INCOME",
+  "Expenses": "EXPENSES",
+  "AppHomeInfo": "Relevant To Your Business",
+  "AppLoanOverview": {
+    "bannerTitle": "Maximum Loan Amount",
+    "lowerRate": "Lower Rate",
+    "higherLimit": "Higher Limit",
+    "fasterApproval": "Faster Approval",
+    "instructionTitle": "Maximise Your Limit",
+    "instructionContent1": "Enjoy a higher limit and faster approval time when you provide your profile information:",
+    "instructionContent2": {
+      "personalDetails": "Personal Details",
+      "bizInfo": "Business Information",
+      "photos": "Photos of Your ID"
+    }
+  },
   "Home": {
     "income": "TODAY'S INCOME",
     "expenses": "EXPENSES",

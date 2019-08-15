@@ -1,8 +1,8 @@
 <template>
- <div class="app-loan-overview">
+ <div v-if="!loanProfile || Object.keys(loanProfile).length === 0" class="app-loan-overview">
    <div class="banner">
      <div class="banner-title">
-       Maximum Loan Amount
+       {{$t("AppLoanOverview.bannerTitle")}}
      </div>
      <div class="banner-number">
        100,000 ฿
@@ -13,32 +13,32 @@
       <i
         class="iconfont iconcheck"
       />
-      <div>Lower Rate</div>
+      <div>{{$t("AppLoanOverview.lowerRate")}}</div>
     </div>
      <div class="higher-limit">
        <i
          class="iconfont iconcheck"
        />
-       <div>Higher Limit</div>
+       <div>{{$t("AppLoanOverview.higherLimit")}}</div>
      </div>
      <div class="faster-approval">
        <i
          class="iconfont iconcheck"
        />
-       <div>Faster Approval</div>
+       <div>{{$t("AppLoanOverview.fasterApproval")}}</div>
      </div>
    </div>
    <div class="instruction">
     <div class="instruction-title">
-      Maximise Your Limit
+      {{$t("AppLoanOverview.instructionTitle")}}
     </div>
      <div class="instruction-content-1">
-       Enjoy a higher limit and faster approval time when you provide your profile information:
+       {{$t("AppLoanOverview.instructionContent1")}}
      </div>
      <ul class="instruction-content-2">
-       <li><span>Personal Details</span></li>
-       <li><span>Business Information</span></li>
-       <li><span>Photos of Your ID</span></li>
+       <li><span>{{$t("AppLoanOverview.instructionContent2.personalDetails")}}</span></li>
+       <li><span>{{$t("AppLoanOverview.instructionContent2.bizInfo")}}</span></li>
+       <li><span>{{$t("AppLoanOverview.instructionContent2.photos")}}</span></li>
      </ul>
      <div class="instruction-content-3">
        Tap <span style="font-weight: bold">Start Now</span> to begin applying!
@@ -66,10 +66,53 @@
      </van-button>
    </div>
  </div>
+  <div v-else class="app-loan-overview">
+    <div class="loan-applied-wrapper">
+      <div>
+        <van-row type="flex" justify="space-between">
+          <van-col class="loan-heading" span="12">
+            Your Application
+          </van-col>
+          <van-col :class="formatStatus(loanProfile.status).color +' loan-status'">
+            {{formatStatus(loanProfile.status).label}}
+          </van-col>
+        </van-row>
+
+      </div>
+      <div>
+        <van-row class="loan-details" type="flex" justify="space-between">
+          <van-col class="label" span="12">
+            Applicant Mobile Number
+          </van-col>
+          <van-col class="info" span="12">
+            {{loanProfile.phoneNumber}}
+          </van-col>
+        </van-row>
+
+        <van-row class="loan-details" type="flex" justify="space-between">
+          <van-col class="label" span="12">
+            Application Time
+          </van-col>
+          <van-col class="info" span="12">
+            {{this.$moment(loanProfile.createTime).format("DD MMM YYYY, HH:ss")}}
+          </van-col>
+        </van-row>
+
+        <van-row class="loan-details" type="flex" justify="space-between">
+          <van-col class="label" span="12">
+            Application Amount
+          </van-col>
+          <van-col class="info" span="12">
+            {{formatCurrency(loanProfile.amount)}} ฿
+          </van-col>
+        </van-row>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-
+import { mapState } from "vuex";
 export default {
   name: "AppLoanOverview",
   components: {
@@ -78,9 +121,58 @@ export default {
     return {
     }
   },
+  computed: {
+    ...mapState({
+      loanProfile: state => state.loanProfile,
+      merchantApplyingChannelStatus: state => state.merchantApplyingChannelStatus
+    })
+  },
   methods: {
     handleStart() {
+      this.$router.push({ name: "EnterLoanInfo" });
+    },
+    formatStatus(loanStatus) {
+      return this.merchantApplyingChannelStatus.filter(status => String(status.value) === String(loanStatus))[0];
+    },
+    formatNumber(n) {
+      return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    },
+    formatCurrency(val) {
+      // change to string
+      val = String(val);
+      // don't validate empty input
+      if (val === "") { return; }
 
+      // check for decimal
+      if (val.indexOf(".") >= 0) {
+        // get position of first decimal
+        // this prevents multiple decimals from
+        // being entered
+        var decimalPos = val.indexOf(".");
+
+        // split number by decimal point`
+        var leftSide = val.substring(0, decimalPos);
+        var rightSide = val.substring(decimalPos);
+
+        // add commas to left side of number
+        leftSide = this.formatNumber(leftSide);
+
+        // validate right side
+        rightSide = this.formatNumber(rightSide);
+
+        // Limit decimal to only 2 digits
+        rightSide = rightSide.substring(0, 2);
+
+        // join number by .
+        val = leftSide + "." + rightSide;
+      } else {
+        // no decimal entered
+        // add commas to number
+        // remove all non-digits
+        val = this.formatNumber(val);
+      }
+      // send updated string to input
+      return val;
     }
   }
 }
@@ -118,7 +210,7 @@ export default {
       margin-bottom: -15px;
       .lower-rate{
         position: absolute;
-        top:25px;
+        top:28px;
         left:41px;
         .iconcheck {
           color: #62cd7b;
@@ -129,7 +221,7 @@ export default {
       }
       .higher-limit{
         position: absolute;
-        top:25px;
+        top:28px;
         left:141px;
         .iconcheck {
           color: #62cd7b;
@@ -140,7 +232,7 @@ export default {
       }
       .faster-approval{
         position: absolute;
-        top:25px;
+        top:28px;
         left:240px;
         .iconcheck {
           color: #62cd7b;
@@ -182,10 +274,12 @@ export default {
         font-size: 16px;
         font-weight: bold;
         text-align: center;
-        margin-bottom:12px;
+        margin-bottom:22px;
       }
       .loan-terms-content-1,.loan-terms-content-2,.loan-terms-content-3{
         font-size:14px;
+      }
+      .loan-terms-content-2,.loan-terms-content-3{
         margin-top: 8px;
       }
       .loan-terms-content-3{
@@ -200,6 +294,51 @@ export default {
         margin-bottom: 16px;
       }
     }
+
+    .loan-applied-wrapper {
+      padding: 23px 16px 0 16px;
+      color: #2F3941;
+      .loan-heading {
+        font-size:16px;
+        font-weight: bold;
+      }
+      .loan-status {
+        text-align:right;
+        color: white;
+        border-radius: 4px;
+        padding: 5px 10px 5px 10px;
+        font-size: 12px;
+      }
+      .green {
+        background-color: #04A777;
+      }
+
+      .red {
+        background-color: #B41800;
+      }
+
+      .gray {
+        background-color: #A0B4C0;
+      }
+
+      .blue {
+        background-color: #1F73B7;
+      }
+      .loan-details {
+        border-bottom: 1px solid #D8D8D8;
+        margin-top: 28px;
+        padding-bottom: 20px;
+        .label{
+          color: #87929D;
+          font-size:12px;
+        }
+        .info{
+          text-align: right;
+          font-size: 14px;
+        }
+      }
+    }
+
 
   }
 </style>

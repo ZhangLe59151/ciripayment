@@ -242,7 +242,14 @@ export default new Vuex.Store({
         : "/api/self-onboarding/image/upload",
     bankList: require("./assets/data/bankInfo.json").list,
     merchantProfile: {},
-    recommendChannelsStore: []
+    recommendChannelsStore: [],
+    fortunetelling: {
+      luckyNumber: "-",
+      luckyWords: "-",
+      luckySales: "-"
+    },
+    completeLoanProfile: false,
+    loanProfile: {}
   },
   mutations: {
     InitForm(state) {
@@ -297,7 +304,6 @@ export default new Vuex.Store({
       state.merchantProfile = merchantProfile;
       localStorage.setItem("merchantProfile", JSON.stringify(merchantProfile));
     },
-    // if there is no merchant profile in store, try to look in storage
     fetchDataFromLocal(state) {
       // fetch merchant profile
       if (
@@ -321,6 +327,28 @@ export default new Vuex.Store({
         state.application = {
           ...state.application,
           ...localApplication
+        };
+      }
+      // fetch loan Profile
+      if (
+        Object.keys(state.loanProfile).length === 0 &&
+        localStorage.getItem("loanProfile")
+      ) {
+        let localLoanProfile = JSON.parse(localStorage.getItem("loanProfile"));
+        state.loanProfile = {
+          ...state.loanProfile,
+          ...localLoanProfile
+        };
+      }
+      // fetch user Info
+      if (
+        Object.keys(state.userInfo).length === 0 &&
+        localStorage.getItem("userInfo")
+      ) {
+        let localUserInfo = JSON.parse(localStorage.getItem("userInfo"));
+        state.userInfo = {
+          ...state.userInfo,
+          ...localUserInfo
         };
       }
     },
@@ -371,6 +399,18 @@ export default new Vuex.Store({
     ClearApplicationInfo(state) {
       state.application = {};
       window.localStorage.setItem("application", "{}");
+    },
+    // Fetch Loan profile
+    initLoanProfile(state, loanProfile) {
+      state.loanProfile = loanProfile;
+      localStorage.setItem("loanProfile", JSON.stringify(loanProfile));
+    },
+    UpdateLoanProfile(state, updateLoanProfile) {
+      state.loanProfile = Object.assign(state.loanProfile, updateLoanProfile);
+      window.localStorage.setItem("loanProfile", JSON.stringify(state.loanProfile));
+    },
+    CompleteLoanProfile(state) {
+      state.completeLoanProfile = true;
     }
   },
   actions: {}

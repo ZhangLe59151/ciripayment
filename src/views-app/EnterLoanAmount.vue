@@ -1,0 +1,301 @@
+<template>
+    <div class="enter-loan-amount">
+      <van-nav-bar
+        @click-left="$router.back()"
+        left-arrow
+      />
+      <div class="banner">
+        <div class="banner-title">
+          Your Estimated Credit Limit
+        </div>
+        <div class="banner-number">
+          up to <span style="font-size: 32px">100,000* ฿</span>
+        </div>
+      </div>
+
+      <el-form
+        label-width="0px"
+        :model="form"
+        ref="elForm"
+        size="small"
+        label-position="top"
+        class="elForm"
+      >
+        <el-card class="box-card">
+          <el-form-item
+            label="How much do you want to borrow?"
+            prop="loanAmount"
+            :rules="[{ required: true, message: 'This field is required.', trigger: 'blur' },
+            ]"
+          >
+            <el-input
+              v-model="form.loanAmount"
+              @input="formatCurrency"
+            >
+              <div class="currency" slot="suffix">฿</div>
+            </el-input>
+          </el-form-item>
+        </el-card>
+      </el-form>
+
+      <div class="tips">
+        *This figure is an estimated amount. Your final approved loan amount may differ.
+      </div>
+
+      <van-button
+        size="large"
+        class="bottom-btn apply-btn"
+        @click="handleApply"
+        :disabled = "form.loanAmount === ''"
+      >
+        Apply
+      </van-button>
+
+      <van-dialog
+        v-model="dialog"
+        scroll=paper
+        class="scroll-dialog"
+        :showConfirmButton="false"
+      >
+        <div
+          class="heading"
+        >
+          <h1>Proceed without Completing Profile?</h1>
+          <van-icon
+            name="cross"
+            @click="dialog = false"
+          />
+        </div>
+        <div class="warning">
+          <van-row>
+            <van-col span="1"><i
+              class="iconfont iconalert"
+            /></van-col>
+            <van-col span="18" offset="1"><div class="warning-content">Your current credit limit is <b>5,000฿</b>. Complete your profile to get up to <b>100,000฿!</b>
+            </div></van-col>
+          </van-row>
+        </div>
+        <div class="button-group">
+          <van-row>
+            <van-col span="11"><van-button
+              size="small"
+              class="bottom-btn dialog-btn plain"
+              @click="applyForLoan"
+            >
+              Apply Anyway
+            </van-button>
+            </van-col>
+            <van-col span="11" offset="2">
+              <van-button
+                size="small"
+                class="bottom-btn dialog-btn"
+                @click="$router.push({name: 'EnterLoanInfo'})"
+              >
+                Complete Profile
+              </van-button>
+            </van-col>
+          </van-row>
+        </div>
+      </van-dialog>
+    </div>
+</template>
+
+<script>
+import { mapState } from "vuex";
+export default {
+  name: "EnterLoanAmount",
+  data() {
+    return {
+      dialog: false,
+      form: {
+        loanAmount: ""
+      }
+    }
+  },
+  computed: {
+    ...mapState([
+      "completeLoanProfile"
+    ])
+  },
+  methods: {
+    formatNumber(n) {
+      return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    },
+    formatCurrency(val) {
+      // don't validate empty input
+      if (val === "") { return; }
+
+      // check for decimal
+      if (val.indexOf(".") >= 0) {
+        // get position of first decimal
+        // this prevents multiple decimals from
+        // being entered
+        var decimalPos = val.indexOf(".");
+
+        // split number by decimal point`
+        var leftSide = val.substring(0, decimalPos);
+        var rightSide = val.substring(decimalPos);
+
+        // add commas to left side of number
+        leftSide = this.formatNumber(leftSide);
+
+        // validate right side
+        rightSide = this.formatNumber(rightSide);
+
+        // Limit decimal to only 2 digits
+        rightSide = rightSide.substring(0, 2);
+
+        // join number by .
+        val = leftSide + "." + rightSide;
+      } else {
+        // no decimal entered
+        // add commas to number
+        // remove all non-digits
+        val = this.formatNumber(val);
+      }
+      // send updated string to input
+      this.form.loanAmount = val;
+    },
+    activateDialog() {
+      this.dialog = true;
+      event.preventDefault();
+    },
+    handleApply() {
+      if (this.completeLoanProfile) {
+        this.applyForLoan();
+      } else {
+        this.activateDialog();
+      }
+    },
+    applyForLoan() {
+      // update Loan Amount
+      this.$store.commit("UpdateForm", { loanAmount: parseInt(this.form.loanAmount.replace(/,/g, "")) });
+      this.$api.applyLoan(this.$store.state.form.loanAmount).then(
+        res => {
+          if (res.data.code === 200 && res.data.data === true) {
+            let successMsg = "Application Sent Successfully";
+            this.$notify({
+              message: successMsg,
+              duration: 5000,
+              background: "#04A777"
+            });
+            this.$router.push({ name: "Loan" });
+          }
+        }
+      );
+
+      // this.$router.push({ name: "Loan" });
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+  .enter-loan-amount{
+    background-color: #E9EBED;
+    color: #363F47;
+    height: 100vh;
+    .banner{
+      height: 138px;
+      background: url("../assets/imgs/enter_loan_amount_banner.png") no-repeat;
+      background-size: cover;
+      text-align: center;
+      padding: 26px 0px 45px 0px ;
+      box-sizing: border-box;
+      font-weight: bold;
+      line-height: 37px;
+      .banner-title{
+        font-size: 20px;
+      }
+      .banner-number{
+        font-size:16px;
+      }
+    }
+    .elForm{
+      width: 100%;
+      height: 149px;
+      .box-card{
+        height: 100%;
+      }
+      .currency {
+        position: relative;
+        top: 0;
+        left:0;
+        font-size: 24px;
+      }
+    }
+    .tips {
+      color : #68737D;
+      font-size: 14px;
+      text-align:center;
+      position: absolute;
+      bottom: 75px;
+      padding: 0 16px 0 16px;
+    }
+    .apply-btn {
+      position: absolute;
+      bottom: 16px;
+      width: 328px;
+      margin-left: calc(50vw - 164px)
+
+    }
+
+    .scroll-dialog {
+      padding: 20px;
+      line-height: 28px;
+      .heading {
+        text-align: left;
+        position: relative;
+
+        > h1 {
+          font-size: 24px;
+          color: #2f3941;
+        }
+        > i {
+          position: absolute;
+          top: -14px;
+          right: 2px;
+        }
+      }
+
+      .warning {
+        i {
+          color: #FCAA10;
+        }
+      }
+      .button-group{
+        margin-top:40px;
+        .dialog-btn{
+          width: 100%;
+          height: 40px;
+        }
+        .plain{
+          color: #FF8600;
+          background-color: #ffffff ;
+          border: 1px solid #FF8600;
+        }
+      }
+    }
+
+  }
+</style>
+
+<style lang="scss">
+  .enter-loan-amount{
+    .el-input__inner {
+      font-size: 24px;
+      padding-left: 0;
+      margin-top: 10px;
+      padding-bottom: 10px;
+    }
+    .el-input__suffix {
+      color: #363F47;
+      position: absolute;
+      top: 5px;
+
+    }
+    .van-button--small {
+      font-size:14px;
+    }
+  }
+</style>

@@ -87,6 +87,11 @@ const AppRouteArr = [
     component: () => import("@/views-app/Records.vue")
   },
   {
+    path: "/addrecord",
+    name: "Records",
+    component: () => import("@/views-app/AddRecords.vue")
+  },
+  {
     path: "/services",
     name: "Services",
     component: () => import("@/views-app/Services.vue")
@@ -97,9 +102,20 @@ const AppRouteArr = [
     component: () => import("@/views-app/Loan.vue")
   },
   {
+<<<<<<< HEAD
     path: "/record-list",
     name: "RecordList",
     component: () => import("@/views-app/RecordList.vue")
+=======
+    path: "/enter-loan-info",
+    name: "EnterLoanInfo",
+    component: () => import("@/views-app/EnterLoanInfo.vue")
+  },
+  {
+    path: "/enter-loan-amount",
+    name: "EnterLoanAmount",
+    component: () => import("@/views-app/EnterLoanAmount.vue")
+>>>>>>> 7e617efbca4ffdf353081ed361bca32ea2aec63a
   },
   {
     path: "/services-apply-more-channel",
@@ -187,6 +203,11 @@ const AppRouteArr = [
     path: "/reset-password-sp",
     name: "ResetPasswordSP",
     component: () => import("@/views-app/ResetPassword.vue")
+  },
+  {
+    path: "/fortunetelling-result",
+    name: "FortunetellingResult",
+    component: () => import("@/views-app/FortunetellingResult.vue")
   }
 ];
 

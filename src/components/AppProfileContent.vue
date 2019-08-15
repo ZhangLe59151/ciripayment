@@ -8,37 +8,24 @@
       </div>
       <div class="label">
         <span>National ID</span>
-        <span>{{nationalId}}
-          <i
-            class="iconfont"
-            :class="iconName"
-            @click="handleEyeClick"
-          />
+        <span>
+          {{nationalId}}
+          <i class="iconfont" :class="iconName" @click="handleEyeClick"/>
         </span>
       </div>
     </div>
 
-    <div
-      class="block"
-      style="margin-top: 20px;"
-    >
+    <div class="block" style="margin-top: 20px;">
       <div class="title">Business Information</div>
-      <div
-        class="label"
-        v-for="item in bizInfo"
-        :key="item.label"
-      >
+      <div class="label" v-for="item in bizInfo" :key="item.label">
         <span>{{item.label}}</span>
         <span>{{item.value}}</span>
       </div>
     </div>
 
-    <div
-      class="block"
-      style="margin-top: 20px;"
-    >
+    <div class="block" style="margin-top: 20px;">
       <div class="title">Bank Account</div>
-      <app-profile-account />
+      <app-profile-account/>
     </div>
   </div>
 </template>
@@ -161,12 +148,12 @@ export default {
       .link-btn {
         width: 100%;
         margin-top: 10px;
-        border: 1px solid #FF8600;
+        border: 1px solid #ff8600;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
         border-radius: 4px;
 
         font-size: 14px;
-        color: #FF8600;
+        color: #ff8600;
         letter-spacing: 0;
         text-align: center;
         line-height: 20px;

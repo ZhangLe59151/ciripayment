@@ -84,7 +84,16 @@ export default {
   submitMerchantChannels(params) {
     return Vue.axios.post("/api/merchant/channels/submit", params);
   },
+  getFortunetelling() {
+    return Vue.axios.post("/api/fortunetelling");
+  },
   getHomePageInfo() {
     return Vue.axios.get("/api/homepage");
+  },
+  applyLoan(params) {
+    return Vue.axios.post(`/api/loan-application?loanAmount=${params}`);
+  },
+  getLoanProfile() {
+    return Vue.axios.get("/api/loan/view");
   }
 };
