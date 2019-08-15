@@ -1,6 +1,6 @@
 <template>
   <div >
-    
+
     <app-records-header />
 
     <div class="app-pick-date">
@@ -25,9 +25,8 @@
           <label class="plus">+</label>
         </van-col>
         <van-col span="20">
-          <input 
+          <input
             class="income"
-            :value="form.income"
             v-model="form.income"
             @touchstart.stop="show = true"
             maxlength=“13”
@@ -50,11 +49,10 @@
           <label class="minus">-</label>
         </van-col>
         <van-col span="20">
-          <input 
+          <input
             class="expense"
             @touchstart.stop="show = true"
-            :value="form.expense"
-            v-model="form.income"
+            v-model="form.expense"
             maxlength=“13”
             placeholder="" />
         </van-col>
@@ -72,8 +70,7 @@
 
       <van-row class="input_note">
         <van-col span="24">
-          <input 
-            :value="note"
+          <input
             @touchstart.stop="show = true"
             v-model="form.note"
             maxlength=“100”
@@ -83,7 +80,7 @@
 
       <van-row class="input_note">
         <van-col span="24">
-          <button 
+          <button
             class="update_btn" >Update Records</button>
         </van-col>
       </van-row>
@@ -123,7 +120,7 @@ export default {
     return {
       currentTab: this.$route.query.currentTab || "0",
       form: {
-        date_selected = 'Today, 13 Aug 2019',
+        date_selected: 'Today, 13 Aug 2019',
         income: '',
         expense: '',
         note: ''
@@ -172,7 +169,7 @@ export default {
     .input_number {
         height: 40px;
         font-size: 40px;
-        
+
         .plus {
           bottom: 0px;
           font-size: 16px;
@@ -214,6 +211,9 @@ export default {
         border: none;
         color: white;
         font-size: 16px;
+        width: 100%;
+        height: 40px;
+        margin-top:16px;
     }
 
 }
