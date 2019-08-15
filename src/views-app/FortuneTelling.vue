@@ -17,6 +17,7 @@
 
 <script>
 import FortunetellingResult from "./FortunetellingResult";
+import { mapState } from "vuex";
 export default {
   name: "FortuneTelling",
   components: {
@@ -26,10 +27,14 @@ export default {
     return {
       status: 0,
       minOpeningAnimateDuration: 3000,
+      animateStartTime: 0,
       today: ""
     }
   },
   computed: {
+    ...mapState({
+      fortunetellingFrame: state => state.fortunetellingFrame
+    }),
     statusEnum() {
       return {
         normal: 0,
@@ -41,11 +46,11 @@ export default {
   methods: {
     startOpeningProcess() {
       this.status = this.statusEnum.opening;
-      let startTime = new Date().getTime();
-      // update network duration after request api
-      this.checkIsRecord();
-      this.queryFortunetelling();
-      let networkDuration = new Date().getTime() - startTime;
+      this.animateStartTime = new Date().getTime();
+      this.getFortunetelling();
+    },
+    showResult() {
+      let networkDuration = new Date().getTime() - this.animateStartTime;
       let timeout = 0;
       if (networkDuration < this.minOpeningAnimateDuration) {
         timeout = this.minOpeningAnimateDuration - timeout
@@ -54,74 +59,63 @@ export default {
         this.status = this.statusEnum.finish;
       }, timeout)
     },
+    getFortunetelling() {
+      this.checkIsRecord();
+      this.getFortunetellingByAPI();
+    },
     getFortunetellingByAPI() {
       this.$api.getFortunetelling().then(res => {
         if (res.data.code === 200) {
           let fortunetellingFrame = res.data.data;
-          fortunetellingFrame["luckyDescription"] =
-            res.data.data.luckyWords[0]["value"];
-          fortunetellingFrame["luckyWords"] =
-            res.data.data.luckyWords[0]["key"];
+          fortunetellingFrame["luckyDescription"] = res.data.data.luckyWords[0]["value"];
+          fortunetellingFrame["luckyWords"] = res.data.data.luckyWords[0]["key"];
           this.$store.commit("SaveFortunetellingResult", {
             [this.today]: this.buildFortunetellingFrame(fortunetellingFrame)
           });
+          this.showResult()
+        } else {
+          this.status = this.statusEnum.normal
         }
       });
     },
     buildFortunetellingFrame(fortunetellingFrame) {
-      return !this.isRecord
-        ? [
-          {
-            luckyArr: [
-              {
-                label: this.$t("LuckyNumberLabel"),
-                value: fortunetellingFrame.luckyNumber
-              },
-              {
-                label: this.$t("LuckyWordsLabel"),
-                value: fortunetellingFrame.luckyWords
-              }
-            ],
-            des: fortunetellingFrame.luckyDescription
-          }
-        ]
-        : [
-          {
-            luckyArr: [
-              {
-                label: this.$t("LuckyNumberLabel"),
-                value: fortunetellingFrame.luckyNumber
-              },
-              {
-                label: this.$t("LuckyWordsLabel"),
-                value: fortunetellingFrame.luckyWords
-              }
-            ],
-            des: fortunetellingFrame.luckyDescription
-          },
-          {
-            luckyArr: [
-              {
-                label: this.$t("LuckySalesLabel"),
-                value: fortunetellingFrame.luckySales
-              }
-            ],
-            des: this.$t("LuckySalesDescription")
-          }
-        ];
-    },
-    queryFortunetelling() {
-      this.today = this.$moment().format("YYYYMMDD");
-      this.getFortunetellingByAPI();
+      let resultArray = [
+        {
+          luckyArr: [
+            {
+              label: this.$t("LuckyNumberLabel"),
+              value: fortunetellingFrame.luckyNumber
+            },
+            {
+              label: this.$t("LuckyWordsLabel"),
+              value: fortunetellingFrame.luckyWords
+            }
+          ],
+          des: fortunetellingFrame.luckyDescription
+        }
+      ];
+      if (this.isYesterdayRecord) {
+        resultArray.push({
+          luckyArr: [
+            {
+              label: this.$t("LuckySalesLabel"),
+              value: fortunetellingFrame.luckySales
+            }
+          ],
+          des: this.$t("LuckySalesDescription")
+        })
+      }
     },
     checkIsRecord() {
-      const yesterday = this.$moment()
-        .subtract(1, "days")
-        .format("YYYYMMDD");
-      this.isRecord = localStorage.getItem(yesterday);
+      const yesterday = this.$moment().subtract(1, "days").format("YYYYMMDD");
+      this.isYesterdayRecord = localStorage.getItem(yesterday);
     }
   },
-  created() {
+  mounted() {
+    this.today = this.$moment().format("YYYYMMDD");
+    if (this.fortunetellingFrame[this.today]) {
+      this.status = this.statusEnum.finish
+    }
   }
 }
 </script>
