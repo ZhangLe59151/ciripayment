@@ -220,6 +220,14 @@ const AppRouteArr = [
   }
 ];
 
+const ArticleArr = [
+  {
+    path: "/article/1",
+    name: "Article-1",
+    component: () => import("@/article/Article-1.vue")
+  }
+];
+
 const ErrorRouteArr = [
   {
     path: "/*",
@@ -236,7 +244,7 @@ const ErrorRouteArr = [
 const router = new Router({
   mode: process.env.VUE_APP_ROUTEMODE,
   base: process.env.BASE_URL,
-  routes: routeArr.concat(AppRouteArr, ErrorRouteArr),
+  routes: routeArr.concat(AppRouteArr, ArticleArr, ErrorRouteArr),
   redirectToHome(message) {
     this.push({ name: "Welcome" });
   },

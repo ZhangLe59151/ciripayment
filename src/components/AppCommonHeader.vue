@@ -4,7 +4,7 @@
     :left-text="leftText"
     :right-text="rightText"
     left-arrow
-    @click-left="leftFunc"
+    @click-left="$router.back()"
     @click-right="rightFunc"
   />
 </template> 
@@ -27,12 +27,6 @@ export default {
     title: {
       default: "",
       type: String
-    },
-    leftFunc: {
-      type: Function,
-      default() {
-        this.$router.back();
-      }
     },
     rightFunc: {
       type: Function
