@@ -12,8 +12,7 @@
         </van-col>
       </van-row>
       <van-row class="pick_date">
-        <van-col span="22">
-          <!-- <van-picker :columns="this.columns" @change="onChange" /> -->
+        <van-col span="22"> 
           <div class="pick_date">Today, 13 Aug 2019</div>
         </van-col>
         <van-col span="2"><van-icon name="arrow-down" /></van-col>
@@ -56,9 +55,9 @@
         <van-col span="20">
           <input
             class="expense"
-            @touchstart.stop="show = true"
+            @touchstart.stop="show2 = true"
             v-model="this.form.expense"
-            maxlength=“13”
+            maxlength="13"
             placeholder="" />
         </van-col>
         <van-col span="2">
@@ -76,7 +75,6 @@
       <van-row class="input_note">
         <van-col span="24">
           <input
-            @touchstart.stop="show = true"
             v-model="this.form.note"
             maxlength=“100”
             placeholder="Add Note" />
@@ -100,6 +98,15 @@
       @blur="show = false"
       @input="onInput"
       @delete="onDelete"
+    />
+
+    <van-number-keyboard
+      :show="show2"
+      extra-key="."
+      close-button-text="Done"
+      @blur="show2 = false"
+      @input="onInput2"
+      @delete="onDelete2"
     />
 
 
@@ -139,7 +146,8 @@ export default {
         expense: "",
         note: "",
       },
-      show: false
+      show: false,
+      show2: false
     };
   },
 
@@ -151,8 +159,19 @@ export default {
       let kbt = this.form.income.toString();
       this.form.income = kbt.length ? kbt.substring(0, kbt.length -1) : kbt;
     },
+    onInput2(value) {
+      this.form.expense = this.form.expense + value;
+    },
+    onDelete2() {
+      let kbt = this.form.expense.toString();
+      this.form.expense = kbt.length ? kbt.substring(0, kbt.length -1) : kbt;
+    },
     update_btn() {
       this.$store.commit("UpdateRecord", this.form);
+      this.form.dateselected = "Today, 13 Aug 2019";
+      this.form.income = "";
+      this.form.expense = "";
+      this.form.note = "";
     },
     view_history() {
       this.$router.push({ name: "RecordList" });

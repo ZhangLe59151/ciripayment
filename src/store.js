@@ -17,7 +17,7 @@ export default new Vuex.Store({
     form: {},
     userInfo: {},
     application: {},
-    
+    recordList: {},
     nationalCodeList: [
       "+66",
       "+65",
@@ -35,8 +35,7 @@ export default new Vuex.Store({
       "+95"
     ],
     nationalCode: require("@/assets/data/nationalCode.json"),
-    recordList: {},
-    dayInMonth: require("@/assets/data/dateInMonth.json"),
+    dateInMonth: require("@/assets/data/dateInMonth.json"),
     phone: {
       regExp: /^(0[1-9]{1}[0-9]{8}|[1-9]{1}[0-9]{8}|[1-9]{1}[0-9]{7})$/,
       thaiExp: /^(0[1-9]{1}[0-9]{8}|[1-9]{1}[0-9]{8})$/,
