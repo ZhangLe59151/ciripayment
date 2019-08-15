@@ -1,14 +1,23 @@
 <template>
   <div class="fortunetelling-result">
-    <app-lucky-header :center="true"/>
-    <section v-for="(item,index) in fortunetellingFrame[today]" :key="index">
-      <app-fortunetelling-result-lucky :luckyArr.sync="item.luckyArr" :des.sync="item.des"/>
+    <app-lucky-header :center="true" />
+    <section
+      v-for="(item,index) in fortunetellingFrame[today]"
+      :key="index"
+    >
+      <app-fortunetelling-result-lucky
+        :luckyArr.sync="item.luckyArr"
+        :des.sync="item.des"
+      />
     </section>
     <div v-if="!isRecord">
-      <app-fortunetelling-result-sales-record/>
+      <app-fortunetelling-result-sales-record />
     </div>
     <div class="bg-image-div">
-      <img :src="bgImageUrl" class="bg-image">
+      <img
+        :src="bgImageUrl"
+        class="bg-image"
+      >
     </div>
   </div>
 </template>
@@ -59,6 +68,8 @@ export default {
 
 .bg-image-div {
   text-align: center;
+  position: relative;
+  bottom: 10px;
 }
 
 .bg-image {
