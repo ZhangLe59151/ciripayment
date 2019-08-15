@@ -103,11 +103,12 @@
         <van-col span="24">
           <van-datetime-picker
             v-show="appear"
-            v-model="form.date"
+            v-model="currentDate"
             type="date"
             :min-date="minDate"
+            :max-date="maxDate"
             @cancel="appear = false"
-            @confirm="setDate()"
+            @confirm="setDate"
             />
         </van-col>
       </van-row>
@@ -133,6 +134,8 @@ import AppTabBar from "@/components/AppTabBar";
 import AppRecordsHeader from "@/components/AppRecordsHeader";
 import {mapState} from "vuex"
 
+const today = new Date()
+
 
 export default {
   name: "AppRecords",
@@ -153,7 +156,7 @@ export default {
     return {
       currentTab: this.$route.query.currentTab || "0",
       form: {
-        date: new Date().toDateString(),
+        date: today.toDateString(),
         income: "",
         expense: "",
         note: "",
@@ -161,10 +164,27 @@ export default {
       show: false,
       type: "income",
       appear: false,
-      minDate: new Date("Jan 01,2018")
+      minDate: new Date("Jan 01,2018"),
+      maxDate: today,
+      currentDate: today
     };
   },
-
+  watch: {
+    currentDate: {
+      handler(val, oldVal) {
+        //this.$set(this.form,"date", val ? this.$moment(val).format("YYYYMMDD") : "")
+        this.$set(this.form,"date", val ? val.toDateString() : "")
+        //this.form.date = "Today ," + val
+        console.log( this.$moment(val).format("YYYYMMDD"))
+        if (this.$moment(val).format("YYYYMMDD") == this.$moment(today).format("YYYYMMDD")) {
+          this.form.date = "Today ," + val
+        }
+        if (new Date(val).getTime() == today.setDate(today.getDate()-1)) {
+          this.form.date = "Yesterday ," + val
+        }
+      }
+    }
+  },
   methods: {
     showKeyboard(type) {
       this.show = true;
@@ -194,7 +214,11 @@ export default {
     },
     setDate(value) {
       this.appear = false;
-      this.form.date = valuel.toDateString();
+      
+      // this.currentDate = this.$moment(value).format("YYYYMMDD");
+
+      // console.log( this.currentDate );
+      
     },
     formatDate(date) {
       var d = new Date(date),
@@ -206,6 +230,14 @@ export default {
       if (day.length < 2) day = '0' + day;
 
       return year.toString()+month.toString()+day.toString();
+    },
+    highlightDate(value) {
+      if (value.getTime() == today.getTime()) {
+        this.form.date = "Today ," + this.form.date
+      }
+      if (value.getTime() == today.setDate(today.getDate()-1)) {
+        this.form.date = "Yesterday ," + this.form.date
+      }
     }
   }
 
