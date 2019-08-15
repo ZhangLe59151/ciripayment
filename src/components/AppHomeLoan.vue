@@ -1,13 +1,20 @@
 <template>
   <div
-    class="app-home-lucky"
+    class="app-home-loan"
     @click="$router.push({name: 'Home'})"
   >
     <div class="des">
-      {{$t("AppHomeLoan")}}
+      {{$t("Home.loan")}}
     </div>
     <div class="amount">
       100,000 ฿
+    </div>
+
+    <div
+      class="getNow"
+      @click="$router.push({name: 'Loan',query: {origin: 'banner'}})"
+    >
+      {{$t("Home.loanBtn")}}
     </div>
   </div>
 </template>
@@ -19,26 +26,45 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.app-home-lucky {
-  height: 80px;
+.app-home-loan {
+  height: 100px;
   width: 100%;
   text-align: center;
+  background-image: url(../assets/imgs/home_loan.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: 8px;
+
   .des {
-    margin-top: 16px;
-    font-family: HelveticaNeue;
     font-size: 14px;
     color: #363f47;
-    letter-spacing: 0;
-    text-align: center;
+    position: relative;
+    top: 16px;
   }
 
   .amount {
-    margin-top: 8px;
-    font-family: HelveticaNeue-Bold;
+    position: relative;
+    top: 24px;
     font-size: 24px;
     color: #363f47;
+    font-weight: bold;
+  }
+
+  .getNow {
+    background: #ff8600;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    font-size: 12px;
+    color: #ffffff;
     letter-spacing: 0;
     text-align: center;
+    line-height: 20px;
+    width: 68px;
+    height: 20px;
+    position: relative;
+    top: 26px;
+    left: 50%;
+    margin-left: -34px;
   }
 }
 </style>

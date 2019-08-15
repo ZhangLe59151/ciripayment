@@ -4,8 +4,15 @@
   "noSelectSettlementErrorMsg": "Please select one of the settlement options to proceed.",
   "marketingServiceErrorMsg": "There are errors in your form. Please correct them before trying again.",
   "OTPErrorMsg": "OTP request too frequent. Please wait for a minute and try again.",
-  "AppHomeLoan": "Tap here to enjoy a pre-approved loan up to",
-  "Income": "INCOME",
-  "Expenses": "EXPENSES",
-  "AppHomeInfo": "Relevant To Your Business"
+  "Home": {
+    "income": "TODAY'S INCOME",
+    "expenses": "EXPENSES",
+    "loan": "Get instant money! Up to",
+    "loanBtn": "Get Now",
+    "luckyTitle": "Feeling Lucky?",
+    "luckySubtitleTop": "Get Today's",
+    "luckySubtitleBtm": "Fortune",
+    "luckyBtn": "Let's Go",
+    "info": "Relevant To Your Business"
+  }
 }

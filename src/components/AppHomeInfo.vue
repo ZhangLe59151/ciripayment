@@ -1,6 +1,6 @@
 <template>
   <div class="app-home-info">
-    <div class="title">{{$t("AppHomeInfo")}}</div>
+    <div class="title">{{$t("Home.info")}}</div>
 
     <div
       class="info-box"
@@ -41,6 +41,7 @@ export default {
     font-size: 12px;
     color: #2f3941;
     margin-bottom: 10px;
+    font-weight: bold;
   }
 
   .info-box {

@@ -97,6 +97,11 @@ const AppRouteArr = [
     component: () => import("@/views-app/Loan.vue")
   },
   {
+    path: "/record-list",
+    name: "RecordList",
+    component: () => import("@/views-app/RecordList.vue")
+  },
+  {
     path: "/services-apply-more-channel",
     name: "ApplyMoreChannel",
     component: () => import("@/views-app/ApplyMoreChannel.vue")

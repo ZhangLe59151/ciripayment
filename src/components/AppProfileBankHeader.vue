@@ -3,7 +3,6 @@
     <div class="title">
       <img
         :src="backIcon"
-        alt
         style="margin-right: 10px"
         @click="$router.back()"
       >
@@ -40,7 +39,7 @@ export default {
 }
 
 .app-profile-select-bank-header {
-  background: #FF8600;
+  background: #ff8600;
   height: 68px;
   width: 100%;
   position: relative;

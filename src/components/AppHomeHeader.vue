@@ -6,8 +6,8 @@
 
     <van-row class="info">
       <van-col span="16">
-        <div>
-          {{$t("Income")}}
+        <div class="income-label">
+          {{$t("Home.income")}}
         </div>
         <div class="income-value">
           <span>+10000000</span>
@@ -25,10 +25,10 @@
       </van-col>
     </van-row>
 
-    <van-button
-      icon="star-o"
-      type="primary"
-    >View and Update Records</van-button>
+    <div class="btn">
+      <i class="iconfont icontime" />
+      View and Update Records
+    </div>
   </div>
 </template>
 
@@ -49,24 +49,38 @@ export default {
 <style lang="scss" scoped>
 .app-home-header {
   background: #ff8600;
-  height: 164px;
+  height: 132px;
   width: 100%;
   position: relative;
   color: #ffffff;
-  font-family: HelveticaNeue-Bold;
 
-  .van-button {
-    margin: 16px;
+  .btn {
+    margin: 10px 16px;
     width: calc(100% - 32px);
+    height: 40px;
+    line-height: 40px;
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+
+    font-size: 14px;
+    color: #2f3941;
+    letter-spacing: 0;
+    text-align: center;
+    > i {
+      color: #ff8600;
+      position: relative;
+      left: -6px;
+    }
   }
   .info {
     margin: 0 16px;
     position: relative;
-    height: 80px;
+    height: 52px;
+    padding-top: 16px;
 
     .van-col {
       position: absolute;
-      // border-bottom: 1px solid red;
     }
 
     .van-col--16 {
@@ -82,6 +96,8 @@ export default {
     .income-label,
     .expenses-label {
       font-size: 10px;
+      position: relative;
+      top: -6px;
     }
 
     .income-value {
