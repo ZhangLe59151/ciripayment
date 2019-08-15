@@ -10,7 +10,10 @@
         <van-col span="12" class="link_view_history">View Record History</van-col>
       </van-row>
       <van-row class="pick_date">
-        <van-col span="22">Today, 13 Aug 2019</van-col>
+        <van-col span="22">
+          <!-- <van-picker :columns="this.columns" @change="onChange" /> -->
+          <div class="pick_date">Today, 13 Aug 2019</div>
+        </van-col>
         <van-col span="2"><van-icon name="arrow-down" /></van-col>
       </van-row>
     </div>
@@ -27,7 +30,7 @@
         <van-col span="20">
           <input
             class="income"
-            v-model="form.income"
+            v-model="this.form.income"
             @touchstart.stop="show = true"
             maxlength=“13”
             placeholder="" />
@@ -52,7 +55,7 @@
           <input
             class="expense"
             @touchstart.stop="show = true"
-            v-model="form.expense"
+            v-model="this.form.expense"
             maxlength=“13”
             placeholder="" />
         </van-col>
@@ -72,7 +75,7 @@
         <van-col span="24">
           <input
             @touchstart.stop="show = true"
-            v-model="form.note"
+            v-model="this.form.note"
             maxlength=“100”
             placeholder="Add Note" />
         </van-col>
@@ -105,7 +108,8 @@
 
 <script>
 import AppTabBar from "@/components/AppTabBar";
-import AppRecordsHeader from "@/components/AppRecordsHeader"
+import AppRecordsHeader from "@/components/AppRecordsHeader";
+import {mapState} from "vuex"
 
 
 export default {
@@ -116,14 +120,21 @@ export default {
     AppRecordsHeader
   },
 
+
+  computed: {
+    ...mapState({
+      dateInMonth: state => state.dateInMonth
+    })
+  },
+
   data() {
     return {
       currentTab: this.$route.query.currentTab || "0",
       form: {
-        date_selected: 'Today, 13 Aug 2019',
-        income: '',
-        expense: '',
-        note: ''
+        date_selected: "Today, 13 Aug 2019",
+        income: "",
+        expense: "",
+        note: "",
       },
       show: false
     };
@@ -131,10 +142,18 @@ export default {
 
   methods: {
     onInput(value) {
-      this.income = this.income + value;
+      this.form.income = this.form.income + value;
     },
     onDelete() {
-      //this.income = this.income.Substring(0,this.income.Length-1)
+      let kbt = this.form.income.toString();
+      this.form.income = kbt.length ? kbt.substring(0, kbt.length -1) : kbt;
+    },
+    update_btn() {
+      this.$store.commit("UpdateRecord", this.form);
+    },
+    onChange(picker, values) {
+      picker.setColumnValues(1, dateInMonth[values[0]]);
+      this.form.date_selected = values;
     }
   }
 

@@ -17,6 +17,7 @@ export default new Vuex.Store({
     form: {},
     userInfo: {},
     application: {},
+    
     nationalCodeList: [
       "+66",
       "+65",
@@ -34,6 +35,8 @@ export default new Vuex.Store({
       "+95"
     ],
     nationalCode: require("@/assets/data/nationalCode.json"),
+    recordList: {},
+    dayInMonth: require("@/assets/data/dateInMonth.json"),
     phone: {
       regExp: /^(0[1-9]{1}[0-9]{8}|[1-9]{1}[0-9]{8}|[1-9]{1}[0-9]{7})$/,
       thaiExp: /^(0[1-9]{1}[0-9]{8}|[1-9]{1}[0-9]{8})$/,
@@ -371,6 +374,17 @@ export default new Vuex.Store({
     ClearApplicationInfo(state) {
       state.application = {};
       window.localStorage.setItem("application", "{}");
+    },
+    //this is for record
+    InitRecord(state) {
+      var originRecord = state.recordList !== null ? state.recordList : {};
+      var recordString = window.localStorage.getItem("recordList");
+      recordString = recordString !== null ? recordString : "{}";
+      state.recordList = Object.assign(originRecord, JSON.parse(recordString));
+    },
+    UpdateRecord(state, updateRecordInfo) {
+      state.recordList = Object.assign(state.recordList, updateRecordInfo);
+      window.localStorage.setItem("recordList", JSON.stringify(state.recordList));
     }
   },
   actions: {}
