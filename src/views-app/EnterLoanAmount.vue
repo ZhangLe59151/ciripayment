@@ -179,7 +179,7 @@ export default {
               duration: 5000,
               background: "#04A777"
             });
-            this.$router.push({ name: "Loan" });
+            this.$router.push({ name: "Loan", query: { justSubmitted: "true" } });
           }
         }
       );

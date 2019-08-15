@@ -21,7 +21,7 @@
       ref="elForm"
       size="small"
       label-position="top"
-      style="width: 100%; margin-top: 10px;"
+      style="width: 100%; margin-top: 32px;"
     >
       <el-card class="box-card">
         <!-- applicant information -->
@@ -745,7 +745,7 @@ export default {
 <style lang="scss" scoped>
   @import "../assets/css/bottom-btn.scss";
   .enter-loan-info {
-    background-color: #ffffff;
+    background-color: #E9EBED;
     .spec-mobile {
       background-color: #f5f7fa;
       border-color: #e4e7ed;
@@ -817,6 +817,7 @@ export default {
         letter-spacing: 0;
         text-align: center;
         line-height: 36px;
+        margin-bottom: 8px;
       }
     }
 

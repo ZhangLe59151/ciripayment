@@ -1,7 +1,6 @@
 <template>
   <div
     class="app-home-loan"
-    @click="$router.push({name: 'Home'})"
   >
     <div class="des">
       {{$t("Home.loan")}}
