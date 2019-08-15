@@ -102,6 +102,16 @@ const AppRouteArr = [
     component: () => import("@/views-app/Loan.vue")
   },
   {
+    path: "/enter-loan-info",
+    name: "EnterLoanInfo",
+    component: () => import("@/views-app/EnterLoanInfo.vue")
+  },
+  {
+    path: "/enter-loan-amount",
+    name: "EnterLoanAmount",
+    component: () => import("@/views-app/EnterLoanAmount.vue")
+  },
+  {
     path: "/services-apply-more-channel",
     name: "ApplyMoreChannel",
     component: () => import("@/views-app/ApplyMoreChannel.vue")

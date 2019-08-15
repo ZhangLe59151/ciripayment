@@ -247,7 +247,9 @@ export default new Vuex.Store({
       luckyNumber: "-",
       luckyWords: "-",
       luckySales: "-"
-    }
+    },
+    completeLoanProfile: false,
+    loanProfile: {}
   },
   mutations: {
     InitForm(state) {
@@ -302,7 +304,6 @@ export default new Vuex.Store({
       state.merchantProfile = merchantProfile;
       localStorage.setItem("merchantProfile", JSON.stringify(merchantProfile));
     },
-    // if there is no merchant profile in store, try to look in storage
     fetchDataFromLocal(state) {
       // fetch merchant profile
       if (
@@ -326,6 +327,17 @@ export default new Vuex.Store({
         state.application = {
           ...state.application,
           ...localApplication
+        };
+      }
+      // fetch loan Profile
+      if (
+        Object.keys(state.loanProfile).length === 0 &&
+        localStorage.getItem("loanProfile")
+      ) {
+        let localLoanProfile = JSON.parse(localStorage.getItem("loanProfile"));
+        state.loanProfile = {
+          ...state.loanProfile,
+          ...localLoanProfile
         };
       }
     },
@@ -376,6 +388,14 @@ export default new Vuex.Store({
     ClearApplicationInfo(state) {
       state.application = {};
       window.localStorage.setItem("application", "{}");
+    },
+    // Fetch Loan profile
+    initLoanProfile(state, loanProfile) {
+      state.loanProfile = loanProfile;
+      localStorage.setItem("loanProfile", JSON.stringify(loanProfile));
+    },
+    CompleteLoanProfile(state) {
+      state.completeLoanProfile = true;
     }
   },
   actions: {}

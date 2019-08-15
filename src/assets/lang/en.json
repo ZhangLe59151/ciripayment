@@ -12,5 +12,18 @@
   "LuckySalesDescription": "Record your daily income for better predictions.",
   "Income": "INCOME",
   "Expenses": "EXPENSES",
-  "AppHomeInfo": "Relevant To Your Business"
+  "AppHomeInfo": "Relevant To Your Business",
+  "AppLoanOverview": {
+    "bannerTitle": "Maximum Loan Amount",
+    "lowerRate": "Lower Rate",
+    "higherLimit": "Higher Limit",
+    "fasterApproval": "Faster Approval",
+    "instructionTitle": "Maximise Your Limit",
+    "instructionContent1": "Enjoy a higher limit and faster approval time when you provide your profile information:",
+    "instructionContent2": {
+      "personalDetails": "Personal Details",
+      "bizInfo": "Business Information",
+      "photos": "Photos of Your ID"
+    }
+  }
 }
