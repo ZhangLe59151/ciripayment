@@ -195,9 +195,13 @@ export default {
       this.type = type;
     },
     onInput(value) {
-      if (true) {
-        this.form[this.type] += value;
+      if (this.form[this.type].indexOf(".") != -1 && value == ".") {
+        return false;
       }
+      if (this.form[this.type] == "" && value == ".") {
+        return false;
+      }
+      this.form[this.type] += value;
     },
     onDelete() {
       let kbt = this.form[this.type].toString();
