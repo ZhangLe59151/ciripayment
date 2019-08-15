@@ -14,11 +14,11 @@
       >
         <template slot="default">
           <div>
-            Income: <span class="custom-income">+{{item.income}}</span>
+            Income: <span class="custom-income">+{{item.income || 0}}</span>
           </div>
 
           <div>
-            Expenses: <span class="custom-expense"> -{{item.expense}}</span>
+            Expenses: <span class="custom-expense"> -{{item.expense || 0}}</span>
           </div>
 
         </template>
@@ -52,7 +52,7 @@ export default {
 
   methods: {
     formatDate(val) {
-      return this.$moment(val).format("dd MM YYYY");
+      return this.$moment(val).format("D MMM YYYY");
     },
     onLoad() {
       // 异步更新数据
