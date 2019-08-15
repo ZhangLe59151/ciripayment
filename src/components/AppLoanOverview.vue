@@ -191,7 +191,9 @@ export default {
 
 <style lang="scss" scoped>
   .app-loan-overview{
-
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
     .banner{
       height: 138px;
       background: url("../assets/imgs/loan.png") no-repeat;
@@ -279,6 +281,7 @@ export default {
     }
     .loan-terms{
       background-color: #E9EBED;
+      flex-grow: 1;
       padding: 20px 16px 50px 16px;
       color: #68737D;
       .loan-terms-title{
