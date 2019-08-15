@@ -102,11 +102,11 @@ const AppRouteArr = [
     component: () => import("@/views-app/Loan.vue")
   },
   {
-<<<<<<< HEAD
     path: "/record-list",
     name: "RecordList",
     component: () => import("@/views-app/RecordList.vue")
-=======
+  },
+  {
     path: "/enter-loan-info",
     name: "EnterLoanInfo",
     component: () => import("@/views-app/EnterLoanInfo.vue")
@@ -115,7 +115,6 @@ const AppRouteArr = [
     path: "/enter-loan-amount",
     name: "EnterLoanAmount",
     component: () => import("@/views-app/EnterLoanAmount.vue")
->>>>>>> 7e617efbca4ffdf353081ed361bca32ea2aec63a
   },
   {
     path: "/services-apply-more-channel",
