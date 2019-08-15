@@ -4,7 +4,6 @@
     <app-records-header />
 
     <div class="app-pick-date">
-      <!-- <div class="pick_date">Today, 13 Aug 2019</div> -->
       <van-row class="select_date">
         <van-col span="12">Date</van-col>
         <van-col span="12" class="link_view_history">
@@ -13,7 +12,8 @@
       </van-row>
       <van-row class="pick_date">
         <van-col span="22"> 
-          <div class="pick_date">Today, 13 Aug 2019</div>
+          <div class="pick_date">
+            </div>
         </van-col>
         <van-col span="2"><van-icon name="arrow-down" /></van-col>
       </van-row>
@@ -100,6 +100,12 @@
       @delete="onDelete"
     />
 
+    <van-datetime-picker
+      :show="appear"
+      v-model="currentDate"
+      type="date"
+      :min-date="minDate"
+    />
 
 
     <app-tab-bar :active="1" />
@@ -138,7 +144,9 @@ export default {
         note: "",
       },
       show: false,
-      type: "income"
+      type: "income",
+      appear: false,
+      currentDate: new Date()
     };
   },
 
