@@ -12,8 +12,15 @@
       </van-row>
       <van-row class="pick_date">
         <van-col span="22"> 
-          <div class="pick_date">
-            </div>
+          
+              <input
+                type="text"
+                v-model="form.date"
+                confirm-button-text="confirm"
+                cancel-button-text="cancel"
+                @focus="appear = true"
+                />
+            
         </van-col>
         <van-col span="2"><van-icon name="arrow-down" /></van-col>
       </van-row>
@@ -91,6 +98,21 @@
 
     </div>
 
+    <div>
+      <van-row >
+        <van-col span="24">
+          <van-datetime-picker
+            v-show="appear"
+            v-model="form.date"
+            type="date"
+            :min-date="minDate"
+            @cancel="appear = false"
+            @confirm="setDate()"
+            />
+        </van-col>
+      </van-row>
+    </div>
+
     <van-number-keyboard
       :show="show"
       extra-key="."
@@ -98,13 +120,6 @@
       @blur="show = false"
       @input="onInput"
       @delete="onDelete"
-    />
-
-    <van-datetime-picker
-      :show="appear"
-      v-model="currentDate"
-      type="date"
-      :min-date="minDate"
     />
 
 
@@ -138,7 +153,7 @@ export default {
     return {
       currentTab: this.$route.query.currentTab || "0",
       form: {
-        dateselected: "20190813",
+        date: new Date().toDateString(),
         income: "",
         expense: "",
         note: "",
@@ -146,7 +161,7 @@ export default {
       show: false,
       type: "income",
       appear: false,
-      currentDate: new Date()
+      minDate: new Date("Jan 01,2018")
     };
   },
 
@@ -163,8 +178,9 @@ export default {
       this.form[this.type] = kbt.length ? kbt.substring(0, kbt.length -1) : kbt;
     },
     update_btn() {
+      this.form.date = this.formatDate(this.form.date);
       this.$store.commit("UpdateRecord", this.form);
-      this.form.dateselected = "Today, 13 Aug 2019";
+      this.form.date = new Date().toDateString();
       this.form.income = "";
       this.form.expense = "";
       this.form.note = "";
@@ -174,7 +190,22 @@ export default {
     },
     onChange(picker, values) {
       picker.setColumnValues(1, dateInMonth[values[0]]);
-      this.form.dateselected = values;
+      this.form.date = values;
+    },
+    setDate(value) {
+      this.appear = false;
+      this.form.date = valuel.toDateString();
+    },
+    formatDate(date) {
+      var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+      if (month.length < 2) month = '0' + month;
+      if (day.length < 2) day = '0' + day;
+
+      return year.toString()+month.toString()+day.toString();
     }
   }
 
@@ -204,6 +235,7 @@ export default {
         top: 4px;
         height: 40px;
         font-size: 16px;
+        width: 100%;
     }
 
     .input_number {
