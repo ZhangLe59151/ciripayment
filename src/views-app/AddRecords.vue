@@ -83,6 +83,7 @@
             v-model="form.note"
             maxlength="“100”"
             placeholder="Add Note"
+            @focus="inputNote"
           >
         </van-col>
       </van-row>
@@ -121,12 +122,14 @@
       @input="onInput"
       @delete="onDelete"
     />
+
     <van-datetime-picker
       :show="appear"
       v-model="currentDate"
       type="date"
       :min-date="minDate"
     />
+
     <app-tab-bar :active="1" />
   </div>
 </template>
@@ -156,7 +159,7 @@ export default {
     return {
       currentTab: this.$route.query.currentTab || "0",
       form: {
-        date: today.toDateString(),
+        date: this.$route.query.date ? this.$moment(today.setDate(today.getDate() - 1)).format("D MMM YYYY") : this.$moment(today).format("D MMM YYYY"),
         income: "",
         expense: "",
         note: ""
@@ -166,7 +169,8 @@ export default {
       appear: false,
       minDate: new Date("Jan 01,2018"),
       maxDate: today,
-      currentDate: today
+      currentDate: today,
+      dispaly: false
     };
   },
   watch: {
@@ -175,7 +179,7 @@ export default {
         this.$set(
           this.form,
           "date",
-          val ? this.$moment(val).format("dd MM YYYY") : ""
+          val ? this.$moment(val).format("D MMM YYYY") : ""
         );
         //this.$set(this.form,"date", val ? val.toDateString() : "")
         //this.form.date = "Today ," + val
@@ -204,7 +208,9 @@ export default {
       this.type = type;
     },
     onInput(value) {
-      this.form[this.type] += value;
+      if (true) {
+        this.form[this.type] += value;
+      }
     },
     onDelete() {
       let kbt = this.form[this.type].toString();
@@ -214,12 +220,12 @@ export default {
     },
     update_btn() {
       this.form.date = this.$moment(this.form.date).format("YYYYMMDD");
-      this.$store.commit("UpdateRecord", this.form);
-      this.form.date = new Date().toDateString();
-      this.form.income = "";
-      this.form.expense = "";
-      this.form.note = "";
       this.appear = false;
+      console.log( this.form[this.type] );
+      if ( this.form[this.type].match(/^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/) ) {
+        this.$store.commit("UpdateRecord", this.form);
+      }
+      
     },
     view_history() {
       this.$router.push({ name: "RecordList" });
@@ -234,6 +240,9 @@ export default {
       // this.currentDate = this.$moment(value).format("YYYYMMDD");
 
       // console.log( this.currentDate );
+    },
+    inputNote() {
+      this.appear = false;
     }
   }
 };
