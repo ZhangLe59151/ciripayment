@@ -592,6 +592,7 @@ export default {
               return false;
             }
           }
+          this.$store.commit("CompleteLoanProfile");
           this.gotoNextPage();
         } else {
           this.$notify({
@@ -606,7 +607,6 @@ export default {
     gotoNextPage() {
       // save request form init store
       this.$store.commit("UpdateForm", this.form);
-      this.$store.commit("CompleteLoanProfile");
       this.$router.push({
         name: "EnterLoanAmount"
       });

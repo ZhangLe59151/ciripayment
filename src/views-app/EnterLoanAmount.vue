@@ -162,26 +162,23 @@ export default {
     },
     handleApply() {
       if (this.completeLoanProfile) {
-        // update Loan Amount
-        this.$store.commit("UpdateForm", this.form);
         this.applyForLoan();
       } else {
         this.activateDialog();
       }
     },
     applyForLoan() {
-      // TODO: Add Backend API
-      // this.$api.applyLoan(this.$store.state.form).then(
-      //   res => {
-      //     if (res.data.code === 200) {
-      //       // update Form
-      //       this.$store.commit("updateLoanProfile", res.data);
-      //       this.$router.push({ name: "Loan" });
-      //     }
-      //   }
-      // );
+      // update Loan Amount
+      this.$store.commit("UpdateForm", { loanAmount: parseInt(this.form.loanAmount.replace(/,/g, "")) });
+      this.$api.applyLoan(this.$store.state.form.loanAmount).then(
+        res => {
+          if (res.data.code === 200 && res.data.data === true) {
+            this.$router.push({ name: "Loan" });
+          }
+        }
+      );
 
-      this.$router.push({ name: "Loan" });
+      // this.$router.push({ name: "Loan" });
     }
   }
 }

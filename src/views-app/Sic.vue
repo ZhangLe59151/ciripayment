@@ -15,7 +15,7 @@
     >
       <div class="category">
         <span></span>
-        <span class="header-line">{{sic}}</span>
+        <span class="header-line">Select Business Category</span>
       </div>
       <van-cell
         v-for="item in list"
@@ -73,7 +73,9 @@ export default {
 .category {
   height: 40px;
   width: 100%;
+  margin-top:20px;
   margin-bottom: 1px;
+  background-color: #F2F2F2;
 
   span {
     display: inline-block;
@@ -86,9 +88,8 @@ export default {
 
     &:last-child {
       width: calc(80% - 12px);
-      margin-left: 10%;
+      margin-left: 5%;
       height: 40px;
-      border-bottom: 2px solid #FF8600;
 
       font-size: 17px;
       line-height: 40px;
@@ -96,12 +97,12 @@ export default {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      color: #FF8600;
+      color: #2F3941;
     }
   }
 }
 .list-item-title {
-  color: #FF8600;
+  color: #2F3941;
   font-size: 17px;
 }
 </style>

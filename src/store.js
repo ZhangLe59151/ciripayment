@@ -340,6 +340,17 @@ export default new Vuex.Store({
           ...localLoanProfile
         };
       }
+      // fetch user Info
+      if (
+        Object.keys(state.userInfo).length === 0 &&
+        localStorage.getItem("userInfo")
+      ) {
+        let localUserInfo = JSON.parse(localStorage.getItem("userInfo"));
+        state.userInfo = {
+          ...state.userInfo,
+          ...localUserInfo
+        };
+      }
     },
     removeUselessForm(state) {
       var keys = [
@@ -393,6 +404,10 @@ export default new Vuex.Store({
     initLoanProfile(state, loanProfile) {
       state.loanProfile = loanProfile;
       localStorage.setItem("loanProfile", JSON.stringify(loanProfile));
+    },
+    UpdateLoanProfile(state, updateLoanProfile) {
+      state.loanProfile = Object.assign(state.loanProfile, updateLoanProfile);
+      window.localStorage.setItem("loanProfile", JSON.stringify(state.loanProfile));
     },
     CompleteLoanProfile(state) {
       state.completeLoanProfile = true;

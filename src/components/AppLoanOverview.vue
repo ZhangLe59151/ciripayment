@@ -1,5 +1,5 @@
 <template>
- <div v-if="Object.keys(loanProfile).length === 0" class="app-loan-overview">
+ <div v-if="!loanProfile || Object.keys(loanProfile).length === 0" class="app-loan-overview">
    <div class="banner">
      <div class="banner-title">
        {{$t("AppLoanOverview.bannerTitle")}}
@@ -103,7 +103,7 @@
             Application Amount
           </van-col>
           <van-col class="info" span="12">
-            {{loanProfile.amount}} ฿
+            {{formatCurrency(loanProfile.amount)}} ฿
           </van-col>
         </van-row>
       </div>
@@ -133,6 +133,46 @@ export default {
     },
     formatStatus(loanStatus) {
       return this.merchantApplyingChannelStatus.filter(status => String(status.value) === String(loanStatus))[0];
+    },
+    formatNumber(n) {
+      return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    },
+    formatCurrency(val) {
+      // change to string
+      val = String(val);
+      // don't validate empty input
+      if (val === "") { return; }
+
+      // check for decimal
+      if (val.indexOf(".") >= 0) {
+        // get position of first decimal
+        // this prevents multiple decimals from
+        // being entered
+        var decimalPos = val.indexOf(".");
+
+        // split number by decimal point`
+        var leftSide = val.substring(0, decimalPos);
+        var rightSide = val.substring(decimalPos);
+
+        // add commas to left side of number
+        leftSide = this.formatNumber(leftSide);
+
+        // validate right side
+        rightSide = this.formatNumber(rightSide);
+
+        // Limit decimal to only 2 digits
+        rightSide = rightSide.substring(0, 2);
+
+        // join number by .
+        val = leftSide + "." + rightSide;
+      } else {
+        // no decimal entered
+        // add commas to number
+        // remove all non-digits
+        val = this.formatNumber(val);
+      }
+      // send updated string to input
+      return val;
     }
   }
 }

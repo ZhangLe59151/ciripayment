@@ -110,10 +110,12 @@ export default {
   overflow-x: hidden;
 
   .category {
-    padding: 10px;
     width: 100%;
+    height: 40px;
     margin-bottom: 1px;
+    margin-top: 20px;
     border-left: 10px solid #26c485;
+    background-color: #F2F2F2;
 
     > div {
       display: inline-block;
@@ -121,13 +123,12 @@ export default {
       margin-left: 5%;
       height: 40px;
       line-height: 40px;
-      border-bottom: 2px solid #FF8600;
       font-size: 17px;
       // overflow: scroll;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      color: #FF8600;
+      color: #2F3941;
     }
   }
   .selected-title {
@@ -135,7 +136,7 @@ export default {
     font-size: 17px;
   }
   .list-item-title {
-    color: #FF8600;
+    color: #2F3941;
     font-size: 17px;
   }
 }

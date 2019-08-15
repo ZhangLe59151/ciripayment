@@ -20,7 +20,13 @@ export default {
   },
   name: "Loan",
   created() {
-    this.$store.commit("fetchDataFromLocal");
+    this.$api.getLoanProfile().then(res => {
+      if (res.data.code === 200) {
+        this.$store.commit("initLoanProfile", res.data.data);
+      }
+    });
+    // for testing
+    // this.$store.commit("fetchDataFromLocal");
   }
 };
 </script>

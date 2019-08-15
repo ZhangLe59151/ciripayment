@@ -91,9 +91,9 @@ export default {
     return Vue.axios.get("/api/homepage");
   },
   applyLoan(params) {
-    return Vue.axios.post("/api/loan-application", params);
+    return Vue.axios.post(`/api/loan-application?loanAmount=${params}`);
   },
-  getLoanProfile(params) {
-    return Vue.axios.post("/api/loan/view", params);
+  getLoanProfile() {
+    return Vue.axios.get("/api/loan/view");
   }
 };
