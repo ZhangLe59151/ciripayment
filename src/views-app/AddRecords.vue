@@ -89,7 +89,7 @@
         <van-col span="24">
           <button
             class="update_btn"
-            v-on:click="update_btn"
+            @click="updateBtn"
           >Update Records</button>
         </van-col>
       </van-row>
@@ -157,7 +157,11 @@ export default {
     return {
       currentTab: this.$route.query.currentTab || "0",
       form: {
-        date: this.$route.query.date ? this.$moment(today.setDate(today.getDate() - 1)).format("D MMM YYYY") : this.$moment(today).format("D MMM YYYY"),
+        date: this.$route.query.date
+          ? this.$moment(today.setDate(today.getDate() - 1)).format(
+              "D MMM YYYY"
+            )
+          : this.$moment(today).format("D MMM YYYY"),
         income: "",
         expense: "",
         note: ""
@@ -216,14 +220,17 @@ export default {
         ? kbt.substring(0, kbt.length - 1)
         : kbt;
     },
-    update_btn() {
-      this.form.date = this.$moment(this.form.date).format("YYYYMMDD");
+    updateBtn() {
+      const form = Object.assign({}, this.form);
+      form.date = this.$moment(this.form.date).format("YYYYMMDD");
       this.appear = false;
-      console.log( this.form[this.type] );
-      if ( this.form[this.type].match(/^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/) ) {
-        this.$store.commit("UpdateRecord", this.form);
+      const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
+      if (regex.test(form[this.type])) {
+        this.$store.commit("UpdateRecord", form);
+        this.$toast("Update succeed!");
+        return false;
       }
-      
+      this.$toast("Pls input valid amount.");
     },
     view_history() {
       this.$router.push({ name: "RecordList" });
