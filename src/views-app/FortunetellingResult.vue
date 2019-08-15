@@ -64,15 +64,18 @@ export default {
 .fortunetelling-result {
   height: 100vh;
   background-color: #ff8600;
+  position: relative;
 }
 
 .bg-image-div {
   text-align: center;
-  position: relative;
-  bottom: 10px;
 }
 
 .bg-image {
-  width: 60%;
+  width: 240px;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  margin-left: -120px;
 }
 </style>

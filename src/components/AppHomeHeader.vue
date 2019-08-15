@@ -19,8 +19,11 @@
       </van-col>
     </van-row>
 
-    <div class="btn">
-      <i class="iconfont icontime"/>
+    <div
+      class="btn"
+      @click="$router.push({name: 'AddRecord'})"
+    >
+      <i class="iconfont icontime" />
       View and Update Records
     </div>
   </div>
