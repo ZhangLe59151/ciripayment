@@ -222,9 +222,9 @@ const AppRouteArr = [
 
 const ArticleArr = [
   {
-    path: "/article/1",
-    name: "Article-1",
-    component: () => import("@/article/Article-1.vue")
+    path: "/article",
+    name: "ArticleExternal",
+    component: () => import("@/article/ArticleExternal.vue")
   }
 ];
 

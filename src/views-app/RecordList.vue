@@ -8,14 +8,14 @@
       @load="onLoad"
     >
       <van-cell
-        v-for="item in list"
-        :key="item"
-        title="2019/09/01"
+        v-for="(item) in list"
+        :key="item.date"
+        :title="item.date"
       >
         <template slot="default">
-          <span class="custom-title">Income: {{item}}</span>
+          <span class="custom-title">Income: {{item.income}}</span>
           <br>
-          <span class="custom-title">Expenses: {{item}}</span>
+          <span class="custom-title">Expenses: {{item.expense}}</span>
         </template>
       </van-cell>
     </van-list>
@@ -24,13 +24,30 @@
 
 <script>
 import AppCommonHeader from "@/components/AppCommonHeader";
+const recordList = [
+  {
+    date: "20190917",
+    income: "+100",
+    expense: "-50"
+  },
+  {
+    date: "20190918",
+    income: "+100",
+    expense: "-50"
+  },
+  {
+    date: "20190919",
+    income: "+100",
+    expense: "-50"
+  }
+];
 export default {
   components: {
     AppCommonHeader
   },
   data() {
     return {
-      list: [],
+      list: recordList,
       loading: false,
       finished: false
     };
@@ -47,7 +64,7 @@ export default {
         this.loading = false;
 
         // 数据全部加载完成
-        if (this.list.length >= 40) {
+        if (this.list.length >= recordList.length) {
           this.finished = true;
         }
       }, 500);

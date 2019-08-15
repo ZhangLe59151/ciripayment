@@ -1,11 +1,14 @@
 <template>
   <div>
-    <app-records-header/>
+    <app-records-header />
 
     <div class="app-pick-date">
       <van-row class="select_date">
         <van-col span="12">Date</van-col>
-        <van-col span="12" class="link_view_history">
+        <van-col
+          span="12"
+          class="link_view_history"
+        >
           <button v-on:click="view_history">View Record History</button>
         </van-col>
       </van-row>
@@ -71,13 +74,20 @@
 
       <van-row class="input_note">
         <van-col span="24">
-          <input v-model="form.note" maxlength="“100”" placeholder="Add Note">
+          <input
+            v-model="form.note"
+            maxlength="“100”"
+            placeholder="Add Note"
+          >
         </van-col>
       </van-row>
 
       <van-row class="input_note">
         <van-col span="24">
-          <button class="update_btn" v-on:click="update_btn">Update Records</button>
+          <button
+            class="update_btn"
+            v-on:click="update_btn"
+          >Update Records</button>
         </van-col>
       </van-row>
     </div>
@@ -87,11 +97,12 @@
         <van-col span="24">
           <van-datetime-picker
             v-show="appear"
-            v-model="form.date"
+            v-model="currentDate"
             type="date"
             :min-date="minDate"
+            :max-date="maxDate"
             @cancel="appear = false"
-            @confirm="setDate()"
+            @confirm="setDate"
           />
         </van-col>
       </van-row>
@@ -104,10 +115,14 @@
       @blur="show = false"
       @input="onInput"
       @delete="onDelete"
-    /><<<<<<< HEAD
-    <van-datetime-picker :show="appear" v-model="currentDate" type="date" :min-date="minDate"/>=======
-    <app-tab-bar :active="1"/>>>>>>>> b7477603c4dc8670f506a4681608b7191d5a2f0e
-    <app-tab-bar :active="1"/>
+    />
+    <van-datetime-picker
+      :show="appear"
+      v-model="currentDate"
+      type="date"
+      :min-date="minDate"
+    />
+    <app-tab-bar :active="1" />
   </div>
 </template>
 
@@ -115,6 +130,8 @@
 import AppTabBar from "@/components/AppTabBar";
 import AppRecordsHeader from "@/components/AppRecordsHeader";
 import { mapState } from "vuex";
+
+const today = new Date();
 
 export default {
   name: "AppRecords",
@@ -134,7 +151,7 @@ export default {
     return {
       currentTab: this.$route.query.currentTab || "0",
       form: {
-        date: new Date().toDateString(),
+        date: today.toDateString(),
         income: "",
         expense: "",
         note: ""
@@ -142,12 +159,42 @@ export default {
       show: false,
       type: "income",
       appear: false,
-      minDate: new Date("Jan 01,2018")
+      minDate: new Date("Jan 01,2018"),
+      maxDate: today,
+      currentDate: today
     };
   },
-
+  watch: {
+    currentDate: {
+      handler(val, oldVal) {
+        this.$set(
+          this.form,
+          "date",
+          val ? this.$moment(val).format("dd MM YYYY") : ""
+        );
+        //this.$set(this.form,"date", val ? val.toDateString() : "")
+        //this.form.date = "Today ," + val
+        if (
+          this.$moment(val).format("YYYYMMDD") ==
+          this.$moment(new Date()).format("YYYYMMDD")
+        ) {
+          this.form.date = "Today ," + val;
+        } else if (
+          this.$moment(val).format("YYYYMMDD") ==
+          this.$moment(today.setDate(today.getDate() - 1)).format("YYYYMMDD")
+        ) {
+          this.form.date = "Yesterday ," + val;
+        } else {
+          this.form.date = this.form.date
+            .replace("Today ,", "")
+            .replace("Yesterday ,", "");
+        }
+      }
+    }
+  },
   methods: {
     showKeyboard(type) {
+      this.appear = false;
       this.show = true;
       this.type = type;
     },
@@ -161,12 +208,13 @@ export default {
         : kbt;
     },
     update_btn() {
-      this.form.date = this.formatDate(this.form.date);
+      this.form.date = this.$moment(this.form.date).format("YYYYMMDD");
       this.$store.commit("UpdateRecord", this.form);
       this.form.date = new Date().toDateString();
       this.form.income = "";
       this.form.expense = "";
       this.form.note = "";
+      this.appear = false;
     },
     view_history() {
       this.$router.push({ name: "RecordList" });
@@ -177,18 +225,10 @@ export default {
     },
     setDate(value) {
       this.appear = false;
-      this.form.date = valuel.toDateString();
-    },
-    formatDate(date) {
-      var d = new Date(date),
-        month = "" + (d.getMonth() + 1),
-        day = "" + d.getDate(),
-        year = d.getFullYear();
 
-      if (month.length < 2) month = "0" + month;
-      if (day.length < 2) day = "0" + day;
+      // this.currentDate = this.$moment(value).format("YYYYMMDD");
 
-      return year.toString() + month.toString() + day.toString();
+      // console.log( this.currentDate );
     }
   }
 };
