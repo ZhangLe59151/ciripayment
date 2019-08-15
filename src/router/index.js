@@ -192,6 +192,11 @@ const AppRouteArr = [
     path: "/fortunetelling-result",
     name: "FortunetellingResult",
     component: () => import("@/views-app/FortunetellingResult.vue")
+  },
+  {
+    path: "/fortune-telling",
+    name: "FortuneTelling",
+    component: () => import("@/views-app/FortuneTelling.vue")
   }
 ];
 
