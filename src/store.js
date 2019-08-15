@@ -249,7 +249,9 @@ export default new Vuex.Store({
     recommendChannelsStore: [],
     completeLoanProfile: false,
     loanProfile: {},
-    fortunetellingFrame: localStorage.getItem("fortunetellingFrame") ? JSON.parse(localStorage.getItem("fortunetellingFrame")) : [],
+    fortunetellingFrame: localStorage.getItem("fortunetellingFrame")
+      ? JSON.parse(localStorage.getItem("fortunetellingFrame"))
+      : [],
     todayDate: ""
   },
   mutations: {
@@ -408,32 +410,38 @@ export default new Vuex.Store({
     },
     UpdateLoanProfile(state, updateLoanProfile) {
       state.loanProfile = Object.assign(state.loanProfile, updateLoanProfile);
-      window.localStorage.setItem("loanProfile", JSON.stringify(state.loanProfile));
+      window.localStorage.setItem(
+        "loanProfile",
+        JSON.stringify(state.loanProfile)
+      );
     },
     CompleteLoanProfile(state) {
       state.completeLoanProfile = true;
     },
     SaveFortunetellingResult(state, fortunetellingFrame) {
       state.fortunetellingFrame = fortunetellingFrame;
-      window.localStorage.setItem("fortunetellingFrame", JSON.stringify(fortunetellingFrame));
+      window.localStorage.setItem(
+        "fortunetellingFrame",
+        JSON.stringify(fortunetellingFrame)
+      );
     },
     ClearFortunetellingResult(state) {
       state.fortunetellingFrame = [];
       window.localStorage.removeItem("fortunetellingFrame");
     },
     SetTodayDate(state) {
-      state.todayDate = this.$moment().format("YYYYMMDD");;
+      state.todayDate = this.$moment().format("YYYYMMDD");
       window.localStorage.setItem("todayDate", state.todayDate);
     },
-    //this is for record
+    // this is for record
     UpdateRecord(state, updateRecordInfo) {
-      const recordList = Array.from(state.recordList)
+      const recordList = Array.from(state.recordList);
       const itemIndex = findIndex(recordList, { date: updateRecordInfo.date });
       if (itemIndex && itemIndex > -1) {
         // udpate
-        recordList.splice(1, itemIndex, updateRecordInfo)
+        recordList.splice(1, itemIndex, updateRecordInfo);
       } else {
-        recordList.push(updateRecordInfo)
+        recordList.push(updateRecordInfo);
       }
       state.recordList = recordList;
       window.localStorage.setItem("recordList", JSON.stringify(recordList));
