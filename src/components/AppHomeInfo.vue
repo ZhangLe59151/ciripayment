@@ -2,23 +2,18 @@
   <div class="app-home-info">
     <div class="title">{{$t("Home.info")}}</div>
 
-    <div
-      class="info-box"
-      v-for="item in arr"
-      :key="item.id"
-    >
-      <van-row
-        type="flex"
-        justify="space-between"
-      >
-        <van-col span="16">
-          <div class="arc-title">{{item.title}}</div>
-          <!-- <div class="arc-des">{{item.des}}</div> -->
-        </van-col>
-        <van-col span="8">
-          <img :src="item.icon">
-        </van-col>
-      </van-row>
+    <div class="info-box" v-for="item in arr" :key="item.id">
+      <div @click="$router.push({name: 'Article-1', query: { url: item.link}})">
+        <van-row type="flex" justify="space-between">
+          <van-col span="16">
+            <div class="arc-title">{{item.title}}</div>
+            <!-- <div class="arc-des">{{item.des}}</div> -->
+          </van-col>
+          <van-col span="8">
+            <img :src="item.icon">
+          </van-col>
+        </van-row>
+      </div>
     </div>
   </div>
 </template>
