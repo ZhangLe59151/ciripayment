@@ -1,12 +1,13 @@
 <template>
   <div class="fortune-telling">
-    <div class="background-img-normal" v-on:click="startOpeningProcess" v-if="status===statusEnum.normal">
-      <div class="tap-tips">
-        Tap on the treasure chest!
-      </div>
+    <div
+      class="background-img-normal"
+      v-on:click="startOpeningProcess"
+      v-if="status===statusEnum.normal"
+    >
+      <div class="tap-tips">Tap on the treasure chest!</div>
     </div>
-    <div class="background-img-opening" v-if="status===statusEnum.opening">
-    </div>
+    <div class="background-img-opening" v-if="status===statusEnum.opening"></div>
     <transition name="bounce">
       <div class="result-page" v-if="status===statusEnum.finish">
         <fortunetelling-result/>
@@ -29,7 +30,7 @@ export default {
       minOpeningAnimateDuration: 3000,
       animateStartTime: 0,
       today: ""
-    }
+    };
   },
   computed: {
     ...mapState({
@@ -40,7 +41,7 @@ export default {
         normal: 0,
         opening: 1,
         finish: 2
-      }
+      };
     }
   },
   methods: {
@@ -53,11 +54,11 @@ export default {
       let networkDuration = new Date().getTime() - this.animateStartTime;
       let timeout = 0;
       if (networkDuration < this.minOpeningAnimateDuration) {
-        timeout = this.minOpeningAnimateDuration - timeout
+        timeout = this.minOpeningAnimateDuration - timeout;
       }
       setTimeout(() => {
         this.status = this.statusEnum.finish;
-      }, timeout)
+      }, timeout);
     },
     getFortunetelling() {
       this.checkIsRecord();
@@ -121,47 +122,47 @@ export default {
 </script>
 
 <style scoped>
-  .fortune-telling {
-    background-color: #e39502;
-    position: fixed;
-    width: 100%;
-    height: 100%;
+.fortune-telling {
+  background-color: #e39502;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+.background-img-normal {
+  background: url("../assets/imgs/fortune-telling/fortune_telling_normal.gif");
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+}
+.tap-tips {
+  text-align: center;
+  margin-top: 20vh;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+.background-img-opening {
+  background: url("../assets/imgs/fortune-telling/fortune_telling_opening.gif");
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+}
+.result-page {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+.bounce-enter-active {
+  animation: bounce-in 0.2s;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.2);
   }
-  .background-img-normal {
-    background: url("../assets/imgs/fortune-telling/fortune_telling_normal.gif");
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
+  100% {
+    transform: scale(1);
   }
-  .tap-tips {
-    text-align: center;
-    margin-top: 20vh;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-  }
-  .background-img-opening {
-    background: url("../assets/imgs/fortune-telling/fortune_telling_opening.gif");
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-  }
-  .result-page {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-  }
-  .bounce-enter-active {
-    animation: bounce-in .2s;
-  }
-  @keyframes bounce-in {
-    0% {
-      transform: scale(0.2);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
+}
 </style>
