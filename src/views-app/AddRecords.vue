@@ -31,8 +31,8 @@
         <van-col span="20">
           <input
             class="income"
-            v-model="this.form.income"
-            @touchstart.stop="show = true"
+            v-model="form.income"
+            @touchstart.stop="showKeyboard('income')"
             maxlength=“13”
             placeholder="" />
         </van-col>
@@ -55,8 +55,8 @@
         <van-col span="20">
           <input
             class="expense"
-            @touchstart.stop="show2 = true"
-            v-model="this.form.expense"
+            @touchstart.stop="showKeyboard('expense')"
+            v-model="form.expense"
             maxlength="13"
             placeholder="" />
         </van-col>
@@ -75,7 +75,7 @@
       <van-row class="input_note">
         <van-col span="24">
           <input
-            v-model="this.form.note"
+            v-model="form.note"
             maxlength=“100”
             placeholder="Add Note" />
         </van-col>
@@ -98,15 +98,6 @@
       @blur="show = false"
       @input="onInput"
       @delete="onDelete"
-    />
-
-    <van-number-keyboard
-      :show="show2"
-      extra-key="."
-      close-button-text="Done"
-      @blur="show2 = false"
-      @input="onInput2"
-      @delete="onDelete2"
     />
 
 
@@ -141,30 +132,27 @@ export default {
     return {
       currentTab: this.$route.query.currentTab || "0",
       form: {
-        dateselected: "Today, 13 Aug 2019",
+        dateselected: "20190813",
         income: "",
         expense: "",
         note: "",
       },
       show: false,
-      show2: false
+      type: "income"
     };
   },
 
   methods: {
+    showKeyboard(type) {
+      this.show = true;
+      this.type = type
+    },
     onInput(value) {
-      this.form.income = this.form.income + value;
+      this.form[this.type] += value 
     },
     onDelete() {
-      let kbt = this.form.income.toString();
-      this.form.income = kbt.length ? kbt.substring(0, kbt.length -1) : kbt;
-    },
-    onInput2(value) {
-      this.form.expense = this.form.expense + value;
-    },
-    onDelete2() {
-      let kbt = this.form.expense.toString();
-      this.form.expense = kbt.length ? kbt.substring(0, kbt.length -1) : kbt;
+      let kbt = this.form[this.type].toString();
+      this.form[this.type] = kbt.length ? kbt.substring(0, kbt.length -1) : kbt;
     },
     update_btn() {
       this.$store.commit("UpdateRecord", this.form);

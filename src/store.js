@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import {findIndex} from "lodash";
 
 Vue.use(Vuex);
 
@@ -17,7 +18,7 @@ export default new Vuex.Store({
     form: {},
     userInfo: {},
     application: {},
-    recordList: {},
+    recordList: JSON.parse(localStorage.getItem("recordList")) || [],
     nationalCodeList: [
       "+66",
       "+65",
@@ -375,15 +376,17 @@ export default new Vuex.Store({
       window.localStorage.setItem("application", "{}");
     },
     //this is for record
-    InitRecord(state) {
-      var originRecord = state.recordList !== null ? state.recordList : {};
-      var recordString = window.localStorage.getItem("recordList");
-      recordString = recordString !== null ? recordString : "{}";
-      state.recordList = Object.assign(originRecord, JSON.parse(recordString));
-    },
     UpdateRecord(state, updateRecordInfo) {
-      state.recordList = Object.assign(state.recordList, updateRecordInfo);
-      window.localStorage.setItem("recordList", JSON.stringify(state.recordList));
+      const recordList = Array.from(state.recordList)
+      const itemIndex = findIndex(recordList, {date: updateRecordInfo.date });
+      if (itemIndex && itemIndex > -1) {
+        // udpate
+        recordList.splice(1,itemIndex, updateRecordInfo)
+      } else {
+        recordList.push(updateRecordInfo)
+      }
+      state.recordList = recordList;
+      window.localStorage.setItem("recordList", JSON.stringify(recordList));
     }
   },
   actions: {}
