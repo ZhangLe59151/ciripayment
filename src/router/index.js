@@ -87,6 +87,11 @@ const AppRouteArr = [
     component: () => import("@/views-app/Records.vue")
   },
   {
+    path: "/addrecord",
+    name: "Records",
+    component: () => import("@/views-app/AddRecords.vue")
+  },
+  {
     path: "/services",
     name: "Services",
     component: () => import("@/views-app/Services.vue")
@@ -182,6 +187,11 @@ const AppRouteArr = [
     path: "/reset-password-sp",
     name: "ResetPasswordSP",
     component: () => import("@/views-app/ResetPassword.vue")
+  },
+  {
+    path: "/fortunetelling-result",
+    name: "FortunetellingResult",
+    component: () => import("@/views-app/FortunetellingResult.vue")
   }
 ];
 
