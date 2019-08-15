@@ -248,7 +248,7 @@ export default new Vuex.Store({
     recommendChannelsStore: [],
     completeLoanProfile: false,
     loanProfile: {},
-    fortunetellingFrame: [],
+    fortunetellingFrame: localStorage.getItem("fortunetellingFrame") ? JSON.parse(localStorage.getItem("fortunetellingFrame")) : [],
     todayDate: ""
   },
   mutations: {
