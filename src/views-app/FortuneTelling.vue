@@ -41,6 +41,7 @@ export default {
     startOpeningProcess() {
       this.status = this.statusEnum.opening;
       let startTime = new Date().getTime();
+      // update network duration after request api
       let networkDuration = new Date().getTime() - startTime;
       let timeout = 0;
       if (networkDuration < this.minOpeningAnimateDuration) {
@@ -70,8 +71,7 @@ export default {
   }
   .tap-tips {
     text-align: center;
-    /*margin-top: 20vh;*/
-    margin-top: 10vh;
+    margin-top: 20vh;
     color: white;
     font-size: 20px;
     font-weight: bold;
