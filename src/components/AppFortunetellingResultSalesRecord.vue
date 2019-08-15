@@ -10,7 +10,7 @@ export default {
   computed: {},
   methods: {
     recordNow() {
-      this.$router.push({ name: "Home" });
+      this.$router.push({ name: "AddRecord" });
     }
   }
 };
