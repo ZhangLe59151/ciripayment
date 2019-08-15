@@ -1,6 +1,6 @@
 <template>
-  <section>
-    <app-common-header/>
+  <section class="article-section">
+    <app-common-header v-if="$store.state.deviceType === 'APP'"/>
     <!-- <div class="article">
       <div class="title">"พระจูเลียน" รับเสพเมถุน ขอโทษคนไทย เตรียมสึกพรุ่งนี้</div>
       <div class="date">12 July 2019</div>
@@ -11,14 +11,7 @@
         class="cnt"
       >Volatile Dow Jones hedge fund rates bonds fluctuate bear capital district. Securities passively taxpayer funds market dividends value financial health quarterly. Index investment performance interest potential taxpayer retirement dividends. Government credit comodity receive dividends economy. Capital exchange NYSE funds potential government federal dividends term district established economy treasury. Potential interest rate Dow Jones financial health bills NYSE exchange index funds established exchange traded funds municipal managed comodity bonds. Public notes volatile Moody's credit interest funds Fitch economy retirement.</div>
     </div>-->
-    <iframe
-      class="articleIframe"
-      :src="this.$route.query.url"
-      id="show-iframe"
-      frameborder="0"
-      width="100%"
-      scrolling="auto"
-    />
+    <iframe class="article-iframe" :src="this.$route.query.url" id="show-iframe"/>
   </section>
 </template>
 
@@ -32,8 +25,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.articleIframe {
+.article-section {
+  overflow-x: hidden;
+}
+.article-iframe {
   height: calc(100vh - 44px);
+  width: 100%;
+  border: none;
 }
 .article {
   margin: 16px;
