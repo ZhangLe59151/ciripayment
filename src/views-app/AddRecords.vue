@@ -1,6 +1,8 @@
 <template>
   <div >
+    
     <app-records-header />
+
     <div class="app-pick-date">
       <!-- <div class="pick_date">Today, 13 Aug 2019</div> -->
       <van-row class="select_date">
@@ -25,7 +27,8 @@
         <van-col span="20">
           <input 
             class="income"
-            :value="income"
+            :value="form.income"
+            v-model="form.income"
             @touchstart.stop="show = true"
             maxlength=“13”
             placeholder="" />
@@ -50,7 +53,8 @@
           <input 
             class="expense"
             @touchstart.stop="show = true"
-            :value="expense"
+            :value="form.expense"
+            v-model="form.income"
             maxlength=“13”
             placeholder="" />
         </van-col>
@@ -71,8 +75,9 @@
           <input 
             :value="note"
             @touchstart.stop="show = true"
+            v-model="form.note"
             maxlength=“100”
-            placeholder="Add Nte" />
+            placeholder="Add Note" />
         </van-col>
       </van-row>
 
@@ -85,7 +90,6 @@
 
     </div>
 
-    
     <van-number-keyboard
       :show="show"
       extra-key="."
@@ -118,7 +122,12 @@ export default {
   data() {
     return {
       currentTab: this.$route.query.currentTab || "0",
-      income: '',
+      form: {
+        date_selected = 'Today, 13 Aug 2019',
+        income: '',
+        expense: '',
+        note: ''
+      },
       show: false
     };
   },
