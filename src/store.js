@@ -14,6 +14,7 @@ export default new Vuex.Store({
     clientInfo: {
       bankName: "ABC Bank"
     },
+    currency: "฿",
     serviceOverviewVo: {},
     form: {},
     userInfo: {},

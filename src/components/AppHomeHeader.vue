@@ -1,32 +1,26 @@
 <template>
   <div class="app-home-header">
-    <div>
-
-    </div>
+    <div></div>
 
     <van-row class="info">
       <van-col span="16">
-        <div class="income-label">
-          {{$t("Home.income")}}
-        </div>
+        <div class="income-label">{{$t("Home.income")}}</div>
         <div class="income-value">
           <span>+{{info.income}}</span>
-          <span class="income-currency">฿</span>
+          <span class="income-currency">{{$store.state.currency}}</span>
         </div>
       </van-col>
       <van-col span="8">
-        <div class="expenses-label">
-          {{$t("Expenses")}}
-        </div>
+        <div class="expenses-label">{{$t("Expenses")}}</div>
         <div class="expenses-value">
           <span>-{{info.expense}}</span>
-          <span class="expenses-currency">฿</span>
+          <span class="expenses-currency">{{$store.state.currency}}</span>
         </div>
       </van-col>
     </van-row>
 
     <div class="btn">
-      <i class="iconfont icontime" />
+      <i class="iconfont icontime"/>
       View and Update Records
     </div>
   </div>

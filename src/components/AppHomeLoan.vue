@@ -1,20 +1,12 @@
 <template>
-  <div
-    class="app-home-loan"
-  >
-    <div class="des">
-      {{$t("Home.loan")}}
-    </div>
-    <div class="amount">
-      100,000 ฿
-    </div>
+  <div class="app-home-loan">
+    <div class="des">{{$t("Home.loan")}}</div>
+    <div class="amount">100,000 {{$store.state.currency}}</div>
 
     <div
       class="getNow"
       @click="$router.push({name: 'Loan',query: {origin: 'banner'}})"
-    >
-      {{$t("Home.loanBtn")}}
-    </div>
+    >{{$t("Home.loanBtn")}}</div>
   </div>
 </template>
 
