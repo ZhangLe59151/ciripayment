@@ -172,22 +172,22 @@ export default {
   watch: {
     currentDate: {
       handler(val, oldVal) {
-        //this.$set(this.form,"date", val ? this.$moment(val).format("YYYYMMDD") : "")
-        this.$set(this.form,"date", val ? val.toDateString() : "")
+        this.$set(this.form,"date", val ? this.$moment(val).format("dd MM YYYY") : "")
+        //this.$set(this.form,"date", val ? val.toDateString() : "")
         //this.form.date = "Today ," + val
-        console.log( this.$moment(val).format("YYYYMMDD"))
-        console.log( this.$moment(new Date()).format("YYYYMMDD"))
         if (this.$moment(val).format("YYYYMMDD") == this.$moment(new Date()).format("YYYYMMDD")) {
-          this.form.currentDate = "Today ," + val
-        }
-        if (this.$moment(val).format("YYYYMMDD") == this.$moment(today.setDate(today.getDate()-1)).format("YYYYMMDD")) {
+          this.form.date = "Today ," + val
+        } else if (this.$moment(val).format("YYYYMMDD") == this.$moment(today.setDate(today.getDate()-1)).format("YYYYMMDD")) {
           this.form.date = "Yesterday ," + val
+        } else {
+          this.form.date = this.form.date.replace("Today ,","").replace("Yesterday ,","");
         }
       }
     }
   },
   methods: {
     showKeyboard(type) {
+      this.appear = false;
       this.show = true;
       this.type = type
     },
@@ -199,12 +199,13 @@ export default {
       this.form[this.type] = kbt.length ? kbt.substring(0, kbt.length -1) : kbt;
     },
     update_btn() {
-      this.form.date = this.formatDate(this.form.date);
+      this.form.date = this.$moment(this.form.date).format("YYYYMMDD");
       this.$store.commit("UpdateRecord", this.form);
       this.form.date = new Date().toDateString();
       this.form.income = "";
       this.form.expense = "";
       this.form.note = "";
+      this.appear = false;
     },
     view_history() {
       this.$router.push({ name: "RecordList" });
@@ -220,25 +221,6 @@ export default {
 
       // console.log( this.currentDate );
       
-    },
-    formatDate(date) {
-      var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-      if (month.length < 2) month = '0' + month;
-      if (day.length < 2) day = '0' + day;
-
-      return year.toString()+month.toString()+day.toString();
-    },
-    highlightDate(value) {
-      if (value.getTime() == today.getTime()) {
-        this.form.date = "Today ," + this.form.date
-      }
-      if (value.getTime() == today.setDate(today.getDate()-1)) {
-        this.form.date = "Yesterday ," + this.form.date
-      }
     }
   }
 
