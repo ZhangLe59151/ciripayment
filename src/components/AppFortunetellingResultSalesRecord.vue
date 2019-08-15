@@ -10,7 +10,10 @@ export default {
   computed: {},
   methods: {
     recordNow() {
-      this.$router.push({ name: "Home" });
+      const yesterday = this.$moment()
+        .subtract(1, "days")
+        .format("YYYYMMDD");
+      this.$router.push({ name: "AddRecord", query: { date: yesterday } });
     }
   }
 };

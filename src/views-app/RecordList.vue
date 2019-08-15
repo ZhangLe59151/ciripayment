@@ -59,5 +59,6 @@ export default {
 
 <style lang="scss" scoped>
 .van-nav-bar {
+  height: 44px;
 }
 </style>

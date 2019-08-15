@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import { findIndex } from "lodash";
 
 Vue.use(Vuex);
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
     form: {},
     userInfo: {},
     application: {},
+    recordList: JSON.parse(localStorage.getItem("recordList")) || [],
     nationalCodeList: [
       "+66",
       "+65",
@@ -34,6 +36,7 @@ export default new Vuex.Store({
       "+95"
     ],
     nationalCode: require("@/assets/data/nationalCode.json"),
+    dateInMonth: require("@/assets/data/dateInMonth.json"),
     phone: {
       regExp: /^(0[1-9]{1}[0-9]{8}|[1-9]{1}[0-9]{8}|[1-9]{1}[0-9]{7})$/,
       thaiExp: /^(0[1-9]{1}[0-9]{8}|[1-9]{1}[0-9]{8})$/,
@@ -243,13 +246,10 @@ export default new Vuex.Store({
     bankList: require("./assets/data/bankInfo.json").list,
     merchantProfile: {},
     recommendChannelsStore: [],
-    fortunetelling: {
-      luckyNumber: "-",
-      luckyWords: "-",
-      luckySales: "-"
-    },
     completeLoanProfile: false,
-    loanProfile: {}
+    loanProfile: {},
+    fortunetellingFrame: [],
+    todayDate: ""
   },
   mutations: {
     InitForm(state) {
@@ -411,6 +411,31 @@ export default new Vuex.Store({
     },
     CompleteLoanProfile(state) {
       state.completeLoanProfile = true;
+    },
+    SaveFortunetellingResult(state, fortunetellingFrame) {
+      state.fortunetellingFrame = fortunetellingFrame;
+      window.localStorage.setItem("fortunetellingFrame", JSON.stringify(fortunetellingFrame));
+    },
+    ClearFortunetellingResult(state) {
+      state.fortunetellingFrame = [];
+      window.localStorage.removeItem("fortunetellingFrame");
+    },
+    SetTodayDate(state) {
+      state.todayDate = this.$moment().format("YYYYMMDD");;
+      window.localStorage.setItem("todayDate", state.todayDate);
+    },
+    //this is for record
+    UpdateRecord(state, updateRecordInfo) {
+      const recordList = Array.from(state.recordList)
+      const itemIndex = findIndex(recordList, { date: updateRecordInfo.date });
+      if (itemIndex && itemIndex > -1) {
+        // udpate
+        recordList.splice(1, itemIndex, updateRecordInfo)
+      } else {
+        recordList.push(updateRecordInfo)
+      }
+      state.recordList = recordList;
+      window.localStorage.setItem("recordList", JSON.stringify(recordList));
     }
   },
   actions: {}

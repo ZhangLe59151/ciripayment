@@ -2,21 +2,21 @@
   "list": [
     {
       "title": "Franchising 101",
-      "des": "Volatile Dow Jones hedge fund rates bonds fluctuate bear capital district…",
       "id": "1",
-      "icon": "https://media.treehugger.com/assets/images/2018/04/white_eggs_in_carton.jpg.860x0_q70_crop-scale.jpg"
+      "icon": "https://media.treehugger.com/assets/images/2018/04/white_eggs_in_carton.jpg.860x0_q70_crop-scale.jpg",
+      "link": "https://example/3.html"
     },
     {
       "title": "Franchising 102",
-      "des": "Volatile Dow Jones hedge fund rates bonds fluctuate bear capital district…",
       "id": "2",
-      "icon": "https://media.treehugger.com/assets/images/2018/04/white_eggs_in_carton.jpg.860x0_q70_crop-scale.jpg"
+      "icon": "https://media.treehugger.com/assets/images/2018/04/white_eggs_in_carton.jpg.860x0_q70_crop-scale.jpg",
+      "link": "https://example/3.html"
     },
     {
       "title": "Franchising 103",
-      "des": "Volatile Dow Jones hedge fund rates bonds fluctuate bear capital district…",
       "id": "3",
-      "icon": "https://media.treehugger.com/assets/images/2018/04/white_eggs_in_carton.jpg.860x0_q70_crop-scale.jpg"
+      "icon": "https://media.treehugger.com/assets/images/2018/04/white_eggs_in_carton.jpg.860x0_q70_crop-scale.jpg",
+      "link": "https://example/3.html"
     }
   ]
 }
