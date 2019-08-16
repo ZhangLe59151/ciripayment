@@ -8,7 +8,7 @@
         span="12"
         class="link_view_history"
       >
-        <div v-on:click="view_history">View Record History</div>
+        <div @click="viewHistory">View Record History</div>
       </van-col>
     </van-row>
 
@@ -188,7 +188,7 @@ export default {
         console.log();
         if (itemIndex > -1) {
           this.form = Object.assign({}, this.recordList[itemIndex]);
-          this.form.date = this.$moment(this.form.date).format("D MMM YYYY")
+          this.form.date = this.$moment(this.form.date).format("D MMM YYYY");
         } else {
           this.form.note = "";
           this.form.income = "";
@@ -242,8 +242,9 @@ export default {
       form.date = this.$moment(_date).format(this.localDateFormatter);
       return form;
     },
-    view_history() {
-      this.$router.push({ name: "RecordList" });
+    viewHistory() {
+      const date = this.$moment(this.form.date).format(this.localDateFormatter);
+      this.$router.push({ name: "RecordList", query: { date: date } });
     },
     setDate(value) {
       this.appear = false;
@@ -278,6 +279,10 @@ export default {
   height: 40px;
   font-size: 16px;
   margin: 4px 16px 0 16px;
+  .van-icon-arrow-down {
+    position: relative;
+    top: 10px;
+  }
 }
 
 .input_income_expense {
