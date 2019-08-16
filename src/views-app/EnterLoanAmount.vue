@@ -36,7 +36,7 @@
     >*This figure is an estimated amount. Your final approved loan amount may differ.</div>
 
     <van-button
-      size="large"
+      size="small"
       class="bottom-btn apply-btn"
       @click="handleApply"
       :disabled="form.loanAmount === ''"
@@ -219,8 +219,12 @@ export default {
   .apply-btn {
     position: absolute;
     bottom: 16px;
+    height: 40px;
     width: 328px;
     margin-left: calc(50vw - 164px);
+    background-color: #ff8600;
+    border-radius: 4px;
+    font-size: 14px;
   }
 
   .scroll-dialog {
