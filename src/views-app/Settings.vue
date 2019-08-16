@@ -43,9 +43,7 @@ export default {
       this.$router.push({ name: "LandingPage" });
     }
   },
-  created() {
-    // debugger;
-  }
+  created() {}
 };
 </script>
 

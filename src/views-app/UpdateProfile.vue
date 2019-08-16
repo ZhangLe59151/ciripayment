@@ -1,14 +1,14 @@
 <template>
   <div class="update-profile">
-<!--    <van-nav-bar-->
-<!--      right-text="Discard"-->
-<!--      @click-right="handleDiscard"-->
-<!--      @click-left="$router.back()"-->
-<!--      title="Update Profile"-->
-<!--      left-arrow-->
-<!--    />-->
+    <!--    <van-nav-bar-->
+    <!--      right-text="Discard"-->
+    <!--      @click-right="handleDiscard"-->
+    <!--      @click-left="$router.back()"-->
+    <!--      title="Update Profile"-->
+    <!--      left-arrow-->
+    <!--    />-->
 
-<!--    Remove the left arrow now because same purpose as Discard-->
+    <!--    Remove the left arrow now because same purpose as Discard-->
     <van-nav-bar
       right-text="Discard"
       @click-right="handleDiscard"
@@ -613,7 +613,6 @@ export default {
     },
     gotoNextPage() {
       const form = this.form;
-      debugger;
       const params = {
         applicantFirstName: form.applicantFirstName,
         applicantLastName: form.applicantLastName,
@@ -812,7 +811,7 @@ export default {
     font-size: 17px;
     padding: 20px 10px;
     text-align: center;
-    color: #FF8600;
+    color: #ff8600;
     text-transform: uppercase;
     font-weight: bold;
   }
@@ -828,7 +827,7 @@ export default {
 
   .label-title {
     font-size: 14px;
-    color: #FF8600;
+    color: #ff8600;
     height: 40px;
     line-height: 40px;
 
