@@ -1,6 +1,9 @@
 <template>
   <div class="app-setting">
-    <app-setting-header></app-setting-header>
+    <app-common-header
+      :hasLeftArrow="false"
+      leftText="Settings"
+    />
     <app-setting-list></app-setting-list>
     <div class="logout">
       <span @click="handleLogout">Log Out</span>
@@ -15,6 +18,7 @@
 <script>
 import AppTabBar from "@/components/AppTabBar";
 import AppSettingHeader from "@/components/AppSettingHeader";
+import AppCommonHeader from "@/components/AppCommonHeader";
 import AppSettingList from "@/components/AppSettingList";
 import util from "@/util";
 export default {
@@ -23,7 +27,8 @@ export default {
   components: {
     AppTabBar,
     AppSettingHeader,
-    AppSettingList
+    AppSettingList,
+    AppCommonHeader
   },
   data() {
     return {

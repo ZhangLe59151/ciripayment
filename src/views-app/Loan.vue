@@ -1,8 +1,10 @@
 <template>
   <div class="app-loan">
     <app-loan-header v-if="!$route.query.origin" />
-    <van-nav-bar v-else
-      :left-arrow = "!!$route.query.origin"
+    <app-common-header v-if="!$route.query.origin" />
+    <van-nav-bar
+      v-else
+      :left-arrow="!!$route.query.origin"
       @click-left="$router.push({name: 'Home'})"
       :border="false"
     >
@@ -14,7 +16,10 @@
       </div>
     </van-nav-bar>
     <app-loan-overview />
-    <app-tab-bar :active="1" v-if="!$route.query.origin && !$route.query.justSubmitted "/>
+    <app-tab-bar
+      :active="1"
+      v-if="!$route.query.origin && !$route.query.justSubmitted "
+    />
   </div>
 
 </template>
@@ -44,14 +49,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .app-loan {
-    min-height: 100vh;
-    display:flex;
-    flex-direction: column;
-    .header-title {
-      font-size: 20px;
-      color: white;
-      font-weight: bold;
-    }
+.app-loan {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  .header-title {
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
   }
+}
 </style>

@@ -3,7 +3,7 @@
     :title="title"
     :left-text="leftText"
     :right-text="rightText"
-    left-arrow
+    :left-arrow="hasLeftArrow"
     @click-left="$router.back()"
     @click-right="rightFunc"
   />
@@ -30,6 +30,10 @@ export default {
     },
     rightFunc: {
       type: Function
+    },
+    hasLeftArrow: {
+      default: true,
+      type: Boolean
     }
   }
 };
