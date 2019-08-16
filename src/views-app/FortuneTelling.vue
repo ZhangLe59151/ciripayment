@@ -44,8 +44,6 @@ export default {
       status: 0,
       minOpeningAnimateDuration: 3000,
       animateStartTime: 0,
-      shakeAudio: this.$refs.fortuneTellingShake,
-      finishAudio: this.$refs.fortuneTellingFinish,
       statusEnum: {
         normal: 0,
         opening: 1,
@@ -56,11 +54,18 @@ export default {
   computed: {
     ...mapState({
       fortunetellingFrame: "fortunetellingFrame",
-      recordList: "recordList"
+      recordList: "recordList",
+      localDateFormatter: "localDateFormatter"
     }),
 
     today() {
       return this.$moment().format(this.localDateFormatter);
+    },
+    shakeAudio() {
+      return this.$refs.fortuneTellingShake;
+    },
+    finishAudio() {
+      return this.$refs.fortuneTellingFinish;
     }
   },
   methods: {
