@@ -24,16 +24,7 @@
 </template>
 
 <script>
-import AppTabBar from "@/components/AppTabBar";
-import AppLoanHeader from "@/components/AppLoanHeader";
-import AppLoanOverview from "@/components/AppLoanOverview";
-
 export default {
-  components: {
-    AppTabBar,
-    AppLoanHeader,
-    AppLoanOverview
-  },
   name: "Loan",
   created() {
     this.$api.getLoanProfile().then(res => {
