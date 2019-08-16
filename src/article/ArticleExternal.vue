@@ -20,20 +20,18 @@
 </template>
 
 <script>
-import AppCommonHeader from "@/components/AppCommonHeader";
-
 export default {
   data() {
     return {
       loadingIframe: true
     };
   },
-  components: {
-    AppCommonHeader
-  },
+  components: {},
   methods: {
     loadPageData() {
       const vm = this;
+      console.log(vm);
+
       const iframe = document.querySelector("#show-iframe");
       if (iframe.attachEvent) {
         iframe.attachEvent("onload", function() {

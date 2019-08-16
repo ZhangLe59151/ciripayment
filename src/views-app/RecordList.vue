@@ -28,13 +28,9 @@
 </template>
 
 <script>
-import AppCommonHeader from "@/components/AppCommonHeader";
 import { mapState } from "vuex";
 
 export default {
-  components: {
-    AppCommonHeader
-  },
   data() {
     return {
       list: [],
@@ -51,6 +47,12 @@ export default {
   },
 
   methods: {
+    handleBack() {
+      this.$router.push({
+        name: "AddRecord",
+        query: { date: this.$route.query.date }
+      });
+    },
     formatDate(val) {
       return this.$moment(val).format("D MMM YYYY");
     },

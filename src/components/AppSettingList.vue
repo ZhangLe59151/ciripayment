@@ -1,14 +1,14 @@
 <template>
   <div class="app-setting-list">
 
-    <van-cell-group>
+    <!-- <van-cell-group>
       <van-cell
         title="Profile"
         is-link
         @click="verifyIdentity"
         value=""
       />
-    </van-cell-group>
+    </van-cell-group> -->
 
     <van-cell-group>
       <van-cell

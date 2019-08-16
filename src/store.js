@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { findIndex } from "lodash";
+import { find, findIndex } from "lodash";
 
 Vue.use(Vuex);
 
@@ -20,6 +20,7 @@ export default new Vuex.Store({
     userInfo: {},
     application: {},
     recordList: JSON.parse(localStorage.getItem("recordList")) || [],
+    localDateFormatter: "YYYYMMDD",
     nationalCodeList: [
       "+66",
       "+65",
@@ -429,17 +430,14 @@ export default new Vuex.Store({
       state.fortunetellingFrame = [];
       window.localStorage.removeItem("fortunetellingFrame");
     },
-    SetTodayDate(state) {
-      state.todayDate = this.$moment().format("YYYYMMDD");
-      window.localStorage.setItem("todayDate", state.todayDate);
-    },
     // this is for record
     UpdateRecord(state, updateRecordInfo) {
       const recordList = Array.from(state.recordList);
       const itemIndex = findIndex(recordList, { date: updateRecordInfo.date });
-      if (itemIndex && itemIndex > -1) {
+      const item = find(recordList, { date: updateRecordInfo.date });
+      if (item) {
         // udpate
-        recordList.splice(1, itemIndex, updateRecordInfo);
+        recordList[itemIndex] = updateRecordInfo;
       } else {
         recordList.push(updateRecordInfo);
       }

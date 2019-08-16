@@ -1,99 +1,101 @@
 <template>
-  <div>
+  <div class="app-add-record">
     <app-common-header title="Records" />
 
-    <div class="app-pick-date">
-      <van-row class="select_date">
-        <van-col span="12">Date</van-col>
-        <van-col
-          span="12"
-          class="link_view_history"
-        >
-          <button v-on:click="view_history">View Record History</button>
-        </van-col>
-      </van-row>
-      <van-row class="pick_date">
-        <van-col span="22">
-          <input
-            class="input"
-            type="text"
-            :value="form.date"
-            readonly
-            confirm-button-text="confirm"
-            cancel-button-text="cancel"
-            @focus="appear = true"
-          />
-        </van-col>
-      </van-row>
-    </div>
+    <van-row class="label-left">
+      <van-col span="12">Date</van-col>
+      <van-col
+        span="12"
+        class="link_view_history"
+      >
+        <div @click="viewHistory">View Record History</div>
+      </van-col>
+    </van-row>
 
-    <div class="app-pick-date">
-      <van-row class="select_date">Income</van-row>
+    <van-row class="pick_date">
+      <van-col span="21">
+        <van-field
+          class="input"
+          :value="form.date"
+          confirm-button-text="confirm"
+          cancel-button-text="cancel"
+          @focus="appear = true"
+          maxlength="13"
+          readonly
+        />
+      </van-col>
+      <van-col span="1">
+        <van-icon name="arrow-down" />
+      </van-col>
+    </van-row>
 
-      <van-row class="input_number">
-        <van-col span="2">
-          <label class="plus">+</label>
-        </van-col>
-        <van-col span="20">
-          <input
-            class="income"
-            v-model="form.income"
-            @touchstart.stop="showKeyboard('income')"
-            maxlength="“13”"
-            placeholder
-          >
-        </van-col>
-        <van-col span="2">
-          <label class="currency">{{$store.state.currency}}</label>
-        </van-col>
-      </van-row>
-    </div>
+    <van-row class="label-left">Income</van-row>
 
-    <div class="app-pick-date">
-      <van-row class="select_date">Expense</van-row>
+    <van-row
+      class="input_income_expense"
+      id="income"
+    >
+      <van-col span="2">
+        <label class="plus">+</label>
+      </van-col>
+      <van-col span="20">
 
-      <van-row class="input_number">
-        <van-col span="2">
-          <label class="minus">-</label>
-        </van-col>
-        <van-col span="20">
-          <input
-            class="expense"
-            @touchstart.stop="showKeyboard('expense')"
-            v-model="form.expense"
-            maxlength="13"
-            placeholder
-          >
-        </van-col>
-        <van-col span="2">
-          <label class="currency">{{$store.state.currency}}</label>
-        </van-col>
-      </van-row>
-    </div>
+        <van-field
+          class="income"
+          v-model="form.income"
+          @focus="showKeyboard('income')"
+          maxlength="13"
+          readonly
+        />
 
-    <div class="app-pick-date">
-      <van-row class="select_date">Note (Optional)</van-row>
+      </van-col>
+      <van-col span="2">
+        <label class="currency">{{$store.state.currency}}</label>
+      </van-col>
+    </van-row>
 
-      <van-row class="input_note">
-        <van-col span="24">
-          <input
-            v-model="form.note"
-            maxlength="“100”"
-            placeholder="Add Note"
-            @focus="inputNote"
-          >
-        </van-col>
-      </van-row>
+    <van-row class="label-left">Expense</van-row>
 
-      <van-row class="input_note">
-        <van-col span="24">
-          <button
-            class="update_btn"
-            @click="updateBtn"
-          >Update Records</button>
-        </van-col>
-      </van-row>
-    </div>
+    <van-row
+      class="input_income_expense"
+      id="expense"
+    >
+      <van-col span="2">
+        <label class="minus">-</label>
+      </van-col>
+      <van-col span="20">
+
+        <van-field
+          class="expense"
+          v-model="form.expense"
+          @focus="showKeyboard('expense')"
+          maxlength="13"
+          readonly
+        />
+      </van-col>
+      <van-col span="2">
+        <label class="currency">{{$store.state.currency}}</label>
+      </van-col>
+    </van-row>
+
+    <van-row class="label-left">Note (Optional)</van-row>
+
+    <van-row class="input_note">
+      <van-col span="24">
+
+        <van-field
+          v-model="form.note"
+          @focus="inputNote"
+          maxlength="100"
+          placeholder="Add Note"
+        />
+      </van-col>
+    </van-row>
+
+    <button
+      class="update_btn"
+      @click="updateBtn"
+    >Update Records</button>
 
     <van-row>
       <van-col span="24">
@@ -110,14 +112,13 @@
     </van-row>
 
     <van-number-keyboard
-      :show="show"
+      :show="showNumber"
       extra-key="."
       close-button-text="Done"
-      @blur="show = false"
+      @blur="showNumberFalse"
       @input="onInput"
       @delete="onDelete"
     />
-
     <app-tab-bar :active="1" />
   </div>
 </template>
@@ -125,6 +126,7 @@
 <script>
 import AppTabBar from "@/components/AppTabBar";
 import AppCommonHeader from "@/components/AppCommonHeader";
+import { findIndex } from "lodash";
 
 import { mapState } from "vuex";
 
@@ -140,7 +142,8 @@ export default {
 
   computed: {
     ...mapState({
-      dateInMonth: state => state.dateInMonth
+      recordList: state => state.recordList,
+      localDateFormatter: state => state.localDateFormatter
     })
   },
 
@@ -153,12 +156,12 @@ export default {
         expense: "",
         note: ""
       },
-      show: false,
+      showNumber: false,
       type: "income",
       appear: false,
       minDate: startDate,
       maxDate: today,
-      currentDate: today
+      currentDate: this.$route.query.date ? this.$route.query.date : today
     };
   },
   watch: {
@@ -166,33 +169,44 @@ export default {
       immediate: true,
       handler(val, oldVal) {
         let formDate = this.$moment(val).format("D MMM YYYY");
-        let prefix = "";
+        const _today = this.$moment().format(this.localDateFormatter);
+        const _yesterday = this.$moment()
+          .subtract(1, "days")
+          .format(this.localDateFormatter);
+        const _selected = this.$moment(val).format(this.localDateFormatter);
+        const kv = { [_today]: "Today, ", [_yesterday]: "Yesterday, " };
 
-        if (
-          this.$moment(val).format("YYYYMMDD") ===
-          this.$moment().format("YYYYMMDD")
-        ) {
-          prefix = "Today ,";
+        this.$set(
+          this.form,
+          "date",
+          val ? (kv[_selected] ? kv[_selected] : "") + formDate : ""
+        );
+
+        const itemIndex = findIndex(this.recordList, {
+          date: this.$moment(val).format(this.localDateFormatter)
+        });
+        console.log();
+        if (itemIndex > -1) {
+          this.form = Object.assign({}, this.recordList[itemIndex]);
+          this.form.date = this.$moment(this.form.date).format("D MMM YYYY");
+        } else {
+          this.form.note = "";
+          this.form.income = "";
+          this.form.expense = "";
         }
-
-        if (
-          this.$moment(val).format("YYYYMMDD") ===
-          this.$moment()
-            .subtract(1, "days")
-            .format("YYYYMMDD")
-        ) {
-          prefix = "Yesterday ,";
-        }
-
-        this.$set(this.form, "date", val ? prefix + formDate : "");
       }
     }
   },
   methods: {
     showKeyboard(type) {
       this.appear = false;
-      this.show = true;
+      this.showNumber = true;
       this.type = type;
+    },
+    showNumberFalse() {
+      this.showNumber = false;
+      document.getElementById("income").className = "input_income_expense";
+      document.getElementById("expense").className = "input_income_expense";
     },
     onInput(value) {
       if (this.form[this.type].indexOf(".") != -1 && value == ".") {
@@ -211,7 +225,7 @@ export default {
     },
     updateBtn() {
       const form = Object.assign({}, this.form);
-      form.date = this.$moment(this.form.date).format("YYYYMMDD");
+      form.date = this.$moment(this.form.date).format(this.localDateFormatter);
       this.appear = false;
       const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
       if (regex.test(form[this.type])) {
@@ -225,20 +239,17 @@ export default {
       const _date = form.date.includes(",")
         ? form.date.split(", ")[1]
         : form.date;
-      form.date = this.$moment(_date).format("YYYYMMDD");
+      form.date = this.$moment(_date).format(this.localDateFormatter);
       return form;
     },
-    view_history() {
-      this.$router.push({ name: "RecordList" });
-    },
-    onChange(picker, values) {
-      picker.setColumnValues(1, dateInMonth[values[0]]);
-      this.form.date = values;
+    viewHistory() {
+      const date = this.$moment(this.form.date).format(this.localDateFormatter);
+      this.$router.push({ name: "RecordList", query: { date: date } });
     },
     setDate(value) {
       this.appear = false;
 
-      // this.currentDate = this.$moment(value).format("YYYYMMDD");
+      // this.currentDate = this.$moment(value).format(this.localDateFormatter);
 
       // console.log( this.currentDate );
     },
@@ -250,90 +261,123 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.app-pick-date {
-  margin-top: 16px;
-  margin-right: 16px;
-  margin-left: 16px;
-  height: 64px;
+.app-add-record {
+  height: calc(100vh - 50px);
+}
+.label-left {
+  margin: 16px 16px 0 16px;
+  height: 24px;
 
-  .select_date {
-    height: 40px;
+  .link_view_history {
     font-size: 14px;
-
-    .link_view_history {
-      font-size: 14px;
-      color: #ff8600;
-      text-align: right;
-      height: auto;
-    }
+    color: #ff8600;
+    text-align: right;
   }
+}
 
-  .pick_date {
-    top: 4px;
-    height: 40px;
+.pick_date {
+  height: 40px;
+  font-size: 16px;
+  margin: 4px 16px 0 16px;
+  .van-icon-arrow-down {
+    position: relative;
+    top: 10px;
+  }
+}
+
+.input_income_expense {
+  height: 40px;
+  font-size: 16px;
+  margin: 4px 16px 0 16px;
+  border-bottom: 1px solid #c2c8cc;
+
+  .plus {
+    bottom: 0px;
     font-size: 16px;
-    width: 100%;
-
-    .input {
-      width: 100%;
-    }
+    color: #04a777;
   }
 
   .income {
     top: 4px;
     color: #04a777;
-  }
-
-  .input_number {
-    height: 40px;
-    font-size: 40px;
-
-    .plus {
-      bottom: 0px;
-      font-size: 16px;
-      color: #04a777;
-    }
-
-    .income {
-      top: 4px;
-      color: #04a777;
-    }
-
-    .minus {
-      bottom: 0px;
-      font-size: 16px;
-      color: #b41800;
-    }
-
-    .expense {
-      top: 4px;
-      color: #b41800;
-    }
-
-    .currency {
-      bottom: 0px;
-      font-size: 16px;
-      color: #2f3941;
-    }
-  }
-
-  .input_note {
-    height: 40px;
     font-size: 24px;
+
+    width: 90%;
   }
 
-  .update_btn {
-    border-radius: 4;
-    background-color: #ff8600;
-    border: none;
-    color: white;
+  .minus {
     font-size: 16px;
-    width: 100%;
-    height: 40px;
-    margin-top: 16px;
+    color: #b41800;
+  }
+
+  .expense {
+    top: 4px;
+    color: #b41800;
+    font-size: 24px;
+
+    width: 90%;
+  }
+
+  .currency {
+    bottom: 0px;
+    font-size: 16px;
+    color: #2f3941;
+    padding-bottom: 10px;
   }
 }
+
+.input_note {
+  height: 40px;
+  font-size: 24px;
+  margin: 16px 16px 0 16px;
+  border-bottom: 1px solid #c2c8cc;
+}
+
+.update_btn {
+  border-radius: 4;
+  background-color: #ff8600;
+  border: none;
+  color: white;
+  font-size: 16px;
+  height: 40px;
+  width: 90%;
+  margin-top: 16px;
+  margin-right: 16px;
+  margin-left: 16px;
+}
+
 .van-picker {
   z-index: 2000;
 }
+
+.van-field {
+  height: 40px;
+  line-height: 40px;
+  padding: 0;
+}
+
+.van-col--20 {
+  position: relative;
+  top: -4px;
+}
+
+.van-col--2 {
+  position: relative;
+  top: 10px;
+}
 </style>
+
+<style lang="scss">
+.income .van-field__control {
+  color: #04a777 !important;
+}
+
+.expense .van-field__control {
+  color: #b41800 !important;
+}
+
+.input_note .van-field__control {
+}
+</style>
+
+     

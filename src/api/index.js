@@ -98,5 +98,8 @@ export default {
   },
   getHomeInformation() {
     return Vue.axios.get("/api/information");
+  },
+  getArticleContent(params) {
+    return Vue.axios.get(`/api/information/article-detail?articleDetailId=${params}`);
   }
 };

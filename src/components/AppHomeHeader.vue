@@ -23,8 +23,8 @@
       class="btn"
       @click="$router.push({name: 'AddRecord'})"
     >
-      <i class="iconfont icontime" />
-      View and Update Records
+      <van-icon name="bars" />
+      {{$t('Home.btmBtn')}}
     </div>
   </div>
 </template>
@@ -64,10 +64,12 @@ export default {
     color: #2f3941;
     letter-spacing: 0;
     text-align: center;
-    > i {
+    > .van-icon-bars {
       color: #ff8600;
       position: relative;
       left: -6px;
+      top: 4px;
+      font-size: 18px;
     }
   }
   .info {

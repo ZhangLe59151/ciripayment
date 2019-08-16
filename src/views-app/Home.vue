@@ -13,31 +13,14 @@
 </template>
 
 <script>
-import AppTabBar from "@/components/AppTabBar";
-import AppHomeLoan from "@/components/AppHomeLoan";
-import AppHomeHeader from "@/components/AppHomeHeader";
-import AppHomeInfo from "@/components/AppHomeInfo";
-import AppHomeLucky from "@/components/AppHomeLucky";
-
-import AppHomeDownload from "@/components/AppHomeDownload";
-
 import { mapState } from "vuex";
 
 export default {
   name: "AppHome",
 
-  components: {
-    AppTabBar,
-    AppHomeHeader,
-    AppHomeDownload,
-    AppHomeLoan,
-    AppHomeInfo,
-    AppHomeLucky
-  },
   data() {
     return {
       applicationStatus: this.$store.state.application.applicationStatus + "",
-
       hasLoan: false
     };
   },

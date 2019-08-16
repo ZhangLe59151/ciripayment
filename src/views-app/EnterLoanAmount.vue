@@ -24,7 +24,7 @@
           :rules="[{ required: true, message: 'This field is required.', trigger: 'blur' },
             ]"
         >
-          <el-input v-model="form.loanAmount" @input="formatCurrency">
+          <el-input inputmode="numeric" pattern="[0-9]*\,*\.*" v-model="form.loanAmount" @input="formatCurrency">
             <div class="currency" slot="suffix">{{$store.state.currency}}</div>
           </el-input>
         </el-form-item>
@@ -35,12 +35,15 @@
       class="tips"
     >*This figure is an estimated amount. Your final approved loan amount may differ.</div>
 
-    <van-button
-      size="large"
-      class="bottom-btn apply-btn"
-      @click="handleApply"
-      :disabled="form.loanAmount === ''"
-    >Apply</van-button>
+    <div class="apply-btn-wrapper">
+      <van-button
+        size="small"
+        class="bottom-btn apply-btn"
+        @click="handleApply"
+        :disabled="form.loanAmount === ''"
+      >Apply</van-button>
+    </div>
+
 
     <van-dialog v-model="dialog" scroll="paper" class="scroll-dialog" :showConfirmButton="false">
       <div class="heading">
@@ -157,12 +160,13 @@ export default {
       });
       this.$api.applyLoan(this.$store.state.form.loanAmount).then(res => {
         if (res.data.code === 200 && res.data.data === true) {
-          let successMsg = "Application Sent Successfully";
-          this.$notify({
-            message: successMsg,
-            duration: 5000,
-            background: "#04A777"
-          });
+          // let successMsg = "Application Sent Successfully";
+          // this.$notify({
+          //   message: successMsg,
+          //   duration: 50000,
+          //   background: "#04A777"
+          // });
+          // Move the notification handle to Loan Overview Page
           this.$router.push({ name: "Loan", query: { justSubmitted: "true" } });
         }
       });
@@ -215,11 +219,20 @@ export default {
     bottom: 75px;
     padding: 0 16px 0 16px;
   }
-  .apply-btn {
+
+  .apply-btn-wrapper{
     position: absolute;
     bottom: 16px;
-    width: 328px;
-    margin-left: calc(50vw - 164px);
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 16px 0 16px;
+    .apply-btn {
+      height: 40px;
+      width: 100%;
+      background-color: #ff8600;
+      border-radius: 4px;
+      font-size: 14px;
+    }
   }
 
   .scroll-dialog {
