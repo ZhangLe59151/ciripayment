@@ -7,20 +7,33 @@
     >
       <div class="tap-tips">Tap on the treasure chest!</div>
     </div>
-    <div class="background-img-opening" v-if="status===statusEnum.opening"></div>
+    <div
+      class="background-img-opening"
+      v-if="status===statusEnum.opening"
+    ></div>
     <transition name="bounce">
-      <div class="result-page" v-if="status===statusEnum.finish">
-        <fortunetelling-result/>
+      <div
+        class="result-page"
+        v-if="status===statusEnum.finish"
+      >
+        <fortunetelling-result />
       </div>
     </transition>
-    <audio :src="require('@/assets/audio/fortune-telling-shake.mp3')" id="fortune-telling-shake"></audio>
-    <audio :src="require('@/assets/audio/fortune-telling-success.mp3')" id="fortune-telling-finish"></audio>
+    <audio
+      :src="require('@/assets/audio/fortune-telling-shake.mp3')"
+      ref="fortuneTellingShake"
+    ></audio>
+    <audio
+      :src="require('@/assets/audio/fortune-telling-success.mp3')"
+      ref="fortuneTellingFinish"
+    ></audio>
   </div>
 </template>
 
 <script>
 import FortunetellingResult from "./FortunetellingResult";
 import { mapState } from "vuex";
+
 export default {
   name: "FortuneTelling",
   components: {
@@ -30,29 +43,24 @@ export default {
     return {
       status: 0,
       minOpeningAnimateDuration: 3000,
-      animateStartTime: 0
+      animateStartTime: 0,
+      shakeAudio: this.$refs.fortuneTellingShake,
+      finishAudio: this.$refs.fortuneTellingFinish,
+      statusEnum: {
+        normal: 0,
+        opening: 1,
+        finish: 2
+      }
     };
   },
   computed: {
     ...mapState({
-      fortunetellingFrame: state => state.fortunetellingFrame,
-      recordList: state => state.recordList
+      fortunetellingFrame: "fortunetellingFrame",
+      recordList: "recordList"
     }),
-    statusEnum() {
-      return {
-        normal: 0,
-        opening: 1,
-        finish: 2
-      };
-    },
+
     today() {
-      return this.$moment().format("YYYYMMDD");
-    },
-    shakeAudio() {
-      return document.getElementById("fortune-telling-shake");
-    },
-    finishAudio() {
-      return document.getElementById("fortune-telling-finish");
+      return this.$moment().format(this.localDateFormatter);
     }
   },
   methods: {
