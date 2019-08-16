@@ -42,7 +42,7 @@ export default {
       }
     });
     // for testing
-    // this.$store.commit("fetchDataFromLocal");
+    this.$store.commit("fetchDataFromLocal");
   }
 };
 </script>

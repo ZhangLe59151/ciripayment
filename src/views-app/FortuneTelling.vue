@@ -13,13 +13,14 @@
         <fortunetelling-result/>
       </div>
     </transition>
+    <audio :src="require('@/assets/audio/fortune-telling-shake.mp3')" id="fortune-telling-shake"></audio>
+    <audio :src="require('@/assets/audio/fortune-telling-success.mp3')" id="fortune-telling-finish"></audio>
   </div>
 </template>
 
 <script>
 import FortunetellingResult from "./FortunetellingResult";
 import { mapState } from "vuex";
-import { debuglog } from "util";
 export default {
   name: "FortuneTelling",
   components: {
@@ -46,6 +47,12 @@ export default {
     },
     today() {
       return this.$moment().format("YYYYMMDD");
+    },
+    shakeAudio() {
+      return document.getElementById("fortune-telling-shake");
+    },
+    finishAudio() {
+      return document.getElementById("fortune-telling-finish");
     }
   },
   methods: {
@@ -53,6 +60,8 @@ export default {
       this.status = this.statusEnum.opening;
       this.animateStartTime = new Date().getTime();
       this.getFortunetelling();
+      this.shakeAudio.loop = true;
+      this.shakeAudio.play();
     },
     showResult() {
       let networkDuration = new Date().getTime() - this.animateStartTime;
@@ -62,6 +71,8 @@ export default {
       }
       setTimeout(() => {
         this.status = this.statusEnum.finish;
+        this.shakeAudio.pause();
+        this.finishAudio.play();
       }, timeout);
     },
     getFortunetelling() {
@@ -81,12 +92,12 @@ export default {
           this.showResult();
         } else {
           this.status = this.statusEnum.normal;
+          this.shakeAudio.pause();
         }
       });
     }
   },
   mounted() {
-    // debugger;
     if (this.fortunetellingFrame[this.today]) {
       this.status = this.statusEnum.finish;
     }
