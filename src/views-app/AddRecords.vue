@@ -360,7 +360,6 @@ export default {
   position: relative;
   top: 10px;
 }
-<<<<<<< HEAD
 </style>
 
 <style lang="scss">
@@ -376,21 +375,4 @@ export default {
 }
 </style>
 
-=======
-</style>
-
-<style lang="scss">
-.income .van-field__control {
-  color: #04a777 !important;
-}
-
-.expense .van-field__control {
-  color: #b41800 !important;
-}
-
-.input_note .van-field__control {
-}
-</style>
-
->>>>>>> origin/zhangle
      
