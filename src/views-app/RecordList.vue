@@ -1,9 +1,6 @@
 <template>
   <div class="record-list">
-    <app-common-header
-      title="Records List"
-      :leftFunc="handleBack"
-    />
+    <app-common-header title="Records List" />
     <van-list
       v-model="loading"
       :finished="finished"

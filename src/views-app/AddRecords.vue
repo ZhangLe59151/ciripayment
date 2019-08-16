@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-add-record">
     <app-common-header title="Records" />
 
     <van-row class="label-left">
@@ -8,12 +8,12 @@
         span="12"
         class="link_view_history"
       >
-        <button @click="view_history">View Record History</button>
+        <div @click="viewHistory">View Record History</div>
       </van-col>
     </van-row>
 
     <van-row class="pick_date">
-      <van-col span="22">
+      <van-col span="21">
         <van-field
           class="input"
           :value="form.date"
@@ -23,6 +23,9 @@
           maxlength="13"
           readonly
         />
+      </van-col>
+      <van-col span="1">
+        <van-icon name="arrow-down" />
       </van-col>
     </van-row>
 
@@ -42,6 +45,7 @@
           v-model="form.income"
           @focus="showKeyboard('income')"
           maxlength="13"
+          readonly
         />
 
       </van-col>
@@ -66,6 +70,7 @@
           v-model="form.expense"
           @focus="showKeyboard('expense')"
           maxlength="13"
+          readonly
         />
       </van-col>
       <van-col span="2">
@@ -183,6 +188,7 @@ export default {
         console.log();
         if (itemIndex > -1) {
           this.form = Object.assign({}, this.recordList[itemIndex]);
+          this.form.date = this.$moment(this.form.date).format("D MMM YYYY");
         } else {
           this.form.note = "";
           this.form.income = "";
@@ -236,7 +242,7 @@ export default {
       form.date = this.$moment(_date).format(this.localDateFormatter);
       return form;
     },
-    view_history() {
+    viewHistory() {
       const date = this.$moment(this.form.date).format(this.localDateFormatter);
       this.$router.push({ name: "RecordList", query: { date: date } });
     },
@@ -255,6 +261,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.app-add-record {
+  height: calc(100vh - 50px);
+}
 .label-left {
   margin: 16px 16px 0 16px;
   height: 24px;
@@ -270,6 +279,10 @@ export default {
   height: 40px;
   font-size: 16px;
   margin: 4px 16px 0 16px;
+  .van-icon-arrow-down {
+    position: relative;
+    top: 10px;
+  }
 }
 
 .input_income_expense {

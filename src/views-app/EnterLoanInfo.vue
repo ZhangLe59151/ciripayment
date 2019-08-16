@@ -355,13 +355,15 @@
         :columns="columns"
       />
     </van-popup>
-    <van-button
-      size="small"
-      class="bottom-btn"
-      @click="handleNext"
-    >
-      Next
-    </van-button>
+    <div class="btn-group">
+      <van-button
+        size="small"
+        class="bottom-btn"
+        @click="handleNext"
+      >
+        Next
+      </van-button>
+    </div>
 
   </div>
 </template>
@@ -922,15 +924,17 @@ export default {
       font-weight: bold;
     }
     // Document area end
-    .bottom-btn{
-      margin-left: calc(50vw - 164px);
-      width: 328px;
-      background-color: #ff8600;
-      border-radius: 4px;
-      height: 40px;
-      font-size: 14px;
-      margin-bottom: 12px;
-      margin-top:20px;
+    .btn-group{
+      padding: 0 16px 0 16px;
+      .bottom-btn{
+        width: 100%;
+        background-color: #ff8600;
+        border-radius: 4px;
+        height: 40px;
+        font-size: 14px;
+        margin-bottom: 12px;
+        margin-top:20px;
+      }
     }
   }
 </style>
