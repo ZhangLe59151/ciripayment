@@ -430,10 +430,6 @@ export default new Vuex.Store({
       state.fortunetellingFrame = [];
       window.localStorage.removeItem("fortunetellingFrame");
     },
-    SetTodayDate(state) {
-      state.todayDate = this.$moment().format("YYYYMMDD");
-      window.localStorage.setItem("todayDate", state.todayDate);
-    },
     // this is for record
     UpdateRecord(state, updateRecordInfo) {
       const recordList = Array.from(state.recordList);
