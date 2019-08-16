@@ -114,7 +114,6 @@
       @input="onInput"
       @delete="onDelete"
     />
-
     <app-tab-bar :active="1" />
   </div>
 </template>

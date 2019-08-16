@@ -613,6 +613,7 @@ export default {
     },
     gotoNextPage() {
       const form = this.form;
+
       const params = {
         applicantFirstName: form.applicantFirstName,
         applicantLastName: form.applicantLastName,
@@ -811,7 +812,7 @@ export default {
     font-size: 17px;
     padding: 20px 10px;
     text-align: center;
-    color: #ff8600;
+    color: #053c5e;
     text-transform: uppercase;
     font-weight: bold;
   }
@@ -827,7 +828,7 @@ export default {
 
   .label-title {
     font-size: 14px;
-    color: #ff8600;
+    color: #053c5e;
     height: 40px;
     line-height: 40px;
 
