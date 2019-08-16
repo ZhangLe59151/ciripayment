@@ -24,7 +24,7 @@
     }
   },
   "Home": {
-    "income": "TODAY'S INCOME",
+    "income": "MONTHLY'S INCOME",
     "expenses": "EXPENSES",
     "loan": "Get instant money! Up to",
     "loanBtn": "Get Now",
