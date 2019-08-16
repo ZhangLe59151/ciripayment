@@ -1,13 +1,14 @@
 <template>
-  <div class="app-home-loan">
+  <router-link
+    class="app-home-loan"
+    tag="div"
+    :to="{name: 'Loan',query: {origin: 'banner'}}"
+  >
     <div class="des">{{$t("Home.loan")}}</div>
     <div class="amount">100,000 {{$store.state.currency}}</div>
 
-    <div
-      class="getNow"
-      @click="$router.push({name: 'Loan',query: {origin: 'banner'}})"
-    >{{$t("Home.loanBtn")}}</div>
-  </div>
+    <div class="getNow">{{$t("Home.loanBtn")}}</div>
+  </router-link>
 </template>
 
 <script>

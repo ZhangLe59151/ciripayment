@@ -1,17 +1,23 @@
 <template>
-  <div class="app-home-lucky">
+  <router-link
+    class="app-home-lucky"
+    tag="div"
+    :to="{name: 'FortuneTelling'}"
+  >
     <div class="title">{{$t("Home.luckyTitle")}}</div>
     <div class="subtitle">
       <div>{{$t("Home.luckySubtitleTop")}}</div>
       <div>{{$t("Home.luckySubtitleBtm")}}</div>
     </div>
-
-    <div
-      class="btn"
-      @click="$router.push({name: 'FortuneTelling'})"
-    >{{$t("Home.luckyBtn")}}</div>
-  </div>
+    <div class="btn">{{$t("Home.luckyBtn")}}</div>
+  </router-link>
 </template>
+
+<script>
+export default {
+  name: "AppHomeLucky"
+};
+</script>
 
 <style lang="scss" scoped>
 .app-home-lucky {
@@ -47,7 +53,6 @@
       border-radius: 4px;
       font-size: 14px;
       color: #2f3941;
-
       text-align: center;
       line-height: 20px;
       width: 90px;
