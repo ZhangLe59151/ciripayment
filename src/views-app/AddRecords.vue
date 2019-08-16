@@ -13,11 +13,7 @@
     </van-row>
 
     <van-row class="pick_date">
-<<<<<<< HEAD
-      <van-col span="22">
-=======
       <van-col span="21">
->>>>>>> origin/zhangle
         <van-field
           class="input"
           :value="form.date"
@@ -49,10 +45,7 @@
           v-model="form.income"
           @focus="showKeyboard('income')"
           maxlength="13"
-<<<<<<< HEAD
-=======
           readonly
->>>>>>> origin/zhangle
         />
 
       </van-col>
@@ -77,10 +70,7 @@
           v-model="form.expense"
           @focus="showKeyboard('expense')"
           maxlength="13"
-<<<<<<< HEAD
-=======
           readonly
->>>>>>> origin/zhangle
         />
       </van-col>
       <van-col span="2">
