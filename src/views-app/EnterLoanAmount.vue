@@ -44,7 +44,6 @@
       >Apply</van-button>
     </div>
 
-
     <van-dialog v-model="dialog" scroll="paper" class="scroll-dialog" :showConfirmButton="false">
       <div class="heading">
         <h1>Proceed without Completing Profile?</h1>
@@ -211,27 +210,51 @@ export default {
       font-size: 24px;
     }
   }
-  .tips {
-    color: #68737d;
-    font-size: 14px;
-    text-align: center;
-    position: absolute;
-    bottom: 75px;
-    padding: 0 16px 0 16px;
-  }
-
-  .apply-btn-wrapper{
-    position: absolute;
-    bottom: 16px;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0 16px 0 16px;
-    .apply-btn {
-      height: 40px;
-      width: 100%;
-      background-color: #ff8600;
-      border-radius: 4px;
+  @media screen and (min-height: 460px) {
+    .tips {
+      color: #68737d;
       font-size: 14px;
+      text-align: center;
+      position: absolute;
+      bottom: 75px;
+      padding: 0 16px 0 16px;
+    }
+    .apply-btn-wrapper{
+      position: absolute;
+      bottom: 16px;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 16px 0 16px;
+      .apply-btn {
+        height: 40px;
+        width: 100%;
+        background-color: #ff8600;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+    }
+  }
+  @media screen and (max-height: 460px) {
+    .tips {
+      color: #68737d;
+      font-size: 14px;
+      text-align: center;
+      padding: 0 16px 0 16px;
+      margin-top:20px;
+      display: block !important;
+    }
+    .apply-btn-wrapper{
+      display: block !important;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 16px 0 16px;
+      .apply-btn {
+        height: 40px;
+        width: 100%;
+        background-color: #ff8600;
+        border-radius: 4px;
+        font-size: 14px;
+      }
     }
   }
 
