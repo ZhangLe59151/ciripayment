@@ -52,6 +52,9 @@ export default {
     },
     onLoad() {
       // 异步更新数据
+      // sort by date desc 
+      this.recordList.sort((a,b) => Number(b.date) - Number(a.date))
+      
       setTimeout(() => {
         const endNo =
           this.currentNo + 10 < this.recordList.length
