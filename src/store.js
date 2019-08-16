@@ -20,6 +20,7 @@ export default new Vuex.Store({
     userInfo: {},
     application: {},
     recordList: JSON.parse(localStorage.getItem("recordList")) || [],
+    localDateFormatter: "YYYYMMDD",
     nationalCodeList: [
       "+66",
       "+65",

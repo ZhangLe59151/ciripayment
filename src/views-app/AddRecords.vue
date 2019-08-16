@@ -3,88 +3,93 @@
     <app-common-header title="Records" />
 
     <van-row class="label-left">
-        <van-col span="12">Date</van-col>
-        <van-col
-          span="12"
-          class="link_view_history"
-        >
-          <button v-on:click="view_history">View Record History</button>
-        </van-col>
+      <van-col span="12">Date</van-col>
+      <van-col
+        span="12"
+        class="link_view_history"
+      >
+        <button v-on:click="view_history">View Record History</button>
+      </van-col>
     </van-row>
-   
+
     <van-row class="pick_date">
       <van-col span="22">
-          <input
-            class="input"
-            type="text"
-            :value="form.date"
-            readonly
-            confirm-button-text="confirm"
-            cancel-button-text="cancel"
-            @focus="appear = true"
-          />
+        <input
+          class="input"
+          type="text"
+          :value="form.date"
+          readonly
+          confirm-button-text="confirm"
+          cancel-button-text="cancel"
+          @focus="appear = true"
+        />
       </van-col>
     </van-row>
 
     <van-row class="label-left">Income</van-row>
 
-    <van-row class="input_income_expense" id="income">
-        <van-col span="2">
-          <label class="plus">+</label>
-        </van-col>
-        <van-col span="20">
-          <input
-            class="income"
-            v-model="form.income"
-            @touchstart.stop="showKeyboard('income')"
-            maxlength="“13”"
-            placeholder
-          >
-        </van-col>
-        <van-col span="2">
-          <label class="currency">{{$store.state.currency}}</label>
-        </van-col>
+    <van-row
+      class="input_income_expense"
+      id="income"
+    >
+      <van-col span="2">
+        <label class="plus">+</label>
+      </van-col>
+      <van-col span="20">
+        <input
+          class="income"
+          v-model="form.income"
+          @touchstart.stop="showKeyboard('income')"
+          maxlength="“13”"
+          placeholder
+        >
+      </van-col>
+      <van-col span="2">
+        <label class="currency">{{$store.state.currency}}</label>
+      </van-col>
     </van-row>
 
     <van-row class="label-left">Expense</van-row>
 
-    <van-row class="input_income_expense" id="expense">
-        <van-col span="2">
-          <label class="minus">-</label>
-        </van-col>
-        <van-col span="20">
-          <input
-            class="expense"
-            @touchstart.stop="showKeyboard('expense')"
-            v-model="form.expense"
-            maxlength="13"
-            placeholder
-          >
-        </van-col>
-        <van-col span="2">
-          <label class="currency">{{$store.state.currency}}</label>
-        </van-col>
+    <van-row
+      class="input_income_expense"
+      id="expense"
+    >
+      <van-col span="2">
+        <label class="minus">-</label>
+      </van-col>
+      <van-col span="20">
+        <input
+          class="expense"
+          @touchstart.stop="showKeyboard('expense')"
+          v-model="form.expense"
+          maxlength="13"
+          placeholder
+        >
+      </van-col>
+      <van-col span="2">
+        <label class="currency">{{$store.state.currency}}</label>
+      </van-col>
     </van-row>
 
     <van-row class="label-left">Note (Optional)</van-row>
 
-      <van-row class="input_note">
-        <van-col span="24">
-          <input
-            v-model="form.note"
-            maxlength="100"
-            placeholder="Add Note"
-            @focus="inputNote"
-          >
-        </van-col>
+    <van-row class="input_note">
+      <van-col span="24">
+        <input
+          v-model="form.note"
+          maxlength="100"
+          placeholder="Add Note"
+          @focus="inputNote"
+        >
+      </van-col>
     </van-row>
-
 
     <button
       class="update_btn"
       @click="updateBtn"
-      >Update Records</button>
-    
+    >Update Records</button>
+
     <van-row>
       <van-col span="24">
         <van-datetime-picker
@@ -131,7 +136,8 @@ export default {
 
   computed: {
     ...mapState({
-      recordList: state => state.recordList
+      recordList: state => state.recordList,
+      localDateFormatter: state => state.localDateFormatter
     })
   },
 
@@ -157,27 +163,19 @@ export default {
       immediate: true,
       handler(val, oldVal) {
         let formDate = this.$moment(val).format("D MMM YYYY");
-        let prefix = "";
+        const _today = this.$moment().format(this.localDateFormatter);
+        const _yesterday = this.$moment()
+          .subtract(1, "days")
+          .format(this.localDateFormatter);
+        const _selected = this.$moment(val).format(this.localDateFormatter);
+        const kv = { [_today]: "Today, ", [_yesterday]: "Yesterday, " };
 
-        if (
-          this.$moment(val).format("YYYYMMDD") ===
-          this.$moment().format("YYYYMMDD")
-        ) {
-          prefix = "Today, ";
-        }
+        this.$set(
+          this.form,
+          "date",
+          val ? (kv[_selected] ? kv[_selected] : "") + formDate : ""
+        );
 
-        if (
-          this.$moment(val).format("YYYYMMDD") ===
-          this.$moment()
-            .subtract(1, "days")
-            .format("YYYYMMDD")
-        ) {
-          prefix = "Yesterday, ";
-        }
-
-        this.$set(this.form, "date", val ? prefix + formDate : "");
-        
-        
         const itemIndex = findIndex(this.recordList, { date: val });
         console.log(itemIndex);
         if (itemIndex > -1) {
@@ -187,7 +185,6 @@ export default {
           this.form.income = "";
           this.form.expense = "";
         }
-        
       }
     }
   },
@@ -196,20 +193,21 @@ export default {
       this.appear = false;
       this.showNumber = true;
       this.type = type;
-      if (type=='income') {
-        document.getElementById('income').className = "input_income_expense_focus";
-        document.getElementById('expense').className = "input_income_expense";
+      if (type == "income") {
+        document.getElementById("income").className =
+          "input_income_expense_focus";
+        document.getElementById("expense").className = "input_income_expense";
       }
-      if (type=='expense') {
-        document.getElementById('expense').className = "input_income_expense_focus";
-        document.getElementById('income').className = "input_income_expense";
+      if (type == "expense") {
+        document.getElementById("expense").className =
+          "input_income_expense_focus";
+        document.getElementById("income").className = "input_income_expense";
       }
-      
     },
     showNumberFalse() {
       this.showNumber = false;
-      document.getElementById('income').className = "input_income_expense";
-      document.getElementById('expense').className = "input_income_expense";
+      document.getElementById("income").className = "input_income_expense";
+      document.getElementById("expense").className = "input_income_expense";
     },
     onInput(value) {
       if (this.form[this.type].indexOf(".") != -1 && value == ".") {
@@ -228,7 +226,7 @@ export default {
     },
     updateBtn() {
       const form = Object.assign({}, this.form);
-      form.date = this.$moment(this.form.date).format("YYYYMMDD");
+      form.date = this.$moment(this.form.date).format(this.localDateFormatter);
       this.appear = false;
       const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
       if (regex.test(form[this.type])) {
@@ -242,7 +240,7 @@ export default {
       const _date = form.date.includes(",")
         ? form.date.split(", ")[1]
         : form.date;
-      form.date = this.$moment(_date).format("YYYYMMDD");
+      form.date = this.$moment(_date).format(this.localDateFormatter);
       return form;
     },
     view_history() {
@@ -251,7 +249,7 @@ export default {
     setDate(value) {
       this.appear = false;
 
-      // this.currentDate = this.$moment(value).format("YYYYMMDD");
+      // this.currentDate = this.$moment(value).format(this.localDateFormatter);
 
       // console.log( this.currentDate );
     },
@@ -263,7 +261,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .label-left {
   margin-top: 16px;
   margin-right: 16px;
@@ -276,7 +273,6 @@ export default {
     text-align: right;
     height: auto;
   }
-
 }
 
 .pick_date {
@@ -328,7 +324,6 @@ export default {
     color: #2f3941;
     padding-bottom: 10px;
   }
-
 }
 
 .input_income_expense_focus {
@@ -372,7 +367,6 @@ export default {
     color: #2f3941;
     padding-bottom: 10px;
   }
-
 }
 
 .input_note {
@@ -399,6 +393,5 @@ export default {
 .van-picker {
   z-index: 2000;
 }
-
 </style>
      
