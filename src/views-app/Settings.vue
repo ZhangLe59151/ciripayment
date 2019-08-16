@@ -2,6 +2,7 @@
   <div class="app-setting">
     <app-common-header
       :hasLeftArrow="false"
+      :leftFunc="function(){}"
       leftText="Settings"
     />
     <app-setting-list></app-setting-list>

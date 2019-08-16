@@ -4,7 +4,7 @@
     :left-text="leftText"
     :right-text="rightText"
     :left-arrow="hasLeftArrow"
-    @click-left="$router.back()"
+    @click-left="leftFunc ? leftFunc : $router.back()"
     @click-right="rightFunc"
   />
 </template> 
@@ -29,6 +29,9 @@ export default {
       type: String
     },
     rightFunc: {
+      type: Function
+    },
+    leftFunc: {
       type: Function
     },
     hasLeftArrow: {
