@@ -115,6 +115,7 @@
 <script>
 import AppTabBar from "@/components/AppTabBar";
 import AppCommonHeader from "@/components/AppCommonHeader";
+import { findIndex } from "lodash";
 
 import { mapState } from "vuex";
 
@@ -130,7 +131,7 @@ export default {
 
   computed: {
     ...mapState({
-      item: state => state.recordList
+      recordList: state => state.recordList
     })
   },
 
@@ -148,7 +149,7 @@ export default {
       appear: false,
       minDate: startDate,
       maxDate: today,
-      currentDate: today
+      currentDate: this.$route.query.date ? this.$route.query.date : today
     };
   },
   watch: {
@@ -162,7 +163,7 @@ export default {
           this.$moment(val).format("YYYYMMDD") ===
           this.$moment().format("YYYYMMDD")
         ) {
-          prefix = "Today ,";
+          prefix = "Today, ";
         }
 
         if (
@@ -171,10 +172,22 @@ export default {
             .subtract(1, "days")
             .format("YYYYMMDD")
         ) {
-          prefix = "Yesterday ,";
+          prefix = "Yesterday, ";
         }
 
         this.$set(this.form, "date", val ? prefix + formDate : "");
+        
+        
+        const itemIndex = findIndex(this.recordList, { date: val });
+        console.log(itemIndex);
+        if (itemIndex > -1) {
+          this.form = Object.assign({}, this.recordList[itemIndex]);
+        } else {
+          this.form.note = "";
+          this.form.income = "";
+          this.form.expense = "";
+        }
+        
       }
     }
   },
