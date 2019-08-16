@@ -1,6 +1,6 @@
 <template>
   <div class="tandc">
-    <van-nav-bar title="Terms & Conditions" left-arrow @click-left="$router.back()" :border="false"></van-nav-bar>
+    <app-common-header title="Terms & Conditions" />
     <div class="wrapper">
       <div class="title"></div>
       <div class="update-time">
