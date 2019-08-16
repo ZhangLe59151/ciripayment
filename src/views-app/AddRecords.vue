@@ -130,7 +130,7 @@ export default {
 
   computed: {
     ...mapState({
-      dateInMonth: state => state.dateInMonth
+      item: state => state.recordList
     })
   },
 
@@ -234,10 +234,6 @@ export default {
     },
     view_history() {
       this.$router.push({ name: "RecordList" });
-    },
-    onChange(picker, values) {
-      picker.setColumnValues(1, dateInMonth[values[0]]);
-      this.form.date = values;
     },
     setDate(value) {
       this.appear = false;
