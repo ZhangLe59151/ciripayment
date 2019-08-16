@@ -79,7 +79,6 @@
       <van-col span="24">
 
         <van-field
-          class="expense"
           v-model="form.note"
           @focus="inputNote"
           maxlength="100"
