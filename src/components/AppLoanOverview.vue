@@ -95,6 +95,12 @@
         class="back-to-home-btn bottom-btn"
         @click="$router.push({name: 'Home'})"
       >Back To Home</van-button>
+      <van-popup
+        v-model="showPopUp"
+        class="success-popup"
+        position="top"
+        :overlay="false"
+      >Application Sent Successfully</van-popup>
     </div>
   </div>
 </template>
@@ -105,7 +111,9 @@ export default {
   name: "AppLoanOverview",
   components: {},
   data() {
-    return {};
+    return {
+      showPopUp: false
+    };
   },
   computed: {
     ...mapState({
@@ -113,6 +121,12 @@ export default {
       merchantApplyingChannelStatus: state =>
         state.merchantApplyingChannelStatus
     })
+  },
+  created() {
+    if (this.$route.query.justSubmitted) {
+      setTimeout(() => this.showPopUp = true, 300)
+    }
+    setTimeout(() => this.showPopUp = false, 2000)
   },
   methods: {
     handleStart() {
@@ -350,6 +364,16 @@ export default {
       bottom: 16px;
       left: 16px;
     }
+    .success-popup{
+      text-align: center;
+      font-size: 13px;
+      padding-top: 13px;
+      padding-bottom: 13px;
+      top: 44px;
+      background-color: #04a777;
+      color: white ;
+    }
+
   }
 }
 </style>

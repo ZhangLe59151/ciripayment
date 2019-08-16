@@ -157,12 +157,13 @@ export default {
       });
       this.$api.applyLoan(this.$store.state.form.loanAmount).then(res => {
         if (res.data.code === 200 && res.data.data === true) {
-          let successMsg = "Application Sent Successfully";
-          this.$notify({
-            message: successMsg,
-            duration: 5000,
-            background: "#04A777"
-          });
+          // let successMsg = "Application Sent Successfully";
+          // this.$notify({
+          //   message: successMsg,
+          //   duration: 50000,
+          //   background: "#04A777"
+          // });
+          // Move the notification handle to Loan Overview Page
           this.$router.push({ name: "Loan", query: { justSubmitted: "true" } });
         }
       });
