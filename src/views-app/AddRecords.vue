@@ -14,14 +14,14 @@
 
     <van-row class="pick_date">
       <van-col span="22">
-        <input
+        <van-field
           class="input"
-          type="text"
           :value="form.date"
-          readonly
           confirm-button-text="confirm"
           cancel-button-text="cancel"
           @focus="appear = true"
+          maxlength="13"
+          readonly
         />
       </van-col>
     </van-row>
@@ -36,14 +36,14 @@
         <label class="plus">+</label>
       </van-col>
       <van-col span="20">
-        <input
+
+        <van-field
           class="income"
           v-model="form.income"
-          readonly
-          @touchstart.stop="showKeyboard('income')"
-          maxlength="“13”"
-          placeholder
-        >
+          @focus="showKeyboard('income')"
+          maxlength="13"
+        />
+
       </van-col>
       <van-col span="2">
         <label class="currency">{{$store.state.currency}}</label>
@@ -60,14 +60,13 @@
         <label class="minus">-</label>
       </van-col>
       <van-col span="20">
-        <input
+
+        <van-field
           class="expense"
-          @touchstart.stop="showKeyboard('expense')"
           v-model="form.expense"
+          @focus="showKeyboard('expense')"
           maxlength="13"
-          readonly
-          placeholder
-        >
+        />
       </van-col>
       <van-col span="2">
         <label class="currency">{{$store.state.currency}}</label>
@@ -78,12 +77,13 @@
 
     <van-row class="input_note">
       <van-col span="24">
-        <input
+
+        <van-field
           v-model="form.note"
+          @focus="inputNote"
           maxlength="100"
           placeholder="Add Note"
-          @focus="inputNote"
-        >
+        />
       </van-col>
     </van-row>
 
@@ -178,7 +178,9 @@ export default {
           val ? (kv[_selected] ? kv[_selected] : "") + formDate : ""
         );
 
-        const itemIndex = findIndex(this.recordList, { date: this.$moment(val).format(this.localDateFormatter) });
+        const itemIndex = findIndex(this.recordList, {
+          date: this.$moment(val).format(this.localDateFormatter)
+        });
         console.log();
         if (itemIndex > -1) {
           this.form = Object.assign({}, this.recordList[itemIndex]);
@@ -195,16 +197,6 @@ export default {
       this.appear = false;
       this.showNumber = true;
       this.type = type;
-      if (type == "income") {
-        document.getElementById("income").className =
-          "input_income_expense_focus";
-        document.getElementById("expense").className = "input_income_expense";
-      }
-      if (type == "expense") {
-        document.getElementById("expense").className =
-          "input_income_expense_focus";
-        document.getElementById("income").className = "input_income_expense";
-      }
     },
     showNumberFalse() {
       this.showNumber = false;
@@ -264,35 +256,27 @@ export default {
 
 <style lang="scss" scoped>
 .label-left {
-  margin-top: 16px;
-  margin-right: 16px;
-  margin-left: 16px;
+  margin: 16px 16px 0 16px;
   height: 24px;
 
   .link_view_history {
     font-size: 14px;
     color: #ff8600;
     text-align: right;
-    height: auto;
   }
 }
 
 .pick_date {
-  top: 4px;
   height: 40px;
   font-size: 16px;
-  margin-right: 16px;
-  margin-left: 16px;
+  margin: 4px 16px 0 16px;
 }
 
 .input_income_expense {
-  top: 4px;
   height: 40px;
   font-size: 16px;
-  margin-right: 16px;
-  margin-left: 16px;
-  border-bottom: 0px solid red;
-  padding-bottom: 21px;
+  margin: 4px 16px 0 16px;
+  border-bottom: 1px solid #c2c8cc;
 
   .plus {
     bottom: 0px;
@@ -303,12 +287,12 @@ export default {
   .income {
     top: 4px;
     color: #04a777;
-    font-size: 40px;
+    font-size: 24px;
+
     width: 90%;
   }
 
   .minus {
-    bottom: 0px;
     font-size: 16px;
     color: #b41800;
   }
@@ -316,50 +300,8 @@ export default {
   .expense {
     top: 4px;
     color: #b41800;
-    font-size: 40px;
-    width: 90%;
-  }
+    font-size: 24px;
 
-  .currency {
-    bottom: 0px;
-    font-size: 16px;
-    color: #2f3941;
-    padding-bottom: 10px;
-  }
-}
-
-.input_income_expense_focus {
-  top: 4px;
-  height: 40px;
-  font-size: 16px;
-  margin-right: 16px;
-  margin-left: 16px;
-  border-bottom: 1px solid red;
-  padding-bottom: 20px;
-
-  .plus {
-    bottom: 0px;
-    font-size: 16px;
-    color: #04a777;
-  }
-
-  .income {
-    top: 4px;
-    color: #04a777;
-    font-size: 40px;
-    width: 90%;
-  }
-
-  .minus {
-    bottom: 0px;
-    font-size: 16px;
-    color: #b41800;
-  }
-
-  .expense {
-    top: 4px;
-    color: #b41800;
-    font-size: 40px;
     width: 90%;
   }
 
@@ -374,9 +316,8 @@ export default {
 .input_note {
   height: 40px;
   font-size: 24px;
-  margin-top: 16px;
-  margin-right: 16px;
-  margin-left: 16px;
+  margin: 16px 16px 0 16px;
+  border-bottom: 1px solid #c2c8cc;
 }
 
 .update_btn {
@@ -395,5 +336,35 @@ export default {
 .van-picker {
   z-index: 2000;
 }
+
+.van-field {
+  height: 40px;
+  line-height: 40px;
+  padding: 0;
+}
+
+.van-col--20 {
+  position: relative;
+  top: -4px;
+}
+
+.van-col--2 {
+  position: relative;
+  top: 10px;
+}
 </style>
+
+<style lang="scss">
+.income .van-field__control {
+  color: #04a777 !important;
+}
+
+.expense .van-field__control {
+  color: #b41800 !important;
+}
+
+.input_note .van-field__control {
+}
+</style>
+
      
