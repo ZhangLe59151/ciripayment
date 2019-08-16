@@ -14,11 +14,11 @@
       >
         <template slot="default">
           <div>
-            Income: <span class="custom-income">+{{item.income || 0}}</span>
+            {{$t('Income')}}: <span class="custom-income">+{{item.income || 0}}</span>
           </div>
 
           <div>
-            Expenses: <span class="custom-expense"> -{{item.expense || 0}}</span>
+            {{$t('Expenses')}}: <span class="custom-expense"> -{{item.expense || 0}}</span>
           </div>
 
         </template>
