@@ -5,7 +5,7 @@
       :leftFunc="function(){}"
       leftText="Settings"
     />
-    <app-setting-list></app-setting-list>
+    <app-setting-list />
     <div class="logout">
       <span @click="handleLogout">Log Out</span>
     </div>
@@ -17,20 +17,9 @@
 </template>
 
 <script>
-import AppTabBar from "@/components/AppTabBar";
-import AppSettingHeader from "@/components/AppSettingHeader";
-import AppCommonHeader from "@/components/AppCommonHeader";
-import AppSettingList from "@/components/AppSettingList";
 import util from "@/util";
 export default {
   name: "AppSettings",
-
-  components: {
-    AppTabBar,
-    AppSettingHeader,
-    AppSettingList,
-    AppCommonHeader
-  },
   data() {
     return {
       active: 3
