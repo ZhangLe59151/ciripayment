@@ -2,8 +2,7 @@
   <div>
     <app-common-header title="Records" />
 
-    <div class="app-pick-date">
-      <van-row class="select_date">
+    <van-row class="label-left">
         <van-col span="12">Date</van-col>
         <van-col
           span="12"
@@ -11,9 +10,10 @@
         >
           <button v-on:click="view_history">View Record History</button>
         </van-col>
-      </van-row>
-      <van-row class="pick_date">
-        <van-col span="22">
+    </van-row>
+   
+    <van-row class="pick_date">
+      <van-col span="22">
           <input
             class="input"
             type="text"
@@ -23,14 +23,12 @@
             cancel-button-text="cancel"
             @focus="appear = true"
           />
-        </van-col>
-      </van-row>
-    </div>
+      </van-col>
+    </van-row>
 
-    <div class="app-pick-date">
-      <van-row class="select_date">Income</van-row>
+    <van-row class="label-left">Income</van-row>
 
-      <van-row class="input_number">
+    <van-row class="input_income_expense" id="income">
         <van-col span="2">
           <label class="plus">+</label>
         </van-col>
@@ -46,13 +44,11 @@
         <van-col span="2">
           <label class="currency">{{$store.state.currency}}</label>
         </van-col>
-      </van-row>
-    </div>
+    </van-row>
 
-    <div class="app-pick-date">
-      <van-row class="select_date">Expense</van-row>
+    <van-row class="label-left">Expense</van-row>
 
-      <van-row class="input_number">
+    <van-row class="input_income_expense" id="expense">
         <van-col span="2">
           <label class="minus">-</label>
         </van-col>
@@ -68,33 +64,27 @@
         <van-col span="2">
           <label class="currency">{{$store.state.currency}}</label>
         </van-col>
-      </van-row>
-    </div>
+    </van-row>
 
-    <div class="app-pick-date">
-      <van-row class="select_date">Note (Optional)</van-row>
+    <van-row class="label-left">Note (Optional)</van-row>
 
       <van-row class="input_note">
         <van-col span="24">
           <input
             v-model="form.note"
-            maxlength="“100”"
+            maxlength="100"
             placeholder="Add Note"
             @focus="inputNote"
           >
         </van-col>
-      </van-row>
+    </van-row>
 
-      <van-row class="input_note">
-        <van-col span="24">
-          <button
-            class="update_btn"
-            @click="updateBtn"
-          >Update Records</button>
-        </van-col>
-      </van-row>
-    </div>
 
+    <button
+      class="update_btn"
+      @click="updateBtn"
+      >Update Records</button>
+    
     <van-row>
       <van-col span="24">
         <van-datetime-picker
@@ -110,10 +100,10 @@
     </van-row>
 
     <van-number-keyboard
-      :show="show"
+      :show="showNumber"
       extra-key="."
       close-button-text="Done"
-      @blur="show = false"
+      @blur="showNumberFalse"
       @input="onInput"
       @delete="onDelete"
     />
@@ -125,6 +115,7 @@
 <script>
 import AppTabBar from "@/components/AppTabBar";
 import AppCommonHeader from "@/components/AppCommonHeader";
+import { findIndex } from "lodash";
 
 import { mapState } from "vuex";
 
@@ -140,7 +131,7 @@ export default {
 
   computed: {
     ...mapState({
-      dateInMonth: state => state.dateInMonth
+      recordList: state => state.recordList
     })
   },
 
@@ -153,12 +144,12 @@ export default {
         expense: "",
         note: ""
       },
-      show: false,
+      showNumber: false,
       type: "income",
       appear: false,
       minDate: startDate,
       maxDate: today,
-      currentDate: today
+      currentDate: this.$route.query.date ? this.$route.query.date : today
     };
   },
   watch: {
@@ -172,7 +163,7 @@ export default {
           this.$moment(val).format("YYYYMMDD") ===
           this.$moment().format("YYYYMMDD")
         ) {
-          prefix = "Today ,";
+          prefix = "Today, ";
         }
 
         if (
@@ -181,18 +172,44 @@ export default {
             .subtract(1, "days")
             .format("YYYYMMDD")
         ) {
-          prefix = "Yesterday ,";
+          prefix = "Yesterday, ";
         }
 
         this.$set(this.form, "date", val ? prefix + formDate : "");
+        
+        
+        const itemIndex = findIndex(this.recordList, { date: val });
+        console.log(itemIndex);
+        if (itemIndex > -1) {
+          this.form = Object.assign({}, this.recordList[itemIndex]);
+        } else {
+          this.form.note = "";
+          this.form.income = "";
+          this.form.expense = "";
+        }
+        
       }
     }
   },
   methods: {
     showKeyboard(type) {
       this.appear = false;
-      this.show = true;
+      this.showNumber = true;
       this.type = type;
+      if (type=='income') {
+        document.getElementById('income').className = "input_income_expense_focus";
+        document.getElementById('expense').className = "input_income_expense";
+      }
+      if (type=='expense') {
+        document.getElementById('expense').className = "input_income_expense_focus";
+        document.getElementById('income').className = "input_income_expense";
+      }
+      
+    },
+    showNumberFalse() {
+      this.showNumber = false;
+      document.getElementById('income').className = "input_income_expense";
+      document.getElementById('expense').className = "input_income_expense";
     },
     onInput(value) {
       if (this.form[this.type].indexOf(".") != -1 && value == ".") {
@@ -231,10 +248,6 @@ export default {
     view_history() {
       this.$router.push({ name: "RecordList" });
     },
-    onChange(picker, values) {
-      picker.setColumnValues(1, dateInMonth[values[0]]);
-      this.form.date = values;
-    },
     setDate(value) {
       this.appear = false;
 
@@ -250,90 +263,142 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.app-pick-date {
+
+.label-left {
   margin-top: 16px;
   margin-right: 16px;
   margin-left: 16px;
-  height: 64px;
+  height: 24px;
 
-  .select_date {
-    height: 40px;
+  .link_view_history {
     font-size: 14px;
-
-    .link_view_history {
-      font-size: 14px;
-      color: #ff8600;
-      text-align: right;
-      height: auto;
-    }
+    color: #ff8600;
+    text-align: right;
+    height: auto;
   }
 
-  .pick_date {
-    top: 4px;
-    height: 40px;
-    font-size: 16px;
-    width: 100%;
+}
 
-    .input {
-      width: 100%;
-    }
+.pick_date {
+  top: 4px;
+  height: 40px;
+  font-size: 16px;
+  margin-right: 16px;
+  margin-left: 16px;
+}
+
+.input_income_expense {
+  top: 4px;
+  height: 40px;
+  font-size: 16px;
+  margin-right: 16px;
+  margin-left: 16px;
+  border-bottom: 0px solid red;
+  padding-bottom: 21px;
+
+  .plus {
+    bottom: 0px;
+    font-size: 16px;
+    color: #04a777;
   }
 
   .income {
     top: 4px;
     color: #04a777;
-  }
-
-  .input_number {
-    height: 40px;
     font-size: 40px;
-
-    .plus {
-      bottom: 0px;
-      font-size: 16px;
-      color: #04a777;
-    }
-
-    .income {
-      top: 4px;
-      color: #04a777;
-    }
-
-    .minus {
-      bottom: 0px;
-      font-size: 16px;
-      color: #b41800;
-    }
-
-    .expense {
-      top: 4px;
-      color: #b41800;
-    }
-
-    .currency {
-      bottom: 0px;
-      font-size: 16px;
-      color: #2f3941;
-    }
+    width: 90%;
   }
 
-  .input_note {
-    height: 40px;
-    font-size: 24px;
-  }
-
-  .update_btn {
-    border-radius: 4;
-    background-color: #ff8600;
-    border: none;
-    color: white;
+  .minus {
+    bottom: 0px;
     font-size: 16px;
-    width: 100%;
-    height: 40px;
-    margin-top: 16px;
+    color: #b41800;
   }
+
+  .expense {
+    top: 4px;
+    color: #b41800;
+    font-size: 40px;
+    width: 90%;
+  }
+
+  .currency {
+    bottom: 0px;
+    font-size: 16px;
+    color: #2f3941;
+    padding-bottom: 10px;
+  }
+
 }
+
+.input_income_expense_focus {
+  top: 4px;
+  height: 40px;
+  font-size: 16px;
+  margin-right: 16px;
+  margin-left: 16px;
+  border-bottom: 1px solid red;
+  padding-bottom: 20px;
+
+  .plus {
+    bottom: 0px;
+    font-size: 16px;
+    color: #04a777;
+  }
+
+  .income {
+    top: 4px;
+    color: #04a777;
+    font-size: 40px;
+    width: 90%;
+  }
+
+  .minus {
+    bottom: 0px;
+    font-size: 16px;
+    color: #b41800;
+  }
+
+  .expense {
+    top: 4px;
+    color: #b41800;
+    font-size: 40px;
+    width: 90%;
+  }
+
+  .currency {
+    bottom: 0px;
+    font-size: 16px;
+    color: #2f3941;
+    padding-bottom: 10px;
+  }
+
+}
+
+.input_note {
+  height: 40px;
+  font-size: 24px;
+  margin-top: 16px;
+  margin-right: 16px;
+  margin-left: 16px;
+}
+
+.update_btn {
+  border-radius: 4;
+  background-color: #ff8600;
+  border: none;
+  color: white;
+  font-size: 16px;
+  height: 40px;
+  width: 90%;
+  margin-top: 16px;
+  margin-right: 16px;
+  margin-left: 16px;
+}
+
 .van-picker {
   z-index: 2000;
 }
+
 </style>
+     
