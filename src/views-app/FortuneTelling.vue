@@ -5,7 +5,7 @@
       v-on:click="startOpeningProcess"
       v-if="status===statusEnum.normal"
     >
-      <div class="tap-tips">Tap on the treasure chest!</div>
+      <div class="tap-tips">{{$t("FortuneTelling.TapChestTips")}}</div>
     </div>
     <div class="background-img-opening" v-if="status===statusEnum.opening"></div>
     <transition name="bounce">

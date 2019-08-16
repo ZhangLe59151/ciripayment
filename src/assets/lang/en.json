@@ -4,10 +4,13 @@
   "noSelectSettlementErrorMsg": "Please select one of the settlement options to proceed.",
   "marketingServiceErrorMsg": "There are errors in your form. Please correct them before trying again.",
   "OTPErrorMsg": "OTP request too frequent. Please wait for a minute and try again.",
-  "LuckyNumberLabel": "Lucky Number",
-  "LuckyWordsLabel": "Lucky Words",
-  "LuckySalesLabel": "Sales Lucky Today",
-  "LuckySalesDescription": "Record your daily income for better predictions.",
+  "FortuneTelling": {
+    "TapChestTips": "Tap on the treasure chest!",
+    "LuckyNumberLabel": "Lucky Number",
+    "LuckyWordsLabel": "Lucky Words",
+    "LuckySalesLabel": "Sales Lucky Today",
+    "LuckySalesDescription": "Record your daily income for better predictions."
+  },
   "Income": "INCOME",
   "Expenses": "EXPENSES",
   "AppLoanOverview": {

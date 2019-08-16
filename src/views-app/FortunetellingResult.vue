@@ -40,11 +40,11 @@ export default {
           {
             luckyArr: [
               {
-                label: this.$t("LuckyNumberLabel"),
+                label: this.$t("FortuneTelling.LuckyNumberLabel"),
                 value: fortunetellingFrame.luckyNumber
               },
               {
-                label: this.$t("LuckyWordsLabel"),
+                label: this.$t("FortuneTelling.LuckyWordsLabel"),
                 value: fortunetellingFrame.luckyWords
               }
             ],
@@ -55,11 +55,11 @@ export default {
           resultArray.push({
             luckyArr: [
               {
-                label: this.$t("LuckySalesLabel"),
+                label: this.$t("FortuneTelling.LuckySalesLabel"),
                 value: fortunetellingFrame.luckySales
               }
             ],
-            des: this.$t("LuckySalesDescription")
+            des: this.$t("FortuneTelling.LuckySalesDescription")
           });
         }
         return resultArray;
