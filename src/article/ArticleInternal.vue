@@ -3,7 +3,7 @@
     <app-common-header/>
     <!-- <van-overlay :show="loadingIframe" :class="{'showOverlay': loadingIframe}"></van-overlay> -->
     <!-- <van-loading type="spinner" color="#ffffff" class="loading" v-show="loadingIframe"/> -->
-    <div v-html="articleContent">{{articleContent}}</div>
+    <div class="internalArticle-article" v-html="articleContent">{{articleContent}}</div>
   </section>
 </template>
 
@@ -55,14 +55,14 @@ export default {
     margin-top: -15px;
     z-index: 9999;
   }
-  .internalArticle-title {
+  .title {
     font-weight: bold;
     font-size: 24px;
     color: #2f3941;
     letter-spacing: 0;
   }
 
-  .internalArticle-date {
+  .date {
     font-size: 16px;
     color: #68737d;
     letter-spacing: 0;
@@ -70,7 +70,7 @@ export default {
     margin: 10px 0 20px;
   }
 
-  .internalArticle-cnt {
+  div {
     margin-top: 20px;
     font-size: 16px;
     color: #68737d;
