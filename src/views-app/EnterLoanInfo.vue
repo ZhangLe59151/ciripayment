@@ -99,7 +99,7 @@
 
       <el-card class="box-card">
         <!-- merchant information -->
-        <div class="title">Business Information</div>
+        <div ref="bizInfo" class="title">Business Information</div>
         <div class="title-line"></div>
 
         <el-form-item
@@ -455,6 +455,11 @@ export default {
     this.form = Object.assign(form);
   },
   mounted() {
+    if (!this.$route.query.position) {
+      // Scroll to top whenever apply new application
+      window.scrollTo(0, 0);
+    }
+
     if (!this.idleTimer) {
       this.idleTimer = new Idle()
         .whenNotInteractive()
@@ -469,10 +474,11 @@ export default {
 
     this.idleTimer.start();
 
-    // scroll to saved position
+    // scroll to saved position - change to refs, position value somehow not working in Vue with refs
     if (this.$route.query.position) {
-      var savedPosition = this.$route.query.position;
-      window.scrollTo(0, savedPosition);
+      var element = this.$refs["bizInfo"];
+      var top = element.offsetTop;
+      window.scrollTo(0, top);
     }
     if (this.$route.query.flag && this.$route.query.flag === "back") {
       this.$refs["elForm"].validate();

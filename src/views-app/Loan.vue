@@ -1,7 +1,6 @@
 <template>
   <div class="app-loan">
     <app-loan-header v-if="!$route.query.origin" />
-    <app-common-header v-if="!$route.query.origin" />
     <van-nav-bar
       v-else
       :left-arrow="!!$route.query.origin"
@@ -43,7 +42,7 @@ export default {
       }
     });
     // for testing
-    // this.$store.commit("fetchDataFromLocal");
+    this.$store.commit("fetchDataFromLocal");
   }
 };
 </script>
