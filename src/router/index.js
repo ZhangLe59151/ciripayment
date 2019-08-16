@@ -221,6 +221,11 @@ const ArticleArr = [
     path: "/article",
     name: "ArticleExternal",
     component: () => import("@/article/ArticleExternal.vue")
+  },
+  {
+    path: "/article-internal",
+    name: "ArticleInternal",
+    component: () => import("@/article/ArticleInternal.vue")
   }
 ];
 
