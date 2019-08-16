@@ -28,13 +28,9 @@
 </template>
 
 <script>
-import AppCommonHeader from "@/components/AppCommonHeader";
 import { mapState } from "vuex";
 
 export default {
-  components: {
-    AppCommonHeader
-  },
   data() {
     return {
       list: [],
