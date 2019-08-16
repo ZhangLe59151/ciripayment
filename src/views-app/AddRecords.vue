@@ -39,6 +39,7 @@
         <input
           class="income"
           v-model="form.income"
+          readonly
           @touchstart.stop="showKeyboard('income')"
           maxlength="“13”"
           placeholder
@@ -64,6 +65,7 @@
           @touchstart.stop="showKeyboard('expense')"
           v-model="form.expense"
           maxlength="13"
+          readonly
           placeholder
         >
       </van-col>
