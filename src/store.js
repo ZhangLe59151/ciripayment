@@ -435,10 +435,10 @@ export default new Vuex.Store({
       const recordList = Array.from(state.recordList);
       const itemIndex = findIndex(recordList, { date: updateRecordInfo.date }); 
       const item = find(recordList, { date: updateRecordInfo.date }); 
-      // debugger
+      debugger
       if (item) {
         // udpate
-        recordList.splice(1, recordList[itemIndex], updateRecordInfo);
+        recordList[itemIndex] = updateRecordInfo;
       } else {
         recordList.push(updateRecordInfo);
       }
