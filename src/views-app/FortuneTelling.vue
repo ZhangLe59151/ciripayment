@@ -19,6 +19,7 @@
 <script>
 import FortunetellingResult from "./FortunetellingResult";
 import { mapState } from "vuex";
+import { debuglog } from "util";
 export default {
   name: "FortuneTelling",
   components: {
@@ -83,38 +84,9 @@ export default {
         }
       });
     }
-    //   buildFortunetellingFrame(fortunetellingFrame) {
-    //     let resultArray = [
-    //       {
-    //         luckyArr: [
-    //           {
-    //             label: this.$t("LuckyNumberLabel"),
-    //             value: fortunetellingFrame.luckyNumber
-    //           },
-    //           {
-    //             label: this.$t("LuckyWordsLabel"),
-    //             value: fortunetellingFrame.luckyWords
-    //           }
-    //         ],
-    //         des: fortunetellingFrame.luckyDescription
-    //       }
-    //     ];
-    //     console.log(this.isYesterdayRecord);
-    //     if (this.isYesterdayRecord) {
-    //       resultArray.push({
-    //         luckyArr: [
-    //           {
-    //             label: this.$t("LuckySalesLabel"),
-    //             value: fortunetellingFrame.luckySales
-    //           }
-    //         ],
-    //         des: this.$t("LuckySalesDescription")
-    //       });
-    //     }
-    //     return resultArray;
-    //   }
   },
   mounted() {
+    // debugger;
     if (this.fortunetellingFrame[this.today]) {
       this.status = this.statusEnum.finish;
     }
