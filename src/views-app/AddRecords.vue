@@ -176,8 +176,8 @@ export default {
           val ? (kv[_selected] ? kv[_selected] : "") + formDate : ""
         );
 
-        const itemIndex = findIndex(this.recordList, { date: val });
-        console.log(itemIndex);
+        const itemIndex = findIndex(this.recordList, { date: this.$moment(val).format(this.localDateFormatter) });
+        console.log();
         if (itemIndex > -1) {
           this.form = Object.assign({}, this.recordList[itemIndex]);
         } else {

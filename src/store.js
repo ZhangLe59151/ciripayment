@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { findIndex } from "lodash";
+import { find,findIndex } from "lodash";
 
 Vue.use(Vuex);
 
@@ -433,10 +433,12 @@ export default new Vuex.Store({
     // this is for record
     UpdateRecord(state, updateRecordInfo) {
       const recordList = Array.from(state.recordList);
-      const itemIndex = findIndex(recordList, { date: updateRecordInfo.date });
-      if (itemIndex && itemIndex > -1) {
+      const itemIndex = findIndex(recordList, { date: updateRecordInfo.date }); 
+      const item = find(recordList, { date: updateRecordInfo.date }); 
+      debugger
+      if (item) {
         // udpate
-        recordList.splice(1, itemIndex, updateRecordInfo);
+        recordList[itemIndex] = updateRecordInfo;
       } else {
         recordList.push(updateRecordInfo);
       }
