@@ -8,7 +8,7 @@
         span="12"
         class="link_view_history"
       >
-        <button v-on:click="view_history">View Record History</button>
+        <button @click="view_history">View Record History</button>
       </van-col>
     </van-row>
 
@@ -237,7 +237,8 @@ export default {
       return form;
     },
     view_history() {
-      this.$router.push({ name: "RecordList" });
+      const date = this.$moment(this.form.date).format(this.localDateFormatter);
+      this.$router.push({ name: "RecordList", query: { date: date } });
     },
     setDate(value) {
       this.appear = false;

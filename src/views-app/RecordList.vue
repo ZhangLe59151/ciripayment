@@ -1,6 +1,9 @@
 <template>
   <div class="record-list">
-    <app-common-header title="Records List" />
+    <app-common-header
+      title="Records List"
+      :leftFunc="handleBack"
+    />
     <van-list
       v-model="loading"
       :finished="finished"
@@ -47,6 +50,12 @@ export default {
   },
 
   methods: {
+    handleBack() {
+      this.$router.push({
+        name: "AddRecord",
+        query: { date: this.$route.query.date }
+      });
+    },
     formatDate(val) {
       return this.$moment(val).format("D MMM YYYY");
     },
