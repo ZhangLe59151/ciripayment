@@ -19,17 +19,21 @@
       </van-col>
     </van-row>
 
-    <div
-      class="btn"
-      @click="$router.push({name: 'AddRecord'})"
-    >
-      <van-icon name="bars" />
-      {{$t('Home.btmBtn')}}
+    <div>
+      <div class="btnView btn" @click="$router.push({name: 'RecordList', query: { date: date }})">
+        <van-icon name="bars"/>
+        {{$t('Home.homeRecordViewHistoryBtn')}}
+      </div>
+      <div class="btnAdd btn" @click="$router.push({name: 'AddRecord'})">
+        <van-icon name="plus"/>
+        {{$t('Home.homeRecordAddBtn')}}
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   props: {
     info: {
@@ -37,6 +41,15 @@ export default {
         return {};
       },
       type: Object
+    }
+  },
+  computed: {
+    ...mapState({
+      localDateFormatter: "localDateFormatter"
+    }),
+    date() {
+      const today = this.$moment().format(this.localDateFormatter);
+      return today;
     }
   },
   methods: {}
@@ -53,7 +66,7 @@ export default {
 
   .btn {
     margin: 10px 16px;
-    width: calc(100% - 32px);
+    width: calc(50% - 34px);
     height: 40px;
     line-height: 40px;
     background: #ffffff;
@@ -71,6 +84,19 @@ export default {
       top: 4px;
       font-size: 18px;
     }
+    > .van-icon-plus {
+      color: #ff8600;
+      position: relative;
+      left: -6px;
+      top: 4px;
+      font-size: 18px;
+    }
+  }
+  .btnView {
+    float: left;
+  }
+  .btnAdd {
+    float: right;
   }
   .info {
     margin: 0 16px;

@@ -72,6 +72,7 @@
     "luckySubtitleBtm": "Fortune",
     "luckyBtn": "Let's Go",
     "info": "Relevant To Your Business",
-    "btmBtn": "View and Update Records"
+    "homeRecordAddBtn": "Add Records",
+    "homeRecordViewHistoryBtn": "Record History"
   }
 }

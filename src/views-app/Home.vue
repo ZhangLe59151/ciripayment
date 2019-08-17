@@ -1,14 +1,13 @@
 <template>
   <div class="app-home">
-    <app-home-header :info.sync="records" />
+    <app-home-header :info.sync="records"/>
 
-    <app-home-loan />
-    <app-home-lucky />
+    <app-home-loan/>
+    <app-home-lucky/>
 
-    <app-home-download v-if="$store.state.deviceType === 'WEB'" />
-    <app-home-info />
-    <app-tab-bar :active="0" />
-
+    <app-home-download v-if="$store.state.deviceType === 'WEB'"/>
+    <app-home-info/>
+    <app-tab-bar :active="0"/>
   </div>
 </template>
 
