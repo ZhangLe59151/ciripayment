@@ -5,6 +5,7 @@
       v-model="loading"
       :finished="finished"
       finished-text="no more"
+      :immediate-check="false"
       @load="onLoad"
     >
       <van-cell
@@ -31,6 +32,7 @@
 import { mapState } from "vuex";
 
 export default {
+  name: "RecordList",
   data() {
     return {
       list: [],
@@ -42,7 +44,7 @@ export default {
 
   computed: {
     ...mapState({
-      recordList: state => state.recordList
+      recordList: "recordList"
     })
   },
 
@@ -57,10 +59,9 @@ export default {
       return this.$moment(val).format("D MMM YYYY");
     },
     onLoad() {
-      // 异步更新数据
-      // sort by date desc 
-      this.recordList.sort((a,b) => Number(b.date) - Number(a.date))
-      
+      // sort by date desc
+      this.recordList.sort((a, b) => Number(b.date) - Number(a.date));
+
       setTimeout(() => {
         const endNo =
           this.currentNo + 10 < this.recordList.length
@@ -78,6 +79,9 @@ export default {
         }
       }, 500);
     }
+  },
+  created() {
+    this.onLoad();
   }
 };
 </script>

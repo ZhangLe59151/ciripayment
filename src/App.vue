@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <transition name="slide-fade">
-      <router-view />
+      <router-view :key="$route.fullpath" />
     </transition>
   </div>
 </template>
