@@ -207,7 +207,6 @@ export default {
 
   computed: {
     ...mapState({
-      //recordList: state => state.recordList,
       localDateFormatter: state => state.localDateFormatter
     })
   },
@@ -234,13 +233,7 @@ export default {
   },
   created() {
     this.currentDate = this.$moment(this.$route.query.date ? this.$route.query.date : today).format(this.localDateFormatter);
-    this.$api.viewRecordSum(this.currentDate).then(res => { 
-      if (res.data.code === 200) { 
-        console.log(res.data.data.expensesSum);
-        this.dailyIncome = util.fmoney(res.data.data.incomeSum);
-        this.dailyExpense = util.fmoney(res.data.data.expensesSum);
-      } 
-    });
+    this.fetchDataUpdate(this.currentDate);
   },
   watch: {
     tabActive: {
@@ -287,6 +280,15 @@ export default {
           }
         })
     },
+    fetchDataUpdate(currentDate) {
+      this.$api.viewRecordSum(currentDate).then(res => { 
+        if (res.data.code === 200) { 
+          debugger
+          this.dailyIncome = util.fmoney(res.data.data.incomeSum);
+          this.dailyExpense = util.fmoney(res.data.data.expensesSum);
+        } 
+      });
+    },
     showKeyboard(type) {
       this.appear = false;
       this.showNumber = true;
@@ -319,7 +321,8 @@ export default {
         //this.$store.commit("UpdateRecord", this.convertForm(form));
         form[this.type] = parseFloat(form[this.type]);
         this.fetchData(form);
-        this.$toast("Update succeed!");
+        this.fetchDataUpdate(form.accountDate);
+        this.$notify("Update succeed!");
         return false;
       }
       this.$toast("Pls input valid amount.");

@@ -15,7 +15,7 @@
       >
         <div class="record-status">
           <span class="name">TOTAL INCOME</span>
-          <span class="amount">+{{ dailyIncome }} <i>{{$store.state.currency}}</i></span>
+          <span class="amount">+ {{ dailyIncome }} <i>{{$store.state.currency}}</i></span>
         </div>
 
         <van-row class="label-left">Income Name</van-row>
@@ -89,7 +89,7 @@
 
         <div class="record-status expenses">
           <span class="name">TOTAL EXPENSES</span>
-          <span class="amount">-{{ dailyExpense }} <i>{{$store.state.currency}}</i></span>
+          <span class="amount">- {{ dailyExpense }} <i>{{$store.state.currency}}</i></span>
         </div>
         <van-row class="label-left">Expenses Name</van-row>
 
@@ -158,10 +158,17 @@
       </van-tab>
     </van-tabs>
 
+  <van-row>
+    <div
+      class="delete_btn"
+      @click="updateBtn"
+    >Delete Record</div>
+
     <div
       class="update_btn"
       @click="updateBtn"
     >Update Records</div>
+  </van-row>
 
     <van-number-keyboard
       :show="showNumber"
@@ -180,6 +187,7 @@ import AppCommonHeader from "@/components/AppCommonHeader";
 import { findIndex } from "lodash";
 
 import { mapState } from "vuex";
+import util from "@/util.js";
 
 const today = new Date();
 const startDate = new Date("2019/01/01");
@@ -200,7 +208,7 @@ export default {
 
   data() {
     return {
-      tabActive: 2,
+      tabActive: 0,
       form: {
         accountDate: "",
         income: "",
@@ -227,11 +235,11 @@ export default {
       if (res.data.code === 200) { 
         this.type = res.data.data.type === 0 ? "income" : "expense";
         this.disable[this.type] = true;
-        this.tabActive = res.data.data.type === 0 ? "INCOME" : "EXPENSES";
+        this.tabActive = res.data.data.type;
         this.currentDate = this.$moment(res.data.data.accountDate).format("D MMM YYYYY");
-        this.form[this.type] = res.data.data.amount;
-        this.dailyIncome = res.data.data.incomeSum;
-        this.dailyExpense = res.data.data.expensesSum;
+        this.form[this.type] = util.fmoney(res.data.data.amount);
+        this.dailyIncome = util.fmoney(res.data.data.incomeSum);
+        this.dailyExpense = util.fmoney(res.data.data.expensesSum);
         this.form.memo = res.data.data.memo;
       } 
     });
@@ -267,8 +275,9 @@ export default {
       const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
       if (regex.test(form[this.type])) {
         form[this.type] = float(form[this.type]);
-        this.$store.commit("UpdateRecord", this.convertForm(form));
-        this.$toast("Update succeed!");
+        //this.$store.commit("UpdateRecord", this.convertForm(form));
+        this.$notify("Update succeed!");
+        //this.$toast("Update succeed!");
         return false;
       }
       this.$toast("Pls input valid amount.");
@@ -367,19 +376,27 @@ export default {
   border-bottom: 1px solid #c2c8cc;
 }
 
-.update_btn {
+
+.delete_btn {
   border-radius: 4px;
-  background-color: #ff8600;
-  border: none;
-  color: white;
+  border: 5px solid #ff8600;
   font-size: 16px;
-  height: 40px;
-  width: 90%;
-  margin-top: 16px;
+  margin: 16px 16px 0 16px;
   margin-right: 16px;
   margin-left: 16px;
   text-align: center;
   line-height: 40px;
+  text-align: center;
+  height: 40px;
+  border-color: #ff8600;
+  background-color: white;
+  color: #ff8600;
+  width: 45%;
+  .update_btn {
+    color: white;
+    background-color: #ff8600;
+    width: 45%;
+  }
 }
 
 .van-picker {
