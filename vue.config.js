@@ -1,7 +1,7 @@
 module.exports = {
   devServer: {
-    proxy: "http://13.251.81.240:15005/"
-    //proxy: process.env.VUE_APP_PROXY
+    //proxy: "http://13.251.81.240:15005/"
+    proxy: process.env.VUE_APP_PROXY
   },
   configureWebpack: config => {
     if (process.env.NODE_ENV === "production") {
