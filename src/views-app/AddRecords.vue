@@ -194,6 +194,7 @@ import AppCommonHeader from "@/components/AppCommonHeader";
 import { findIndex } from "lodash";
 
 import { mapState } from "vuex";
+import util from "@/util.js";
 
 const today = new Date();
 const startDate = new Date("2019/01/01");
@@ -238,8 +239,8 @@ export default {
     this.$api.viewRecordSum(this.currentDate).then(res => { 
       if (res.data.code === 200) { 
         console.log(res.data.data.expensesSum);
-        this.dailyIncome = res.data.data.incomeSum;
-        this.dailyExpense = res.data.data.expensesSum;
+        this.dailyIncome = util.fmoney(res.data.data.incomeSum);
+        this.dailyExpense = util.fmoney(res.data.data.expensesSum);
         debugger
       } 
     });
