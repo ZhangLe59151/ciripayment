@@ -235,8 +235,8 @@ export default {
   },
   created() {
     this.test = this.$moment(this.currentDate).format(this.localDateFormatter);
-    console.log(this.test);
-    this.$api.viewRecordSum({ accountDate:this.test }).then(res => { 
+    debugger
+    this.$api.viewRecordSum({ accountDate: this.$moment(this.currentDate).format(this.localDateFormatter) }).then(res => { 
       debugger
       if (res.data.code === 200) { 
         console.log(res.data.data);
