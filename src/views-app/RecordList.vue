@@ -8,32 +8,40 @@
       :immediate-check="false"
       @load="onLoad"
     >
-      <van-cell
-        class="group"
-        v-for="(details, key) in list"
-        :key="key"
-        :title="formatDate(key)"
-        :value="sumIncome(details)"
-      >
-        <van-cell
-          class="detail"
-          v-for="(item, index) in details"
-          :key="index"
-          :title="formatIncome(item)"
-          :label="formatDate(item)"
-          :value="formatAmount(item)"
-        >
-          <template slot="default">
-            <div>Income - {{item.memo}}</div>
-          </template>
-        </van-cell>
-      </van-cell>
+      <div class="group" v-for="(details, key) in list" :key="key">
+        <div class="title">{{formatDate(key)}}</div>
+        <div class="sum">
+          {{sumIncome(details)}}
+          <div class="baht">{{$store.state["currency"]}}</div>
+        </div>
+        <div>
+          <van-cell
+            v-for="(item, index) in details"
+            :key="index"
+            :title="formatIncome(item)"
+            :label="formatTime(item['createTime'])"
+            :value="formatAmount(item)"
+            value-class="positive-amount"
+            v-if="item['type']===0"
+          ></van-cell>
+          <van-cell
+            v-for="(item, index) in details"
+            :key="index"
+            :title="formatIncome(item)"
+            :label="formatTime(item['createTime'])"
+            :value="formatAmount(item)"
+            value-class="negtive-amount"
+            v-if="item['type']>0"
+          ></van-cell>
+        </div>
+      </div>
     </van-list>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import util from "@/util.js";
 
 export default {
   name: "RecordList",
@@ -47,9 +55,9 @@ export default {
             accountDate: "20190817",
             amount: 5,
             type: 1,
-            memo: "买西瓜",
-            createTime: "2019-08-17T08:03:13.000+0000",
-            modifyTime: "2019-08-17T08:03:13.000+0000"
+            memo: "",
+            createTime: "2019-08-17T08:04:13.000+0000",
+            modifyTime: "2019-08-17T08:04:13.000+0000"
           },
           {
             id: 4,
@@ -94,26 +102,28 @@ export default {
         query: { date: this.$route.query.date }
       });
     },
-    formatDate(item) {
-      return this.$moment(item.createTime).format("D MMM YYYY");
+    formatDate(date) {
+      return this.$moment(date).format("D MMM YYYY");
+    },
+    formatTime(date) {
+      return this.$moment(date).format("D MMM YYYY HH:mm:ss");
     },
     formatIncome(item) {
-      console.log(item["type"]);
       if (item["type"] === 0) {
         return item["memo"] == ""
           ? this.$t("Income")
           : this.$t("Income") + " - " + item["memo"];
       } else {
-        item["memo"] == ""
+        return item["memo"] == ""
           ? this.$t("Expenses")
           : this.$t("Expenses") + " - " + item["memo"];
       }
     },
     formatAmount(item) {
       if (item["type"] === 0) {
-        return "+" + item["amount"] + this.$t("currency");
+        return "+" + util.fmoney(item["amount"]) + " " + this.$store.state["currency"];
       } else {
-        return "-" + item["amount"] + this.$t("currency");
+        return "-" + util.fmoney(item["amount"]) + " " + this.$store.state["currency"];
       }
     },
     sumIncome(item) {
@@ -125,7 +135,8 @@ export default {
           sum -= item[index]["amount"];
         }
       }
-      return sum;
+      let money = util.fmoney(sum);
+      return sum < 0 ? "-" + money : "+" + money;
     },
     onLoad() {
       // setTimeout(() => {
@@ -152,55 +163,50 @@ export default {
 
 
 <style lang="scss" scoped>
+.van-list {
+  background-color: #e9ebed;
+}
 .van-nav-bar {
   height: 44px;
 }
 .van-cell {
   .van-cell__title > span {
     position: relative;
-    top: 14px;
+    top: 4px;
   }
-  .group {
-    font-family: HelveticaNeue;
-    font-size: 16px;
-    color: #2f3941;
-    letter-spacing: 0;
-    font-family: HelveticaNeue;
-    font-size: 10px;
-    color: #2f3941;
-    letter-spacing: 0;
-    text-align: right;
-    line-height: 24px;
-    font-family: HelveticaNeue-Bold;
-    font-size: 16px;
-    color: #2f3941;
-    letter-spacing: 0;
-    text-align: right;
-  }
-  .detail {
-    background: #ffffff;
-    font-family: HelveticaNeue;
-    font-size: 10px;
-    color: #2f3941;
-    letter-spacing: 0;
-    text-align: right;
-    line-height: 24px;
-    font-family: HelveticaNeue;
-    font-size: 14px;
-    color: #04a777;
-    letter-spacing: 0;
-    text-align: right;
-    font-family: HelveticaNeue;
-    font-size: 14px;
-    color: #2f3941;
-    letter-spacing: 0;
-    font-family: HelveticaNeue;
-    font-size: 10px;
-    color: #87929d;
-    letter-spacing: 0;
+  .van-cell__value > span {
+    position: relative;
+    top: 11px;
   }
 }
-
+.positive-amount {
+  color: #b41800;
+}
+.negtive-amount {
+  color: #04a777;
+}
+.group {
+  font-family: HelveticaNeue;
+  font-size: 16px;
+  color: #2f3941;
+  letter-spacing: 0;
+  line-height: 47px;
+}
+.title {
+  float: left;
+  margin: 18px 16px 8px 16px;
+}
+.sum {
+  float: right;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 18px 16px 8px 16px;
+  .baht {
+    float: inherit;
+    font-size: 10px;
+    margin-left: 4px;
+  }
+}
 .custom-income {
   font-size: 16px;
   color: #04a777;
