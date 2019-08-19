@@ -14,7 +14,7 @@
       >
         <div class="record-status">
           <span class="name">TOTAL INCOME</span>
-          <span class="amount">+1000.00 <i>{{$store.state.currency}}</i></span>
+          <span class="amount">+{{ dailyIncome }} <i>{{$store.state.currency}}</i></span>
         </div>
 
         <van-row class="label-left">Income Name</van-row>
@@ -88,7 +88,7 @@
 
         <div class="record-status expenses">
           <span class="name">TOTAL EXPENSES</span>
-          <span class="amount">-1000.00 <i>{{$store.state.currency}}</i></span>
+          <span class="amount">-{{ dailyExpense }} <i>{{$store.state.currency}}</i></span>
         </div>
         <van-row class="label-left">Expenses Name</van-row>
 
@@ -225,7 +225,9 @@ export default {
       appear: false,
       minDate: startDate,
       maxDate: today,
-      currentDate: this.$route.query.date ? this.$route.query.date : today
+      currentDate: this.$route.query.date ? this.$route.query.date : today,
+      dailyIncome: 0,
+      dailyExpense: 0
     };
   },
   created() {
@@ -236,7 +238,9 @@ export default {
         debugger
         this.type = res.data.data.type === 0 ? "income" : "expense";
         this.tabActive = res.data.data.type === 0 ? "INCOME" : "EXPENSES";
-        
+        this.form[this.type] = res.data.data.amount;
+        this.dailyIncome = res.data.data.incomeSum;
+        this.dailyExpense = res.data.data.expensesSum;
         debugger
       } 
     });

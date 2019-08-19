@@ -228,7 +228,6 @@ export default {
       maxDate: today,
       currentDate: this.$route.query.date ? this.$route.query.date : today,
       recordList: [],
-      test: '',
       dailyIncome: 0,
       dailyExpense: 0
     };
