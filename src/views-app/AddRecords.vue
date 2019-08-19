@@ -264,6 +264,19 @@ export default {
     }
   },
   methods: {
+    fetchData(form) {
+      this.$api
+        .addRecord({
+          params: {
+            merchantRecordDtor: form
+          }
+        })
+        .then(res => {
+          if (res.data.code === 200) {
+            console.log(res.data.data)
+          }
+        })
+    },
     showKeyboard(type) {
       this.appear = false;
       this.showNumber = true;
@@ -293,7 +306,8 @@ export default {
       this.appear = false;
       const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
       if (regex.test(form[this.type])) {
-        this.$store.commit("UpdateRecord", this.convertForm(form));
+        //this.$store.commit("UpdateRecord", this.convertForm(form));
+        fetchData(form);
         this.$toast("Update succeed!");
         return false;
       }
