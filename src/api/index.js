@@ -113,5 +113,8 @@ export default {
   },
   viewRecord(params) {
     return Vue.axios.get(`/api/merchant/record/view?id=${params}`);
+  },
+  deleteRecord(params) {
+    return Vue.axios.get(`/api/merchant/record/delete?id=${params}`);
   }
 };
