@@ -13,11 +13,11 @@
         name="INCOME"
       >
         <div class="record-status">
-          <span class="name">TOTAL INCOME</span>
-          <span class="amount">+1000.00 - {{ form["memo"] }}<i>{{$store.state.currency}}</i></span>
+          <span class="name">{{$t("TOTAL INCOME")}}</span>
+          <span class="amount">+1000.00 <i>{{$store.state.currency}}</i></span>
         </div>
 
-        <van-row class="label-left">Income Name</van-row>
+        <van-row class="label-left">{{$t("Income Name")}}</van-row>
 
         <van-row class="input_note">
           <van-col span="24">
@@ -31,7 +31,7 @@
         </van-row>
 
         <van-row class="label-left">
-          <van-col span="12">Date</van-col>
+          <van-col span="12">{{$t("Date")}}</van-col>
           <van-col
             span="12"
             class="link_view_history"
@@ -56,7 +56,7 @@
           </van-col>
         </van-row>
 
-        <van-row class="label-left">Income</van-row>
+        <van-row class="label-left">{{$t("Income")}}</van-row>
         <van-row
           class="input_income_expense"
           id="income"
@@ -87,10 +87,10 @@
       >
 
         <div class="record-status expenses">
-          <span class="name">TOTAL EXPENSES</span>
+          <span class="name">{{$t("TOTAL EXPENSES")}}</span>
           <span class="amount">-1000.00 <i>{{$store.state.currency}}</i></span>
         </div>
-        <van-row class="label-left">Expenses Name</van-row>
+        <van-row class="label-left">{{$t("Expenses Name")}}</van-row>
 
         <van-row class="input_note">
           <van-col span="24">
@@ -105,7 +105,7 @@
         </van-row>
 
         <van-row class="label-left">
-          <van-col span="12">Date</van-col>
+          <van-col span="12">{{$t("Date")}}</van-col>
           <van-col
             span="12"
             class="link_view_history"
@@ -130,7 +130,7 @@
           </van-col>
         </van-row>
 
-        <van-row class="label-left">Expense</van-row>
+        <van-row class="label-left">{{$t("Expense")}}</van-row>
 
         <van-row
           class="input_income_expense"
@@ -160,7 +160,7 @@
     <button
       class="update_btn"
       @click="updateBtn"
-    >Update Records</button>
+    >{{$t("Update Records")}}</button>
 
     <van-row>
       <van-col span="24">
@@ -207,7 +207,7 @@ export default {
 
   computed: {
     ...mapState({
-      recordList: state => state.recordList,
+      //recordList: state => state.recordList,
       localDateFormatter: state => state.localDateFormatter
     })
   },
@@ -226,8 +226,18 @@ export default {
       appear: false,
       minDate: startDate,
       maxDate: today,
-      currentDate: this.$route.query.date ? this.$route.query.date : today
+      currentDate: this.$route.query.date ? this.$route.query.date : today,
+      recordList: []
     };
+  },
+  created() {
+    this.$api.viewRecord().then(res => { 
+      debugger
+      if (res.data.code === 200) { 
+        console.log(res.data.data);
+        this.recordList = res.data.data;
+      } 
+    });
   },
   watch: {
     currentDate: {
@@ -243,14 +253,13 @@ export default {
 
         this.$set(
           this.form,
-          "date",
+          "accountDate",
           val ? (kv[_selected] ? kv[_selected] : "") + formDate : ""
         );
 
         const itemIndex = findIndex(this.recordList, {
           accountDate: this.$moment(val).format(this.localDateFormatter)
         });
-        console.log();
         if (itemIndex > -1) {
           this.form = Object.assign({}, this.recordList[itemIndex]);
           this.form.accountDate = this.$moment(this.form.accountDate).format("D MMM YYYY");
@@ -264,15 +273,15 @@ export default {
   },
   methods: {
     fetchData(form) {
+      console.log(form);
       this.$api
         .addRecord({
-          params: {
-            merchantRecordDtor: form
-          }
+         merchantRecordDtor: this.form
         })
         .then(res => {
           if (res.data.code === 200) {
-            console.log(res.data.data)
+            //console.log(res.data.data)
+            this.$router.push({name: 'AddRecord'});
           }
         })
     },
@@ -305,8 +314,8 @@ export default {
       this.appear = false;
       const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
       if (regex.test(form[this.type])) {
-        this.$store.commit("UpdateRecord", this.convertForm(form));
-        //fetchData(form);
+        //this.$store.commit("UpdateRecord", this.convertForm(form));
+        this.fetchData(form);
         this.$toast("Update succeed!");
         return false;
       }
