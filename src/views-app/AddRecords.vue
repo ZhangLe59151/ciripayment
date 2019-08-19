@@ -273,15 +273,13 @@ export default {
   },
   methods: {
     fetchData(form) {
-      console.log(form);
       this.$api
         .addRecord({
-         merchantRecordDtor: this.form
+         merchantRecordDtor: form
         })
         .then(res => {
           debugger
           if (res.data.code === 200) {
-            debugger
             console.log(res.data.data)
             //this.$router.push({name: 'AddRecord'});
           }
