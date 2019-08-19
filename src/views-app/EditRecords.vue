@@ -43,7 +43,7 @@
           <van-col span="21">
             <van-field
               class="input"
-              :value="form.accountDate"
+              :value="currentDate"
               confirm-button-text="confirm"
               cancel-button-text="cancel"
               @focus="appear = true"
@@ -231,12 +231,14 @@ export default {
     };
   },
   created() {
-    this.currentDate = this.$route.params.id;
-    debugger
+    this.form.accountDate = this.$route.params.id;
     this.$api.viewRecord(this.$route.params.id).then(res => { 
       if (res.data.code === 200) { 
+        debugger
         this.type = res.data.data.type === 0 ? "income" : "expense";
+        console.log(this.type);
         this.tabActive = res.data.data.type === 0 ? "INCOME" : "EXPENSES";
+        this.currentDate = this.$moment(res.data.data.accountDate).format(this.localDateFormatter);
         this.form[this.type] = res.data.data.amount;
         this.dailyIncome = res.data.data.incomeSum;
         this.dailyExpense = res.data.data.expensesSum;
