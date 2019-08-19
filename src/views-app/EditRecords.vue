@@ -11,7 +11,7 @@
       <van-tab
         title="Income"
         name="INCOME"
-        :disabled="this.disable.expense"
+        :disabled="this.disable.expenseAmount"
       >
         <div class="record-status">
           <span class="name">TOTAL INCOME</span>
@@ -68,8 +68,8 @@
 
             <van-field
               class="income"
-              v-model="form.income"
-              @focus="showKeyboard('income')"
+              v-model="form.incomeAmount"
+              @focus="showKeyboard('incomeAmount')"
               maxlength="13"
               readonly
             />
@@ -84,7 +84,7 @@
       <van-tab
         title="Expenses"
         name="EXPENSES"
-        :disabled="this.disable.income"
+        :disabled="this.disable.incomeAmount"
       >
 
         <div class="record-status expenses">
@@ -144,8 +144,8 @@
 
             <van-field
               class="expense"
-              v-model="form.expense"
-              @focus="showKeyboard('expense')"
+              v-model="form.expenseAmount"
+              @focus="showKeyboard('expenseAmount')"
               maxlength="13"
               readonly
             />
@@ -215,12 +215,13 @@ export default {
       tabActive: 0,
       form: {
         accountDate: "",
-        income: "",
-        expense: "",
-        memo: ""
+        incomeAmount: "",
+        expenseAmount: "",
+        memo: "",
+        id: 0,
       },
       showNumber: false,
-      type: "income",
+      type: "incomeAmount",
       appear: false,
       minDate: startDate,
       maxDate: today,
@@ -228,10 +229,9 @@ export default {
       dailyIncome: 0,
       dailyExpense: 0,
       disable: {
-        income: false,
-        expense: false
-      },
-      recordid: 0
+        incomeAmount: false,
+        expenseAmount: false
+      }
     };
   },
   created() {
@@ -241,7 +241,7 @@ export default {
     viewRecord(){
       this.$api.viewRecord(this.$route.params.id).then(res => { 
       if (res.data.code === 200) { 
-        this.type = res.data.data.type === 0 ? "income" : "expense";
+        this.type = res.data.data.type === 0 ? "incomeAmount" : "expenseAmount";
         this.disable[this.type] = true;
         this.tabActive = res.data.data.type;
         this.currentDate = this.$moment(res.data.data.accountDate).format("D MMM YYYYY");
@@ -249,9 +249,12 @@ export default {
         this.dailyIncome = util.fmoney(res.data.data.incomeSum);
         this.dailyExpense = util.fmoney(res.data.data.expensesSum);
         this.form.memo = res.data.data.memo;
-        this.recordid = res.data.data.id;
+        this.form.id = res.data.data.id;
         } 
       });
+    },
+    updateRecord() {
+
     },
     showKeyboard(type) {
       this.appear = false;
@@ -282,8 +285,7 @@ export default {
       this.appear = false;
       const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
       if (regex.test(form[this.type])) {
-        form[this.type] = float(form[this.type]);
-        form.id = this.recordid;
+        form[this.type] = parseFloat(form[this.type]);
         //this.$store.commit("UpdateRecord", this.convertForm(form));
         this.$notify("Update succeed!");
         //this.$toast("Update succeed!");
@@ -293,7 +295,7 @@ export default {
     },
     deleteBtn() {
       this.$api
-        .deleteRecord(this.recordid)
+        .deleteRecord(this.form.id)
         .then(res => {
           if (res.data.code === 200) {
             this.$notify("Delete succeed!");
