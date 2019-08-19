@@ -13,11 +13,11 @@
         name="INCOME"
       >
         <div class="record-status">
-          <span class="name">TOTAL INCOME</span>
-          <span class="amount">+1000.00 <i>{{$store.state.currency}}</i></span>
+          <span class="name">{{$t("TOTAL INCOME")}}</span>
+          <span class="amount">+{{ dailyIncome }} <i>{{$store.state.currency}}</i></span>
         </div>
 
-        <van-row class="label-left">Income Name</van-row>
+        <van-row class="label-left">{{$t("Income Name")}}</van-row>
 
         <van-row class="input_note">
           <van-col span="24">
@@ -31,7 +31,7 @@
         </van-row>
 
         <van-row class="label-left">
-          <van-col span="12">Date</van-col>
+          <van-col span="12">{{$t("Date")}}</van-col>
           <van-col
             span="12"
             class="link_view_history"
@@ -56,7 +56,7 @@
           </van-col>
         </van-row>
 
-        <van-row class="label-left">Income</van-row>
+        <van-row class="label-left">{{$t("Income")}}</van-row>
         <van-row
           class="input_income_expense"
           id="income"
@@ -68,8 +68,8 @@
 
             <van-field
               class="income"
-              v-model="form.incomeAmount"
-              @focus="showKeyboard('income')"
+              v-model="form.incodeAmount"
+              @focus="showKeyboard('incodeAmount')"
               maxlength="13"
               readonly
             />
@@ -87,10 +87,10 @@
       >
 
         <div class="record-status expenses">
-          <span class="name">TOTAL EXPENSES</span>
-          <span class="amount">-1000.00 <i>{{$store.state.currency}}</i></span>
+          <span class="name">{{$t("TOTAL EXPENSES")}}</span>
+          <span class="amount">-{{ dailyExpense }} <i>{{$store.state.currency}}</i></span>
         </div>
-        <van-row class="label-left">Expenses Name</van-row>
+        <van-row class="label-left">{{$t("Expenses Name")}}</van-row>
 
         <van-row class="input_note">
           <van-col span="24">
@@ -105,7 +105,7 @@
         </van-row>
 
         <van-row class="label-left">
-          <van-col span="12">Date</van-col>
+          <van-col span="12">{{$t("Date")}}</van-col>
           <van-col
             span="12"
             class="link_view_history"
@@ -130,7 +130,7 @@
           </van-col>
         </van-row>
 
-        <van-row class="label-left">Expense</van-row>
+        <van-row class="label-left">{{$t("Expense")}}</van-row>
 
         <van-row
           class="input_income_expense"
@@ -144,7 +144,7 @@
             <van-field
               class="expense"
               v-model="form.expenseAmount"
-              @focus="showKeyboard('expense')"
+              @focus="showKeyboard('expenseAmount')"
               maxlength="13"
               readonly
             />
@@ -160,7 +160,7 @@
     <button
       class="update_btn"
       @click="updateBtn"
-    >Update Records</button>
+    >{{$t("Update Records")}}</button>
 
     <van-row>
       <van-col span="24">
@@ -207,7 +207,7 @@ export default {
 
   computed: {
     ...mapState({
-      recordList: state => state.recordList,
+      //recordList: state => state.recordList,
       localDateFormatter: state => state.localDateFormatter
     })
   },
@@ -215,20 +215,36 @@ export default {
   data() {
     return {
       tabActive: "INCOME",
-      currentTab: this.$route.query.currentTab || "0",
       form: {
-        date: "",
-        income: "",
-        expense: "",
-        note: ""
+        accountDate: "",
+        expenseAmount: "",
+        incodeAmount: "",
+        memo: ""
       },
       showNumber: false,
-      type: "income",
+      type: "incodeAmount",
       appear: false,
       minDate: startDate,
       maxDate: today,
-      currentDate: this.$route.query.date ? this.$route.query.date : today
+      currentDate: this.$route.query.date ? this.$route.query.date : today,
+      recordList: [],
+      test: '',
+      dailyIncome: 0,
+      dailyExpense: 0
     };
+  },
+  created() {
+    this.test = this.$moment(this.currentDate).format(this.localDateFormatter);
+    debugger
+    this.$api.viewRecordSum({ accountDate: this.$moment(this.currentDate).format(this.localDateFormatter) }).then(res => { 
+      debugger
+      if (res.data.code === 200) { 
+        console.log(res.data.data);
+        
+        //this.dailyIncome = res.data.data.total1;
+        //this.dailyExpense = res.data.data.total2;
+      } 
+    });
   },
   watch: {
     currentDate: {
@@ -242,28 +258,31 @@ export default {
         const _selected = this.$moment(val).format(this.localDateFormatter);
         const kv = { [_today]: "Today, ", [_yesterday]: "Yesterday, " };
 
+        this.form[Object.keys(this.form)]="";
+
         this.$set(
           this.form,
-          "date",
+          "accountDate",
           val ? (kv[_selected] ? kv[_selected] : "") + formDate : ""
         );
 
-        const itemIndex = findIndex(this.recordList, {
-          date: this.$moment(val).format(this.localDateFormatter)
-        });
-        console.log();
-        if (itemIndex > -1) {
-          this.form = Object.assign({}, this.recordList[itemIndex]);
-          this.form.date = this.$moment(this.form.date).format("D MMM YYYY");
-        } else {
-          this.form.note = "";
-          this.form.income = "";
-          this.form.expense = "";
-        }
       }
     }
   },
   methods: {
+    fetchData(form) {
+      console.log(form);
+      this.$api
+        .addRecord({
+         merchantRecordDtor: this.form
+        })
+        .then(res => {
+          if (res.data.code === 200) {
+            console.log(res.data.data)
+            //this.$router.push({name: 'AddRecord'});
+          }
+        })
+    },
     showKeyboard(type) {
       this.appear = false;
       this.showNumber = true;
@@ -289,26 +308,27 @@ export default {
     },
     updateBtn() {
       const form = Object.assign({}, this.form);
-      form.date = this.$moment(this.form.date).format(this.localDateFormatter);
+      form.accountDate = this.$moment(this.form.accountDate).format(this.localDateFormatter);
       this.appear = false;
       const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
       if (regex.test(form[this.type])) {
-        this.$store.commit("UpdateRecord", this.convertForm(form));
+        //this.$store.commit("UpdateRecord", this.convertForm(form));
+        this.fetchData(form);
         this.$toast("Update succeed!");
         return false;
       }
       this.$toast("Pls input valid amount.");
     },
     convertForm(form) {
-      const _date = form.date.includes(",")
-        ? form.date.split(", ")[1]
-        : form.date;
-      form.date = this.$moment(_date).format(this.localDateFormatter);
+      const _date = form.accountDate.includes(",")
+        ? form.accountDate.split(", ")[1]
+        : form.accountDate;
+      form.accountDate = this.$moment(_date).format(this.localDateFormatter);
       return form;
     },
     viewHistory() {
-      const date = this.$moment(this.form.date).format(this.localDateFormatter);
-      this.$router.push({ name: "RecordList", query: { date: date } });
+      const date = this.$moment(this.form.accountDate).format(this.localDateFormatter);
+      this.$router.push({ name: "RecordList", query: { accountDate: date } });
     },
     setDate(value) {
       this.appear = false;
