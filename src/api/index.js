@@ -99,6 +99,9 @@ export default {
   getHomeInformation() {
     return Vue.axios.get("/api/information");
   },
+  getRecordList() {
+    return Vue.axios.get("/api/merchant/record/list");
+  },
   getArticleContent(params) {
     return Vue.axios.get(`/api/information/article-detail?articleDetailId=${params}`);
   },
