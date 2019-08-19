@@ -219,6 +219,7 @@ export default {
         expenseAmount: "",
         memo: "",
         id: 0,
+        merchantId: 0
       },
       showNumber: false,
       type: "incomeAmount",
@@ -250,11 +251,17 @@ export default {
         this.dailyExpense = util.fmoney(res.data.data.expensesSum);
         this.form.memo = res.data.data.memo;
         this.form.id = res.data.data.id;
+        this.form.merchantId = res.data.data.merchantId;
         } 
       });
     },
-    updateRecord() {
-
+    updateRecord(form) {
+      this.$api.updateRecord(form).then(res => { 
+        debugger
+      if (res.data.code === 200) { 
+        debugger
+        } 
+      });
     },
     showKeyboard(type) {
       this.appear = false;
@@ -287,8 +294,8 @@ export default {
       if (regex.test(form[this.type])) {
         form[this.type] = parseFloat(form[this.type]);
         //this.$store.commit("UpdateRecord", this.convertForm(form));
+        this.updateRecord(form);
         this.$notify("Update succeed!");
-        //this.$toast("Update succeed!");
         return false;
       }
       this.$toast("Pls input valid amount.");
