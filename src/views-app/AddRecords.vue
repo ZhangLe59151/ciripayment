@@ -13,7 +13,7 @@
       >
         <div class="record-status">
           <span class="name">{{$t("TOTAL INCOME")}}</span>
-          <span class="amount">+{{ dailyIncome }} <i>{{$store.state.currency}}</i></span>
+          <span class="amount">+ {{ dailyIncome }} <i>{{$store.state.currency}}</i></span>
         </div>
 
         <van-row class="label-left">{{$t("Income Name")}}</van-row>
@@ -87,7 +87,7 @@
 
         <div class="record-status expenses">
           <span class="name">{{$t("TOTAL EXPENSES")}}</span>
-          <span class="amount">-{{ dailyExpense }} <i>{{$store.state.currency}}</i></span>
+          <span class="amount">- {{ dailyExpense }} <i>{{$store.state.currency}}</i></span>
         </div>
         <van-row class="label-left">{{$t("Expenses Name")}}</van-row>
 
