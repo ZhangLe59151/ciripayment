@@ -162,7 +162,7 @@
     <van-col span="12">
     <div
       class="delete_btn"
-      @click="updateBtn"
+      @click="deleteBtn"
     >Delete Record</div>
     </van-col>
     <van-col span="12">
@@ -191,6 +191,7 @@ import { findIndex } from "lodash";
 
 import { mapState } from "vuex";
 import util from "@/util.js";
+import { debuglog } from 'util';
 
 const today = new Date();
 const startDate = new Date("2019/01/01");
@@ -229,13 +230,15 @@ export default {
       disable: {
         income: false,
         expense: false
-      }
+      },
+      recordid: 0
     };
   },
   created() {
     this.form.accountDate = this.$route.params.id;
     this.$api.viewRecord(this.$route.params.id).then(res => { 
       if (res.data.code === 200) { 
+        debugger
         this.type = res.data.data.type === 0 ? "income" : "expense";
         this.disable[this.type] = true;
         this.tabActive = res.data.data.type;
@@ -244,6 +247,7 @@ export default {
         this.dailyIncome = util.fmoney(res.data.data.incomeSum);
         this.dailyExpense = util.fmoney(res.data.data.expensesSum);
         this.form.memo = res.data.data.memo;
+        this.recordid = res.data.data.id;
       } 
     });
   },
@@ -284,6 +288,17 @@ export default {
         return false;
       }
       this.$toast("Pls input valid amount.");
+    },
+    deleteBtn() {
+      this.$api
+        .deleteRecord(this.recordid)
+        .then(res => {
+          debugger
+          if (res.data.code === 200) {
+            console.log(res.data.data)
+            //this.$router.push({name: 'AddRecord'});
+          }
+        })
     },
     convertForm(form) {
       const _date = form.date.includes(",")
