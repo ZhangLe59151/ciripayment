@@ -706,7 +706,7 @@ export default {
     font-size: 17px;
     padding: 20px 10%;
     text-align: center;
-    color: #FF8600;
+    color: #ff8600;
     text-transform: uppercase;
     font-weight: bold;
   }
@@ -750,9 +750,6 @@ export default {
 
   .box-card {
     // margin: 30px 30px;
-    > h3 {
-      alignment: center;
-    }
 
     .settlement-text {
       font-size: 16px;
