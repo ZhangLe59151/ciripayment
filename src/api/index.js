@@ -116,5 +116,8 @@ export default {
   },
   deleteRecord(params) {
     return Vue.axios.get(`/api/merchant/record/delete?id=${params}`);
+  },
+  updateRecord(params) {
+    return Vue.axios.post("/api/merchant/record/update", params);
   }
 };
