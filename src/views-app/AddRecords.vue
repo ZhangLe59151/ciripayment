@@ -319,6 +319,7 @@ export default {
       const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
       if (regex.test(form[this.type])) {
         //this.$store.commit("UpdateRecord", this.convertForm(form));
+        debugger
         form[this.type] = parseFloat(form[this.type]);
         this.fetchData(form);
         this.fetchDataUpdate(form.accountDate);

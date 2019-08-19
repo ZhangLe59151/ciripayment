@@ -241,7 +241,6 @@ export default {
     viewRecord(){
       this.$api.viewRecord(this.$route.params.id).then(res => { 
       if (res.data.code === 200) { 
-        debugger
         this.type = res.data.data.type === 0 ? "income" : "expense";
         this.disable[this.type] = true;
         this.tabActive = res.data.data.type;
@@ -284,6 +283,7 @@ export default {
       const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
       if (regex.test(form[this.type])) {
         form[this.type] = float(form[this.type]);
+        form.id = this.recordid;
         //this.$store.commit("UpdateRecord", this.convertForm(form));
         this.$notify("Update succeed!");
         //this.$toast("Update succeed!");
@@ -297,7 +297,7 @@ export default {
         .then(res => {
           if (res.data.code === 200) {
             this.$notify("Delete succeed!");
-            this.$router.push({name: 'AddRecord'});
+            this.$router.push({name: 'RecordList'});
           }
         })
     },
@@ -307,10 +307,6 @@ export default {
         : form.date;
       form.date = this.$moment(_date).format(this.localDateFormatter);
       return form;
-    },
-    viewHistory() {
-      const date = this.$moment(this.form.date).format(this.localDateFormatter);
-      this.$router.push({ name: "RecordList", query: { date: date } });
     },
     setDate(value) {
       this.appear = false;
