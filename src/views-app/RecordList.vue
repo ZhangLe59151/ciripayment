@@ -19,20 +19,13 @@
             v-for="(item, index) in details"
             :key="index"
             :title="formatIncome(item)"
-            :label="formatTime(item['createTime'])"
-            :value="formatAmount(item)"
-            value-class="positive-amount"
-            v-if="item['type']===0"
-          ></van-cell>
-          <van-cell
-            v-for="(item, index) in details"
-            :key="index"
-            :title="formatIncome(item)"
-            :label="formatTime(item['createTime'])"
-            :value="formatAmount(item)"
-            value-class="negtive-amount"
-            v-if="item['type']>0"
-          ></van-cell>
+            :label="formatTime(item['createTime'])">
+            <div slot="default">
+	            <span class="positive-amount" v-if="item['type']===0">{{formatAmount(item)}}</span>
+              <span class="negtive-amount" v-if="item['type']===1">{{formatAmount(item)}}</span>
+              <div class="baht">{{$store.state["currency"]}}</div>
+            </div>
+          </van-cell>
         </div>
       </div>
     </van-list>
@@ -121,9 +114,9 @@ export default {
     },
     formatAmount(item) {
       if (item["type"] === 0) {
-        return "+" + util.fmoney(item["amount"]) + " " + this.$store.state["currency"];
+        return "+" + util.fmoney(item["amount"]);
       } else {
-        return "-" + util.fmoney(item["amount"]) + " " + this.$store.state["currency"];
+        return "-" + util.fmoney(item["amount"]);
       }
     },
     sumIncome(item) {
@@ -201,11 +194,12 @@ export default {
   font-weight: bold;
   font-size: 16px;
   margin: 18px 16px 8px 16px;
-  .baht {
-    float: inherit;
+}
+.baht {
+    float: right;
     font-size: 10px;
     margin-left: 4px;
-  }
+    color: #000000;
 }
 .custom-income {
   font-size: 16px;
