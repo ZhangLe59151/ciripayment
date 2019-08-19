@@ -68,8 +68,8 @@
 
             <van-field
               class="income"
-              v-model="form.incodeAmount"
-              @focus="showKeyboard('incodeAmount')"
+              v-model="form.incomeAmount"
+              @focus="showKeyboard('incomeAmount')"
               maxlength="13"
               readonly
             />
@@ -218,11 +218,11 @@ export default {
       form: {
         accountDate: "",
         expenseAmount: "",
-        incodeAmount: "",
+        incomeAmount: "",
         memo: ""
       },
       showNumber: false,
-      type: "incodeAmount",
+      type: "incomeAmount",
       appear: false,
       minDate: startDate,
       maxDate: today,
@@ -234,15 +234,14 @@ export default {
     };
   },
   created() {
-    this.test = this.$moment(this.currentDate).format(this.localDateFormatter);
+    this.currentDate = this.$moment(this.$route.query.date ? this.$route.query.date : today).format(this.localDateFormatter);
     debugger
-    this.$api.viewRecordSum({ accountDate: this.$moment(this.currentDate).format(this.localDateFormatter) }).then(res => { 
-      debugger
+    this.$api.viewRecordSum(this.currentDate).then(res => { 
       if (res.data.code === 200) { 
-        console.log(res.data.data);
-        
-        //this.dailyIncome = res.data.data.total1;
-        //this.dailyExpense = res.data.data.total2;
+        console.log(res.data.data.expensesSum);
+        this.dailyIncome = res.data.data.incomeSum;
+        this.dailyExpense = res.data.data.expensesSum;
+        debugger
       } 
     });
   },
@@ -258,7 +257,10 @@ export default {
         const _selected = this.$moment(val).format(this.localDateFormatter);
         const kv = { [_today]: "Today, ", [_yesterday]: "Yesterday, " };
 
-        this.form[Object.keys(this.form)]="";
+        //this.form[Object.keys(this.form)]="";
+        this.form.expenseAmount = "";
+        this.form.incomeAmount = "";
+        this.form.memo = "";
 
         this.$set(
           this.form,
@@ -277,7 +279,9 @@ export default {
          merchantRecordDtor: this.form
         })
         .then(res => {
+          debugger
           if (res.data.code === 200) {
+            debugger
             console.log(res.data.data)
             //this.$router.push({name: 'AddRecord'});
           }
