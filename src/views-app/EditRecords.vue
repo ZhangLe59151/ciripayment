@@ -184,7 +184,6 @@
       @input="onInput"
       @delete="onDelete"
     />
-    <app-tab-bar :active="1" />
   </div>
 </template>
 
@@ -215,7 +214,6 @@ export default {
   data() {
     return {
       tabActive: "INCOME",
-      currentTab: this.$route.query.currentTab || "0",
       form: {
         accountDate: "",
         income: "",
@@ -231,13 +229,14 @@ export default {
     };
   },
   created() {
-    this.currentDate = this.$moment(this.$route.query.date ? this.$route.query.date : today).format(this.localDateFormatter);
+    this.currentDate = this.$route.params.id;
     debugger
-    this.$api.viewRecordSum(this.currentDate).then(res => { 
+    this.$api.viewRecord(this.$route.params.id).then(res => { 
       if (res.data.code === 200) { 
-        console.log(res.data.data.expensesSum);
-        this.dailyIncome = res.data.data.incomeSum;
-        this.dailyExpense = res.data.data.expensesSum;
+        debugger
+        this.type = res.data.data.type === 0 ? "income" : "expense";
+        this.tabActive = res.data.data.type === 0 ? "INCOME" : "EXPENSES";
+        
         debugger
       } 
     });
