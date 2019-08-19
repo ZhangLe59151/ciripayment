@@ -14,7 +14,7 @@
       >
         <div class="record-status">
           <span class="name">{{$t("TOTAL INCOME")}}</span>
-          <span class="amount">+1000.00 <i>{{$store.state.currency}}</i></span>
+          <span class="amount">+{{ dailyIncome }} <i>{{$store.state.currency}}</i></span>
         </div>
 
         <van-row class="label-left">{{$t("Income Name")}}</van-row>
@@ -88,7 +88,7 @@
 
         <div class="record-status expenses">
           <span class="name">{{$t("TOTAL EXPENSES")}}</span>
-          <span class="amount">-1000.00 <i>{{$store.state.currency}}</i></span>
+          <span class="amount">-{{ dailyExpense }} <i>{{$store.state.currency}}</i></span>
         </div>
         <van-row class="label-left">{{$t("Expenses Name")}}</van-row>
 
@@ -227,15 +227,22 @@ export default {
       minDate: startDate,
       maxDate: today,
       currentDate: this.$route.query.date ? this.$route.query.date : today,
-      recordList: []
+      recordList: [],
+      test: '',
+      dailyIncome: 0,
+      dailyExpense: 0
     };
   },
   created() {
+    this.test = this.$moment(this.currentDate).format(this.localDateFormatter);
+    console.log(this.test);
     this.$api.viewRecord().then(res => { 
       debugger
       if (res.data.code === 200) { 
         console.log(res.data.data);
         this.recordList = res.data.data;
+        //this.dailyIncome = res.data.data.total1;
+        //this.dailyExpense = res.data.data.total2;
       } 
     });
   },
@@ -251,23 +258,14 @@ export default {
         const _selected = this.$moment(val).format(this.localDateFormatter);
         const kv = { [_today]: "Today, ", [_yesterday]: "Yesterday, " };
 
+        this.form[Object.keys(this.form)]="";
+
         this.$set(
           this.form,
           "accountDate",
           val ? (kv[_selected] ? kv[_selected] : "") + formDate : ""
         );
 
-        const itemIndex = findIndex(this.recordList, {
-          accountDate: this.$moment(val).format(this.localDateFormatter)
-        });
-        if (itemIndex > -1) {
-          this.form = Object.assign({}, this.recordList[itemIndex]);
-          this.form.accountDate = this.$moment(this.form.accountDate).format("D MMM YYYY");
-        } else {
-          this.form.memo = "";
-          this.form.incodeAmount = "";
-          this.form.expenseAmount = "";
-        }
       }
     }
   },
