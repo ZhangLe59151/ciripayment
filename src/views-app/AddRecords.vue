@@ -184,7 +184,7 @@
       @input="onInput"
       @delete="onDelete"
     />
-    <app-tab-bar :active="1" />
+    
   </div>
 </template>
 
@@ -215,11 +215,11 @@ export default {
 
   data() {
     return {
-      tabActive: "INCOME",
+      tabActive: "EXPENSES",
       form: {
         accountDate: "",
-        expenseAmount: "0",
-        incomeAmount: "0",
+        expenseAmount: "",
+        incomeAmount: "",
         memo: ""
       },
       showNumber: false,
@@ -246,6 +246,13 @@ export default {
     });
   },
   watch: {
+    tabActive: {
+      handler(val, oldVal){
+        this.form.memo = "";
+        this.form.incomeAmount = "";
+        this.form.expenseAmount = "";
+      }
+    },
     currentDate: {
       immediate: true,
       handler(val, oldVal) {
@@ -314,7 +321,7 @@ export default {
       const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
       if (regex.test(form[this.type])) {
         //this.$store.commit("UpdateRecord", this.convertForm(form));
-        console.log(form)
+        form[this.type] = parseFloat(form[this.type]);
         this.fetchData(form);
         this.$toast("Update succeed!");
         return false;
