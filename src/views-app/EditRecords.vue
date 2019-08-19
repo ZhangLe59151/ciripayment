@@ -11,6 +11,7 @@
       <van-tab
         title="Income"
         name="INCOME"
+        :disabled="this.disable.expense"
       >
         <div class="record-status">
           <span class="name">TOTAL INCOME</span>
@@ -84,6 +85,7 @@
       <van-tab
         title="Expenses"
         name="EXPENSES"
+        :disabled="this.disable.income"
       >
 
         <div class="record-status expenses">
@@ -225,59 +227,29 @@ export default {
       appear: false,
       minDate: startDate,
       maxDate: today,
-      currentDate: this.$route.query.date ? this.$route.query.date : today,
+      currentDate: "",
       dailyIncome: 0,
-      dailyExpense: 0
+      dailyExpense: 0,
+      disable: {
+        income: false,
+        expense: false
+      }
     };
   },
   created() {
     this.form.accountDate = this.$route.params.id;
     this.$api.viewRecord(this.$route.params.id).then(res => { 
       if (res.data.code === 200) { 
-        debugger
         this.type = res.data.data.type === 0 ? "income" : "expense";
-        console.log(this.type);
+        this.disable[this.type] = true;
         this.tabActive = res.data.data.type === 0 ? "INCOME" : "EXPENSES";
-        this.currentDate = this.$moment(res.data.data.accountDate).format(this.localDateFormatter);
+        this.currentDate = this.$moment(res.data.data.accountDate).format("D MMM YYYYY");
         this.form[this.type] = res.data.data.amount;
         this.dailyIncome = res.data.data.incomeSum;
         this.dailyExpense = res.data.data.expensesSum;
         this.form.memo = res.data.data.memo;
       } 
     });
-  },
-  watch: {
-    currentDate: {
-      immediate: true,
-      handler(val, oldVal) {
-        let formDate = this.$moment(val).format("D MMM YYYY");
-        const _today = this.$moment().format(this.localDateFormatter);
-        const _yesterday = this.$moment()
-          .subtract(1, "days")
-          .format(this.localDateFormatter);
-        const _selected = this.$moment(val).format(this.localDateFormatter);
-        const kv = { [_today]: "Today, ", [_yesterday]: "Yesterday, " };
-
-        this.$set(
-          this.form,
-          "date",
-          val ? (kv[_selected] ? kv[_selected] : "") + formDate : ""
-        );
-
-        const itemIndex = findIndex(this.recordList, {
-          date: this.$moment(val).format(this.localDateFormatter)
-        });
-        console.log();
-        if (itemIndex > -1) {
-          this.form = Object.assign({}, this.recordList[itemIndex]);
-          this.form.date = this.$moment(this.form.date).format("D MMM YYYY");
-        } else {
-          this.form.memo = "";
-          this.form.income = "";
-          this.form.expense = "";
-        }
-      }
-    }
   },
   methods: {
     showKeyboard(type) {
