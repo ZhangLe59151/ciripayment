@@ -1,6 +1,6 @@
 <template>
   <div class="app-add-record">
-    <app-common-header title="Add Record" />
+    <app-common-header title="Edit Record" />
 
     <van-tabs
       v-model="tabActive"
@@ -157,10 +157,10 @@
       </van-tab>
     </van-tabs>
 
-    <button
+    <div
       class="update_btn"
       @click="updateBtn"
-    >Update Records</button>
+    >Update Records</div>
 
     <van-row>
       <van-col span="24">
@@ -394,6 +394,7 @@ export default {
 }
 
 .update_btn {
+  background: #ff8600;
   border-radius: 4px;
   background-color: #ff8600;
   border: none;
