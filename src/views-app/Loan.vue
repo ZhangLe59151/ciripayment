@@ -11,7 +11,7 @@
         slot="title"
         class="header-title"
       >
-        Instant Loan
+        {{$t("LoanTitle")}}
       </div>
     </van-nav-bar>
     <app-loan-overview />

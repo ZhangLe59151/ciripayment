@@ -1,7 +1,7 @@
 <template>
   <div class="app-loan-header">
     <div class="title">
-      Instant Loan
+      {{$t("LoanTitle")}}
     </div>
   </div>
 </template>

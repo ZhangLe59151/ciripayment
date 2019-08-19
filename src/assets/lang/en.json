@@ -13,6 +13,7 @@
   },
   "Income": "INCOME",
   "Expenses": "EXPENSES",
+  "LoanTitle": "Instant Loan",
   "AppLoanOverview": {
     "bannerTitle": "Maximum Loan Amount",
     "lowerRate": "Lower Rate",
@@ -25,9 +26,23 @@
       "bizInfo": "Business Information",
       "photos": "Photos of Your ID"
     },
+    "tap": "Tap",
+    "toBeginApplying": "to begin applying",
     "loanTerms": "Loan Terms",
+    "loanTerms1": {
+      "front": "The base loan amount is",
+      "end": "without any profile information."
+    },
+    "loanTerms2": "Low interest rates from",
+    "loanTerms3":{
+      "front": "From",
+      "mid": "1 minute",
+      "end": "approval in-principle."
+    },
     "startNow": "Start Now",
     "consent": "By submitting an application, you consent to the use of all submitted information by Silot AI for loan application and marketing purposes.",
+    "submittedNotification": "Application Sent Successfully",
+    "submittedBack": "Back To Home",
     "yourApplication": "Your Application",
     "applicantPhone": "Applicant Mobile Number",
     "applicationTime": "Application Time",
@@ -35,18 +50,26 @@
   },
   "EnterLoanInfo": {
     "skip": "Skip",
+    "discard":{
+      "question": "Discard application?",
+      "msg": "All entered and uploaded information will be lost.",
+      "confirm": "Discard",
+      "cancel": "Cancel"
+    },
     "heading": "Profile Information",
     "headingDesc": "Complete the form below to enjoy a higher limit and faster approval time!",
     "subTitle": "APPLICANT INFORMATION",
     "firstName": "First Name",
     "lastName": "Last Name",
-    "NationalID": "National ID",
+    "nationalID": "National ID",
     "contact": "Contact Number",
     "subTitle2": "BUSINESS INFORMATION",
     "bizNameEng": "Business Name (English)",
     "bizCat": "Business Category",
+    "selectCat": "Select Category",
     "bizAdd": "Business Address",
     "province": "Province",
+    "selectProvince": "Select Province",
     "postalCode": "Postal Code",
     "subTitle3": "SUPPORTING DOCUMENTS",
     "identityCard": "Identity Card",
@@ -60,7 +83,12 @@
     "title2": "up to",
     "question": "How much do you want to borrow?",
     "warning": "*This figure is an estimated amount. Your final approved loan amount may differ.",
-    "apply": "Apply"
+    "apply": "Apply",
+    "dialogTitle": "Proceed without Completing Profile?",
+    "dialogDesc1": "Your current credit limit is",
+    "dialogDesc2": "Complete your profile to get up to",
+    "dialogApp": "Apply Anyway",
+    "dialogComplete": "Complete Profile"
   },
   "Home": {
     "income": "MONTHLY'S INCOME",

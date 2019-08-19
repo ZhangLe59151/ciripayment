@@ -1,16 +1,16 @@
 <template>
   <div class="enter-loan-info">
         <van-nav-bar
-          right-text="Skip"
+          :right-text="$t('EnterLoanInfo.skip')"
           @click-right="gotoNextPage"
           @click-left="handleDiscard"
           left-arrow
         />
 
     <div class="heading">
-      <h1>Profile Information</h1>
+      <h1>{{$t("EnterLoanInfo.heading")}}</h1>
       <div class="description">
-        Complete the form below to enjoy a higher limit and faster approval time!
+        {{$t("EnterLoanInfo.headingDesc")}}
       </div>
     </div>
 
@@ -25,22 +25,22 @@
     >
       <el-card class="box-card">
         <!-- applicant information -->
-        <div class="title">Applicant Information</div>
+        <div class="title">{{$t("EnterLoanInfo.subTitle")}}</div>
         <div class="title-line"></div>
         <el-form-item
-          label="First Name"
+          :label="$t('EnterLoanInfo.firstName')"
           prop="applicantFirstName"
           :rules="[{ required: true, message: 'This field is required.', trigger: 'blur' }, { validator: this.$store.state.validationPatterns.englishAlphabetAndThai, message: 'Please enter a valid First Name', trigger: 'blur'}]"
         >
           <el-input
             v-model="form.applicantFirstName"
-            placeholder="First Name"
+            :placeholder="$t('EnterLoanInfo.firstName')"
             :maxlength="25"
           ></el-input>
         </el-form-item>
 
         <el-form-item
-          label="Last Name"
+          :label="$t('EnterLoanInfo.lastName')"
           prop="applicantLastName"
           :rules="[
       { required: true, message: 'This field is required.', trigger: 'blur' },
@@ -49,13 +49,13 @@
         >
           <el-input
             v-model="form.applicantLastName"
-            placeholder="Last Name"
+            :placeholder="$t('EnterLoanInfo.lastName')"
             :maxlength="25"
           ></el-input>
         </el-form-item>
 
         <el-form-item
-          label="National ID"
+          :label="$t('EnterLoanInfo.nationalID')"
           prop="applicantNationalId"
           :rules="[
         { required: true, message: 'This field is required.', trigger: 'blur' },
@@ -64,11 +64,11 @@
         >
           <el-input
             v-model="form.applicantNationalId"
-            placeholder="National ID"
+            :placeholder="$t('EnterLoanInfo.nationalID')"
             :maxlength="13"
           ></el-input>
         </el-form-item>
-        <div class="label-title required">Contact Number</div>
+        <div class="label-title required">{{$t("EnterLoanInfo.contact")}}</div>
         <el-form-item
           class="spec-mobile"
           prop="contactPersonPhoneNumber"
@@ -99,11 +99,11 @@
 
       <el-card class="box-card">
         <!-- merchant information -->
-        <div ref="bizInfo" class="title">Business Information</div>
+        <div ref="bizInfo" class="title">{{$t("EnterLoanInfo.subTitle2")}}</div>
         <div class="title-line"></div>
 
         <el-form-item
-          label="Business Name (English)"
+          :label="$t('EnterLoanInfo.bizNameEng')"
           prop="bizNameEn"
           :rules="[
       { required: true, message: 'This field is required.', trigger: 'blur' },
@@ -112,7 +112,7 @@
         >
           <el-input
             v-model="form.bizNameEn"
-            placeholder="Business Name(English)"
+            :placeholder="$t('EnterLoanInfo.bizNameEng')"
             :maxlength="25"
           ></el-input>
         </el-form-item>
@@ -123,21 +123,21 @@
           v-show="$store.state.form.haveBizReg === '1'"
         >If your business is registered, please enter the Business Registration Number above.</div>
         <el-form-item
-          label="Business Category"
+          :label="$t('EnterLoanInfo.bizCat')"
           prop="sicName"
           :rules="[
         { required: true, message: 'Select a category.', trigger: 'blur'}
         ]"
         >
           <van-cell
-            :title="`${this.form.mccName || 'Select Category'} `"
+            :title="`${this.form.mccName || $t('EnterLoanInfo.selectCat')} `"
             is-link
             @click="handleGotoSIC"
           />
         </el-form-item>
         <!-- business address -->
         <el-form-item
-          label="Business Address"
+          :label="$t('EnterLoanInfo.bizAdd')"
           prop="bizAddr"
           :rules="[
       { required: true, message: 'This field is required.', trigger: 'blur' }
@@ -145,7 +145,7 @@
         >
           <el-input
             v-model="form.bizAddr"
-            placeholder="Business Address"
+            :placeholder="$t('EnterLoanInfo.bizAdd')"
             type="textarea"
             :maxlength="110"
             :autosize="{minRows: 0, maxRows: 3}"
@@ -153,21 +153,21 @@
         </el-form-item>
 
         <el-form-item
-          label="Province"
+          :label="$t('EnterLoanInfo.province')"
           prop="provinceName"
           :rules="[
         { required: true, message: 'Select a province.', trigger: 'blur' }
       ]"
         >
           <van-cell
-            :title="`${this.form.provinceName || 'Select Province'} `"
+            :title="`${this.form.provinceName || $t('EnterLoanInfo.selectProvince')} `"
             is-link
             @click="handleGotoProvince"
           />
         </el-form-item>
 
         <el-form-item
-          label="Postal Code"
+          :label="$t('EnterLoanInfo.postalCode')"
           prop="postal"
           :rules="[
         { required: true, message: 'This field is required.', trigger: 'blur' },
@@ -177,7 +177,7 @@
         >
           <el-input
             v-model.number="form.postal"
-            placeholder="Postal Code"
+            :placeholder="$t('EnterLoanInfo.postalCode')"
             :maxlength="5"
           ></el-input>
         </el-form-item>
@@ -185,12 +185,12 @@
 
       <el-card class="box-card">
         <!-- personal information -->
-        <div class="title">Supporting Documents</div>
+        <div class="title">{{$t("EnterLoanInfo.subTitle3")}}</div>
         <div class="title-line"></div>
-        <div class="section-header">Identity Card</div>
+        <div class="section-header">{{$t("EnterLoanInfo.identityCard")}}</div>
         <div class="document-cell">
           <div class="document-name-container">
-            <div class="label-title required">Front of National ID</div>
+            <div class="label-title required">{{$t("EnterLoanInfo.frontNat")}}</div>
             <div class="file-name">{{frontName}}</div>
           </div>
           <div
@@ -227,7 +227,7 @@
         </div>
         <div class="document-cell">
           <div class="document-name-container">
-            <div class="label-title required">Back of National ID</div>
+            <div class="label-title required">{{$t("EnterLoanInfo.backNat")}}</div>
             <div class="file-name">{{backName}}</div>
           </div>
           <div
@@ -265,7 +265,7 @@
 
         <div class="document-cell">
           <div class="document-name-container">
-            <div class="label-title required double-line">Photo of yourself with Front of National ID</div>
+            <div class="label-title required double-line">{{$t("EnterLoanInfo.photos")}}</div>
             <div class="file-name">{{faceName}}</div>
           </div>
           <div
@@ -361,7 +361,7 @@
         class="bottom-btn"
         @click="handleNext"
       >
-        Next
+        {{$t("EnterLoanInfo.next")}}
       </van-button>
     </div>
 
@@ -497,10 +497,10 @@ export default {
     handleDiscard() {
       this.$dialog
         .confirm({
-          title: "Discard application? ",
-          message: "All entered and uploaded information will be lost.",
-          confirmButtonText: "Discard",
-          cancelButtonText: "Cancel"
+          title: this.$t("EnterLoanInfo.discard.question"),
+          message: this.$t("EnterLoanInfo.discard.msg"),
+          confirmButtonText: this.$t("EnterLoanInfo.discard.confirm"),
+          cancelButtonText: this.$t("EnterLoanInfo.discard.cancel")
         })
         .then(() => {
           this.$store.commit("ClearForm");

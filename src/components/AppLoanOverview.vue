@@ -33,35 +33,35 @@
         </li>
       </ul>
       <div class="instruction-content-3">
-        Tap
-        <span style="font-weight: bold">Start Now</span> to begin applying!
+        {{$t("AppLoanOverview.tap")}}
+        <span style="font-weight: bold">{{$t("AppLoanOverview.startNow")}}</span> {{$t("AppLoanOverview.toBeginApplying")}}
       </div>
     </div>
     <div class="loan-terms">
-      <div class="loan-terms-title">Loan Terms</div>
+      <div class="loan-terms-title">{{$t("AppLoanOverview.loanTerms")}}</div>
       <div class="loan-terms-content-1">
-        The base loan amount is
-        <b>5,000 {{$store.state.currency}}</b> without any profile information.
+        {{$t("AppLoanOverview.loanTerms1.front")}}
+        <b>5,000 {{$store.state.currency}}</b> {{$t("AppLoanOverview.loanTerms1.end")}}
       </div>
       <div class="loan-terms-content-2">
-        Low interest rates from
+        {{$t("AppLoanOverview.loanTerms2")}}
         <b>3.7% p.a. (EIR 7% p.a.).</b>
       </div>
       <div class="loan-terms-content-3">
-        From
-        <b>1 minute</b> approval in-principle.
+        {{$t("AppLoanOverview.loanTerms3.front")}}
+        <b>{{$t("AppLoanOverview.loanTerms3.mid")}}</b> {{$t("AppLoanOverview.loanTerms3.end")}}
       </div>
-      <van-button size="small" class="bottom-btn" @click="handleStart">Start Now</van-button>
+      <van-button size="small" class="bottom-btn" @click="handleStart">{{$t("AppLoanOverview.startNow")}}</van-button>
       <div
         class="consent-agreement"
-      >By submitting an application, you consent to the use of all submitted information by Silot AI for loan application and marketing purposes.</div>
+      >{{$t("AppLoanOverview.consent")}}</div>
     </div>
   </div>
   <div v-else class="app-loan-overview">
     <div class="loan-applied-wrapper">
       <div>
         <van-row type="flex" justify="space-between">
-          <van-col class="loan-heading" span="12">Your Application</van-col>
+          <van-col class="loan-heading" span="12">{{$t("AppLoanOverview.yourApplication")}}</van-col>
           <van-col
             :class="formatStatus(loanProfile.status).color +' loan-status'"
           >{{formatStatus(loanProfile.status).label}}</van-col>
@@ -69,12 +69,12 @@
       </div>
       <div>
         <van-row class="loan-details" type="flex" justify="space-between">
-          <van-col class="label" span="12">Applicant Mobile Number</van-col>
+          <van-col class="label" span="12">{{$t("AppLoanOverview.applicantPhone")}}</van-col>
           <van-col class="info" span="12">{{loanProfile.phoneNumber}}</van-col>
         </van-row>
 
         <van-row class="loan-details" type="flex" justify="space-between">
-          <van-col class="label" span="12">Application Time</van-col>
+          <van-col class="label" span="12">{{$t("AppLoanOverview.applicationTime")}}</van-col>
           <van-col
             class="info"
             span="12"
@@ -82,7 +82,7 @@
         </van-row>
 
         <van-row class="loan-details" type="flex" justify="space-between">
-          <van-col class="label" span="12">Application Amount</van-col>
+          <van-col class="label" span="12">{{$t("AppLoanOverview.applicationAmount")}}</van-col>
           <van-col
             class="info"
             span="12"
@@ -94,13 +94,13 @@
         size="small"
         class="back-to-home-btn bottom-btn"
         @click="$router.push({name: 'Home'})"
-      >Back To Home</van-button>
+      >{{$t("AppLoanOverview.submittedBack")}}</van-button>
       <van-popup
         v-model="showPopUp"
         class="success-popup"
         position="top"
         :overlay="false"
-      >Application Sent Successfully</van-popup>
+      >{{$t("AppLoanOverview.submittedNotification")}}</van-popup>
     </div>
   </div>
 </template>
