@@ -50,7 +50,7 @@
               readonly
             />
           </van-col>
-          <van-col span="1">
+          <van-col span="1" >
             <van-icon name="arrow-down" />
           </van-col>
         </van-row>

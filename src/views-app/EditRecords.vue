@@ -159,15 +159,18 @@
     </van-tabs>
 
   <van-row>
+    <van-col span="12">
     <div
       class="delete_btn"
       @click="updateBtn"
     >Delete Record</div>
-
+    </van-col>
+    <van-col span="12">
     <div
       class="update_btn"
       @click="updateBtn"
     >Update Records</div>
+    </van-col>
   </van-row>
 
     <van-number-keyboard
@@ -379,11 +382,9 @@ export default {
 
 .delete_btn {
   border-radius: 4px;
-  border: 5px solid #ff8600;
+  border: 1px solid #ff8600;
   font-size: 16px;
-  margin: 16px 16px 0 16px;
-  margin-right: 16px;
-  margin-left: 16px;
+  margin: 16px 8px 0 16px;
   text-align: center;
   line-height: 40px;
   text-align: center;
@@ -391,12 +392,22 @@ export default {
   border-color: #ff8600;
   background-color: white;
   color: #ff8600;
-  width: 45%;
-  .update_btn {
-    color: white;
-    background-color: #ff8600;
-    width: 45%;
-  }
+  width: 90%;
+}
+
+.update_btn {
+  border-radius: 4px;
+  border: 1px solid #ff8600;
+  font-size: 16px;
+  margin: 16px 16px 0 8px;
+  text-align: center;
+  line-height: 40px;
+  text-align: center;
+  height: 40px;
+  border-color: #ff8600;
+  color: white;
+  background-color: #ff8600;
+  width: 90%;
 }
 
 .van-picker {
