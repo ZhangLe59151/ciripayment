@@ -1,7 +1,7 @@
 <template>
   <div class="app-add-record">
     <app-common-header title="Edit Record" />
-
+    {{ this.disable.expense }} - {{ this.disable.income}}
     <van-tabs
       v-model="tabActive"
       animated
@@ -47,7 +47,6 @@
               :value="currentDate"
               confirm-button-text="confirm"
               cancel-button-text="cancel"
-              @focus="appear = true"
               maxlength="13"
               readonly
             />
@@ -69,7 +68,7 @@
 
             <van-field
               class="income"
-              v-model="form.incomeAmount"
+              v-model="form.income"
               @focus="showKeyboard('income')"
               maxlength="13"
               readonly
@@ -145,7 +144,7 @@
 
             <van-field
               class="expense"
-              v-model="form.expenseAmount"
+              v-model="form.expense"
               @focus="showKeyboard('expense')"
               maxlength="13"
               readonly
@@ -163,20 +162,6 @@
       class="update_btn"
       @click="updateBtn"
     >Update Records</div>
-
-    <van-row>
-      <van-col span="24">
-        <van-datetime-picker
-          v-show="appear"
-          v-model="currentDate"
-          type="date"
-          :min-date="minDate"
-          :max-date="maxDate"
-          @cancel="appear = false"
-          @confirm="setDate"
-        />
-      </van-col>
-    </van-row>
 
     <van-number-keyboard
       :show="showNumber"
@@ -215,7 +200,7 @@ export default {
 
   data() {
     return {
-      tabActive: "INCOME",
+      tabActive: "EXPENSES",
       form: {
         accountDate: "",
         income: "",
