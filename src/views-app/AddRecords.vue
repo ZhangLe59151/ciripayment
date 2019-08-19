@@ -236,11 +236,11 @@ export default {
   created() {
     this.test = this.$moment(this.currentDate).format(this.localDateFormatter);
     console.log(this.test);
-    this.$api.viewRecord().then(res => { 
+    this.$api.viewRecordSum({ accountDate:this.test }).then(res => { 
       debugger
       if (res.data.code === 200) { 
         console.log(res.data.data);
-        this.recordList = res.data.data;
+        
         //this.dailyIncome = res.data.data.total1;
         //this.dailyExpense = res.data.data.total2;
       } 
