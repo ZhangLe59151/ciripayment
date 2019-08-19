@@ -19,7 +19,9 @@
             v-for="(item, index) in details"
             :key="index"
             :title="formatIncome(item)"
-            :label="formatTime(item['createTime'])">
+            :label="formatTime(item['createTime'])"
+            @click="$router.push({'name':'EditRecord', 'params':{'id':item['id']}})"
+            >
             <div slot="default">
 	            <span class="positive-amount" v-if="item['type']===0">{{formatAmount(item)}}</span>
               <span class="negtive-amount" v-if="item['type']===1">{{formatAmount(item)}}</span>
@@ -41,40 +43,40 @@ export default {
   data() {
     return {
       list: {
-        "20190817": [
-          {
-            id: 3,
-            merchantId: 22,
-            accountDate: "20190817",
-            amount: 5,
-            type: 1,
-            memo: "",
-            createTime: "2019-08-17T08:04:13.000+0000",
-            modifyTime: "2019-08-17T08:04:13.000+0000"
-          },
-          {
-            id: 4,
-            merchantId: 22,
-            accountDate: "20190817",
-            amount: 10,
-            type: 0,
-            memo: "卖苹果",
-            createTime: "2019-08-17T08:03:13.000+0000",
-            modifyTime: "2019-08-17T08:03:13.000+0000"
-          }
-        ],
-        "20190816": [
-          {
-            id: 2,
-            merchantId: 22,
-            accountDate: "20190816",
-            amount: 99,
-            type: 0,
-            memo: "卖点卡",
-            createTime: "2019-08-17T07:57:56.000+0000",
-            modifyTime: "2019-08-17T07:58:38.000+0000"
-          }
-        ]
+        // "20190817": [
+        //   {
+        //     id: 3,
+        //     merchantId: 22,
+        //     accountDate: "20190817",
+        //     amount: 5,
+        //     type: 1,
+        //     memo: "",
+        //     createTime: "2019-08-17T08:04:13.000+0000",
+        //     modifyTime: "2019-08-17T08:04:13.000+0000"
+        //   },
+        //   {
+        //     id: 4,
+        //     merchantId: 22,
+        //     accountDate: "20190817",
+        //     amount: 10,
+        //     type: 0,
+        //     memo: "卖苹果",
+        //     createTime: "2019-08-17T08:03:13.000+0000",
+        //     modifyTime: "2019-08-17T08:03:13.000+0000"
+        //   }
+        // ],
+        // "20190816": [
+        //   {
+        //     id: 2,
+        //     merchantId: 22,
+        //     accountDate: "20190816",
+        //     amount: 99,
+        //     type: 0,
+        //     memo: "卖点卡",
+        //     createTime: "2019-08-17T07:57:56.000+0000",
+        //     modifyTime: "2019-08-17T07:58:38.000+0000"
+        //   }
+        // ]
       },
       loading: false,
       finished: false,
@@ -129,23 +131,15 @@ export default {
         }
       }
       let money = util.fmoney(sum);
-      return sum < 0 ? "-" + money : "+" + money;
+      return sum < 0 ? money : "+" + money;
     },
     onLoad() {
-      // setTimeout(() => {
-      //   const endNo =
-      //     this.currentNo + 10 < this.recordList.length
-      //       ? this.currentNo + 10
-      //       : this.recordList.length;
-      //   const startNo = this.currentNo;
-      //   this.list = this.list.concat(this.recordList.slice(startNo, endNo));
-      //   // 加载状态结束
-      //   this.loading = false;
-      //   // 数据全部加载完成
-      //   if (this.list.length >= this.recordList.length) {
-      //     this.finished = true;
-      //   }
-      // }, 500);
+      this.$api.getRecordList().then(res => {
+        if (res.data.code === 200) {
+          this.list = res.data.data.recordMap;
+        } else {
+        }
+      });
     }
   },
   created() {
