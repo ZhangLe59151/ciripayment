@@ -1,7 +1,6 @@
 <template>
   <div class="app-add-record">
     <app-common-header title="Add Record" />
-
     <van-tabs
       v-model="tabActive"
       animated
@@ -215,7 +214,7 @@ export default {
 
   data() {
     return {
-      tabActive: "EXPENSES",
+      tabActive: 0,
       form: {
         accountDate: "",
         expenseAmount: "",
@@ -235,13 +234,11 @@ export default {
   },
   created() {
     this.currentDate = this.$moment(this.$route.query.date ? this.$route.query.date : today).format(this.localDateFormatter);
-    debugger
     this.$api.viewRecordSum(this.currentDate).then(res => { 
       if (res.data.code === 200) { 
         console.log(res.data.data.expensesSum);
         this.dailyIncome = util.fmoney(res.data.data.incomeSum);
         this.dailyExpense = util.fmoney(res.data.data.expensesSum);
-        debugger
       } 
     });
   },
@@ -256,6 +253,7 @@ export default {
     currentDate: {
       immediate: true,
       handler(val, oldVal) {
+        this.tabActive = 0;
         let formDate = this.$moment(val).format("D MMM YYYY");
         const _today = this.$moment().format(this.localDateFormatter);
         const _yesterday = this.$moment()
@@ -280,11 +278,9 @@ export default {
   },
   methods: {
     fetchData(form) {
-      debugger
       this.$api
         .addRecord(form)
         .then(res => {
-          debugger
           if (res.data.code === 200) {
             console.log(res.data.data)
             //this.$router.push({name: 'AddRecord'});
