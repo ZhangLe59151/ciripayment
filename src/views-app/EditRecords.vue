@@ -1,7 +1,7 @@
 <template>
   <div class="app-add-record">
     <app-common-header title="Edit Record" />
-    {{ this.disable.expense }} - {{ this.disable.income}}
+
     <van-tabs
       v-model="tabActive"
       animated
@@ -200,7 +200,7 @@ export default {
 
   data() {
     return {
-      tabActive: "EXPENSES",
+      tabActive: 2,
       form: {
         accountDate: "",
         income: "",
@@ -367,7 +367,6 @@ export default {
 }
 
 .update_btn {
-  background: #ff8600;
   border-radius: 4px;
   background-color: #ff8600;
   border: none;
@@ -378,6 +377,8 @@ export default {
   margin-top: 16px;
   margin-right: 16px;
   margin-left: 16px;
+  text-align: center;
+  line-height: 40px;
 }
 
 .van-picker {
