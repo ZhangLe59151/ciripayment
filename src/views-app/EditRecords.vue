@@ -235,8 +235,11 @@ export default {
     };
   },
   created() {
-    this.form.accountDate = this.$route.params.id;
-    this.$api.viewRecord(this.$route.params.id).then(res => { 
+    this.viewRecord();
+  },
+  methods: {
+    viewRecord(){
+      this.$api.viewRecord(this.$route.params.id).then(res => { 
       if (res.data.code === 200) { 
         debugger
         this.type = res.data.data.type === 0 ? "income" : "expense";
@@ -248,10 +251,9 @@ export default {
         this.dailyExpense = util.fmoney(res.data.data.expensesSum);
         this.form.memo = res.data.data.memo;
         this.recordid = res.data.data.id;
-      } 
-    });
-  },
-  methods: {
+        } 
+      });
+    },
     showKeyboard(type) {
       this.appear = false;
       this.showNumber = true;
@@ -293,10 +295,9 @@ export default {
       this.$api
         .deleteRecord(this.recordid)
         .then(res => {
-          debugger
           if (res.data.code === 200) {
-            console.log(res.data.data)
-            //this.$router.push({name: 'AddRecord'});
+            this.$notify("Delete succeed!");
+            this.$router.push({name: 'AddRecord'});
           }
         })
     },
