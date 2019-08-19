@@ -217,8 +217,8 @@ export default {
       tabActive: "INCOME",
       form: {
         accountDate: "",
-        expenseAmount: "",
-        incomeAmount: "",
+        expenseAmount: "0",
+        incomeAmount: "0",
         memo: ""
       },
       showNumber: false,
@@ -273,10 +273,9 @@ export default {
   },
   methods: {
     fetchData(form) {
+      debugger
       this.$api
-        .addRecord({
-         merchantRecordDtor: form
-        })
+        .addRecord(form)
         .then(res => {
           debugger
           if (res.data.code === 200) {
@@ -315,6 +314,7 @@ export default {
       const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
       if (regex.test(form[this.type])) {
         //this.$store.commit("UpdateRecord", this.convertForm(form));
+        console.log(form)
         this.fetchData(form);
         this.$toast("Update succeed!");
         return false;

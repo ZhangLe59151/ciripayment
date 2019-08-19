@@ -217,7 +217,7 @@ export default {
       tabActive: "INCOME",
       currentTab: this.$route.query.currentTab || "0",
       form: {
-        date: "",
+        accountDate: "",
         income: "",
         expense: "",
         note: ""
