@@ -14,7 +14,7 @@
       >
         <div class="record-status">
           <span class="name">TOTAL INCOME</span>
-          <span class="amount">+1000.00 <i>{{$store.state.currency}}</i></span>
+          <span class="amount">+1000.00 - {{ form["memo"] }}<i>{{$store.state.currency}}</i></span>
         </div>
 
         <van-row class="label-left">Income Name</van-row>
@@ -68,8 +68,8 @@
 
             <van-field
               class="income"
-              v-model="form.incomeAmount"
-              @focus="showKeyboard('income')"
+              v-model="form.incodeAmount"
+              @focus="showKeyboard('incodeAmount')"
               maxlength="13"
               readonly
             />
@@ -144,7 +144,7 @@
             <van-field
               class="expense"
               v-model="form.expenseAmount"
-              @focus="showKeyboard('expense')"
+              @focus="showKeyboard('expenseAmount')"
               maxlength="13"
               readonly
             />
@@ -215,15 +215,14 @@ export default {
   data() {
     return {
       tabActive: "INCOME",
-      currentTab: this.$route.query.currentTab || "0",
       form: {
-        date: "",
-        income: "",
-        expense: "",
-        note: ""
+        accountDate: "",
+        expenseAmount: "",
+        incodeAmount: "",
+        memo: ""
       },
       showNumber: false,
-      type: "income",
+      type: "incodeAmount",
       appear: false,
       minDate: startDate,
       maxDate: today,
@@ -249,16 +248,16 @@ export default {
         );
 
         const itemIndex = findIndex(this.recordList, {
-          date: this.$moment(val).format(this.localDateFormatter)
+          accountDate: this.$moment(val).format(this.localDateFormatter)
         });
         console.log();
         if (itemIndex > -1) {
           this.form = Object.assign({}, this.recordList[itemIndex]);
-          this.form.date = this.$moment(this.form.date).format("D MMM YYYY");
+          this.form.accountDate = this.$moment(this.form.accountDate).format("D MMM YYYY");
         } else {
-          this.form.note = "";
-          this.form.income = "";
-          this.form.expense = "";
+          this.form.memo = "";
+          this.form.incodeAmount = "";
+          this.form.expenseAmount = "";
         }
       }
     }
@@ -302,27 +301,27 @@ export default {
     },
     updateBtn() {
       const form = Object.assign({}, this.form);
-      form.date = this.$moment(this.form.date).format(this.localDateFormatter);
+      form.accountDate = this.$moment(this.form.accountDate).format(this.localDateFormatter);
       this.appear = false;
       const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
       if (regex.test(form[this.type])) {
-        //this.$store.commit("UpdateRecord", this.convertForm(form));
-        fetchData(form);
+        this.$store.commit("UpdateRecord", this.convertForm(form));
+        //fetchData(form);
         this.$toast("Update succeed!");
         return false;
       }
       this.$toast("Pls input valid amount.");
     },
     convertForm(form) {
-      const _date = form.date.includes(",")
-        ? form.date.split(", ")[1]
-        : form.date;
-      form.date = this.$moment(_date).format(this.localDateFormatter);
+      const _date = form.accountDate.includes(",")
+        ? form.accountDate.split(", ")[1]
+        : form.accountDate;
+      form.accountDate = this.$moment(_date).format(this.localDateFormatter);
       return form;
     },
     viewHistory() {
-      const date = this.$moment(this.form.date).format(this.localDateFormatter);
-      this.$router.push({ name: "RecordList", query: { date: date } });
+      const date = this.$moment(this.form.accountDate).format(this.localDateFormatter);
+      this.$router.push({ name: "RecordList", query: { accountDate: date } });
     },
     setDate(value) {
       this.appear = false;
