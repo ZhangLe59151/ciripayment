@@ -230,6 +230,18 @@ export default {
       currentDate: this.$route.query.date ? this.$route.query.date : today
     };
   },
+  created() {
+    this.currentDate = this.$moment(this.$route.query.date ? this.$route.query.date : today).format(this.localDateFormatter);
+    debugger
+    this.$api.viewRecordSum(this.currentDate).then(res => { 
+      if (res.data.code === 200) { 
+        console.log(res.data.data.expensesSum);
+        this.dailyIncome = res.data.data.incomeSum;
+        this.dailyExpense = res.data.data.expensesSum;
+        debugger
+      } 
+    });
+  },
   watch: {
     currentDate: {
       immediate: true,

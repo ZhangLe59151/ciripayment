@@ -111,7 +111,7 @@ export default {
   viewRecordSum(params) {
     return Vue.axios.get(`/api/merchant/record/view/sum?accountDate=${params}`);
   },
-  viewRecord() {
-    return Vue.axios.get("/api/merchant/record/view");
+  viewRecord(params) {
+    return Vue.axios.get(`/api/merchant/record/view?id=${params}`);
   }
 };
