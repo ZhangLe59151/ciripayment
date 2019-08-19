@@ -105,6 +105,9 @@ export default {
   addRecord(params) {
     return Vue.axios.post("/api/merchant/record/add", params);
   },
+  viewRecordSum(params) {
+    return Vue.axios.get("/api/merchant/record/view/sum", params);
+  },
   viewRecord() {
     return Vue.axios.get("/api/merchant/record/view");
   }
