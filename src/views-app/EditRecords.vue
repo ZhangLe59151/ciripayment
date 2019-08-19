@@ -218,7 +218,7 @@ export default {
         accountDate: "",
         income: "",
         expense: "",
-        note: ""
+        memo: ""
       },
       showNumber: false,
       type: "income",
@@ -235,13 +235,12 @@ export default {
     debugger
     this.$api.viewRecord(this.$route.params.id).then(res => { 
       if (res.data.code === 200) { 
-        debugger
         this.type = res.data.data.type === 0 ? "income" : "expense";
         this.tabActive = res.data.data.type === 0 ? "INCOME" : "EXPENSES";
         this.form[this.type] = res.data.data.amount;
         this.dailyIncome = res.data.data.incomeSum;
         this.dailyExpense = res.data.data.expensesSum;
-        debugger
+        this.form.memo = res.data.data.memo;
       } 
     });
   },
@@ -271,7 +270,7 @@ export default {
           this.form = Object.assign({}, this.recordList[itemIndex]);
           this.form.date = this.$moment(this.form.date).format("D MMM YYYY");
         } else {
-          this.form.note = "";
+          this.form.memo = "";
           this.form.income = "";
           this.form.expense = "";
         }

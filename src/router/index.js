@@ -9,7 +9,6 @@ const routeArr = [
     path: "/",
     redirect: "/home"
   },
-
   {
     path: "/enter-info",
     name: "EnterInfo",
