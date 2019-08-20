@@ -48,7 +48,7 @@
           :rules="[{ required: true, message: 'This field is required.', trigger: 'blur' },
             ]"
         >
-          <el-input inputmode="numeric" pattern="[0-9]*\,*\.*" v-model="form.loanAmount" @input="formatCurrency">
+          <el-input inputmode="numeric" v-model="form.loanAmount" @input="formatCurrency">
             <div class="currency" slot="suffix">{{$store.state.currency}}</div>
           </el-input>
         </el-form-item>
@@ -138,6 +138,7 @@ export default {
   methods: {
     handleStart() {
       // update Loan Amount
+      event.preventDefault();
       this.$store.commit("UpdateForm", {
         loanAmount: parseInt(this.form.loanAmount.replace(/,/g, ""))
       });
@@ -152,7 +153,6 @@ export default {
       return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
     formatCurrency(val) {
-      console.log("run", val);
       // change to string
       val = String(val);
       // don't validate empty input
