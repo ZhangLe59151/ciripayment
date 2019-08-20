@@ -241,7 +241,7 @@ export default {
     currentDate: {
       immediate: true,
       handler(val, oldVal) {
-        this.tabActive = 0;
+
         Object.entries(this.form).forEach(([key, value]) => this.form[`${key}`] = `${value}`);
         let formDate = this.$moment(val).format("D MMM YYYY");
         const _today = this.$moment().format(this.localDateFormatter);
