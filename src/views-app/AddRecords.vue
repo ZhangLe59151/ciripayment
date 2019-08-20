@@ -241,6 +241,8 @@ export default {
           val ? (kv[_selected] ? kv[_selected] : "") + formDate : ""
         );
 
+        this.fetchDataUpdate(val);
+
       }
     }
   },

@@ -14,6 +14,7 @@
 
 <script>
 import { mapState } from "vuex";
+import util from "@/util.js";
 
 export default {
   name: "AppHome",
@@ -87,8 +88,8 @@ export default {
       this.$api.getHomePageInfo().then(res => {
         if (res.data.code === 200) {
           this.hasLoan = res.data.data.hasLoan;
-          this.records.income = res.data.data.merchantRecordSum.incomeSum;
-          this.records.expense = res.data.data.merchantRecordSum.expensesSum;
+          this.records.income = util.fmoney(res.data.data.merchantRecordSum.incomeSum);
+          this.records.expense = util.fmoney(res.data.data.merchantRecordSum.expensesSum);
         }
       });
     }
