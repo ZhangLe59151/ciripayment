@@ -12,7 +12,7 @@
         v-for="item in list"
         :key="item.accountDate">&nbsp
         <div class="date_title">{{ formatDate(item.accountDate) }}</div>
-        <div class="sum">{{ formatTotalIncome(item.totalIncome) }}</div>
+        <div class="sum">{{ item.totalIncome }}</div>
         <div class="baht">{{ $store.state["currency"] }}</div>
         <div class="cell">
           <van-cell
@@ -148,7 +148,7 @@ export default {
     font-weight: bold;
     font-size: 16px;
     position: absolute;
-    right: 66px;
+    right: 46px;
     top: 4px;
   }
 
@@ -178,14 +178,14 @@ export default {
 
   .negtive-amount {
     position: absolute;
-    right: 50px;
+    right: 30px;
     top: 10px;
     color: #b41800;
   }
 
   .positive-amount {
     position: absolute;
-    right: 50px;
+    right: 30px;
     top: 10px;
     color: #04a777;
   }
