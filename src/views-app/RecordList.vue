@@ -10,9 +10,9 @@
     >
       <div class="group"
         v-for="item in list"
-        :key="item.accountDate">
-        {{ formatDate(item.accountDate) }}
-        <div class="sum">{{ formatTotalIncome(item.totalIncome) }}</div>
+        :key="item.accountDate">&nbsp
+        <div class="date_title">{{ formatDate(item.accountDate) }}</div>
+        <div class="sum">{{ item.totalIncome }}</div>
         <div class="baht">{{ $store.state["currency"] }}</div>
         <div class="cell">
           <van-cell
@@ -82,7 +82,7 @@ export default {
       if (item["type"] === 0) {
         return "+" + util.fmoney(item["amount"]);
       } else {
-        return "-" + util.fmoney(item["amount"]);
+        return util.fmoney(item["amount"]);
       }
     },
     formatTotalIncome(number) {
@@ -137,17 +137,18 @@ export default {
   position: relative;
 
   .date_title {
-    font-size: 10px;
+    font-size: 16px;
+    font-weight: bolder;
     position: absolute;
     left: 16px;
-    top: 10px;
+    top: 4px;
   }
 
   .sum {
     font-weight: bold;
     font-size: 16px;
     position: absolute;
-    right: 66px;
+    right: 46px;
     top: 4px;
   }
 
@@ -177,14 +178,14 @@ export default {
 
   .negtive-amount {
     position: absolute;
-    right: 50px;
+    right: 30px;
     top: 10px;
     color: #b41800;
   }
 
   .positive-amount {
     position: absolute;
-    right: 50px;
+    right: 30px;
     top: 10px;
     color: #04a777;
   }

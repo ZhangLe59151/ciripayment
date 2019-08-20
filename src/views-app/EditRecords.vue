@@ -202,7 +202,6 @@ export default {
 
   computed: {
     ...mapState({
-      recordList: state => state.recordList,
       localDateFormatter: state => state.localDateFormatter
     })
   },
@@ -256,7 +255,7 @@ export default {
       this.$api.updateRecord(form).then(res => {
       if (res.data.code === 200) {
         this.viewRecord();
-        this.$notify("Update succeed!");
+        this.$notify({ message: "Update succeed!", background: "#04A777" });
         }
       });
     },
@@ -302,8 +301,7 @@ export default {
         .then(res => {
           if (res.data.code === 200) {
             this.$notify({ message: "Deleted Sucessfully", background: "#04A777" });
-            //Object.entries(this.form).forEach(([key, value]) => this.form[(`${key}`)] = `${value}`);
-            this.$router.push({name: 'RecordList'});
+            this.$router.go(-1);
           }
         })
     },

@@ -50,6 +50,9 @@ export default {
       //}
     })
   },
+  created() {
+    this.fetchHomePageData();
+  },
   methods: {
     ShowPopup() {
       this.popupStatus = true;
@@ -95,7 +98,7 @@ export default {
   },
   mounted() {
     // this.$store.commit("InitUserInfo");
-    this.fetchHomePageData();
+    //this.fetchHomePageData();
 
     // if (
     //   Object.entries(this.$store.state.userInfo).length === 0 &&
