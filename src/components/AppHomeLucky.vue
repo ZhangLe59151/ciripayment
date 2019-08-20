@@ -17,7 +17,8 @@
   >
     <div class="title">{{encourageLuckyTitle}}</div>
     <div class="subtitle">
-      <div>{{incomeMin}}<span class="subscript">{{currency}}</span> ~ {{incomeMax}}<span class="subscript">{{currency}}</span></div>
+      <div v-if="inputedIncome">{{incomeMin}}<span class="subscript">{{currency}}</span> ~ {{incomeMax}}<span class="subscript">{{currency}}</span></div>
+      <div v-else>{{subtitle}}</div>
     </div>
     <div class="encourage">{{encourageWording}}</div>
   </router-link>
@@ -34,6 +35,7 @@ export default {
       subtitle: this.$t("Home.luckySubtitle"),
       encourageLuckyTitle: this.$t("Home.encourageLuckyTitle"),
       encourageWording: this.$t("Home.encourageWording"),
+      inputedIncome: false,
       incomeMin: 0,
       incomeMax: 0,
       currency: this.$t("Home.currency")
@@ -54,9 +56,11 @@ export default {
       this.fortuneTold = true;
       let salesTarget = todayFortune.salesTarget;
       if (salesTarget.type === 0) {
+        this.inputedIncome = true;
         this.incomeMin = salesTarget.incomeResult.min.replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,'$&,');
         this.incomeMax = salesTarget.incomeResult.max.replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,'$&,');;
       } else {
+        this.inputedIncome = false;
         this.subtitle = salesTarget.generalResult;
       }
     }
