@@ -16,16 +16,14 @@
 
         <div class="label-left">{{$t("Record.IncomeName")}}</div>
 
-        <van-row class="input_note">
-          <van-col span="24">
+        <div class="input_note">
             <van-field
               v-model="form.memo"
               @focus="inputNote"
               maxlength="50"
               placeholder="E.g. Sales Item"
             />
-          </van-col>
-        </van-row>
+        </div>
 
         <van-row class="label-left">
           <van-col span="12">{{$t("Record.Date")}}</van-col>
@@ -227,7 +225,7 @@ export default {
     };
   },
   created() {
-    //this.form.accountDate = this.$moment(this.$route.query.date ? this.$route.query.date : today).format(this.localDateFormatter);
+    this.form.accountDate = this.$moment(this.$route.query.date ? this.$route.query.date : today).format(this.localDateFormatter);
     this.fetchDataUpdate(this.form.accountDate);
   },
   watch: {
