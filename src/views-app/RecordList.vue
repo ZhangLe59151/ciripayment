@@ -1,6 +1,6 @@
 <template>
   <div class="record-list">
-    <app-common-header title="Records List"/>
+    <app-common-header title="Records History"/>
     <van-list
       v-model="loading"
       :finished="finished"
@@ -8,14 +8,15 @@
       :immediate-check="false"
       @load="onLoad"
     >
-      <div class="group" v-for="(details, key) in list" :key="key">
-        <div class="title">{{formatDate(key)}}</div>
+      <div class="group" 
+        v-for="item in dateList"
+        :key="item">
+        <div class="title">{{formatDate(item)}}</div>
         <div class="sum">
-          {{sumIncome(details)}}
           <div class="baht">{{$store.state["currency"]}}</div>
         </div>
         <div>
-          <van-cell
+        <!--  <van-cell
             v-for="(item, index) in details"
             :key="index"
             :title="formatIncome(item)"
@@ -27,7 +28,7 @@
               <span class="negtive-amount" v-if="item['type']===1">{{formatAmount(item)}}</span>
               <div class="baht">{{$store.state["currency"]}}</div>
             </div>
-          </van-cell>
+          </van-cell>  -->
         </div>
       </div>
     </van-list>
@@ -43,44 +44,11 @@ export default {
   data() {
     return {
       list: {
-        // "20190817": [
-        //   {
-        //     id: 3,
-        //     merchantId: 22,
-        //     accountDate: "20190817",
-        //     amount: 5,
-        //     type: 1,
-        //     memo: "",
-        //     createTime: "2019-08-17T08:04:13.000+0000",
-        //     modifyTime: "2019-08-17T08:04:13.000+0000"
-        //   },
-        //   {
-        //     id: 4,
-        //     merchantId: 22,
-        //     accountDate: "20190817",
-        //     amount: 10,
-        //     type: 0,
-        //     memo: "卖苹果",
-        //     createTime: "2019-08-17T08:03:13.000+0000",
-        //     modifyTime: "2019-08-17T08:03:13.000+0000"
-        //   }
-        // ],
-        // "20190816": [
-        //   {
-        //     id: 2,
-        //     merchantId: 22,
-        //     accountDate: "20190816",
-        //     amount: 99,
-        //     type: 0,
-        //     memo: "卖点卡",
-        //     createTime: "2019-08-17T07:57:56.000+0000",
-        //     modifyTime: "2019-08-17T07:58:38.000+0000"
-        //   }
-        // ]
       },
       loading: false,
       finished: false,
-      currentNo: 0
+      currentNo: 0,
+      dateList: []
     };
   },
 
@@ -137,6 +105,7 @@ export default {
       this.$api.getRecordList().then(res => {
         if (res.data.code === 200) {
           this.list = res.data.data.recordMap;
+          this.dateList = Object.keys(res.data.data.recordMap);
         } else {
         }
       });
