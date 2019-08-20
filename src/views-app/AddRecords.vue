@@ -1,5 +1,6 @@
 <template>
   <div class="app-add-record">
+
     <app-common-header title="Add Record" />
     <van-tabs
       v-model="tabActive"
@@ -12,11 +13,11 @@
         name="INCOME"
       >
         <div class="record-status">
-          <span class="name">{{$t("TOTAL INCOME")}}</span>
+          <span class="name">{{$t("TotalIncome")}}</span>
           <span class="amount">+ {{ dailyIncome }} <i>{{$store.state.currency}}</i></span>
         </div>
 
-        <van-row class="label-left">{{$t("Income Name")}}</van-row>
+        <van-row class="label-left">{{$t("IncomeName")}}</van-row>
 
         <van-row class="input_note">
           <van-col span="24">
@@ -55,7 +56,7 @@
           </van-col>
         </van-row>
 
-        <van-row class="label-left">{{$t("Income")}}</van-row>
+        <van-row class="label-left">{{$t("IncomeS")}}</van-row>
         <van-row
           class="input_income_expense"
           id="income"
@@ -89,7 +90,7 @@
           <span class="name">{{$t("TOTAL EXPENSES")}}</span>
           <span class="amount">- {{ dailyExpense }} <i>{{$store.state.currency}}</i></span>
         </div>
-        <van-row class="label-left">{{$t("Expenses Name")}}</van-row>
+        <van-row class="label-left">{{$t("ExpensesName")}}</van-row>
 
         <van-row class="input_note">
           <van-col span="24">
@@ -129,7 +130,7 @@
           </van-col>
         </van-row>
 
-        <van-row class="label-left">{{$t("Expense")}}</van-row>
+        <van-row class="label-left">{{$t("Expenses")}}</van-row>
 
         <van-row
           class="input_income_expense"
@@ -159,7 +160,7 @@
     <button
       class="update_btn"
       @click="updateBtn"
-    >{{$t("Update Records")}}</button>
+    >{{$t("updateRecord")}}</button>
 
     <van-row>
       <van-col span="24">
@@ -275,7 +276,7 @@ export default {
         .addRecord(form)
         .then(res => {
           if (res.data.code === 200) {
-            console.log(res.data.data)
+            this.fetchDataUpdate(form.accountDate);
             //this.$router.push({name: 'AddRecord'});
           }
         })
@@ -320,7 +321,6 @@ export default {
         //this.$store.commit("UpdateRecord", this.convertForm(form));
         form[this.type] = parseFloat(form[this.type]);
         this.fetchData(form);
-        this.fetchDataUpdate(form.accountDate);
         this.$notify("Update succeed!");
         return false;
       }
