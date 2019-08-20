@@ -226,7 +226,7 @@ export default {
       immediate: true,
       handler(val, oldVal) {
 
-        Object.entries(this.form).forEach(([key, value]) => this.form[`${key}`] = `${value}`);
+        Object.entries(this.form).forEach(([key, value]) => this.form[`${key}`] = "");
         let formDate = this.$moment(val).format("D MMM YYYY");
         const _today = this.$moment().format(this.localDateFormatter);
         const _yesterday = this.$moment()
@@ -241,7 +241,7 @@ export default {
           val ? (kv[_selected] ? kv[_selected] : "") + formDate : ""
         );
 
-        this.fetchDataUpdate(val);
+        this.fetchDataUpdate(this.$moment(val).format(this.localDateFormatter));
 
       }
     }
@@ -260,6 +260,7 @@ export default {
     fetchDataUpdate(currentDate) {
       this.$api.viewRecordSum(currentDate).then(res => { 
         if (res.data.code === 200) { 
+          debugger
           this.dailyIncome = util.fmoney(res.data.data.incomeSum);
           this.dailyExpense = util.fmoney(res.data.data.expensesSum);
         } 
