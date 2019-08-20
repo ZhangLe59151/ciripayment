@@ -306,7 +306,9 @@ export default {
         .then(res => {
           if (res.data.code === 200) {
             this.$notify("Delete succeed!");
-            for (let [key, value] of Object.entries(this.form)) { console.log(`${key}: ${value}`); }
+            debugger
+            Object.entries(this.form).forEach(([key, value]) => this.form[(`${key}`)] = `${value}`);
+            //for (let [key, value] of Object.entries(this.form)) { console.log(`${key}: ${value}`); }
             //this.$router.push({name: 'RecordList'});
           }
         })
