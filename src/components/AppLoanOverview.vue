@@ -48,7 +48,7 @@
           :rules="[{ required: true, message: 'This field is required.', trigger: 'blur' },
             ]"
         >
-          <el-input inputmode="numeric" v-model="form.loanAmount" @input="formatCurrency">
+          <el-input inputmode="numeric" v-model="form.loanAmount" maxlength="11" @input="formatCurrency">
             <div class="currency" slot="suffix">{{$store.state.currency}}</div>
           </el-input>
         </el-form-item>
