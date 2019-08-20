@@ -3,6 +3,7 @@
     <app-home-header :info.sync="records"/>
 
     <app-home-loan/>
+    <app-home-credit />
     <app-home-lucky/>
 
     <app-home-download v-if="$store.state.deviceType === 'WEB'"/>

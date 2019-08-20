@@ -4,16 +4,18 @@
     tag="div"
     :to="{name: 'Loan',query: {origin: 'banner'}}"
   >
-    <div class="des">{{$t("Home.loan")}}</div>
-    <div class="amount">100,000 {{$store.state.currency}}</div>
+    <div class="des">Get instant loan!</div>
+<!--    <div class="amount">100,000 {{$store.state.currency}}</div>-->
 
-    <div class="getNow">{{$t("Home.loanBtn")}}</div>
+<!--    <div class="getNow">{{$t("Home.loanBtn")}}</div>-->
+    <div class="applyNow">Apply Now</div>
+
   </router-link>
 </template>
 
 <script>
 export default {
-  name: "AppHomeLucky"
+  name: "AppHomeLoan"
 };
 </script>
 
@@ -28,10 +30,11 @@ export default {
   margin-top: 8px;
 
   .des {
-    font-size: 14px;
+    font-size: 20px;
+    font-weight: bold;
     color: #363f47;
     position: relative;
-    top: 16px;
+    top: 17px;
   }
 
   .amount {
@@ -57,6 +60,21 @@ export default {
     top: 26px;
     left: 50%;
     margin-left: -34px;
+  }
+  .applyNow {
+    background: #ff8600;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    font-size: 14px;
+    color: #ffffff;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 32px;
+    width: 94px;
+    height: 32px;
+    position: relative;
+    top: 26px;
+    left: calc(50vw - 47px);
   }
 }
 </style>

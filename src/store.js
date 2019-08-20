@@ -352,7 +352,8 @@ export default new Vuex.Store({
         let localUserInfo = JSON.parse(localStorage.getItem("userInfo"));
         state.userInfo = {
           ...state.userInfo,
-          ...localUserInfo
+          ...localUserInfo,
+          ...(("creditLimit" in localUserInfo) ? {} : { creditLimit: 5000 })
         };
       }
     },
