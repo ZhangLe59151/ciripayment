@@ -18,7 +18,7 @@ import "element-ui/lib/theme-chalk/index.css";
 import moment from "moment-timezone";
 
 import Vant, { Notify, Swipe, SwipeItem, Checkbox, CheckboxGroup } from "vant";
-
+// import "@/amfe"
 import VueSignaturePad from "vue-signature-pad";
 
 Vue.use(ElementUI);

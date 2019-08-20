@@ -218,6 +218,26 @@ const AppRouteArr = [
     path: "/fortune-telling",
     name: "FortuneTelling",
     component: () => import("@/views-app/FortuneTelling.vue")
+  },
+  {
+    path: "/daily-fortune-prepare",
+    name: "DailyFortunePrepare",
+    component: () => import("@/views-app/fortune/DailyFortunePrepare.vue")
+  },
+  {
+    path: "/daily-fortune-question",
+    name: "DailyFortuneQuestion",
+    component: () => import("@/views-app/fortune/DailyFortuneQuestion.vue")
+  },
+  {
+    path: "/daily-fortune-loading",
+    name: "DailyFortuneLoading",
+    component: () => import("@/views-app/fortune/DailyFortuneLoading.vue")
+  },
+  {
+    path: "/daily-fortune-result",
+    name: "DailyFortuneResult",
+    component: () => import("@/views-app/fortune/DailyFortuneResult.vue")
   }
 ];
 
