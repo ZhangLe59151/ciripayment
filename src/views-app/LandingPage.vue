@@ -159,7 +159,6 @@ export default {
             );
             return;
           }
-          console.log(res.data);
           this.$store.commit("UpdateUserInfo", {
             accountVerified: res.data.data.merchantExist
           });

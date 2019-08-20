@@ -237,8 +237,8 @@ export default {
   },
   methods: {
     viewRecord(){
-      this.$api.viewRecord(this.$route.params.id).then(res => { 
-      if (res.data.code === 200) { 
+      this.$api.viewRecord(this.$route.params.id).then(res => {
+      if (res.data.code === 200) {
         this.type = res.data.data.type === 0 ? "incomeAmount" : "expenseAmount";
         this.disable[this.type] = true;
         this.tabActive = res.data.data.type;
@@ -249,16 +249,15 @@ export default {
         this.form.memo = res.data.data.memo;
         this.form.id = res.data.data.id;
         this.form.merchantId = res.data.data.merchantId;
-        } 
+        }
       });
     },
     updateRecord(form) {
-      this.$api.updateRecord(form).then(res => { 
-        debugger
-      if (res.data.code === 200) { 
+      this.$api.updateRecord(form).then(res => {
+      if (res.data.code === 200) {
         this.viewRecord();
         this.$notify("Update succeed!");
-        } 
+        }
       });
     },
     showKeyboard(type) {
@@ -498,4 +497,3 @@ export default {
 }
 </style>
 
-     

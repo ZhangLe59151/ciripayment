@@ -23,7 +23,7 @@
       />
     </van-cell-group>
 
-    <van-cell-group v-if="this.$store.state.userInfo.accountVerified">
+    <van-cell-group v-if="false && this.$store.state.userInfo.accountVerified">
       <van-cell
         title="Change Password"
         is-link
