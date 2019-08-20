@@ -9,9 +9,9 @@
       @load="onLoad"
     >
       <div class="group" 
-        v-for="item in dateList"
-        :key="item">
-        {{formatDate(item)}}
+        v-for="item in list"
+        :key="item.accountDate">
+        {{formatDate(item.accountDate)}}
         <div class="baht">{{$store.state["currency"]}}</div>
         <div>
         <!--  <van-cell
@@ -41,12 +41,10 @@ export default {
   name: "RecordList",
   data() {
     return {
-      list: {
-      },
+      list: [],
       loading: false,
       finished: false,
-      currentNo: 0,
-      dateList: []
+      currentNo: 0
     };
   },
 
@@ -102,8 +100,8 @@ export default {
     onLoad() {
       this.$api.getRecordList().then(res => {
         if (res.data.code === 200) {
-          this.list = res.data.data.recordMap;
-          this.dateList = Object.keys(res.data.data.recordMap).sort().reverse();
+          this.list = res.data.data;
+          //this.dateList = Object.keys(res.data.data.recordMap).sort().reverse();
           debugger
         } else {
         }
