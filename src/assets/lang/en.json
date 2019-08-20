@@ -12,12 +12,7 @@
     "LuckySalesDescription": "Record your daily income for better predictions."
   },
   "Income": "INCOME",
-  "IncomeS": "Income",
-  "IncomeName": "Income Name",
   "Expenses": "EXPENSES",
-  "ExpensesName": "Expenses Name",
-  "TotalIncome": "TOTAL INCOME",
-  "Date": "Date",
   "LoanTitle": "Instant Loan",
   "AppLoanOverview": {
     "bannerTitle": "Maximum Loan Amount",
@@ -32,7 +27,6 @@
       "photos": "Photos of Your ID"
     },
     "tap": "Tap",
-    "updateRecord": "Update Records",
     "toBeginApplying": "to begin applying",
     "loanTerms": "Loan Terms",
     "loanTerms1": {
@@ -108,5 +102,17 @@
     "info": "Relevant To Your Business",
     "homeRecordAddBtn": "Add Records",
     "homeRecordViewHistoryBtn": "Record History"
+  },
+  "AddRecord": {
+    "Income": "INCOME",
+    "IncomeS": "Income",
+    "IncomeName": "Income Name",
+    "Expenses": "EXPENSES",
+    "ExpensesS": "Expenses",
+    "ExpensesName": "Expenses Name",
+    "TotalIncome": "TOTAL INCOME",
+    "TotalExpenses": "TOTAL EXPENSES",
+    "Date": "Date",
+    "updateRecord": "Update Records"
   }
 }
