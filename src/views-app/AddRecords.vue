@@ -260,7 +260,6 @@ export default {
     fetchDataUpdate(currentDate) {
       this.$api.viewRecordSum(currentDate).then(res => { 
         if (res.data.code === 200) { 
-          debugger
           this.dailyIncome = util.fmoney(res.data.data.incomeSum);
           this.dailyExpense = util.fmoney(res.data.data.expensesSum);
         } 
