@@ -88,7 +88,7 @@ export default {
       position: absolute;
       color: #68737D;
       font-size: 14px;
-      top: 150px;
+      top: 160px;
       width: 100%;
       height: 16px;
       text-align: center;
@@ -97,7 +97,7 @@ export default {
       position: absolute;
       color: black;
       font-size: 24px;
-      top: 176px;
+      top: 186px;
       width: 100%;
       height: 28px;
       text-align: center;

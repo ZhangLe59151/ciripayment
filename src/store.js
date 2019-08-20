@@ -283,6 +283,8 @@ export default new Vuex.Store({
     logOut(state) {
       state.OTPVerified = false;
       state.logInWithPassword = false;
+      state.fortunetellingFrame = null;
+      state.fortuneQuestionUsed = [];
       localStorage.clear();
     },
     // This is for settlement
