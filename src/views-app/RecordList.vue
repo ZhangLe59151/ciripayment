@@ -11,9 +11,9 @@
       <div class="group" 
         v-for="item in list"
         :key="item.accountDate">
-        {{formatDate(item.accountDate)}}
-        <div class="sum"></div>
-        <div class="baht">{{$store.state["currency"]}}</div>
+        <div class="date_title">{{ formatDate(item.accountDate) }}</div>
+        <div class="sum">{{ formatAmount(item.totalIncome) }}</div>
+        <div class="baht">{{ $store.state["currency"] }}</div>
         <div class="cell">
           <van-cell
             v-for="record in item.recordList"
@@ -133,7 +133,15 @@ export default {
   .date_title {
     font-size: 10px;
     position: absolute;
-    right: 16px;
+    left: 16px;
+    top: 10px;
+  }
+
+  .sum {
+    font-weight: bold;
+    font-size: 16px;
+    position: absolute;
+    right: 56px;
     top: 10px;
   }
 
@@ -183,12 +191,7 @@ export default {
   }
 }
 
-.sum {
-  float: right;
-  font-weight: bold;
-  font-size: 16px;
-  margin: 18px 16px 8px 16px;
-}
+
 
 .custom-income {
   font-size: 16px;
