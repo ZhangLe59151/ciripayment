@@ -22,8 +22,8 @@
             :label="formatTime(record.createTime)"
             @click="$router.push({'name':'EditRecord', 'params':{ 'id': record.id }})"
             >
-	          <div class="positive-amount" v-if="record.type===0">{{formatAmount(record)}}</div>
-            <div class="negtive-amount" v-if="record.type===1">{{formatAmount(record)}}</div>
+	          <div class="positive-amount" v-if="record.type===0">+{{formatAmount(record)}}</div>
+            <div class="negtive-amount" v-if="record.type===1">-{{formatAmount(record)}}</div>
             <div class="baht">{{$store.state["currency"]}}</div>
 
           </van-cell>
@@ -79,18 +79,10 @@ export default {
       }
     },
     formatAmount(item) {
-      if (item["type"] === 0) {
-        return "+" + util.fmoney(item["amount"]);
-      } else {
-        return util.fmoney(item["amount"]);
-      }
+      return util.fmoney(item["amount"]);
     },
     formatTotalIncome(number) {
-      if (number>0) {
-        return "+ "+util.fmoney(number);
-      }else {
-        return "- "+util.fmoney(number);
-      }
+      return util.fmoney(number);
     },
     onLoad() {
       this.$api.getRecordList().then(res => {
@@ -148,7 +140,7 @@ export default {
     font-weight: bold;
     font-size: 16px;
     position: absolute;
-    right: 66px;
+    right: 46px;
     top: 4px;
   }
 
@@ -178,14 +170,14 @@ export default {
 
   .negtive-amount {
     position: absolute;
-    right: 50px;
+    right: 30px;
     top: 10px;
     color: #b41800;
   }
 
   .positive-amount {
     position: absolute;
-    right: 50px;
+    right: 30px;
     top: 10px;
     color: #04a777;
   }
