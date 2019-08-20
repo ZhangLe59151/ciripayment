@@ -57,8 +57,8 @@ export default {
       let salesTarget = todayFortune.salesTarget;
       if (salesTarget.type === 0) {
         this.inputedIncome = true;
-        this.incomeMin = salesTarget.incomeResult.min.replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,'$&,');
-        this.incomeMax = salesTarget.incomeResult.max.replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,'$&,');;
+        this.incomeMin = (salesTarget.incomeResult.min + "").replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,'$&,');
+        this.incomeMax = (salesTarget.incomeResult.max + "").replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,'$&,');;
       } else {
         this.inputedIncome = false;
         this.subtitle = salesTarget.generalResult;
