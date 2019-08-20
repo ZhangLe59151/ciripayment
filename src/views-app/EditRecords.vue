@@ -43,7 +43,6 @@
         <van-row class="pick_date">
           <van-col span="21">
             <van-field
-              class="input"
               :value="currentDate"
               confirm-button-text="confirm"
               cancel-button-text="cancel"
@@ -117,7 +116,6 @@
         <van-row class="pick_date">
           <van-col span="21">
             <van-field
-              class="input"
               :value="currentDate"
               confirm-button-text="confirm"
               cancel-button-text="cancel"
@@ -345,6 +343,8 @@ export default {
 .pick_date {
   height: 40px;
   font-size: 16px;
+  //background-color: #E9EBED;
+  border-radius: 4;
   margin: 4px 16px 0 16px;
   .van-icon-arrow-down {
     position: relative;
