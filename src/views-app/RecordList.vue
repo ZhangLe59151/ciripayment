@@ -10,8 +10,8 @@
     >
       <div class="group" 
         v-for="item in list"
-        :key="item.accountDate">
-        {{ formatDate(item.accountDate) }}
+        :key="item.accountDate">&nbsp
+        <div class="date_title">{{ formatDate(item.accountDate) }}</div>
         <div class="sum">{{ formatTotalIncome(item.totalIncome) }}</div>
         <div class="baht">{{ $store.state["currency"] }}</div>
         <div class="cell">
@@ -137,10 +137,11 @@ export default {
   position: relative;
 
   .date_title {
-    font-size: 10px;
+    font-size: 16px;
+    font-weight: bolder;
     position: absolute;
     left: 16px;
-    top: 10px;
+    top: 4px;
   }
 
   .sum {
