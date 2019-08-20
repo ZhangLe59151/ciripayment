@@ -2,26 +2,71 @@
   <router-link
     class="app-home-lucky"
     tag="div"
-    :to="{name: 'FortuneTelling'}"
+    :to="{name: 'DailyFortunePrepare'}" v-if="!fortuneTold"
   >
-    <div class="title">{{$t("Home.luckyTitle")}}</div>
+    <div class="title">{{luckTitle}}</div>
     <div class="subtitle">
-      <div>{{$t("Home.luckySubtitleTop")}}</div>
-      <div>{{$t("Home.luckySubtitleBtm")}}</div>
+      <div>{{subtitle}}</div>
     </div>
     <div class="btn">{{$t("Home.luckyBtn")}}</div>
+  </router-link>
+  <router-link
+    class="app-home-lucky"
+    tag="div"
+    :to="{name: 'DailyFortuneResult'}" v-else
+  >
+    <div class="title">{{encourageLuckyTitle}}</div>
+    <div class="subtitle">
+      <div>{{incomeMin}}<span class="subscript">{{currency}}</span> ~ {{incomeMax}}<span class="subscript">{{currency}}</span></div>
+    </div>
+    <div class="encourage">{{encourageWording}}</div>
   </router-link>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
-  name: "AppHomeLucky"
+  name: "AppHomeLucky",
+  data() {
+    return {
+      fortuneTold: false,
+      luckTitle: this.$t("Home.luckyTitle"),
+      subtitle: this.$t("Home.luckySubtitle"),
+      encourageLuckyTitle: this.$t("Home.encourageLuckyTitle"),
+      encourageWording: this.$t("Home.encourageWording"),
+      incomeMin: 0,
+      incomeMax: 0,
+      currency: this.$t("Home.currency")
+    };
+  },
+  computed: {
+    ...mapState({
+      fortunetellingFrame: "fortunetellingFrame",
+      localDateFormatter: "localDateFormatter"
+    }),
+    today() {
+      return this.$moment().format(this.localDateFormatter);
+    }
+  },
+  mounted() {
+    let todayFortune = this.fortunetellingFrame[this.today] ? this.fortunetellingFrame[this.today] : "";
+    if (todayFortune) {
+      this.fortuneTold = true;
+      let salesTarget = todayFortune.salesTarget;
+      if (salesTarget.type === 0) {
+        this.incomeMin = salesTarget.incomeResult.min.replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,'$&,');
+        this.incomeMax = salesTarget.incomeResult.max.replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,'$&,');;
+      } else {
+        this.subtitle = salesTarget.generalResult;
+      }
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 .app-home-lucky {
-  height: 160px;
+  height: 142px;
   width: 100%;
   background-image: url(../assets/imgs/home_chest.png);
   background-repeat: no-repeat;
@@ -32,7 +77,7 @@ export default {
   > div {
     &.title {
       font-size: 14px;
-      color: #ffd99f;
+      color: #ffffff;
       position: absolute;
       top: 20px;
       right: 16px;
@@ -43,10 +88,16 @@ export default {
       font-size: 22px;
       color: #ffffff;
       position: absolute;
-      top: 40px;
+      top: 45px;
       right: 16px;
     }
-
+    &.encourage{
+      font-size: 14px;
+      color: #ffffff;
+      position: absolute;
+      bottom: 30px;
+      right: 16px;
+    }
     &.btn {
       background: #ffffff;
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
@@ -63,5 +114,12 @@ export default {
       bottom: 20px;
     }
   }
+  .subscript{
+      font-size: 12px;
+      font-weight: bold;
+      color: #ffffff;
+      vertical-align:top;
+      padding-left:4px;
+    }
 }
 </style>
