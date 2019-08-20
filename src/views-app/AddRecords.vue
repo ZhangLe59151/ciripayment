@@ -38,10 +38,10 @@
             <van-icon name="arrow-down" />
         </div>
 
-        <van-row class="label-left">{{$t("Record.IncomeS")}}</van-row>
+        <div class="label-left">{{$t("Record.IncomeS")}}</div>
+        
         <van-row
           class="input_income_expense"
-          id="income"
         >
           <van-col span="2">
             <label class="plus">+</label>
@@ -337,13 +337,12 @@ export default {
   height: 40px;
   font-size: 16px;
   margin: 4px 16px 0 16px;
-  background-color: #c2c8cc;
   position: relative;
 }
 
 .van-icon-arrow-down {
     position: absolute;
-    top: 0;
+    top: 10px;
     right: 0;
   }
 
