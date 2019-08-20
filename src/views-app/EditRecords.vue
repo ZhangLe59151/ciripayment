@@ -259,7 +259,8 @@ export default {
       this.$api.updateRecord(form).then(res => { 
         debugger
       if (res.data.code === 200) { 
-        debugger
+        this.viewRecord();
+        this.$notify("Update succeed!");
         } 
       });
     },
@@ -295,7 +296,6 @@ export default {
         form[this.type] = parseFloat(form[this.type]);
         //this.$store.commit("UpdateRecord", this.convertForm(form));
         this.updateRecord(form);
-        this.$notify("Update succeed!");
         return false;
       }
       this.$toast("Pls input valid amount.");
