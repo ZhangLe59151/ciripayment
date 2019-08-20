@@ -118,10 +118,9 @@
           <van-col span="21">
             <van-field
               class="input"
-              :value="form.accountDate"
+              :value="currentDate"
               confirm-button-text="confirm"
               cancel-button-text="cancel"
-              @focus="appear = true"
               maxlength="13"
               readonly
             />
