@@ -1,6 +1,5 @@
 <template>
   <div class="app-add-record">
-{{ this.currentDate }} - {{ this.form.accountDate }}
     <app-common-header title="Add Record" />
     <van-tabs
       v-model="tabActive"
@@ -225,8 +224,7 @@ export default {
     };
   },
   created() {
-    this.form.accountDate = this.$moment(this.$route.query.date ? this.$route.query.date : today).format(this.localDateFormatter);
-    this.fetchDataUpdate(this.form.accountDate);
+    this.fetchDataUpdate(this.$moment(this.$route.query.date ? this.$route.query.date : today).format(this.localDateFormatter));
   },
   watch: {
     tabActive: {
