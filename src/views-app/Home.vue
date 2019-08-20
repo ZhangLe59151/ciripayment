@@ -5,8 +5,7 @@
     <app-home-loan/>
     <app-home-credit />
     <app-home-lucky/>
-
-    <app-home-download v-if="$store.state.deviceType === 'WEB'"/>
+    
     <app-home-info/>
     <app-tab-bar :active="0"/>
   </div>

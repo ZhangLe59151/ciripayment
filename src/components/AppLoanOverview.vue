@@ -48,11 +48,11 @@
           :rules="[{ required: true, message: 'This field is required.', trigger: 'blur' },
             ]"
         >
-          <el-input inputmode="numeric" pattern="[0-9]*\,*\.*" v-model="form.loanAmount" @input="formatCurrency">
+          <el-input inputmode="numeric" v-model="form.loanAmount" @input="formatCurrency">
             <div class="currency" slot="suffix">{{$store.state.currency}}</div>
           </el-input>
         </el-form-item>
-        <van-button size="small" class="bottom-btn" @click="handleStart">Apply Now</van-button>
+        <van-button size="small" class="bottom-btn" @click="handleStart" :disabled="form.loanAmount === ''">Apply Now</van-button>
         <div
           class="consent-agreement"
         >{{$t("AppLoanOverview.consent")}}</div>
@@ -138,6 +138,7 @@ export default {
   methods: {
     handleStart() {
       // update Loan Amount
+      event.preventDefault();
       this.$store.commit("UpdateForm", {
         loanAmount: parseInt(this.form.loanAmount.replace(/,/g, ""))
       });
@@ -152,7 +153,6 @@ export default {
       return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
     formatCurrency(val) {
-      console.log("run", val);
       // change to string
       val = String(val);
       // don't validate empty input
@@ -327,8 +327,7 @@ export default {
   .enter-loan-amount {
     background-color: #e9ebed;
     flex-grow: 1;
-    padding: 10px 0 8px 0;
-    margin-bottom: 50px;
+    padding: 10px 0 50px 0;
     .bottom-btn {
       background-color: #ff8600;
       border-radius: 4px;

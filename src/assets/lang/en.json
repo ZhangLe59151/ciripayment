@@ -96,12 +96,14 @@
     "loan": "Get instant money! Up to",
     "loanBtn": "Get Now",
     "luckyTitle": "Feeling Lucky?",
-    "luckySubtitleTop": "Get Today's",
-    "luckySubtitleBtm": "Fortune",
+    "luckySubtitle": "Get Today's Fortune",
     "luckyBtn": "Let's Go",
+    "encourageLuckyTitle": "Your Sales Target Today",
+    "encourageWording": "Almost there! You can do it.",
     "info": "Relevant To Your Business",
     "homeRecordAddBtn": "Add Records",
-    "homeRecordViewHistoryBtn": "Record History"
+    "homeRecordViewHistoryBtn": "Record History",
+    "currency": "฿"
   },
   "Record": {
     "Income": "INCOME",
