@@ -302,7 +302,7 @@ export default {
         .deleteRecord(this.form.id)
         .then(res => {
           if (res.data.code === 200) {
-            this.$notify("Delete succeed!");
+            this.$notify({ message: "Deleted Sucessfully", background: "#04A777" });
             //Object.entries(this.form).forEach(([key, value]) => this.form[(`${key}`)] = `${value}`);
             this.$router.push({name: 'RecordList'});
           }

@@ -115,7 +115,6 @@
     "Date": "Date",
     "updateRecord": "Update Records",
     "addRecord": "Add Records",
-    "deleteRecord": "Delete Records",
-    "incomeAddSucceed": "Income Added Successfully"
+    "deleteRecord": "Delete Records"
   }
 }

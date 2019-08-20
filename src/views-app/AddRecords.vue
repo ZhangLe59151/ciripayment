@@ -296,7 +296,7 @@ export default {
         //this.$store.commit("UpdateRecord", this.convertForm(form));
         form[this.type] = parseFloat(form[this.type]);
         this.fetchData(form);
-        this.$notify({ message: $t("Record.incomeAddSucceed"), background: "#04A777" });
+        this.$notify({ message: "Added Sucessfully", background: "#04A777" });
         return false;
       }
       //this.$notify({ message: "Please input valid number", background: "#04A777" });
@@ -307,10 +307,6 @@ export default {
         : form.accountDate;
       form.accountDate = this.$moment(_date).format(this.localDateFormatter);
       return form;
-    },
-    viewHistory() {
-      const date = this.$moment(this.form.accountDate).format(this.localDateFormatter);
-      this.$router.push({ name: "RecordList", query: { accountDate: date } });
     },
     setDate(value) {
       this.appear = false;
