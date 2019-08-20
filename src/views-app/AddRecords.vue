@@ -283,7 +283,6 @@ export default {
     fetchDataUpdate(currentDate) {
       this.$api.viewRecordSum(currentDate).then(res => { 
         if (res.data.code === 200) { 
-          debugger
           this.dailyIncome = util.fmoney(res.data.data.incomeSum);
           this.dailyExpense = util.fmoney(res.data.data.expensesSum);
         } 
@@ -319,7 +318,6 @@ export default {
       const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
       if (regex.test(form[this.type])) {
         //this.$store.commit("UpdateRecord", this.convertForm(form));
-        debugger
         form[this.type] = parseFloat(form[this.type]);
         this.fetchData(form);
         this.fetchDataUpdate(form.accountDate);
