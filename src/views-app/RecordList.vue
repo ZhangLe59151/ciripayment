@@ -89,7 +89,6 @@ export default {
       this.$api.getRecordList().then(res => {
         if (res.data.code === 200) {
           this.list = res.data.data;
-          debugger
         } else {
         }
       });
