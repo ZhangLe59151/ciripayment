@@ -33,23 +33,14 @@ export default {
     getFortunetellingByAPI() {
       this.$api.getFortunetelling().then(res => {
         if (res.data.code === 200) {
-          // let fortunetellingFrame = res.data.data;
-          let fortunetellingFrame = {
-            fortuneResult: "花木遭风 借风得舟之兆",
-            salesTarget: {
-              type: 0,
-              incomeResult: {
-                min: "200",
-                max: "30000"
-              },
-              generalResult: ""
-            }
-          };
+          let fortunetellingFrame = res.data.data;
           this.$store.commit("SaveFortunetellingResult", {
             [this.today]: fortunetellingFrame
           });
           this.showResult();
         } else {
+          this.$toast.fail(res.data.msg);
+          this.$router.push({ name: "Home" });
         }
       });
     },

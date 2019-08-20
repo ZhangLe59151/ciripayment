@@ -8,11 +8,11 @@
       :immediate-check="false"
       @load="onLoad"
     >
-      <div class="group" 
+      <div class="group"
         v-for="item in list"
-        :key="item.accountDate">
+        :key="item.accountDate">&nbsp
         <div class="date_title">{{ formatDate(item.accountDate) }}</div>
-        <div class="sum">{{ formatAmount(item.totalIncome) }}</div>
+        <div class="sum">{{ formatTotalIncome(item.totalIncome) }}</div>
         <div class="baht">{{ $store.state["currency"] }}</div>
         <div class="cell">
           <van-cell
@@ -26,7 +26,7 @@
             <div class="negtive-amount" v-if="record.type===1">{{formatAmount(record)}}</div>
             <div class="baht">{{$store.state["currency"]}}</div>
 
-          </van-cell>  
+          </van-cell>
         </div>
       </div>
     </van-list>
@@ -82,7 +82,14 @@ export default {
       if (item["type"] === 0) {
         return "+" + util.fmoney(item["amount"]);
       } else {
-        return "-" + util.fmoney(item["amount"]);
+        return util.fmoney(item["amount"]);
+      }
+    },
+    formatTotalIncome(number) {
+      if (number>0) {
+        return "+ "+util.fmoney(number);
+      }else {
+        return "- "+util.fmoney(number);
       }
     },
     onLoad() {
@@ -130,25 +137,26 @@ export default {
   position: relative;
 
   .date_title {
-    font-size: 10px;
+    font-size: 16px;
+    font-weight: bolder;
     position: absolute;
     left: 16px;
-    top: 10px;
+    top: 4px;
   }
 
   .sum {
     font-weight: bold;
     font-size: 16px;
     position: absolute;
-    right: 56px;
-    top: 10px;
+    right: 66px;
+    top: 4px;
   }
 
   .baht {
     font-size: 10px;
     position: absolute;
-    right: 16px;
-    top: 10px;
+    right: 32px;
+    top: 4px;
   }
 }
 

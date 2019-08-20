@@ -13,6 +13,7 @@
 <script>
 import AppFortuneQuestionContent from "../../components/fortune-telling/AppFortuneQuestionContent";
 import AppFortuneHeader from "../../components/fortune-telling/AppFortuneHeader";
+import { mapState } from "vuex";
 export default {
   name: "DailyFortuneQuestion",
   components: { AppFortuneHeader, AppFortuneQuestionContent },
@@ -22,6 +23,11 @@ export default {
       questionList: require("@/assets/data/fortuneQuestionList.json"),
       question: "test"
     }
+  },
+  computed: {
+    ...mapState({
+      fortuneQuestionUsed: "fortuneQuestionUsed"
+    })
   },
   mounted() {
     this.updateQuestion()
@@ -36,9 +42,16 @@ export default {
       }
     },
     updateQuestion() {
-      let randomIndex = Math.floor(Math.random() * this.questionList.length);
+      let availableQuestionList = [];
+      this.questionList.forEach((item) => {
+        if (!this.fortuneQuestionUsed.includes(item.id)) {
+          availableQuestionList.push(item)
+        }
+      });
+      let randomIndex = Math.floor(Math.random() * availableQuestionList.length);
       let randomQuestion = this.questionList[randomIndex];
       this.question = randomQuestion.content;
+      this.fortuneQuestionUsed.push(randomQuestion.id);
     }
   }
 }
@@ -46,7 +59,7 @@ export default {
 
 <style lang="scss" scoped>
   .daily-fortune-question {
-    position: relative;
+    position: absolute;
     background-color: #FF8600;
     height: 100vh;
     width: 100%;
