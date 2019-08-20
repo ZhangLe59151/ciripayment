@@ -82,7 +82,7 @@ export default {
       if (item["type"] === 0) {
         return "+" + util.fmoney(item["amount"]);
       } else {
-        return "-" + util.fmoney(item["amount"]);
+        return util.fmoney(item["amount"]);
       }
     },
     formatTotalIncome(number) {
