@@ -40,19 +40,28 @@
 
         <div class="label-left">{{$t("Record.IncomeS")}}</div>
         
-        <div class="input_income_expense">
-          <div class="plus">+</div>
+        <van-row
+          class="input_income_expense"
+          id="income"
+        >
+          <van-col span="2">
+            <label class="plus">+</label>
+          </van-col>
+          <van-col span="20">
 
-          <van-field
-            class="income"
-            v-model="form.incomeAmount"
-            @focus="showKeyboard('incomeAmount')"
-            maxlength="13"
-            readonly
-          />
+            <van-field
+              class="income"
+              v-model="form.incomeAmount"
+              @focus="showKeyboard('incomeAmount')"
+              maxlength="13"
+              readonly
+            />
 
-          <div class="currency">{{$store.state.currency}}</div>
-        </div>
+          </van-col>
+          <van-col span="2">
+            <label class="currency">{{$store.state.currency}}</label>
+          </van-col>
+        </van-row>
 
       </van-tab>
       <van-tab title="Expenses">
@@ -88,19 +97,27 @@
 
         <div class="label-left">{{$t("Record.ExpensesS")}}</div>
 
-        <div class="input_income_expense">
-          <div class="minus">-</div>
+        <van-row
+          class="input_income_expense"
+          id="expense"
+        >
+          <van-col span="2">
+            <label class="minus">-</label>
+          </van-col>
+          <van-col span="20">
 
-          <van-field
+            <van-field
               class="expense"
               v-model="form.expenseAmount"
               @focus="showKeyboard('expenseAmount')"
               maxlength="13"
               readonly
             />
-
-          <div class="currency">{{$store.state.currency}}</div>
-        </div>
+          </van-col>
+          <van-col span="2">
+            <label class="currency">{{$store.state.currency}}</label>
+          </van-col>
+        </van-row>
 
       </van-tab>
     </van-tabs>
@@ -322,45 +339,35 @@ export default {
   font-size: 16px;
   margin: 4px 16px 0 16px;
   border-bottom: 1px solid #c2c8cc;
-  position: relative;
 
   .plus {
-    position: absolute;
     bottom: 0px;
     font-size: 16px;
     color: #04a777;
-    left:0;
   }
 
   .income {
-    position: absolute;
-    left: 5ps;
     top: 4px;
     color: #04a777;
     font-size: 24px;
+
     width: 90%;
   }
 
   .minus {
-    position: absolute;
-    bottom: 0px;
     font-size: 16px;
     color: #b41800;
-    left:0;
   }
 
   .expense {
-    position: absolute;
-    left: 5ps;
     top: 4px;
     color: #b41800;
     font-size: 24px;
+
     width: 90%;
   }
 
   .currency {
-    position: absolute;
-    right: 0;
     bottom: 0px;
     font-size: 16px;
     color: #2f3941;
