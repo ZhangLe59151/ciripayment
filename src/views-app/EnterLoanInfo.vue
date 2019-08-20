@@ -361,7 +361,7 @@
         class="bottom-btn"
         @click="handleNext"
       >
-        {{$t("EnterLoanInfo.next")}}
+        Submit Application
       </van-button>
     </div>
 

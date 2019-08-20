@@ -52,7 +52,7 @@
             <div class="currency" slot="suffix">{{$store.state.currency}}</div>
           </el-input>
         </el-form-item>
-        <van-button size="small" class="bottom-btn" @click="handleStart">Apply Now</van-button>
+        <van-button size="small" class="bottom-btn" @click="handleStart" :disabled="form.loanAmount === ''">Apply Now</van-button>
         <div
           class="consent-agreement"
         >{{$t("AppLoanOverview.consent")}}</div>
