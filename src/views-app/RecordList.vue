@@ -11,10 +11,8 @@
       <div class="group" 
         v-for="item in dateList"
         :key="item">
-        <div class="title">{{formatDate(item)}}</div>
-        <div class="sum">
-          <div class="baht">{{$store.state["currency"]}}</div>
-        </div>
+        {{formatDate(item)}}
+        <div class="baht">{{$store.state["currency"]}}</div>
         <div>
         <!--  <van-cell
             v-for="(item, index) in details"
@@ -54,7 +52,7 @@ export default {
 
   computed: {
     ...mapState({
-      recordList: "recordList"
+      recordList: "recordList",
     })
   },
 
@@ -105,7 +103,8 @@ export default {
       this.$api.getRecordList().then(res => {
         if (res.data.code === 200) {
           this.list = res.data.data.recordMap;
-          this.dateList = Object.keys(res.data.data.recordMap);
+          this.dateList = Object.keys(res.data.data.recordMap).sort().reverse();
+          debugger
         } else {
         }
       });
@@ -147,6 +146,18 @@ export default {
   color: #2f3941;
   letter-spacing: 0;
   line-height: 47px;
+  margin: 0 0 0 0;
+  background-color: #e9ebed;
+  position: relative;
+
+  .baht {
+    float: right;
+    font-size: 10px;
+    color: #000000;
+    position: absolute;
+    right: 0;
+    top: 10px;
+  }
 }
 .title {
   float: left;
@@ -158,12 +169,8 @@ export default {
   font-size: 16px;
   margin: 18px 16px 8px 16px;
 }
-.baht {
-    float: right;
-    font-size: 10px;
-    margin-left: 4px;
-    color: #000000;
-}
+
+
 .custom-income {
   font-size: 16px;
   color: #04a777;
