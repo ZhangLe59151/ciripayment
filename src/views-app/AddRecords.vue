@@ -1,6 +1,6 @@
 <template>
   <div class="app-add-record">
-
+{{ this.currentDate }} - {{ this.form.accountDate }}
     <app-common-header title="Add Record" />
     <van-tabs
       v-model="tabActive"
