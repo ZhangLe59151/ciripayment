@@ -480,6 +480,7 @@ export default {
     right: 16px;
     i {
       font-size: 12px;
+      font-style: normal;
       position: relative;
       top: -10px;
     }
