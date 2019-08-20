@@ -24,19 +24,11 @@
             />
         </div>
 
-        <van-row class="label-left">
-          <van-col span="12">{{$t("Record.Date")}}</van-col>
-          <van-col
-            span="12"
-            class="link_view_history"
-          >
-          </van-col>
-        </van-row>
+        <div class="label-left">{{$t("Record.Date")}}</div>
 
         <van-row class="pick_date">
           <van-col span="21">
             <van-field
-              class="input"
               :value="form.accountDate"
               confirm-button-text="confirm"
               cancel-button-text="cancel"
