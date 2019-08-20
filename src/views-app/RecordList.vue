@@ -11,8 +11,8 @@
       <div class="group" 
         v-for="item in list"
         :key="item.accountDate">
-        <div class="date_title">{{ formatDate(item.accountDate) }}</div>
-        <div class="sum">{{ formatAmount(item.totalIncome) }}</div>
+        {{ formatDate(item.accountDate) }}
+        <div class="sum">{{ formatTotalIncome(item.totalIncome) }}</div>
         <div class="baht">{{ $store.state["currency"] }}</div>
         <div class="cell">
           <van-cell
@@ -84,6 +84,9 @@ export default {
       } else {
         return "-" + util.fmoney(item["amount"]);
       }
+    },
+    formatTotalIncome(number) {
+        return util.fmoney(number);
     },
     onLoad() {
       this.$api.getRecordList().then(res => {
