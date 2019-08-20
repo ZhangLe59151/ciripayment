@@ -14,7 +14,7 @@
           <span class="amount">+ {{ dailyIncome }} <i>{{$store.state.currency}}</i></span>
         </div>
 
-        <van-row class="label-left">{{$t("Record.IncomeName")}}</van-row>
+        <div class="label-left">{{$t("Record.IncomeName")}}</div>
 
         <van-row class="input_note">
           <van-col span="24">
@@ -337,6 +337,7 @@ export default {
 .app-add-record {
   height: calc(100vh - 50px);
 }
+
 .label-left {
   margin: 16px 16px 0 16px;
   height: 24px;
@@ -446,6 +447,8 @@ export default {
   height: 52px;
   line-height: 52px;
   margin: 16px;
+  font-size: 24px;
+  color: #ffffff;
   position: relative;
 
   &.expenses {
@@ -454,7 +457,6 @@ export default {
 
   .name {
     font-size: 10px;
-    color: #ffffff;
     font-weight: bold;
     position: absolute;
     left: 16px;
@@ -462,8 +464,6 @@ export default {
 
   .amount {
     font-weight: bold;
-    font-size: 24px;
-    color: #ffffff;
     position: absolute;
     right: 16px;
     i {
