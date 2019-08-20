@@ -80,6 +80,7 @@ export default {
       text-align: center;
       padding: 20px 0 20px 0;
       font-weight: bold;
+      box-sizing: border-box;
       .credit-limit-title {
         font-size: 16px;
       }

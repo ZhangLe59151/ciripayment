@@ -327,8 +327,7 @@ export default {
   .enter-loan-amount {
     background-color: #e9ebed;
     flex-grow: 1;
-    padding: 10px 0 8px 0;
-    margin-bottom: 50px;
+    padding: 10px 0 50px 0;
     .bottom-btn {
       background-color: #ff8600;
       border-radius: 4px;

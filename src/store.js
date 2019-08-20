@@ -345,17 +345,27 @@ export default new Vuex.Store({
         };
       }
       // fetch user Info
+      let localUserInfo = JSON.parse(localStorage.getItem("userInfo"));
       if (
         Object.keys(state.userInfo).length === 0 &&
         localStorage.getItem("userInfo")
       ) {
-        let localUserInfo = JSON.parse(localStorage.getItem("userInfo"));
         state.userInfo = {
           ...state.userInfo,
-          ...localUserInfo,
-          ...(("creditLimit" in localUserInfo) ? {} : { creditLimit: 5000 })
+          ...localUserInfo
         };
       }
+    },
+    fetchCreditDataFromLocal(state) {
+      // fetch user Info credit
+      let localUserInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+      let numberOfAnsweredCreditQuestion = ("creditAnswers" in localUserInfo)
+        ? Object.values(localUserInfo.creditAnswers).filter(String).length : 0;
+      state.userInfo = {
+        ...state.userInfo,
+        ...{ creditLimit: numberOfAnsweredCreditQuestion * 10000 + 5000 }
+      };
     },
     removeUselessForm(state) {
       var keys = [

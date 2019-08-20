@@ -22,7 +22,7 @@
 export default {
   name: "Credit",
   created() {
-    this.$store.commit("fetchDataFromLocal");
+    this.$store.commit("fetchCreditDataFromLocal");
   }
 }
 </script>

@@ -617,6 +617,7 @@ export default {
       this.$store.commit("UpdateForm", this.form);
       this.$api.applyLoan(this.$store.state.form.loanAmount).then(res => {
         if (res.data.code === 200 && res.data.data === true) {
+          this.$store.commit("ClearForm");
           this.$router.push({ name: "Loan", query: { justSubmitted: "true" } });
         }
       });
