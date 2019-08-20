@@ -166,10 +166,10 @@ export default {
     top: 11px;
   }
 }
-.positive-amount {
+.negtive-amount {
   color: #b41800;
 }
-.negtive-amount {
+.positive-amount {
   color: #04a777;
 }
 .group {
