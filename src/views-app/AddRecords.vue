@@ -13,11 +13,11 @@
         name="INCOME"
       >
         <div class="record-status">
-          <span class="name">{{$t("AddRecord.TotalIncome")}}</span>
+          <span class="name">{{$t("Record.TotalIncome")}}</span>
           <span class="amount">+ {{ dailyIncome }} <i>{{$store.state.currency}}</i></span>
         </div>
 
-        <van-row class="label-left">{{$t("AddRecord.IncomeName")}}</van-row>
+        <van-row class="label-left">{{$t("Record.IncomeName")}}</van-row>
 
         <van-row class="input_note">
           <van-col span="24">
@@ -31,7 +31,7 @@
         </van-row>
 
         <van-row class="label-left">
-          <van-col span="12">{{$t("AddRecord.Date")}}</van-col>
+          <van-col span="12">{{$t("Record.Date")}}</van-col>
           <van-col
             span="12"
             class="link_view_history"
@@ -56,7 +56,7 @@
           </van-col>
         </van-row>
 
-        <van-row class="label-left">{{$t("AddRecord.IncomeS")}}</van-row>
+        <van-row class="label-left">{{$t("Record.IncomeS")}}</van-row>
         <van-row
           class="input_income_expense"
           id="income"
@@ -87,10 +87,10 @@
       >
 
         <div class="record-status expenses">
-          <span class="name">{{$t("AddRecord.TotalExpenses")}}</span>
+          <span class="name">{{$t("Record.TotalExpenses")}}</span>
           <span class="amount">- {{ dailyExpense }} <i>{{$store.state.currency}}</i></span>
         </div>
-        <van-row class="label-left">{{$t("AddRecord.ExpensesName")}}</van-row>
+        <van-row class="label-left">{{$t("Record.ExpensesName")}}</van-row>
 
         <van-row class="input_note">
           <van-col span="24">
@@ -105,7 +105,7 @@
         </van-row>
 
         <van-row class="label-left">
-          <van-col span="12">{{$t("AddRecord.Date")}}</van-col>
+          <van-col span="12">{{$t("Record.Date")}}</van-col>
           <van-col
             span="12"
             class="link_view_history"
@@ -130,7 +130,7 @@
           </van-col>
         </van-row>
 
-        <van-row class="label-left">{{$t("AddRecord.ExpensesS")}}</van-row>
+        <van-row class="label-left">{{$t("Record.ExpensesS")}}</van-row>
 
         <van-row
           class="input_income_expense"
@@ -160,7 +160,7 @@
     <button
       class="update_btn"
       @click="updateBtn"
-    >{{$t("AddRecord.updateRecord")}}</button>
+    >{{$t("Record.addRecord")}}</button>
 
     <van-row>
       <van-col span="24">

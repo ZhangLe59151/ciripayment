@@ -14,11 +14,11 @@
         :disabled="this.disable.expenseAmount"
       >
         <div class="record-status">
-          <span class="name">TOTAL INCOME</span>
+          <span class="name">{{$t("Record.TotalIncome")}}E</span>
           <span class="amount">+ {{ dailyIncome }} <i>{{$store.state.currency}}</i></span>
         </div>
 
-        <van-row class="label-left">Income Name</van-row>
+        <van-row class="label-left">{{$t("Record.IncomeName")}}</van-row>
 
         <van-row class="input_note">
           <van-col span="24">
@@ -32,7 +32,7 @@
         </van-row>
 
         <van-row class="label-left">
-          <van-col span="12">Date</van-col>
+          <van-col span="12">{{$t("Record.Date")}}</van-col>
           <van-col
             span="12"
             class="link_view_history"
@@ -56,7 +56,7 @@
           </van-col>
         </van-row>
 
-        <van-row class="label-left">Income</van-row>
+        <van-row class="label-left">{{$t("Record.IncomeS")}}</van-row>
         <van-row
           class="input_income_expense"
           id="income"
@@ -88,10 +88,10 @@
       >
 
         <div class="record-status expenses">
-          <span class="name">TOTAL EXPENSES</span>
+          <span class="name">{{$t("Record.TotalExpenses")}}</span>
           <span class="amount">- {{ dailyExpense }} <i>{{$store.state.currency}}</i></span>
         </div>
-        <van-row class="label-left">Expenses Name</van-row>
+        <van-row class="label-left">{{$t("Record.ExpensesName")}}</van-row>
 
         <van-row class="input_note">
           <van-col span="24">
@@ -106,7 +106,7 @@
         </van-row>
 
         <van-row class="label-left">
-          <van-col span="12">Date</van-col>
+          <van-col span="12">{{$t("Record.Date")}}</van-col>
           <van-col
             span="12"
             class="link_view_history"
@@ -131,7 +131,7 @@
           </van-col>
         </van-row>
 
-        <van-row class="label-left">Expense</van-row>
+        <van-row class="label-left">{{$t("Record.ExpensesS")}}</van-row>
 
         <van-row
           class="input_income_expense"
@@ -163,13 +163,13 @@
     <div
       class="delete_btn"
       @click="deleteBtn"
-    >Delete Record</div>
+    >{{$t("Record.deleteRecord")}}</div>
     </van-col>
     <van-col span="12">
     <div
       class="update_btn"
       @click="updateBtn"
-    >Update Records</div>
+    >{{$t("Record.updateRecord")}}</div>
     </van-col>
   </van-row>
 
@@ -306,10 +306,8 @@ export default {
         .then(res => {
           if (res.data.code === 200) {
             this.$notify("Delete succeed!");
-            debugger
-            Object.entries(this.form).forEach(([key, value]) => this.form[(`${key}`)] = `${value}`);
-            //for (let [key, value] of Object.entries(this.form)) { console.log(`${key}: ${value}`); }
-            //this.$router.push({name: 'RecordList'});
+            //Object.entries(this.form).forEach(([key, value]) => this.form[(`${key}`)] = `${value}`);
+            this.$router.push({name: 'RecordList'});
           }
         })
     },

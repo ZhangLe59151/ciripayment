@@ -103,7 +103,7 @@
     "homeRecordAddBtn": "Add Records",
     "homeRecordViewHistoryBtn": "Record History"
   },
-  "AddRecord": {
+  "Record": {
     "Income": "INCOME",
     "IncomeS": "Income",
     "IncomeName": "Income Name",
@@ -113,6 +113,8 @@
     "TotalIncome": "TOTAL INCOME",
     "TotalExpenses": "TOTAL EXPENSES",
     "Date": "Date",
-    "updateRecord": "Update Records"
+    "updateRecord": "Update Records",
+    "addRecord": "Add Records",
+    "deleteRecord": "Delete Records"
   }
 }
