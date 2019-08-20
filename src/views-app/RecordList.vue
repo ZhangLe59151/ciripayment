@@ -101,7 +101,6 @@ export default {
       this.$api.getRecordList().then(res => {
         if (res.data.code === 200) {
           this.list = res.data.data;
-          //this.dateList = Object.keys(res.data.data.recordMap).sort().reverse();
           debugger
         } else {
         }
@@ -148,12 +147,12 @@ export default {
   background-color: #e9ebed;
   position: relative;
 
+  
+
   .baht {
-    float: right;
     font-size: 10px;
-    color: #000000;
     position: absolute;
-    right: 0;
+    right: 16px;
     top: 10px;
   }
 }
