@@ -86,7 +86,11 @@ export default {
       }
     },
     formatTotalIncome(number) {
-        return util.fmoney(number);
+      if (number>0) {
+        return "+ "+util.fmoney(number);
+      }else {
+        return "- "+util.fmoney(number);
+      }
     },
     onLoad() {
       this.$api.getRecordList().then(res => {
@@ -143,15 +147,15 @@ export default {
     font-weight: bold;
     font-size: 16px;
     position: absolute;
-    right: 56px;
-    top: 10px;
+    right: 66px;
+    top: 4px;
   }
 
   .baht {
     font-size: 10px;
     position: absolute;
-    right: 16px;
-    top: 10px;
+    right: 32px;
+    top: 4px;
   }
 }
 
