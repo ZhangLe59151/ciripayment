@@ -615,8 +615,10 @@ export default {
     gotoNextPage() {
       // save request form init store
       this.$store.commit("UpdateForm", this.form);
-      this.$router.push({
-        name: "EnterLoanAmount"
+      this.$api.applyLoan(this.$store.state.form.loanAmount).then(res => {
+        if (res.data.code === 200 && res.data.data === true) {
+          this.$router.push({ name: "Loan", query: { justSubmitted: "true" } });
+        }
       });
     },
 
