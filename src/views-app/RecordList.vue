@@ -12,21 +12,21 @@
         v-for="item in list"
         :key="item.accountDate">
         {{formatDate(item.accountDate)}}
+        <div class="sum"></div>
         <div class="baht">{{$store.state["currency"]}}</div>
-        <div>
-        <!--  <van-cell
-            v-for="(item, index) in details"
-            :key="index"
-            :title="formatIncome(item)"
-            :label="formatTime(item['createTime'])"
-            @click="$router.push({'name':'EditRecord', 'params':{'id':item['id']}})"
+        <div class="cell">
+          <van-cell
+            v-for="record in item.recordList"
+            :key="record.id"
+            :title="formatIncome(record)"
+            :label="formatTime(record.createTime)"
+            @click="$router.push({'name':'EditRecord', 'params':{ 'id': record.id }})"
             >
-            <div slot="default">
-	            <span class="positive-amount" v-if="item['type']===0">{{formatAmount(item)}}</span>
-              <span class="negtive-amount" v-if="item['type']===1">{{formatAmount(item)}}</span>
-              <div class="baht">{{$store.state["currency"]}}</div>
-            </div>
-          </van-cell>  -->
+	          <div class="positive-amount" v-if="record.type===0">{{formatAmount(record)}}</div>
+            <div class="negtive-amount" v-if="record.type===1">{{formatAmount(record)}}</div>
+            <div class="baht">{{$store.state["currency"]}}</div>
+
+          </van-cell>  
         </div>
       </div>
     </van-list>
@@ -85,18 +85,6 @@ export default {
         return "-" + util.fmoney(item["amount"]);
       }
     },
-    sumIncome(item) {
-      let sum = 0;
-      for (let index in item) {
-        if (item[index]["type"] === 0) {
-          sum += item[index]["amount"];
-        } else {
-          sum -= item[index]["amount"];
-        }
-      }
-      let money = util.fmoney(sum);
-      return sum < 0 ? money : "+" + money;
-    },
     onLoad() {
       this.$api.getRecordList().then(res => {
         if (res.data.code === 200) {
@@ -131,12 +119,7 @@ export default {
     top: 11px;
   }
 }
-.negtive-amount {
-  color: #b41800;
-}
-.positive-amount {
-  color: #04a777;
-}
+
 .group {
   font-family: HelveticaNeue;
   font-size: 16px;
@@ -147,7 +130,12 @@ export default {
   background-color: #e9ebed;
   position: relative;
 
-  
+  .date_title {
+    font-size: 10px;
+    position: absolute;
+    right: 16px;
+    top: 10px;
+  }
 
   .baht {
     font-size: 10px;
@@ -156,17 +144,51 @@ export default {
     top: 10px;
   }
 }
-.title {
-  float: left;
-  margin: 18px 16px 8px 16px;
+
+.cell {
+  font-family: HelveticaNeue;
+  font-size: 16px;
+  color: #2f3941;
+  letter-spacing: 0;
+  line-height: 47px;
+  margin: 0 0 0 0;
+  position: relative;
+
+  .income_title {
+    font-size: 16px;
+    position: absolute;
+    left: 16px;
+    top: 0;
+  }
+
+  .negtive-amount {
+    position: absolute;
+    right: 50px;
+    top: 10px;
+    color: #b41800;
+  }
+
+  .positive-amount {
+    position: absolute;
+    right: 50px;
+    top: 10px;
+    color: #04a777;
+  }
+
+  .baht {
+    font-size: 10px;
+    position: absolute;
+    right: 16px;
+    top: 10px;
+  }
 }
+
 .sum {
   float: right;
   font-weight: bold;
   font-size: 16px;
   margin: 18px 16px 8px 16px;
 }
-
 
 .custom-income {
   font-size: 16px;
