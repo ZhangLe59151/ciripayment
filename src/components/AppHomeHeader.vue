@@ -20,7 +20,7 @@
     </van-row>
 
     <div>
-      <div class="btnView btn" @click="$router.push({name: 'RecordList', query: { date: date }})">
+      <div class="btnView btn" @click="$router.push({name: 'RecordList'})">
         <van-icon name="bars"/>
         {{$t('Home.homeRecordViewHistoryBtn')}}
       </div>

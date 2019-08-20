@@ -9,7 +9,6 @@ const routeArr = [
     path: "/",
     redirect: "/home"
   },
-
   {
     path: "/enter-info",
     name: "EnterInfo",
@@ -105,6 +104,11 @@ const AppRouteArr = [
     path: "/services",
     name: "Services",
     component: () => import("@/views-app/Services.vue")
+  },
+  {
+    path: "/credit",
+    name: "Credit",
+    component: () => import("@/views-app/Credit.vue")
   },
   {
     path: "/loan",

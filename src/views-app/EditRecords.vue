@@ -11,13 +11,14 @@
       <van-tab
         title="Income"
         name="INCOME"
+        :disabled="this.disable.expenseAmount"
       >
         <div class="record-status">
-          <span class="name">TOTAL INCOME</span>
-          <span class="amount">+1000.00 <i>{{$store.state.currency}}</i></span>
+          <span class="name">{{$t("Record.TotalIncome")}}E</span>
+          <span class="amount">+ {{ dailyIncome }} <i>{{$store.state.currency}}</i></span>
         </div>
 
-        <van-row class="label-left">Income Name</van-row>
+        <van-row class="label-left">{{$t("Record.IncomeName")}}</van-row>
 
         <van-row class="input_note">
           <van-col span="24">
@@ -31,7 +32,7 @@
         </van-row>
 
         <van-row class="label-left">
-          <van-col span="12">Date</van-col>
+          <van-col span="12">{{$t("Record.Date")}}</van-col>
           <van-col
             span="12"
             class="link_view_history"
@@ -42,11 +43,9 @@
         <van-row class="pick_date">
           <van-col span="21">
             <van-field
-              class="input"
-              :value="form.accountDate"
+              :value="currentDate"
               confirm-button-text="confirm"
               cancel-button-text="cancel"
-              @focus="appear = true"
               maxlength="13"
               readonly
             />
@@ -56,7 +55,7 @@
           </van-col>
         </van-row>
 
-        <van-row class="label-left">Income</van-row>
+        <van-row class="label-left">{{$t("Record.IncomeS")}}</van-row>
         <van-row
           class="input_income_expense"
           id="income"
@@ -69,7 +68,7 @@
             <van-field
               class="income"
               v-model="form.incomeAmount"
-              @focus="showKeyboard('income')"
+              @focus="showKeyboard('incomeAmount')"
               maxlength="13"
               readonly
             />
@@ -84,13 +83,14 @@
       <van-tab
         title="Expenses"
         name="EXPENSES"
+        :disabled="this.disable.incomeAmount"
       >
 
         <div class="record-status expenses">
-          <span class="name">TOTAL EXPENSES</span>
-          <span class="amount">-1000.00 <i>{{$store.state.currency}}</i></span>
+          <span class="name">{{$t("Record.TotalExpenses")}}</span>
+          <span class="amount">- {{ dailyExpense }} <i>{{$store.state.currency}}</i></span>
         </div>
-        <van-row class="label-left">Expenses Name</van-row>
+        <van-row class="label-left">{{$t("Record.ExpensesName")}}</van-row>
 
         <van-row class="input_note">
           <van-col span="24">
@@ -105,7 +105,7 @@
         </van-row>
 
         <van-row class="label-left">
-          <van-col span="12">Date</van-col>
+          <van-col span="12">{{$t("Record.Date")}}</van-col>
           <van-col
             span="12"
             class="link_view_history"
@@ -116,11 +116,9 @@
         <van-row class="pick_date">
           <van-col span="21">
             <van-field
-              class="input"
-              :value="form.accountDate"
+              :value="currentDate"
               confirm-button-text="confirm"
               cancel-button-text="cancel"
-              @focus="appear = true"
               maxlength="13"
               readonly
             />
@@ -130,7 +128,7 @@
           </van-col>
         </van-row>
 
-        <van-row class="label-left">Expense</van-row>
+        <van-row class="label-left">{{$t("Record.ExpensesS")}}</van-row>
 
         <van-row
           class="input_income_expense"
@@ -144,7 +142,7 @@
             <van-field
               class="expense"
               v-model="form.expenseAmount"
-              @focus="showKeyboard('expense')"
+              @focus="showKeyboard('expenseAmount')"
               maxlength="13"
               readonly
             />
@@ -157,24 +155,20 @@
       </van-tab>
     </van-tabs>
 
+  <van-row>
+    <van-col span="12">
+    <div
+      class="delete_btn"
+      @click="deleteBtn"
+    >{{$t("Record.deleteRecord")}}</div>
+    </van-col>
+    <van-col span="12">
     <div
       class="update_btn"
       @click="updateBtn"
-    >Update Records</div>
-
-    <van-row>
-      <van-col span="24">
-        <van-datetime-picker
-          v-show="appear"
-          v-model="currentDate"
-          type="date"
-          :min-date="minDate"
-          :max-date="maxDate"
-          @cancel="appear = false"
-          @confirm="setDate"
-        />
-      </van-col>
-    </van-row>
+    >{{$t("Record.updateRecord")}}</div>
+    </van-col>
+  </van-row>
 
     <van-number-keyboard
       :show="showNumber"
@@ -184,7 +178,6 @@
       @input="onInput"
       @delete="onDelete"
     />
-    <app-tab-bar :active="1" />
   </div>
 </template>
 
@@ -194,6 +187,8 @@ import AppCommonHeader from "@/components/AppCommonHeader";
 import { findIndex } from "lodash";
 
 import { mapState } from "vuex";
+import util from "@/util.js";
+import { debuglog } from 'util';
 
 const today = new Date();
 const startDate = new Date("2019/01/01");
@@ -214,56 +209,58 @@ export default {
 
   data() {
     return {
-      tabActive: "INCOME",
-      currentTab: this.$route.query.currentTab || "0",
+      tabActive: 0,
       form: {
-        date: "",
-        income: "",
-        expense: "",
-        note: ""
+        accountDate: "",
+        incomeAmount: "",
+        expenseAmount: "",
+        memo: "",
+        id: 0,
+        merchantId: 0
       },
       showNumber: false,
-      type: "income",
+      type: "incomeAmount",
       appear: false,
       minDate: startDate,
       maxDate: today,
-      currentDate: this.$route.query.date ? this.$route.query.date : today
+      currentDate: "",
+      dailyIncome: 0,
+      dailyExpense: 0,
+      disable: {
+        incomeAmount: false,
+        expenseAmount: false
+      }
     };
   },
-  watch: {
-    currentDate: {
-      immediate: true,
-      handler(val, oldVal) {
-        let formDate = this.$moment(val).format("D MMM YYYY");
-        const _today = this.$moment().format(this.localDateFormatter);
-        const _yesterday = this.$moment()
-          .subtract(1, "days")
-          .format(this.localDateFormatter);
-        const _selected = this.$moment(val).format(this.localDateFormatter);
-        const kv = { [_today]: "Today, ", [_yesterday]: "Yesterday, " };
-
-        this.$set(
-          this.form,
-          "date",
-          val ? (kv[_selected] ? kv[_selected] : "") + formDate : ""
-        );
-
-        const itemIndex = findIndex(this.recordList, {
-          date: this.$moment(val).format(this.localDateFormatter)
-        });
-        console.log();
-        if (itemIndex > -1) {
-          this.form = Object.assign({}, this.recordList[itemIndex]);
-          this.form.date = this.$moment(this.form.date).format("D MMM YYYY");
-        } else {
-          this.form.note = "";
-          this.form.income = "";
-          this.form.expense = "";
-        }
-      }
-    }
+  created() {
+    this.viewRecord();
   },
   methods: {
+    viewRecord(){
+      this.$api.viewRecord(this.$route.params.id).then(res => { 
+      if (res.data.code === 200) { 
+        this.type = res.data.data.type === 0 ? "incomeAmount" : "expenseAmount";
+        this.disable[this.type] = true;
+        this.tabActive = res.data.data.type;
+        this.currentDate = this.$moment(res.data.data.accountDate).format("D MMM YYYYY");
+        this.form[this.type] = util.fmoney(res.data.data.amount);
+        this.dailyIncome = util.fmoney(res.data.data.incomeSum);
+        this.dailyExpense = util.fmoney(res.data.data.expensesSum);
+        this.form.memo = res.data.data.memo;
+        this.form.id = res.data.data.id;
+        this.form.merchantId = res.data.data.merchantId;
+        } 
+      });
+    },
+    updateRecord(form) {
+      this.$api.updateRecord(form).then(res => { 
+        debugger
+      if (res.data.code === 200) { 
+        this.viewRecord();
+        this.$notify("Update succeed!");
+        } 
+      });
+    },
     showKeyboard(type) {
       this.appear = false;
       this.showNumber = true;
@@ -293,11 +290,23 @@ export default {
       this.appear = false;
       const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
       if (regex.test(form[this.type])) {
-        this.$store.commit("UpdateRecord", this.convertForm(form));
-        this.$toast("Update succeed!");
+        form[this.type] = parseFloat(form[this.type]);
+        //this.$store.commit("UpdateRecord", this.convertForm(form));
+        this.updateRecord(form);
         return false;
       }
       this.$toast("Pls input valid amount.");
+    },
+    deleteBtn() {
+      this.$api
+        .deleteRecord(this.form.id)
+        .then(res => {
+          if (res.data.code === 200) {
+            this.$notify({ message: "Deleted Sucessfully", background: "#04A777" });
+            //Object.entries(this.form).forEach(([key, value]) => this.form[(`${key}`)] = `${value}`);
+            this.$router.push({name: 'RecordList'});
+          }
+        })
     },
     convertForm(form) {
       const _date = form.date.includes(",")
@@ -305,10 +314,6 @@ export default {
         : form.date;
       form.date = this.$moment(_date).format(this.localDateFormatter);
       return form;
-    },
-    viewHistory() {
-      const date = this.$moment(this.form.date).format(this.localDateFormatter);
-      this.$router.push({ name: "RecordList", query: { date: date } });
     },
     setDate(value) {
       this.appear = false;
@@ -338,6 +343,8 @@ export default {
 .pick_date {
   height: 40px;
   font-size: 16px;
+  //background-color: #E9EBED;
+  border-radius: 4;
   margin: 4px 16px 0 16px;
   .van-icon-arrow-down {
     position: relative;
@@ -393,18 +400,35 @@ export default {
   border-bottom: 1px solid #c2c8cc;
 }
 
-.update_btn {
-  background: #ff8600;
+
+.delete_btn {
   border-radius: 4px;
-  background-color: #ff8600;
-  border: none;
-  color: white;
+  border: 1px solid #ff8600;
   font-size: 16px;
+  margin: 16px 8px 0 16px;
+  text-align: center;
+  line-height: 40px;
+  text-align: center;
   height: 40px;
+  border-color: #ff8600;
+  background-color: white;
+  color: #ff8600;
   width: 90%;
-  margin-top: 16px;
-  margin-right: 16px;
-  margin-left: 16px;
+}
+
+.update_btn {
+  border-radius: 4px;
+  border: 1px solid #ff8600;
+  font-size: 16px;
+  margin: 16px 16px 0 8px;
+  text-align: center;
+  line-height: 40px;
+  text-align: center;
+  height: 40px;
+  border-color: #ff8600;
+  color: white;
+  background-color: #ff8600;
+  width: 90%;
 }
 
 .van-picker {

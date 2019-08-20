@@ -99,7 +99,25 @@ export default {
   getHomeInformation() {
     return Vue.axios.get("/api/information");
   },
+  getRecordList() {
+    return Vue.axios.get("/api/merchant/record/list");
+  },
   getArticleContent(params) {
     return Vue.axios.get(`/api/information/article-detail?articleDetailId=${params}`);
+  },
+  addRecord(params) {
+    return Vue.axios.post("/api/merchant/record/add", params);
+  },
+  viewRecordSum(params) {
+    return Vue.axios.get(`/api/merchant/record/view/sum?accountDate=${params}`);
+  },
+  viewRecord(params) {
+    return Vue.axios.get(`/api/merchant/record/view?id=${params}`);
+  },
+  deleteRecord(params) {
+    return Vue.axios.get(`/api/merchant/record/delete?id=${params}`);
+  },
+  updateRecord(params) {
+    return Vue.axios.post("/api/merchant/record/update", params);
   }
 };

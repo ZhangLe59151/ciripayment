@@ -2,9 +2,9 @@
   <div class="enter-loan-amount">
     <van-nav-bar @click-left="$router.back()" left-arrow/>
     <div class="banner">
-      <div class="banner-title">Your Estimated Credit Limit</div>
+      <div class="banner-title">{{$t("EnterLoanAmount.title1")}}</div>
       <div class="banner-number">
-        up to
+        {{$t("EnterLoanAmount.title2")}}
         <span style="font-size: 32px">100,000* {{$store.state.currency}}</span>
       </div>
     </div>
@@ -19,7 +19,7 @@
     >
       <el-card class="box-card">
         <el-form-item
-          label="How much do you want to borrow?"
+          :label="$t('EnterLoanAmount.question')"
           prop="loanAmount"
           :rules="[{ required: true, message: 'This field is required.', trigger: 'blur' },
             ]"
@@ -33,7 +33,7 @@
 
     <div
       class="tips"
-    >*This figure is an estimated amount. Your final approved loan amount may differ.</div>
+    >{{$t("EnterLoanAmount.warning")}}</div>
 
     <div class="apply-btn-wrapper">
       <van-button
@@ -41,12 +41,12 @@
         class="bottom-btn apply-btn"
         @click="handleApply"
         :disabled="form.loanAmount === ''"
-      >Apply</van-button>
+      >{{$t("EnterLoanAmount.apply")}}</van-button>
     </div>
 
     <van-dialog v-model="dialog" scroll="paper" class="scroll-dialog" :showConfirmButton="false">
       <div class="heading">
-        <h1>Proceed without Completing Profile?</h1>
+        <h1>{{$t("EnterLoanAmount.dialogTitle")}}</h1>
         <van-icon name="cross" @click="dialog = false"/>
       </div>
       <div class="warning">
@@ -56,8 +56,8 @@
           </van-col>
           <van-col span="18" offset="1">
             <div class="warning-content">
-              Your current credit limit is
-              <b>5,000{{$store.state.currency}}</b>. Complete your profile to get up to
+              {{$t("EnterLoanAmount.dialogDesc1")}}
+              <b>5,000{{$store.state.currency}}.</b> {{$t("EnterLoanAmount.dialogDesc2")}}
               <b>100,000{{$store.state.currency}}!</b>
             </div>
           </van-col>
@@ -70,14 +70,14 @@
               size="small"
               class="bottom-btn dialog-btn plain"
               @click="applyForLoan"
-            >Apply Anyway</van-button>
+            >{{$t("EnterLoanAmount.dialogApp")}}</van-button>
           </van-col>
           <van-col span="11" offset="2">
             <van-button
               size="small"
               class="bottom-btn dialog-btn"
               @click="$router.push({name: 'EnterLoanInfo'})"
-            >Complete Profile</van-button>
+            >{{$t("EnterLoanAmount.dialogComplete")}}</van-button>
           </van-col>
         </van-row>
       </div>

@@ -1,8 +1,7 @@
 <template>
   <div v-if="!loanProfile || Object.keys(loanProfile).length === 0" class="app-loan-overview">
     <div class="banner">
-      <div class="banner-title">{{$t("AppLoanOverview.bannerTitle")}}</div>
-      <div class="banner-number">100,000 {{$store.state.currency}}</div>
+      <div class="banner-title">Get instant cash in under 2 min!</div>
     </div>
     <div class="ribbon">
       <div class="lower-rate">
@@ -32,36 +31,41 @@
           <span>{{$t("AppLoanOverview.instructionContent2.photos")}}</span>
         </li>
       </ul>
-      <div class="instruction-content-3">
-        Tap
-        <span style="font-weight: bold">Start Now</span> to begin applying!
-      </div>
     </div>
-    <div class="loan-terms">
-      <div class="loan-terms-title">Loan Terms</div>
-      <div class="loan-terms-content-1">
-        The base loan amount is
-        <b>5,000 {{$store.state.currency}}</b> without any profile information.
-      </div>
-      <div class="loan-terms-content-2">
-        Low interest rates from
-        <b>3.7% p.a. (EIR 7% p.a.).</b>
-      </div>
-      <div class="loan-terms-content-3">
-        From
-        <b>1 minute</b> approval in-principle.
-      </div>
-      <van-button size="small" class="bottom-btn" @click="handleStart">Start Now</van-button>
-      <div
-        class="consent-agreement"
-      >By submitting an application, you consent to the use of all submitted information by Silot AI for loan application and marketing purposes.</div>
+    <div class="enter-loan-amount">
+      <el-form
+        label-width="0px"
+        :model="form"
+        ref="elForm"
+        size="small"
+        label-position="top"
+        class="elForm"
+      >
+      <el-card class="box-card">
+        <el-form-item
+          :label="$t('EnterLoanAmount.question')"
+          prop="loanAmount"
+          :rules="[{ required: true, message: 'This field is required.', trigger: 'blur' },
+            ]"
+        >
+          <el-input inputmode="numeric" pattern="[0-9]*\,*\.*" v-model="form.loanAmount" @input="formatCurrency">
+            <div class="currency" slot="suffix">{{$store.state.currency}}</div>
+          </el-input>
+        </el-form-item>
+        <van-button size="small" class="bottom-btn" @click="handleStart">Apply Now</van-button>
+        <div
+          class="consent-agreement"
+        >{{$t("AppLoanOverview.consent")}}</div>
+      </el-card>
+
+      </el-form>
     </div>
   </div>
   <div v-else class="app-loan-overview">
     <div class="loan-applied-wrapper">
       <div>
         <van-row type="flex" justify="space-between">
-          <van-col class="loan-heading" span="12">Your Application</van-col>
+          <van-col class="loan-heading" span="12">{{$t("AppLoanOverview.yourApplication")}}</van-col>
           <van-col
             :class="formatStatus(loanProfile.status).color +' loan-status'"
           >{{formatStatus(loanProfile.status).label}}</van-col>
@@ -69,12 +73,12 @@
       </div>
       <div>
         <van-row class="loan-details" type="flex" justify="space-between">
-          <van-col class="label" span="12">Applicant Mobile Number</van-col>
+          <van-col class="label" span="12">{{$t("AppLoanOverview.applicantPhone")}}</van-col>
           <van-col class="info" span="12">{{loanProfile.phoneNumber}}</van-col>
         </van-row>
 
         <van-row class="loan-details" type="flex" justify="space-between">
-          <van-col class="label" span="12">Application Time</van-col>
+          <van-col class="label" span="12">{{$t("AppLoanOverview.applicationTime")}}</van-col>
           <van-col
             class="info"
             span="12"
@@ -82,7 +86,7 @@
         </van-row>
 
         <van-row class="loan-details" type="flex" justify="space-between">
-          <van-col class="label" span="12">Application Amount</van-col>
+          <van-col class="label" span="12">{{$t("AppLoanOverview.applicationAmount")}}</van-col>
           <van-col
             class="info"
             span="12"
@@ -94,13 +98,13 @@
         size="small"
         class="back-to-home-btn bottom-btn"
         @click="$router.push({name: 'Home'})"
-      >Back To Home</van-button>
+      >{{$t("AppLoanOverview.submittedBack")}}</van-button>
       <van-popup
         v-model="showPopUp"
         class="success-popup"
         position="top"
         :overlay="false"
-      >Application Sent Successfully</van-popup>
+      >{{$t("AppLoanOverview.submittedNotification")}}</van-popup>
     </div>
   </div>
 </template>
@@ -112,7 +116,10 @@ export default {
   components: {},
   data() {
     return {
-      showPopUp: false
+      showPopUp: false,
+      form: {
+        loanAmount: ""
+      }
     };
   },
   computed: {
@@ -130,6 +137,10 @@ export default {
   },
   methods: {
     handleStart() {
+      // update Loan Amount
+      this.$store.commit("UpdateForm", {
+        loanAmount: parseInt(this.form.loanAmount.replace(/,/g, ""))
+      });
       this.$router.push({ name: "EnterLoanInfo" });
     },
     formatStatus(loanStatus) {
@@ -141,6 +152,7 @@ export default {
       return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
     formatCurrency(val) {
+      console.log("run", val);
       // change to string
       val = String(val);
       // don't validate empty input
@@ -176,6 +188,7 @@ export default {
         // remove all non-digits
         val = this.formatNumber(val);
       }
+      this.form.loanAmount = val;
       // send updated string to input
       return val;
     }
@@ -194,16 +207,13 @@ export default {
     background-size: cover;
     color: #363f47;
     text-align: center;
-    padding: 26px 0px 45px 0px;
+    padding: 26px 100px 45px 101px;
     box-sizing: border-box;
     .banner-title {
-      font-size: 16px;
+      font-size: 20px;
       font-weight: bold;
     }
-    .banner-number {
-      font-size: 32px;
-      font-weight: bold;
-    }
+
   }
 
   .ribbon {
@@ -251,7 +261,7 @@ export default {
   }
 
   .instruction {
-    padding: 0 16px 12px 16px;
+    padding: 0 16px 0 16px;
     color: #2f3941;
     .instruction-title {
       text-align: center;
@@ -314,6 +324,25 @@ export default {
     }
   }
 
+  .enter-loan-amount {
+    background-color: #e9ebed;
+    flex-grow: 1;
+    padding: 10px 0 8px 0;
+    margin-bottom: 50px;
+    .bottom-btn {
+      background-color: #ff8600;
+      border-radius: 4px;
+      width: 100%;
+      height: 40px;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+    .consent-agreement {
+      text-align: center;
+      font-size: 10px;
+      color: #68737d;
+    }
+  }
   .loan-applied-wrapper {
     padding: 23px 16px 0 16px;
     color: #2f3941;
@@ -376,4 +405,27 @@ export default {
 
   }
 }
+</style>
+
+<style lang="scss">
+  .enter-loan-amount {
+    .el-card{
+      border-radius: 0;
+      border: none;
+    }
+    .el-card__body {
+      padding: 20px 16px 16px 16px;
+    }
+    .el-input__inner {
+      font-size: 24px;
+      padding-left: 0;
+      margin-top: 10px;
+      padding-bottom: 10px;
+    }
+    .el-input__suffix {
+      color: #363f47;
+      position: absolute;
+      top: 5px;
+    }
+  }
 </style>

@@ -3,6 +3,7 @@
     <app-home-header :info.sync="records"/>
 
     <app-home-loan/>
+    <app-home-credit />
     <app-home-lucky/>
 
     <app-home-download v-if="$store.state.deviceType === 'WEB'"/>
@@ -20,7 +21,11 @@ export default {
   data() {
     return {
       applicationStatus: this.$store.state.application.applicationStatus + "",
-      hasLoan: false
+      hasLoan: false,
+      records: {
+        income: 0,
+        expense: 0
+      }
     };
   },
   computed: {
@@ -28,22 +33,21 @@ export default {
       return this.applicationStatus === "NOAPPLICATION";
     },
     ...mapState({
-      records(state) {
-        const recordList = state.recordList;
-        const month = this.$moment().format("YYYYMM");
-        const records = {
-          income: 0,
-          expense: 0
-        };
-        recordList.map(item => {
-          if (item.date.includes(month)) {
-            records.income += Number(item.income);
-            records.expense += Number(item.expense);
-          }
-        });
-
-        return records;
-      }
+      //records(state) {
+      //  const recordList = state.recordList;
+      //  const month = this.$moment().format("YYYYMM");
+      //  const records = {
+      //    income: 0,
+      //    expense: 0
+      //  };
+      //  recordList.map(item => {
+      //    if (item.date.includes(month)) {
+      //      records.income += Number(item.income);
+      //      records.expense += Number(item.expense);
+      //    }
+      //  });
+      //  return records;
+      //}
     })
   },
   methods: {
@@ -83,6 +87,8 @@ export default {
       this.$api.getHomePageInfo().then(res => {
         if (res.data.code === 200) {
           this.hasLoan = res.data.data.hasLoan;
+          this.records.income = res.data.data.merchantRecordSum.incomeSum;
+          this.records.expense = res.data.data.merchantRecordSum.expensesSum;
         }
       });
     }
