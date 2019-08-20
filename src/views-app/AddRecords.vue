@@ -227,7 +227,7 @@ export default {
     };
   },
   created() {
-    this.form.accountDate = this.$moment(this.$route.query.date ? this.$route.query.date : today).format(this.localDateFormatter);
+    //this.form.accountDate = this.$moment(this.$route.query.date ? this.$route.query.date : today).format(this.localDateFormatter);
     this.fetchDataUpdate(this.form.accountDate);
   },
   watch: {
@@ -242,6 +242,7 @@ export default {
       immediate: true,
       handler(val, oldVal) {
         this.tabActive = 0;
+        Object.entries(this.form).forEach(([key, value]) => this.form[`${key}`] = `${value}`);
         let formDate = this.$moment(val).format("D MMM YYYY");
         const _today = this.$moment().format(this.localDateFormatter);
         const _yesterday = this.$moment()
@@ -249,11 +250,6 @@ export default {
           .format(this.localDateFormatter);
         const _selected = this.$moment(val).format(this.localDateFormatter);
         const kv = { [_today]: "Today, ", [_yesterday]: "Yesterday, " };
-
-        //this.form.expenseAmount = "";
-        //this.form.incomeAmount = "";
-        //this.form.memo = "";
-        Object.entries(this.form).forEach(([key, value]) => this.form[`${key}`] = `${value}`);
 
         this.$set(
           this.form,
