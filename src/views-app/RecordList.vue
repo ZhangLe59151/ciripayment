@@ -1,6 +1,6 @@
 <template>
   <div class="record-list">
-    <app-common-header title="Records List"/>
+    <app-common-header title="Records History"/>
     <van-list
       v-model="loading"
       :finished="finished"
@@ -8,26 +8,25 @@
       :immediate-check="false"
       @load="onLoad"
     >
-      <div class="group" v-for="(details, key) in list" :key="key">
-        <div class="title">{{formatDate(key)}}</div>
-        <div class="sum">
-          {{sumIncome(details)}}
-          <div class="baht">{{$store.state["currency"]}}</div>
-        </div>
-        <div>
+      <div class="group" 
+        v-for="item in list"
+        :key="item.accountDate">
+        <div class="date_title">{{ formatDate(item.accountDate) }}</div>
+        <div class="sum">{{ formatAmount(item.totalIncome) }}</div>
+        <div class="baht">{{ $store.state["currency"] }}</div>
+        <div class="cell">
           <van-cell
-            v-for="(item, index) in details"
-            :key="index"
-            :title="formatIncome(item)"
-            :label="formatTime(item['createTime'])"
-            @click="$router.push({'name':'EditRecord', 'params':{'id':item['id']}})"
+            v-for="record in item.recordList"
+            :key="record.id"
+            :title="formatIncome(record)"
+            :label="formatTime(record.createTime)"
+            @click="$router.push({'name':'EditRecord', 'params':{ 'id': record.id }})"
             >
-            <div slot="default">
-	            <span class="positive-amount" v-if="item['type']===0">{{formatAmount(item)}}</span>
-              <span class="negtive-amount" v-if="item['type']===1">{{formatAmount(item)}}</span>
-              <div class="baht">{{$store.state["currency"]}}</div>
-            </div>
-          </van-cell>
+	          <div class="positive-amount" v-if="record.type===0">{{formatAmount(record)}}</div>
+            <div class="negtive-amount" v-if="record.type===1">{{formatAmount(record)}}</div>
+            <div class="baht">{{$store.state["currency"]}}</div>
+
+          </van-cell>  
         </div>
       </div>
     </van-list>
@@ -42,42 +41,7 @@ export default {
   name: "RecordList",
   data() {
     return {
-      list: {
-        // "20190817": [
-        //   {
-        //     id: 3,
-        //     merchantId: 22,
-        //     accountDate: "20190817",
-        //     amount: 5,
-        //     type: 1,
-        //     memo: "",
-        //     createTime: "2019-08-17T08:04:13.000+0000",
-        //     modifyTime: "2019-08-17T08:04:13.000+0000"
-        //   },
-        //   {
-        //     id: 4,
-        //     merchantId: 22,
-        //     accountDate: "20190817",
-        //     amount: 10,
-        //     type: 0,
-        //     memo: "卖苹果",
-        //     createTime: "2019-08-17T08:03:13.000+0000",
-        //     modifyTime: "2019-08-17T08:03:13.000+0000"
-        //   }
-        // ],
-        // "20190816": [
-        //   {
-        //     id: 2,
-        //     merchantId: 22,
-        //     accountDate: "20190816",
-        //     amount: 99,
-        //     type: 0,
-        //     memo: "卖点卡",
-        //     createTime: "2019-08-17T07:57:56.000+0000",
-        //     modifyTime: "2019-08-17T07:58:38.000+0000"
-        //   }
-        // ]
-      },
+      list: [],
       loading: false,
       finished: false,
       currentNo: 0
@@ -86,7 +50,7 @@ export default {
 
   computed: {
     ...mapState({
-      recordList: "recordList"
+      recordList: "recordList",
     })
   },
 
@@ -121,22 +85,11 @@ export default {
         return "-" + util.fmoney(item["amount"]);
       }
     },
-    sumIncome(item) {
-      let sum = 0;
-      for (let index in item) {
-        if (item[index]["type"] === 0) {
-          sum += item[index]["amount"];
-        } else {
-          sum -= item[index]["amount"];
-        }
-      }
-      let money = util.fmoney(sum);
-      return sum < 0 ? money : "+" + money;
-    },
     onLoad() {
       this.$api.getRecordList().then(res => {
         if (res.data.code === 200) {
-          this.list = res.data.data.recordMap;
+          this.list = res.data.data;
+          debugger
         } else {
         }
       });
@@ -166,35 +119,80 @@ export default {
     top: 11px;
   }
 }
-.negtive-amount {
-  color: #b41800;
-}
-.positive-amount {
-  color: #04a777;
-}
+
 .group {
   font-family: HelveticaNeue;
   font-size: 16px;
   color: #2f3941;
   letter-spacing: 0;
   line-height: 47px;
-}
-.title {
-  float: left;
-  margin: 18px 16px 8px 16px;
-}
-.sum {
-  float: right;
-  font-weight: bold;
-  font-size: 16px;
-  margin: 18px 16px 8px 16px;
-}
-.baht {
-    float: right;
+  margin: 0 0 0 0;
+  background-color: #e9ebed;
+  position: relative;
+
+  .date_title {
     font-size: 10px;
-    margin-left: 4px;
-    color: #000000;
+    position: absolute;
+    left: 16px;
+    top: 10px;
+  }
+
+  .sum {
+    font-weight: bold;
+    font-size: 16px;
+    position: absolute;
+    right: 56px;
+    top: 10px;
+  }
+
+  .baht {
+    font-size: 10px;
+    position: absolute;
+    right: 16px;
+    top: 10px;
+  }
 }
+
+.cell {
+  font-family: HelveticaNeue;
+  font-size: 16px;
+  color: #2f3941;
+  letter-spacing: 0;
+  line-height: 47px;
+  margin: 0 0 0 0;
+  position: relative;
+
+  .income_title {
+    font-size: 16px;
+    position: absolute;
+    left: 16px;
+    top: 0;
+  }
+
+  .negtive-amount {
+    position: absolute;
+    right: 50px;
+    top: 10px;
+    color: #b41800;
+  }
+
+  .positive-amount {
+    position: absolute;
+    right: 50px;
+    top: 10px;
+    color: #04a777;
+  }
+
+  .baht {
+    font-size: 10px;
+    position: absolute;
+    right: 16px;
+    top: 10px;
+  }
+}
+
+
+
 .custom-income {
   font-size: 16px;
   color: #04a777;

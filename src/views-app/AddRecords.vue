@@ -40,27 +40,19 @@
 
         <div class="label-left">{{$t("Record.IncomeS")}}</div>
         
-        <van-row
-          class="input_income_expense"
-        >
-          <van-col span="2">
-            <label class="plus">+</label>
-          </van-col>
-          <van-col span="20">
+        <div class="input_income_expense">
+          <div class="plus">+</div>
 
-            <van-field
-              class="income"
-              v-model="form.incomeAmount"
-              @focus="showKeyboard('incomeAmount')"
-              maxlength="13"
-              readonly
-            />
+          <van-field
+            class="income"
+            v-model="form.incomeAmount"
+            @focus="showKeyboard('incomeAmount')"
+            maxlength="13"
+            readonly
+          />
 
-          </van-col>
-          <van-col span="2">
-            <label class="currency">{{$store.state.currency}}</label>
-          </van-col>
-        </van-row>
+          <div class="currency">{{$store.state.currency}}</div>
+        </div>
 
       </van-tab>
       <van-tab title="Expenses">
@@ -69,33 +61,21 @@
           <span class="name">{{$t("Record.TotalExpenses")}}</span>
           <span class="amount">- {{ dailyExpense }} <i>{{$store.state.currency}}</i></span>
         </div>
-        <van-row class="label-left">{{$t("Record.ExpensesName")}}</van-row>
+        <div class="label-left">{{$t("Record.ExpensesName")}}</div>
 
-        <van-row class="input_note">
-          <van-col span="24">
-
+        <div class="input_note">
             <van-field
               v-model="form.memo"
               @focus="inputNote"
               maxlength="50"
               placeholder="E.g. Sales Item"
             />
-          </van-col>
-        </van-row>
+        </div>
 
-        <van-row class="label-left">
-          <van-col span="12">{{$t("Record.Date")}}</van-col>
-          <van-col
-            span="12"
-            class="link_view_history"
-          >
-          </van-col>
-        </van-row>
+        <div class="label-left">{{$t("Record.Date")}}</div>
 
-        <van-row class="pick_date">
-          <van-col span="21">
+        <div class="pick_date">
             <van-field
-              class="input"
               :value="form.accountDate"
               confirm-button-text="confirm"
               cancel-button-text="cancel"
@@ -103,35 +83,24 @@
               maxlength="13"
               readonly
             />
-          </van-col>
-          <van-col span="1">
             <van-icon name="arrow-down" />
-          </van-col>
-        </van-row>
+        </div>
 
-        <van-row class="label-left">{{$t("Record.ExpensesS")}}</van-row>
+        <div class="label-left">{{$t("Record.ExpensesS")}}</div>
 
-        <van-row
-          class="input_income_expense"
-          id="expense"
-        >
-          <van-col span="2">
-            <label class="minus">-</label>
-          </van-col>
-          <van-col span="20">
+        <div class="input_income_expense">
+          <div class="minus">-</div>
 
-            <van-field
+          <van-field
               class="expense"
               v-model="form.expenseAmount"
               @focus="showKeyboard('expenseAmount')"
               maxlength="13"
               readonly
             />
-          </van-col>
-          <van-col span="2">
-            <label class="currency">{{$store.state.currency}}</label>
-          </van-col>
-        </van-row>
+
+          <div class="currency">{{$store.state.currency}}</div>
+        </div>
 
       </van-tab>
     </van-tabs>
@@ -353,35 +322,45 @@ export default {
   font-size: 16px;
   margin: 4px 16px 0 16px;
   border-bottom: 1px solid #c2c8cc;
+  position: relative;
 
   .plus {
+    position: absolute;
     bottom: 0px;
     font-size: 16px;
     color: #04a777;
+    left:0;
   }
 
   .income {
+    position: absolute;
+    left: 5ps;
     top: 4px;
     color: #04a777;
     font-size: 24px;
-
     width: 90%;
   }
 
   .minus {
+    position: absolute;
+    bottom: 0px;
     font-size: 16px;
     color: #b41800;
+    left:0;
   }
 
   .expense {
+    position: absolute;
+    left: 5ps;
     top: 4px;
     color: #b41800;
     font-size: 24px;
-
     width: 90%;
   }
 
   .currency {
+    position: absolute;
+    right: 0;
     bottom: 0px;
     font-size: 16px;
     color: #2f3941;
