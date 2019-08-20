@@ -26,8 +26,7 @@
 
         <div class="label-left">{{$t("Record.Date")}}</div>
 
-        <van-row class="pick_date">
-          <van-col span="21">
+        <div class="pick_date">
             <van-field
               :value="form.accountDate"
               confirm-button-text="confirm"
@@ -36,11 +35,8 @@
               maxlength="13"
               readonly
             />
-          </van-col>
-          <van-col span="1" >
-            <van-icon name="arrow-down" />
-          </van-col>
-        </van-row>
+            <van-icon class="icon-arrow-down" name="arrow-down" />
+        </div>
 
         <van-row class="label-left">{{$t("Record.IncomeS")}}</van-row>
         <van-row
@@ -341,9 +337,10 @@ export default {
   height: 40px;
   font-size: 16px;
   margin: 4px 16px 0 16px;
-  .van-icon-arrow-down {
+  .icon-arrow-down {
     position: relative;
     top: 10px;
+    right: 0;
   }
 }
 
