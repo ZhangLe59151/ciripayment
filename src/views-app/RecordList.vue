@@ -8,7 +8,7 @@
       :immediate-check="false"
       @load="onLoad"
     >
-      <div class="group" 
+      <div class="group"
         v-for="item in list"
         :key="item.accountDate">
         {{ formatDate(item.accountDate) }}
@@ -26,7 +26,7 @@
             <div class="negtive-amount" v-if="record.type===1">{{formatAmount(record)}}</div>
             <div class="baht">{{$store.state["currency"]}}</div>
 
-          </van-cell>  
+          </van-cell>
         </div>
       </div>
     </van-list>
@@ -92,7 +92,6 @@ export default {
       this.$api.getRecordList().then(res => {
         if (res.data.code === 200) {
           this.list = res.data.data;
-          debugger
         } else {
         }
       });

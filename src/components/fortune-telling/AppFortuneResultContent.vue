@@ -60,7 +60,7 @@ export default {
   }
   .result-box {
     position: absolute;
-    left: 60px;
+    left: 80px;
     right: 60px;
     top: 50%;
     height: 200px;

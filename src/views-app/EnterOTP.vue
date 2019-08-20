@@ -319,8 +319,8 @@ export default {
                   this.$router.push({
                     name:
                       res.data.code === 10050
-                        ? "VerifiedFirstTime"
-                        : "EnterPasswordSP"
+                        ? "Home"
+                        : "Home"
                   });
                 });
             } else {
@@ -429,10 +429,10 @@ export default {
                         })
                         .then(res => {
                           if (res.data.code === 10050) {
-                            this.$router.push({ name: "CreatePasswordSP" });
+                            this.$router.push({ name: "Home" });
                           }
                         });
-                      this.$router.push({ name: "EnterPasswordSP" });
+                      this.$router.push({ name: "Home" });
                     });
 
                   return false;
@@ -445,13 +445,13 @@ export default {
                   })
                   .then(() => {
                     this.$store.state.serviceOverviewVo = res.data.data;
-                    this.$router.push({ name: "ServiceOverview" });
+                    this.$router.push({ name: "Home" });
                   });
 
                 return false;
               }
               // no existing application - go to new application page
-              this.$router.push({ name: "DocumentsPrepare" });
+              this.$router.push({ name: "Home" });
             });
           } else {
             this.$notify({

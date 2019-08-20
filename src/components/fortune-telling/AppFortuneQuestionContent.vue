@@ -11,7 +11,7 @@
         <van-field v-model="answer" class="answer-input" :border="true">
         </van-field>
         <van-button class="bottom-btn" type="primary" :disabled="answer.length === 0" @click="next">
-          Next
+          {{index === 1 ? "Next" : "Get My Fortune"}}
         </van-button>
       </div>
     </div>
@@ -50,12 +50,14 @@ export default {
     position: relative;
     background-color: #FF8600;
     height: 65vh;
-    width: 100%;
+    width: 90%;
+    margin-left: 20px;
+    margin-right: 20px;
   }
   .background-card {
     position: absolute;
-    background: no-repeat center url("../../assets/imgs/fortune-telling/fortune_telling_question_card.png");
-    background-size: contain;
+    background: url("../../assets/imgs/fortune-telling/fortune_telling_question_card.png") no-repeat center;
+    background-size: cover;
     width: 100%;
     height: 100%;
   }
