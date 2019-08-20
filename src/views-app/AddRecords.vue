@@ -8,10 +8,7 @@
       color="#ff8600"
       title-active-color="#ff8600"
     >
-      <van-tab
-        title="Income"
-        name="INCOME"
-      >
+      <van-tab title="Income">
         <div class="record-status">
           <span class="name">{{$t("Record.TotalIncome")}}</span>
           <span class="amount">+ {{ dailyIncome }} <i>{{$store.state.currency}}</i></span>
@@ -81,10 +78,7 @@
         </van-row>
 
       </van-tab>
-      <van-tab
-        title="Expenses"
-        name="EXPENSES"
-      >
+      <van-tab title="Expenses">
 
         <div class="record-status expenses">
           <span class="name">{{$t("Record.TotalExpenses")}}</span>
@@ -248,25 +242,6 @@ export default {
       immediate: true,
       handler(val, oldVal) {
         this.tabActive = 0;
-        let formDate = this.$moment(val).format("D MMM YYYY");
-        const _today = this.$moment().format(this.localDateFormatter);
-        const _yesterday = this.$moment()
-          .subtract(1, "days")
-          .format(this.localDateFormatter);
-        const _selected = this.$moment(val).format(this.localDateFormatter);
-        const kv = { [_today]: "Today, ", [_yesterday]: "Yesterday, " };
-
-        //this.form[Object.keys(this.form)]="";
-        this.form.expenseAmount = "";
-        this.form.incomeAmount = "";
-        this.form.memo = "";
-
-        this.$set(
-          this.form,
-          "accountDate",
-          val ? (kv[_selected] ? kv[_selected] : "") + formDate : ""
-        );
-
       }
     }
   },
@@ -321,10 +296,10 @@ export default {
         //this.$store.commit("UpdateRecord", this.convertForm(form));
         form[this.type] = parseFloat(form[this.type]);
         this.fetchData(form);
-        this.$notify("Update succeed!");
+        this.$notify({ message: $t("Record.incomeAddSucceed"), background: "#04A777" });
         return false;
       }
-      this.$toast("Pls input valid amount.");
+      //this.$notify({ message: "Please input valid number", background: "#04A777" });
     },
     convertForm(form) {
       const _date = form.accountDate.includes(",")
