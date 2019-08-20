@@ -239,7 +239,9 @@ export default {
         .then(res => {
           if (res.data.code === 200) {
             this.fetchDataUpdate(form.accountDate);
-            //this.$router.push({name: 'AddRecord'});
+            this.form.incomeAmount = "";
+            this.form.expenseAmount = "";
+            this.form.memo = "";
           }
         })
     },
