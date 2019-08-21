@@ -5,6 +5,7 @@
       :leftFunc="function(){}"
       leftText="Settings"
     />
+    
     <app-setting-list />
     <div class="logout">
       <span @click="handleLogout">Log Out</span>
