@@ -190,7 +190,6 @@ export default {
     currentDate: {
       immediate: true,
       handler(val, oldVal) {
-
         Object.entries(this.form).forEach(([key, value]) => this.form[`${key}`] = "");
         let formDate = this.$moment(val).format("D MMM YYYY");
         const _today = this.$moment().format(this.localDateFormatter);
@@ -245,6 +244,11 @@ export default {
         return false;
       }
       if (this.form[this.type] == "" && value == ".") {
+        return false;
+      }
+      const regex = /^[1-9][0-9]*\.\d{2}$/;
+      if (regex.test(form[this.type])) {
+        this.showNumberFalse();
         return false;
       }
       this.form[this.type] += value;
