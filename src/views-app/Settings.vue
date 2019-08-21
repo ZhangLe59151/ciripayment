@@ -6,9 +6,9 @@
       leftText="Settings"
     />
 
-    <div class="logout" @click="handleLogout">Sign Up or Log In</div>
+    <div class="logout" v-if="isLogin==false" @click="handleLogout">Sign Up or Log In</div>
     <app-setting-list />
-    <div class="logout" @click="handleLogout">Log Out</div>
+    <div class="logout" v-if="isLogin" @click="handleLogout">Log Out</div>
     <div class="version">
       version 1.1.0
     </div>
@@ -22,7 +22,8 @@ export default {
   name: "AppSettings",
   data() {
     return {
-      active: 3
+      active: 3,
+      isLogin: util.removeCookies("SSID")? true : false
     };
   },
   methods: {
