@@ -7,9 +7,7 @@
     />
     
     <app-setting-list />
-    <div class="logout">
-      <span @click="handleLogout">Log Out</span>
-    </div>
+    <div class="logout" @click="handleLogout">Log Out</div>
     <div class="version">
       version 1.1.0
     </div>
@@ -48,13 +46,11 @@ export default {
     width: 100%;
     margin-top: 30px;
     text-align: center;
-    > span {
-      font-size: 14px;
-      color: #037aff;
-      letter-spacing: 0;
-      text-align: center;
-      line-height: 24px;
-    }
+    color: #037aff;
+    letter-spacing: 0;
+    line-height: 50px;
+    height: 50px;
+    background-color: white;
   }
 
   .version {
