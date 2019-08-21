@@ -142,6 +142,11 @@ const AppRouteArr = [
     component: () => import("@/views-app/LanguageSelect.vue")
   },
   {
+    path: "/support",
+    name: "Support",
+    component: () => import("@/views-app/Support.vue")
+  },
+  {
     path: "/manage-settlement",
     name: "ManageSettlement",
     component: () => import("@/views-app/ManageSettlement.vue")
