@@ -4,10 +4,12 @@ import camelCase from "lodash/camelCase";
 
 // Require in a base component context
 const requireComponent = require.context(
-  "@/components",
-  false,
+  "@/components/",
+  true,
   /App[\w-]+\.vue$/
 );
+
+console.log(requireComponent.keys());
 
 requireComponent.keys().forEach(fileName => {
   // Get component config

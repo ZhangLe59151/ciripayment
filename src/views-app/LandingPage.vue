@@ -6,7 +6,7 @@
     />
     <div class="landingPageContent">
 
-      <transition name="el-zoom-in-top">
+      <transition name="van-slide-up">
         <div v-show="$store.state.deviceType && showComponents">
           <div class="slogan-title center">
             Grow Your Business with Moon Merchant Portal.
@@ -223,7 +223,7 @@ export default {
     font-size: 15px;
   }
   .bottom-btn {
-    background-color: #FF8600;
+    background-color: #ff8600;
     border-radius: 4px;
     margin: 1.25rem 0;
     width: 100%;
@@ -232,10 +232,10 @@ export default {
 </style>
 
 <style lang="scss">
-  .loginWrapper {
-    .el-form-item__error {
-      position: relative;
-      left: 15px;
-    }
+.loginWrapper {
+  .el-form-item__error {
+    position: relative;
+    left: 15px;
   }
+}
 </style>
