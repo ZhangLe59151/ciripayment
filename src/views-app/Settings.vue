@@ -5,11 +5,11 @@
       :leftFunc="function(){}"
       leftText="Settings"
     />
-    <div class="logout" v-if="isLogin==false" @click="handleLogout">{{$t("SoL")}}</div>
+    <div class="logout" v-if="isLogin==false" @click="handleLogout">{{$t("Setting.SoL")}}</div>
     <app-setting-list />
-    <div class="logout" v-if="isLogin" @click="handleLogout">{{$t("Log Out")}}</div>
+    <div class="logout" v-if="isLogin" @click="handleLogout">{{$t("Setting.Logout")}}</div>
     <div class="version">
-      version 1.1.0
+      {{$t("Setting.Version")}} 0.1
     </div>
     <app-tab-bar :active="($store.state.deviceType === 'APP' ? 2 : 2 )" />
   </div>

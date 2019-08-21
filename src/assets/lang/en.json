@@ -123,6 +123,7 @@
   "Setting": {
     "Language": "Language",
     "SoL": "Sign Up or Log In",
-    "Logout": "Log Out"
+    "Logout": "Log Out",
+    "Version": "version"
   }
 }
