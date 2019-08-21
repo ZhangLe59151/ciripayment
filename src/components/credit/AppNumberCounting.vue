@@ -6,6 +6,8 @@
 
 <script>
 import { mapState } from "vuex";
+import util from "@/util.js";
+
 export default {
   name: "AppNumberCounting",
   props: { "numberTo": { default: 0 } },
@@ -16,7 +18,7 @@ export default {
     }
   },
   computed: { ...mapState({
-    originalDisplayNumber: state => state.userInfo.creditLimit }
+    originalDisplayNumber: state => state.credit.creditLimit }
   ) },
   created() {
     this.displayNumber = this.originalDisplayNumber;
