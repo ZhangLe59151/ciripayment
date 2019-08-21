@@ -3,7 +3,7 @@
     <div v-bind:class="creditLimitClass">
       <div class="credit-limit-title">Your Current Credit Limit:</div>
 <!--      <div class="credit-limit-amount">{{formatCurrency(creditLimit)}} {{$store.state.currency}}</div>-->
-      <app-number-counting :numberTo="numberTo" class="credit-limit-amount" />
+      <credit-app-number-counting :numberTo="numberTo" class="credit-limit-amount" />
 
     </div>
     <div class="credit-question-wrapper">
@@ -91,7 +91,7 @@ export default {
       background-color: #ffffff;
     }
     .money-backgr {
-      background: url("../assets/imgs/money_crop.gif") no-repeat ;
+      background: url("../../assets/imgs/money_crop.gif") no-repeat ;
       background-size: 100% 100%;
       background-position-y: bottom;
     }

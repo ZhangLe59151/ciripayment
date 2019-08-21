@@ -13,8 +13,8 @@
       </div>
     </van-nav-bar>
 
-   <app-credit-limit />
-    <app-credit-update />
+   <credit-app-credit-limit />
+    <credit-app-credit-update />
   </div>
 </template>
 
