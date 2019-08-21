@@ -20,6 +20,9 @@
             <van-button class="submit-btn">+1,000 B criedit</van-button>
           </div>
         </van-swipe-item>
+        <van-swipe-item>
+          <credit-app-question-select-two />
+        </van-swipe-item>
       </van-swipe>
       <div class="indicator">Swipe left to skip this question for now</div>
     </div>

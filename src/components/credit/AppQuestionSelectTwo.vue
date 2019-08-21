@@ -1,16 +1,15 @@
 <template>
-  <div class="credit-question-2">
-    <div class="title">What's your monthly income?</div>
-            <van-field
-              class="input_number"
-              v-model="form.memo"
-              maxlength="50"
-              placeholder="5000"
-            />
-            <div class="curruncy">{{$store.state.currency}}</div>
-            
-            <div class="error_msg">Please enter an amount</div>
-            <van-button class="submit-btn">+1,000 B criedit</van-button>
+  <div class="box-card">
+        <div class="title">What's your monthly income?</div>
+        <div class="option-block">
+          <button class="option">0</button>
+          <button class="option">1</button>
+        <!--   <button class="option">2</button>
+          <button class="option">3</button>
+          <button class="option">4</button>
+          <button class="option">5+</button> -->
+        </div>
+        <van-button class="submit-btn">+1,000 B criedit</van-button>
   </div>
 </template>
 
@@ -56,25 +55,22 @@ export default {
         top: 30px;
       }
 
-      .input_number {
+      .option-block {
         position: absolute;
-        height: 82px;
+        top: 110px;
         left: 16px;
         right: 16px;
-        width: 90%;
-        top: 130px;
-        font-size: 24px;
-        height: 25%;
-        border-color: #B41800;
-        border-style: solid;
-        border-width: 1px;
-        border-radius: 4px;
-      }
+        height: 30%;
 
-      .curruncy {
-        position: absolute;
-        top: 163px;
-        right: 32px;
+        .option {
+          border-color: #87929D;
+          border-width: 1px;
+          background-color: white;
+          border-radius: 4px;
+          width: 45%;
+          height: 40%;
+          margin: 4px 6px 4px 6px;
+        }
       }
       
       .submit-btn{
