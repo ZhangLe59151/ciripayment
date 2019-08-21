@@ -86,27 +86,17 @@
 
         <div class="label-left">{{$t("Record.ExpensesS")}}</div>
 
-        <van-row
-          class="input_income_expense"
-          id="expense"
-        >
-          <van-col span="2">
-            <label class="minus">-</label>
-          </van-col>
-          <van-col span="20">
-
-            <van-field
+        <div class="input_income_expense" >
+          <div class="minus">-</div>
+          <van-field
               class="expense"
               v-model="form.expenseAmount"
               @focus="showKeyboard('expenseAmount')"
               maxlength="13"
               readonly
-            />
-          </van-col>
-          <van-col span="2">
-            <label class="currency">{{$store.state.currency}}</label>
-          </van-col>
-        </van-row>
+          />
+          <div class="currency">{{$store.state.currency}}</div>
+        </div>
 
       </van-tab>
     </van-tabs>
@@ -336,13 +326,13 @@ export default {
 
   .plus {
     position: absolute;
-    bottom: 2px;
+    bottom: 10px;
     width: 10px;
   }
 
   .minus {
     position: absolute;
-    bottom: 2px;
+    bottom: 10px;
     width: 10px;
     color: #b41800;
   }
@@ -365,10 +355,10 @@ export default {
   }
 
   .currency {
-    bottom: 2px;
+    position: absolute;
+    bottom: 10px;
     right: 0;
     color: #2f3941;
-    padding-bottom: 10px;
   }
 }
 
