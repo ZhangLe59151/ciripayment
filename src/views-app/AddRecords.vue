@@ -124,7 +124,7 @@
       :show="showNumber"
       extra-key="."
       close-button-text="Done"
-      @blur="showNumberFalse"
+      @blur="showNumber = false"
       @input="onInput"
       @delete="onDelete"
     />
@@ -236,9 +236,6 @@ export default {
       this.showNumber = true;
       this.type = type;
     },
-    showNumberFalse() {
-      this.showNumber = false;
-    },
     onInput(value) {
       if (this.form[this.type].indexOf(".") != -1 && value == ".") {
         return false;
@@ -249,7 +246,7 @@ export default {
       const regex = /^[0-9]*\.\d{1}$/;
       if (regex.test(this.form[this.type])) {
         this.form[this.type] += value;
-        this.showNumberFalse();
+        this.showNumber = false;
         return false;
       }
       this.form[this.type] += value;
