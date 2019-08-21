@@ -307,7 +307,7 @@ export default {
     position: absolute;
     top: 10px;
     right: 0;
-  }
+}
 
 .input_income_expense {
   position: relative;
@@ -346,9 +346,6 @@ export default {
     }
 
   }
-
-  
-
   
 }
 
