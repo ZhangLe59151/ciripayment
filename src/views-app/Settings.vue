@@ -5,7 +5,6 @@
       :leftFunc="function(){}"
       leftText="Settings"
     />
-
     <div class="logout" v-if="isLogin==false" @click="handleLogout">Sign Up or Log In</div>
     <app-setting-list />
     <div class="logout" v-if="isLogin" @click="handleLogout">Log Out</div>
@@ -23,7 +22,7 @@ export default {
   data() {
     return {
       active: 3,
-      isLogin: util.removeCookies("SSID")? true : false
+      isLogin: this.$store.state.userInfo.accountVerified? true : false
     };
   },
   methods: {
