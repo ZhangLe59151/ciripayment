@@ -1,11 +1,11 @@
 <template>
   <div class="app-home-progress">
-    <app-home-apply
+    <home-app-home-apply
       v-if="status === 'NOAPPLICATION' || status === '2'"
       :status.sync="status"
-    ></app-home-apply>
+    />
 
-    <transition name="el-zoom-in-center">
+    <transition name="van-slide-up">
       <div
         class="regular-progress"
         v-if="status !== 'NOAPPLICATION' && status !== '2' && showBox"
@@ -28,13 +28,9 @@
 
 <script>
 import { find } from "lodash";
-import AppHomeApply from "@/components/AppHomeApply";
+
 export default {
   name: "AppHomeProgress",
-
-  components: {
-    AppHomeApply
-  },
 
   props: {
     status: {
@@ -116,7 +112,7 @@ export default {
     width: 230px;
     .title {
       font-size: 16px;
-      color: #FF8600;
+      color: #ff8600;
       letter-spacing: 0;
       font-weight: bold;
       position: relative;

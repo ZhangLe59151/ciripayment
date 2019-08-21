@@ -5,7 +5,7 @@
       <div class="title">
         Create Password
       </div>
-      <transition name="el-zoom-in-top">
+      <transition name="van-slide-up">
         <div v-show="showComponents">
           <div class="description">
             Great! Now set up a password to secure your account.

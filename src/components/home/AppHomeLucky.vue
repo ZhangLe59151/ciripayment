@@ -2,7 +2,8 @@
   <router-link
     class="app-home-lucky"
     tag="div"
-    :to="{name: 'DailyFortunePrepare'}" v-if="!fortuneTold"
+    :to="{name: 'DailyFortunePrepare'}"
+    v-if="!fortuneTold"
   >
     <div class="title">{{luckTitle}}</div>
     <div class="subtitle">
@@ -13,7 +14,8 @@
   <router-link
     class="app-home-lucky"
     tag="div"
-    :to="{name: 'DailyFortuneResult'}" v-else
+    :to="{name: 'DailyFortuneResult'}"
+    v-else
   >
     <div class="title">{{encourageLuckyTitle}}</div>
     <div class="subtitle">
@@ -51,14 +53,22 @@ export default {
     }
   },
   mounted() {
-    let todayFortune = this.fortunetellingFrame[this.today] ? this.fortunetellingFrame[this.today] : "";
+    let todayFortune = this.fortunetellingFrame[this.today]
+      ? this.fortunetellingFrame[this.today]
+      : "";
     if (todayFortune) {
       this.fortuneTold = true;
       let salesTarget = todayFortune.salesTarget;
       if (salesTarget.type === 0) {
         this.inputedIncome = true;
-        this.incomeMin = salesTarget.incomeResult.min.replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,'$&,');
-        this.incomeMax = salesTarget.incomeResult.max.replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,'$&,');;
+        this.incomeMin = (salesTarget.incomeResult.min + "").replace(
+          /\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,
+          "$&,"
+        );
+        this.incomeMax = (salesTarget.incomeResult.max + "").replace(
+          /\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,
+          "$&,"
+        );
       } else {
         this.inputedIncome = false;
         this.subtitle = salesTarget.generalResult;
@@ -72,7 +82,7 @@ export default {
 .app-home-lucky {
   height: 142px;
   width: 100%;
-  background-image: url(../assets/imgs/home_chest.png);
+  background-image: url(../../assets/imgs/home_chest.png);
   background-repeat: no-repeat;
   background-size: cover;
   text-align: right;
@@ -95,7 +105,7 @@ export default {
       top: 45px;
       right: 16px;
     }
-    &.encourage{
+    &.encourage {
       font-size: 14px;
       color: #ffffff;
       position: absolute;
@@ -118,12 +128,12 @@ export default {
       bottom: 20px;
     }
   }
-  .subscript{
-      font-size: 12px;
-      font-weight: bold;
-      color: #ffffff;
-      vertical-align:top;
-      padding-left:4px;
-    }
+  .subscript {
+    font-size: 12px;
+    font-weight: bold;
+    color: #ffffff;
+    vertical-align: top;
+    padding-left: 4px;
+  }
 }
 </style>

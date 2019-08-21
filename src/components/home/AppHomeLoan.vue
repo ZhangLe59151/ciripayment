@@ -5,9 +5,9 @@
     :to="{name: 'Loan',query: {origin: 'banner'}}"
   >
     <div class="des">Get instant loan!</div>
-<!--    <div class="amount">100,000 {{$store.state.currency}}</div>-->
+    <!--    <div class="amount">100,000 {{$store.state.currency}}</div>-->
 
-<!--    <div class="getNow">{{$t("Home.loanBtn")}}</div>-->
+    <!--    <div class="getNow">{{$t("Home.loanBtn")}}</div>-->
     <div class="applyNow">Apply Now</div>
 
   </router-link>
@@ -24,7 +24,7 @@ export default {
   height: 100px;
   width: 100%;
   text-align: center;
-  background-image: url(../assets/imgs/home_loan.png);
+  background-image: url(../../assets/imgs/home_loan.png);
   background-repeat: no-repeat;
   background-size: cover;
   margin-top: 8px;

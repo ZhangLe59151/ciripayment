@@ -281,8 +281,11 @@ export default new Vuex.Store({
       localStorage.setItem("logInWithPassword", "true");
     },
     logOut(state) {
+      state.userInfo.creditLimit = null;
       state.OTPVerified = false;
       state.logInWithPassword = false;
+      state.fortunetellingFrame = null;
+      state.fortuneQuestionUsed = [];
       localStorage.clear();
     },
     // This is for settlement

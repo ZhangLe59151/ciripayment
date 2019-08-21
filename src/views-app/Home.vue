@@ -1,13 +1,13 @@
 <template>
   <div class="app-home">
-    <app-home-header :info.sync="records"/>
+    <home-app-home-header :info.sync="records" />
 
-    <app-home-loan/>
-    <app-home-credit />
-    <app-home-lucky/>
-    
-    <app-home-info/>
-    <app-tab-bar :active="0"/>
+    <home-app-home-loan />
+    <home-app-home-credit />
+    <home-app-home-lucky />
+
+    <home-app-home-info />
+    <home-app-tab-bar :active="0" />
   </div>
 </template>
 
@@ -90,8 +90,12 @@ export default {
       this.$api.getHomePageInfo().then(res => {
         if (res.data.code === 200) {
           this.hasLoan = res.data.data.hasLoan;
-          this.records.income = util.fmoney(res.data.data.merchantRecordSum.incomeSum);
-          this.records.expense = util.fmoney(res.data.data.merchantRecordSum.expensesSum);
+          this.records.income = util.fmoney(
+            res.data.data.merchantRecordSum.incomeSum
+          );
+          this.records.expense = util.fmoney(
+            res.data.data.merchantRecordSum.expensesSum
+          );
         }
       });
     }
@@ -99,7 +103,6 @@ export default {
   mounted() {
     // this.$store.commit("InitUserInfo");
     //this.fetchHomePageData();
-
     // if (
     //   Object.entries(this.$store.state.userInfo).length === 0 &&
     //   this.$store.state.userInfo.constructor === Object
