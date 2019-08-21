@@ -1,4 +1,4 @@
-import Vue from "vue";
+settimport Vue from "vue";
 import Router from "vue-router";
 import store from "../store";
 
@@ -135,6 +135,11 @@ const AppRouteArr = [
     path: "/settings",
     name: "Settings",
     component: () => import("@/views-app/Settings.vue")
+  },
+  {
+    path: "/language",
+    name: "LanguageSelect",
+    component: () => import("@/views-app/LanguageSelect.vue")
   },
   {
     path: "/manage-settlement",

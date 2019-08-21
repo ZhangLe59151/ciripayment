@@ -9,22 +9,13 @@
         value=""
       />
     </van-cell-group> -->
-    <div class="setting_title" v-if="login">SERVICES</div>
-
-    <van-cell-group>
-      <van-cell
-        title="Notifications"
-        is-link
-      />
-    </van-cell-group>
-
-    <div class="setting_title">OTHERS</div>
 
     <van-cell-group>
       <van-cell
         title="Language"
         is-link
         value="English"
+        :to="{name: 'LanguageSelect'}"
       />
       <van-cell
         title="Terms & Conditions"
