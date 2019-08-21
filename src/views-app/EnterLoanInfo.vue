@@ -42,7 +42,7 @@
             @blur="validateResAddr"
           >
           </el-input>
-          <div :class="(resAddrValidated ? 'success-validator': 'success-validator unchecked')">
+          <div v-if="resAddrValidated" class="bottom-right-position">
             <i class="iconfont iconsuccess"/></div>
         </el-form-item>
 
@@ -59,7 +59,7 @@
             :maxlength="25"
             @blur="validateBizName"
           ></el-input>
-          <div :class="(bizNameEnValidated ? 'success-validator': 'success-validator unchecked')">
+          <div v-if="bizNameEnValidated" class="bottom-right-position">
             <i class="iconfont iconsuccess"/></div>
         </el-form-item>
 
@@ -97,7 +97,7 @@
             :autosize="{minRows: 0, maxRows: 3}"
             @blur="validateBizAddr"
           ></el-input>
-          <div :class="(bizAddrValidated ? 'success-validator': 'success-validator unchecked')">
+          <div v-if="bizAddrValidated" class="bottom-right-position">
             <i class="iconfont iconsuccess"/></div>
         </el-form-item>
       </el-card>
@@ -110,7 +110,7 @@
         <div class="document-cell">
           <div class="document-name-container">
             <div class="label-title required">{{$t("EnterLoanInfo.frontNat")}}</div>
-            <div class="file-name">{{frontName}}</div>
+            <div class="file-name"><i v-if="!!frontName" class="iconfont iconsuccess success-validator margin-right-8"/>{{frontName}}</div>
           </div>
           <div
             class="action-area"
@@ -147,7 +147,8 @@
         <div class="document-cell">
           <div class="document-name-container">
             <div class="label-title required">{{$t("EnterLoanInfo.backNat")}}</div>
-            <div class="file-name">{{backName}}</div>
+            <div class="file-name">
+              <i v-if="!!backName" class="iconfont iconsuccess success-validator margin-right-8"/>{{backName}}</div>
           </div>
           <div
             class="action-area"
@@ -185,7 +186,8 @@
         <div class="document-cell">
           <div class="document-name-container">
             <div class="label-title required double-line">{{$t("EnterLoanInfo.photos")}}</div>
-            <div class="file-name">{{faceName}}</div>
+            <div class="file-name"><i v-if="!!faceName" class="iconfont iconsuccess success-validator margin-right-8"/>
+              {{faceName}}</div>
           </div>
           <div
             class="action-area"
@@ -769,12 +771,14 @@ export default {
     }
     .success-validator {
       color: #04a777;
+    }
+    .bottom-right-position {
       position:absolute;
       bottom:0;
       right:0;
     }
-    .unchecked {
-      display:none;
+    .margin-right-8 {
+      margin-right: 8px;
     }
     .tips {
       font-size: 16px;
@@ -795,7 +799,6 @@ export default {
       border: 1px solid #d8dee6;
       border-radius: 8px;
       font-size: 16px;
-      color: #b41800;
       letter-spacing: 0;
       line-height: 24px;
       margin: 16px 0 20px;

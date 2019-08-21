@@ -1,105 +1,27 @@
 <template>
     <div class="app-credit-update">
-      <el-form
-        label-width="0px"
-        :model="form"
-        ref="elForm"
-        size="small"
-        label-position="top"
-        class="elForm"
-      >
-        <div class="box-card">
-          <el-form-item
-            label="What's your monthly income?"
-            prop="Q1"
-          >
-            <el-row v-if="!Answers || !Answers.Q1">
-              <el-col :span="18">
-                <el-input inputmode="numeric" v-model="form.Q1" >
-                  <div class="currency" slot="suffix">{{$store.state.currency}}</div>
-                </el-input>
-              </el-col>
-              <el-col :span="5" :offset="1">
-                <van-button
-                  size="small"
-                  @click="submitAnswers"
-                  v-bind:class="[(!form.Q1) ? 'submit-btn disabled' : 'submit-btn']"
-                  :disabled="!form.Q1"
-                >Submit</van-button>
-              </el-col>
-            </el-row>
-            <el-row v-else>
-              <el-col :span="2">
-                <van-checkbox v-model="checked" checked-color="#04A777"></van-checkbox>
-              </el-col>
-              <el-col :span="21" class="submittedAnswer">
-                {{Answers.Q1}} {{$store.state.currency}}
-              </el-col>
-            </el-row>
-          </el-form-item>
-        </div>
-        <div class="box-card">
-          <el-form-item
-            label="What's your monthly expenses?"
-            prop="Q2"
-          >
-            <el-row v-if="!Answers || !Answers.Q2">
-              <el-col :span="18">
-                <el-input inputmode="numeric" v-model="form.Q2" >
-                  <div class="currency" slot="suffix">{{$store.state.currency}}</div>
-                </el-input>
-              </el-col>
-              <el-col :span="5" :offset="1">
-                <van-button
-                  size="small"
-                  class="submit-btn"
-                  @click="submitAnswers"
-                  v-bind:class="[(!form.Q2) ? 'submit-btn disabled' : 'submit-btn']"
-                  :disabled="!form.Q2"
-                >Submit</van-button>
-              </el-col>
-            </el-row>
-            <el-row v-else>
-              <el-col :span="2">
-                <van-checkbox v-model="checked" checked-color="#04A777"></van-checkbox>
-              </el-col>
-              <el-col :span="21" class="submittedAnswer">
-                {{Answers.Q2}} {{$store.state.currency}}
-              </el-col>
-            </el-row>
-          </el-form-item>
-        </div>
-        <div class="box-card">
-          <el-form-item
-            label="What's your favourite restaurant?"
-            prop="Q3"
-          >
-            <el-row v-if="!Answers || !Answers.Q3">
-              <el-col :span="18">
-                <el-input v-model="form.Q3" >
-                </el-input>
-              </el-col>
-              <el-col :span="5" :offset="1">
-                <van-button
-                  size="small"
-                  class="submit-btn"
-                  @click="submitAnswers"
-                  v-bind:class="[(!form.Q3) ? 'submit-btn disabled' : 'submit-btn']"
-                  :disabled="!form.Q3"
-                >Submit</van-button>
-              </el-col>
-            </el-row>
-            <el-row v-else>
-              <el-col :span="2">
-                <van-checkbox v-model="checked" checked-color="#04A777"></van-checkbox>
-              </el-col>
-              <el-col :span="21" class="submittedAnswer">
-                {{Answers.Q3}}
-              </el-col>
-            </el-row>
-          </el-form-item>
-        </div>
-      </el-form>
+      <van-swipe 
+        @change="onChange"
+        :loop="false"
+        :show-indicators="false"
+        :width="swipeWidth" >
+        <van-swipe-item>
+          <div class="box-card">
+            <div class="title">What's your monthly income?</div>
+            <van-field
+              class="input_number"
+              v-model="form.memo"
+              maxlength="50"
+              placeholder="5000"
+            />
+            <div class="curruncy">{{$store.state.currency}}</div>
+            
+            <div class="error_msg">Please enter an amount</div>
+            <van-button class="submit-btn">+1,000 B criedit</van-button>
+          </div>
+        </van-swipe-item>
+      </van-swipe>
+      <div class="indicator">Swipe left to skip this question for now</div>
     </div>
 </template>
 
@@ -111,7 +33,8 @@ export default {
   data() {
     return {
       checked: true,
-      form: {}
+      form: {},
+      swipeWidth: 355
     }
   },
   computed: {
@@ -126,54 +49,8 @@ export default {
     })
   },
   methods: {
-    formatNumber(n) {
-      return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    },
-    formatCurrency(val) {
-      val = String(val);
-      // don't validate empty input
-      if (val === "") {
-        return;
-      }
-
-      // check for decimal
-      if (val.indexOf(".") >= 0) {
-        // get position of first decimal
-        // this prevents multiple decimals from
-        // being entered
-        var decimalPos = val.indexOf(".");
-
-        // split number by decimal point`
-        var leftSide = val.substring(0, decimalPos);
-        var rightSide = val.substring(decimalPos);
-
-        // add commas to left side of number
-        leftSide = this.formatNumber(leftSide);
-
-        // validate right side
-        rightSide = this.formatNumber(rightSide);
-
-        // Limit decimal to only 2 digits
-        rightSide = rightSide.substring(0, 2);
-
-        // join number by .
-        val = leftSide + "." + rightSide;
-      } else {
-        // no decimal entered
-        // add commas to number
-        // remove all non-digits
-        val = this.formatNumber(val);
-      }
-      // send updated string to input
-      return val;
-    },
-    submitAnswers() {
-      let submittingAnswers = this.form;
-      let submittedAnswers = this.Answers;
-      let updatingAnswers = { ...submittedAnswers, ...submittingAnswers };
-      let numberOfAnswered = Object.values(updatingAnswers).filter(String).length;
-      let updatingCreditLimit = numberOfAnswered * 10000 + 5000;
-      this.$store.commit("UpdateUserInfo", { creditAnswers: updatingAnswers, creditLimit: updatingCreditLimit });
+    onChange(index) {
+      this.swipeWidth = 300;
     }
   }
 
@@ -183,23 +60,67 @@ export default {
 <style lang="scss" scoped>
   .app-credit-update{
     flex-grow:1;
-    background-color: #E9EBED;
+    background-color: #04A777;
+
     .box-card{
       background-color: #ffffff;
-      padding: 16px;
-      margin-bottom: 8px;
-      height: 95px;
-      box-sizing: border-box;
+      margin: 16px 6px 0 28px;
+      height: 340px;
+      border-radius: 10px;
+      position: relative;
+
+      .title{
+        font-size: 20px;
+        font-weight: bolder;
+        text-align: center;
+        position: absolute;
+        left: 30px;
+        right: 30px;
+        top: 30px;
+      }
+
+      .input_number {
+        position: absolute;
+        height: 82px;
+        left: 16px;
+        right: 16px;
+        width: 90%;
+        top: 130px;
+        font-size: 24px;
+        height: 25%;
+        border-color: #B41800;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 4px;
+      }
+
+      .curruncy {
+        position: absolute;
+        top: 163px;
+        right: 32px;
+      }
+
+      .error_msg {
+        position: absolute;
+        top: 220px;
+        font-size: 14px;
+        color: #B41800;
+        text-align: center;
+        width: 100%;
+      }
+      
       .submit-btn{
+        position: absolute;
         background: #FF8600;
         border-radius: 4px;
+        left: 16px;
+        right: 16px;
+        width: 90%;
         height: 40px;
-        width: 100%;
         color: white;
         font-size: 14px;
-        position: relative;
-        top: -4px;
         line-height: 40px;
+        bottom: 20px;
       }
       .disabled {
         background-color: #E9EBED;
@@ -211,6 +132,14 @@ export default {
         top: -2px;
       }
     }
+
+    .indicator {
+      margin: 16px 0 0 0;
+      font-size: 14px;
+      text-align: center;
+      color: white;
+    }
+
   }
 </style>
 

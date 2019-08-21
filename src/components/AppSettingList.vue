@@ -1,25 +1,24 @@
 <template>
   <div class="app-setting-list">
 
-    <!-- <van-cell-group>
-      <van-cell
-        title="Profile"
-        is-link
-        @click="verifyIdentity"
-        value=""
-      />
-    </van-cell-group> -->
-
     <van-cell-group>
-      <van-cell
-        title="Currency"
-        is-link
-        value="THB"
-      />
       <van-cell
         title="Language"
         is-link
         value="English"
+        :to="{name: 'LanguageSelect'}"
+      />
+      <van-cell
+        title="Terms & Conditions"
+        is-link
+        value=""
+        :to="{name: 'TermsAndConditions'}"
+      />
+      <van-cell
+        title="Support"
+        is-link
+        value=""
+        :to="{name: 'Support'}"
       />
     </van-cell-group>
 
@@ -29,15 +28,6 @@
         is-link
         value=""
         :to="{name: 'ForgotPasswordSP'}"
-      />
-    </van-cell-group>
-
-    <van-cell-group>
-      <van-cell
-        title="Terms & Conditions"
-        is-link
-        value=""
-        :to="{name: 'TermsAndConditions'}"
       />
     </van-cell-group>
 
@@ -78,7 +68,8 @@ export default {
     return {
       profileDialog: false,
       showKeyboard: false,
-      value: ""
+      value: "",
+      login: true
     };
   },
   methods: {
@@ -163,6 +154,13 @@ export default {
   .van-number-keyboard {
     z-index: 3001 !important;
   }
+}
+
+.setting_title {
+  margin: 16px 16px 4px 16px;
+  font-size: 12px;
+  font-weight: bolder;
+  color: #2F3941;
 }
 </style>
 

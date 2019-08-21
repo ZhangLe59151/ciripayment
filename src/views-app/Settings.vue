@@ -5,10 +5,9 @@
       :leftFunc="function(){}"
       leftText="Settings"
     />
+    <div class="logout" v-if="isLogin==false" @click="handleLogout">Sign Up or Log In</div>
     <app-setting-list />
-    <div class="logout">
-      <span @click="handleLogout">Log Out</span>
-    </div>
+    <div class="logout" v-if="isLogin" @click="handleLogout">Log Out</div>
     <div class="version">
       version 1.1.0
     </div>
@@ -22,7 +21,8 @@ export default {
   name: "AppSettings",
   data() {
     return {
-      active: 3
+      active: 3,
+      isLogin: this.$store.state.userInfo.accountVerified? true : false
     };
   },
   methods: {
@@ -48,13 +48,11 @@ export default {
     width: 100%;
     margin-top: 30px;
     text-align: center;
-    > span {
-      font-size: 14px;
-      color: #037aff;
-      letter-spacing: 0;
-      text-align: center;
-      line-height: 24px;
-    }
+    color: #037aff;
+    letter-spacing: 0;
+    line-height: 50px;
+    height: 50px;
+    background-color: white;
   }
 
   .version {

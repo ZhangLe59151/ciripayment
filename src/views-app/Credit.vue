@@ -1,20 +1,9 @@
 <template>
   <div class="credit">
-    <van-nav-bar
-      @click-left="$router.push({name: 'Home'})"
-      :border="false"
-      left-arrow
-    >
-      <div
-        slot="title"
-        class="header-title"
-      >
-        Credit Line
-      </div>
-    </van-nav-bar>
+    <app-common-header title="Credit Line" />
 
-   <credit-app-credit-limit />
-<!--    <credit-app-credit-update />-->
+    <credit-app-credit-limit />
+    <credit-app-credit-update />
   </div>
 </template>
 

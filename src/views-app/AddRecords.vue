@@ -40,28 +40,17 @@
 
         <div class="label-left">{{$t("Record.IncomeS")}}</div>
         
-        <van-row
-          class="input_income_expense"
-          id="income"
-        >
-          <van-col span="2">
-            <label class="plus">+</label>
-          </van-col>
-          <van-col span="20">
-
-            <van-field
+        <div class="input_income_expense" >
+          <div class="plus">+</div>
+          <van-field
               class="income"
               v-model="form.incomeAmount"
               @focus="showKeyboard('incomeAmount')"
               maxlength="13"
               readonly
-            />
-
-          </van-col>
-          <van-col span="2">
-            <label class="currency">{{$store.state.currency}}</label>
-          </van-col>
-        </van-row>
+          />
+          <div class="plus currency">{{$store.state.currency}}</div>
+        </div>
 
       </van-tab>
       <van-tab title="Expenses">
@@ -97,27 +86,17 @@
 
         <div class="label-left">{{$t("Record.ExpensesS")}}</div>
 
-        <van-row
-          class="input_income_expense"
-          id="expense"
-        >
-          <van-col span="2">
-            <label class="minus">-</label>
-          </van-col>
-          <van-col span="20">
-
-            <van-field
-              class="expense"
+        <div class="input_income_expense" >
+          <div class="plus minus">-</div>
+          <van-field
+              class="income expense"
               v-model="form.expenseAmount"
               @focus="showKeyboard('expenseAmount')"
               maxlength="13"
               readonly
-            />
-          </van-col>
-          <van-col span="2">
-            <label class="currency">{{$store.state.currency}}</label>
-          </van-col>
-        </van-row>
+          />
+          <div class="plus currency">{{$store.state.currency}}</div>
+        </div>
 
       </van-tab>
     </van-tabs>
@@ -145,7 +124,7 @@
       :show="showNumber"
       extra-key="."
       close-button-text="Done"
-      @blur="showNumberFalse"
+      @blur="showNumber = false"
       @input="onInput"
       @delete="onDelete"
     />
@@ -211,7 +190,6 @@ export default {
     currentDate: {
       immediate: true,
       handler(val, oldVal) {
-
         Object.entries(this.form).forEach(([key, value]) => this.form[`${key}`] = "");
         let formDate = this.$moment(val).format("D MMM YYYY");
         const _today = this.$moment().format(this.localDateFormatter);
@@ -258,14 +236,17 @@ export default {
       this.showNumber = true;
       this.type = type;
     },
-    showNumberFalse() {
-      this.showNumber = false;
-    },
     onInput(value) {
       if (this.form[this.type].indexOf(".") != -1 && value == ".") {
         return false;
       }
       if (this.form[this.type] == "" && value == ".") {
+        return false;
+      }
+      const regex = /^[0-9]*\.\d{1}$/;
+      if (regex.test(this.form[this.type])) {
+        this.form[this.type] += value;
+        this.showNumber = false;
         return false;
       }
       this.form[this.type] += value;
@@ -315,12 +296,6 @@ export default {
 .label-left {
   margin: 16px 16px 0 16px;
   height: 24px;
-
-  .link_view_history {
-    font-size: 14px;
-    color: #ff8600;
-    text-align: right;
-  }
 }
 
 .pick_date {
@@ -334,47 +309,46 @@ export default {
     position: absolute;
     top: 10px;
     right: 0;
-  }
+}
 
 .input_income_expense {
+  position: relative;
   height: 40px;
   font-size: 16px;
   margin: 4px 16px 0 16px;
   border-bottom: 1px solid #c2c8cc;
+  color: #04a777;
+  font-size: 16px;
 
   .plus {
-    bottom: 0px;
-    font-size: 16px;
-    color: #04a777;
+    position: absolute;
+    bottom: 10px;
+    width: 10px;
+
+    &.minus {
+      color: #b41800;
+    }
+
+    &.currency {
+      right: 0;
+      color: #2f3941;
+    }
+
   }
 
   .income {
-    top: 4px;
-    color: #04a777;
+    position: absolute;
+    bottom: 2px;
+    left: 25px;
+    right: 25px;
     font-size: 24px;
 
-    width: 90%;
-  }
+    &.expense {
+      color: #b41800;
+    }
 
-  .minus {
-    font-size: 16px;
-    color: #b41800;
   }
-
-  .expense {
-    top: 4px;
-    color: #b41800;
-    font-size: 24px;
-
-    width: 90%;
-  }
-
-  .currency {
-    bottom: 0px;
-    font-size: 16px;
-    color: #2f3941;
-    padding-bottom: 10px;
-  }
+  
 }
 
 .input_note {
