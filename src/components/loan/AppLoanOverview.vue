@@ -203,7 +203,7 @@ export default {
   flex-direction: column;
   .banner {
     height: 138px;
-    background: url("../assets/imgs/loan.png") no-repeat;
+    background: url("../../assets/imgs/loan.png") no-repeat;
     background-size: cover;
     color: #363f47;
     text-align: center;
@@ -218,7 +218,7 @@ export default {
 
   .ribbon {
     height: 60px;
-    background: url("../assets/imgs/ribbon.png") no-repeat;
+    background: url("../../assets/imgs/ribbon.png") no-repeat;
     background-size: cover;
     position: relative;
     top: -35px;

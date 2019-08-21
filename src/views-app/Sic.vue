@@ -40,7 +40,7 @@ import { SIC } from "@/assets/data/sic.js";
 export default {
   data() {
     return {
-      list: [],
+      list: SIC,
       loading: false,
       finished: false,
       sic: ""

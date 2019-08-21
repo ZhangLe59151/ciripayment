@@ -10,6 +10,28 @@ axios.defaults.headers = {
 };
 
 axios.defaults.baseURL = process.env.VUE_APP_BASEURL;
+axios.interceptors.request.use(
+  config => {
+    const clientId = localStorage.getItem("ClientId");
+    if (config.method === "post") {
+      config.data = {
+        ...config.data,
+        _t: Date.parse(new Date()) / 1000,
+        clientId: clientId
+      };
+    } else if (config.method === "get") {
+      config.params = {
+        _t: Date.parse(new Date()) / 1000,
+        clientId: clientId,
+        ...config.params
+      };
+    }
+    return config;
+  },
+  function(error) {
+    return Promise.reject(error);
+  }
+);
 
 // http response interceptor
 axios.interceptors.response.use(

@@ -125,9 +125,6 @@ export default {
       }
     })
   },
-  // created() {
-  //   this.form = this.Answers;
-  // },
   methods: {
     formatNumber(n) {
       return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -177,7 +174,6 @@ export default {
       let numberOfAnswered = Object.values(updatingAnswers).filter(String).length;
       let updatingCreditLimit = numberOfAnswered * 10000 + 5000;
       this.$store.commit("UpdateUserInfo", { creditAnswers: updatingAnswers, creditLimit: updatingCreditLimit });
-      this.$store.commit("fetchCreditDataFromLocal");
     }
   }
 

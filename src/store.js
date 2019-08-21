@@ -4,8 +4,23 @@ import { find, findIndex } from "lodash";
 
 Vue.use(Vuex);
 
+function guid() {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+    var r = (Math.random() * 16) | 0;
+    var v = c === "x" ? r : (r & 0x3) | 0x8;
+
+    return v.toString(16);
+  });
+}
+
+if (!localStorage.getItem("ClientId")) {
+  const ClientId = guid();
+  localStorage.setItem("ClientId", ClientId);
+}
+
 export default new Vuex.Store({
   state: {
+    ClientId: localStorage.getItem("ClientId"),
     Config:
       process.env.VUE_APP_DEVICETYPE === "APP"
         ? require("@/config/AppConfig")
@@ -364,10 +379,13 @@ export default new Vuex.Store({
       // fetch user Info credit
       let localUserInfo = JSON.parse(localStorage.getItem("userInfo"));
 
-      let numberOfAnsweredCreditQuestion = ("creditAnswers" in localUserInfo)
-        ? Object.values(localUserInfo.creditAnswers).filter(String).length : 0;
+      let numberOfAnsweredCreditQuestion =
+        "creditAnswers" in localUserInfo
+          ? Object.values(localUserInfo.creditAnswers).filter(String).length
+          : 0;
       state.userInfo = {
         ...state.userInfo,
+        ...localUserInfo,
         ...{ creditLimit: numberOfAnsweredCreditQuestion * 10000 + 5000 }
       };
     },
@@ -401,7 +419,9 @@ export default new Vuex.Store({
       );
     },
     UpdateUserInfo(state, updateUserInfo) {
-      state.userInfo = Object.assign(state.userInfo, updateUserInfo);
+      // state.userInfo = Object.assign(state.userInfo, updateUserInfo);
+      // change to spread
+      state.userInfo = { ...state.userInfo, ...updateUserInfo };
       window.localStorage.setItem("userInfo", JSON.stringify(state.userInfo));
     },
     ClearUserInfo(state) {
@@ -448,8 +468,12 @@ export default new Vuex.Store({
     // this is for record
     UpdateRecord(state, updateRecordInfo) {
       const recordList = Array.from(state.recordList);
-      const itemIndex = findIndex(recordList, { accountDate: updateRecordInfo.accountDate });
-      const item = find(recordList, { accountDate: updateRecordInfo.accountDate });
+      const itemIndex = findIndex(recordList, {
+        accountDate: updateRecordInfo.accountDate
+      });
+      const item = find(recordList, {
+        accountDate: updateRecordInfo.accountDate
+      });
       if (item) {
         // udpate
         recordList[itemIndex] = updateRecordInfo;
