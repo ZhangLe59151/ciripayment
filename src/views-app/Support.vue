@@ -30,6 +30,11 @@
 
     <div class="remain" >{{remnant}}/500</div>
 
+    <button
+      class="submit_btn"
+      @click="sendBtn"
+    >Submit</button>
+
   </div>
 </template>
 
@@ -60,6 +65,19 @@ export default {
 .app-support {
   margin: 0 0 0 0;
   position: relative;
+
+  .submit_btn {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+  border-radius: 4px;
+  background-color: #ff8600;
+  border: none;
+  color: white;
+  font-size: 16px;
+  height: 40px;
+  width: 90%;
+}
 
   .feedback {
     background-color: #c8c8c8;
@@ -109,6 +127,8 @@ export default {
   .remain {
     margin: 16px 16px 0 16px;
   }
+
+
 
 
 </style>
