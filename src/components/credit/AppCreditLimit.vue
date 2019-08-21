@@ -91,7 +91,7 @@ export default {
       background-color: #ffffff;
     }
     .money-backgr {
-      background: url("../../assets/imgs/money_crop.gif") no-repeat ;
+      background: url("../../assets/imgs/money_rain.gif") no-repeat ;
       background-size: 100% 100%;
       background-position-y: bottom;
     }

@@ -1,6 +1,6 @@
 <template>
   <div class="app-loan">
-    <app-loan-header v-if="!$route.query.origin" />
+    <loan-app-loan-header v-if="!$route.query.origin" />
     <van-nav-bar
       v-else
       :left-arrow="!!$route.query.origin"
@@ -14,7 +14,7 @@
         {{$t("LoanTitle")}}
       </div>
     </van-nav-bar>
-    <app-loan-overview />
+    <loan-app-loan-overview />
     <app-tab-bar
       :active="1"
       v-if="!$route.query.origin && !$route.query.justSubmitted "

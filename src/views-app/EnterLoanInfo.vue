@@ -1,8 +1,7 @@
 <template>
   <div class="enter-loan-info">
         <van-nav-bar
-          :right-text="$t('EnterLoanInfo.skip')"
-          @click-right="gotoNextPage"
+          title="Loan Application"
           @click-left="handleDiscard"
           left-arrow
         />
@@ -24,83 +23,25 @@
       style="width: 100%; margin-top: 32px;"
     >
       <el-card class="box-card">
-        <!-- applicant information -->
-        <div class="title">{{$t("EnterLoanInfo.subTitle")}}</div>
+        <!-- merchant information -->
+        <div ref="bizInfo" class="title">Applicant Information</div>
         <div class="title-line"></div>
-        <el-form-item
-          :label="$t('EnterLoanInfo.firstName')"
-          prop="applicantFirstName"
-          :rules="[{ required: true, message: 'This field is required.', trigger: 'blur' }, { validator: this.$store.state.validationPatterns.englishAlphabetAndThai, message: 'Please enter a valid First Name', trigger: 'blur'}]"
-        >
-          <el-input
-            v-model="form.applicantFirstName"
-            :placeholder="$t('EnterLoanInfo.firstName')"
-            :maxlength="25"
-          ></el-input>
-        </el-form-item>
 
         <el-form-item
-          :label="$t('EnterLoanInfo.lastName')"
-          prop="applicantLastName"
+          label="Residential Address"
+          prop="resAddr"
           :rules="[
-      { required: true, message: 'This field is required.', trigger: 'blur' },
-      { validator: this.$store.state.validationPatterns.englishAlphabetAndThai, message: 'Please enter a valid Last Name', trigger: 'blur'}
+      { required: true, message: 'This field is required.', trigger: 'blur' }
     ]"
         >
           <el-input
-            v-model="form.applicantLastName"
-            :placeholder="$t('EnterLoanInfo.lastName')"
-            :maxlength="25"
+            v-model="form.resAddr"
+            placeholder="Residential Address"
+            type="textarea"
+            :maxlength="110"
+            :autosize="{minRows: 0, maxRows: 3}"
           ></el-input>
         </el-form-item>
-
-        <el-form-item
-          :label="$t('EnterLoanInfo.nationalID')"
-          prop="applicantNationalId"
-          :rules="[
-        { required: true, message: 'This field is required.', trigger: 'blur' },
-        { pattern: this.$store.state.validationPatterns.nationaldID, message: 'Please enter a valid National ID', trigger: 'blur'}
-        ]"
-        >
-          <el-input
-            v-model="form.applicantNationalId"
-            :placeholder="$t('EnterLoanInfo.nationalID')"
-            :maxlength="13"
-          ></el-input>
-        </el-form-item>
-        <div class="label-title required">{{$t("EnterLoanInfo.contact")}}</div>
-        <el-form-item
-          class="spec-mobile"
-          prop="contactPersonPhoneNumber"
-        >
-          <span
-            slot="label"
-            style="width: 100px;"
-          >
-            <van-icon name="phone-o" />
-            <span
-              style="margin: 0 10px;"
-              class="disable-field"
-            >{{$store.state.form.nationalCode}}</span>
-            <van-icon name="arrow-down" />
-          </span>
-          <el-input
-            :value="$store.state.form.phone"
-            placeholder="Mobile Number"
-            width="100%"
-            :maxlength="this.$store.state.phone.maxLen"
-            :minength="this.$store.state.phone.minLen"
-            readonly
-            disabled
-          ></el-input>
-        </el-form-item>
-
-      </el-card>
-
-      <el-card class="box-card">
-        <!-- merchant information -->
-        <div ref="bizInfo" class="title">{{$t("EnterLoanInfo.subTitle2")}}</div>
-        <div class="title-line"></div>
 
         <el-form-item
           :label="$t('EnterLoanInfo.bizNameEng')"
@@ -151,40 +92,10 @@
             :autosize="{minRows: 0, maxRows: 3}"
           ></el-input>
         </el-form-item>
-
-        <el-form-item
-          :label="$t('EnterLoanInfo.province')"
-          prop="provinceName"
-          :rules="[
-        { required: true, message: 'Select a province.', trigger: 'blur' }
-      ]"
-        >
-          <van-cell
-            :title="`${this.form.provinceName || $t('EnterLoanInfo.selectProvince')} `"
-            is-link
-            @click="handleGotoProvince"
-          />
-        </el-form-item>
-
-        <el-form-item
-          :label="$t('EnterLoanInfo.postalCode')"
-          prop="postal"
-          :rules="[
-        { required: true, message: 'This field is required.', trigger: 'blur' },
-        { pattern: this.$store.state.validationPatterns.postalCode, message: 'Please enter a valid Postal Code', trigger: 'blur'},
-        { validator: validateProvince, trigger: 'blur'}
-    ]"
-        >
-          <el-input
-            v-model.number="form.postal"
-            :placeholder="$t('EnterLoanInfo.postalCode')"
-            :maxlength="5"
-          ></el-input>
-        </el-form-item>
       </el-card>
 
       <el-card class="box-card">
-        <!-- personal information -->
+        <!-- supporting documents -->
         <div class="title">{{$t("EnterLoanInfo.subTitle3")}}</div>
         <div class="title-line"></div>
         <div class="section-header">{{$t("EnterLoanInfo.identityCard")}}</div>
@@ -203,7 +114,7 @@
               :http-request="uploadImg"
               :before-upload="fileCheck"
             >
-              <i class="el-icon-plus"></i>
+              <i class="el-icon-camera-solid"></i>
             </el-upload>
           </div>
           <div
@@ -240,7 +151,7 @@
               :http-request="uploadImg"
               :before-upload="fileCheck"
             >
-              <i class="el-icon-plus"></i>
+              <i class="el-icon-camera-solid"></i>
             </el-upload>
           </div>
           <div
@@ -278,7 +189,7 @@
               :http-request="uploadImg"
               :before-upload="fileCheck"
             >
-              <i class="el-icon-plus"></i>
+              <i class="el-icon-camera-solid"></i>
             </el-upload>
           </div>
           <div
@@ -319,7 +230,7 @@
                 :http-request="uploadImg"
                 :before-upload="fileCheck"
               >
-                <i class="el-icon-plus"></i>
+                <i class="el-icon-camera-solid"></i>
               </el-upload>
             </div>
             <div
@@ -794,6 +705,7 @@ export default {
 
       &.double-line {
         height: 40px;
+        width: 160px;
         line-height: 20px;
       }
 
@@ -878,16 +790,17 @@ export default {
       .action-area {
         display: flex;
         align-items: center;
-        width: 40px;
+        width: 44px;
         height: 40px;
-        border: #0059ff 1px dotted;
+        border: #FF8600 1px dotted;
         border-radius: 3px;
         text-align: center;
+        box-sizing: border-box;
 
-        .el-icon-plus {
-          padding: 14px 6px;
+        .el-icon-camera-solid {
+          padding: 14px 7px;
           width: 100%;
-          color: #0059ff;
+          color: #FF8600;
         }
       }
       .action-area-spinner {
@@ -938,6 +851,16 @@ export default {
         margin-bottom: 12px;
         margin-top:20px;
       }
+    }
+  }
+</style>
+
+<style lang="scss">
+  .enter-loan-info{
+    .el-textarea__inner{
+      /*border-left:none;*/
+      /*border-top:none;*/
+      /*border-right:none;*/
     }
   }
 </style>
