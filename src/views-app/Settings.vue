@@ -5,7 +5,7 @@
       :leftFunc="function(){}"
       leftText="Settings"
     />
-    <div class="logout" v-if="isLogin==false" @click="handleLogout">{{$t("Setting.SoL")}}</div>
+    <div class="logout" v-if="isLogin==false" @click="login">{{$t("Setting.SoL")}}</div>
     <app-setting-list />
     <div class="logout" v-if="isLogin" @click="handleLogout">{{$t("Setting.Logout")}}</div>
     <div class="version">
@@ -17,6 +17,8 @@
 
 <script>
 import util from "@/util";
+import { mapState } from "vuex";
+
 export default {
   name: "AppSettings",
   data() {
@@ -25,15 +27,22 @@ export default {
       isLogin: this.$store.state.userInfo.accountVerified? true : false
     };
   },
+ computed: {
+    ...mapState({
+      isLogin: "OTPVerified"
+    })
+  },
   methods: {
     handleLogout() {
       util.removeCookies("SSID");
       this.$store.commit("logOut");
       localStorage.clear();
       this.$router.push({ name: "LandingPage" });
+    },
+    login() {
+      this.$router.push({ name: "LandingPage" });
     }
-  },
-  created() {}
+  }
 };
 </script>
 
