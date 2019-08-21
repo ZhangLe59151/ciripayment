@@ -1,6 +1,6 @@
 <template>
   <div class="box-card">
-        <div class="title">What's your monthly income?</div>
+        <div class="title">What's your monthly income? {{ currentCreditLimit }}</div>
         <div class="option-block">
           <button class="option">0</button>
           <button class="option">1</button>
@@ -9,13 +9,14 @@
           <button class="option">4</button>
           <button class="option">5+</button> -->
         </div>
-        <van-button class="submit-btn">+1,000 B criedit</van-button>
+        <van-button class="submit-btn">+ B criedit</van-button>
   </div>
 </template>
 
 <script>
 export default {
   name: "AppQuestionSelectTwo",
+  props: ['currentCreditLimit'],
   created() {
     // this.$store.commit("fetchCreditDataFromLocal");
     // fetch credit from server or userphone:
