@@ -87,7 +87,7 @@
         <div class="label-left">{{$t("Record.ExpensesS")}}</div>
 
         <div class="input_income_expense" >
-          <div class="minus">-</div>
+          <div class="plus minus">-</div>
           <van-field
               class="expense"
               v-model="form.expenseAmount"
@@ -328,13 +328,10 @@ export default {
     position: absolute;
     bottom: 10px;
     width: 10px;
-  }
 
-  .minus {
-    position: absolute;
-    bottom: 10px;
-    width: 10px;
-    color: #b41800;
+    &.minus {
+      color: #b41800;
+    }
   }
 
   .income {
