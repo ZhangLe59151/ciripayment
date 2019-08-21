@@ -14,7 +14,7 @@
     </van-nav-bar>
 
    <credit-app-credit-limit />
-    <credit-app-credit-update />
+<!--    <credit-app-credit-update />-->
   </div>
 </template>
 
@@ -22,7 +22,22 @@
 export default {
   name: "Credit",
   created() {
-    this.$store.commit("fetchCreditDataFromLocal");
+    // this.$store.commit("fetchCreditDataFromLocal");
+    // fetch credit from server or userphone:
+    let credit = {
+      creditLimit: 5000,
+      creditQuestions: {
+        Q1: "What's your monthly income",
+        Q2: "What's your monthly expenses",
+        Q3: "Whats your favourite restaurant"
+      },
+      creditAnswers: {
+        Q1: "",
+        Q2: "",
+        Q3: ""
+      }
+    };
+    this.$store.commit("InitCredit", credit);
   }
 }
 </script>
@@ -32,5 +47,6 @@ export default {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: #04A777;
   }
 </style>
