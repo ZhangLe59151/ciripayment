@@ -26,6 +26,8 @@
       <van-cell
         title="Support"
         is-link
+        value=""
+        :to="{name: 'Support'}"
       />
     </van-cell-group>
 
