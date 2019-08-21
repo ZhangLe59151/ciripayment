@@ -1,4 +1,5 @@
 <template>
+
     <div class="app-credit-update">
       <van-swipe @change="onChange">
         <van-swipe-item>
@@ -89,6 +90,10 @@ export default {
         border-radius: 4px;
       }
 
+      .input {
+        
+      }
+
       .error_msg {
         position: absolute;
         top: 220px;
@@ -121,6 +126,12 @@ export default {
         top: -2px;
       }
     }
+  }
+
+  .test {
+    width: 800px;
+    height: 100px;
+    background-color: white;
   }
 </style>
 
