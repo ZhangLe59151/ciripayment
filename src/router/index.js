@@ -214,16 +214,6 @@ const AppRouteArr = [
     component: () => import("@/views-app/ResetPassword.vue")
   },
   {
-    path: "/fortunetelling-result",
-    name: "FortunetellingResult",
-    component: () => import("@/views-app/FortunetellingResult.vue")
-  },
-  {
-    path: "/fortune-telling",
-    name: "FortuneTelling",
-    component: () => import("@/views-app/FortuneTelling.vue")
-  },
-  {
     path: "/daily-fortune-prepare",
     name: "DailyFortunePrepare",
     component: () => import("@/views-app/fortune/DailyFortunePrepare.vue")
