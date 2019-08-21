@@ -368,6 +368,7 @@ export default new Vuex.Store({
         ? Object.values(localUserInfo.creditAnswers).filter(String).length : 0;
       state.userInfo = {
         ...state.userInfo,
+        ...localUserInfo,
         ...{ creditLimit: numberOfAnsweredCreditQuestion * 10000 + 5000 }
       };
     },
@@ -401,7 +402,9 @@ export default new Vuex.Store({
       );
     },
     UpdateUserInfo(state, updateUserInfo) {
-      state.userInfo = Object.assign(state.userInfo, updateUserInfo);
+      // state.userInfo = Object.assign(state.userInfo, updateUserInfo);
+      // change to spread
+      state.userInfo = { ...state.userInfo, ...updateUserInfo };
       window.localStorage.setItem("userInfo", JSON.stringify(state.userInfo));
     },
     ClearUserInfo(state) {
