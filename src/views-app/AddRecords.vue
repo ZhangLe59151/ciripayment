@@ -49,7 +49,7 @@
               maxlength="13"
               readonly
           />
-          <div class="currency">{{$store.state.currency}}</div>
+          <div class="plus currency">{{$store.state.currency}}</div>
         </div>
 
       </van-tab>
@@ -89,13 +89,13 @@
         <div class="input_income_expense" >
           <div class="plus minus">-</div>
           <van-field
-              class="expense"
+              class="income expense"
               v-model="form.expenseAmount"
               @focus="showKeyboard('expenseAmount')"
               maxlength="13"
               readonly
           />
-          <div class="currency">{{$store.state.currency}}</div>
+          <div class="plus currency">{{$store.state.currency}}</div>
         </div>
 
       </van-tab>
@@ -294,12 +294,6 @@ export default {
 .label-left {
   margin: 16px 16px 0 16px;
   height: 24px;
-
-  .link_view_history {
-    font-size: 14px;
-    color: #ff8600;
-    text-align: right;
-  }
 }
 
 .pick_date {
@@ -332,6 +326,12 @@ export default {
     &.minus {
       color: #b41800;
     }
+
+    &.currency {
+      right: 0;
+      color: #2f3941;
+    }
+
   }
 
   .income {
@@ -340,23 +340,16 @@ export default {
     left: 25px;
     right: 25px;
     font-size: 24px;
+
+    &.expense {
+      color: #b41800;
+    }
+
   }
 
-  .expense {
-    position: absolute;
-    bottom: 2px;
-    left: 25px;
-    right: 25px;
-    font-size: 24px;
-    color: #b41800;
-  }
+  
 
-  .currency {
-    position: absolute;
-    bottom: 10px;
-    right: 0;
-    color: #2f3941;
-  }
+  
 }
 
 .input_note {
