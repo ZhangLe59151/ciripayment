@@ -17,18 +17,13 @@
       position="left"
       duration="0.1"
     >
-      <app-home-apply />
+      <home-app-home-apply />
     </van-popup>
   </div>
 </template>
 
 <script>
-import AppHomeApply from "@/components/AppHomeApply";
-
 export default {
-  components: {
-    AppHomeApply
-  },
   data() {
     return {
       popupStatus: true

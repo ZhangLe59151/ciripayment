@@ -1,9 +1,9 @@
 <template>
   <div class="app-home-progress">
-    <app-home-apply
+    <home-app-home-apply
       v-if="status === 'NOAPPLICATION' || status === '2'"
       :status.sync="status"
-    ></app-home-apply>
+    />
 
     <transition name="van-slide-up">
       <div
@@ -28,13 +28,9 @@
 
 <script>
 import { find } from "lodash";
-import AppHomeApply from "@/components/AppHomeApply";
+
 export default {
   name: "AppHomeProgress",
-
-  components: {
-    AppHomeApply
-  },
 
   props: {
     status: {
