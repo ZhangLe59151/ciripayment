@@ -5,7 +5,8 @@
       :leftFunc="function(){}"
       leftText="Settings"
     />
-    
+
+    <div class="logout" @click="handleLogout">Sign Up or Log In</div>
     <app-setting-list />
     <div class="logout" @click="handleLogout">Log Out</div>
     <div class="version">
