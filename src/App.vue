@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <!-- use vant transition -->
     <transition name="van-fade">
       <router-view :key="$route.fullpath" />
     </transition>
