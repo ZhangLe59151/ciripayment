@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- use vant transition -->
-    <transition name="van-fade">
+    <transition :name="transitionStyle">
       <router-view :key="$route.fullpath" />
     </transition>
   </div>
@@ -18,6 +18,20 @@ body,
 
 <script>
 export default {
-  created() {}
+  created() {},
+  watch: {
+    $route: function(to, from) {
+      if (["SIC", "SubSIC", "MCC"].includes(to.name)) {
+        this.transitionStyle = "fade";
+      } else {
+        this.transitionStyle = "van-fade";
+      }
+    }
+  },
+  data() {
+    return {
+      transitionStyle: "van-fade"
+    }
+  }
 };
 </script>
