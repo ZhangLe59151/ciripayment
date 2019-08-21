@@ -34,7 +34,7 @@
       "end": "without any profile information."
     },
     "loanTerms2": "Low interest rates from",
-    "loanTerms3":{
+    "loanTerms3": {
       "front": "From",
       "mid": "1 minute",
       "end": "approval in-principle."
@@ -50,7 +50,7 @@
   },
   "EnterLoanInfo": {
     "skip": "Skip",
-    "discard":{
+    "discard": {
       "question": "Discard application?",
       "msg": "All entered and uploaded information will be lost.",
       "confirm": "Discard",
@@ -117,6 +117,7 @@
     "Date": "Date",
     "updateRecord": "Update Records",
     "addRecord": "Add Records",
-    "deleteRecord": "Delete Records"
+    "deleteRecord": "Delete Records",
+    "emptyMsg": "Your income and expenses records will appear here once you start adding them."
   }
 }

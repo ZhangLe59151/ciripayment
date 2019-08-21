@@ -10,6 +10,7 @@ axios.defaults.headers = {
 };
 
 axios.defaults.baseURL = process.env.VUE_APP_BASEURL;
+
 axios.interceptors.request.use(
   config => {
     const clientId = localStorage.getItem("ClientId");
