@@ -20,6 +20,14 @@
             <van-button class="submit-btn">+1,000 B criedit</van-button>
           </div>
         </van-swipe-item>
+        <van-swipe-item>
+          <credit-app-question-select-two 
+            :currentCreditLimit="3000"/>
+        </van-swipe-item>
+        <van-swipe-item>
+          <credit-app-question-select-two
+            :currentCreditLimit="3000" />
+        </van-swipe-item>
       </van-swipe>
       <div class="indicator">Swipe left to skip this question for now</div>
     </div>
@@ -30,11 +38,38 @@ import { mapState } from "vuex";
 
 export default {
   name: "AppCreditUpdate",
+  props: ['currentCreditLimit'],
   data() {
     return {
       checked: true,
-      form: {},
-      swipeWidth: 355
+      form: {
+        currentCreditLimit: 1000,
+        questions:[
+        {
+            "id":1,
+            "question":"who am i",
+            "type":"radio|text|number",
+            "limit":5000,
+            "options":[
+                "Yes",
+                "No"
+            ],
+            "value":"Yes"
+        },
+        {
+            "id":2,
+            "question":"where am i",
+            "type":"radio|text|number",
+            "limit":5000,
+            "options":[
+                "Yes",
+                "No"
+            ],
+            "value":""
+        }
+    ]
+},
+      swipeWidth: 355,
     }
   },
   computed: {
