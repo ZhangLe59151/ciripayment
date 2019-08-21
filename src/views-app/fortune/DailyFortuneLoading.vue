@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     getFortunetellingByAPI() {
-      this.$api.getFortunetelling().then(res => {
+      this.$api.getFortunetelling(1).then(res => {
         if (res.data.code === 200) {
           const fortunetellingFrame = res.data.data;
           this.$store.commit("SaveFortunetellingResult", {

@@ -1,29 +1,35 @@
 <template>
   <div class="daily-fortune">
     <fortune-telling-app-fortune-header />
-    <div class="top-half">
-      <div class="master-icon">
-      </div>
+    <div class="top-desc">
+      Select a Master to tell your fortune.
     </div>
-    <div class="bottom-half">
-      <div class="fortune-action">
-        <router-link
-          tag="van-button"
-          class="fortune-btn"
-          type="primary"
-          :to="{ name: 'DailyFortuneQuestion' }"
-        >Tell Me My Fortune</router-link>
-        <div class="powered-tips">
-          This service is powered by Master Tang
-        </div>
-      </div>
+    <div class="master-select">
+      <fortune-telling-app-fortune-master
+        v-for="master in masterList"
+        class="fortune-master-item"
+        :master="master"
+        @chooseMaster="chooseMaster"/>
+    </div>
+    <div class="powered-tips">
+      This service is powered by Master Cai, Master Yun and Master Fu
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "DailyFortunePrepare"
+  name: "DailyFortunePrepare",
+  data() {
+    return {
+      masterList: require("@/assets/data/fortuneMasterList.json")
+    }
+  },
+  methods: {
+    chooseMaster(master) {
+      this.$router.push({ name: "DailyFortuneQuestion" })
+    }
+  }
 };
 </script>
 
@@ -32,55 +38,36 @@ export default {
   position: relative;
   height: 100vh;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.top-half {
-  background: #ff8600;
-  position: absolute;
-  top: 70px;
-  bottom: 193px;
-  width: 100%;
-  .master-icon {
-    position: absolute;
-    background: no-repeat center
-      url("../../assets/imgs/fortune-telling/fortune_telling_master.png");
-    background-size: contain;
-    bottom: 0;
+  background: no-repeat center url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
+  background-size: cover;
+
+  .top-desc {
     width: 100%;
-    height: 360px;
+    font-size: 16px;
+    color: white;
+    text-align: center;
   }
-}
-.bottom-half {
-  background-color: #7b4508;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 193px;
-  .fortune-action {
+
+  .master-select {
+    width: 100%;
+    height: 450px;
+    margin-top: 40px;
+
+    .fortune-master-item {
+      margin-bottom: 24px;
+    }
+  }
+
+  .powered-tips {
     position: absolute;
-    height: 143px;
-    left: 30px;
-    right: 30px;
-    top: 48px;
-    bottom: 0;
-    .fortune-btn {
-      position: absolute;
-      background-color: #ff8600;
-      color: white;
-      font-size: 20px;
-      height: 60px;
-      width: 100%;
-    }
-    .powered-tips {
-      position: absolute;
-      color: white;
-      font-size: 12px;
-      text-align: center;
-      bottom: 20px;
-      width: 100%;
-      height: 10px;
-    }
+    color: white;
+    font-size: 10px;
+    text-align: center;
+    bottom: 20px;
+    left: 20px;
+    width: calc(100% - 40px);
+    height: 10px;
+    opacity: 0.7;
   }
 }
 </style>

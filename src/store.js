@@ -269,6 +269,11 @@ export default new Vuex.Store({
       ? JSON.parse(localStorage.getItem("fortunetellingFrame"))
       : [],
     fortuneQuestionUsed: [],
+    fortuneInfo: {
+      fortuneResult: {},
+      fortuneQuestionUsed: [],
+      selectedMasterId: 0
+    },
     todayDate: ""
   },
   mutations: {
