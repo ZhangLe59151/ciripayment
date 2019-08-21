@@ -56,6 +56,9 @@ export default {
         return false;
       }
       this.remnant = 500 - txtVal;
+    },
+    sendBtn() {
+      //send email
     }
   }
 };
@@ -65,19 +68,6 @@ export default {
 .app-support {
   margin: 0 0 0 0;
   position: relative;
-
-  .submit_btn {
-    position: absolute;
-    left: 16px;
-    bottom: 16px;
-  border-radius: 4px;
-  background-color: #ff8600;
-  border: none;
-  color: white;
-  font-size: 16px;
-  height: 40px;
-  width: 90%;
-}
 
   .feedback {
     background-color: #c8c8c8;
@@ -128,7 +118,16 @@ export default {
     margin: 16px 16px 0 16px;
   }
 
-
+.submit_btn {
+  margin: 16px 16px 0 16px;
+  border-radius: 4px;
+  background-color: #ff8600;
+  border: none;
+  color: white;
+  font-size: 16px;
+  height: 40px;
+  width: 90%;
+}
 
 
 </style>
