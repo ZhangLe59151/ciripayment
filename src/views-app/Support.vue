@@ -16,7 +16,7 @@
     <div class="label_title">Your Email</div>
 
     <van-field  
-      v-model="email" 
+      v-model="form.email" 
       placeholder="email@domain.com" />
 
     <div class="label_title">Your Message</div>
@@ -25,7 +25,7 @@
       class="textarea"
       maxlength="500" 
       @input="descInput" 
-      v-model="desc"
+      v-model="form.message"
       placeholder="Describe your problem or feedback" />
 
     <div class="remain" >{{remnant}}/500</div>
@@ -43,22 +43,31 @@ export default {
   name: "Support",
   data() {
     return {
-      email: "",
       login: true,
       remnant: 500,
-      desc: ""
+      form: {
+        email: "",
+        message: ""
+      }      
     };
   },
   methods: {
     descInput(){
-      var txtVal = this.desc.length;
+      var txtVal = this.form.message.length;
       if (this.remnant == 0) {
         return false;
       }
       this.remnant = 500 - txtVal;
     },
     sendBtn() {
-      //send email
+      this.$api.feedback(this.form).then(res => {
+        debugger
+        if (res.data.code === 200) {
+          this.$notify({ message: "Sent Sucessfully", background: "#04A777" });
+        } else {
+          this.$notify({ message: "Failed to send", background: "#04A777" });
+        }
+      });
     }
   }
 };
