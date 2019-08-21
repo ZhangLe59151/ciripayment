@@ -270,6 +270,11 @@ export default new Vuex.Store({
       : [],
     fortuneQuestionUsed: [],
     todayDate: "",
+    fortuneInfo: {
+      fortuneResult: {},
+      fortuneQuestionUsed: [],
+      selectedMasterId: 0
+    },
     credit: {
       creditLimit: 5000,
       creditQuestions: {

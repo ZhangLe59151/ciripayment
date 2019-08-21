@@ -1,0 +1,20 @@
+[
+  {
+  "id": 1,
+  "name": "Master Cai",
+  "desc": "Specialises in Wealth",
+  "image": "master_01"
+  },
+  {
+    "id": 2,
+    "name": "Master Yun",
+    "desc": "Specialises in Luck",
+    "image": "master_02"
+  },
+  {
+    "id": 3,
+    "name": "Master Fu",
+    "desc": "Specialises in Happiness",
+    "image": "master_03"
+  }
+]

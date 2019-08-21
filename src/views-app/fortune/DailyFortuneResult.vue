@@ -8,19 +8,6 @@
       :fortuneResult="fortuneResult"
       :salesResult="salesResult"
     />
-    <div class="bottom-box">
-      <div class="bottom-desc">
-        Come back tomorrow for your daily reading.
-      </div>
-      <van-button
-        plain
-        type="primary"
-        class="return-btn"
-        @click="$router.push({ name: 'Home' })"
-      >
-        Return Home
-      </van-button>
-    </div>
   </div>
 </template>
 
@@ -68,7 +55,8 @@ export default {
   position: relative;
   height: 100vh;
   width: 100%;
-  background-color: #ff8600;
+  background: no-repeat center url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
+  background-size: cover;
   .top-desc {
     position: absolute;
     width: 100%;
@@ -78,33 +66,7 @@ export default {
     text-align: center;
   }
   .app-fortune-result-content {
-    margin-top: 50px;
-  }
-  .bottom-box {
-    position: absolute;
-    left: 16px;
-    right: 16px;
-    height: 70px;
-    bottom: 20px;
-    .bottom-desc {
-      position: absolute;
-      width: 100%;
-      height: 24px;
-      top: 0;
-      font-size: 14px;
-      color: white;
-      text-align: center;
-    }
-    .return-btn {
-      position: absolute;
-      background-color: transparent;
-      border-style: solid;
-      border-color: white;
-      width: 100%;
-      height: 40px;
-      color: white;
-      bottom: 0;
-    }
+    margin-top: 20px;
   }
 }
 </style>

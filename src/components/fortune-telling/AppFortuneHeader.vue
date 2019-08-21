@@ -19,7 +19,6 @@ export default {
   .app-fortune-header {
     height: 70px;
     position: relative;
-    background-color: #FF8600;
     .close {
       position: absolute;
       right: 16px;

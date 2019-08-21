@@ -48,7 +48,6 @@ export default {
 <style lang="scss" scoped>
   .app-fortune-question-content {
     position: relative;
-    background-color: #FF8600;
     height: 65vh;
     width: 90%;
     margin-left: 20px;
@@ -63,7 +62,6 @@ export default {
   }
   .question-header {
     position: absolute;
-    color: #FF8600;
     font-size: 14px;
     top: 48px;
     width: 100%;

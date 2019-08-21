@@ -69,8 +69,9 @@ export default {
 
 <style lang="scss" scoped>
 .daily-fortune-question {
-  position: absolute;
-  background-color: #ff8600;
+  position: relative;
+  background: no-repeat center url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
+  background-size: cover;
   height: 100vh;
   width: 100%;
 }

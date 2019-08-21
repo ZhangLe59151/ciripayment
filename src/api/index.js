@@ -84,8 +84,8 @@ export default {
   submitMerchantChannels(params) {
     return Vue.axios.post("/api/merchant/channels/submit", params);
   },
-  getFortunetelling() {
-    return Vue.axios.get("/api/lucky-draw");
+  getFortunetelling(params) {
+    return Vue.axios.get(`/api/lucky-draw?masterId=${params}`);
   },
   getHomePageInfo() {
     return Vue.axios.get("/api/homepage");
