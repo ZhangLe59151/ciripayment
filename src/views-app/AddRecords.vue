@@ -246,8 +246,9 @@ export default {
       if (this.form[this.type] == "" && value == ".") {
         return false;
       }
-      const regex = /^[1-9][0-9]*\.\d{2}$/;
-      if (regex.test(form[this.type])) {
+      const regex = /^[0-9]*\.\d{1}$/;
+      if (regex.test(this.form[this.type])) {
+        this.form[this.type] += value;
         this.showNumberFalse();
         return false;
       }
