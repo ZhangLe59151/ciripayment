@@ -40,28 +40,17 @@
 
         <div class="label-left">{{$t("Record.IncomeS")}}</div>
         
-        <van-row
-          class="input_income_expense"
-          id="income"
-        >
-          <van-col span="2">
-            <label class="plus">+</label>
-          </van-col>
-          <van-col span="20">
-
-            <van-field
+        <div class="input_income_expense" >
+          <div class="plus">+</div>
+          <van-field
               class="income"
               v-model="form.incomeAmount"
               @focus="showKeyboard('incomeAmount')"
               maxlength="13"
               readonly
-            />
-
-          </van-col>
-          <van-col span="2">
-            <label class="currency">{{$store.state.currency}}</label>
-          </van-col>
-        </van-row>
+          />
+          <div class="currency">{{$store.state.currency}}</div>
+        </div>
 
       </van-tab>
       <van-tab title="Expenses">
@@ -337,41 +326,47 @@ export default {
   }
 
 .input_income_expense {
+  position: relative;
   height: 40px;
   font-size: 16px;
   margin: 4px 16px 0 16px;
   border-bottom: 1px solid #c2c8cc;
+  color: #04a777;
+  font-size: 16px;
 
   .plus {
-    bottom: 0px;
-    font-size: 16px;
-    color: #04a777;
-  }
-
-  .income {
-    top: 4px;
-    color: #04a777;
-    font-size: 24px;
-
-    width: 90%;
+    position: absolute;
+    bottom: 2px;
+    width: 10px;
   }
 
   .minus {
-    font-size: 16px;
+    position: absolute;
+    bottom: 2px;
+    width: 10px;
     color: #b41800;
+  }
+
+  .income {
+    position: absolute;
+    bottom: 2px;
+    left: 25px;
+    right: 25px;
+    font-size: 24px;
   }
 
   .expense {
-    top: 4px;
-    color: #b41800;
+    position: absolute;
+    bottom: 2px;
+    left: 25px;
+    right: 25px;
     font-size: 24px;
-
-    width: 90%;
+    color: #b41800;
   }
 
   .currency {
-    bottom: 0px;
-    font-size: 16px;
+    bottom: 2px;
+    right: 0;
     color: #2f3941;
     padding-bottom: 10px;
   }
