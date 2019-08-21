@@ -1,18 +1,18 @@
 <template>
   <div class="landing-page">
-    <WapHeader
+    <!-- <WapHeader
       :center="true"
       style="top: 34px"
-    />
+    /> -->
     <div class="landingPageContent">
 
       <transition name="van-slide-up">
         <div v-show="$store.state.deviceType && showComponents">
-          <div class="slogan-title center">
+          <!-- <div class="slogan-title center">
             Grow Your Business with Moon Merchant Portal.
-          </div>
-          <div class="slogan-sub center">
-            Managing finances for your business has never been easier.
+          </div> -->
+          <div class="slogan-title center">
+            {{sloganTitle}}
           </div>
         </div>
       </transition>
@@ -93,17 +93,26 @@
 
 <script>
 import { mapState } from "vuex";
-import WapHeader from "@/components/WapHeader";
+// import WapHeader from "@/components/WapHeader";
 export default {
   name: "landing-page",
   components: {
-    WapHeader
+    // WapHeader
   },
   computed: {
     ...mapState({
       columns: "nationalCodeList",
       nationCode: "nationalCode"
-    })
+    }),
+    sloganTitle() {
+      const ob = {
+        EnterLoanInfo: "Sign In Now To Get An Instant Loan! ",
+        Credit: "Sign In Now To See Your Credit Limit! ",
+        fortuneTelling: "Sign In Now To Get Your Daily Fortune!"
+      };
+
+      return ob[this.$route.query.to];
+    }
   },
   data() {
     return {
@@ -163,7 +172,8 @@ export default {
             accountVerified: res.data.data.merchantExist
           });
           this.$router.push({
-            name: "EnterOtp"
+            name: "EnterOtp",
+            query: this.$route.query
           });
         });
     }
@@ -177,8 +187,9 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/css/bottom-btn";
 .landing-page {
-  background: url("../assets/imgs/MP-background.png");
-  min-height: 100vh;
+  background: url("../assets/imgs/landing_bg.png") no-repeat;
+  background-size: cover;
+  height: 100vh;
   .landingPageContent {
     position: fixed;
     bottom: 0;

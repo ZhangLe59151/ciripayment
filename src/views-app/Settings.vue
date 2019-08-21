@@ -5,19 +5,28 @@
       :leftFunc="function(){}"
       leftText="Settings"
     />
+    <div
+      v-if="isLogin === false"
+      class="logout"
+      @click="$router.push({name: 'LandingPage', query: {to: 'Settings'}})"
+    >Sign Up or Log In</div>
     <app-setting-list />
-    <div class="logout">
-      <span @click="handleLogout">Log Out</span>
-    </div>
+    <div
+      v-if="isLogin"
+      class="logout"
+      @click="handleLogout"
+    >Log Out</div>
     <div class="version">
       version 1.1.0
     </div>
-    <app-tab-bar :active="($store.state.deviceType === 'APP' ? 2 : 2 )" />
+    <app-tab-bar :active="(deviceType === 'APP' ? 2 : 2 )" />
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import util from "@/util";
+
 export default {
   name: "AppSettings",
   data() {
@@ -25,15 +34,22 @@ export default {
       active: 3
     };
   },
+  computed: {
+    ...mapState({
+      isLogin: "OTPVerified",
+      deviceType: "deviceType"
+    })
+  },
+  created() {},
   methods: {
     handleLogout() {
       util.removeCookies("SSID");
       this.$store.commit("logOut");
       localStorage.clear();
-      this.$router.push({ name: "LandingPage" });
+      // this.$router.push({ name: "LandingPage" });
+      this.$router.push({ name: "Home" });
     }
-  },
-  created() {}
+  }
 };
 </script>
 
@@ -47,13 +63,11 @@ export default {
     width: 100%;
     margin-top: 30px;
     text-align: center;
-    > span {
-      font-size: 14px;
-      color: #037aff;
-      letter-spacing: 0;
-      text-align: center;
-      line-height: 24px;
-    }
+    color: #037aff;
+    letter-spacing: 0;
+    line-height: 50px;
+    height: 50px;
+    background-color: white;
   }
 
   .version {

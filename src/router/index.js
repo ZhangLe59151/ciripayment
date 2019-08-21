@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import store from "../store";
+// import store from "../store";
 
 Vue.use(Router);
 
@@ -137,6 +137,16 @@ const AppRouteArr = [
     component: () => import("@/views-app/Settings.vue")
   },
   {
+    path: "/language",
+    name: "LanguageSelect",
+    component: () => import("@/views-app/LanguageSelect.vue")
+  },
+  {
+    path: "/support",
+    name: "Support",
+    component: () => import("@/views-app/Support.vue")
+  },
+  {
     path: "/manage-settlement",
     name: "ManageSettlement",
     component: () => import("@/views-app/ManageSettlement.vue")
@@ -212,16 +222,6 @@ const AppRouteArr = [
     path: "/reset-password-sp",
     name: "ResetPasswordSP",
     component: () => import("@/views-app/ResetPassword.vue")
-  },
-  {
-    path: "/fortunetelling-result",
-    name: "FortunetellingResult",
-    component: () => import("@/views-app/FortunetellingResult.vue")
-  },
-  {
-    path: "/fortune-telling",
-    name: "FortuneTelling",
-    component: () => import("@/views-app/FortuneTelling.vue")
   },
   {
     path: "/daily-fortune-prepare",
@@ -304,13 +304,13 @@ router.beforeEach((to, from, next) => {
   // }
 
   // These page can go without OTP Verified
-  if (
-    !store.state.OTPVerified &&
-    !["LandingPage", "EnterOtp", "Admin"].includes(to.name)
-  ) {
-    next({ name: "LandingPage" });
-    return false;
-  }
+  // if (
+  //   !store.state.OTPVerified &&
+  //   !["LandingPage", "EnterOtp", "Admin"].includes(to.name)
+  // ) {
+  //   next({ name: "LandingPage" });
+  //   return false;
+  // }
   next();
 });
 

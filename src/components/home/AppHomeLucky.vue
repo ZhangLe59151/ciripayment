@@ -5,8 +5,10 @@
     :to="{name: 'DailyFortunePrepare'}"
     v-if="!fortuneTold"
   >
-    <div class="title">{{luckTitle}}</div>
+    <img :src="require('@/assets/imgs/home_master.png')">
+    <!-- <div class="title">{{luckTitle}}</div> -->
     <div class="subtitle">
+      <div>{{luckTitle}}</div>
       <div>{{subtitle}}</div>
     </div>
     <div class="btn">{{$t("Home.luckyBtn")}}</div>
@@ -17,6 +19,10 @@
     :to="{name: 'DailyFortuneResult'}"
     v-else
   >
+    <img
+      :src="require('@/assets/imgs/master_01.png')"
+      class="single"
+    >
     <div class="title">{{encourageLuckyTitle}}</div>
     <div class="subtitle">
       <div v-if="inputedIncome">{{incomeMin}}<span class="subscript">{{currency}}</span> ~ {{incomeMax}}<span class="subscript">{{currency}}</span></div>
@@ -80,14 +86,25 @@ export default {
 
 <style lang="scss" scoped>
 .app-home-lucky {
-  height: 142px;
+  height: 125px;
   width: 100%;
-  background-image: url(../../assets/imgs/home_chest.png);
+  background-image: url(../../assets/imgs/home_master_bg.png);
   background-repeat: no-repeat;
   background-size: cover;
   text-align: right;
   margin: 8px 0;
   position: relative;
+
+  > img {
+    height: 120px;
+    position: absolute;
+    left: 0;
+    bottom: -7px;
+
+    &.single {
+      left: 20px;
+    }
+  }
   > div {
     &.title {
       font-size: 14px;
@@ -102,7 +119,7 @@ export default {
       font-size: 22px;
       color: #ffffff;
       position: absolute;
-      top: 45px;
+      top: 16px;
       right: 16px;
     }
     &.encourage {

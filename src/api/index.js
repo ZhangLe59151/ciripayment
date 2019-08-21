@@ -119,5 +119,8 @@ export default {
   },
   updateRecord(params) {
     return Vue.axios.post("/api/merchant/record/update", params);
+  },
+  feedback(params) {
+    return Vue.axios.post("/api/feedback", params);
   }
 };

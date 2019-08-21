@@ -1,19 +1,22 @@
 <template>
-  <div v-if="!loanProfile || Object.keys(loanProfile).length === 0" class="app-loan-overview">
+  <div
+    v-if="!loanProfile || Object.keys(loanProfile).length === 0"
+    class="app-loan-overview"
+  >
     <div class="banner">
       <div class="banner-title">Get instant cash in under 2 min!</div>
     </div>
     <div class="ribbon">
       <div class="lower-rate">
-        <i class="iconfont iconcheck"/>
+        <i class="iconfont iconcheck" />
         <div>{{$t("AppLoanOverview.lowerRate")}}</div>
       </div>
       <div class="higher-limit">
-        <i class="iconfont iconcheck"/>
+        <i class="iconfont iconcheck" />
         <div>{{$t("AppLoanOverview.higherLimit")}}</div>
       </div>
       <div class="faster-approval">
-        <i class="iconfont iconcheck"/>
+        <i class="iconfont iconcheck" />
         <div>{{$t("AppLoanOverview.fasterApproval")}}</div>
       </div>
     </div>
@@ -41,52 +44,94 @@
         label-position="top"
         class="elForm"
       >
-      <el-card class="box-card">
-        <el-form-item
-          :label="$t('EnterLoanAmount.question')"
-          prop="loanAmount"
-          :rules="[{ required: true, message: 'This field is required.', trigger: 'blur' },
+        <el-card class="box-card">
+          <el-form-item
+            :label="$t('EnterLoanAmount.question')"
+            prop="loanAmount"
+            :rules="[{ required: true, message: 'This field is required.', trigger: 'blur' },
             ]"
-        >
-          <el-input inputmode="numeric" v-model="form.loanAmount" maxlength="11" @input="formatCurrency">
-            <div class="currency" slot="suffix">{{$store.state.currency}}</div>
-          </el-input>
-        </el-form-item>
-        <van-button size="small" class="bottom-btn" @click="handleStart" :disabled="form.loanAmount === ''">Apply Now</van-button>
-        <div
-          class="consent-agreement"
-        >{{$t("AppLoanOverview.consent")}}</div>
-      </el-card>
+          >
+            <el-input
+              inputmode="numeric"
+              v-model="form.loanAmount"
+              maxlength="11"
+              @input="formatCurrency"
+            >
+              <div
+                class="currency"
+                slot="suffix"
+              >{{$store.state.currency}}</div>
+            </el-input>
+          </el-form-item>
+          <van-button
+            size="small"
+            class="bottom-btn"
+            @click="handleStart"
+            :disabled="form.loanAmount === ''"
+          >Apply Now</van-button>
+          <div class="consent-agreement">{{$t("AppLoanOverview.consent")}}</div>
+        </el-card>
 
       </el-form>
     </div>
   </div>
-  <div v-else class="app-loan-overview">
+  <div
+    v-else
+    class="app-loan-overview"
+  >
     <div class="loan-applied-wrapper">
       <div>
-        <van-row type="flex" justify="space-between">
-          <van-col class="loan-heading" span="12">{{$t("AppLoanOverview.yourApplication")}}</van-col>
+        <van-row
+          type="flex"
+          justify="space-between"
+        >
           <van-col
-            :class="formatStatus(loanProfile.status).color +' loan-status'"
-          >{{formatStatus(loanProfile.status).label}}</van-col>
+            class="loan-heading"
+            span="12"
+          >{{$t("AppLoanOverview.yourApplication")}}</van-col>
+          <van-col :class="formatStatus(loanProfile.status).color +' loan-status'">{{formatStatus(loanProfile.status).label}}</van-col>
         </van-row>
       </div>
       <div>
-        <van-row class="loan-details" type="flex" justify="space-between">
-          <van-col class="label" span="12">{{$t("AppLoanOverview.applicantPhone")}}</van-col>
-          <van-col class="info" span="12">{{loanProfile.phoneNumber}}</van-col>
+        <van-row
+          class="loan-details"
+          type="flex"
+          justify="space-between"
+        >
+          <van-col
+            class="label"
+            span="12"
+          >{{$t("AppLoanOverview.applicantPhone")}}</van-col>
+          <van-col
+            class="info"
+            span="12"
+          >{{loanProfile.phoneNumber}}</van-col>
         </van-row>
 
-        <van-row class="loan-details" type="flex" justify="space-between">
-          <van-col class="label" span="12">{{$t("AppLoanOverview.applicationTime")}}</van-col>
+        <van-row
+          class="loan-details"
+          type="flex"
+          justify="space-between"
+        >
+          <van-col
+            class="label"
+            span="12"
+          >{{$t("AppLoanOverview.applicationTime")}}</van-col>
           <van-col
             class="info"
             span="12"
           >{{this.$moment(loanProfile.createTime).format("DD MMM YYYY, HH:ss")}}</van-col>
         </van-row>
 
-        <van-row class="loan-details" type="flex" justify="space-between">
-          <van-col class="label" span="12">{{$t("AppLoanOverview.applicationAmount")}}</van-col>
+        <van-row
+          class="loan-details"
+          type="flex"
+          justify="space-between"
+        >
+          <van-col
+            class="label"
+            span="12"
+          >{{$t("AppLoanOverview.applicationAmount")}}</van-col>
           <van-col
             class="info"
             span="12"
@@ -113,7 +158,6 @@
 import { mapState } from "vuex";
 export default {
   name: "AppLoanOverview",
-  components: {},
   data() {
     return {
       showPopUp: false,
@@ -126,19 +170,28 @@ export default {
     ...mapState({
       loanProfile: state => state.loanProfile,
       merchantApplyingChannelStatus: state =>
-        state.merchantApplyingChannelStatus
+        state.merchantApplyingChannelStatus,
+      OTPVerified: "OTPVerified"
     })
   },
   created() {
     if (this.$route.query.justSubmitted) {
-      setTimeout(() => this.showPopUp = true, 300)
+      setTimeout(() => (this.showPopUp = true), 300);
     }
-    setTimeout(() => this.showPopUp = false, 2000)
+    setTimeout(() => (this.showPopUp = false), 2000);
   },
   methods: {
     handleStart() {
       // update Loan Amount
       event.preventDefault();
+      if (!this.OTPVerified) {
+        this.$router.push({
+          name: "LandingPage",
+          query: { to: "EnterLoanInfo" }
+        });
+        return false;
+      }
+
       this.$store.commit("UpdateForm", {
         loanAmount: parseInt(this.form.loanAmount.replace(/,/g, ""))
       });
@@ -213,7 +266,6 @@ export default {
       font-size: 20px;
       font-weight: bold;
     }
-
   }
 
   .ribbon {
@@ -392,39 +444,38 @@ export default {
       bottom: 16px;
       left: 16px;
     }
-    .success-popup{
+    .success-popup {
       text-align: center;
       font-size: 13px;
       padding-top: 13px;
       padding-bottom: 13px;
       top: 44px;
       background-color: #04a777;
-      color: white ;
+      color: white;
     }
-
   }
 }
 </style>
 
 <style lang="scss">
-  .enter-loan-amount {
-    .el-card{
-      border-radius: 0;
-      border: none;
-    }
-    .el-card__body {
-      padding: 20px 16px 16px 16px;
-    }
-    .el-input__inner {
-      font-size: 24px;
-      padding-left: 0;
-      margin-top: 10px;
-      padding-bottom: 10px;
-    }
-    .el-input__suffix {
-      color: #363f47;
-      position: absolute;
-      top: 5px;
-    }
+.enter-loan-amount {
+  .el-card {
+    border-radius: 0;
+    border: none;
   }
+  .el-card__body {
+    padding: 20px 16px 16px 16px;
+  }
+  .el-input__inner {
+    font-size: 24px;
+    padding-left: 0;
+    margin-top: 10px;
+    padding-bottom: 10px;
+  }
+  .el-input__suffix {
+    color: #363f47;
+    position: absolute;
+    top: 5px;
+  }
+}
 </style>

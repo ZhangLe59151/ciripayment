@@ -269,12 +269,25 @@ export default new Vuex.Store({
       ? JSON.parse(localStorage.getItem("fortunetellingFrame"))
       : [],
     fortuneQuestionUsed: [],
+    todayDate: "",
     fortuneInfo: {
       fortuneResult: {},
       fortuneQuestionUsed: [],
       selectedMasterId: 0
     },
-    todayDate: ""
+    credit: {
+      creditLimit: 5000,
+      creditQuestions: {
+        Q1: "What's your monthly income",
+        Q2: "What's your monthly expenses",
+        Q3: "Whats your favourite restaurant"
+      },
+      creditAnswers: {
+        Q1: "",
+        Q2: "",
+        Q3: ""
+      }
+    }
   },
   mutations: {
     InitForm(state) {
@@ -444,7 +457,7 @@ export default new Vuex.Store({
       state.application = {};
       window.localStorage.setItem("application", "{}");
     },
-    // Fetch Loan profile
+    // for Loan profile
     initLoanProfile(state, loanProfile) {
       state.loanProfile = loanProfile;
       localStorage.setItem("loanProfile", JSON.stringify(loanProfile));
@@ -487,6 +500,25 @@ export default new Vuex.Store({
       }
       state.recordList = recordList;
       window.localStorage.setItem("recordList", JSON.stringify(recordList));
+    },
+    // this is for credit
+    InitCredit(state, credit) {
+      state.credit = credit;
+      localStorage.setItem("credit", JSON.stringify(credit));
+    },
+    UpdateCreditLimit(state, creditLimit) {
+      state.credit.creditLimit = creditLimit;
+      window.localStorage.setItem(
+        "credit",
+        JSON.stringify(state.credit)
+      );
+    },
+    UpdateCreditAnswer(state, creditAnswers) {
+      state.credit.creditAnswers = creditAnswers;
+      window.localStorage.setItem(
+        "credit",
+        JSON.stringify(state.credit)
+      );
     }
   },
   actions: {}

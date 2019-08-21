@@ -1,19 +1,39 @@
 <template>
-  <router-link
+  <div
     class="app-home-credit"
-    tag="div"
     :to="{name: 'Credit',query: {origin: 'banner'}}"
+    @click="handleCreditClick"
   >
     <div class="des">Find Out Your Credit Limit</div>
 
     <div class="checkNow">Check Now</div>
 
-  </router-link>
+  </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
-  name: "AppHomeCredit"
+  name: "AppHomeCredit",
+  computed: {
+    ...mapState({
+      OTPVerified: "OTPVerified"
+    })
+  },
+  methods: {
+    handleCreditClick() {
+      if (!this.OTPVerified) {
+        this.$router.push({
+          name: "LandingPage",
+          query: { to: "Credit" }
+        });
+        return false;
+      }
+
+      this.$router.push({ name: "Credit" });
+    }
+  }
 };
 </script>
 

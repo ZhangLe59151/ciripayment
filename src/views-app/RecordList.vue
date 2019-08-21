@@ -108,6 +108,7 @@ export default {
 <style lang="scss" scoped>
 .record-list {
   background-color: #e9ebed;
+  height: 100vh;
   .van-list {
     background-color: #e9ebed;
   }

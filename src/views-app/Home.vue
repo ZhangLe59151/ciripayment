@@ -100,18 +100,7 @@ export default {
       });
     }
   },
-  mounted() {
-    // this.$store.commit("InitUserInfo");
-    //this.fetchHomePageData();
-    // if (
-    //   Object.entries(this.$store.state.userInfo).length === 0 &&
-    //   this.$store.state.userInfo.constructor === Object
-    // ) {
-    //   this.$router.push({ name: "LandingPage" });
-    // } else {
-    //   this.fetchData(this.fetchApplicationStatus);
-    // }
-  }
+  mounted() {}
 };
 </script>
 
