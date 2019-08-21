@@ -17,12 +17,13 @@
     >
         <el-form-item
           prop="answering">
-          <el-input inputmode="numeric" v-model="form.answering" placeholder="0">
+          <el-input :class="error? 'input-box-error': 'input-box'" inputmode="numeric" v-model="form.answering" placeholder="0">
             <div class="currency" slot="suffix">{{$store.state.currency}}</div>
           </el-input>
         </el-form-item>
     </el-form>
-    <van-button class="submit-btn">
+    <div v-if="error" class="error_msg">Please enter an amount</div>
+    <van-button class="submit-btn" @click="handleSubmit">
       <div class="btn-text">+1,000 {{$store.state.currency}} Credit</div>
       <img class="dollar-coin" src="../../assets/imgs/dollar_coin.png">
     </van-button>
@@ -36,10 +37,23 @@ export default {
     question: String,
     answer: String
   },
-  data(){
+  data() {
     return {
       form: {
         answering: ""
+      },
+      error: false,
+    }
+  },
+  methods: {
+    validateInput() {
+      this.error = !this.form.answering;
+    },
+    handleSubmit() {
+      this.validateInput();
+      if (this.validateInput()) {
+        // send to server
+        // update vuex and localstorage
       }
     }
   }
@@ -105,6 +119,20 @@ export default {
       top:25px;
       left:-5px;
     }
+    .error_msg {
+      font-size: 14px;
+      color: #B41800;
+      text-align: center;
+      width: 100%;
+    }
+    .input-box{
+      border: 1px solid #DCDFE6;
+      border-radius: 4px;
+    }
+    .input-box-error {
+      border: 1px solid #B41800;
+      border-radius: 4px;
+    }
     .submit-btn{
       position:absolute;
       bottom:20px;
@@ -133,7 +161,7 @@ export default {
 <style lang="scss">
   .money-input-question{
     .el-input--small .el-input__inner{
-      border: 1px solid #DCDFE6;
+      border: none;
       border-radius: 4px;
       width:264px;
       height: 80px;
