@@ -111,7 +111,7 @@
 @import "../assets/css/bottom-btn.scss";
 
 .enter-password {
-  background: url("../assets/imgs/MP-background.png");
+  background: url("../assets/imgs/landing_bg.png");
   min-height: 100vh;
 
   .login-title {
@@ -185,7 +185,7 @@
 
   @media screen and (min-height: 400px) {
     .bottom-btn-password {
-      background-color: #FF8600;
+      background-color: #ff8600;
       border-radius: 4px;
       width: calc(100% - 40px);
       position: fixed;
@@ -198,7 +198,7 @@
   }
   @media screen and (max-height: 400px) {
     .bottom-btn-password {
-      background-color: #FF8600;
+      background-color: #ff8600;
       border-radius: 4px;
       display: block !important;
       color: #fff;

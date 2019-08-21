@@ -30,7 +30,8 @@ export default {
       util.removeCookies("SSID");
       this.$store.commit("logOut");
       localStorage.clear();
-      this.$router.push({ name: "LandingPage" });
+      // this.$router.push({ name: "LandingPage" });
+      this.$router.push({ name: "Home" });
     }
   },
   created() {}

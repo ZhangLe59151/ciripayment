@@ -1,8 +1,7 @@
 <template>
-  <router-link
+  <div
     class="app-home-loan"
-    tag="div"
-    :to="{name: 'Loan',query: {origin: 'banner'}}"
+    @click="handleLoanClick"
   >
     <div class="des">Get instant loan!</div>
     <!--    <div class="amount">100,000 {{$store.state.currency}}</div>-->
@@ -10,12 +9,18 @@
     <!--    <div class="getNow">{{$t("Home.loanBtn")}}</div>-->
     <div class="applyNow">Apply Now</div>
 
-  </router-link>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "AppHomeLoan"
+  name: "AppHomeLoan",
+  computed: {},
+  methods: {
+    handleLoanClick() {
+      this.$router.push({ name: "Loan", query: { origin: "banner" } });
+    }
+  }
 };
 </script>
 

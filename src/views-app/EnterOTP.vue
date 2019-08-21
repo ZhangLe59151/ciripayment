@@ -112,7 +112,7 @@
 @import "../assets/css/bottom-btn.scss";
 
 .enter-otp {
-  background: url("../assets/imgs/MP-background.png");
+  background: url("../assets/imgs/landing_bg.png");
   min-height: 100vh;
   .login-title {
     font-size: 24px;
@@ -176,7 +176,7 @@
     bottom: 20px;
   }
   .bottom-btn {
-    background-color: #FF8600;
+    background-color: #ff8600;
     border-radius: 4px;
     margin: 0;
     width: calc(100% - 40px);
@@ -275,7 +275,8 @@ export default {
       this.$api
         .sendOtp({
           phoneNumber:
-            this.$store.state.userInfo.nationalCode + this.$store.state.userInfo.phone
+            this.$store.state.userInfo.nationalCode +
+            this.$store.state.userInfo.phone
         })
         .then(res => {
           if (res.data.code !== 200) {
@@ -325,7 +326,9 @@ export default {
                   });
                 });
                 */
-               this.$router.push({ name: "Home" });
+
+              const to = this.$route.query.to;
+              this.$router.push(to ? { name: to } : { name: "Home" });
             } else {
               this.$notify({
                 message: otpCodeErrorMessage,
@@ -349,7 +352,8 @@ export default {
       this.$api
         .verifyOtp({
           phoneNumber:
-            this.$store.state.userInfo.nationalCode + this.$store.state.userInfo.phone,
+            this.$store.state.userInfo.nationalCode +
+            this.$store.state.userInfo.phone,
           otpCode: this.value
         })
         .then(res => {
@@ -379,7 +383,8 @@ export default {
       this.$api
         .verifyOtp({
           phoneNumber:
-            this.$store.state.userInfo.nationalCode + this.$store.state.userInfo.phone,
+            this.$store.state.userInfo.nationalCode +
+            this.$store.state.userInfo.phone,
           otpCode: this.value
         })
         .then(res => {
