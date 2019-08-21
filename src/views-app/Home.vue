@@ -7,7 +7,7 @@
     <home-app-home-lucky />
 
     <home-app-home-info />
-    <home-app-tab-bar :active="0" />
+    <app-tab-bar :active="0" />
   </div>
 </template>
 

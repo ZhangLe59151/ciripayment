@@ -9,8 +9,6 @@ const requireComponent = require.context(
   /App[\w-]+\.vue$/
 );
 
-console.log(requireComponent.keys());
-
 requireComponent.keys().forEach(fileName => {
   // Get component config
   const componentConfig = requireComponent(fileName);
