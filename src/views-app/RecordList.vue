@@ -14,9 +14,12 @@
         v-for="item in list"
         :key="item.accountDate"
       >
-        <div class="date_title">{{ formatDate(item.accountDate) }}</div>
-        <div class="sum">{{ formatTotalIncome(item.totalIncome) }}</div>
-        <div class="baht">{{ $store.state["currency"] }}</div>
+        <div class="header">
+          <div class="date_title">{{ formatDate(item.accountDate) }}</div>
+          <div class="sum">{{ formatTotalIncome(item.totalIncome) }}</div>
+          <div class="baht">{{ $store.state["currency"] }}</div>
+        </div>
+
         <div class="cell">
           <van-cell
             v-for="record in item.recordList"
@@ -104,6 +107,7 @@ export default {
 
 <style lang="scss" scoped>
 .record-list {
+  background-color: #e9ebed;
   .van-list {
     background-color: #e9ebed;
   }
@@ -139,6 +143,9 @@ export default {
     background-color: #e9ebed;
     position: relative;
 
+    .header {
+      height: 50px;
+    }
     .date_title {
       font-size: 16px;
       font-weight: bolder;
