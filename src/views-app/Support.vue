@@ -23,12 +23,12 @@
 
     <textarea 
       class="textarea"
-      maxlength="200" 
+      maxlength="500" 
       @input="descInput" 
       v-model="desc"
       placeholder="Describe your problem or feedback" />
 
-    <div>{{remnant}}/500</div>
+    <div class="remain" >{{remnant}}/500</div>
 
   </div>
 </template>
@@ -47,9 +47,11 @@ export default {
   methods: {
     descInput(){
       var txtVal = this.desc.length;
-      this.remnant = 200 - txtVal;
-      remnant: 500;
+      if (this.remnant == 0) {
+        return false;
       }
+      this.remnant = 500 - txtVal;
+    }
   }
 };
 </script>
@@ -57,6 +59,7 @@ export default {
 <style lang="scss" scoped>
 .app-support {
   margin: 0 0 0 0;
+  position: relative;
 
   .feedback {
     background-color: #c8c8c8;
@@ -81,6 +84,7 @@ export default {
       top: 96px;
     }
   }
+
 }
 
 .label_title {
@@ -89,35 +93,23 @@ export default {
   }
 
 .textarea {
-  margin: 16px 16px 4px 16px;
+  margin: 16px 16px 0 16px;
+  left: 16px;
+  width: 90%;
+  right: 16px;
   height: 144px;
   font-size: 16px;
   color: #2F3941;
-}
-</style>
-
-<style lang="scss" >
-.app-setting-list {
-  .van-password-input__security {
-    height: 40px;
-
-    li {
-      font-size: 14px;
-      color: #87929d;
-      letter-spacing: 0;
-      text-align: center;
-      border: 1px solid #c8c8c8;
-      height: 40px;
-      line-height: 40px;
-      width: 40px;
-      flex: none;
-      margin-right: 10px;
-      border-radius: 4px;
-    }
+  border-bottom-color: #87929d;
+  border-top-width: 0;
+  border-left-width: 0;
+  border-right-width: 0;
   }
 
-  .van-password-input__security::after {
-    border: none;
+  .remain {
+    margin: 16px 16px 0 16px;
   }
-}
+
+
 </style>
+
