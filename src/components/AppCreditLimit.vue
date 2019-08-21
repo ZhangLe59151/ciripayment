@@ -1,8 +1,10 @@
 <template>
   <div class="app-credit-limit">
-    <div class="credit-limit">
+    <div v-bind:class="creditLimitClass">
       <div class="credit-limit-title">Your Current Credit Limit:</div>
-      <div class="credit-limit-amount">{{formatCurrency(creditLimit)}} {{$store.state.currency}}</div>
+<!--      <div class="credit-limit-amount">{{formatCurrency(creditLimit)}} {{$store.state.currency}}</div>-->
+      <app-number-counting :numberTo="numberTo" class="credit-limit-amount" />
+
     </div>
     <div class="credit-question-wrapper">
       <div class="credit-question">Want more credit?</div>
@@ -16,12 +18,23 @@ import { mapState } from "vuex";
 export default {
   name: "AppCreditLimit",
   data() {
-    return {}
+    return {
+      numberTo: 100000,
+      background: "#ffffff",
+      creditLimitClass: "credit-limit white-backgr"
+    }
   },
   computed: {
     ...mapState({
       creditLimit: state => state.userInfo.creditLimit
     })
+  },
+  watch: {
+    creditLimit: function(newVal, oldVal) {
+      this.numberTo = newVal;
+      this.creditLimitClass = "credit-limit money-backgr";
+      setTimeout(() => this.creditLimitClass = "credit-limit white-backgr", 2600);
+    }
   },
   methods: {
     formatNumber(n) {
@@ -73,9 +86,17 @@ export default {
   .app-credit-limit{
     background-color: #E9EBED;
     color: #363F47;
-    .credit-limit{
+    overflow: hidden;
+    .white-backgr {
       background-color: #ffffff;
-      height: 101px;
+    }
+    .money-backgr {
+      background: url("../assets/imgs/money_crop.gif") no-repeat ;
+      background-size: 100% 100%;
+      background-position-y: bottom;
+    }
+    .credit-limit{
+      height: 100px;
       width: 100%;
       text-align: center;
       padding: 20px 0 20px 0;
@@ -99,6 +120,9 @@ export default {
         font-size: 16px;
         margin-top: 10px;
       }
+    }
+    .scaleBig {
+      font-size: 35px;
     }
   }
 
