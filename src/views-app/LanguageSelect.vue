@@ -3,12 +3,12 @@
     <app-common-header title="Language" />
     <div class="language">
       <div class="title">English</div>
-      <van-checkbox 
-        class="icon" 
+      <van-checkbox
+        class="icon"
         v-model="checked"
         checked-color="#07c160"
-        shape="round" ></van-checkbox>
-    </div>    
+      />
+    </div>
   </div>
 </template>
 
@@ -17,13 +17,11 @@ export default {
   name: "LanguageSelect",
   data() {
     return {
-    checked: true,
+      checked: true
     };
   },
-  methods: {
-  },
-  watch: {
-  }
+  methods: {},
+  watch: {}
 };
 </script>
 
@@ -34,25 +32,24 @@ export default {
   min-height: 100vh;
 }
 
-.language{
-    height: 50px;
-    line-height: 50px;
-    margin: 0 0 0 0;
-    background-color: white;
-    border-bottom-color: #87929d;
-    border-bottom-width: 2px;
-    position: relative;
+.language {
+  height: 50px;
+  line-height: 50px;
+  margin: 0 0 0 0;
+  background-color: white;
+  border-bottom-color: #87929d;
+  border-bottom-width: 2px;
+  position: relative;
 
-    .title{
-      position: absolute;
-      left: 16px;
-    }
-
-    .icon {
-      position: absolute;
-      right: 16px;
-      top: 0;
-    }
+  .title {
+    position: absolute;
+    left: 16px;
   }
 
+  .icon {
+    position: absolute;
+    right: 16px;
+    top: 0;
+  }
+}
 </style>

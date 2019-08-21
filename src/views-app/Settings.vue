@@ -5,26 +5,42 @@
       :leftFunc="function(){}"
       leftText="Settings"
     />
-    <div class="logout" v-if="isLogin==false" @click="handleLogout">Sign Up or Log In</div>
+    <div
+      v-if="isLogin === false"
+      class="logout"
+      @click="$router.push({name: 'LandingPage', query: {to: 'Settings'}})"
+    >Sign Up or Log In</div>
     <app-setting-list />
-    <div class="logout" v-if="isLogin" @click="handleLogout">Log Out</div>
+    <div
+      v-if="isLogin"
+      class="logout"
+      @click="handleLogout"
+    >Log Out</div>
     <div class="version">
       version 1.1.0
     </div>
-    <app-tab-bar :active="($store.state.deviceType === 'APP' ? 2 : 2 )" />
+    <app-tab-bar :active="(deviceType === 'APP' ? 2 : 2 )" />
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import util from "@/util";
+
 export default {
   name: "AppSettings",
   data() {
     return {
-      active: 3,
-      isLogin: this.$store.state.userInfo.accountVerified? true : false
+      active: 3
     };
   },
+  computed: {
+    ...mapState({
+      isLogin: "OTPVerified",
+      deviceType: "deviceType"
+    })
+  },
+  created() {},
   methods: {
     handleLogout() {
       util.removeCookies("SSID");
@@ -33,8 +49,7 @@ export default {
       // this.$router.push({ name: "LandingPage" });
       this.$router.push({ name: "Home" });
     }
-  },
-  created() {}
+  }
 };
 </script>
 

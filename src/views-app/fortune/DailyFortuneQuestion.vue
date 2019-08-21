@@ -25,7 +25,8 @@ export default {
   },
   computed: {
     ...mapState({
-      fortuneQuestionUsed: "fortuneQuestionUsed"
+      fortuneQuestionUsed: "fortuneQuestionUsed",
+      OTPVerified: "OTPVerified"
     })
   },
   mounted() {
@@ -36,6 +37,14 @@ export default {
       if (this.index < 2) {
         this.index++;
         this.updateQuestion();
+        return false;
+      }
+
+      if (!this.OTPVerified) {
+        this.$router.push({
+          name: "LandingPage",
+          query: { to: "DailyFortuneLoading" }
+        });
         return false;
       }
       this.$router.push({ name: "DailyFortuneLoading" });
