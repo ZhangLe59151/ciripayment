@@ -15,7 +15,6 @@
 
     <el-form
       label-width="0px"
-      status-icon
       :model="form"
       ref="elForm"
       size="small"
@@ -40,7 +39,11 @@
             type="textarea"
             :maxlength="110"
             :autosize="{minRows: 0, maxRows: 3}"
-          ></el-input>
+            @blur="validateResAddr"
+          >
+          </el-input>
+          <div :class="(resAddrValidated ? 'success-validator': 'success-validator unchecked')">
+            <i class="iconfont iconsuccess"/></div>
         </el-form-item>
 
         <el-form-item
@@ -48,14 +51,16 @@
           prop="bizNameEn"
           :rules="[
       { required: true, message: 'This field is required.', trigger: 'blur' },
-      { validator: checkSpecificKey, message: 'Please enter a valid business name in English', trigger: 'blur'}
     ]"
         >
           <el-input
             v-model="form.bizNameEn"
             :placeholder="$t('EnterLoanInfo.bizNameEng')"
             :maxlength="25"
+            @blur="validateBizName"
           ></el-input>
+          <div :class="(bizNameEnValidated ? 'success-validator': 'success-validator unchecked')">
+            <i class="iconfont iconsuccess"/></div>
         </el-form-item>
 
         <div
@@ -90,7 +95,10 @@
             type="textarea"
             :maxlength="110"
             :autosize="{minRows: 0, maxRows: 3}"
+            @blur="validateBizAddr"
           ></el-input>
+          <div :class="(bizAddrValidated ? 'success-validator': 'success-validator unchecked')">
+            <i class="iconfont iconsuccess"/></div>
         </el-form-item>
       </el-card>
 
@@ -349,7 +357,10 @@ export default {
         } else {
           callback();
         }
-      }
+      },
+      resAddrValidated: false,
+      bizNameEnValidated: false,
+      bizAddrValidated: false
     };
   },
   created() {
@@ -421,6 +432,15 @@ export default {
           // on cancel
           this.$dialog.close();
         });
+    },
+    validateResAddr() {
+      this.resAddrValidated = !!(this.form.resAddr);
+    },
+    validateBizName() {
+      this.bizNameEnValidated = !!(this.form.bizNameEn);
+    },
+    validateBizAddr() {
+      this.bizAddrValidated = !!(this.form.bizAddr);
     },
     handleGotoSIC() {
       var savedPosition =
@@ -747,7 +767,15 @@ export default {
       padding: 10px;
       // margin: 30px 10px;
     }
-
+    .success-validator {
+      color: #04a777;
+      position:absolute;
+      bottom:0;
+      right:0;
+    }
+    .unchecked {
+      display:none;
+    }
     .tips {
       font-size: 16px;
       margin-top: 30px;
@@ -792,7 +820,7 @@ export default {
         align-items: center;
         width: 44px;
         height: 40px;
-        border: #FF8600 1px dotted;
+        border: #FF8600 1px solid;
         border-radius: 3px;
         text-align: center;
         box-sizing: border-box;
@@ -858,9 +886,11 @@ export default {
 <style lang="scss">
   .enter-loan-info{
     .el-textarea__inner{
-      /*border-left:none;*/
-      /*border-top:none;*/
-      /*border-right:none;*/
+      border-left:none;
+      border-top:none;
+      border-right:none;
+      resize: none;
+      border-radius: 0;
     }
   }
 </style>
