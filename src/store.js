@@ -504,8 +504,13 @@ export default new Vuex.Store({
         JSON.stringify(state.credit)
       );
     },
-    UpdateCreditAnswer(state, creditAnswers) {
-      state.credit.questions = creditAnswers;
+    UpdateCreditAnswer(state, creditAnswer) {
+      let questionList = state.credit.questions;
+      for (let i = 0; i < questionList.length; i++) {
+        if (questionList[i].id === creditAnswer.id) {
+          questionList[i].value = creditAnswer.value;
+        }
+      }
       window.localStorage.setItem(
         "credit",
         JSON.stringify(state.credit)

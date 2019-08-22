@@ -3,7 +3,7 @@
     <i class="iconfont iconsuccess" />
     <div class="title">{{question.question}}</div>
     <div class="answer">{{question.value}}<div class="baht">{{$store.state.currency}}</div></div>
-    <van-button class="submit-btn-disabled" disabled >1,000 {{$store.state.currency}} Earned</van-button>
+    <van-button class="submit-btn-disabled" disabled >{{question.limitAmount}} {{$store.state.currency}} Earned</van-button>
   </div>
   <div v-else class="money-input-question">
     <div class="title">{{question.question}}</div>
@@ -50,10 +50,20 @@ export default {
       this.error = !this.form.answering;
     },
     handleSubmit() {
+      event.preventDefault();
+      console.log("btn click");
       this.validateInput();
-      if (this.validateInput()) {
+      if (!this.error) {
         // send to server
-        // update vuex and localstorage
+        this.$api.sendAnswerCredit({ id: this.question.id, value: this.form.answering }).then(
+          res => {
+            if (res.data.code === 200) {
+              // update vuex and localstorage
+              this.$store.commit("UpdateCreditLimit", this.$store.state.credit.currentCreditLimit + this.question.limitAmount);
+              this.$store.commit("UpdateCreditAnswer", { id: this.question.id, value: this.form.answering });
+            }
+          }
+        )
       }
     }
   }
