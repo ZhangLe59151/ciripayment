@@ -19,16 +19,14 @@ export default {
   computed: {
     ...mapState({
       finishedAll: state =>
-        state.credit.questions.map(item => item.value).filter(Boolean)
-          .length === 3,
+        (state.credit.questions) ? state.credit.questions.map(item => item.value).filter(Boolean)
+          .length === 3 : false,
       questions: state => state.credit.questions
     })
   },
   created() {
     // this.$api.getQuestion().then(res => {
     //   if (res.data.code === 200) {
-    //     let numberOfAnswered = res.data.data.questions.map(item => item.value).filter(Boolean).length;
-    //     this.finishedAll = (numberOfAnswered === 3);
     //     this.$store.commit("InitCredit", res.data.data);
     //   }
     // });
