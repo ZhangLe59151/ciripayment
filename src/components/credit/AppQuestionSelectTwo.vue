@@ -6,7 +6,7 @@
             v-for="(item,index) in question.options"
             :key="index"
             class="option"
-            text="XXXXXXXXXXXXXXXXXXXXXXXXXX"
+            text="item"
             ></van-button>
         </div>
         <van-button class="submit-btn">+{{ currentCreditLimit }} {{$store.state.currency}} credit</van-button>
@@ -61,6 +61,7 @@ export default {
           width: 45%;
           height: 40%;
           margin: 4px 6px 4px 6px;
+          white-space: normal;
         }
       }
 
