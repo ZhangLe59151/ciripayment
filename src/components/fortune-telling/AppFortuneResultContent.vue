@@ -79,7 +79,7 @@ export default {
       }
       .result-box {
         position: absolute;
-        left: 80px;
+        left: 70px;
         right: 60px;
         top: 50%;
         height: 100%;
@@ -99,7 +99,7 @@ export default {
           font-size: 20px;
           top: 134px;
           width: 100%;
-          height: 100px;
+          height: 150px;
           text-align: center;
           overflow: scroll;
         }

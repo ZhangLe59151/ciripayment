@@ -30,14 +30,17 @@ export default {
     })
   },
   mounted() {
-    this.updateQuestion();
+    if (!this.updateQuestion()) {
+      this.$router.push({ name: "DailyFortuneLoading" });
+    }
   },
   methods: {
     submitAnswer(answer) {
       if (this.index < 2) {
         this.index++;
-        this.updateQuestion();
-        return false;
+        if (this.updateQuestion()) {
+          return false;
+        }
       }
 
       if (!this.OTPVerified) {
@@ -56,10 +59,13 @@ export default {
           availableQuestionList.push(item);
         }
       });
+      if (availableQuestionList.length === 0) {
+        return false;
+      }
       const randomIndex = Math.floor(
         Math.random() * availableQuestionList.length
       );
-      const randomQuestion = this.questionList[randomIndex];
+      const randomQuestion = availableQuestionList[randomIndex];
       this.question = randomQuestion.content;
       this.fortuneInfo.fortuneQuestionUsed.push(randomQuestion.id);
     }

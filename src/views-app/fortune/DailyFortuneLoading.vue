@@ -6,7 +6,7 @@
         Hang in there!
       </div>
       <div class="bottom-title">
-        Master Tang is calculating your fortune
+        {{fortuneInfo.selectedMaster.name}} is calculating your fortune
       </div>
     </div>
   </div>
