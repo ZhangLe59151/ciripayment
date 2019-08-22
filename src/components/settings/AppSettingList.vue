@@ -3,26 +3,26 @@
 
     <van-cell-group>
       <van-cell
-        title="Language"
+        :title="$t('Setting.Language')"
         is-link
-        value="English"
+        :value="$t('Language.en')"
         :to="{name: 'LanguageSelect'}"
       />
       <van-cell
-        title="Terms & Conditions"
+        :title="$t('Setting.tc')"
         is-link
         value=""
         :to="{name: 'TermsAndConditions'}"
       />
       <van-cell
-        title="Support"
+        :title="$t('Setting.support')"
         is-link
         value=""
         :to="{name: 'Support'}"
       />
     </van-cell-group>
 
-    <van-cell-group v-if="false && this.$store.state.userInfo.accountVerified">
+    <van-cell-group v-if="false && isLogin">
       <van-cell
         title="Change Password"
         is-link
@@ -62,6 +62,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "AppSettingList",
   data() {
@@ -69,9 +70,22 @@ export default {
       profileDialog: false,
       showKeyboard: false,
       value: "",
-      login: true,
-      language: $t("Setting.Language")
+      login: true
     };
+  },
+  computed: {
+    ...mapState({
+      isLogin: "OTPVerified"
+    })
+  },
+  watch: {
+    value: {
+      handler(val, oldVal) {
+        if (val.length === 4) {
+          this.checkNationalId(val);
+        }
+      }
+    }
   },
   methods: {
     handleClose() {
@@ -111,15 +125,6 @@ export default {
           }
         }
       });
-    }
-  },
-  watch: {
-    value: {
-      handler(val, oldVal) {
-        if (val.length === 4) {
-          this.checkNationalId(val);
-        }
-      }
     }
   }
 };
@@ -161,7 +166,7 @@ export default {
   margin: 16px 16px 4px 16px;
   font-size: 12px;
   font-weight: bolder;
-  color: #2F3941;
+  color: #2f3941;
 }
 </style>
 

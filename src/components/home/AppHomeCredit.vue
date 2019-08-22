@@ -4,9 +4,9 @@
     :to="{name: 'Credit',query: {origin: 'banner'}}"
     @click="handleCreditClick"
   >
-    <div class="des">Find Out Your Credit Limit</div>
+    <div class="des">{{ctx.label}}</div>
 
-    <div class="checkNow">Check Now</div>
+    <div class="checkNow">{{ctx.btn}}</div>
 
   </div>
 </template>
@@ -16,10 +16,47 @@ import { mapState } from "vuex";
 
 export default {
   name: "AppHomeCredit",
+  props: {
+    creditLimit: {
+      default() {
+        return {};
+      },
+      required: true
+    }
+  },
   computed: {
     ...mapState({
       OTPVerified: "OTPVerified"
-    })
+    }),
+    ctx() {
+      const kv = {
+        "-1": "start",
+        "1": "pending",
+        "2": "pending",
+        "3": "pending",
+        "0": "finish"
+      };
+      const k = this.creditLimit.remaining || -1 + "";
+
+      const ob = {
+        start: {
+          label: this.$t("Home.creditLimitTitle1"),
+          btn: this.$t("Home.creditLimitBtn1")
+        },
+        pending: {
+          label: this.$tc("Home.creditLimitTitle2", k === "1" ? 1 : 2, {
+            n: k
+          }),
+          btn: this.$t("Home.creditLimitBtn1")
+        },
+        finish: {
+          label: this.$t("Home.creditLimitTitle3"),
+          btn: this.$t("Home.creditLimitBtn2")
+        }
+      };
+
+      return ob[kv[k]];
+    }
   },
   methods: {
     handleCreditClick() {
@@ -45,13 +82,14 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   margin-top: 8px;
+  position: relative;
 
   .des {
     font-size: 16px;
     font-weight: bold;
     color: #ffffff;
     position: relative;
-    width: 112px;
+    width: 140px;
     top: 9px;
     left: 16px;
   }
@@ -64,12 +102,11 @@ export default {
     color: #363f47;
     letter-spacing: 0;
     text-align: center;
-    line-height: 32px;
-    width: 105px;
-    height: 32px;
-    position: relative;
-    top: 17px;
+    padding: 6px 16px;
+    position: absolute;
     left: 16px;
+    bottom: 16px;
+    max-width: 130px;
   }
 }
 </style>

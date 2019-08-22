@@ -2,14 +2,14 @@
   <div class="box-card">
         <div class="title">{{ question.question }}</div>
         <div class="option-block">
-          <van-button 
+          <van-button
             v-for="(item,index) in question.options"
             :key="index"
             class="option"
-            text="XXXXXXXXXXXXXXXXXXXXXXXXXX"
-            ></van-button>
+            style = "height:100%"
+            >{{ item }}</van-button>
         </div>
-        <van-button class="submit-btn">+{{ currentCreditLimit }} {{$store.state.currency}} credit</van-button>
+<!--        <van-button class="submit-btn">+{{ item.limitAmount }} {{$store.state.currency}} credit</van-button>-->
   </div>
 </template>
 
@@ -31,9 +31,8 @@ export default {
 <style lang="scss" scoped>
   .box-card{
       background-color: #ffffff;
-      margin: 16px 6px 0 28px;
       height: 340px;
-      border-radius: 10px;
+      border-radius: 8px;
       position: relative;
 
       .title{
@@ -51,7 +50,7 @@ export default {
         top: 110px;
         left: 16px;
         right: 16px;
-        height: 30%;
+        height: 40%;
 
         .option {
           border-color: #87929D;
@@ -59,11 +58,11 @@ export default {
           background-color: white;
           border-radius: 4px;
           width: 45%;
-          height: 40%;
           margin: 4px 6px 4px 6px;
+          white-space: normal;
         }
       }
-      
+
       .submit-btn{
         position: absolute;
         background: #FF8600;

@@ -3,7 +3,7 @@
     <home-app-home-header :info.sync="records" />
 
     <home-app-home-loan />
-    <home-app-home-credit />
+    <home-app-home-credit :creditLimit.sync="creditLimit" />
     <home-app-home-lucky />
 
     <home-app-home-info />
@@ -20,94 +20,45 @@ export default {
 
   data() {
     return {
-      applicationStatus: this.$store.state.application.applicationStatus + "",
       hasLoan: false,
       records: {
         income: 0,
         expense: 0
-      }
+      },
+      creditLimit: {}
     };
   },
   computed: {
-    canClick() {
-      return this.applicationStatus === "NOAPPLICATION";
-    },
     ...mapState({
-      //records(state) {
-      //  const recordList = state.recordList;
-      //  const month = this.$moment().format("YYYYMM");
-      //  const records = {
-      //    income: 0,
-      //    expense: 0
-      //  };
-      //  recordList.map(item => {
-      //    if (item.date.includes(month)) {
-      //      records.income += Number(item.income);
-      //      records.expense += Number(item.expense);
-      //    }
-      //  });
-      //  return records;
-      //}
+      applicantPhoneNumber: state => userInfo.applicantPhoneNumber
     })
   },
   created() {
     this.fetchHomePageData();
   },
+  mounted() {},
   methods: {
-    ShowPopup() {
-      this.popupStatus = true;
-    },
-    fetchData(cb) {
-      // using api to fetch the merchant Profile
-      this.$api
-        .getMerchantProfile({
-          params: {
-            phoneNumber: this.$store.state.userInfo.applicantPhoneNumber
-          }
-        })
-        .then(res => {
-          if (res.data.code === 200) {
-            this.$store.commit("initMerchantProfile", res.data.data);
-          }
-          if (cb) {
-            cb();
-          }
-        });
-    },
-    fetchApplicationStatus() {
-      this.$api.getApplictionStatus().then(res => {
-        if (res.data.code === 200) {
-          this.applicationStatus = res.data.data.applicationStatus + "";
-          this.$store.commit("UpdateApplicationInfo", res.data.data);
-        }
-
-        if (res.data.code === 10021) {
-          this.applicationStatus = "NOAPPLICATION";
-        }
-      });
-    },
     fetchHomePageData() {
       this.$api.getHomePageInfo().then(res => {
         if (res.data.code === 200) {
-          this.hasLoan = res.data.data.hasLoan;
-          this.records.income = util.fmoney(
-            res.data.data.merchantRecordSum.incomeSum
-          );
+          const data = res.data.data;
+          this.hasLoan = data.hasLoan;
+          this.records.income = util.fmoney(data.merchantRecordSum.incomeSum);
           this.records.expense = util.fmoney(
-            res.data.data.merchantRecordSum.expensesSum
+            data.merchantRecordSum.expensesSum
           );
+
+          this.creditLimit = data.creditLimit;
         }
       });
     }
-  },
-  mounted() {}
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 .app-home {
   background-color: #f0f7fb;
-  // height: 100vh;
   position: relative;
   margin-bottom: 50px;
 
