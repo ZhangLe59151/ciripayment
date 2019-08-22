@@ -906,6 +906,16 @@ export default {
       border-right:none;
       resize: none;
       border-radius: 0;
+      font-size:16px;
+    }
+    .el-input__inner{
+      font-size:16px;
+    }
+    textarea::placeholder {
+      font-size: 14px!important;
+    }
+    input::placeholder {
+      font-size: 14px!important;
     }
   }
 </style>
