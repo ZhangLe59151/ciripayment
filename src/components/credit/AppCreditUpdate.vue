@@ -23,6 +23,7 @@
 <script>
 import { mapState } from "vuex";
 import AppCreditQAMapper from "@/components/credit/AppCreditQAMapper";
+import util from "@/util.js";
 
 export default {
   name: "AppCreditUpdate",
@@ -44,6 +45,14 @@ export default {
     ...mapState({
       questionList: state => state.credit.questions
     })
+  },
+  created() {
+    this.$api.getQuestion().then(res => {
+      if (res.data.code === 200) {
+        this.form.currentCreditLimit = util.fmoney(res.data.data.currentCreditLimit);
+        this.form.questionList = res.data.data.questions;
+      }
+    });
   },
   methods: {
   }
