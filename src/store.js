@@ -306,7 +306,7 @@ export default new Vuex.Store({
       state.userInfo.creditLimit = null;
       state.OTPVerified = false;
       state.logInWithPassword = false;
-      localStorage.clear();
+      // localStorage.clear();
     },
     // This is for settlement
     updateSettlement(state, settlement) {
@@ -499,10 +499,7 @@ export default new Vuex.Store({
     },
     UpdateCreditLimit(state, creditLimit) {
       state.credit.currentCreditLimit = creditLimit;
-      window.localStorage.setItem(
-        "credit",
-        JSON.stringify(state.credit)
-      );
+      window.localStorage.setItem("credit", JSON.stringify(state.credit));
     },
     UpdateCreditAnswer(state, creditAnswer) {
       let questionList = state.credit.questions;
@@ -511,10 +508,7 @@ export default new Vuex.Store({
           questionList[i].value = creditAnswer.value;
         }
       }
-      window.localStorage.setItem(
-        "credit",
-        JSON.stringify(state.credit)
-      );
+      window.localStorage.setItem("credit", JSON.stringify(state.credit));
     }
   },
   actions: {}
