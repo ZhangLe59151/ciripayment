@@ -49,7 +49,7 @@
           <van-button
             v-for="(item,index) in question.options"
             :key="index"
-            @v-if="unselected(item)"
+            v-if="false"
             class="option-done"
             disabled
             >{{ item }}</van-button>
@@ -57,7 +57,7 @@
           <van-button
             v-for="(item,index) in question.options"
             :key="index"
-            @v-if="selected(item)"
+            v-if="true"
             class="option-done-selected"
             disabled
             >{{ item }}</van-button>
@@ -72,6 +72,7 @@
             @v-if="unselected(item)"
             :key="index"
             class="option-done"
+            disabled
             >{{ item }}</van-button>
 
           <van-button
@@ -79,6 +80,7 @@
             @v-if="selected(item)"
             :key="index"
             class="option-done-selected"
+            disabled
             >{{ item }}</van-button>
         </div>
 
@@ -91,6 +93,7 @@
             @v-if="unselected(item)"
             :key="index"
             class="option-done"
+            disabled
             >{{ item }}</van-button>
 
           <van-button
@@ -98,6 +101,7 @@
             @v-if="selected(item)"
             :key="index"
             class="option-done-selected"
+            disabled
             >{{ item }}</van-button>
         </div>   
         <van-button class="submit-btn-done" disabled >{{question.limitAmount}} {{$store.state.currency}} Earned</van-button>
