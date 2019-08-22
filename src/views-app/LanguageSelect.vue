@@ -2,13 +2,14 @@
   <div class="language-select">
     <app-common-header title="Language" />
     <div class="language">
-      <div class="title">English</div>
+      <div class="title">{{$t("Language.en")}}</div>
       <van-checkbox
         class="icon"
         v-model="checked"
-        checked-color="#07c160"
+        checked-color="#04A777"
       />
     </div>
+
   </div>
 </template>
 
@@ -27,18 +28,17 @@ export default {
 
 <style lang="scss" scoped>
 .language-select {
-  margin: 0 0 0 0;
-  background-color: #c8c8c8;
+  margin: 0;
+  background-color: #e9ebed;
   min-height: 100vh;
 }
 
 .language {
   height: 50px;
   line-height: 50px;
-  margin: 0 0 0 0;
+  margin: 8px 0 0 0;
   background-color: white;
-  border-bottom-color: #87929d;
-  border-bottom-width: 2px;
+  border: 1px solid #e9ebed;
   position: relative;
 
   .title {

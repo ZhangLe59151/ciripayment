@@ -11,6 +11,13 @@ body {
   padding: 0;
   @include fontFamily;
 
+  textarea::placeholder,
+  input::placeholder {
+    font-size: 16px;
+    color: #87929d !important;
+    letter-spacing: 0;
+  }
+
   .van-tabbar-item__text {
     @include fontFamily;
   }

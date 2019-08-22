@@ -124,6 +124,11 @@
     "Language": "Language",
     "SoL": "Sign Up or Log In",
     "Logout": "Log Out",
-    "Version": "version"
+    "Version": "version",
+    "tc": "Terms & Conditions",
+    "support": "Support"
+  },
+  "Language": {
+    "en": "English"
   }
 }
