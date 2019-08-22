@@ -43,7 +43,7 @@
           >
           </el-input>
           <div v-if="resAddrValidated" class="bottom-right-position">
-            <i class="iconfont iconsuccess"/></div>
+            <i class="iconfont iconsuccess success-validator"/></div>
         </el-form-item>
 
         <el-form-item
@@ -60,7 +60,7 @@
             @blur="validateBizName"
           ></el-input>
           <div v-if="bizNameEnValidated" class="bottom-right-position">
-            <i class="iconfont iconsuccess"/></div>
+            <i class="iconfont iconsuccess success-validator"/></div>
         </el-form-item>
 
         <div
@@ -98,7 +98,7 @@
             @blur="validateBizAddr"
           ></el-input>
           <div v-if="bizAddrValidated" class="bottom-right-position">
-            <i class="iconfont iconsuccess"/></div>
+            <i class="iconfont iconsuccess success-validator"/></div>
         </el-form-item>
       </el-card>
 
@@ -548,7 +548,19 @@ export default {
     gotoNextPage() {
       // save request form init store
       this.$store.commit("UpdateForm", this.form);
-      this.$api.applyLoan(this.$store.state.form.loanAmount).then(res => {
+      let submitForm = {
+        bizAddr: this.$store.state.form.bizAddr,
+        bizNameEn: this.$store.state.form.bizNameEn,
+        currency: this.$store.state.currency,
+        loanAmount: this.$store.state.form.loanAmount,
+        mcc: this.$store.state.form.mccID,
+        picNationalIdBack: this.$store.state.form.backUrl,
+        picNationalIdFront: this.$store.state.form.frontUrl,
+        picNationalIdFrontWithFace: this.$store.state.form.faceUrl,
+        resAddr: this.$store.state.form.resAddr
+      };
+
+      this.$api.applyLoan(submitForm).then(res => {
         if (res.data.code === 200 && res.data.data === true) {
           this.$store.commit("ClearForm");
           this.$router.push({ name: "Loan", query: { justSubmitted: "true" } });
