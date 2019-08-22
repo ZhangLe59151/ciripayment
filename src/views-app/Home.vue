@@ -49,6 +49,9 @@ export default {
           );
 
           this.creditLimit = data.creditLimit;
+          this.$store.commit("SaveFortuneInfo", {
+            fortuneResult: data.fortuneResult
+          });
         }
       });
     }
