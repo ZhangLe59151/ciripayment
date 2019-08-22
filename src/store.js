@@ -266,11 +266,13 @@ export default new Vuex.Store({
     completeLoanProfile: false,
     loanProfile: {},
     todayDate: "",
-    fortuneInfo: {
-      fortuneResult: {},
-      fortuneQuestionUsed: [],
-      selectedMaster: {}
-    },
+    fortuneInfo: localStorage.getItem("fortuneInfo")
+      ? JSON.parse(localStorage.getItem("fortuneInfo"))
+      : {
+        fortuneResult: {},
+        fortuneQuestionUsed: [],
+        selectedMaster: {}
+      },
     credit: {
       currentCreditLimit: 5000,
       questions: {}
