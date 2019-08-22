@@ -52,8 +52,11 @@ export default {
       event.preventDefault();
       this.validateInput();
       if (!this.error) {
+        // this.$store.commit("UpdateCreditLimit", this.$store.state.credit.currentCreditLimit + this.question.limitAmount);
+        // this.$store.commit("UpdateCreditAnswer", { id: this.question.id, value: this.form.answering });
+
         // send to server
-        this.$api.sendAnswerCredit({ id: this.question.id, value: this.form.answering }).then(
+        this.$api.submitQuestion({ id: this.question.id, value: this.form.answering }).then(
           res => {
             if (res.data.code === 200) {
               // update vuex and localstorage
@@ -73,7 +76,7 @@ export default {
     background-color: #ffffff;
     height: 340px;
     width: 304px;
-
+    margin: auto;
     border-radius: 8px;
     color: #2F3941;
     padding: 30px 20px 20px 20px;

@@ -1,8 +1,7 @@
 <template>
-  <router-link
+  <div
     class="app-home-lucky"
-    tag="div"
-    :to="{name: 'DailyFortunePrepare'}"
+    @click="gotoOuterLink(BaseWebUrl + '#/daily-fortune-prepare')"
     v-if="!fortuneTold"
   >
     <img :src="require('@/assets/imgs/home_master.png')">
@@ -11,11 +10,10 @@
       <div>{{$t("Home.luckySubtitle")}}</div>
     </div>
     <div class="btn">{{$t("Home.luckyBtn")}}</div>
-  </router-link>
-  <router-link
+  </div>
+  <div
     class="app-home-lucky"
-    tag="div"
-    :to="{name: 'DailyFortuneResult'}"
+    @click="gotoOuterLink(BaseWebUrl + '#/daily-fortune-result?id=' + fortuneResult.id)"
     v-else
   >
     <img
@@ -28,7 +26,7 @@
       <div v-else>{{$t("Home.luckySubtitle")}}</div>
     </div>
     <div class="encourage">{{$t("Home.encourageWording")}}</div>
-  </router-link>
+  </div>
 </template>
 
 <script>
@@ -48,7 +46,8 @@ export default {
     ...mapState({
       fortunetellingFrame: "fortunetellingFrame",
       localDateFormatter: "localDateFormatter",
-      fortuneResult: state => state.fortuneInfo.fortuneResult
+      fortuneResult: state => state.fortuneInfo.fortuneResult,
+      BaseWebUrl: "BaseWebUrl"
     }),
     today() {
       return this.$moment().format(this.localDateFormatter);
@@ -89,7 +88,12 @@ export default {
       deep: true
     }
   },
-  mounted() {}
+  methods: {
+    gotoOuterLink(url) {
+      // window.location.href = url;
+      this.$router.push(url.split("#")[1]);
+    }
+  }
 };
 </script>
 
