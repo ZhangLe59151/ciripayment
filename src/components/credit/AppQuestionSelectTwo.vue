@@ -10,7 +10,9 @@
             @click="answer=item"
             >{{ item }}</van-button>
         </div>
-        <van-button class="submit-btn">+{{ question.limitAmount }} {{$store.state.currency}} credit</van-button>
+        <van-button 
+          class="submit-btn"
+          @click="submitQuestion">+{{ question.limitAmount }} {{$store.state.currency}} credit</van-button>
   </div>
 </template>
 
@@ -26,6 +28,11 @@ export default {
   },
   created() {
     //Object.entries(this.question.options).forEach(([key, value]) => this.form[`${value}`] = `${value}`);
+  },
+  method() {
+    submitQuestion() {
+      
+    }
   }
 }
 </script>
