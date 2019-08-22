@@ -2,7 +2,7 @@
   <div class="box-card">
         <div class="title">{{ question.question }}</div>
         <div class="option-block">
-          <van-button 
+          <van-button
             v-for="(item,index) in question.options"
             :key="index"
             class="option"
@@ -31,9 +31,9 @@ export default {
 <style lang="scss" scoped>
   .box-card{
       background-color: #ffffff;
-      margin: 16px 6px 0 28px;
+      /*margin: 16px 6px 0 28px;*/
       height: 340px;
-      border-radius: 10px;
+      border-radius: 8px;
       position: relative;
 
       .title{
@@ -63,7 +63,7 @@ export default {
           margin: 4px 6px 4px 6px;
         }
       }
-      
+
       .submit-btn{
         position: absolute;
         background: #FF8600;

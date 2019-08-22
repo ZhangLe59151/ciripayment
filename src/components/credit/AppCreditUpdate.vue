@@ -1,34 +1,43 @@
 <template>
     <div class="app-credit-update">
-      <van-swipe 
+      <van-swipe
         @change="onChange"
         :loop="false"
         :show-indicators="false"
         :width="swipeWidth" >
-        <van-swipe-item>
-          <div class="box-card">
-            <div class="title">What's your monthly income?</div>
-            <van-field
-              class="input_number"
-              v-model="form.memo"
-              maxlength="50"
-              placeholder="5000"
-            />
-            <div class="curruncy">{{$store.state.currency}}</div>
-            
-            <div class="error_msg">Please enter an amount</div>
-            <van-button 
-              class="submit-btn" >+{{ form.currentCreditLimit }} {{$store.state.currency}} credit</van-button>
-          </div>
-        </van-swipe-item>
+<!--        <van-swipe-item>-->
+<!--          <div class="box-card">-->
+<!--            <div class="title">What's your monthly income?</div>-->
+<!--            <van-field-->
+<!--              class="input_number"-->
+<!--              v-model="form.memo"-->
+<!--              maxlength="50"-->
+<!--              placeholder="5000"-->
+<!--            />-->
+<!--            <div class="curruncy">{{$store.state.currency}}</div>-->
+<!--            -->
+<!--            <div class="error_msg">Please enter an amount</div>-->
+<!--            <van-button -->
+<!--              class="submit-btn" >+{{ form.currentCreditLimit }} {{$store.state.currency}} credit</van-button>-->
+<!--          </div>-->
+<!--        </van-swipe-item>-->
+
+<!--        <van-swipe-item-->
+<!--          v-for="item in form.questionList"-->
+<!--          :key="item.id" > -->
+<!--          <credit-app-question-select-two-->
+<!--            :v-show="test1"-->
+<!--            :question="item"-->
+<!--            :currentCreditLimit="form.currentCreditLimit" />-->
+<!--        </van-swipe-item>-->
 
         <van-swipe-item
           v-for="item in form.questionList"
-          :key="item.id" > 
-          <credit-app-question-select-two
-            :v-show="test1"
+          :key="item.id"
+          class="swipe-item">
+          <app-credit-q-a-mapper
             :question="item"
-            :currentCreditLimit="form.currentCreditLimit" />
+          />
         </van-swipe-item>
       </van-swipe>
       <div class="indicator">Swipe left to skip this question for now</div>
@@ -38,10 +47,12 @@
 <script>
 import { mapState } from "vuex";
 import util from "@/util.js";
+import AppCreditQAMapper from "@/components/credit/AppCreditQAMapper";
 
 export default {
   name: "AppCreditUpdate",
-  props: ['question','currentCreditLimit'],
+  components: { AppCreditQAMapper },
+  // props: ['question','currentCreditLimit'],
   data() {
     return {
       checked: true,
@@ -54,7 +65,7 @@ export default {
         currentCreditLimit: "",
         questionList: []
       },
-      swipeWidth: 355,
+      swipeWidth: 355
     }
   },
   computed: {
@@ -69,12 +80,12 @@ export default {
     })
   },
   created() {
-    this.$api.getQuestion().then(res => { 
-      if (res.data.code === 200) { 
+    this.$api.getQuestion().then(res => {
+      if (res.data.code === 200) {
         this.form.currentCreditLimit = util.fmoney(res.data.data.currentCreditLimit);
         this.form.questionList = res.data.data.questions;
-        debugger
-      } 
+        // debugger
+      }
     });
   },
   methods: {
@@ -137,7 +148,7 @@ export default {
         text-align: center;
         width: 100%;
       }
-      
+
       .submit-btn{
         position: absolute;
         background: #FF8600;
@@ -161,7 +172,9 @@ export default {
         top: -2px;
       }
     }
-
+    .swipe-item {
+      padding: 16px 6px 0 6px;
+    }
     .indicator {
       margin: 16px 0 0 0;
       font-size: 14px;

@@ -27,9 +27,9 @@ export default {
         Q3: "Whats your favourite restaurant"
       },
       creditAnswers: {
-        Q1: "a",
-        Q2: "a",
-        Q3: "a"
+        Q1: "",
+        Q2: "",
+        Q3: ""
       }
     };
     let numberOfAnswered = Object.values(credit.creditAnswers).filter(String).length;

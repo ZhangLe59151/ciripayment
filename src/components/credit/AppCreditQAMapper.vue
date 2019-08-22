@@ -1,19 +1,20 @@
 <template>
     <div class="app-credit-qa-mapper">
-      <money-input-question v-if="type==='1'" question="What's your monthly income?" answer="d" />
+      <money-input-question v-if="question.type==='number'" :question="question" />
+      <app-question-select-two v-else-if="question.type==='radio'" :question="question"/>
     </div>
 </template>
 
 <script>
 import MoneyInputQuestion from "@/components/credit/MoneyInputQuestion";
+import AppQuestionSelectTwo from "@/components/credit/AppQuestionSelectTwo";
 export default {
   name: "AppCreditQAMapper",
   components: {
+    AppQuestionSelectTwo,
     MoneyInputQuestion
   },
-  props: {
-    type: String
-  }
+  props: ["question"]
 }
 </script>
 
