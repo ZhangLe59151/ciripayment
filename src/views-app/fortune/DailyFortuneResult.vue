@@ -41,7 +41,7 @@ export default {
   mounted() {
     let savedResult = this.fortuneInfo.fortuneResult;
     this.fortuneResult = savedResult.fortuneResult;
-    this.likeStatus = this.fortuneResult.like;
+    this.likeStatus = savedResult.like;
   },
   destroyed() {
     this.updateLikeStatusWithApi()

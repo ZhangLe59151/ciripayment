@@ -68,6 +68,7 @@ export default {
       const randomQuestion = availableQuestionList[randomIndex];
       this.question = randomQuestion.content;
       this.fortuneInfo.fortuneQuestionUsed.push(randomQuestion.id);
+      return true
     }
   }
 };
