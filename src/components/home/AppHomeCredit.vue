@@ -16,10 +16,45 @@ import { mapState } from "vuex";
 
 export default {
   name: "AppHomeCredit",
+  props: {
+    creditLimit: {
+      default() {
+        return {};
+      },
+      required: true
+    }
+  },
   computed: {
     ...mapState({
       OTPVerified: "OTPVerified"
-    })
+    }),
+    ctx() {
+      const kv = {
+        "-1": "start",
+        "1": "pending",
+        "2": "pending",
+        "3": "pending",
+        "0": "finish"
+      };
+      const k = this.creditLimit.today + "";
+
+      const ob = {
+        start: {
+          label: this.$t("Home.creditLimitTitle1"),
+          btn: this.$t("Home.creditLimitBtn1")
+        },
+        pending: {
+          label: this.$t("Home.creditLimitTitle2", k, { count: k }),
+          btn: this.$t("Home.creditLimitBtn1")
+        },
+        finish: {
+          label: this.$t("Home.creditLimitTitle3"),
+          btn: this.$t("Home.creditLimitBtn2")
+        }
+      };
+
+      return ob[kv[k]];
+    }
   },
   methods: {
     handleCreditClick() {
