@@ -158,6 +158,7 @@ export default {
   .box-card{
       background-color: #ffffff;
       height: 340px;
+      width: 304px;
       border-radius: 8px;
       position: relative;
       .iconsuccess{

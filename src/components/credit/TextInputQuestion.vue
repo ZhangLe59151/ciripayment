@@ -3,7 +3,7 @@
     <i class="iconfont iconsuccess" />
     <div class="title">{{question.question}}</div>
     <div class="answer">{{question.value}}</div>
-    <van-button class="submit-btn-disabled" disabled >1,000 {{$store.state.currency}} Earned</van-button>
+    <van-button class="submit-btn-disabled" disabled >{{question.limitAmount}} {{$store.state.currency}} Earned</van-button>
   </div>
   <div v-else class="text-input-question">
     <div class="title">{{question.question}}</div>
@@ -49,10 +49,19 @@ export default {
       this.error = !this.form.answering;
     },
     handleSubmit() {
+      event.preventDefault();
       this.validateInput();
-      if (this.validateInput()) {
+      if (!this.error) {
         // send to server
-        // update vuex and localstorage
+        this.$api.sendAnswerCredit({ id: this.question.id, value: this.form.answering }).then(
+          res => {
+            if (res.data.code === 200) {
+              // update vuex and localstorage
+              this.$store.commit("UpdateCreditLimit", this.$store.state.credit.currentCreditLimit + this.question.limitAmount);
+              this.$store.commit("UpdateCreditAnswer", { id: this.question.id, value: this.form.answering });
+            }
+          }
+        )
       }
     }
   }
@@ -64,6 +73,7 @@ export default {
     background-color: #ffffff;
     height: 340px;
     width: 304px;
+
     border-radius: 8px;
     color: #2F3941;
     padding: 30px 20px 20px 20px;

@@ -103,7 +103,12 @@
     "info": "Relevant To Your Business",
     "homeRecordAddBtn": "Add Records",
     "homeRecordViewHistoryBtn": "Record History",
-    "currency": "฿"
+    "currency": "฿",
+    "creditLimitTitle1": "Increase Your Credit Limit",
+    "creditLimitTitle2": "{n} Question Left For Today! | {n} Questions Left For Today!",
+    "creditLimitTitle3": "All done! Come back tomorrow",
+    "creditLimitBtn1": "Let’s Go",
+    "creditLimitBtn2": "View Credit Limit"
   },
   "Record": {
     "Income": "INCOME",

@@ -265,15 +265,11 @@ export default new Vuex.Store({
     recommendChannelsStore: [],
     completeLoanProfile: false,
     loanProfile: {},
-    fortunetellingFrame: localStorage.getItem("fortunetellingFrame")
-      ? JSON.parse(localStorage.getItem("fortunetellingFrame"))
-      : [],
-    fortuneQuestionUsed: [],
     todayDate: "",
     fortuneInfo: {
       fortuneResult: {},
       fortuneQuestionUsed: [],
-      selectedMasterId: 0
+      selectedMaster: {}
     },
     credit: {
       currentCreditLimit: 5000,
@@ -308,8 +304,6 @@ export default new Vuex.Store({
       state.userInfo.creditLimit = null;
       state.OTPVerified = false;
       state.logInWithPassword = false;
-      state.fortunetellingFrame = null;
-      state.fortuneQuestionUsed = [];
       localStorage.clear();
     },
     // This is for settlement
@@ -463,16 +457,20 @@ export default new Vuex.Store({
     CompleteLoanProfile(state) {
       state.completeLoanProfile = true;
     },
-    SaveFortunetellingResult(state, fortunetellingFrame) {
-      state.fortunetellingFrame = fortunetellingFrame;
+    SaveFortuneInfo(state, updateFortuneInfo) {
+      state.fortuneInfo = Object.assign(state.fortuneInfo, updateFortuneInfo);
       window.localStorage.setItem(
-        "fortunetellingFrame",
-        JSON.stringify(fortunetellingFrame)
+        "fortuneInfo",
+        JSON.stringify(state.fortuneInfo)
       );
     },
     ClearFortunetellingResult(state) {
-      state.fortunetellingFrame = [];
-      window.localStorage.removeItem("fortunetellingFrame");
+      state.fortuneInfo = {
+        fortuneResult: {},
+        fortuneQuestionUsed: [],
+        selectedMaster: {}
+      };
+      window.localStorage.removeItem("fortuneInfo");
     },
     // this is for record
     UpdateRecord(state, updateRecordInfo) {
@@ -504,8 +502,13 @@ export default new Vuex.Store({
         JSON.stringify(state.credit)
       );
     },
-    UpdateCreditAnswer(state, creditAnswers) {
-      state.credit.questions = creditAnswers;
+    UpdateCreditAnswer(state, creditAnswer) {
+      let questionList = state.credit.questions;
+      for (let i = 0; i < questionList.length; i++) {
+        if (questionList[i].id === creditAnswer.id) {
+          questionList[i].value = creditAnswer.value;
+        }
+      }
       window.localStorage.setItem(
         "credit",
         JSON.stringify(state.credit)

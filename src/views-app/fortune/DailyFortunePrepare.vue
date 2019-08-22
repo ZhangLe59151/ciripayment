@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "DailyFortunePrepare",
   data() {
@@ -25,8 +27,15 @@ export default {
       masterList: require("@/assets/data/fortuneMasterList.json")
     }
   },
+  computed: {
+    ...mapState({
+      fortuneInfo: "fortuneInfo"
+    })
+  },
   methods: {
     chooseMaster(master) {
+      this.fortuneInfo.selectedMaster = master;
+      this.$store.commit("SaveFortuneInfo", this.fortuneInfo);
       this.$router.push({ name: "DailyFortuneQuestion" })
     }
   }

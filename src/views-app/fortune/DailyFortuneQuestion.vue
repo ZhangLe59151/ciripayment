@@ -25,19 +25,22 @@ export default {
   },
   computed: {
     ...mapState({
-      fortuneQuestionUsed: "fortuneQuestionUsed",
+      fortuneInfo: "fortuneInfo",
       OTPVerified: "OTPVerified"
     })
   },
   mounted() {
-    this.updateQuestion();
+    if (!this.updateQuestion()) {
+      this.$router.push({ name: "DailyFortuneLoading" });
+    }
   },
   methods: {
     submitAnswer(answer) {
       if (this.index < 2) {
         this.index++;
-        this.updateQuestion();
-        return false;
+        if (this.updateQuestion()) {
+          return false;
+        }
       }
 
       if (!this.OTPVerified) {
@@ -52,16 +55,19 @@ export default {
     updateQuestion() {
       const availableQuestionList = [];
       this.questionList.forEach(item => {
-        if (!this.fortuneQuestionUsed.includes(item.id)) {
+        if (!this.fortuneInfo.fortuneQuestionUsed.includes(item.id)) {
           availableQuestionList.push(item);
         }
       });
+      if (availableQuestionList.length === 0) {
+        return false;
+      }
       const randomIndex = Math.floor(
         Math.random() * availableQuestionList.length
       );
-      const randomQuestion = this.questionList[randomIndex];
+      const randomQuestion = availableQuestionList[randomIndex];
       this.question = randomQuestion.content;
-      this.fortuneQuestionUsed.push(randomQuestion.id);
+      this.fortuneInfo.fortuneQuestionUsed.push(randomQuestion.id);
     }
   }
 };
