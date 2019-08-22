@@ -1,53 +1,60 @@
 <template>
-  <div class="box-card">
-        <div class="title">{{ questionItem.question }}</div>
+  <div class="box-card" v-if="!!question.value">
+        <div class="title">{{ question.question }}</div>
         <div 
           class="option-block-2"
-          v-if="questionItem.options.length === 2 && !isAnswered">
+          v-if="questionItem.options.length === 2">
           <van-button
-            v-for="(item,index) in questionItem.options"
+            v-for="(item,index) in question.options"
             :key="index"
             class="option"
-            @click="form.value=item"
+            @click="setDate(item)"
             >{{ item }}</van-button>
         </div>
 
         <div 
           class="option-block-4"
-          v-if="questionItem.options.length === 4 && !isAnswered">
+          v-if="question.options.length === 4">
           <van-button
-            v-for="(item,index) in questionItem.options"
+            v-for="(item,index) in question.options"
             :key="index"
             class="option"
-            @click="form.value=item"
+            @click="setDate(item)"
             >{{ item }}</van-button>
         </div>
 
         <div 
           class="option-block-6"
-          v-if="questionItem.options.length > 4 && !isAnswered">
+          v-if="question.options.length > 4 ">
           <van-button
             v-for="(item,index) in questionItem.options"
             :key="index"
             class="option"
-            @click="form.value=item"
+            @click="setDate(item)"
             >{{ item }}</van-button>
         </div>
 
+        <van-button class="submit-btn" @click="submitQuestion">
+          <div class="btn-text">+{{question.limitAmount}} {{$store.state.currency}} Credit</div>
+          <img class="dollar-coin" src="../../assets/imgs/dollar_coin.png">
+        </van-button>
+  </div>
+  <div class="box-card" v-else>
+    <div class="title">{{ question.question }}</div>
         <div 
           class="option-block-done-2" 
-          v-if="questionItem.options.length === 2 && isAnswered">
+          v-if="question.options.length === 2">
           
           <van-button
-            v-for="(item,index) in questionItem.options"
-            v-if="questionItem.value != item"
+            v-for="(item,index) in question.options"
+            v-if="question.value != item"
             :key="index"
             class="option-done"
             >{{ item }}</van-button>
 
           <van-button
-            v-for="(item,index) in questionItem.options"
-            v-if="questionItem.value === item"
+            v-for="(item,index) in question.options"
+            v-if="question.value === item"
             :key="index"
             class="option-done-selected"
             >{{ item }}</van-button>
@@ -55,32 +62,36 @@
 
         <div 
           class="option-block-done-4" 
-          v-if="questionItem.options.length === 2 && isAnswered">
+          v-if="question.options.length === 4">
           
           <van-button
-            v-for="(item,index) in questionItem.options"
-            v-if="questionItem.value != item"
+            v-for="(item,index) in question.options"
+            v-if="question.value != item"
             :key="index"
             class="option-done"
             >{{ item }}</van-button>
 
           <van-button
-            v-for="(item,index) in questionItem.options"
-            v-if="questionItem.value === item"
+            v-for="(item,index) in question.options"
+            v-if="question.value === item"
             :key="index"
             class="option-done-selected"
             >{{ item }}</van-button>
         </div>   
-        <van-button 
-          class="submit-btn"
-          @click="submitQuestion">+{{ limitAmount }} {{$store.state.currency}} credit</van-button>
+        <van-button class="submit-btn-done" @click="submitQuestion">
+          <div class="btn-text">+{{question.limitAmount}} {{$store.state.currency}} Credit</div>
+        </van-button>
   </div>
 </template>
 
 <script>
+import util from "@/util.js";
+
 export default {
   name: "AppQuestionSelectTwo",
-  props: ['question'],
+  props: {
+    question: Object
+  },
   data() {
     return {
       form: {
@@ -88,14 +99,13 @@ export default {
         id: this.question.id
       },
       limitAmount: this.question.limitAmount,
-      questionItem: {},
-      isAnswered: this.questionItem.value ? true : false
+      isAnswered: this.question.value ? true : false,
+      value: ""
     }
   },
   created() {
-    this.questionItem = this.question;
-    this.isAnswered = this.questionItem.value ? true : false;
-    this.limitAmount = this.questionItem.limitAmount;
+    this.isAnswered = this.question.value ? true : false;
+    this.limitAmount = this.question.limitAmount;
   },
   methods: {
     submitQuestion() {
@@ -104,6 +114,9 @@ export default {
         limitAmount += this.question.limitAmount;
         }
       });
+    },
+    setData(item) {
+      this.form.value = item;
     }
   }
 }
@@ -214,6 +227,7 @@ export default {
           color: white;
           border-radius: 4px;
           width: 45%;
+          height: 100%;
           margin: 4px 6px 4px 6px;
           white-space: normal;
         }
@@ -225,6 +239,7 @@ export default {
           color: #87929D;
           border-radius: 4px;
           width: 45%;
+          height: 100%;
           margin: 4px 6px 4px 6px;
           white-space: normal;
         }
@@ -263,17 +278,41 @@ export default {
       }
 
       .submit-btn{
-        position: absolute;
-        background: #FF8600;
-        border-radius: 4px;
-        left: 16px;
-        right: 16px;
-        width: 90%;
-        height: 40px;
-        color: white;
-        font-size: 14px;
-        line-height: 40px;
-        bottom: 20px;
+      position:absolute;
+      bottom:20px;
+      left:20px;
+      width: 274px;
+      height:40px;
+      background-color: #FF8600;
+      color:white;
+      font-size: 14px;
+      .btn-text{
+        position: relative;
+        left: -20px;
+        top: -2px;
       }
+      .dollar-coin{
+        width: 24px;
+        height:24px;
+        position: absolute;
+        top: 7px;
+        right: 55px;
+      }
+
     }
+
+    .submit-btn-done{
+      position:absolute;
+      bottom:20px;
+      left:20px;
+      width: 274px;
+      height:40px;
+      background-color: #C2C8CC !important;
+      color:white !important;
+      opacity: 1 !important;
+      box-shadow: none !important;
+      font-size: 14px;
+    }
+
+}
 </style>
