@@ -84,7 +84,7 @@ export default {
       if (res.data.code === 200) {
         this.form.currentCreditLimit = util.fmoney(res.data.data.currentCreditLimit);
         this.form.questionList = res.data.data.questions;
-        // debugger
+        debugger
       }
     });
   },
