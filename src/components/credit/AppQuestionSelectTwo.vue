@@ -3,10 +3,11 @@
         <div class="title">{{ question.question }}</div>
         <div class="option-block">
           <van-button 
-            v-for="item in question.options"
-            :key="item"
+            v-for="(item,index) in question.options"
+            :key="index"
             class="option"
-            >{{ item }}</van-button>
+            text="XXXXXXXXXXXXXXXXXXXXXXXXXX"
+            ></van-button>
         </div>
         <van-button class="submit-btn">+{{ currentCreditLimit }} {{$store.state.currency}} credit</van-button>
   </div>

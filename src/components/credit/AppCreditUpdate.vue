@@ -25,9 +25,8 @@
         <van-swipe-item
           v-for="item in form.questionList"
           :key="item.id" > 
-          {{ item.type }}
           <credit-app-question-select-two
-            :v-if="item.type === type.number"
+            :v-show="test1"
             :question="item"
             :currentCreditLimit="form.currentCreditLimit" />
         </van-swipe-item>
@@ -46,9 +45,10 @@ export default {
   data() {
     return {
       checked: true,
+      test1: false,
       type: {
-        number: "number",
-        radio: "radio"
+        number: true,
+        radio: false
       },
       form: {
         currentCreditLimit: "",
