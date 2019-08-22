@@ -14,22 +14,14 @@ axios.defaults.baseURL = process.env.VUE_APP_BASEURL;
 axios.interceptors.request.use(
   config => {
     const clientId = localStorage.getItem("ClientId");
-    if (config.method === "post") {
-      config.data = {
-        ...config.data,
-        _t: Date.parse(new Date()) / 1000,
-        clientId: clientId
-      };
-    } else if (config.method === "get") {
-      config.params = {
-        _t: Date.parse(new Date()) / 1000,
-        clientId: clientId,
-        ...config.params
-      };
+    config.headers = {
+      ...config.headers,
+      _t: Date.parse(new Date()) / 1000,
+      clientId: clientId
     }
     return config;
   },
-  function(error) {
+  function (error) {
     return Promise.reject(error);
   }
 );
@@ -37,11 +29,11 @@ axios.interceptors.request.use(
 // http response interceptor
 axios.interceptors.response.use(
   // eslint-disable-next-line space-before-function-paren
-  function(response) {
+  function (response) {
     return response;
   },
   // eslint-disable-next-line space-before-function-paren
-  function(error) {
+  function (error) {
     if (error.response.status === 401) {
       // Dialog.alert({
       //   message: "You have been inactive for a while. Please login again.",
