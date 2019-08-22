@@ -5,32 +5,6 @@
         :loop="false"
         :show-indicators="false"
         :width="swipeWidth" >
-<!--        <van-swipe-item>-->
-<!--          <div class="box-card">-->
-<!--            <div class="title">What's your monthly income?</div>-->
-<!--            <van-field-->
-<!--              class="input_number"-->
-<!--              v-model="form.memo"-->
-<!--              maxlength="50"-->
-<!--              placeholder="5000"-->
-<!--            />-->
-<!--            <div class="curruncy">{{$store.state.currency}}</div>-->
-<!--            -->
-<!--            <div class="error_msg">Please enter an amount</div>-->
-<!--            <van-button -->
-<!--              class="submit-btn" >+{{ form.currentCreditLimit }} {{$store.state.currency}} credit</van-button>-->
-<!--          </div>-->
-<!--        </van-swipe-item>-->
-
-<!--        <van-swipe-item-->
-<!--          v-for="item in form.questionList"-->
-<!--          :key="item.id" > -->
-<!--          <credit-app-question-select-two-->
-<!--            :v-show="test1"-->
-<!--            :question="item"-->
-<!--            :currentCreditLimit="form.currentCreditLimit" />-->
-<!--        </van-swipe-item>-->
-
         <van-swipe-item
           v-for="item in form.questionList"
           :key="item.id"
@@ -40,7 +14,8 @@
           />
         </van-swipe-item>
       </van-swipe>
-      <div class="indicator">Swipe left to skip this question for now</div>
+      <div class="instruction">Swipe left to skip this question for now</div>
+      <i class="iconfont iconswipe" />
     </div>
 </template>
 
@@ -80,13 +55,47 @@ export default {
     })
   },
   created() {
-    this.$api.getQuestion().then(res => {
-      if (res.data.code === 200) {
-        this.form.currentCreditLimit = util.fmoney(res.data.data.currentCreditLimit);
-        this.form.questionList = res.data.data.questions;
-        // debugger
+    // this.$api.getQuestion().then(res => {
+    //   if (res.data.code === 200) {
+    //     this.form.currentCreditLimit = util.fmoney(res.data.data.currentCreditLimit);
+    //     this.form.questionList = res.data.data.questions;
+    //     // debugger
+    //   }
+    // });
+
+    const questionListMock = [
+      {
+        "id": 1,
+        "question": "Do you have a driving licence?",
+        "type": 3,
+        "options": [
+          "Yes",
+          "No"
+        ],
+        "limitAmount": 5000,
+        "value": null,
+        "placeholder": ""
+      },
+      {
+        "id": 2,
+        "question": "What is your monthly income?",
+        "type": 1,
+        "options": null,
+        "limitAmount": 7000,
+        "value": "2300",
+        "placeholder": "25000"
+      },
+      {
+        "id": 3,
+        "question": "What do you sell or provide?",
+        "type": 2,
+        "options": null,
+        "limitAmount": 6000,
+        "value": null,
+        "placeholder": "E.g. Sell clothes, sell food"
       }
-    });
+    ]
+    this.form.questionList = questionListMock;
   },
   methods: {
     onChange(index) {
@@ -102,84 +111,19 @@ export default {
     flex-grow:1;
     background-color: #04A777;
 
-    .box-card{
-      background-color: #ffffff;
-      margin: 16px 6px 0 28px;
-      height: 340px;
-      border-radius: 10px;
-      position: relative;
-
-      .title{
-        font-size: 20px;
-        font-weight: bolder;
-        text-align: center;
-        position: absolute;
-        left: 30px;
-        right: 30px;
-        top: 30px;
-      }
-
-      .input_number {
-        position: absolute;
-        height: 82px;
-        left: 16px;
-        right: 16px;
-        width: 90%;
-        top: 130px;
-        font-size: 24px;
-        height: 25%;
-        border-color: #B41800;
-        border-style: solid;
-        border-width: 1px;
-        border-radius: 4px;
-      }
-
-      .curruncy {
-        position: absolute;
-        top: 163px;
-        right: 32px;
-      }
-
-      .error_msg {
-        position: absolute;
-        top: 220px;
-        font-size: 14px;
-        color: #B41800;
-        text-align: center;
-        width: 100%;
-      }
-
-      .submit-btn{
-        position: absolute;
-        background: #FF8600;
-        border-radius: 4px;
-        left: 16px;
-        right: 16px;
-        width: 90%;
-        height: 40px;
-        color: white;
-        font-size: 14px;
-        line-height: 40px;
-        bottom: 20px;
-      }
-      .disabled {
-        background-color: #E9EBED;
-        color: #87929D;
-      }
-      .submittedAnswer{
-        font-size: 24px;
-        position: relative;
-        top: -2px;
-      }
-    }
     .swipe-item {
-      padding: 16px 6px 0 6px;
+      padding-top: 20px;
     }
-    .indicator {
-      margin: 16px 0 0 0;
+    .instruction {
+      margin: 20px 0 10px 0;
       font-size: 14px;
       text-align: center;
       color: white;
+    }
+    .iconswipe{
+      color:white;
+      font-size: 34px;
+      margin: 0 0 0 160px;
     }
 
   }

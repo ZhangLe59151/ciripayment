@@ -17,14 +17,15 @@
     >
         <el-form-item
           prop="answering">
-          <el-input :class="error? 'input-box-error': 'input-box'" inputmode="numeric" v-model="form.answering" placeholder="0">
+          <el-input :class="error? 'input-box-error': 'input-box'" inputmode="numeric" v-model="form.answering"
+                    :placeholder="question.placeholder">
             <div class="currency" slot="suffix">{{$store.state.currency}}</div>
           </el-input>
         </el-form-item>
     </el-form>
     <div v-if="error" class="error_msg">Please enter an amount</div>
     <van-button class="submit-btn" @click="handleSubmit">
-      <div class="btn-text">+1,000 {{$store.state.currency}} Credit</div>
+      <div class="btn-text">+{{question.limitAmount}} {{$store.state.currency}} Credit</div>
       <img class="dollar-coin" src="../../assets/imgs/dollar_coin.png">
     </van-button>
   </div>
@@ -34,14 +35,14 @@
 export default {
   name: "MoneyInputQuestion",
   props: {
-    question: Object,
+    question: Object
   },
   data() {
     return {
       form: {
         answering: ""
       },
-      error: false,
+      error: false
     }
   },
   methods: {
@@ -89,6 +90,7 @@ export default {
       background-color: #E9EBED;
       padding-top:26px;
       font-size:24px;
+      text-align:center;
       position: relative;
 
       .baht{
@@ -115,7 +117,7 @@ export default {
       font-size: 16px;
       color: #2F3941;
       position: relative;
-      top:25px;
+      top:20px;
       left:-5px;
     }
     .error_msg {
@@ -167,6 +169,9 @@ export default {
       font-size:24px;
       color: #87929D;
       text-align: center;
+    }
+    .el-input--suffix .el-input__inner{
+      padding-left: 30px;
     }
   }
 </style>

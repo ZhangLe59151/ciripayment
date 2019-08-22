@@ -1,7 +1,8 @@
 <template>
     <div class="app-credit-qa-mapper">
-      <money-input-question v-if="question.type==='1'" :question="question" />
-      <app-question-select-two v-else-if="question.type==='3'" :question="question"/>
+      <money-input-question v-if="String(question.type)==='1'" :question="question" />
+      <money-input-question v-else-if="String(question.type)==='2'" :question="question" />
+      <app-question-select-two v-else :question="question"/>
     </div>
 </template>
 

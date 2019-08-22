@@ -9,7 +9,7 @@
             style = "height:100%"
             >{{ item }}</van-button>
         </div>
-        <van-button class="submit-btn">+{{ item.limitAmount }} {{$store.state.currency}} credit</van-button>
+<!--        <van-button class="submit-btn">+{{ item.limitAmount }} {{$store.state.currency}} credit</van-button>-->
   </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
 <style lang="scss" scoped>
   .box-card{
       background-color: #ffffff;
-      /*margin: 16px 6px 0 28px;*/
+      margin: 0 6px 0 28px;
       height: 340px;
       border-radius: 8px;
       position: relative;
