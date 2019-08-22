@@ -87,6 +87,12 @@ export default {
   getFortunetelling(params) {
     return Vue.axios.get(`/api/lucky-draw?masterId=${params}`);
   },
+  likeFortunetellingResult(params) {
+    return Vue.axios.get(`/api/lucky-draw/like?id=${params}`);
+  },
+  unlikeFortunetellingResult(params) {
+    return Vue.axios.get(`/api/lucky-draw/unlike?id=${params}`);
+  },
   getHomePageInfo() {
     return Vue.axios.get("/api/homepage");
   },

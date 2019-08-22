@@ -18,7 +18,8 @@ export default {
   name: "DailyFortuneLoading",
   computed: {
     ...mapState({
-      localDateFormatter: "localDateFormatter"
+      localDateFormatter: "localDateFormatter",
+      fortuneInfo: "fortuneInfo"
     }),
     today() {
       return this.$moment().format(this.localDateFormatter);
@@ -29,18 +30,16 @@ export default {
   },
   methods: {
     getFortunetellingByAPI() {
-      this.$api.getFortunetelling(1).then(res => {
+      this.$api.getFortunetelling(this.fortuneInfo.selectedMaster.id).then(res => {
         if (res.data.code === 200) {
-          const fortunetellingFrame = res.data.data;
-          this.$store.commit("SaveFortunetellingResult", {
-            [this.today]: fortunetellingFrame
-          });
+          this.fortuneInfo.fortuneResult = res.data.data;
+          this.$store.commit("SaveFortuneInfo", this.fortuneInfo);
           this.showResult();
         } else {
           this.$toast.fail(res.data.msg);
           this.$router.push({ name: "Home" });
         }
-      });
+      })
     },
     showResult() {
       setTimeout(() => {
@@ -54,7 +53,8 @@ export default {
 <style lang="scss" scoped>
 .daily-fortune-loading {
   position: relative;
-  background-color: #ff8600;
+  background: no-repeat center url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
+  background-size: cover;
   height: 100vh;
   width: 100%;
   text-align: center;

@@ -2,12 +2,17 @@
   <div class="daily-fortune-result">
     <fortune-telling-app-fortune-header />
     <div class="top-desc">
-      Here's your fortune today!
+      Here's your fortune by {{fortuneInfo.selectedMaster.name}}!
     </div>
     <fortune-telling-app-fortune-result-content
-      :fortuneResult="fortuneResult"
-      :salesResult="salesResult"
+      :fortuneInfo="fortuneInfo"
+      :currency="currency"
     />
+    <div class="like"
+         @click="triggerLike">
+      <i :class="likeStatus ? 'iconfont iconlike' : 'iconfont iconunlike'" />
+      <span class="like-text">Like</span>
+    </div>
   </div>
 </template>
 
@@ -18,12 +23,14 @@ export default {
   data() {
     return {
       fortuneResult: "",
-      salesResult: ""
+      salesResult: "",
+      likeStatus: false,
+      processingLike: false
     };
   },
   computed: {
     ...mapState({
-      fortunetellingFrame: "fortunetellingFrame",
+      fortuneInfo: "fortuneInfo",
       localDateFormatter: "localDateFormatter",
       currency: "currency"
     }),
@@ -32,20 +39,34 @@ export default {
     }
   },
   mounted() {
-    let savedResult = this.fortunetellingFrame[this.today];
-    let salesTarget = savedResult.salesTarget;
+    let savedResult = this.fortuneInfo.fortuneResult;
     this.fortuneResult = savedResult.fortuneResult;
-
-    this.salesResult =
-      salesTarget.type === 0
-        ? (this.salesResult = "".concat(
-            salesTarget.incomeResult.min,
-            this.currency,
-            " ~ ",
-            salesTarget.incomeResult.max,
-            this.currency
-          ))
-        : salesTarget.generalResult;
+    this.likeStatus = this.fortuneResult.like;
+  },
+  destroyed() {
+    this.updateLikeStatusWithApi()
+  },
+  methods: {
+    triggerLike() {
+      this.likeStatus = !this.likeStatus;
+      if (!this.processingLike) {
+        this.updateLikeStatusWithApi()
+      }
+    },
+    updateLikeStatusWithApi() {
+      const resultId = this.fortuneInfo.fortuneResult.id;
+      const api = this.likeStatus
+        ? this.$api.likeFortunetellingResult
+        : this.$api.unlikeFortunetellingResult;
+      this.processingLike = true;
+      api(resultId)
+        .then(() => {
+          this.processingLike = false;
+        })
+        .catch(() => {
+          this.processingLike = false;
+        });
+    }
   }
 };
 </script>
@@ -67,6 +88,23 @@ export default {
   }
   .app-fortune-result-content {
     margin-top: 20px;
+  }
+  .like {
+    color: white;
+    margin-top: 70px;
+    text-align: right;
+    margin-right: 20px;
+    .iconunlike {
+      color: white;
+    }
+    .iconlike {
+      color: #D44832;
+    }
+    .like-text {
+      color: white;
+      font-size: 16px;
+      margin-left: 8px;
+    }
   }
 }
 </style>

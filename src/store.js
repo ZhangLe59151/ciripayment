@@ -273,7 +273,7 @@ export default new Vuex.Store({
     fortuneInfo: {
       fortuneResult: {},
       fortuneQuestionUsed: [],
-      selectedMasterId: 0
+      selectedMaster: {}
     },
     credit: {
       creditLimit: 5000,
@@ -472,11 +472,11 @@ export default new Vuex.Store({
     CompleteLoanProfile(state) {
       state.completeLoanProfile = true;
     },
-    SaveFortunetellingResult(state, fortunetellingFrame) {
-      state.fortunetellingFrame = fortunetellingFrame;
+    SaveFortuneInfo(state, updateFortuneInfo) {
+      state.fortuneInfo = Object.assign(state.fortuneInfo, updateFortuneInfo);
       window.localStorage.setItem(
-        "fortunetellingFrame",
-        JSON.stringify(fortunetellingFrame)
+        "fortuneInfo",
+        JSON.stringify(state.fortuneInfo)
       );
     },
     ClearFortunetellingResult(state) {

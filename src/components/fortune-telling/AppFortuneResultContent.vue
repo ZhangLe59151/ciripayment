@@ -1,20 +1,27 @@
 <template>
   <div class="app-fortune-result-content">
     <div class="background-card">
-      <fortune-telling-app-fortune-master-photo class="master-photo" :masterId="1" />
+      <fortune-telling-app-fortune-master-photo class="master-photo" :masterId="fortuneInfo.selectedMaster.id" />
       <div class="result-box">
         <div class="date">
           {{today}}
         </div>
         <div class="fortune-result">
-          {{fortuneResult}}
+          {{fortuneResult.fortuneResult}}
         </div>
         <div class="sales-desc">
           Sales Target Today
         </div>
         <div class="sales-result">
-          {{salesResult}}
-        </div>
+          <div v-if="fortuneResult.salesTarget.type === 0">
+            <span>{{fortuneResult.salesTarget.incomeResult.min}}</span><span class="currency">{{currency}}</span>
+            <span> ~ </span>
+            <span>{{fortuneResult.salesTarget.incomeResult.max}}</span><span class="currency">{{currency}}</span>
+          </div>
+          <div v-else>
+            {{fortuneResult.salesTarget.generalResult}}
+          </div>
+      </div>
       </div>
     </div>
   </div>
@@ -24,18 +31,25 @@
 export default {
   name: "AppFortuneResultContent",
   props: {
-    fortuneResult: {
+    currency: {
       default: "",
       type: String
     },
-    salesResult: {
-      default: "",
-      type: String
+    fortuneInfo: {
+      default() {
+        return {}
+      },
+      type: Object
     }
   },
   data() {
     return {
       today: ""
+    }
+  },
+  computed: {
+    fortuneResult() {
+      return this.fortuneInfo.fortuneResult
     }
   },
   mounted() {
@@ -68,13 +82,13 @@ export default {
         left: 80px;
         right: 60px;
         top: 50%;
-        height: 200px;
+        height: 100%;
         transform: translateY(-50%);
         .date {
           position: absolute;
-          color: #2F3941;
+          color: #D44832;
           font-size: 16px;
-          top: 0;
+          top: 96px;
           width: 100%;
           height: 18px;
           text-align: center;
@@ -82,8 +96,8 @@ export default {
         .fortune-result {
           position: absolute;
           color: #2F3941;
-          font-size: 24px;
-          top: 50px;
+          font-size: 20px;
+          top: 134px;
           width: 100%;
           height: 100px;
           text-align: center;
@@ -93,7 +107,7 @@ export default {
           position: absolute;
           color: #68737D;
           font-size: 14px;
-          top: 160px;
+          bottom: 107px;
           width: 100%;
           height: 16px;
           text-align: center;
@@ -102,10 +116,16 @@ export default {
           position: absolute;
           color: black;
           font-size: 24px;
-          top: 186px;
+          bottom: 72px;
           width: 100%;
           height: 28px;
           text-align: center;
+          .currency {
+            font-size: 12px;
+            font-weight: bold;
+            color: #2F3941;
+            vertical-align: text-top;
+          }
         }
       }
     }

@@ -25,7 +25,7 @@ export default {
   },
   computed: {
     ...mapState({
-      fortuneQuestionUsed: "fortuneQuestionUsed",
+      fortuneInfo: "fortuneInfo",
       OTPVerified: "OTPVerified"
     })
   },
@@ -52,7 +52,7 @@ export default {
     updateQuestion() {
       const availableQuestionList = [];
       this.questionList.forEach(item => {
-        if (!this.fortuneQuestionUsed.includes(item.id)) {
+        if (!this.fortuneInfo.fortuneQuestionUsed.includes(item.id)) {
           availableQuestionList.push(item);
         }
       });
@@ -61,7 +61,7 @@ export default {
       );
       const randomQuestion = this.questionList[randomIndex];
       this.question = randomQuestion.content;
-      this.fortuneQuestionUsed.push(randomQuestion.id);
+      this.fortuneInfo.fortuneQuestionUsed.push(randomQuestion.id);
     }
   }
 };
