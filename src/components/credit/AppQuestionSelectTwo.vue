@@ -6,10 +6,10 @@
             v-for="(item,index) in question.options"
             :key="index"
             class="option"
-            text="item"
-            ></van-button>
+            style = "height:100%"
+            >{{ item }}</van-button>
         </div>
-        <van-button class="submit-btn">+{{ currentCreditLimit }} {{$store.state.currency}} credit</van-button>
+        <van-button class="submit-btn">+{{ item.limitAmount }} {{$store.state.currency}} credit</van-button>
   </div>
 </template>
 
@@ -51,7 +51,7 @@ export default {
         top: 110px;
         left: 16px;
         right: 16px;
-        height: 30%;
+        height: 40%;
 
         .option {
           border-color: #87929D;
@@ -59,7 +59,6 @@ export default {
           background-color: white;
           border-radius: 4px;
           width: 45%;
-          height: 40%;
           margin: 4px 6px 4px 6px;
           white-space: normal;
         }
