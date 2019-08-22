@@ -265,10 +265,6 @@ export default new Vuex.Store({
     recommendChannelsStore: [],
     completeLoanProfile: false,
     loanProfile: {},
-    fortunetellingFrame: localStorage.getItem("fortunetellingFrame")
-      ? JSON.parse(localStorage.getItem("fortunetellingFrame"))
-      : [],
-    fortuneQuestionUsed: [],
     todayDate: "",
     fortuneInfo: {
       fortuneResult: {},
@@ -308,8 +304,6 @@ export default new Vuex.Store({
       state.userInfo.creditLimit = null;
       state.OTPVerified = false;
       state.logInWithPassword = false;
-      state.fortunetellingFrame = null;
-      state.fortuneQuestionUsed = [];
       localStorage.clear();
     },
     // This is for settlement
@@ -471,8 +465,12 @@ export default new Vuex.Store({
       );
     },
     ClearFortunetellingResult(state) {
-      state.fortunetellingFrame = [];
-      window.localStorage.removeItem("fortunetellingFrame");
+      state.fortuneInfo = {
+        fortuneResult: {},
+        fortuneQuestionUsed: [],
+        selectedMaster: {}
+      };
+      window.localStorage.removeItem("fortuneInfo");
     },
     // this is for record
     UpdateRecord(state, updateRecordInfo) {
