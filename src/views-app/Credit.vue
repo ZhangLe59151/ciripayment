@@ -32,40 +32,42 @@ export default {
     //     this.$store.commit("InitCredit", res.data.data);
     //   }
     // });
-
-    const creditMock = {
-      currentCreditLimit: 50000,
-      questions: [
-        {
-          id: 6,
-          question: "What is your monthly expenses?",
-          type: 1,
-          options: null,
-          limitAmount: 7000,
-          value: "",
-          placeholder: "25000"
-        },
-        {
-          id: 5,
-          question: "What is your monthly income?",
-          type: 1,
-          options: null,
-          limitAmount: 7000,
-          value: "",
-          placeholder: "25000"
-        },
-        {
-          id: 9,
-          question: "What do you sell or provide?",
-          type: 2,
-          options: null,
-          limitAmount: 6000,
-          value: "",
-          placeholder: "E.g. Sell clothes, sell food"
-        }
-      ]
-    };
-
+    const creditMock =
+      {
+        currentCreditLimit: 50000,
+        questions: [
+          {
+            "id": 1,
+            "question": "Do you have a driving licence?",
+            "type": 3,
+            "options": [
+              "Yes",
+              "No"
+            ],
+            "limitAmount": 5000,
+            "value": null,
+            "placeholder": ""
+          },
+          {
+            "id": 5,
+            "question": "What is your monthly income?",
+            "type": 1,
+            "options": null,
+            "limitAmount": 7000,
+            "value": "",
+            "placeholder": "25000"
+          },
+          {
+            "id": 9,
+            "question": "What do you sell or provide?",
+            "type": 2,
+            "options": null,
+            "limitAmount": 6000,
+            "value": "",
+            "placeholder": "E.g. Sell clothes, sell food"
+          }
+        ]
+      };
     this.$store.commit("InitCredit", creditMock);
   }
 };
