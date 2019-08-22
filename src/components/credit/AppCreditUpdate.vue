@@ -17,16 +17,18 @@
             <div class="curruncy">{{$store.state.currency}}</div>
             
             <div class="error_msg">Please enter an amount</div>
-            <van-button class="submit-btn">+1,000 B criedit</van-button>
+            <van-button 
+              class="submit-btn" >+{{ form.currentCreditLimit }} {{$store.state.currency}} credit</van-button>
           </div>
         </van-swipe-item>
-        <van-swipe-item>
-          <credit-app-question-select-two 
-            :currentCreditLimit="3000"/>
-        </van-swipe-item>
-        <van-swipe-item>
+
+        <van-swipe-item
+          v-for="item in form.questionList"
+          :key="item.id" > 
           <credit-app-question-select-two
-            :currentCreditLimit="3000" />
+            :v-show="test1"
+            :question="item"
+            :currentCreditLimit="form.currentCreditLimit" />
         </van-swipe-item>
       </van-swipe>
       <div class="indicator">Swipe left to skip this question for now</div>
@@ -35,40 +37,23 @@
 
 <script>
 import { mapState } from "vuex";
+import util from "@/util.js";
 
 export default {
   name: "AppCreditUpdate",
-  props: ['currentCreditLimit'],
+  props: ['question','currentCreditLimit'],
   data() {
     return {
       checked: true,
+      test1: false,
+      type: {
+        number: true,
+        radio: false
+      },
       form: {
-        currentCreditLimit: 1000,
-        questions:[
-        {
-            "id":1,
-            "question":"who am i",
-            "type":"radio|text|number",
-            "limit":5000,
-            "options":[
-                "Yes",
-                "No"
-            ],
-            "value":"Yes"
-        },
-        {
-            "id":2,
-            "question":"where am i",
-            "type":"radio|text|number",
-            "limit":5000,
-            "options":[
-                "Yes",
-                "No"
-            ],
-            "value":""
-        }
-    ]
-},
+        currentCreditLimit: "",
+        questionList: []
+      },
       swipeWidth: 355,
     }
   },
@@ -82,6 +67,15 @@ export default {
         }
       }
     })
+  },
+  created() {
+    this.$api.getQuestion().then(res => { 
+      if (res.data.code === 200) { 
+        this.form.currentCreditLimit = util.fmoney(res.data.data.currentCreditLimit);
+        this.form.questionList = res.data.data.questions;
+        debugger
+      } 
+    });
   },
   methods: {
     onChange(index) {

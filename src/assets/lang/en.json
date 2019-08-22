@@ -119,5 +119,11 @@
     "addRecord": "Add Records",
     "deleteRecord": "Delete Records",
     "emptyMsg": "Your income and expenses records will appear here once you start adding them."
+  },
+  "Setting": {
+    "Language": "Language",
+    "SoL": "Sign Up or Log In",
+    "Logout": "Log Out",
+    "Version": "version"
   }
 }
