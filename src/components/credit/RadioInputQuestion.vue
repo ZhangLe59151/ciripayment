@@ -130,6 +130,7 @@ export default {
     //   });
     // },
     setData(item) {
+      this.error = false;
       this.form.value = item;
     }
   }
