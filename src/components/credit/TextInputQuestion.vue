@@ -1,11 +1,11 @@
 <template>
-  <div v-if="!!question.value" class="money-input-question">
+  <div v-if="!!question.value" class="text-input-question">
     <i class="iconfont iconsuccess" />
     <div class="title">{{question.question}}</div>
-    <div class="answer">{{question.value}}<div class="baht">{{$store.state.currency}}</div></div>
+    <div class="answer">{{question.value}}</div>
     <van-button class="submit-btn-disabled" disabled >1,000 {{$store.state.currency}} Earned</van-button>
   </div>
-  <div v-else class="money-input-question">
+  <div v-else class="text-input-question">
     <div class="title">{{question.question}}</div>
     <el-form
       label-width="0px"
@@ -15,13 +15,12 @@
       label-position="top"
       class="elForm"
     >
-        <el-form-item
-          prop="answering">
-          <el-input :class="error? 'input-box-error': 'input-box'" inputmode="numeric" v-model="form.answering"
-                    :placeholder="question.placeholder">
-            <div class="currency" slot="suffix">{{$store.state.currency}}</div>
-          </el-input>
-        </el-form-item>
+      <el-form-item
+        prop="answering">
+        <el-input :class="error? 'input-box-error': 'input-box'" v-model="form.answering"
+                  :placeholder="question.placeholder">
+        </el-input>
+      </el-form-item>
     </el-form>
     <div v-if="error" class="error_msg">Please enter an amount</div>
     <van-button class="submit-btn" @click="handleSubmit">
@@ -33,7 +32,7 @@
 
 <script>
 export default {
-  name: "MoneyInputQuestion",
+  name: "TextInputQuestion",
   props: {
     question: Object
   },
@@ -61,7 +60,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .money-input-question{
+  .text-input-question{
     background-color: #ffffff;
     height: 340px;
     width: 304px;
@@ -92,13 +91,6 @@ export default {
       font-size:24px;
       text-align:center;
       position: relative;
-
-      .baht{
-        font-size:16px;
-        position: absolute;
-        right:12px;
-        bottom:30px;
-      }
     }
     .submit-btn-disabled{
       position:absolute;
@@ -113,13 +105,6 @@ export default {
       font-size: 14px;
     }
 
-    .currency{
-      font-size: 16px;
-      color: #2F3941;
-      position: relative;
-      top:20px;
-      left:-5px;
-    }
     .error_msg {
       font-size: 14px;
       color: #B41800;
@@ -160,7 +145,7 @@ export default {
 </style>
 
 <style lang="scss">
-  .money-input-question{
+  .text-input-question{
     .el-input--small .el-input__inner{
       border: none;
       border-radius: 4px;
@@ -169,9 +154,7 @@ export default {
       font-size:24px;
       color: #87929D;
       text-align: center;
-    }
-    .el-input--suffix .el-input__inner{
-      padding-left: 30px;
+      padding-right:0;
     }
   }
 </style>

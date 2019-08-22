@@ -100,7 +100,6 @@ export default {
 <style lang="scss" scoped>
   .box-card{
       background-color: #ffffff;
-      /*margin: 16px 6px 0 28px;*/
       height: 340px;
       border-radius: 8px;
       position: relative;

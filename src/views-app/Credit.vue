@@ -13,28 +13,71 @@ export default {
   name: "Credit",
   data() {
     return {
-      finishedAll: false,
+      finishedAll: false
     }
   },
   created() {
     // this.$store.commit("fetchCreditDataFromLocal");
     // fetch credit from server or userphone:
-    let credit = {
-      creditLimit: 5000,
-      creditQuestions: {
-        Q1: "What's your monthly income",
-        Q2: "What's your monthly expenses",
-        Q3: "Whats your favourite restaurant"
-      },
-      creditAnswers: {
-        Q1: "",
-        Q2: "",
-        Q3: ""
-      }
-    };
-    let numberOfAnswered = Object.values(credit.creditAnswers).filter(String).length;
+    // let credit = {
+    //   creditLimit: 5000,
+    //   creditQuestions: {
+    //     Q1: "What's your monthly income",
+    //     Q2: "What's your monthly expenses",
+    //     Q3: "Whats your favourite restaurant"
+    //   },
+    //   creditAnswers: {
+    //     Q1: "",
+    //     Q2: "",
+    //     Q3: ""
+    //   }
+    // };
+    // this.$api.getQuestion().then(res => {
+    //   if (res.data.code === 200) {
+    //
+    //   }
+    // });
+
+    const creditMock =
+      {
+        currentCreditLimit: 50000,
+        questions: [
+          {
+            "id": 1,
+            "question": "Do you have a driving licence?",
+            "type": 3,
+            "options": [
+              "Yes",
+              "No"
+            ],
+            "limitAmount": 5000,
+            "value": null,
+            "placeholder": ""
+          },
+          {
+            "id": 2,
+            "question": "What is your monthly income?",
+            "type": 1,
+            "options": null,
+            "limitAmount": 7000,
+            "value": "2300",
+            "placeholder": "25000"
+          },
+          {
+            "id": 3,
+            "question": "What do you sell or provide?",
+            "type": 2,
+            "options": null,
+            "limitAmount": 6000,
+            "value": "sold",
+            "placeholder": "E.g. Sell clothes, sell food"
+          }
+        ]
+      };
+
+    let numberOfAnswered = creditMock.questions.map(item => item.value).filter(Boolean).length;
     this.finishedAll = (numberOfAnswered === 3);
-    this.$store.commit("InitCredit", credit);
+    this.$store.commit("InitCredit", creditMock);
   }
 }
 </script>
