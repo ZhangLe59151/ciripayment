@@ -66,7 +66,6 @@ export default {
     },
     sendBtn() {
       this.$api.feedback(this.form).then(res => {
-        debugger;
         if (res.data.code === 200) {
           this.$notify({ message: "Sent Sucessfully", background: "#04A777" });
         } else {

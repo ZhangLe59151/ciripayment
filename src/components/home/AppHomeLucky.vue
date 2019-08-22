@@ -6,10 +6,9 @@
     v-if="!fortuneTold"
   >
     <img :src="require('@/assets/imgs/home_master.png')">
-    <!-- <div class="title">{{luckTitle}}</div> -->
     <div class="subtitle">
-      <div>{{luckTitle}}</div>
-      <div>{{subtitle}}</div>
+      <div>{{$t("Home.luckyTitle")}}</div>
+      <div>{{$t("Home.luckySubtitle")}}</div>
     </div>
     <div class="btn">{{$t("Home.luckyBtn")}}</div>
   </router-link>
@@ -20,15 +19,15 @@
     v-else
   >
     <img
-      :src="require('@/assets/imgs/master_01.png')"
+      :src="imgUrl"
       class="single"
     >
-    <div class="title">{{encourageLuckyTitle}}</div>
-    <div class="subtitle">
-      <div v-if="inputedIncome">{{incomeMin}}<span class="subscript">{{currency}}</span> ~ {{incomeMax}}<span class="subscript">{{currency}}</span></div>
-      <div v-else>{{subtitle}}</div>
+    <div class="title">{{$t("Home.encourageLuckyTitle")}}</div>
+    <div class="subtitle single-subtitle">
+      <div v-if="inputedIncome">{{incomeMin}}<span class="subscript">{{$t("Home.currency")}}</span> ~ {{incomeMax}}<span class="subscript">{{$t("Home.currency")}}</span></div>
+      <div v-else>{{$t("Home.luckySubtitle")}}</div>
     </div>
-    <div class="encourage">{{encourageWording}}</div>
+    <div class="encourage">{{$t("Home.encourageWording")}}</div>
   </router-link>
 </template>
 
@@ -36,51 +35,62 @@
 import { mapState } from "vuex";
 export default {
   name: "AppHomeLucky",
+
   data() {
     return {
       fortuneTold: false,
-      luckTitle: this.$t("Home.luckyTitle"),
-      subtitle: this.$t("Home.luckySubtitle"),
-      encourageLuckyTitle: this.$t("Home.encourageLuckyTitle"),
-      encourageWording: this.$t("Home.encourageWording"),
       inputedIncome: false,
       incomeMin: 0,
-      incomeMax: 0,
-      currency: this.$t("Home.currency")
+      incomeMax: 0
     };
   },
   computed: {
     ...mapState({
       fortunetellingFrame: "fortunetellingFrame",
-      localDateFormatter: "localDateFormatter"
+      localDateFormatter: "localDateFormatter",
+      fortuneResult: state => state.fortuneInfo.fortuneResult
     }),
     today() {
       return this.$moment().format(this.localDateFormatter);
+    },
+    imgUrl() {
+      // const masterId = this.fortuneResult.id;
+      const masterId = 2;
+      const imgList = {
+        "1": require(`@/assets/imgs/master_01.png`),
+        "2": require(`@/assets/imgs/master_02.png`),
+        "3": require(`@/assets/imgs/master_03.png`)
+      };
+      return imgList[masterId];
     }
   },
-  mounted() {
-    let todayFortune = this.fortunetellingFrame[this.today]
-      ? this.fortunetellingFrame[this.today]
-      : "";
-    if (todayFortune) {
-      this.fortuneTold = true;
-      let salesTarget = todayFortune.salesTarget;
-      if (salesTarget.type === 0) {
-        this.inputedIncome = true;
-        this.incomeMin = (salesTarget.incomeResult.min + "").replace(
-          /\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,
-          "$&,"
-        );
-        this.incomeMax = (salesTarget.incomeResult.max + "").replace(
-          /\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,
-          "$&,"
-        );
-      } else {
-        this.inputedIncome = false;
-        this.subtitle = salesTarget.generalResult;
-      }
+
+  watch: {
+    fortuneResult: {
+      handler(val, oldVal) {
+        if (val.fortuneResult.length > 0) {
+          this.fortuneTold = true;
+          let salesTarget = val.salesTarget;
+          if (salesTarget.type === 0) {
+            this.inputedIncome = true;
+            this.incomeMin = (salesTarget.incomeResult.min + "").replace(
+              /\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,
+              "$&,"
+            );
+            this.incomeMax = (salesTarget.incomeResult.max + "").replace(
+              /\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,
+              "$&,"
+            );
+          } else {
+            this.inputedIncome = false;
+            this.subtitle = salesTarget.generalResult;
+          }
+        }
+      },
+      deep: true
     }
-  }
+  },
+  mounted() {}
 };
 </script>
 
@@ -103,6 +113,7 @@ export default {
 
     &.single {
       left: 20px;
+      bottom: 0px;
     }
   }
   > div {
@@ -121,6 +132,9 @@ export default {
       position: absolute;
       top: 16px;
       right: 16px;
+      &.single-subtitle {
+        top: 44px;
+      }
     }
     &.encourage {
       font-size: 14px;
@@ -136,13 +150,10 @@ export default {
       font-size: 14px;
       color: #2f3941;
       text-align: center;
-      line-height: 20px;
-      width: 90px;
-      height: 32px;
-      line-height: 32px;
+      padding: 6px 16px;
       position: absolute;
       right: 16px;
-      bottom: 20px;
+      bottom: 16px;
     }
   }
   .subscript {
