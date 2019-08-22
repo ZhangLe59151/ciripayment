@@ -3,18 +3,25 @@
     <app-common-header title="Credit Line" />
 
    <credit-app-credit-limit />
+
     <credit-app-credit-update v-if="!finishedAll"/>
     <credit-app-credit-finish-questions v-else />
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "Credit",
   data() {
     return {
-      finishedAll: false
     }
+  },
+  computed: {
+    ...mapState({
+      finishedAll: state => state.credit.questions.map(item => item.value).filter(Boolean).length === 3,
+      questions: state => state.credit.questions
+    })
   },
   created() {
     // this.$api.getQuestion().then(res => {
@@ -30,16 +37,13 @@ export default {
         currentCreditLimit: 50000,
         questions: [
           {
-            "id": 1,
-            "question": "Do you have a driving licence?",
-            "type": 3,
-            "options": [
-              "Yes",
-              "No"
-            ],
-            "limitAmount": 5000,
-            "value": null,
-            "placeholder": ""
+            "id": 6,
+            "question": "What is your monthly expenses?",
+            "type": 1,
+            "options": null,
+            "limitAmount": 7000,
+            "value": "",
+            "placeholder": "25000"
           },
           {
             "id": 5,
@@ -62,8 +66,6 @@ export default {
         ]
       };
 
-    let numberOfAnswered = creditMock.questions.map(item => item.value).filter(Boolean).length;
-    this.finishedAll = (numberOfAnswered === 3);
     this.$store.commit("InitCredit", creditMock);
   }
 }

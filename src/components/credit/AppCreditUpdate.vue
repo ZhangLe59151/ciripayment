@@ -14,6 +14,7 @@
             :question="item"
           />
         </van-swipe-item>
+
       </van-swipe>
       <div class="instruction">Swipe left to skip this question for now</div>
       <i class="iconfont iconswipe" />
@@ -43,20 +44,11 @@ export default {
   },
   computed: {
     ...mapState({
-      questionList: state => state.credit.questions
-    })
-  },
-  created() {
-    this.$api.getQuestion().then(res => {
-      if (res.data.code === 200) {
-        this.form.currentCreditLimit = util.fmoney(res.data.data.currentCreditLimit);
-        this.form.questionList = res.data.data.questions;
-      }
-    });
-  },
-  methods: {
-  }
+      questionList: state => state.credit.questions,
+      finishedAll: state => state.credit.questions.map(item => item.value).filter(Boolean).length === 3
 
+    })
+  }
 }
 </script>
 
