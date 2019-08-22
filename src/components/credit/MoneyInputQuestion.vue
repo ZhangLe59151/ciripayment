@@ -1,12 +1,12 @@
 <template>
-  <div v-if="!!answer" class="money-input-question">
+  <div v-if="!!question.value" class="money-input-question">
     <i class="iconfont iconsuccess" />
-    <div class="title">{{question}}</div>
-    <div class="answer">{{answer}}<div class="baht">{{$store.state.currency}}</div></div>
+    <div class="title">{{JSON.parse(String(question.question)).default}}</div>
+    <div class="answer">{{question.value}}<div class="baht">{{$store.state.currency}}</div></div>
     <van-button class="submit-btn-disabled" disabled >1,000 {{$store.state.currency}} Earned</van-button>
   </div>
   <div v-else class="money-input-question">
-    <div class="title">{{question}}</div>
+    <div class="title">{{question.question}}</div>
     <el-form
       label-width="0px"
       :model="form"
@@ -34,8 +34,7 @@
 export default {
   name: "MoneyInputQuestion",
   props: {
-    question: String,
-    answer: String
+    question: Object,
   },
   data() {
     return {
