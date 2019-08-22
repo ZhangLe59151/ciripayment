@@ -126,4 +126,7 @@ export default {
   getQuestion() {
     return Vue.axios.get("/api/credit/limit");
   },
+  submitQuestion(params) {
+    return Vue.axios.post("/api/credit/limit",params);
+  },
 };

@@ -6,10 +6,11 @@
             v-for="(item,index) in question.options"
             :key="index"
             class="option"
-            style = "height:100%"
+            style="height: (150/question.options.length)px"
+            @click="answer=item"
             >{{ item }}</van-button>
         </div>
-        <van-button class="submit-btn">+{{ item.limitAmount }} {{$store.state.currency}} credit</van-button>
+        <van-button class="submit-btn">+{{ question.limitAmount }} {{$store.state.currency}} credit</van-button>
   </div>
 </template>
 
@@ -19,7 +20,8 @@ export default {
   props: ['question','currentCreditLimit'],
   data() {
     return {
-      form: {}
+      form: {},
+      answer: ""
     }
   },
   created() {
