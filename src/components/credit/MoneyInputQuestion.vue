@@ -1,7 +1,7 @@
 <template>
   <div v-if="!!question.value" class="money-input-question">
     <i class="iconfont iconsuccess" />
-    <div class="title">{{JSON.parse(String(question.question)).default}}</div>
+    <div class="title">{{question.question}}</div>
     <div class="answer">{{question.value}}<div class="baht">{{$store.state.currency}}</div></div>
     <van-button class="submit-btn-disabled" disabled >1,000 {{$store.state.currency}} Earned</van-button>
   </div>
