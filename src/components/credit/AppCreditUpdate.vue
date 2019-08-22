@@ -1,10 +1,10 @@
 <template>
     <div class="app-credit-update">
       <van-swipe
-        @change="onChange"
         :loop="false"
         :show-indicators="false"
-        :width="swipeWidth" >
+        :width="swipeWidth"
+        >
         <van-swipe-item
           v-for="item in questionList"
           :key="item.id"
@@ -37,7 +37,7 @@ export default {
       },
       form: {
       },
-      swipeWidth: 355
+      swipeWidth: 316
     }
   },
   computed: {
@@ -46,9 +46,6 @@ export default {
     })
   },
   methods: {
-    onChange(index) {
-      this.swipeWidth = 300;
-    }
   }
 
 }
@@ -58,11 +55,10 @@ export default {
   .app-credit-update{
     flex-grow:1;
     background-color: #04A777;
-
+    padding-bottom: 25px;
     .swipe-item {
       padding-top: 20px;
       .item-mapper{
-        margin: 0 6px 0 28px;
       }
     }
     .instruction {
@@ -99,6 +95,9 @@ export default {
       border-radius: 100% !important;
       width: 16px;
       height: 16px;
+    }
+    .van-swipe__track{
+      margin-left: 28px;
     }
   }
 </style>

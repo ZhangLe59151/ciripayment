@@ -16,14 +16,14 @@
 <script>
 export default {
   name: "AppQuestionSelectTwo",
-  props: ['question','currentCreditLimit'],
+  props: ["question", "currentCreditLimit"],
   data() {
     return {
       form: {}
     }
   },
   created() {
-    //Object.entries(this.question.options).forEach(([key, value]) => this.form[`${value}`] = `${value}`);
+    // Object.entries(this.question.options).forEach(([key, value]) => this.form[`${value}`] = `${value}`);
   }
 }
 </script>
@@ -32,6 +32,7 @@ export default {
   .box-card{
       background-color: #ffffff;
       height: 340px;
+      width: 304px;
       border-radius: 8px;
       position: relative;
 
