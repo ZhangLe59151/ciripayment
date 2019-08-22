@@ -54,8 +54,7 @@ export default {
       return this.$moment().format(this.localDateFormatter);
     },
     imgUrl() {
-      // const masterId = this.fortuneResult.id;
-      const masterId = 2;
+      const masterId = this.fortuneResult.masterId;
       const imgList = {
         "1": require(`@/assets/imgs/master_01.png`),
         "2": require(`@/assets/imgs/master_02.png`),
