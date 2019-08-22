@@ -276,17 +276,8 @@ export default new Vuex.Store({
       selectedMasterId: 0
     },
     credit: {
-      creditLimit: 5000,
-      creditQuestions: {
-        Q1: "What's your monthly income",
-        Q2: "What's your monthly expenses",
-        Q3: "Whats your favourite restaurant"
-      },
-      creditAnswers: {
-        Q1: "",
-        Q2: "",
-        Q3: ""
-      }
+      currentCreditLimit: 5000,
+      questions: {}
     }
   },
   mutations: {
@@ -507,14 +498,19 @@ export default new Vuex.Store({
       localStorage.setItem("credit", JSON.stringify(credit));
     },
     UpdateCreditLimit(state, creditLimit) {
-      state.credit.creditLimit = creditLimit;
+      state.credit.currentCreditLimit = creditLimit;
       window.localStorage.setItem(
         "credit",
         JSON.stringify(state.credit)
       );
     },
-    UpdateCreditAnswer(state, creditAnswers) {
-      state.credit.creditAnswers = creditAnswers;
+    UpdateCreditAnswer(state, creditAnswer) {
+      let questionList = state.credit.questions;
+      for (let i = 0; i < questionList.length; i++) {
+        if (questionList[i].id === creditAnswer.id) {
+          questionList[i].value = creditAnswer.value;
+        }
+      }
       window.localStorage.setItem(
         "credit",
         JSON.stringify(state.credit)

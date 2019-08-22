@@ -18,7 +18,7 @@ export default {
     }
   },
   computed: { ...mapState({
-    originalDisplayNumber: state => state.credit.creditLimit }
+    originalDisplayNumber: state => state.credit.currentCreditLimit }
   ) },
   created() {
     this.displayNumber = this.originalDisplayNumber;
