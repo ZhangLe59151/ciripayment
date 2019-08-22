@@ -3,7 +3,18 @@
       <van-swipe
         :loop="false"
         :show-indicators="false"
+        :initial-swipe="3"
       >
+
+        <van-swipe-item
+          v-for="item in questionList"
+          :key="item.id"
+          class="swipe-item">
+          <app-credit-q-a-mapper
+            class="item-mapper"
+            :question="item"
+          />
+        </van-swipe-item>
         <van-swipe-item>
           <div class="app-credit-finish-questions">
             <i class="iconfont iconsuccess" />
@@ -14,15 +25,6 @@
               Come back tomorrow for more questions!
             </div>
           </div>
-        </van-swipe-item>
-        <van-swipe-item
-          v-for="item in questionList"
-          :key="item.id"
-          class="swipe-item">
-          <app-credit-q-a-mapper
-            class="item-mapper"
-            :question="item"
-          />
         </van-swipe-item>
 
       </van-swipe>

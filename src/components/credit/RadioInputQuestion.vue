@@ -7,7 +7,7 @@
       <van-button
         v-for="(item,index) in question.options"
         :key="index"
-        :class="(item !== form.value )?'option-2':'option-2 selecting'"
+        :class="(error? 'error-2' : (item !== form.value )?'option-2':'option-2 selecting')"
         @click="setData(item)"
       >{{ item }}</van-button>
     </div>
@@ -18,7 +18,7 @@
       <van-button
         v-for="(item,index) in question.options"
         :key="index"
-        :class="(item !== form.value )?'option-4':'option-4 selecting'"
+        :class="(error? 'error-4' : (item !== form.value )?'option-4':'option-4 selecting')"
         @click="setData(item)"
       >{{ item }}</van-button>
     </div>
@@ -29,7 +29,7 @@
       <van-button
         v-for="(item,index) in question.options"
         :key="index"
-        :class="(item !== form.value )?'option-6':'option-6 selecting'"
+        :class="(error? 'error-6' : (item !== form.value )?'option-6':'option-6 selecting')"
         @click="setData(item)"
       >{{ item }}</van-button>
     </div>
@@ -49,7 +49,7 @@
       <van-button
         v-for="(item,index) in question.options"
         :key="index"
-        :class="(item === question.value ) ? 'option-2 selected' : 'option-2 unselected'"
+        :class="(error? 'error-2' : (item === question.value ) ? 'option-2 selected' : 'option-2 unselected')"
         disabled
       >{{ item }}</van-button>
     </div>
@@ -61,7 +61,7 @@
       <van-button
         v-for="(item,index) in question.options"
         :key="index"
-        :class="(item === question.value ) ? 'option-4 selected' : 'option-4 unselected'"
+        :class="(error? 'error-4' : (item === question.value ) ? 'option-4 selected' : 'option-4 unselected')"
         disabled
       >{{ item }}</van-button>
     </div>
@@ -73,7 +73,7 @@
       <van-button
         v-for="(item,index) in question.options"
         :key="index"
-        :class="(item === question.value ) ? 'option-6 selected' : 'option-6 unselected'"
+        :class="(error? 'error-6' : (item === question.value ) ? 'option-6 selected' : 'option-6 unselected')"
         disabled
       >{{ item }}</van-button>
     </div>
@@ -104,6 +104,7 @@ export default {
   methods: {
     handleSubmit() {
       event.preventDefault();
+      if (this.form.value === "") { this.error = true; return false; }
       if (!this.error) {
         // this.$store.commit("UpdateCreditLimit", this.$store.state.credit.currentCreditLimit + this.question.limitAmount);
         // this.$store.commit("UpdateCreditAnswer", { id: this.question.id, value: this.form.answering });
@@ -129,13 +130,8 @@ export default {
     //   });
     // },
     setData(item) {
+      this.error = false;
       this.form.value = item;
-    },
-    selected(item) {
-      return item === this.question.value;
-    },
-    unselected(item) {
-      return item !== this.question.value;
     }
   }
 }
@@ -186,6 +182,20 @@ export default {
         width: 124px;
         font-size:20px;
       }
+
+      .error-2 {
+        border-width: 1px;
+        background-color: white;
+        border-radius: 4px;
+        border-color: #B41800;
+        color: #2F3941;
+        margin: 4px 6px 4px 6px;
+        white-space: normal;
+        height: 90px;
+        width: 124px;
+        font-size:20px;
+      }
+
       .option-4{
         border-width: 1px;
         background-color: white;
@@ -199,7 +209,35 @@ export default {
         width: 124px;
 
       }
+
+      .error-4{
+        border-width: 1px;
+        background-color: white;
+        border-radius: 4px;
+        border-color: #B41800;
+        color: #2F3941;
+        margin: 4px 6px 4px 6px;
+        white-space: normal;
+        height: 60px;
+        font-size: 16px;
+        width: 124px;
+
+      }
+
       .option-6{
+        border-width: 1px;
+        background-color: white;
+        border-radius: 4px;
+        border-color: #B41800;
+        color: #2F3941;
+        margin: 4px 6px 4px 6px;
+        white-space: normal;
+        height:40px;
+        font-size: 16px;
+        width: 124px;
+      }
+
+      .error-6{
         border-width: 1px;
         background-color: white;
         border-radius: 4px;
@@ -210,8 +248,8 @@ export default {
         height:40px;
         font-size: 16px;
         width: 124px;
-
       }
+
       .selecting {
         background-color: #ff8600 ;
         color: white ;
