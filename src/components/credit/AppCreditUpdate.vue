@@ -10,6 +10,7 @@
           :key="item.id"
           class="swipe-item">
           <app-credit-q-a-mapper
+            class="item-mapper"
             :question="item"
           />
         </van-swipe-item>
@@ -91,7 +92,7 @@ export default {
         "type": 2,
         "options": null,
         "limitAmount": 6000,
-        "value": null,
+        "value": "sold",
         "placeholder": "E.g. Sell clothes, sell food"
       }
     ]
@@ -113,6 +114,9 @@ export default {
 
     .swipe-item {
       padding-top: 20px;
+      .item-mapper{
+        margin: 0 6px 0 28px;
+      }
     }
     .instruction {
       margin: 20px 0 10px 0;
