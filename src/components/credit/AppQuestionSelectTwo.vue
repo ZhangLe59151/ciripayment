@@ -40,6 +40,7 @@
         </van-button>
   </div>
   <div class="box-card" v-else>
+    <i class="iconfont iconsuccess" />
     <div class="title">{{ question.question }}</div>
         <div 
           class="option-block-done-2" 
@@ -47,16 +48,18 @@
           
           <van-button
             v-for="(item,index) in question.options"
-            v-if="question.value != item"
             :key="index"
+            @v-if="unselected(item)"
             class="option-done"
+            disabled
             >{{ item }}</van-button>
 
           <van-button
             v-for="(item,index) in question.options"
-            v-if="question.value === item"
             :key="index"
+            @v-if="selected(item)"
             class="option-done-selected"
+            disabled
             >{{ item }}</van-button>
         </div>
 
@@ -66,26 +69,44 @@
           
           <van-button
             v-for="(item,index) in question.options"
-            v-if="question.value != item"
+            @v-if="unselected(item)"
             :key="index"
             class="option-done"
             >{{ item }}</van-button>
 
           <van-button
             v-for="(item,index) in question.options"
-            v-if="question.value === item"
+            @v-if="selected(item)"
+            :key="index"
+            class="option-done-selected"
+            >{{ item }}</van-button>
+        </div>
+
+        <div 
+          class="option-block-done-6" 
+          v-if="question.options.length > 4">
+          
+          <van-button
+            v-for="(item,index) in question.options"
+            @v-if="unselected(item)"
+            :key="index"
+            class="option-done"
+            >{{ item }}</van-button>
+
+          <van-button
+            v-for="(item,index) in question.options"
+            @v-if="selected(item)"
             :key="index"
             class="option-done-selected"
             >{{ item }}</van-button>
         </div>   
-        <van-button class="submit-btn-done" @click="submitQuestion">
-          <div class="btn-text">+{{question.limitAmount}} {{$store.state.currency}} Credit</div>
-        </van-button>
+        <van-button class="submit-btn-done" disabled >{{question.limitAmount}} {{$store.state.currency}} Earned</van-button>
   </div>
 </template>
 
 <script>
 import util from "@/util.js";
+import { utimes } from 'fs';
 
 export default {
   name: "AppQuestionSelectTwo",
@@ -111,12 +132,19 @@ export default {
     submitQuestion() {
       this.$api.submitQuestion(this.form).then(res => {
       if (res.data.code === 200) {
-        limitAmount += this.question.limitAmount;
+        //limitAmount += this.question.limitAmount;
+        limitAmount = util.fmoney(this.question.limitAmount);
         }
       });
     },
     setData(item) {
       this.form.value = item;
+    },
+    selected(item) {
+      return item===this.question.value ? true : false;
+    },
+    unselected(item) {
+      return item===this.question.value ? false : true;
     }
   }
 }
@@ -128,6 +156,13 @@ export default {
       height: 340px;
       border-radius: 8px;
       position: relative;
+      .iconsuccess{
+        position: absolute;
+        top: 10px;
+        right:10px;
+        color: #04a777;
+        font-size:24px;
+      }
 
       .title{
         font-size: 20px;
@@ -272,6 +307,36 @@ export default {
           border-radius: 4px;
           width: 45%;
           height: 50%;
+          margin: 4px 6px 4px 6px;
+          white-space: normal;
+        }
+      }
+
+      .option-block-done-6 {
+        position: absolute;
+        top: 110px;
+        left: 16px;
+        right: 16px;
+        height: 40%;
+
+        .option-done-selected {
+          border-color: #87929D;
+          border-width: 1px;
+          background-color: #87929D;
+          color: white;
+          border-radius: 4px;
+          width: 45%;
+          margin: 4px 6px 4px 6px;
+          white-space: normal;
+        }
+
+        .option-done {
+          border-color: #E9EBED;
+          border-width: 1px;
+          background-color: #E9EBED;
+          color: #87929D;
+          border-radius: 4px;
+          width: 45%;
           margin: 4px 6px 4px 6px;
           white-space: normal;
         }

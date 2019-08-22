@@ -49,7 +49,6 @@ export default {
   created() {
     this.$api.getQuestion().then(res => {
       if (res.data.code === 200) {
-        debugger
         this.form.currentCreditLimit = util.fmoney(res.data.data.currentCreditLimit);
         this.form.questionList = res.data.data.questions;
       }
