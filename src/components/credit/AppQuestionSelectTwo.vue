@@ -1,6 +1,6 @@
 <template>
   <div class="box-card">
-        <div class="title">What's your monthly income? {{ question.question }}</div>
+        <div class="title">{{ question.question }}</div>
         <div class="option-block">
           <van-button 
             v-for="item in question.options"
@@ -8,16 +8,18 @@
             class="option"
             >{{ item }}</van-button>
         </div>
-        <van-button class="submit-btn">+ B criedit</van-button>
+        <van-button class="submit-btn">+{{ currentCreditLimit }} {{$store.state.currency}} credit</van-button>
   </div>
 </template>
 
 <script>
 export default {
   name: "AppQuestionSelectTwo",
-  props: ['question'],
+  props: ['question','currentCreditLimit'],
   data() {
-    form: {}
+    return {
+      form: {}
+    }
   },
   created() {
     //Object.entries(this.question.options).forEach(([key, value]) => this.form[`${value}`] = `${value}`);

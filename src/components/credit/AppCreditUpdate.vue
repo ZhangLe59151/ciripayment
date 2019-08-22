@@ -28,10 +28,8 @@
           {{ item.type }}
           <credit-app-question-select-two
             :v-if="item.type === type.number"
-            :question="item" />
-          <credit-app-question-select-two
-            :v-if="item.type === type.radio"
-            :question="item" />
+            :question="item"
+            :currentCreditLimit="form.currentCreditLimit" />
         </van-swipe-item>
       </van-swipe>
       <div class="indicator">Swipe left to skip this question for now</div>
@@ -44,7 +42,7 @@ import util from "@/util.js";
 
 export default {
   name: "AppCreditUpdate",
-  props: ['question'],
+  props: ['question','currentCreditLimit'],
   data() {
     return {
       checked: true,
