@@ -159,6 +159,7 @@ export default {
         if (res.data.code === 200) {
           //limitAmount += this.question.limitAmount;
           limitAmount = util.fmoney(this.question.limitAmount);
+          
         }
       });
     },
