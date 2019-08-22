@@ -152,7 +152,9 @@ export default {
 
   computed: {
     ...mapState({
-      localDateFormatter: state => state.localDateFormatter
+      localDateFormatter: state => state.localDateFormatter,
+      recordList: state => state.recordList,
+      isLogin: "OTPVerified"
     })
   },
 
