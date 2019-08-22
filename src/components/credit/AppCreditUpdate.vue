@@ -98,7 +98,7 @@ export default {
       height: 16px;
     }
     .van-swipe__track{
-      margin-left: 28px;
+      margin-left: 25px;
     }
   }
 </style>
