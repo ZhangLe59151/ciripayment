@@ -351,7 +351,7 @@ export default {
       position:absolute;
       bottom:20px;
       left:20px;
-      width: 274px;
+      width: 260px;
       height:40px;
       background-color: #FF8600;
       color:white;
@@ -375,7 +375,7 @@ export default {
       position:absolute;
       bottom:20px;
       left:20px;
-      width: 274px;
+      width: 260px;
       height:40px;
       background-color: #C2C8CC !important;
       color:white !important;
