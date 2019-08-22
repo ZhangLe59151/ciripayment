@@ -25,10 +25,7 @@
       <div class="instruction-content-1">{{$t("AppLoanOverview.instructionContent1")}}</div>
       <ul class="instruction-content-2">
         <li>
-          <span>{{$t("AppLoanOverview.instructionContent2.personalDetails")}}</span>
-        </li>
-        <li>
-          <span>{{$t("AppLoanOverview.instructionContent2.bizInfo")}}</span>
+          <span>Applicant Information</span>
         </li>
         <li>
           <span>{{$t("AppLoanOverview.instructionContent2.photos")}}</span>
@@ -327,6 +324,7 @@ export default {
     .instruction-content-3 {
       line-height: 22px;
       margin-bottom: 20px;
+      font-size: 16px;
     }
     ul {
       list-style-type: disc;
@@ -379,7 +377,7 @@ export default {
   .enter-loan-amount {
     background-color: #e9ebed;
     flex-grow: 1;
-    padding: 10px 0 50px 0;
+    padding: 10px 0 60px 0;
     .bottom-btn {
       background-color: #ff8600;
       border-radius: 4px;

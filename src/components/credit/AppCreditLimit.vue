@@ -27,7 +27,9 @@ export default {
   computed: {
     ...mapState({
       creditLimit: state => state.credit.currentCreditLimit,
-      creditAnswers: state => state.credit.questions.map(question => question.value)
+      // creditAnswers: state => state.credit.questions.map(question => question.value),
+      creditAnswers: state =>
+        (Array.isArray(state.credit.questions)) ? state.credit.questions.map(item => item.value) : []
     })
   },
   watch: {
