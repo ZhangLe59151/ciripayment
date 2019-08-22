@@ -15,6 +15,7 @@
           :question="item"
         />
       </van-swipe-item>
+
     </van-swipe>
     <div class="instruction">Swipe left to skip this question for now</div>
     <i class="iconfont iconswipe" />
@@ -43,20 +44,12 @@ export default {
   },
   computed: {
     ...mapState({
-      questionList: state => state.credit.questions
+      questionList: state => state.credit.questions,
+      finishedAll: state =>
+        state.credit.questions.map(item => item.value).filter(Boolean)
+          .length === 3
     })
-  },
-  created() {
-    this.$api.getQuestion().then(res => {
-      if (res.data.code === 200) {
-        this.form.currentCreditLimit = util.fmoney(
-          res.data.data.currentCreditLimit
-        );
-        this.form.questionList = res.data.data.questions;
-      }
-    });
-  },
-  methods: {}
+  }
 };
 </script>
 
@@ -106,7 +99,24 @@ export default {
     height: 16px;
   }
   .van-swipe__track {
-    margin-left: 28px;
+    margin-left: 25px;
   }
+}
+.el-input.is-active .el-input__inner,
+.el-input__inner:focus {
+  border-color: #ff8600;
+}
+.el-input__suffix {
+  color: #363f47;
+  position: absolute;
+  font-size: 16px;
+}
+.van-checkbox__icon--round .van-icon {
+  border-radius: 100% !important;
+  width: 16px;
+  height: 16px;
+}
+.van-swipe__track {
+  margin-left: 28px;
 }
 </style>

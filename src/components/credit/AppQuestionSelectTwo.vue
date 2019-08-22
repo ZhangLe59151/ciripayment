@@ -219,23 +219,38 @@ export default {
     }
   }
 
-  .option-block-2 {
-    position: absolute;
-    top: 110px;
-    left: 16px;
-    right: 16px;
-    height: 40%;
+  .option-done {
+    border-color: #e9ebed;
+    border-width: 1px;
+    background-color: #e9ebed;
+    color: #87929d;
+    border-radius: 4px;
+    width: 45%;
+    margin: 4px 6px 4px 6px;
+    white-space: normal;
+  }
+}
 
-    .option {
-      border-color: #87929d;
-      border-width: 1px;
-      background-color: white;
-      border-radius: 4px;
-      height: 100%;
-      width: 45%;
-      margin: 4px 6px 4px 6px;
-      white-space: normal;
-    }
+.submit-btn {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 260px;
+  height: 40px;
+  background-color: #ff8600;
+  color: white;
+  font-size: 14px;
+  .btn-text {
+    position: relative;
+    left: -20px;
+    top: -2px;
+  }
+  .dollar-coin {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 7px;
+    right: 55px;
   }
 
   .option-block-4 {
@@ -257,146 +272,11 @@ export default {
     }
   }
 
-  .option-block-6 {
-    position: absolute;
-    top: 110px;
-    left: 16px;
-    right: 16px;
-    height: 40%;
-
-    .option {
-      border-color: #87929d;
-      border-width: 1px;
-      background-color: white;
-      border-radius: 4px;
-      width: 45%;
-      margin: 4px 6px 4px 6px;
-      white-space: normal;
-    }
-  }
-
-  .option-block-done-2 {
-    position: absolute;
-    top: 110px;
-    left: 16px;
-    right: 16px;
-    height: 40%;
-
-    .option-done-selected {
-      border-color: #87929d;
-      border-width: 1px;
-      background-color: #87929d;
-      color: white;
-      border-radius: 4px;
-      width: 45%;
-      height: 100%;
-      margin: 4px 6px 4px 6px;
-      white-space: normal;
-    }
-
-    .option-done {
-      border-color: #e9ebed;
-      border-width: 1px;
-      background-color: #e9ebed;
-      color: #87929d;
-      border-radius: 4px;
-      width: 45%;
-      height: 100%;
-      margin: 4px 6px 4px 6px;
-      white-space: normal;
-    }
-  }
-
-  .option-block-done-4 {
-    position: absolute;
-    top: 110px;
-    left: 16px;
-    right: 16px;
-    height: 40%;
-
-    .option-done-selected {
-      border-color: #87929d;
-      border-width: 1px;
-      background-color: #87929d;
-      color: white;
-      border-radius: 4px;
-      width: 45%;
-      height: 50%;
-      margin: 4px 6px 4px 6px;
-      white-space: normal;
-    }
-
-    .option-done {
-      border-color: #e9ebed;
-      border-width: 1px;
-      background-color: #e9ebed;
-      color: #87929d;
-      border-radius: 4px;
-      width: 45%;
-      height: 50%;
-      margin: 4px 6px 4px 6px;
-      white-space: normal;
-    }
-  }
-
-  .option-block-done-6 {
-    position: absolute;
-    top: 110px;
-    left: 16px;
-    right: 16px;
-    height: 40%;
-
-    .option-done-selected {
-      border-color: #87929d;
-      border-width: 1px;
-      background-color: #87929d;
-      color: white;
-      border-radius: 4px;
-      width: 45%;
-      margin: 4px 6px 4px 6px;
-      white-space: normal;
-    }
-
-    .option-done {
-      border-color: #e9ebed;
-      border-width: 1px;
-      background-color: #e9ebed;
-      color: #87929d;
-      border-radius: 4px;
-      width: 45%;
-      margin: 4px 6px 4px 6px;
-      white-space: normal;
-    }
-  }
-
-  .submit-btn {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    width: 274px;
-    height: 40px;
-    background-color: #ff8600;
-    color: white;
-    font-size: 14px;
-    .btn-text {
-      position: relative;
-      left: -20px;
-      top: -2px;
-    }
-    .dollar-coin {
-      width: 24px;
-      height: 24px;
-      position: absolute;
-      top: 7px;
-      right: 55px;
-    }
-  }
-
   .submit-btn-done {
     position: absolute;
     bottom: 20px;
     left: 20px;
-    width: 274px;
+    width: 260px;
     height: 40px;
     background-color: #c2c8cc !important;
     color: white !important;
@@ -404,5 +284,135 @@ export default {
     box-shadow: none !important;
     font-size: 14px;
   }
+}
+
+.option-block-done-2 {
+  position: absolute;
+  top: 110px;
+  left: 16px;
+  right: 16px;
+  height: 40%;
+
+  .option-done-selected {
+    border-color: #87929d;
+    border-width: 1px;
+    background-color: #87929d;
+    color: white;
+    border-radius: 4px;
+    width: 45%;
+    height: 100%;
+    margin: 4px 6px 4px 6px;
+    white-space: normal;
+  }
+
+  .option-done {
+    border-color: #e9ebed;
+    border-width: 1px;
+    background-color: #e9ebed;
+    color: #87929d;
+    border-radius: 4px;
+    width: 45%;
+    height: 100%;
+    margin: 4px 6px 4px 6px;
+    white-space: normal;
+  }
+}
+
+.option-block-done-4 {
+  position: absolute;
+  top: 110px;
+  left: 16px;
+  right: 16px;
+  height: 40%;
+
+  .option-done-selected {
+    border-color: #87929d;
+    border-width: 1px;
+    background-color: #87929d;
+    color: white;
+    border-radius: 4px;
+    width: 45%;
+    height: 50%;
+    margin: 4px 6px 4px 6px;
+    white-space: normal;
+  }
+
+  .option-done {
+    border-color: #e9ebed;
+    border-width: 1px;
+    background-color: #e9ebed;
+    color: #87929d;
+    border-radius: 4px;
+    width: 45%;
+    height: 50%;
+    margin: 4px 6px 4px 6px;
+    white-space: normal;
+  }
+}
+
+.option-block-done-6 {
+  position: absolute;
+  top: 110px;
+  left: 16px;
+  right: 16px;
+  height: 40%;
+
+  .option-done-selected {
+    border-color: #87929d;
+    border-width: 1px;
+    background-color: #87929d;
+    color: white;
+    border-radius: 4px;
+    width: 45%;
+    margin: 4px 6px 4px 6px;
+    white-space: normal;
+  }
+
+  .option-done {
+    border-color: #e9ebed;
+    border-width: 1px;
+    background-color: #e9ebed;
+    color: #87929d;
+    border-radius: 4px;
+    width: 45%;
+    margin: 4px 6px 4px 6px;
+    white-space: normal;
+  }
+}
+
+.submit-btn {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 274px;
+  height: 40px;
+  background-color: #ff8600;
+  color: white;
+  font-size: 14px;
+  .btn-text {
+    position: relative;
+    left: -20px;
+    top: -2px;
+  }
+  .dollar-coin {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 7px;
+    right: 55px;
+  }
+}
+
+.submit-btn-done {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 274px;
+  height: 40px;
+  background-color: #c2c8cc !important;
+  color: white !important;
+  opacity: 1 !important;
+  box-shadow: none !important;
+  font-size: 14px;
 }
 </style>
