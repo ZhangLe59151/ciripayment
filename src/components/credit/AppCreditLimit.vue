@@ -2,7 +2,6 @@
   <div class="app-credit-limit">
     <div v-bind:class="creditLimitClass">
       <div class="credit-limit-title">Your Current Credit Limit:</div>
-      <!--      <div class="credit-limit-amount">{{formatCurrency(creditLimit)}} {{$store.state.currency}}</div>-->
       <credit-app-number-counting
         :numberTo="numberTo"
         class="credit-limit-amount"
@@ -27,8 +26,8 @@ export default {
   },
   computed: {
     ...mapState({
-      creditLimit: state => state.credit.creditLimit,
-      creditAnswers: state => state.credit.creditAnswers
+      creditLimit: state => state.credit.currentCreditLimit,
+      creditAnswers: state => state.credit.questions.map(question => question.value)
     })
   },
   watch: {
@@ -44,7 +43,7 @@ export default {
   },
   methods: {
     returnStateBasedOnAnswered(answers) {
-      let numberOfAnswered = Object.values(answers).filter(String).length;
+      let numberOfAnswered = answers.filter(Boolean).length;
       switch (numberOfAnswered) {
         case 1: {
           return "credit-limit answered-one";

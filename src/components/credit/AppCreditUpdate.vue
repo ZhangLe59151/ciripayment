@@ -6,7 +6,7 @@
         :show-indicators="false"
         :width="swipeWidth" >
         <van-swipe-item
-          v-for="item in form.questionList"
+          v-for="item in questionList"
           :key="item.id"
           class="swipe-item">
           <app-credit-q-a-mapper
@@ -22,13 +22,11 @@
 
 <script>
 import { mapState } from "vuex";
-import util from "@/util.js";
 import AppCreditQAMapper from "@/components/credit/AppCreditQAMapper";
 
 export default {
   name: "AppCreditUpdate",
   components: { AppCreditQAMapper },
-  // props: ['question','currentCreditLimit'],
   data() {
     return {
       checked: true,
@@ -38,65 +36,14 @@ export default {
         radio: false
       },
       form: {
-        currentCreditLimit: "",
-        questionList: []
       },
       swipeWidth: 355
     }
   },
   computed: {
     ...mapState({
-      Answers: state => {
-        let emptyAnswer = { Q1: "", Q2: "", Q3: "" };
-        let savedAnswer = state.userInfo.creditAnswers;
-        return {
-          ...emptyAnswer, ...savedAnswer
-        }
-      }
+      questionList: state => state.credit.questions
     })
-  },
-  created() {
-    // this.$api.getQuestion().then(res => {
-    //   if (res.data.code === 200) {
-    //     this.form.currentCreditLimit = util.fmoney(res.data.data.currentCreditLimit);
-    //     this.form.questionList = res.data.data.questions;
-    //     // debugger
-    //   }
-    // });
-
-    const questionListMock = [
-      {
-        "id": 1,
-        "question": "Do you have a driving licence?",
-        "type": 3,
-        "options": [
-          "Yes",
-          "No"
-        ],
-        "limitAmount": 5000,
-        "value": null,
-        "placeholder": ""
-      },
-      {
-        "id": 2,
-        "question": "What is your monthly income?",
-        "type": 1,
-        "options": null,
-        "limitAmount": 7000,
-        "value": "2300",
-        "placeholder": "25000"
-      },
-      {
-        "id": 3,
-        "question": "What do you sell or provide?",
-        "type": 2,
-        "options": null,
-        "limitAmount": 6000,
-        "value": "sold",
-        "placeholder": "E.g. Sell clothes, sell food"
-      }
-    ]
-    this.form.questionList = questionListMock;
   },
   methods: {
     onChange(index) {
