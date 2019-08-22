@@ -20,6 +20,7 @@ if (!localStorage.getItem("ClientId")) {
 
 export default new Vuex.Store({
   state: {
+    BaseWebUrl: process.env.VUE_APP_WEBURL,
     ClientId: localStorage.getItem("ClientId"),
     Config:
       process.env.VUE_APP_DEVICETYPE === "APP"
