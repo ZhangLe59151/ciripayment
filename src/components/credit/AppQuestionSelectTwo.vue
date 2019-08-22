@@ -1,39 +1,29 @@
 <template>
   <div class="box-card">
-        <div class="title">What's your monthly income? {{ currentCreditLimit }}</div>
+        <div class="title">{{ question.question }}</div>
         <div class="option-block">
-          <button class="option">0</button>
-          <button class="option">1</button>
-        <!--   <button class="option">2</button>
-          <button class="option">3</button>
-          <button class="option">4</button>
-          <button class="option">5+</button> -->
+          <van-button 
+            v-for="(item,index) in question.options"
+            :key="index"
+            class="option"
+            text="XXXXXXXXXXXXXXXXXXXXXXXXXX"
+            ></van-button>
         </div>
-        <van-button class="submit-btn">+ B criedit</van-button>
+        <van-button class="submit-btn">+{{ currentCreditLimit }} {{$store.state.currency}} credit</van-button>
   </div>
 </template>
 
 <script>
 export default {
   name: "AppQuestionSelectTwo",
-  props: ['currentCreditLimit'],
+  props: ['question','currentCreditLimit'],
+  data() {
+    return {
+      form: {}
+    }
+  },
   created() {
-    // this.$store.commit("fetchCreditDataFromLocal");
-    // fetch credit from server or userphone:
-    let credit = {
-      creditLimit: 5000,
-      creditQuestions: {
-        Q1: "What's your monthly income",
-        Q2: "What's your monthly expenses",
-        Q3: "Whats your favourite restaurant"
-      },
-      creditAnswers: {
-        Q1: "",
-        Q2: "",
-        Q3: ""
-      }
-    };
-    this.$store.commit("InitCredit", credit);
+    //Object.entries(this.question.options).forEach(([key, value]) => this.form[`${value}`] = `${value}`);
   }
 }
 </script>

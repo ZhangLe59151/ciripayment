@@ -69,7 +69,8 @@ export default {
       profileDialog: false,
       showKeyboard: false,
       value: "",
-      login: true
+      login: true,
+      language: $t("Setting.Language")
     };
   },
   methods: {

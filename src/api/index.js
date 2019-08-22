@@ -122,5 +122,8 @@ export default {
   },
   feedback(params) {
     return Vue.axios.post("/api/feedback", params);
-  }
+  },
+  getQuestion() {
+    return Vue.axios.get("/api/credit/limit");
+  },
 };
