@@ -4,6 +4,11 @@ import VueAxios from "vue-axios";
 
 Vue.use(VueAxios, axios);
 
+const instance = axios.create({
+  baseURL: "",
+  headers: { Cookie: document.cookie }
+});
+
 export default {
   sendOtp(params) {
     return Vue.axios.post("/api/self-onboarding/otp/send", params);
@@ -85,7 +90,7 @@ export default {
     return Vue.axios.post("/api/merchant/channels/submit", params);
   },
   getFortunetelling(params) {
-    return Vue.axios.get(`/api/lucky-draw?masterId=${params}`);
+    return instance.get(`/api/lucky-draw?masterId=${params}`);
   },
   likeFortunetellingResult(params) {
     return Vue.axios.get(`/api/lucky-draw/like?id=${params}`);
@@ -109,7 +114,9 @@ export default {
     return Vue.axios.get("/api/merchant/record/list");
   },
   getArticleContent(params) {
-    return Vue.axios.get(`/api/information/article-detail?articleDetailId=${params}`);
+    return Vue.axios.get(
+      `/api/information/article-detail?articleDetailId=${params}`
+    );
   },
   addRecord(params) {
     return Vue.axios.post("/api/merchant/record/add", params);
