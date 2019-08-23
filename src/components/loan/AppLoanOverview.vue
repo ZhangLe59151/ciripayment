@@ -266,11 +266,13 @@ export default {
     background-size: cover;
     color: #363f47;
     text-align: center;
-    padding: 26px 100px 45px 101px;
+    padding: 26px 0px 45px 0px;
     box-sizing: border-box;
     .banner-title {
       font-size: 20px;
       font-weight: bold;
+      width: 175px;
+      margin-left: calc(50vw - 87px);
     }
   }
 
@@ -286,7 +288,7 @@ export default {
     .lower-rate {
       position: absolute;
       top: 28px;
-      left: 41px;
+      left: 10vw;
       .iconcheck {
         color: #62cd7b;
         top: -17px;
@@ -297,7 +299,7 @@ export default {
     .higher-limit {
       position: absolute;
       top: 28px;
-      left: 141px;
+      left: 38vw;
       .iconcheck {
         color: #62cd7b;
         top: -17px;
@@ -308,7 +310,7 @@ export default {
     .faster-approval {
       position: absolute;
       top: 28px;
-      left: 240px;
+      left: 65vw;
       .iconcheck {
         color: #62cd7b;
         top: -17px;
