@@ -4,7 +4,7 @@
     class="app-loan-overview"
   >
     <div class="banner">
-      <div class="banner-title">Get instant cash in under 2 min!</div>
+      <div class="banner-title">Get instant cash in minutes!</div>
     </div>
     <div class="ribbon">
       <div class="lower-rate">
@@ -21,16 +21,25 @@
       </div>
     </div>
     <div class="instruction">
-      <div class="instruction-title">{{$t("AppLoanOverview.instructionTitle")}}</div>
-      <div class="instruction-content-1">{{$t("AppLoanOverview.instructionContent1")}}</div>
-      <ul class="instruction-content-2">
-        <li>
-          <span>Applicant Information</span>
-        </li>
-        <li>
-          <span>{{$t("AppLoanOverview.instructionContent2.photos")}}</span>
-        </li>
-      </ul>
+<!--      <div class="instruction-title">{{$t("AppLoanOverview.instructionTitle")}}</div>-->
+<!--      <div class="instruction-content-1">{{$t("AppLoanOverview.instructionContent1")}}</div>-->
+<!--      <ul class="instruction-content-2">-->
+<!--        <li>-->
+<!--          <span>Applicant Information</span>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <span>{{$t("AppLoanOverview.instructionContent2.photos")}}</span>-->
+<!--        </li>-->
+<!--      </ul>-->
+      <div class="instruction-qs">
+        What you need:
+      </div>
+      <div class="requirements">
+        <i class="iconfont iconidcard" /> Your National ID
+      </div>
+      <div class="instruction-msg">
+        You are only 2 minutes away from getting instant cash!
+      </div>
     </div>
     <div class="enter-loan-amount">
       <el-form
@@ -252,7 +261,7 @@ export default {
   display: flex;
   flex-direction: column;
   .banner {
-    height: 138px;
+    height: 120px;
     background: url("../../assets/imgs/loan.png") no-repeat;
     background-size: cover;
     color: #363f47;
@@ -310,8 +319,9 @@ export default {
   }
 
   .instruction {
-    padding: 0 16px 0 16px;
+    padding: 0 16px 22px 16px;
     color: #2f3941;
+    font-size: 16px;
     .instruction-title {
       text-align: center;
       font-size: 20px;
@@ -333,6 +343,20 @@ export default {
         position: relative;
         left: -10px;
       }
+    }
+
+    .instruction-qs {
+      margin-bottom: 8px;
+    }
+    .requirements{
+      margin-bottom: 16px;
+      .iconidcard{
+        color: #ff8600;
+        margin-right: 5px;
+      }
+    }
+    .instruction-msg{
+      line-height: 22px;
     }
   }
   .loan-terms {
@@ -384,7 +408,7 @@ export default {
       width: 100%;
       height: 40px;
       font-size: 14px;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
     .consent-agreement {
       text-align: center;
@@ -462,7 +486,7 @@ export default {
     border: none;
   }
   .el-card__body {
-    padding: 20px 16px 16px 16px;
+    padding: 20px 16px 20px 16px;
   }
   .el-input__inner {
     font-size: 24px;

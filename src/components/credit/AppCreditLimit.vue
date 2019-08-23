@@ -8,9 +8,13 @@
       />
 
     </div>
-    <div class="credit-instruction-wrapper">
-      <div class="credit-instruction">Earn credit by answering questions everyday!</div>
+    <div class="ribbon">
+      <div class="ribbon-text">
+        Earn credit by answering questions everyday!
+      </div>
     </div>
+
+<!--      <div class="credit-instruction">Earn credit by answering questions everyday!</div>-->
   </div>
 </template>
 
@@ -67,7 +71,6 @@ export default {
 
 <style lang="scss" scoped>
 .app-credit-limit {
-  background-color: #e9ebed;
   color: #363f47;
   .answered-none {
     background: url("../../assets/imgs/money_background_0.png") no-repeat;
@@ -86,7 +89,7 @@ export default {
     background-size: 100% 100%;
   }
   .credit-limit {
-    height: 100px;
+    height: 136px;
     width: 100%;
     text-align: center;
     padding: 20px 0 20px 0;
@@ -98,6 +101,22 @@ export default {
     .credit-limit-amount {
       margin-top: 4px;
       font-size: 32px;
+    }
+  }
+  .ribbon {
+    height: 60px;
+    background: url("../../assets/imgs/ribbon.png") no-repeat;
+    background-size: cover;
+    position: relative;
+    top: -35px;
+    color: white;
+    font-size: 13px;
+    margin-bottom: -45px;
+    .ribbon-text {
+      font-size: 14px;
+      position: relative;
+      top: 20px;
+      text-align: center;
     }
   }
   .credit-instruction-wrapper {

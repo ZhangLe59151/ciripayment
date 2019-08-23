@@ -224,7 +224,7 @@ export default {
 
       }
 
-      .option-6{
+      .error-6{
         border-width: 1px;
         background-color: white;
         border-radius: 4px;
@@ -237,7 +237,7 @@ export default {
         width: 124px;
       }
 
-      .error-6{
+      .option-6{
         border-width: 1px;
         background-color: white;
         border-radius: 4px;
