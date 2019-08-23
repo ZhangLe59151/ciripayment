@@ -326,6 +326,7 @@ export default {
                   });
                 });
                 */
+              // TODO get Home information
 
               const to = this.$route.query.to;
               this.$router.push(to ? { name: to } : { name: "Home" });
@@ -360,6 +361,7 @@ export default {
           if (res.data.code === 200) {
             // Verify OTP success
             this.$store.commit("OTPVerified");
+            // TODO get Home information
             const to = this.$route.query.to;
             this.$router.push(to ? { name: to } : { name: "Home" });
             // this.$router.push({ name: "Home" });
@@ -391,7 +393,6 @@ export default {
         })
         .then(res => {
           if (res.data.code === 200) {
-            // TODO: add checking of existing application, redirect to check status page
             this.$api.serviceOverview().then(res => {
               if (
                 res.data.code === 200 &&

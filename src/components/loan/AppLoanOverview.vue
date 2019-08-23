@@ -190,6 +190,9 @@ export default {
     handleStart() {
       // update Loan Amount
       event.preventDefault();
+      this.$store.commit("UpdateForm", {
+        loanAmount: parseInt(this.form.loanAmount.replace(/,/g, ""))
+      });
       if (!this.OTPVerified) {
         this.$router.push({
           name: "LandingPage",
@@ -197,10 +200,6 @@ export default {
         });
         return false;
       }
-
-      this.$store.commit("UpdateForm", {
-        loanAmount: parseInt(this.form.loanAmount.replace(/,/g, ""))
-      });
       this.$router.push({ name: "EnterLoanInfo" });
     },
     formatStatus(loanStatus) {
