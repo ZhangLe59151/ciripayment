@@ -1,7 +1,7 @@
 <template>
   <div class="credit">
     <van-nav-bar
-      title="Business Worth"
+      :title="$t('Credit.title')"
       left-arrow
       @click-left="$router.push({name: 'Home'})"
     />

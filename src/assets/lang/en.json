@@ -75,6 +75,14 @@
     "dialogApp": "Apply Anyway",
     "dialogComplete": "Complete Profile"
   },
+  "Credit": {
+    "title": "Business Worth",
+    "bannerTitle": "Your Business Is Currently Worth",
+    "ribbonTitle": "Earn more by answering questions every day!",
+    "swipe": "Swipe left to skip this question for now",
+    "errorEnterAmount": "Please enter an amount",
+    "errorEnterOption": "Please select an option"
+  },
   "Home": {
     "income": "TODAY'S SALES",
     "expenses": "SPENDINGS",
