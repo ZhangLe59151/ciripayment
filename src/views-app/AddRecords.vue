@@ -1,256 +1,209 @@
 <template>
-  <div class="app-add-record">
-    <app-common-header title="Add Record" />
-    <van-tabs
-      v-model="tabActive"
-      animated
-      color="#ff8600"
-      title-active-color="#ff8600"
-    >
-      <van-tab title="Income">
-        <div class="record-status">
-          <span class="name">{{$t("Record.TotalIncome")}}</span>
-          <span class="amount">+ {{ dailyIncome }} <i>{{$store.state.currency}}</i></span>
-        </div>
+  <div>
+    <app-records-header />
 
-        <div class="label-left">{{$t("Record.IncomeName")}}</div>
+    <div class="app-pick-date">
+      <van-row class="select_date">
+        <van-col span="12">Date</van-col>
+        <van-col
+          span="12"
+          class="link_view_history"
+        >
+          <button v-on:click="view_history">View Record History</button>
+        </van-col>
+      </van-row>
+      <van-row class="pick_date">
 
-        <div class="input_note">
-            <van-field
-              v-model="form.memo"
-              @focus="inputNote"
-              maxlength="50"
-              placeholder="E.g. Sales Item"
-            />
-        </div>
+        <van-col span="22">
 
-        <div class="label-left">{{$t("Record.Date")}}</div>
-
-        <div class="pick_date">
-            <van-field
-              :value="form.accountDate"
-              confirm-button-text="confirm"
-              cancel-button-text="cancel"
-              @focus="appear = true"
-              maxlength="13"
-              readonly
-            />
-            <van-icon name="arrow-down" />
-        </div>
-
-        <div class="label-left">{{$t("Record.IncomeS")}}</div>
-        
-        <div class="input_income_expense" >
-          <div class="plus">+</div>
-          <van-field
-              class="income"
-              v-model="form.incomeAmount"
-              @focus="showKeyboard('incomeAmount')"
-              maxlength="13"
-              readonly
+          <input
+            class="input"
+            type="text"
+            v-model="form.date"
+            readonly
+            confirm-button-text="confirm"
+            cancel-button-text="cancel"
+            @focus="appear = true"
           />
-          <div class="plus currency">{{$store.state.currency}}</div>
-        </div>
 
-      </van-tab>
-      <van-tab title="Expenses">
+        </van-col>
+      </van-row>
+    </div>
 
-        <div class="record-status expenses">
-          <span class="name">{{$t("Record.TotalExpenses")}}</span>
-          <span class="amount">- {{ dailyExpense }} <i>{{$store.state.currency}}</i></span>
-        </div>
-        <div class="label-left">{{$t("Record.ExpensesName")}}</div>
+    <div class="app-pick-date">
+      <van-row class="select_date">Income</van-row>
 
-        <div class="input_note">
-            <van-field
-              v-model="form.memo"
-              @focus="inputNote"
-              maxlength="50"
-              placeholder="E.g. Sales Item"
-            />
-        </div>
+      <van-row class="input_number">
+        <van-col span="2">
+          <label class="plus">+</label>
+        </van-col>
+        <van-col span="20">
+          <input
+            class="income"
+            v-model="form.income"
+            @touchstart.stop="showKeyboard('income')"
+            maxlength="“13”"
+            placeholder
+          >
+        </van-col>
+        <van-col span="2">
+          <label class="currency">{{$store.state.currency}}</label>
+        </van-col>
+      </van-row>
+    </div>
 
-        <div class="label-left">{{$t("Record.Date")}}</div>
+    <div class="app-pick-date">
+      <van-row class="select_date">Expense</van-row>
 
-        <div class="pick_date">
-            <van-field
-              :value="form.accountDate"
-              confirm-button-text="confirm"
-              cancel-button-text="cancel"
-              @focus="appear = true"
-              maxlength="13"
-              readonly
-            />
-            <van-icon name="arrow-down" />
-        </div>
+      <van-row class="input_number">
+        <van-col span="2">
+          <label class="minus">-</label>
+        </van-col>
+        <van-col span="20">
+          <input
+            class="expense"
+            @touchstart.stop="showKeyboard('expense')"
+            v-model="form.expense"
+            maxlength="13"
+            placeholder
+          >
+        </van-col>
+        <van-col span="2">
+          <label class="currency">{{$store.state.currency}}</label>
+        </van-col>
+      </van-row>
+    </div>
 
-        <div class="label-left">{{$t("Record.ExpensesS")}}</div>
+    <div class="app-pick-date">
+      <van-row class="select_date">Note (Optional)</van-row>
 
-        <div class="input_income_expense" >
-          <div class="plus minus">-</div>
-          <van-field
-              class="income expense"
-              v-model="form.expenseAmount"
-              @focus="showKeyboard('expenseAmount')"
-              maxlength="13"
-              readonly
+      <van-row class="input_note">
+        <van-col span="24">
+          <input
+            v-model="form.note"
+            maxlength="“100”"
+            placeholder="Add Note"
+          >
+        </van-col>
+      </van-row>
+
+      <van-row class="input_note">
+        <van-col span="24">
+          <button
+            class="update_btn"
+            v-on:click="update_btn"
+          >Update Records</button>
+        </van-col>
+      </van-row>
+    </div>
+
+    <div>
+      <van-row>
+        <van-col span="24">
+          <van-datetime-picker
+            v-show="appear"
+            v-model="currentDate"
+            type="date"
+            :min-date="minDate"
+            :max-date="maxDate"
+            @cancel="appear = false"
+            @confirm="setDate"
           />
-          <div class="plus currency">{{$store.state.currency}}</div>
-        </div>
-
-      </van-tab>
-    </van-tabs>
-
-    <button
-      class="update_btn"
-      @click="updateBtn"
-    >{{$t("Record.addRecord")}}</button>
-
-    <van-row>
-      <van-col span="24">
-        <van-datetime-picker
-          v-show="appear"
-          v-model="currentDate"
-          type="date"
-          :min-date="minDate"
-          :max-date="maxDate"
-          @cancel="appear = false"
-          @confirm="setDate"
-        />
-      </van-col>
-    </van-row>
+        </van-col>
+      </van-row>
+    </div>
 
     <van-number-keyboard
-      :show="showNumber"
+      :show="show"
       extra-key="."
       close-button-text="Done"
-      @blur="showNumber = false"
+      @blur="show = false"
       @input="onInput"
       @delete="onDelete"
     />
-    
+    <van-datetime-picker
+      :show="appear"
+      v-model="currentDate"
+      type="date"
+      :min-date="minDate"
+    />
+    <app-tab-bar :active="1" />
   </div>
 </template>
 
 <script>
 import AppTabBar from "@/components/AppTabBar";
-import AppCommonHeader from "@/components/AppCommonHeader";
-import { findIndex } from "lodash";
-
+import AppRecordsHeader from "@/components/AppRecordsHeader";
 import { mapState } from "vuex";
-import util from "@/util.js";
 
 const today = new Date();
-const startDate = new Date("2019/01/01");
+
 export default {
   name: "AppRecords",
 
   components: {
     AppTabBar,
-    AppCommonHeader
+    AppRecordsHeader
   },
 
   computed: {
     ...mapState({
-      localDateFormatter: state => state.localDateFormatter,
-      recordList: state => state.recordList,
-      isLogin: "OTPVerified"
+      dateInMonth: state => state.dateInMonth
     })
   },
 
   data() {
     return {
-      tabActive: 0,
+      currentTab: this.$route.query.currentTab || "0",
       form: {
-        accountDate: "",
-        expenseAmount: "",
-        incomeAmount: "",
-        memo: ""
+        date: today.toDateString(),
+        income: "",
+        expense: "",
+        note: ""
       },
-      showNumber: false,
-      type: "incomeAmount",
+      show: false,
+      type: "income",
       appear: false,
-      minDate: startDate,
+      minDate: new Date("Jan 01,2018"),
       maxDate: today,
-      currentDate: this.$route.query.date ? this.$route.query.date : today,
-      recordList: [],
-      dailyIncome: 0,
-      dailyExpense: 0
+      currentDate: today
     };
   },
-  created() {
-    this.fetchDataUpdate(this.$moment(this.$route.query.date ? this.$route.query.date : today).format(this.localDateFormatter));
-  },
   watch: {
-    tabActive: {
-      handler(val, oldVal){
-        this.form.memo = "";
-        this.form.incomeAmount = "";
-        this.form.expenseAmount = "";
-      }
-    },
     currentDate: {
-      immediate: true,
       handler(val, oldVal) {
-        Object.entries(this.form).forEach(([key, value]) => this.form[`${key}`] = "");
-        let formDate = this.$moment(val).format("D MMM YYYY");
-        const _today = this.$moment().format(this.localDateFormatter);
-        const _yesterday = this.$moment()
-          .subtract(1, "days")
-          .format(this.localDateFormatter);
-        const _selected = this.$moment(val).format(this.localDateFormatter);
-        const kv = { [_today]: "Today, ", [_yesterday]: "Yesterday, " };
-
         this.$set(
           this.form,
-          "accountDate",
-          val ? (kv[_selected] ? kv[_selected] : "") + formDate : ""
+          "date",
+          val ? this.$moment(val).format("dd MM YYYY") : ""
         );
-
-        this.fetchDataUpdate(this.$moment(val).format(this.localDateFormatter));
-
+        //this.$set(this.form,"date", val ? val.toDateString() : "")
+        //this.form.date = "Today ," + val
+        if (
+          this.$moment(val).format("YYYYMMDD") ==
+          this.$moment(new Date()).format("YYYYMMDD")
+        ) {
+          this.form.date = "Today ," + val;
+        } else if (
+          this.$moment(val).format("YYYYMMDD") ==
+          this.$moment(today.setDate(today.getDate() - 1)).format("YYYYMMDD")
+        ) {
+          this.form.date = "Yesterday ," + val;
+        } else {
+          this.form.date = this.form.date
+            .replace("Today ,", "")
+            .replace("Yesterday ,", "");
+        }
       }
     }
   },
   methods: {
-    fetchData(form) {
-      this.$api
-        .addRecord(form)
-        .then(res => {
-          if (res.data.code === 200) {
-            this.fetchDataUpdate(form.accountDate);
-            this.form.incomeAmount = "";
-            this.form.expenseAmount = "";
-            this.form.memo = "";
-          }
-        })
-    },
-    fetchDataUpdate(currentDate) {
-      this.$api.viewRecordSum(currentDate).then(res => { 
-        if (res.data.code === 200) { 
-          this.dailyIncome = util.fmoney(res.data.data.incomeSum);
-          this.dailyExpense = util.fmoney(res.data.data.expensesSum);
-        } 
-      });
-    },
     showKeyboard(type) {
       this.appear = false;
-      this.showNumber = true;
+      this.show = true;
       this.type = type;
     },
     onInput(value) {
-      if (this.form[this.type].indexOf(".") != -1 && value == ".") {
-        return false;
-      }
-      if (this.form[this.type] == "" && value == ".") {
-        return false;
-      }
-      const regex = /^[0-9]*\.\d{1}$/;
-      if (regex.test(this.form[this.type])) {
-        this.form[this.type] += value;
-        this.showNumber = false;
-        return false;
-      }
       this.form[this.type] += value;
     },
     onDelete() {
@@ -259,184 +212,115 @@ export default {
         ? kbt.substring(0, kbt.length - 1)
         : kbt;
     },
-    updateBtn() {
-      const form = Object.assign({}, this.form);
-      form.accountDate = this.$moment(this.form.accountDate).format(this.localDateFormatter);
+    update_btn() {
+      this.form.date = this.$moment(this.form.date).format("YYYYMMDD");
+      this.$store.commit("UpdateRecord", this.form);
+      this.form.date = new Date().toDateString();
+      this.form.income = "";
+      this.form.expense = "";
+      this.form.note = "";
       this.appear = false;
-      const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
-      if (regex.test(form[this.type])) {
-        //this.$store.commit("UpdateRecord", this.convertForm(form));
-        form[this.type] = parseFloat(form[this.type]);
-        this.fetchData(form);
-        this.$notify({ message: "Added Sucessfully", background: "#04A777" });
-        return false;
-      }
-      //this.$notify({ message: "Please input valid number", background: "#04A777" });
     },
-    convertForm(form) {
-      const _date = form.accountDate.includes(",")
-        ? form.accountDate.split(", ")[1]
-        : form.accountDate;
-      form.accountDate = this.$moment(_date).format(this.localDateFormatter);
-      return form;
+    view_history() {
+      this.$router.push({ name: "RecordList" });
+    },
+    onChange(picker, values) {
+      picker.setColumnValues(1, dateInMonth[values[0]]);
+      this.form.date = values;
     },
     setDate(value) {
       this.appear = false;
-    },
-    inputNote() {
-      this.appear = false;
+
+      // this.currentDate = this.$moment(value).format("YYYYMMDD");
+
+      // console.log( this.currentDate );
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.app-add-record {
-  height: calc(100vh - 50px);
-}
-
-.label-left {
-  margin: 16px 16px 0 16px;
-  height: 24px;
-}
-
-.pick_date {
-  height: 40px;
-  font-size: 16px;
-  margin: 4px 16px 0 16px;
-  position: relative;
-}
-
-.van-icon-arrow-down {
-    position: absolute;
-    top: 10px;
-    right: 0;
-}
-
-.input_income_expense {
-  position: relative;
-  height: 40px;
-  font-size: 16px;
-  margin: 4px 16px 0 16px;
-  border-bottom: 1px solid #c2c8cc;
-  color: #04a777;
-  font-size: 16px;
-
-  .plus {
-    position: absolute;
-    bottom: 10px;
-    width: 10px;
-
-    &.minus {
-      color: #b41800;
-    }
-
-    &.currency {
-      right: 0;
-      color: #2f3941;
-    }
-
-  }
-
-  .income {
-    position: absolute;
-    bottom: 2px;
-    left: 25px;
-    right: 25px;
-    font-size: 24px;
-
-    &.expense {
-      color: #b41800;
-    }
-
-  }
-  
-}
-
-.input_note {
-  height: 40px;
-  font-size: 24px;
-  margin: 0 16px 0 16px;
-  border-bottom: 1px solid #c2c8cc;
-}
-
-.update_btn {
-  border-radius: 4px;
-  background-color: #ff8600;
-  border: none;
-  color: white;
-  font-size: 16px;
-  height: 40px;
-  width: 90%;
+.app-pick-date {
   margin-top: 16px;
   margin-right: 16px;
   margin-left: 16px;
-}
+  height: 64px;
 
-.van-picker {
-  z-index: 2000;
-}
+  .select_date {
+    height: 40px;
+    font-size: 14px;
 
-.van-field {
-  height: 40px;
-  line-height: 40px;
-  padding: 0;
-}
-
-.van-col--20 {
-  position: relative;
-  top: -4px;
-}
-
-.van-col--2 {
-  position: relative;
-  top: 10px;
-}
-
-.record-status {
-  background: #21ba8d;
-  box-shadow: 0 3px 8px -4px rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-  height: 52px;
-  line-height: 52px;
-  margin: 16px;
-  font-size: 24px;
-  color: #ffffff;
-  position: relative;
-
-  &.expenses {
-    background: #b41800;
-  }
-
-  .name {
-    font-size: 10px;
-    font-weight: bold;
-    position: absolute;
-    left: 16px;
-  }
-
-  .amount {
-    font-weight: bold;
-    position: absolute;
-    right: 16px;
-    i {
-      font-size: 12px;
-      font-style: normal;
-      position: relative;
-      top: -10px;
+    .link_view_history {
+      font-size: 14px;
+      color: #ff8600;
+      text-align: right;
+      height: auto;
     }
   }
+
+  .pick_date {
+    top: 4px;
+    height: 40px;
+    font-size: 16px;
+    width: 100%;
+
+    .input {
+      width: 100%;
+    }
+  }
+
+  .income {
+    top: 4px;
+    color: #04a777;
+  }
+
+  .input_number {
+    height: 40px;
+    font-size: 40px;
+
+    .plus {
+      bottom: 0px;
+      font-size: 16px;
+      color: #04a777;
+    }
+
+    .income {
+      top: 4px;
+      color: #04a777;
+    }
+
+    .minus {
+      bottom: 0px;
+      font-size: 16px;
+      color: #b41800;
+    }
+
+    .expense {
+      top: 4px;
+      color: #b41800;
+    }
+
+    .currency {
+      bottom: 0px;
+      font-size: 16px;
+      color: #2f3941;
+    }
+  }
+
+  .input_note {
+    height: 40px;
+    font-size: 24px;
+  }
+
+  .update_btn {
+    border-radius: 4;
+    background-color: #ff8600;
+    border: none;
+    color: white;
+    font-size: 16px;
+    width: 100%;
+    height: 40px;
+    margin-top: 16px;
+  }
 }
 </style>
-
-<style lang="scss">
-.income .van-field__control {
-  color: #04a777 !important;
-}
-
-.expense .van-field__control {
-  color: #b41800 !important;
-}
-</style>
-
-     

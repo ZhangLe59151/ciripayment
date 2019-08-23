@@ -83,22 +83,22 @@ const AppRouteArr = [
   {
     path: "/records",
     name: "Records",
-    component: () => import("@/views-app/Records.vue")
+    component: () => import("@/views-app/record/Records.vue")
   },
   {
     path: "/add-record",
     name: "AddRecord",
-    component: () => import("@/views-app/AddRecords.vue")
+    component: () => import("@/views-app/record/AddRecords.vue")
   },
   {
     path: "/edit-record/:id",
     name: "EditRecord",
-    component: () => import("@/views-app/EditRecords.vue")
+    component: () => import("@/views-app/record/EditRecords.vue")
   },
   {
     path: "/record-list",
     name: "RecordList",
-    component: () => import("@/views-app/RecordList.vue")
+    component: () => import("@/views-app/record/RecordList.vue")
   },
   {
     path: "/services",
@@ -108,23 +108,23 @@ const AppRouteArr = [
   {
     path: "/credit",
     name: "Credit",
-    component: () => import("@/views-app/Credit.vue")
+    component: () => import("@/views-app/credit/Credit.vue")
   },
   {
     path: "/loan",
     name: "Loan",
-    component: () => import("@/views-app/Loan.vue")
+    component: () => import("@/views-app/loan/Loan.vue")
   },
 
   {
     path: "/enter-loan-info",
     name: "EnterLoanInfo",
-    component: () => import("@/views-app/EnterLoanInfo.vue")
+    component: () => import("@/views-app/loan/EnterLoanInfo.vue")
   },
   {
     path: "/enter-loan-amount",
     name: "EnterLoanAmount",
-    component: () => import("@/views-app/EnterLoanAmount.vue")
+    component: () => import("@/views-app/loan/EnterLoanAmount.vue")
   },
   {
     path: "/services-apply-more-channel",
