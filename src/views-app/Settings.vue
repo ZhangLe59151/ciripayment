@@ -43,21 +43,7 @@ export default {
   created() {},
   methods: {
     handleLogout() {
-      util.removeCookies("SSID");
       this.$store.commit("logOut");
-      localStorage.removeItem("OTPVerified");
-      localStorage.removeItem("logInWithPassword");
-      localStorage.removeItem("recommendChannelsStore");
-      localStorage.removeItem("completeLoanProfile");
-      localStorage.removeItem("loanProfile");
-      localStorage.removeItem("fortuneInfo");
-      localStorage.removeItem("application");
-      localStorage.removeItem("userInfo");
-      localStorage.removeItem("form");
-      localStorage.removeItem("serviceOverviewVo");
-      localStorage.removeItem("credit");
-      localStorage.clear();
-      // this.$router.push({ name: "LandingPage" });
       this.$router.push({ name: "Home" });
     }
   }

@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { find, findIndex } from "lodash";
-
+import util from "@/util";
 Vue.use(Vuex);
 
 function guid() {
@@ -304,10 +304,24 @@ export default new Vuex.Store({
       localStorage.setItem("logInWithPassword", "true");
     },
     logOut(state) {
+      util.removeCookies("SSID");
       state.userInfo.creditLimit = null;
       state.OTPVerified = false;
       state.logInWithPassword = false;
-      // localStorage.clear();
+      [
+        "OTPVerified",
+        "logInWithPassword",
+        "recommendChannelsStore",
+        "loanProfile",
+        "fortuneInfo",
+        "application",
+        "userInfo",
+        "form",
+        "serviceOverviewVo",
+        "credit"
+      ].forEach(item => {
+        localStorage.removeItem(item);
+      });
     },
     // This is for settlement
     updateSettlement(state, settlement) {
