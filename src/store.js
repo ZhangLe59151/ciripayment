@@ -306,6 +306,8 @@ export default new Vuex.Store({
     logOut(state) {
       util.removeCookies("SSID");
       state.userInfo.creditLimit = null;
+      state.loanProfile = {};
+      state.credit = {};
       state.OTPVerified = false;
       state.logInWithPassword = false;
       [
@@ -397,20 +399,6 @@ export default new Vuex.Store({
           ...localUserInfo
         };
       }
-    },
-    fetchCreditDataFromLocal(state) {
-      // fetch user Info credit
-      let localUserInfo = JSON.parse(localStorage.getItem("userInfo"));
-
-      let numberOfAnsweredCreditQuestion =
-        "creditAnswers" in localUserInfo
-          ? Object.values(localUserInfo.creditAnswers).filter(String).length
-          : 0;
-      state.userInfo = {
-        ...state.userInfo,
-        ...localUserInfo,
-        ...{ creditLimit: numberOfAnsweredCreditQuestion * 10000 + 5000 }
-      };
     },
     removeUselessForm(state) {
       var keys = [
