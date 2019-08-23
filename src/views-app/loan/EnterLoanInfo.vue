@@ -26,25 +26,25 @@
         <div ref="bizInfo" class="title">Applicant Information</div>
         <div class="title-line"></div>
 
-        <el-form-item
-          label="Residential Address"
-          prop="resAddr"
-          :rules="[
-      { required: true, message: 'This field is required.', trigger: 'blur' }
-    ]"
-        >
-          <el-input
-            v-model="form.resAddr"
-            placeholder="Residential Address"
-            type="textarea"
-            :maxlength="110"
-            :autosize="{minRows: 0, maxRows: 3}"
-            @blur="validateResAddr"
-          >
-          </el-input>
-          <div v-if="resAddrValidated" class="bottom-right-position">
-            <i class="iconfont iconsuccess success-validator"/></div>
-        </el-form-item>
+<!--        <el-form-item-->
+<!--          label="Residential Address"-->
+<!--          prop="resAddr"-->
+<!--          :rules="[-->
+<!--      { required: true, message: 'This field is required.', trigger: 'blur' }-->
+<!--    ]"-->
+<!--        >-->
+<!--          <el-input-->
+<!--            v-model="form.resAddr"-->
+<!--            placeholder="Residential Address"-->
+<!--            type="textarea"-->
+<!--            :maxlength="110"-->
+<!--            :autosize="{minRows: 0, maxRows: 3}"-->
+<!--            @blur="validateResAddr"-->
+<!--          >-->
+<!--          </el-input>-->
+<!--          <div v-if="resAddrValidated" class="bottom-right-position">-->
+<!--            <i class="iconfont iconsuccess success-validator"/></div>-->
+<!--        </el-form-item>-->
 
         <el-form-item
           :label="$t('EnterLoanInfo.bizNameEng')"
@@ -556,8 +556,7 @@ export default {
         mcc: this.$store.state.form.mccID,
         picNationalIdBack: this.$store.state.form.backUrl,
         picNationalIdFront: this.$store.state.form.frontUrl,
-        picNationalIdFrontWithFace: this.$store.state.form.faceUrl,
-        resAddr: this.$store.state.form.resAddr
+        picNationalIdFrontWithFace: this.$store.state.form.faceUrl
       };
 
       this.$api.applyLoan(submitForm).then(res => {
