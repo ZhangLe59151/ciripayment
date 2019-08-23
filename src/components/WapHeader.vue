@@ -1,10 +1,27 @@
 <template>
-  <van-nav-bar class="web-nav"
+  <van-nav-bar
+    class="web-nav"
     :border="false"
   >
-    <van-icon v-if="left" name="arrow-left" slot="left" @click="clickLeft"/>
-    <div v-if="center" slot="title" class="Silot center"><img src="../assets/imgs/Silot-logo.svg"></div>
-    <van-icon v-if="right" name="cross" slot="right" @click="clickRight"/>
+    <van-icon
+      v-if="left"
+      name="arrow-left"
+      slot="left"
+      @click="clickLeft"
+    />
+    <div
+      v-if="center"
+      slot="title"
+      class="Silot center"
+    >
+      <!-- <img src="../assets/imgs/Silot-logo.svg"> -->
+    </div>
+    <van-icon
+      v-if="right"
+      name="cross"
+      slot="right"
+      @click="clickRight"
+    />
   </van-nav-bar>
 </template>
 
@@ -24,7 +41,7 @@ export default {
   },
   methods: {
     clickLeft() {
-      this.$router.back()
+      this.$router.back();
     },
     clickRight() {
       if (this.logInWithPassword) {
@@ -37,12 +54,12 @@ export default {
       }
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  .Silot {
-    position: relative;
-    top: 10px;
-  }
+.Silot {
+  position: relative;
+  top: 10px;
+}
 </style>

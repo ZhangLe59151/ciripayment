@@ -18,10 +18,10 @@ axios.interceptors.request.use(
       ...config.headers,
       _t: Date.parse(new Date()) / 1000,
       clientId: clientId
-    }
+    };
     return config;
   },
-  function (error) {
+  function(error) {
     return Promise.reject(error);
   }
 );
@@ -29,11 +29,11 @@ axios.interceptors.request.use(
 // http response interceptor
 axios.interceptors.response.use(
   // eslint-disable-next-line space-before-function-paren
-  function (response) {
+  function(response) {
     return response;
   },
   // eslint-disable-next-line space-before-function-paren
-  function (error) {
+  function(error) {
     if (error.response.status === 401) {
       // Dialog.alert({
       //   message: "You have been inactive for a while. Please login again.",

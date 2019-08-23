@@ -313,7 +313,6 @@ export default {
       merchantProfileInfoDefault: require("@/assets/imgs/stepper_default.png"),
       servicesInfoActive: require("@/assets/imgs/stepper_active.png"),
       active: 1,
-      logo: require("@/assets/imgs/logo.png"),
       form: {},
       dialog: false,
       checkList:
@@ -570,7 +569,7 @@ export default {
     font-size: 17px;
     padding: 20px 10%;
     text-align: center;
-    color: #FF8600;
+    color: #ff8600;
     text-transform: uppercase;
     font-weight: bold;
   }
@@ -676,7 +675,7 @@ export default {
   .label-title {
     font-size: 14px;
     line-height: 24px;
-    color: #FF8600;
+    color: #ff8600;
     &.required:before {
       color: #f56c6c;
       content: "*";
