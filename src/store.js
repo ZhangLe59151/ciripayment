@@ -322,6 +322,9 @@ export default new Vuex.Store({
       ].forEach(item => {
         localStorage.removeItem(item);
       });
+
+      // update clientId when user logout
+      localStorage.setItem("ClientId", guid());
     },
     // This is for settlement
     updateSettlement(state, settlement) {
