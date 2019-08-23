@@ -1,6 +1,10 @@
 <template>
   <div class="credit">
-    <app-common-header title="Business Worth" @leftFunc="$router.push({name: 'Home'})"/>
+    <van-nav-bar
+      title="Business Worth"
+      left-arrow
+      @click-left="$router.push({name: 'Home'})"
+    />
 
     <credit-app-credit-limit />
 
@@ -14,7 +18,8 @@ import { mapState } from "vuex";
 export default {
   name: "Credit",
   data() {
-    return {};
+    return {
+    };
   },
   computed: {
     ...mapState({
