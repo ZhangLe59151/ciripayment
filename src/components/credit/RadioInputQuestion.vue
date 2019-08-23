@@ -214,7 +214,7 @@ export default {
         margin: 4px 6px 4px 6px;
         white-space: normal;
         height: 60px;
-        font-size: 16px;
+        font-size: 14px;
         width: 120px;
 
       }
@@ -229,7 +229,7 @@ export default {
         margin: 4px 6px 4px 6px;
         white-space: normal;
         height: 60px;
-        font-size: 16px;
+        font-size: 14px;
         width: 120px;
 
       }
