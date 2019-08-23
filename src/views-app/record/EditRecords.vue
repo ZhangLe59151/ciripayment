@@ -134,23 +134,15 @@
 </template>
 
 <script>
-import AppTabBar from "@/components/AppTabBar";
-import AppCommonHeader from "@/components/AppCommonHeader";
 import { findIndex } from "lodash";
 
 import { mapState } from "vuex";
 import util from "@/util.js";
-import { debuglog } from "util";
 
 const today = new Date();
 const startDate = new Date("2019/01/01");
 export default {
   name: "AppRecords",
-
-  components: {
-    AppTabBar,
-    AppCommonHeader
-  },
 
   computed: {
     ...mapState({
