@@ -112,7 +112,7 @@
   },
   "Record": {
     "Income": "SALES",
-    "IncomeS": "Sales",
+    "Incomes": "Sales",
     "IncomeName": "Description",
     "Expenses": "SPENDINGS",
     "ExpensesS": "Spendings",

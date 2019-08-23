@@ -41,7 +41,7 @@
           <van-icon name="arrow-down" />
         </div>
 
-        <div class="label-left">{{$t("Record.IncomeS")}}</div>
+        <div class="label-left">{{$t("Record.Incomes")}}</div>
 
         <div class="input_income_expense">
           <div class="plus">+</div>

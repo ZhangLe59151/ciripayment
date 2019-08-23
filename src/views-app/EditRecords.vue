@@ -20,37 +20,37 @@
         <div class="label-left">{{$t("Record.IncomeName")}}</div>
 
         <div class="input_note">
-            <van-field
-              v-model="form.memo"
-              @focus="inputNote"
-              maxlength="50"
-              placeholder="E.g. Sales Item"
-            />
+          <van-field
+            v-model="form.memo"
+            @focus="inputNote"
+            maxlength="50"
+            placeholder="E.g. Sales Item"
+          />
         </div>
 
         <div class="label-left">{{$t("Record.Date")}}</div>
 
         <div class="pick_date">
-            <van-field
-              :value="currentDate"
-              confirm-button-text="confirm"
-              cancel-button-text="cancel"
-              maxlength="13"
-              readonly
-            />
-            <van-icon name="arrow-down" />
+          <van-field
+            :value="currentDate"
+            confirm-button-text="confirm"
+            cancel-button-text="cancel"
+            maxlength="13"
+            readonly
+          />
+          <van-icon name="arrow-down" />
         </div>
 
-        <div class="label-left">{{$t("Record.IncomeS")}}</div>
+        <div class="label-left">{{$t("Record.Incomes")}}</div>
 
-        <div class="input_income_expense" >
+        <div class="input_income_expense">
           <div class="plus">+</div>
           <van-field
-              class="income"
-              v-model="form.incomeAmount"
-              @focus="showKeyboard('incomeAmount')"
-              maxlength="13"
-              readonly
+            class="income"
+            v-model="form.incomeAmount"
+            @focus="showKeyboard('incomeAmount')"
+            maxlength="13"
+            readonly
           />
           <div class="plus currency">{{$store.state.currency}}</div>
         </div>
@@ -69,37 +69,37 @@
         <div class="label-left">{{$t("Record.ExpensesName")}}</div>
 
         <div class="input_note">
-            <van-field
-              v-model="form.memo"
-              @focus="inputNote"
-              maxlength="50"
-              placeholder="E.g. Sales Item"
-            />
+          <van-field
+            v-model="form.memo"
+            @focus="inputNote"
+            maxlength="50"
+            placeholder="E.g. Sales Item"
+          />
         </div>
 
         <div class="label-left">{{$t("Record.Date")}}</div>
 
         <div class="pick_date">
-            <van-field
-              :value="currentDate"
-              confirm-button-text="confirm"
-              cancel-button-text="cancel"
-              maxlength="13"
-              readonly
-            />
-            <van-icon name="arrow-down" />
+          <van-field
+            :value="currentDate"
+            confirm-button-text="confirm"
+            cancel-button-text="cancel"
+            maxlength="13"
+            readonly
+          />
+          <van-icon name="arrow-down" />
         </div>
 
         <div class="label-left">{{$t("Record.ExpensesS")}}</div>
 
-        <div class="input_income_expense" >
+        <div class="input_income_expense">
           <div class="plus minus">-</div>
           <van-field
-              class="income expense"
-              v-model="form.expenseAmount"
-              @focus="showKeyboard('expenseAmount')"
-              maxlength="13"
-              readonly
+            class="income expense"
+            v-model="form.expenseAmount"
+            @focus="showKeyboard('expenseAmount')"
+            maxlength="13"
+            readonly
           />
           <div class="plus currency">{{$store.state.currency}}</div>
         </div>
@@ -107,20 +107,20 @@
       </van-tab>
     </van-tabs>
 
-  <van-row>
-    <van-col span="12">
-    <div
-      class="delete_btn"
-      @click="deleteBtn"
-    >{{$t("Record.deleteRecord")}}</div>
-    </van-col>
-    <van-col span="12">
-    <div
-      class="update_btn"
-      @click="updateBtn"
-    >{{$t("Record.updateRecord")}}</div>
-    </van-col>
-  </van-row>
+    <van-row>
+      <van-col span="12">
+        <div
+          class="delete_btn"
+          @click="deleteBtn"
+        >{{$t("Record.deleteRecord")}}</div>
+      </van-col>
+      <van-col span="12">
+        <div
+          class="update_btn"
+          @click="updateBtn"
+        >{{$t("Record.updateRecord")}}</div>
+      </van-col>
+    </van-row>
 
     <van-number-keyboard
       :show="showNumber"
@@ -190,10 +190,13 @@ export default {
     viewRecord() {
       this.$api.viewRecord(this.$route.params.id).then(res => {
         if (res.data.code === 200) {
-          this.type = res.data.data.type === 0 ? "incomeAmount" : "expenseAmount";
+          this.type =
+            res.data.data.type === 0 ? "incomeAmount" : "expenseAmount";
           this.disable[this.type] = true;
           this.tabActive = res.data.data.type;
-          this.currentDate = this.$moment(res.data.data.accountDate).format("D MMM YYYYY");
+          this.currentDate = this.$moment(res.data.data.accountDate).format(
+            "D MMM YYYYY"
+          );
           this.form[this.type] = util.fmoney(res.data.data.amount);
           this.dailyIncome = util.fmoney(res.data.data.incomeSum);
           this.dailyExpense = util.fmoney(res.data.data.expensesSum);
@@ -248,14 +251,15 @@ export default {
       this.$toast("Pls input valid amount.");
     },
     deleteBtn() {
-      this.$api
-        .deleteRecord(this.form.id)
-        .then(res => {
-          if (res.data.code === 200) {
-            this.$notify({ message: "Deleted Sucessfully", background: "#04A777" });
-            this.$router.go(-1);
-          }
-        })
+      this.$api.deleteRecord(this.form.id).then(res => {
+        if (res.data.code === 200) {
+          this.$notify({
+            message: "Deleted Sucessfully",
+            background: "#04A777"
+          });
+          this.$router.go(-1);
+        }
+      });
     },
     convertForm(form) {
       const _date = form.date.includes(",")
@@ -297,9 +301,9 @@ export default {
 }
 
 .van-icon-arrow-down {
-    position: absolute;
-    top: 10px;
-    right: 0;
+  position: absolute;
+  top: 10px;
+  right: 0;
 }
 
 .input_income_expense {
@@ -324,7 +328,6 @@ export default {
       right: 0;
       color: #2f3941;
     }
-
   }
 
   .income {
@@ -337,9 +340,7 @@ export default {
     &.expense {
       color: #b41800;
     }
-
   }
-
 }
 
 .input_note {
