@@ -360,7 +360,9 @@ export default {
           if (res.data.code === 200) {
             // Verify OTP success
             this.$store.commit("OTPVerified");
-            this.$router.push({ name: "Home" });
+            const to = this.$route.query.to;
+            this.$router.push(to ? { name: to } : { name: "Home" });
+            // this.$router.push({ name: "Home" });
           } else {
             this.$notify({
               message: otpCodeErrorMessage,
