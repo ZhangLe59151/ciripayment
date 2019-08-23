@@ -1,6 +1,6 @@
 <template>
   <div class="credit">
-    <app-common-header title="Credit Line" />
+    <app-common-header title="Business Worth" @leftFunc="$router.push({name: 'Home'})"/>
 
     <credit-app-credit-limit />
 
