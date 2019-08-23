@@ -83,22 +83,22 @@ const AppRouteArr = [
   {
     path: "/records",
     name: "Records",
-    component: () => import("@/views-app/Records.vue")
+    component: () => import("@/views-app/record/Records.vue")
   },
   {
     path: "/add-record",
     name: "AddRecord",
-    component: () => import("@/views-app/AddRecords.vue")
+    component: () => import("@/views-app/record/AddRecords.vue")
   },
   {
     path: "/edit-record/:id",
     name: "EditRecord",
-    component: () => import("@/views-app/EditRecords.vue")
+    component: () => import("@/views-app/record/EditRecords.vue")
   },
   {
     path: "/record-list",
     name: "RecordList",
-    component: () => import("@/views-app/RecordList.vue")
+    component: () => import("@/views-app/record/RecordList.vue")
   },
   {
     path: "/services",
