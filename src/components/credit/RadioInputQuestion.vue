@@ -4,34 +4,34 @@
     <div
       class="option-block"
       v-if="question.options.length === 2">
-      <van-button
+      <div
         v-for="(item,index) in question.options"
         :key="index"
         :class="(error? 'error-2' : (item !== form.value )?'option-2':'option-2 selecting')"
         @click="setData(item)"
-      >{{ item }}</van-button>
+      >{{ item }}</div>
     </div>
 
     <div
       class="option-block"
       v-if="question.options.length > 2 && question.options.length<=4">
-      <van-button
+      <div
         v-for="(item,index) in question.options"
         :key="index"
         :class="(error? 'error-4' : (item !== form.value )?'option-4':'option-4 selecting')"
         @click="setData(item)"
-      >{{ item }}</van-button>
+      >{{ item }}</div>
     </div>
 
     <div
       class="option-block"
       v-if="question.options.length > 4 ">
-      <van-button
+      <div
         v-for="(item,index) in question.options"
         :key="index"
         :class="(error? 'error-6' : (item !== form.value )?'option-6':'option-6 selecting')"
         @click="setData(item)"
-      >{{ item }}</van-button>
+      >{{ item }}</div>
     </div>
 
     <van-button class="submit-btn" @click="handleSubmit">
@@ -46,36 +46,36 @@
       class="option-block"
       v-if="question.options.length === 2">
 
-      <van-button
+      <div
         v-for="(item,index) in question.options"
         :key="index"
         :class="(error? 'error-2' : (item === question.value ) ? 'option-2 selected' : 'option-2 unselected')"
         disabled
-      >{{ item }}</van-button>
+      >{{ item }}</div>
     </div>
 
     <div
       class="option-block"
       v-if="question.options.length > 2 && question.options.length<=4">
 
-      <van-button
+      <div
         v-for="(item,index) in question.options"
         :key="index"
         :class="(error? 'error-4' : (item === question.value ) ? 'option-4 selected' : 'option-4 unselected')"
         disabled
-      >{{ item }}</van-button>
+      >{{ item }}</div>
     </div>
 
     <div
       class="option-block"
       v-if="question.options.length > 4">
 
-      <van-button
+      <div
         v-for="(item,index) in question.options"
         :key="index"
         :class="(error? 'error-6' : (item === question.value ) ? 'option-6 selected' : 'option-6 unselected')"
         disabled
-      >{{ item }}</van-button>
+      >{{ item }}</div>
     </div>
     <van-button class="submit-btn-done" disabled >{{question.limitAmount}} {{$store.state.currency}} Earned</van-button>
   </div>
@@ -171,19 +171,24 @@ export default {
       height: 40%;
 
       .option-2 {
-        border-width: 1px;
+        text-align: center;
+        float:left;
+        display: flex;
+        justify-content: center; /* align horizontal */
+        align-items: center;
+        border: 1px solid #c2c8cc;
         background-color: white;
         border-radius: 4px;
-        border-color: #C2C8CC;
         color: #2F3941;
         margin: 4px 6px 4px 6px;
         white-space: normal;
         height: 90px;
-        width: 124px;
+        width: 120px;
         font-size:20px;
       }
 
       .error-2 {
+        text-align: center;
         border-width: 1px;
         background-color: white;
         border-radius: 4px;
@@ -192,25 +197,30 @@ export default {
         margin: 4px 6px 4px 6px;
         white-space: normal;
         height: 90px;
-        width: 124px;
+        width: 120px;
         font-size:20px;
       }
 
       .option-4{
-        border-width: 1px;
+        text-align: center;
+        float:left;
+        display: flex;
+        justify-content: center; /* align horizontal */
+        align-items: center;
+        border: 1px solid #c2c8cc;
         background-color: white;
         border-radius: 4px;
-        border-color: #C2C8CC;
         color: #2F3941;
         margin: 4px 6px 4px 6px;
         white-space: normal;
         height: 60px;
         font-size: 16px;
-        width: 124px;
+        width: 120px;
 
       }
 
       .error-4{
+        text-align: center;
         border-width: 1px;
         background-color: white;
         border-radius: 4px;
@@ -220,11 +230,12 @@ export default {
         white-space: normal;
         height: 60px;
         font-size: 16px;
-        width: 124px;
+        width: 120px;
 
       }
 
       .error-6{
+        text-align: center;
         border-width: 1px;
         background-color: white;
         border-radius: 4px;
@@ -234,134 +245,26 @@ export default {
         white-space: normal;
         height:40px;
         font-size: 16px;
-        width: 124px;
+        width: 120px;
       }
 
       .option-6{
-        border-width: 1px;
+        text-align: center;
+        float:left;
+        display: flex;
+        justify-content: center; /* align horizontal */
+        align-items: center;
+        border: 1px solid #c2c8cc;
         background-color: white;
         border-radius: 4px;
-        border-color: #C2C8CC;
         color: #2F3941;
         margin: 4px 6px 4px 6px;
         white-space: normal;
         height:40px;
         font-size: 16px;
-        width: 124px;
+        width: 120px;
       }
 
-      .selecting {
-        background-color: #ff8600 ;
-        color: white ;
-        border-color: #ff8600 ;
-      }
-      .selected{
-        background-color: #87929D !important;
-        color: white !important;
-        opacity: 1!important;
-      }
-      .unselected{
-        background-color: #E9EBED !important;
-        color: #87929D !important;
-        opacity: 1!important;
-        border-color: white !important;
-        border: 0px;
-        box-shadow: none !important;
-      }
-    }
-
-    .option-block-2 {
-      position: absolute;
-      top: 110px;
-      left: 16px;
-      right: 16px;
-      height: 40%;
-
-      .option {
-        border-color: #C2C8CC;
-        border-width: 1px;
-        background-color: white;
-        border-radius: 4px;
-        height: 90px;
-        width: 124px;
-        font-size:20px;
-        color: #2F3941;
-        margin: 4px 6px 4px 6px;
-        white-space: normal;
-      }
-      .selecting {
-        background-color: #ff8600 ;
-        color: white ;
-        border-color: #ff8600 ;
-      }
-      .selected{
-        background-color: #87929D !important;
-        color: white !important;
-        opacity: 1!important;
-      }
-      .unselected{
-        background-color: #E9EBED !important;
-        color: #87929D !important;
-        opacity: 1!important;
-        border-color: white !important;
-        border: 0px;
-        box-shadow: none !important;
-      }
-    }
-
-    .option-block-4 {
-      position: absolute;
-      top: 110px;
-      left: 16px;
-      right: 16px;
-      height: 40%;
-
-      .option {
-        border-color: #87929D;
-        border-width: 1px;
-        background-color: white;
-        border-radius: 4px;
-        height: 60px;
-        width: 124px;
-        margin: 4px 6px 4px 6px;
-        white-space: normal;
-      }
-      .selecting {
-        background-color: #ff8600 ;
-        color: white ;
-        border-color: #ff8600 ;
-      }
-      .selected{
-        background-color: #87929D !important;
-        color: white !important;
-        opacity: 1!important;
-      }
-      .unselected{
-        background-color: #E9EBED !important;
-        color: #87929D !important;
-        opacity: 1!important;
-        border: 0px;
-        box-shadow: none !important;
-      }
-    }
-
-    .option-block-6 {
-      position: absolute;
-      top: 110px;
-      left: 16px;
-      right: 16px;
-      height: 40%;
-
-      .option {
-        border-color: #87929D;
-        border-width: 1px;
-        background-color: white;
-        border-radius: 4px;
-        height:40px;
-        width: 124px;
-        margin: 4px 6px 4px 6px;
-        white-space: normal;
-      }
       .selecting {
         background-color: #ff8600 ;
         color: white ;

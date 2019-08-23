@@ -34,7 +34,7 @@
           <div
             :class="(error? 'error-4' : (question.options[0] !== form.value )?'option-4':'option-4 selecting')"
             @click="setData(question.options[0])"
-          ><div style="margin:auto;">{{ question.options[0] }}</div></div>
+          >{{ question.options[0] }}</div>
         </el-col>
         <el-col :span="11" :offset="1">
           <div
