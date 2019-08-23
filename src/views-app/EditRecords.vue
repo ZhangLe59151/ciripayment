@@ -140,7 +140,7 @@ import { findIndex } from "lodash";
 
 import { mapState } from "vuex";
 import util from "@/util.js";
-import { debuglog } from 'util';
+import { debuglog } from "util";
 
 const today = new Date();
 const startDate = new Date("2019/01/01");
@@ -187,27 +187,27 @@ export default {
     this.viewRecord();
   },
   methods: {
-    viewRecord(){
+    viewRecord() {
       this.$api.viewRecord(this.$route.params.id).then(res => {
-      if (res.data.code === 200) {
-        this.type = res.data.data.type === 0 ? "incomeAmount" : "expenseAmount";
-        this.disable[this.type] = true;
-        this.tabActive = res.data.data.type;
-        this.currentDate = this.$moment(res.data.data.accountDate).format("D MMM YYYYY");
-        this.form[this.type] = util.fmoney(res.data.data.amount);
-        this.dailyIncome = util.fmoney(res.data.data.incomeSum);
-        this.dailyExpense = util.fmoney(res.data.data.expensesSum);
-        this.form.memo = res.data.data.memo;
-        this.form.id = res.data.data.id;
-        this.form.merchantId = res.data.data.merchantId;
+        if (res.data.code === 200) {
+          this.type = res.data.data.type === 0 ? "incomeAmount" : "expenseAmount";
+          this.disable[this.type] = true;
+          this.tabActive = res.data.data.type;
+          this.currentDate = this.$moment(res.data.data.accountDate).format("D MMM YYYYY");
+          this.form[this.type] = util.fmoney(res.data.data.amount);
+          this.dailyIncome = util.fmoney(res.data.data.incomeSum);
+          this.dailyExpense = util.fmoney(res.data.data.expensesSum);
+          this.form.memo = res.data.data.memo;
+          this.form.id = res.data.data.id;
+          this.form.merchantId = res.data.data.merchantId;
         }
       });
     },
     updateRecord(form) {
       this.$api.updateRecord(form).then(res => {
-      if (res.data.code === 200) {
-        this.viewRecord();
-        this.$notify({ message: "Update succeed!", background: "#04A777" });
+        if (res.data.code === 200) {
+          this.viewRecord();
+          this.$notify({ message: "Update succeed!", background: "#04A777" });
         }
       });
     },
@@ -241,7 +241,7 @@ export default {
       const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
       if (regex.test(form[this.type])) {
         form[this.type] = parseFloat(form[this.type]);
-        //this.$store.commit("UpdateRecord", this.convertForm(form));
+        // this.$store.commit("UpdateRecord", this.convertForm(form));
         this.updateRecord(form);
         return false;
       }
@@ -339,7 +339,7 @@ export default {
     }
 
   }
-  
+
 }
 
 .input_note {
@@ -348,7 +348,6 @@ export default {
   margin: 0 16px 0 16px;
   border-bottom: 1px solid #c2c8cc;
 }
-
 
 .delete_btn {
   border-radius: 4px;
@@ -446,4 +445,3 @@ export default {
   color: #b41800 !important;
 }
 </style>
-

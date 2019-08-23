@@ -50,7 +50,7 @@ export default {
 
   computed: {
     ...mapState({
-      recordList: "recordList",
+      recordList: "recordList"
     })
   },
 
@@ -98,7 +98,6 @@ export default {
   }
 };
 </script>
-
 
 <style lang="scss" scoped>
 .van-list {
@@ -189,8 +188,6 @@ export default {
     top: 10px;
   }
 }
-
-
 
 .custom-income {
   font-size: 16px;

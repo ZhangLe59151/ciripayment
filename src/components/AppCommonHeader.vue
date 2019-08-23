@@ -7,7 +7,7 @@
     @click-left="leftFunc ? leftFunc : $router.back()"
     @click-right="rightFunc"
   />
-</template> 
+</template>
 
 <script>
 export default {

@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import { Row, Col, Icon, NumberKeyboard } from 'vant';
+import Vue from "vue";
+import { Row, Col, Icon, NumberKeyboard } from "vant";
 
 Vue.use(Row).use(Col).use(Icon).use((NumberKeyboard));
 
@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       show: false,
-      value: ''
+      value: ""
     }
   },
   methods: {

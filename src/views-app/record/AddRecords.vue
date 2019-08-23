@@ -16,38 +16,38 @@
         <div class="label-left">{{$t("Record.IncomeName")}}</div>
 
         <div class="input_note">
-            <van-field
-              v-model="form.memo"
-              @focus="inputNote"
-              maxlength="50"
-              placeholder="E.g. Sales Item"
-            />
+          <van-field
+            v-model="form.memo"
+            @focus="inputNote"
+            maxlength="50"
+            placeholder="E.g. Sales Item"
+          />
         </div>
 
         <div class="label-left">{{$t("Record.Date")}}</div>
 
         <div class="pick_date">
-            <van-field
-              :value="form.accountDate"
-              confirm-button-text="confirm"
-              cancel-button-text="cancel"
-              @focus="appear = true"
-              maxlength="13"
-              readonly
-            />
-            <van-icon name="arrow-down" />
+          <van-field
+            :value="form.accountDate"
+            confirm-button-text="confirm"
+            cancel-button-text="cancel"
+            @focus="appear = true"
+            maxlength="13"
+            readonly
+          />
+          <van-icon name="arrow-down" />
         </div>
 
         <div class="label-left">{{$t("Record.IncomeS")}}</div>
-        
-        <div class="input_income_expense" >
+
+        <div class="input_income_expense">
           <div class="plus">+</div>
           <van-field
-              class="income"
-              v-model="form.incomeAmount"
-              @focus="showKeyboard('incomeAmount')"
-              maxlength="13"
-              readonly
+            class="income"
+            v-model="form.incomeAmount"
+            @focus="showKeyboard('incomeAmount')"
+            maxlength="13"
+            readonly
           />
           <div class="plus currency">{{$store.state.currency}}</div>
         </div>
@@ -62,38 +62,38 @@
         <div class="label-left">{{$t("Record.ExpensesName")}}</div>
 
         <div class="input_note">
-            <van-field
-              v-model="form.memo"
-              @focus="inputNote"
-              maxlength="50"
-              placeholder="E.g. Sales Item"
-            />
+          <van-field
+            v-model="form.memo"
+            @focus="inputNote"
+            maxlength="50"
+            placeholder="E.g. Sales Item"
+          />
         </div>
 
         <div class="label-left">{{$t("Record.Date")}}</div>
 
         <div class="pick_date">
-            <van-field
-              :value="form.accountDate"
-              confirm-button-text="confirm"
-              cancel-button-text="cancel"
-              @focus="appear = true"
-              maxlength="13"
-              readonly
-            />
-            <van-icon name="arrow-down" />
+          <van-field
+            :value="form.accountDate"
+            confirm-button-text="confirm"
+            cancel-button-text="cancel"
+            @focus="appear = true"
+            maxlength="13"
+            readonly
+          />
+          <van-icon name="arrow-down" />
         </div>
 
         <div class="label-left">{{$t("Record.ExpensesS")}}</div>
 
-        <div class="input_income_expense" >
+        <div class="input_income_expense">
           <div class="plus minus">-</div>
           <van-field
-              class="income expense"
-              v-model="form.expenseAmount"
-              @focus="showKeyboard('expenseAmount')"
-              maxlength="13"
-              readonly
+            class="income expense"
+            v-model="form.expenseAmount"
+            @focus="showKeyboard('expenseAmount')"
+            maxlength="13"
+            readonly
           />
           <div class="plus currency">{{$store.state.currency}}</div>
         </div>
@@ -128,7 +128,7 @@
       @input="onInput"
       @delete="onDelete"
     />
-    
+
   </div>
 </template>
 
@@ -179,11 +179,15 @@ export default {
     };
   },
   created() {
-    this.fetchDataUpdate(this.$moment(this.$route.query.date ? this.$route.query.date : today).format(this.localDateFormatter));
+    this.fetchDataUpdate(
+      this.$moment(
+        this.$route.query.date ? this.$route.query.date : today
+      ).format(this.localDateFormatter)
+    );
   },
   watch: {
     tabActive: {
-      handler(val, oldVal){
+      handler(val, oldVal) {
         this.form.memo = "";
         this.form.incomeAmount = "";
         this.form.expenseAmount = "";
@@ -192,7 +196,9 @@ export default {
     currentDate: {
       immediate: true,
       handler(val, oldVal) {
-        Object.entries(this.form).forEach(([key, value]) => this.form[`${key}`] = "");
+        Object.entries(this.form).forEach(
+          ([key, value]) => (this.form[`${key}`] = "")
+        );
         let formDate = this.$moment(val).format("D MMM YYYY");
         const _today = this.$moment().format(this.localDateFormatter);
         const _yesterday = this.$moment()
@@ -208,29 +214,26 @@ export default {
         );
 
         this.fetchDataUpdate(this.$moment(val).format(this.localDateFormatter));
-
       }
     }
   },
   methods: {
     fetchData(form) {
-      this.$api
-        .addRecord(form)
-        .then(res => {
-          if (res.data.code === 200) {
-            this.fetchDataUpdate(form.accountDate);
-            this.form.incomeAmount = "";
-            this.form.expenseAmount = "";
-            this.form.memo = "";
-          }
-        })
+      this.$api.addRecord(form).then(res => {
+        if (res.data.code === 200) {
+          this.fetchDataUpdate(form.accountDate);
+          this.form.incomeAmount = "";
+          this.form.expenseAmount = "";
+          this.form.memo = "";
+        }
+      });
     },
     fetchDataUpdate(currentDate) {
-      this.$api.viewRecordSum(currentDate).then(res => { 
-        if (res.data.code === 200) { 
+      this.$api.viewRecordSum(currentDate).then(res => {
+        if (res.data.code === 200) {
           this.dailyIncome = util.fmoney(res.data.data.incomeSum);
           this.dailyExpense = util.fmoney(res.data.data.expensesSum);
-        } 
+        }
       });
     },
     showKeyboard(type) {
@@ -242,7 +245,7 @@ export default {
       if (this.form[this.type].indexOf(".") != -1 && value == ".") {
         return false;
       }
-      if (this.form[this.type] == "" && value == ".") {
+      if (this.form[this.type] === "" && value === ".") {
         return false;
       }
       const regex = /^[0-9]*\.\d{1}$/;
@@ -261,17 +264,19 @@ export default {
     },
     updateBtn() {
       const form = Object.assign({}, this.form);
-      form.accountDate = this.$moment(this.form.accountDate).format(this.localDateFormatter);
+      form.accountDate = this.$moment(this.form.accountDate).format(
+        this.localDateFormatter
+      );
       this.appear = false;
       const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
       if (regex.test(form[this.type])) {
-        //this.$store.commit("UpdateRecord", this.convertForm(form));
+        // this.$store.commit("UpdateRecord", this.convertForm(form));
         form[this.type] = parseFloat(form[this.type]);
         this.fetchData(form);
         this.$notify({ message: "Added Sucessfully", background: "#04A777" });
         return false;
       }
-      //this.$notify({ message: "Please input valid number", background: "#04A777" });
+      // this.$notify({ message: "Please input valid number", background: "#04A777" });
     },
     convertForm(form) {
       const _date = form.accountDate.includes(",")
@@ -308,9 +313,9 @@ export default {
 }
 
 .van-icon-arrow-down {
-    position: absolute;
-    top: 10px;
-    right: 0;
+  position: absolute;
+  top: 10px;
+  right: 0;
 }
 
 .input_income_expense {
@@ -335,7 +340,6 @@ export default {
       right: 0;
       color: #2f3941;
     }
-
   }
 
   .income {
@@ -348,9 +352,7 @@ export default {
     &.expense {
       color: #b41800;
     }
-
   }
-  
 }
 
 .input_note {
@@ -438,5 +440,3 @@ export default {
   color: #b41800 !important;
 }
 </style>
-
-     

@@ -145,21 +145,20 @@ export default {
         id: this.question.id
       },
       limitAmount: this.question.limitAmount,
-      isAnswered: this.question.value ? true : false,
+      isAnswered: !!this.question.value,
       value: ""
     };
   },
   created() {
-    this.isAnswered = this.question.value ? true : false;
+    this.isAnswered = !!this.question.value;
     this.limitAmount = this.question.limitAmount;
   },
   methods: {
     submitQuestion() {
       this.$api.submitQuestion(this.form).then(res => {
         if (res.data.code === 200) {
-          //limitAmount += this.question.limitAmount;
+          // limitAmount += this.question.limitAmount;
           limitAmount = util.fmoney(this.question.limitAmount);
-          
         }
       });
     },
@@ -167,10 +166,10 @@ export default {
       this.form.value = item;
     },
     selected(item) {
-      return item === this.question.value ? true : false;
+      return item === this.question.value;
     },
     unselected(item) {
-      return item === this.question.value ? false : true;
+      return item !== this.question.value;
     }
   }
 };

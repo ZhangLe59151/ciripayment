@@ -177,8 +177,8 @@ export default {
           "date",
           val ? this.$moment(val).format("dd MM YYYY") : ""
         );
-        //this.$set(this.form,"date", val ? val.toDateString() : "")
-        //this.form.date = "Today ," + val
+        // this.$set(this.form,"date", val ? val.toDateString() : "")
+        // this.form.date = "Today ," + val
         if (
           this.$moment(val).format("YYYYMMDD") ==
           this.$moment(new Date()).format("YYYYMMDD")

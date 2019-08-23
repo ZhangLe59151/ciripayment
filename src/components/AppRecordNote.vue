@@ -4,15 +4,15 @@
         Note (Optional)
     </van-row>
     <van-field class="input_note"
-        v-model="value" 
+        v-model="value"
         placeholder="Add Note" />
 
   </div>
 </template>
 
 <script>
-import Vue from 'vue';
-import { Row, Col, Field } from 'vant';
+import Vue from "vue";
+import { Row, Col, Field } from "vant";
 
 Vue.use(Row).use(Col).use((Field));
 
@@ -21,7 +21,7 @@ export default {
   props: {},
   data() {
     return {
-        value: ''
+      value: ""
     }
   },
   methods: {

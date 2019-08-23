@@ -1,6 +1,9 @@
 <template>
   <div class="enter-loan-amount">
-    <van-nav-bar @click-left="$router.back()" left-arrow/>
+    <van-nav-bar
+      @click-left="$router.back()"
+      left-arrow
+    />
     <div class="banner">
       <div class="banner-title">{{$t("EnterLoanAmount.title1")}}</div>
       <div class="banner-number">
@@ -24,16 +27,22 @@
           :rules="[{ required: true, message: 'This field is required.', trigger: 'blur' },
             ]"
         >
-          <el-input inputmode="numeric" pattern="[0-9]*\,*\.*" v-model="form.loanAmount" @input="formatCurrency">
-            <div class="currency" slot="suffix">{{$store.state.currency}}</div>
+          <el-input
+            inputmode="numeric"
+            pattern="[0-9]*\,*\.*"
+            v-model="form.loanAmount"
+            @input="formatCurrency"
+          >
+            <div
+              class="currency"
+              slot="suffix"
+            >{{$store.state.currency}}</div>
           </el-input>
         </el-form-item>
       </el-card>
     </el-form>
 
-    <div
-      class="tips"
-    >{{$t("EnterLoanAmount.warning")}}</div>
+    <div class="tips">{{$t("EnterLoanAmount.warning")}}</div>
 
     <div class="apply-btn-wrapper">
       <van-button
@@ -44,17 +53,28 @@
       >{{$t("EnterLoanAmount.apply")}}</van-button>
     </div>
 
-    <van-dialog v-model="dialog" scroll="paper" class="scroll-dialog" :showConfirmButton="false">
+    <van-dialog
+      v-model="dialog"
+      scroll="paper"
+      class="scroll-dialog"
+      :showConfirmButton="false"
+    >
       <div class="heading">
         <h1>{{$t("EnterLoanAmount.dialogTitle")}}</h1>
-        <van-icon name="cross" @click="dialog = false"/>
+        <van-icon
+          name="cross"
+          @click="dialog = false"
+        />
       </div>
       <div class="warning">
         <van-row>
           <van-col span="1">
-            <i class="iconfont iconalert"/>
+            <i class="iconfont iconalert" />
           </van-col>
-          <van-col span="18" offset="1">
+          <van-col
+            span="18"
+            offset="1"
+          >
             <div class="warning-content">
               {{$t("EnterLoanAmount.dialogDesc1")}}
               <b>5,000{{$store.state.currency}}.</b> {{$t("EnterLoanAmount.dialogDesc2")}}
@@ -72,7 +92,10 @@
               @click="applyForLoan"
             >{{$t("EnterLoanAmount.dialogApp")}}</van-button>
           </van-col>
-          <van-col span="11" offset="2">
+          <van-col
+            span="11"
+            offset="2"
+          >
             <van-button
               size="small"
               class="bottom-btn dialog-btn"
@@ -183,7 +206,7 @@ export default {
   height: 100vh;
   .banner {
     height: 138px;
-    background: url("../assets/imgs/enter_loan_amount_banner.png") no-repeat;
+    background: url("../../assets/imgs/enter_loan_amount_banner.png") no-repeat;
     background-size: cover;
     text-align: center;
     padding: 26px 0px 45px 0px;
@@ -219,7 +242,7 @@ export default {
       bottom: 75px;
       padding: 0 16px 0 16px;
     }
-    .apply-btn-wrapper{
+    .apply-btn-wrapper {
       position: absolute;
       bottom: 16px;
       width: 100%;
@@ -240,10 +263,10 @@ export default {
       font-size: 14px;
       text-align: center;
       padding: 0 16px 0 16px;
-      margin-top:20px;
+      margin-top: 20px;
       display: block !important;
     }
-    .apply-btn-wrapper{
+    .apply-btn-wrapper {
       display: block !important;
       width: 100%;
       box-sizing: border-box;

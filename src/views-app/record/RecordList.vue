@@ -75,11 +75,11 @@ export default {
     },
     formatIncome(item) {
       if (item["type"] === 0) {
-        return item["memo"] == ""
+        return item["memo"] === ""
           ? this.$t("Income")
           : this.$t("Income") + " - " + item["memo"];
       } else {
-        return item["memo"] == ""
+        return item["memo"] === ""
           ? this.$t("Expenses")
           : this.$t("Expenses") + " - " + item["memo"];
       }
@@ -103,7 +103,6 @@ export default {
   }
 };
 </script>
-
 
 <style lang="scss" scoped>
 .record-list {

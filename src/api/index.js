@@ -97,7 +97,7 @@ export default {
     return Vue.axios.get("/api/homepage");
   },
   applyLoan(params) {
-    return Vue.axios.post("/api/loan-application?loanAmount",params);
+    return Vue.axios.post("/api/loan-application?loanAmount", params);
   },
   getLoanProfile() {
     return Vue.axios.get("/api/loan/view");
@@ -133,6 +133,6 @@ export default {
     return Vue.axios.get("/api/credit/limit");
   },
   submitQuestion(params) {
-    return Vue.axios.post("/api/credit/limit/answer",params);
-  },
+    return Vue.axios.post("/api/credit/limit/answer", params);
+  }
 };

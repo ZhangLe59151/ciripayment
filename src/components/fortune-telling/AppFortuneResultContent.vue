@@ -53,7 +53,7 @@ export default {
     }
   },
   mounted() {
-    this.today =  this.$moment().format("DD MMM YYYY")
+    this.today = this.$moment().format("DD MMM YYYY")
   }
 }
 </script>

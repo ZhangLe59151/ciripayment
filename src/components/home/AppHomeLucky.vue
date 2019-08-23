@@ -55,9 +55,9 @@ export default {
     imgUrl() {
       const masterId = this.fortuneResult.masterId;
       const imgList = {
-        "1": require(`@/assets/imgs/master_01.png`),
-        "2": require(`@/assets/imgs/master_02.png`),
-        "3": require(`@/assets/imgs/master_03.png`)
+        "1": require("@/assets/imgs/master_01.png"),
+        "2": require("@/assets/imgs/master_02.png"),
+        "3": require("@/assets/imgs/master_03.png")
       };
       return imgList[masterId];
     }
