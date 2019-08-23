@@ -91,7 +91,6 @@ export default {
           if (res.data.code === 200 && res.data.data.same) {
             this.$router.push({ name: "ResetPasswordSP" });
           } else {
-            // FIXME: not implemented yet, the api return when error
             this.$toast("Last 4 digits of Nation ID do not match.");
           }
         });
