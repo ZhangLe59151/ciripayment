@@ -15,31 +15,16 @@
   "Expenses": "SPENDINGS",
   "LoanTitle": "Instant Cash",
   "AppLoanOverview": {
-    "bannerTitle": "Get instant cash in minutes",
+    "bannerTitle": "Get instant cash in minutes!",
     "lowerRate": "Lower Rate",
     "higherLimit": "Higher Limit",
     "fasterApproval": "Faster Approval",
-    "instructionTitle": "Maximise Your Limit",
-    "instructionContent1": "Enjoy a higher limit and faster approval time when you provide your profile information:",
-    "instructionContent2": {
-      "personalDetails": "Personal Details",
-      "bizInfo": "Business Information",
-      "photos": "Photos of Your ID"
+    "instruction": {
+      "qs": "What you need:",
+      "requirements": "Your National ID",
+      "msg": "You are only 2 minutes away from getting instant cash!"
     },
-    "tap": "Tap",
-    "toBeginApplying": "to begin applying",
-    "loanTerms": "Loan Terms",
-    "loanTerms1": {
-      "front": "The base loan amount is",
-      "end": "without any profile information."
-    },
-    "loanTerms2": "Low interest rates from",
-    "loanTerms3": {
-      "front": "From",
-      "mid": "1 minute",
-      "end": "approval in-principle."
-    },
-    "startNow": "Apply Now",
+    "applyNow": "Apply Now",
     "consent": "By submitting an application, you consent to the use of all submitted information by Silot AI for loan application and marketing purposes.",
     "submittedNotification": "Application Sent Successfully",
     "submittedBack": "Back To Home",
@@ -76,7 +61,7 @@
     "frontNat": "Front of National ID",
     "backNat": "Back of National ID",
     "photos": "Photos of Yourself with Front of National ID",
-    "next": "Next"
+    "submit": "Submit Application"
   },
   "EnterLoanAmount": {
     "title1": "Your Estimated Credit Limit",

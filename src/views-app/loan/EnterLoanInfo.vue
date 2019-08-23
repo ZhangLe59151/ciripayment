@@ -23,7 +23,7 @@
     >
       <el-card class="box-card">
         <!-- merchant information -->
-        <div ref="bizInfo" class="title">Applicant Information</div>
+        <div ref="bizInfo" class="title">{{$t("EnterLoanInfo.subTitle")}}</div>
         <div class="title-line"></div>
 
 <!--        <el-form-item-->
@@ -282,7 +282,7 @@
         class="bottom-btn"
         @click="handleNext"
       >
-        Submit Application
+        {{$t("EnterLoanInfo.submit")}}
       </van-button>
     </div>
 

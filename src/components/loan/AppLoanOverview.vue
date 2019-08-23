@@ -32,13 +32,13 @@
 <!--        </li>-->
 <!--      </ul>-->
       <div class="instruction-qs">
-        What you need:
+        {{$t("AppLoanOverview.instruction.qs")}}
       </div>
       <div class="requirements">
-        <i class="iconfont iconidcard" /> Your National ID
+        <i class="iconfont iconidcard" /> {{$t("AppLoanOverview.instruction.requirements")}}
       </div>
       <div class="instruction-msg">
-        You are only 2 minutes away from getting instant cash!
+        {{$t("AppLoanOverview.instruction.msg")}}
       </div>
     </div>
     <div class="enter-loan-amount">
@@ -74,7 +74,7 @@
             class="bottom-btn"
             @click="handleStart"
             :disabled="form.loanAmount === ''"
-          >Apply Now</van-button>
+          >{{$t("AppLoanOverview.applyNow")}}</van-button>
           <div class="consent-agreement">{{$t("AppLoanOverview.consent")}}</div>
         </el-card>
 
