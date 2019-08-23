@@ -1,7 +1,7 @@
 <template>
   <div class="app-credit-limit">
     <div v-bind:class="creditLimitClass">
-      <div class="credit-limit-title">Your Current Credit Limit:</div>
+      <div class="credit-limit-title">Your Business Is Currently Worth</div>
       <credit-app-number-counting
         :numberTo="numberTo"
         class="credit-limit-amount"
