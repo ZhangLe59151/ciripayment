@@ -6,10 +6,12 @@
     </div>
     <div class="master-select">
       <fortune-telling-app-fortune-master
-        v-for="master in masterList"
+        v-for="(master,index) in masterList"
         class="fortune-master-item"
         :master="master"
-        @chooseMaster="chooseMaster"/>
+        @chooseMaster="chooseMaster"
+        :key="index"
+      />
     </div>
     <div class="powered-tips">
       This service is powered by Master Cai, Master Yun and Master Fu
@@ -25,7 +27,7 @@ export default {
   data() {
     return {
       masterList: require("@/assets/data/fortuneMasterList.json")
-    }
+    };
   },
   computed: {
     ...mapState({
@@ -36,7 +38,7 @@ export default {
     chooseMaster(master) {
       this.fortuneInfo.selectedMaster = master;
       this.$store.commit("SaveFortuneInfo", this.fortuneInfo);
-      this.$router.push({ name: "DailyFortuneQuestion" })
+      this.$router.push({ name: "DailyFortuneQuestion" });
     }
   }
 };
@@ -47,7 +49,8 @@ export default {
   position: relative;
   height: 100vh;
   width: 100%;
-  background: no-repeat center url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
+  background: no-repeat center
+    url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
   background-size: cover;
 
   .top-desc {

@@ -21,6 +21,13 @@ import Vant, { Notify, Swipe, SwipeItem, Checkbox, CheckboxGroup } from "vant";
 import "@/amfe";
 import VueSignaturePad from "vue-signature-pad";
 
+import VueAnalytics from "vue-analytics";
+
+Vue.use(VueAnalytics, {
+  id: process.env.VUE_APP_GAID,
+  router
+});
+
 Vue.use(ElementUI);
 
 Vue.use(VueAxios, axios);

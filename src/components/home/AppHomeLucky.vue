@@ -47,7 +47,8 @@ export default {
       fortunetellingFrame: "fortunetellingFrame",
       localDateFormatter: "localDateFormatter",
       fortuneResult: state => state.fortuneInfo.fortuneResult,
-      BaseWebUrl: "BaseWebUrl"
+      BaseWebUrl: "BaseWebUrl",
+      deviceType: "deviceType"
     }),
     today() {
       return this.$moment().format(this.localDateFormatter);
@@ -90,7 +91,12 @@ export default {
   },
   methods: {
     gotoOuterLink(url) {
-      // window.location.href = url;
+      // app
+      if (this.deviceType === "APP") {
+        window.location.href = url;
+        return false;
+      }
+      // web
       this.$router.push(url.split("#")[1]);
     }
   }
