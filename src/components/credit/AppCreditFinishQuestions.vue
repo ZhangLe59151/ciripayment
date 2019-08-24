@@ -17,21 +17,9 @@
           :question="item"
         />
       </van-swipe-item>
-      <!-- <van-swipe-item class="app-credit-success">
-        <div class="app-credit-finish-questions">
-          <i class="iconfont iconsuccess" />
-          <div class="msg-1">
-            All of today’s questions have been answered.
-          </div>
-          <div class="msg-2">
-            Come back tomorrow for more questions!
-          </div>
-        </div>
-      </van-swipe-item> -->
-
     </van-swipe>
 
-    <div>
+    <div class="app-credit-success">
       <div class="app-credit-finish-questions">
         <i class="iconfont iconsuccess" />
         <div class="msg-1">
@@ -73,6 +61,10 @@ export default {
 <style lang="scss" scoped>
 .app-credit-finish-questions-wrapper {
   position: relative;
+
+  .app-credit-success {
+    z-index: 9999;
+  }
   .app-credit-finish-questions {
     text-align: center;
     margin: 28px 16px 0px 16px;

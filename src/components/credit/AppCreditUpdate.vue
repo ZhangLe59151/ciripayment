@@ -4,7 +4,7 @@
       :loop="false"
       :show-indicators="false"
       :width="swipeWidth"
-      :height="300"
+      :height="340"
     >
       <van-swipe-item
         v-for="item in questionList"

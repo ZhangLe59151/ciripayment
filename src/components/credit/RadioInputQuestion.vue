@@ -173,7 +173,7 @@ export default {
 <style lang="scss" scoped>
 .radio-input-question {
   background-color: #ffffff;
-  min-height: 290px;
+  min-height: 320px;
   width: 304px;
   margin: auto;
   border-radius: 8px;
