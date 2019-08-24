@@ -3,11 +3,8 @@
     class="app-home-loan"
     @click="handleLoanClick"
   >
-    <div class="des">Get instant loan!</div>
-    <!--    <div class="amount">100,000 {{$store.state.currency}}</div>-->
-
-    <!--    <div class="getNow">{{$t("Home.loanBtn")}}</div>-->
-    <div class="applyNow">Apply Now</div>
+    <div class="des">{{$t("Home.loan")}}</div>
+    <div class="applyNow">{{$t("Home.loanBtn")}}</div>
 
   </div>
 </template>

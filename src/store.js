@@ -310,6 +310,13 @@ export default new Vuex.Store({
       state.credit = {};
       state.OTPVerified = false;
       state.logInWithPassword = false;
+
+      state.fortuneInfo = {
+        fortuneResult: {},
+        fortuneQuestionUsed: [],
+        selectedMaster: {}
+      };
+
       [
         "OTPVerified",
         "logInWithPassword",
