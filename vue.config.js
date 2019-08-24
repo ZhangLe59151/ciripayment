@@ -1,6 +1,6 @@
 module.exports = {
   devServer: {
-    // proxy: "http://localhost:15005/"
+    //proxy: "http://localhost:15005/"
     proxy: process.env.VUE_APP_PROXY
   },
   configureWebpack: config => {
