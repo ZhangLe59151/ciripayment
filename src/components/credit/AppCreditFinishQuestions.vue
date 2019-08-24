@@ -5,6 +5,7 @@
       :show-indicators="false"
       :initial-swipe="3"
       :width="swipeWidth"
+      v-show="!finishedAll"
     >
 
       <van-swipe-item
