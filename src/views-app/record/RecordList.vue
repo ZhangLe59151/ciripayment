@@ -88,6 +88,9 @@ export default {
       return util.fmoney(item["amount"]);
     },
     formatTotalIncome(number) {
+      if (number<0) {
+        return util.fmoney(number).replace("-,","-")
+      }
       return util.fmoney(number);
     },
     onLoad() {
