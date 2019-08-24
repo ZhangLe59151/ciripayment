@@ -4,6 +4,7 @@
   "noSelectSettlementErrorMsg": "Please select one of the settlement options to proceed.",
   "marketingServiceErrorMsg": "There are errors in your form. Please correct them before trying again.",
   "OTPErrorMsg": "OTP request too frequent. Please wait for a minute and try again.",
+  "missingDocumentErrorMsg": "Missing documents. Please upload all the necessary documents before proceeding to the next step.",
   "FortuneTelling": {
     "TapChestTips": "Tap on the treasure chest!",
     "LuckyNumberLabel": "Lucky Number",
@@ -61,7 +62,9 @@
     "frontNat": "Front of National ID",
     "backNat": "Back of National ID",
     "photos": "Photos of Yourself with Front of National ID",
-    "submit": "Submit Application"
+    "submit": "Submit Application",
+    "errorEnterRequired": "This field is required.",
+    "errorSelectCategory": "Select a category."
   },
   "EnterLoanAmount": {
     "title1": "Your Estimated Credit Limit",
