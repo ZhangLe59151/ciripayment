@@ -9,7 +9,7 @@
       v-if="isLogin === false"
       class="logout"
       @click="$router.push({name: 'LandingPage', query: {to: 'Settings'}})"
-    >Sign Up or Log In</div>
+    >{{$t("Setting.SoL")}}</div>
     <settings-app-setting-list />
     <div
       v-if="isLogin"
