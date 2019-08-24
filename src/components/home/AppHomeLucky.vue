@@ -92,14 +92,11 @@ export default {
   methods: {
     gotoOuterLink(url) {
       // app
-      if (this.deviceType === "APP") {
-        window.location.href = url;
-        return false;
-      }
+      // if (this.deviceType === "APP") {
+      //   window.location.href = url;
+      //   return false;
+      // }
       // web
-      console.log("====================================");
-      console.log(1233, url.split("#")[1]);
-      console.log("====================================");
       this.$router.push(url.split("#")[1]);
     }
   }

@@ -1,5 +1,5 @@
 VUE_APP_ROUTEMODE=hash
-VUE_APP_OUTPUTDIR=../merchant-app/www
+VUE_APP_OUTPUTDIR=../mota/www
 VUE_APP_BASEURL=https://test-taokae.silot.tech
 VUE_APP_DEVICETYPE=APP
 VUE_APP_WEBURL=https://test-taokae.silot.tech

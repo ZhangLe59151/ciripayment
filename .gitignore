@@ -23,3 +23,6 @@ yarn-error.log*
 #deploy
 *.tar.gz
 
+#config
+vue.config.js
+
