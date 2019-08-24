@@ -30,21 +30,24 @@ export default {
   },
   methods: {
     getFortunetellingByAPI() {
-      this.$api.getFortunetelling(this.fortuneInfo.selectedMaster.id).then(res => {
-        if (res.data.code === 200) {
-          this.fortuneInfo.fortuneResult = res.data.data;
-          this.$store.commit("SaveFortuneInfo", this.fortuneInfo);
-          this.showResult();
-        } else {
-          this.$toast.fail(res.data.msg);
-          this.$router.push({ name: "Home" });
-        }
-      })
+      this.$api
+        .getFortunetelling(this.fortuneInfo.selectedMaster.id)
+        .then(res => {
+          if (res.data.code === 200) {
+            this.fortuneInfo.fortuneResult = res.data.data;
+            this.$store.commit("SaveFortuneInfo", this.fortuneInfo);
+            // this.$toast("Success");
+            this.showResult();
+          } else {
+            this.$toast("Failed");
+            this.$toast.fail(res.data.msg);
+            this.$router.push({ name: "Home" });
+          }
+        });
     },
     showResult() {
-      setTimeout(() => {
-        this.$router.push({ name: "DailyFortuneResult" });
-      }, 1000);
+      this.$toast("Success");
+      this.$router.push({ name: "DailyFortuneResult" });
     }
   }
 };
@@ -53,7 +56,8 @@ export default {
 <style lang="scss" scoped>
 .daily-fortune-loading {
   position: relative;
-  background: no-repeat center url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
+  background: no-repeat center
+    url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
   background-size: cover;
   height: 100vh;
   width: 100%;
