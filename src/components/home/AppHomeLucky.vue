@@ -67,7 +67,7 @@ export default {
   watch: {
     fortuneResult: {
       handler(val, oldVal) {
-        if (val.fortuneResult.length > 0) {
+        if (val && val.fortuneResult && val.fortuneResult.length > 0) {
           this.fortuneTold = true;
           let salesTarget = val.salesTarget;
           if (salesTarget.type === 0) {
