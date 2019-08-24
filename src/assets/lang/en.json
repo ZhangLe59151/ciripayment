@@ -122,7 +122,8 @@
     "emptyMsg": "Add sales and spendings to keep track of how your business is doing",
     "placeHolder": "E.g. Sales Item",
     "add": "Add",
-    "recordHistory":"Records History"
+    "recordHistory":"Records History",
+    "editRecord": "Edit Record"
   },
   "Setting": {
     "Language": "Language",

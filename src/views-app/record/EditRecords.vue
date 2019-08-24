@@ -1,6 +1,6 @@
 <template>
   <div class="app-add-record">
-    <app-common-header title="Edit Record" />
+    <app-common-header :title="$t('Record.editRecord')" />
 
     <van-tabs
       v-model="tabActive"
@@ -9,7 +9,7 @@
       title-active-color="#ff8600"
     >
       <van-tab
-        title="Income"
+        :title="$t('Record.Income')"
         :disabled="this.disable.expenseAmount"
       >
         <div class="record-status">
@@ -57,7 +57,7 @@
 
       </van-tab>
       <van-tab
-        title="Expenses"
+        :title="$t('Record.Expenses')"
         :disabled="this.disable.incomeAmount"
       >
 
