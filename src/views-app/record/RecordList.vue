@@ -76,12 +76,12 @@ export default {
     formatIncome(item) {
       if (item["type"] === 0) {
         return item["memo"] === ""
-          ? this.$t("Income")
-          : this.$t("Income") + " - " + item["memo"];
+          ? this.$t("Record.Incomes")
+          : this.$t("Record.Incomes") + " - " + item["memo"];
       } else {
         return item["memo"] === ""
-          ? this.$t("Expenses")
-          : this.$t("Expenses") + " - " + item["memo"];
+          ? this.$t("Record.ExpensesS")
+          : this.$t("Record.ExpensesS") + " - " + item["memo"];
       }
     },
     formatAmount(item) {
