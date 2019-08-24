@@ -1,6 +1,6 @@
 <template>
   <div class="record-list">
-    <app-common-header title="Records History" />
+    <app-common-header :title="$t('Record.recordHistory')" />
     <van-list
       v-model="loading"
       :finished="finished"
@@ -148,7 +148,6 @@ export default {
     }
     .date_title {
       font-size: 16px;
-      font-weight: bolder;
       position: absolute;
       left: 16px;
       top: 4px;

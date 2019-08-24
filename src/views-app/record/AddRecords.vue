@@ -1,13 +1,13 @@
 <template>
   <div class="app-add-record">
-    <app-common-header title="$t('Record.addRecord')" />
+    <app-common-header :title="$t('Record.addRecord')" />
     <van-tabs
       v-model="tabActive"
       animated
       color="#ff8600"
       title-active-color="#ff8600"
     >
-      <van-tab title="Income">
+      <van-tab :title="$t('Record.Income')">
         <div class="record-status">
           <span class="name">{{$t("Record.TotalIncome")}}</span>
           <span class="amount">+ {{ dailyIncome }} <i>{{$store.state.currency}}</i></span>
@@ -20,7 +20,7 @@
             v-model="form.memo"
             @focus="inputNote"
             maxlength="50"
-            placeholder="E.g. Sales Item"
+            :placeholder="$t('Record.placeHolder')"
           />
         </div>
 
@@ -53,7 +53,7 @@
         </div>
 
       </van-tab>
-      <van-tab title="$t('Record.Expenses')">
+      <van-tab :title="$t('Record.Expenses')">
 
         <div class="record-status expenses">
           <span class="name">{{$t("Record.TotalExpenses")}}</span>
@@ -66,7 +66,7 @@
             v-model="form.memo"
             @focus="inputNote"
             maxlength="50"
-            placeholder="$t('Record.placeHolder')"
+            :placeholder="$t('Record.placeHolder')"
           />
         </div>
 
