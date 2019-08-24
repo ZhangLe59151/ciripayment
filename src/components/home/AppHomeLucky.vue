@@ -1,7 +1,7 @@
 <template>
   <div
     class="app-home-lucky"
-    @click="gotoOuterLink(BaseWebUrl + '#/daily-fortune-prepare')"
+    @click="$router.push({name: 'DailyFortunePrepare'})"
     v-if="!fortuneTold"
   >
     <img :src="require('@/assets/imgs/home_master.png')">
@@ -13,7 +13,7 @@
   </div>
   <div
     class="app-home-lucky"
-    @click="gotoOuterLink(BaseWebUrl + '#/daily-fortune-result?id=' + fortuneResult.id)"
+    @click="$router.push({name: 'DailyFortuneResult',query: {id: fortuneResult.id}})"
     v-else
   >
     <img
