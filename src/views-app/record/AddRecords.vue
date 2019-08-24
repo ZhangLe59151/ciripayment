@@ -7,7 +7,7 @@
       color="#ff8600"
       title-active-color="#ff8600"
     >
-      <van-tab title="Income">
+      <van-tab :title="$t('Record.Income')">
         <div class="record-status">
           <span class="name">{{$t("Record.TotalIncome")}}</span>
           <span class="amount">+ {{ dailyIncome }} <i>{{$store.state.currency}}</i></span>
@@ -53,7 +53,7 @@
         </div>
 
       </van-tab>
-      <van-tab title="$t('Record.Expenses')">
+      <van-tab :title="$t('Record.Expenses')">
 
         <div class="record-status expenses">
           <span class="name">{{$t("Record.TotalExpenses")}}</span>
