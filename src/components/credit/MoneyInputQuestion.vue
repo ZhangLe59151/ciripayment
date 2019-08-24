@@ -74,7 +74,7 @@ export default {
 <style lang="scss" scoped>
   .money-input-question{
     background-color: #ffffff;
-    height: 340px;
+    min-height: 320px;
     width: 304px;
     margin: auto;
     border-radius: 8px;
