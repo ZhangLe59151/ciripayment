@@ -121,7 +121,8 @@
     "deleteRecord": "Delete",
     "emptyMsg": "Add sales and spendings to keep track of how your business is doing",
     "placeHolder": "E.g. Sales Item",
-    "add": "Add"
+    "add": "Add",
+    "recordHistory":"Records History"
   },
   "Setting": {
     "Language": "Language",

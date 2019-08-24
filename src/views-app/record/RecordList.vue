@@ -1,6 +1,6 @@
 <template>
   <div class="record-list">
-    <app-common-header title="Records History" />
+    <app-common-header :title="$t('Record.recordHistory')" />
     <van-list
       v-model="loading"
       :finished="finished"
@@ -88,7 +88,12 @@ export default {
       return util.fmoney(item["amount"]);
     },
     formatTotalIncome(number) {
-      return util.fmoney(number);
+      if (number>0){
+        return util.fmoney(number);
+      }else {
+        return util.fmoney(number).replace("-,","-");
+      }
+      
     },
     onLoad() {
       this.$api.getRecordList().then(res => {
