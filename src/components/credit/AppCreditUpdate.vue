@@ -4,7 +4,7 @@
       :loop="false"
       :show-indicators="false"
       :width="swipeWidth"
-      :height="340"
+      :height="300"
     >
       <van-swipe-item
         v-for="item in questionList"
@@ -61,8 +61,6 @@ export default {
   padding-bottom: 25px;
   .swipe-item {
     padding-top: 20px;
-    .item-mapper {
-    }
   }
   .instruction {
     margin: 20px 0 10px 0;
