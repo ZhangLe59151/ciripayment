@@ -23,7 +23,7 @@
     <div class="title">{{$t("Home.encourageLuckyTitle")}}</div>
     <div class="subtitle single-subtitle">
       <div v-if="inputedIncome">{{incomeMin}}<span class="subscript">{{$t("Home.currency")}}</span> ~ {{incomeMax}}<span class="subscript">{{$t("Home.currency")}}</span></div>
-      <div v-else>{{$t("Home.luckySubtitle")}}</div>
+      <div v-else>{{subtitle}}</div>
     </div>
     <div class="encourage">{{$t("Home.encourageWording")}}</div>
   </div>
