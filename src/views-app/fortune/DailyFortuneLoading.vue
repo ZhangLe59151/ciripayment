@@ -33,20 +33,18 @@ export default {
       this.$api
         .getFortunetelling(this.fortuneInfo.selectedMaster.id)
         .then(res => {
+          this.$toast(JSON.stringify(res));
           if (res.data.code === 200) {
             this.fortuneInfo.fortuneResult = res.data.data;
             this.$store.commit("SaveFortuneInfo", this.fortuneInfo);
-            // this.$toast("Success");
             this.showResult();
           } else {
-            this.$toast("Failed");
             this.$toast.fail(res.data.msg);
             this.$router.push({ name: "Home" });
           }
         });
     },
     showResult() {
-      this.$toast("Success");
       this.$router.push({ name: "DailyFortuneResult" });
     }
   }

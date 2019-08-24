@@ -90,7 +90,7 @@ export default {
     return Vue.axios.post("/api/merchant/channels/submit", params);
   },
   getFortunetelling(params) {
-    return instance.get(`/api/lucky-draw?masterId=${params}`);
+    return Vue.axios.get(`/api/lucky-draw?masterId=${params}`);
   },
   likeFortunetellingResult(params) {
     return Vue.axios.get(`/api/lucky-draw/like?id=${params}`);
