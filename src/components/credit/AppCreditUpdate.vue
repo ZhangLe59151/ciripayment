@@ -4,7 +4,7 @@
       :loop="false"
       :show-indicators="false"
       :width="swipeWidth"
-      :height="340"
+      class="swipe-box"
     >
       <van-swipe-item
         v-for="item in questionList"
@@ -59,6 +59,10 @@ export default {
   flex-grow: 1;
   background-color: #04a777;
   padding-bottom: 25px;
+
+  .swipe-box {
+    height: 340px;
+  }
   .swipe-item {
     padding-top: 20px;
   }
