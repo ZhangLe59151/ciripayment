@@ -1,6 +1,6 @@
 <template>
   <div class="app-add-record">
-    <app-common-header title="$t('Record.addRecord')" />
+    <app-common-header :title="$t('Record.addRecord')" />
     <van-tabs
       v-model="tabActive"
       animated
