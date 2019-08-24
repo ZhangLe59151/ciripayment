@@ -4,6 +4,7 @@
   "noSelectSettlementErrorMsg": "Please select one of the settlement options to proceed.",
   "marketingServiceErrorMsg": "There are errors in your form. Please correct them before trying again.",
   "OTPErrorMsg": "OTP request too frequent. Please wait for a minute and try again.",
+  "missingDocumentErrorMsg": "Missing documents. Please upload all the necessary documents before proceeding to the next step.",
   "FortuneTelling": {
     "TapChestTips": "Tap on the treasure chest!",
     "LuckyNumberLabel": "Lucky Number",
@@ -15,31 +16,16 @@
   "Expenses": "SPENDINGS",
   "LoanTitle": "Instant Cash",
   "AppLoanOverview": {
-    "bannerTitle": "Get instant cash in minutes",
+    "bannerTitle": "Get instant cash in minutes!",
     "lowerRate": "Lower Rate",
     "higherLimit": "Higher Limit",
     "fasterApproval": "Faster Approval",
-    "instructionTitle": "Maximise Your Limit",
-    "instructionContent1": "Enjoy a higher limit and faster approval time when you provide your profile information:",
-    "instructionContent2": {
-      "personalDetails": "Personal Details",
-      "bizInfo": "Business Information",
-      "photos": "Photos of Your ID"
+    "instruction": {
+      "qs": "What you need:",
+      "requirements": "Your National ID",
+      "msg": "You are only 2 minutes away from getting instant cash!"
     },
-    "tap": "Tap",
-    "toBeginApplying": "to begin applying",
-    "loanTerms": "Loan Terms",
-    "loanTerms1": {
-      "front": "The base loan amount is",
-      "end": "without any profile information."
-    },
-    "loanTerms2": "Low interest rates from",
-    "loanTerms3": {
-      "front": "From",
-      "mid": "1 minute",
-      "end": "approval in-principle."
-    },
-    "startNow": "Apply Now",
+    "applyNow": "Apply Now",
     "consent": "By submitting an application, you consent to the use of all submitted information by Silot AI for loan application and marketing purposes.",
     "submittedNotification": "Application Sent Successfully",
     "submittedBack": "Back To Home",
@@ -76,7 +62,9 @@
     "frontNat": "Front of National ID",
     "backNat": "Back of National ID",
     "photos": "Photos of Yourself with Front of National ID",
-    "next": "Next"
+    "submit": "Submit Application",
+    "errorEnterRequired": "This field is required.",
+    "errorSelectCategory": "Select a category."
   },
   "EnterLoanAmount": {
     "title1": "Your Estimated Credit Limit",
@@ -89,6 +77,14 @@
     "dialogDesc2": "Complete your profile to get up to",
     "dialogApp": "Apply Anyway",
     "dialogComplete": "Complete Profile"
+  },
+  "Credit": {
+    "title": "Business Worth",
+    "bannerTitle": "Your Business Is Currently Worth",
+    "ribbonTitle": "Earn more by answering questions every day!",
+    "swipe": "Swipe left to skip this question for now",
+    "errorEnterAmount": "Please enter an amount",
+    "errorEnterOption": "Please select an option"
   },
   "Home": {
     "income": "TODAY'S SALES",

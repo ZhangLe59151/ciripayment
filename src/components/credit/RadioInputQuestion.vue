@@ -33,7 +33,7 @@
         @click="setData(item)"
       >{{ item }}</div>
     </div>
-
+    <div class="error-msg" v-if="error">{{$t("Credit.errorEnterOption")}}</div>
     <van-button class="submit-btn" @click="handleSubmit">
       <div class="btn-text">+{{question.limitAmount}} {{$store.state.currency}} Credit</div>
       <img class="dollar-coin" src="../../assets/imgs/dollar_coin.png">
@@ -189,10 +189,13 @@ export default {
 
       .error-2 {
         text-align: center;
-        border-width: 1px;
+        float:left;
+        display: flex;
+        justify-content: center; /* align horizontal */
+        align-items: center;
+        border: 1px solid #b41800;
         background-color: white;
         border-radius: 4px;
-        border-color: #B41800;
         color: #2F3941;
         margin: 4px 6px 4px 6px;
         white-space: normal;
@@ -221,10 +224,13 @@ export default {
 
       .error-4{
         text-align: center;
-        border-width: 1px;
+        float:left;
+        display: flex;
+        justify-content: center; /* align horizontal */
+        align-items: center;
+        border: 1px solid #b41800;
         background-color: white;
         border-radius: 4px;
-        border-color: #B41800;
         color: #2F3941;
         margin: 4px 6px 4px 6px;
         white-space: normal;
@@ -236,10 +242,13 @@ export default {
 
       .error-6{
         text-align: center;
-        border-width: 1px;
+        float:left;
+        display: flex;
+        justify-content: center; /* align horizontal */
+        align-items: center;
+        border: 1px solid #b41800;
         background-color: white;
         border-radius: 4px;
-        border-color: #B41800;
         color: #2F3941;
         margin: 4px 6px 4px 6px;
         white-space: normal;
@@ -285,6 +294,15 @@ export default {
       }
     }
 
+    .error-msg{
+      position:absolute;
+      bottom:76px;
+      left:87px;
+      font-size: 14px;
+      color: #C44834;
+      letter-spacing: 0;
+      text-align: center;
+    }
     .submit-btn{
       position:absolute;
       bottom:20px;

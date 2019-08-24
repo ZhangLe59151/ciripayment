@@ -17,7 +17,7 @@
       </van-swipe-item>
 
     </van-swipe>
-    <div class="instruction">Swipe left to skip this question for now</div>
+    <div class="instruction">{{$t("Credit.swipe")}}</div>
     <i class="iconfont iconswipe" />
   </div>
 </template>

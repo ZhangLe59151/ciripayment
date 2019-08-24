@@ -23,7 +23,7 @@
     >
       <el-card class="box-card">
         <!-- merchant information -->
-        <div ref="bizInfo" class="title">Applicant Information</div>
+        <div ref="bizInfo" class="title">{{$t("EnterLoanInfo.subTitle")}}</div>
         <div class="title-line"></div>
 
 <!--        <el-form-item-->
@@ -50,7 +50,7 @@
           :label="$t('EnterLoanInfo.bizNameEng')"
           prop="bizNameEn"
           :rules="[
-      { required: true, message: 'This field is required.', trigger: 'blur' },
+      { required: true, message: $t('EnterLoanInfo.errorEnterRequired'), trigger: 'blur' },
     ]"
         >
           <el-input
@@ -63,16 +63,11 @@
             <i class="iconfont iconsuccess success-validator"/></div>
         </el-form-item>
 
-        <div
-          class="inner-tips"
-          style="font-size:11px;color: #929292;"
-          v-show="$store.state.form.haveBizReg === '1'"
-        >If your business is registered, please enter the Business Registration Number above.</div>
         <el-form-item
           :label="$t('EnterLoanInfo.bizCat')"
           prop="sicName"
           :rules="[
-        { required: true, message: 'Select a category.', trigger: 'blur'}
+        { required: true, message: $t('EnterLoanInfo.errorSelectCategory'), trigger: 'blur'}
         ]"
         >
           <van-cell
@@ -86,7 +81,7 @@
           :label="$t('EnterLoanInfo.bizAdd')"
           prop="bizAddr"
           :rules="[
-      { required: true, message: 'This field is required.', trigger: 'blur' }
+      { required: true, message: $t('EnterLoanInfo.errorEnterRequired'), trigger: 'blur' }
     ]"
         >
           <el-input
@@ -282,7 +277,7 @@
         class="bottom-btn"
         @click="handleNext"
       >
-        Submit Application
+        {{$t("EnterLoanInfo.submit")}}
       </van-button>
     </div>
 
@@ -516,7 +511,7 @@ export default {
       this.$refs["elForm"].validate(valid => {
         if (valid) {
           var errMsg =
-              "Missing documents. Please upload all the necessary documents before proceeding to the next step.";
+              this.$t("missingDocumentErrorMsg");
           if (!this.frontUrl || !this.backUrl || !this.faceUrl) {
             this.$notify({
               message: errMsg,
@@ -538,7 +533,7 @@ export default {
         } else {
           this.$notify({
             message:
-                "There are errors in your form. Please correct them before trying again.",
+                this.$t("marketingServiceErrorMsg"),
             duration: 5000
           });
           return false;

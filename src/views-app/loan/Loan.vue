@@ -32,7 +32,6 @@ export default {
         this.$store.commit("initLoanProfile", res.data.data);
       }
     });
-    // for testing
     this.$store.commit("fetchDataFromLocal");
   }
 };

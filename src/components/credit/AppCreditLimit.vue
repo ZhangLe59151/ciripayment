@@ -1,7 +1,7 @@
 <template>
   <div class="app-credit-limit">
     <div v-bind:class="creditLimitClass">
-      <div class="credit-limit-title">Your Business Is Currently Worth</div>
+      <div class="credit-limit-title">{{$t("Credit.bannerTitle")}}</div>
       <credit-app-number-counting
         :numberTo="numberTo"
         class="credit-limit-amount"
@@ -10,7 +10,7 @@
     </div>
     <div class="ribbon">
       <div class="ribbon-text">
-        Earn credit by answering questions everyday!
+        {{$t("Credit.ribbonTitle")}}
       </div>
     </div>
 
