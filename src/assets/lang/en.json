@@ -117,9 +117,11 @@
     "TotalExpenses": "SPENDINGS OF THE DAY",
     "Date": "Date",
     "updateRecord": "Update",
-    "addRecord": "Add",
+    "addRecord": "Add Record",
     "deleteRecord": "Delete",
-    "emptyMsg": "Add sales and spendings to keep track of how your business is doing"
+    "emptyMsg": "Add sales and spendings to keep track of how your business is doing",
+    "placeHolder": "E.g. Sales Item",
+    "add": "Add"
   },
   "Setting": {
     "Language": "Language",

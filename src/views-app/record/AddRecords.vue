@@ -1,6 +1,6 @@
 <template>
   <div class="app-add-record">
-    <app-common-header title="Add Record" />
+    <app-common-header title="$t('Record.addRecord')" />
     <van-tabs
       v-model="tabActive"
       animated
@@ -53,7 +53,7 @@
         </div>
 
       </van-tab>
-      <van-tab title="Expenses">
+      <van-tab title="$t('Record.Expenses')">
 
         <div class="record-status expenses">
           <span class="name">{{$t("Record.TotalExpenses")}}</span>
@@ -66,7 +66,7 @@
             v-model="form.memo"
             @focus="inputNote"
             maxlength="50"
-            placeholder="E.g. Sales Item"
+            placeholder="$t('Record.placeHolder')"
           />
         </div>
 
@@ -104,7 +104,7 @@
     <button
       class="update_btn"
       @click="updateBtn"
-    >{{$t("Record.addRecord")}}</button>
+    >{{$t("Record.add")}}</button>
 
     <van-row>
       <van-col span="24">
