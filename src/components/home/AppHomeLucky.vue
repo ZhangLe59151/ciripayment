@@ -97,6 +97,9 @@ export default {
         return false;
       }
       // web
+      console.log("====================================");
+      console.log(1233, url.split("#")[1]);
+      console.log("====================================");
       this.$router.push(url.split("#")[1]);
     }
   }
