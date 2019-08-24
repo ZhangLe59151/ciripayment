@@ -148,7 +148,6 @@ export default {
     }
     .date_title {
       font-size: 16px;
-      font-weight: bolder;
       position: absolute;
       left: 16px;
       top: 4px;
