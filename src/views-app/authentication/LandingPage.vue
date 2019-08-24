@@ -185,9 +185,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/css/bottom-btn";
+@import "../../assets/css/bottom-btn";
 .landing-page {
-  background: url("../assets/imgs/landing_bg.png") no-repeat;
+  background: url("../../assets/imgs/landing_bg.png") no-repeat;
   background-size: cover;
   height: 100vh;
   .landingPageContent {

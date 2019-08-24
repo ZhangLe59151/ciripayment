@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import ApplyMoreChannelHeader from "@/components/ApplyMoreChannelHeader";
-import ApplyMoreChannelContent from "@/components/ApplyMoreChannelContent";
+import ApplyMoreChannelHeader from "@/components/service/ApplyMoreChannelHeader";
+import ApplyMoreChannelContent from "@/components/service/ApplyMoreChannelContent";
 export default {
   name: "ApplyMoreChannel",
   components: {

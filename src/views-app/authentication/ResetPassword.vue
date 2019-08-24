@@ -26,7 +26,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/css/bottom-btn.scss";
+@import "../../assets/css/bottom-btn";
 .reset-password {
   .resetPassWrapper {
     /*height: calc(100vh - 50px);*/

@@ -133,7 +133,7 @@
 
 <script>
 import AppTabBar from "@/components/AppTabBar";
-import AppRecordsHeader from "@/components/AppRecordsHeader";
+import AppRecordsHeader from "@/components/records/AppRecordsHeader";
 import { mapState } from "vuex";
 
 const today = new Date();

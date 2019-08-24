@@ -18,17 +18,17 @@ const routeArr = [
   {
     path: "/sic",
     name: "SIC",
-    component: () => import("@/views-app/Sic.vue")
+    component: () => import("@/views-app/loan/Sic.vue")
   },
   {
     path: "/subsic",
     name: "SubSIC",
-    component: () => import("@/views-app/SubSic.vue")
+    component: () => import("@/views-app/loan/SubSic.vue")
   },
   {
     path: "/mcc",
     name: "MCC",
-    component: () => import("@/views-app/Mcc.vue")
+    component: () => import("@/views-app/loan/Mcc.vue")
   },
   {
     path: "/province",
@@ -103,7 +103,7 @@ const AppRouteArr = [
   {
     path: "/services",
     name: "Services",
-    component: () => import("@/views-app/Services.vue")
+    component: () => import("@/views-app/service/Services.vue")
   },
   {
     path: "/credit",
@@ -129,7 +129,7 @@ const AppRouteArr = [
   {
     path: "/services-apply-more-channel",
     name: "ApplyMoreChannel",
-    component: () => import("@/views-app/ApplyMoreChannel.vue")
+    component: () => import("@/views-app/service/ApplyMoreChannel.vue")
   },
   {
     path: "/settings",
@@ -149,12 +149,12 @@ const AppRouteArr = [
   {
     path: "/manage-settlement",
     name: "ManageSettlement",
-    component: () => import("@/views-app/ManageSettlement.vue")
+    component: () => import("@/views-app/service/ManageSettlement.vue")
   },
   {
     path: "/manage-channels",
     name: "ManageChannels",
-    component: () => import("@/views-app/ManageChannels.vue")
+    component: () => import("@/views-app/service/ManageChannels.vue")
   },
   {
     path: "/qrcode",
@@ -191,37 +191,37 @@ const AppRouteArr = [
   {
     path: "/landing-page",
     name: "LandingPage",
-    component: () => import("@/views-app/LandingPage.vue")
+    component: () => import("@/views-app/authentication/LandingPage.vue")
   },
   {
     path: "/enter-otp-sp",
     name: "EnterOtp",
-    component: () => import("@/views-app/EnterOTP.vue")
+    component: () => import("@/views-app/authentication/EnterOTP.vue")
   },
   {
     path: "/verified-first-time",
     name: "VerifiedFirstTime",
-    component: () => import("@/views-app/VerifiedFirstTimeLogin.vue")
+    component: () => import("@/views-app/authentication/VerifiedFirstTimeLogin.vue")
   },
   {
     path: "/create-password-sp",
     name: "CreatePasswordSP",
-    component: () => import("@/views-app/CreatePassword.vue")
+    component: () => import("@/views-app/authentication/CreatePassword.vue")
   },
   {
     path: "/enter-password-sp",
     name: "EnterPasswordSP",
-    component: () => import("@/views-app/EnterPassword.vue")
+    component: () => import("@/views-app/authentication/EnterPassword.vue")
   },
   {
     path: "/forgot-password-sp",
     name: "ForgotPasswordSP",
-    component: () => import("@/views-app/ForgotPassword.vue")
+    component: () => import("@/views-app/authentication/ForgotPassword.vue")
   },
   {
     path: "/reset-password-sp",
     name: "ResetPasswordSP",
-    component: () => import("@/views-app/ResetPassword.vue")
+    component: () => import("@/views-app/authentication/ResetPassword.vue")
   },
   {
     path: "/daily-fortune-prepare",

@@ -109,10 +109,10 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../assets/css/bottom-btn.scss";
+@import "../../assets/css/bottom-btn";
 
 .enter-otp {
-  background: url("../assets/imgs/landing_bg.png");
+  background: url("../../assets/imgs/landing_bg.png");
   min-height: 100vh;
   .login-title {
     font-size: 24px;
@@ -189,7 +189,7 @@
 
 <script>
 // @ is an alias to /src
-import util from "@/util.js";
+import util from "@/util";
 import WapHeader from "@/components/WapHeader";
 export default {
   name: "enter-otp",
@@ -292,6 +292,7 @@ export default {
       this.value = this.value.slice(0, this.value.length - 1);
     },
 
+    // this is for VERIFIED account
     handleVerifyOtpVerifiedAccount() {
       console.log("on input");
       var otpCodeErrorMessage =
@@ -327,8 +328,17 @@ export default {
                 });
                 */
               // TODO get Home information
-
               const to = this.$route.query.to;
+              this.$api.getHomePageInfo().then(res => {
+                if (res.data.code === 200) {
+                  const hasLoan = res.data.data.hasLoan;
+                  // if already got loan, move to Loan result page instead of Loan Form
+                  if (hasLoan && to === "EnterLoanInfo") {
+                    this.$router.push({ name: "Loan" });
+                    return false;
+                  }
+                }
+              });
               this.$router.push(to ? { name: to } : { name: "Home" });
             } else {
               this.$notify({
@@ -340,6 +350,7 @@ export default {
       }
     },
 
+    // this is for UN-VERIFIED account
     handleVerifyOtpUnverifiedAccount() {
       var otpCodeErrorMessage =
         "Incorrect OTP. Please double check and try again.";
@@ -363,6 +374,16 @@ export default {
             this.$store.commit("OTPVerified");
             // TODO get Home information
             const to = this.$route.query.to;
+            this.$api.getHomePageInfo().then(res => {
+              if (res.data.code === 200) {
+                const hasLoan = res.data.data.hasLoan;
+                // if already got loan, move to Loan result page instead of Loan Form
+                if (hasLoan && to === "EnterLoanInfo") {
+                  this.$router.push({ name: "Loan" });
+                  return false;
+                }
+              }
+            });
             this.$router.push(to ? { name: to } : { name: "Home" });
             // this.$router.push({ name: "Home" });
           } else {
@@ -374,104 +395,6 @@ export default {
         });
     },
 
-    handleVerify() {
-      var otpCodeErrorMessage =
-        "Incorrect OTP. Please double check and try again.";
-      if (this.value === "" || this.value.length !== 6) {
-        this.$notify({
-          message: otpCodeErrorMessage,
-          duration: 1000
-        });
-        return false;
-      }
-      this.$api
-        .verifyOtp({
-          phoneNumber:
-            this.$store.state.userInfo.nationalCode +
-            this.$store.state.userInfo.phone,
-          otpCode: this.value
-        })
-        .then(res => {
-          if (res.data.code === 200) {
-            this.$api.serviceOverview().then(res => {
-              if (
-                res.data.code === 200 &&
-                res.data.data.applicationStatus !== 2
-              ) {
-                let marketingEnabled = false;
-                let paymentEnabled = false;
-                if (this.serviceType.includes("0")) {
-                  if (res.data.data.paymentChannelOverviewVo !== undefined) {
-                    res.data.data.paymentChannelOverviewVo.forEach(function(
-                      paymentChannel,
-                      index
-                    ) {
-                      console.log(paymentChannel, index);
-                      if (paymentChannel.status === 1) {
-                        paymentEnabled = true;
-                      }
-                    });
-                  }
-                } else {
-                  paymentEnabled = true;
-                }
-                if (this.serviceType.includes("1")) {
-                  if (res.data.data.marketingServiceOverviewVo.status === 1) {
-                    marketingEnabled = true;
-                  }
-                } else {
-                  marketingEnabled = true;
-                }
-                let merchantEnabled = paymentEnabled & marketingEnabled;
-                if (merchantEnabled) {
-                  this.$dialog
-                    .alert({
-                      message:
-                        "It looks like you already have services enabled with us.\n" +
-                        "Log in to your Merchant Portal to manage them or apply for more services."
-                    })
-                    .then(() => {
-                      this.$store.state.serviceOverviewVo = res.data.data;
-                      this.$api
-                        .checkPasswordExistence({
-                          params: {
-                            phoneNumber: this.form.applicantPhoneNumber
-                          }
-                        })
-                        .then(res => {
-                          if (res.data.code === 10050) {
-                            this.$router.push({ name: "Home" });
-                          }
-                        });
-                      this.$router.push({ name: "Home" });
-                    });
-
-                  return false;
-                }
-                // applicationStatus === 2 means rejected applicaiton,so user can re-apply appliation
-                this.$dialog
-                  .alert({
-                    message:
-                      "You have applied for the services. Go to your merchant portal to check out the status and enjoy your services now."
-                  })
-                  .then(() => {
-                    this.$store.state.serviceOverviewVo = res.data.data;
-                    this.$router.push({ name: "Home" });
-                  });
-
-                return false;
-              }
-              // no existing application - go to new application page
-              this.$router.push({ name: "Home" });
-            });
-          } else {
-            this.$notify({
-              message: otpCodeErrorMessage,
-              duration: 1000
-            });
-          }
-        });
-    },
     handleCancel() {
       this.$store.commit("ClearForm");
       util.redirectToHome(this);

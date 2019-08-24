@@ -541,8 +541,7 @@ export default {
       });
     },
     gotoNextPage() {
-      // save request form init store
-      this.$store.commit("UpdateForm", this.form);
+      // this.$store.commit("UpdateForm", this.form);
       let submitForm = {
         bizAddr: this.$store.state.form.bizAddr,
         bizNameEn: this.$store.state.form.bizNameEn,
@@ -553,7 +552,7 @@ export default {
         picNationalIdFront: this.$store.state.form.frontUrl,
         picNationalIdFrontWithFace: this.$store.state.form.faceUrl
       };
-
+      console.log(submitForm);
       this.$api.applyLoan(submitForm).then(res => {
         if (res.data.code === 200 && res.data.data === true) {
           this.$store.commit("ClearForm");

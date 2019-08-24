@@ -1,6 +1,6 @@
 <template>
   <div class="app-service">
-    <app-service-header :applicationStatus="applicationStatus" />
+    <service-app-service-header :applicationStatus="applicationStatus" />
     <!-- TODO: only when there is no application, display the application form -->
     <home-app-home-apply
       v-if="applicationStatus === '2'"
@@ -10,8 +10,8 @@
       v-else
       class="app-service-content"
     >
-      <app-service-content-settlement />
-      <app-service-content-channels />
+      <service-app-service-content-settlement />
+      <service-app-service-content-channels />
     </div>
 
     <app-tab-bar :active="($store.state.deviceType === 'APP' ? 2 : 1 )" />

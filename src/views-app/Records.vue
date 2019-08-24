@@ -43,9 +43,9 @@
 
 <script>
 import AppTabBar from "@/components/AppTabBar";
-import AppRecordsHeader from "@/components/AppRecordsHeader";
-import AppRecordsTransactions from "@/components/AppRecordsTransactions";
-import AppRecordsSettlements from "@/components/AppRecordsSettlements";
+import AppRecordsHeader from "@/components/records/AppRecordsHeader";
+import AppRecordsTransactions from "@/components/records/AppRecordsTransactions";
+import AppRecordsSettlements from "@/components/records/AppRecordsSettlements";
 export default {
   name: "AppRecords",
 

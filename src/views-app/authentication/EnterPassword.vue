@@ -68,14 +68,14 @@
               v-if="!showingPassword"
               @click="toggleShowingPassword"
               slot="suffix"
-              src="../assets/imgs/hide.svg"
+              src="../../assets/imgs/hide.svg"
               class="showingPasswordIcon"
             />
             <img
               v-else
               slot="suffix"
               @click="toggleShowingPassword"
-              src="../assets/imgs/reveal.svg"
+              src="../../assets/imgs/reveal.svg"
               class="showingPasswordIcon"
             />
           </el-input>
@@ -108,10 +108,10 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../assets/css/bottom-btn.scss";
+@import "../../assets/css/bottom-btn";
 
 .enter-password {
-  background: url("../assets/imgs/landing_bg.png");
+  background: url("../../assets/imgs/landing_bg.png");
   min-height: 100vh;
 
   .login-title {
@@ -209,7 +209,7 @@
 
 <script>
 // @ is an alias to /src
-import util from "@/util.js";
+import util from "@/util";
 import WapHeader from "@/components/WapHeader";
 
 export default {
