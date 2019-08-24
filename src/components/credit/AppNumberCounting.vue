@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import util from "@/util.js";
 
 export default {
@@ -17,14 +16,8 @@ export default {
       interval: false
     }
   },
-  computed: { ...mapState({
-    originalDisplayNumber: state => state.credit.currentCreditLimit }
-  ) },
   created() {
-    this.displayNumber = this.originalDisplayNumber;
-  },
-  ready: function() {
-    this.displayNumber = this.numberTo ? this.numberTo : 0;
+    this.displayNumber = this.numberTo;
   },
 
   watch: {

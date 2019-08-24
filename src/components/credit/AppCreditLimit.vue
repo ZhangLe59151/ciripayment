@@ -24,7 +24,7 @@ export default {
   name: "AppCreditLimit",
   data() {
     return {
-      numberTo: 100000,
+      numberTo: 0,
       creditLimitClass: "credit-limit answered-none"
     };
   },
@@ -45,6 +45,7 @@ export default {
     }
   },
   created() {
+    this.numberTo = this.creditLimit;
     this.creditLimitClass = this.returnStateBasedOnAnswered(this.creditAnswers);
   },
   methods: {
