@@ -7,7 +7,8 @@
     "serve-app": "vue-cli-service serve --mode local",
     "build": "vue-cli-service build --mode web",
     "build-app": "vue-cli-service build --mode app",
-    "build-pro-app": "vue-cli-service build --mode pro",
+    "build-pro-app": "vue-cli-service build --mode appPro",
+    "build-pro-web": "vue-cli-service build --mode webPro",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
