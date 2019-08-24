@@ -4,6 +4,7 @@
         :loop="false"
         :show-indicators="false"
         :initial-swipe="3"
+        :width="swipeWidth"
       >
 
         <van-swipe-item
@@ -40,6 +41,11 @@ import AppCreditQAMapper from "@/components/credit/AppCreditQAMapper";
 export default {
   name: "AppCreditFinishQuestions",
   components: { AppCreditQAMapper },
+  data() {
+    return {
+      swipeWidth: document.documentElement.clientWidth * 0.9
+    };
+  },
   computed: {
     ...mapState({
       questionList: state => state.credit.questions,
@@ -71,3 +77,29 @@ export default {
     padding-top:28px;
   }
 </style>
+
+<style lang="scss" scoped>
+  .app-credit-finish-questions-wrapper {
+    flex-grow: 1;
+    background-color: #04a777;
+    padding-bottom: 25px;
+    .swipe-item {
+      padding-top: 20px;
+      .item-mapper {
+      }
+    }
+    .instruction {
+
+      margin: 20px 0 10px 0;
+      font-size: 14px;
+      text-align: center;
+      color: white;
+    }
+    .iconswipe {
+      color: white;
+      font-size: 34px;
+      margin: 0 0 0 160px;
+    }
+  }
+</style>
+
