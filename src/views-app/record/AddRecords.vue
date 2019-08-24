@@ -302,6 +302,8 @@ export default {
 .label-left {
   margin: 16px 16px 0 16px;
   height: 24px;
+  font-size: 14px;
+  color: #2f3941;
 }
 
 .pick_date {

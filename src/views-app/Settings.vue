@@ -15,7 +15,7 @@
       v-if="isLogin"
       class="logout"
       @click="handleLogout"
-    >Log Out</div>
+    >{{$t("Setting.Logout")}}</div>
     <div class="version">
       {{$t("Setting.Version")}} 0.1
     </div>
@@ -64,7 +64,8 @@ export default {
     letter-spacing: 0;
     line-height: 50px;
     height: 50px;
-    background-color: white;
+    background-color: #ffffff;
+    font-size: 14px;
   }
 
   .version {
