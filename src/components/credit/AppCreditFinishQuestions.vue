@@ -1,20 +1,11 @@
 <template>
-<<<<<<< HEAD
   <div class="app-credit-finish-questions-wrapper">
     <van-swipe
       :loop="false"
       :show-indicators="false"
       :initial-swipe="3"
+      :width="swipeWidth"
     >
-=======
-    <div class="app-credit-finish-questions-wrapper">
-      <van-swipe
-        :loop="false"
-        :show-indicators="false"
-        :initial-swipe="3"
-        :width="swipeWidth"
-      >
->>>>>>> b503054ac8f41909f74bb7f6040c6a52d959b02f
 
       <van-swipe-item
         v-for="item in questionList"
@@ -109,27 +100,26 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-  .app-credit-finish-questions-wrapper {
-    flex-grow: 1;
-    background-color: #04a777;
-    padding-bottom: 25px;
-    .swipe-item {
-      padding-top: 20px;
-      .item-mapper {
-      }
-    }
-    .instruction {
-
-      margin: 20px 0 10px 0;
-      font-size: 14px;
-      text-align: center;
-      color: white;
-    }
-    .iconswipe {
-      color: white;
-      font-size: 34px;
-      margin: 0 0 0 160px;
+.app-credit-finish-questions-wrapper {
+  flex-grow: 1;
+  background-color: #04a777;
+  padding-bottom: 25px;
+  .swipe-item {
+    padding-top: 20px;
+    .item-mapper {
     }
   }
+  .instruction {
+    margin: 20px 0 10px 0;
+    font-size: 14px;
+    text-align: center;
+    color: white;
+  }
+  .iconswipe {
+    color: white;
+    font-size: 34px;
+    margin: 0 0 0 160px;
+  }
+}
 </style>
 
