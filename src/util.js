@@ -57,6 +57,10 @@ export default {
       t += l[i] + ((i + 1) % 3 === 0 && i + 1 !== l.length ? "," : "");
     }
     var str = t.split("").reverse().join("") +"." + r
+    if (n > 0) {
+    }else{
+      str = str.replace("-,","-")
+    }
     return (
       t
         .split("")
