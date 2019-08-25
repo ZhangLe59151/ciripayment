@@ -1,5 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
+import analytics from "../firebase/analytics"
+
 // import store from "../store";
 
 Vue.use(Router);
@@ -311,6 +313,7 @@ router.beforeEach((to, from, next) => {
   //   next({ name: "LandingPage" });
   //   return false;
   // }
+  analytics.setCurrentScreen(to.name);
   next();
 });
 

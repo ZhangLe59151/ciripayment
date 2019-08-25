@@ -8,6 +8,7 @@ import VueI18n from "vue-i18n";
 import axios from "axios";
 import VueAxios from "vue-axios";
 import api from "./api";
+import analytics from "./firebase/analytics"
 import "@/assets/js/main.js";
 import "vant/lib/index.css";
 import "@/assets/css/main.scss";
@@ -39,6 +40,7 @@ Vue.use(VueI18n);
 Vue.use(VueSignaturePad);
 
 Vue.prototype.$api = api;
+Vue.prototype.$analytics = analytics;
 Vue.prototype.$moment = moment;
 Vue.prototype.$find = find;
 Vue.prototype.$notify = Notify;
@@ -51,10 +53,24 @@ const i18n = new VueI18n({
   }
 });
 
+Vue.directive("analytics", {
+  bind: function(el, binding, vnode) {
+    el.addEventListener("click", () => {
+      if (!binding.value.params) {
+        binding.value.params = {};
+      }
+      binding.value.params["login"] = true;
+      binding.value.params["lang"] = "en";
+      analytics.logEvent(binding.value.event, binding.value.params);
+    })
+  }
+});
+
 new Vue({
   router,
   store,
   i18n,
   components: { App },
-  render: h => h(App)
+  render: h => h(App),
+  el: "#app"
 }).$mount("#app");
