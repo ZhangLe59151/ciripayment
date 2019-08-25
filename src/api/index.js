@@ -141,5 +141,8 @@ export default {
   },
   submitQuestion(params) {
     return Vue.axios.post("/api/credit/limit/answer", params);
+  },
+  logout(params) {
+    return Vue.axios.post("/api/logout", params);
   }
 };

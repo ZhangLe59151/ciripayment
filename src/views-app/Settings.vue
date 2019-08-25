@@ -43,8 +43,15 @@ export default {
   created() {},
   methods: {
     handleLogout() {
-      this.$store.commit("logOut");
-      this.$router.push({ name: "Home" });
+      this.$api.logout({}).then(res => {
+        if (res.data.code === 200) {
+          this.$toast("Logout success");
+          this.$store.commit("logOut");
+          this.$router.push({ name: "Home" });
+        } else {
+          this.$toast("Logout failed");
+        }
+      });
     }
   }
 };
