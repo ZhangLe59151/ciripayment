@@ -15,7 +15,9 @@
     <van-field
       v-model="form.email"
       :placeholder="$t('Setting.emailPlaceholder')"
+      @blur="validateEmail"
       class="form-value"
+      :error="emailError"
     />
 
     <div class="label_title">{{ $t('Setting.message') }}</div>
@@ -50,7 +52,8 @@ export default {
       form: {
         email: "",
         message: ""
-      }
+      },
+      emailError: false
     };
   },
   methods: {
@@ -70,6 +73,9 @@ export default {
           background: "#04A777"
         });
       });
+    },
+    validateEmail() {
+      this.emailError = this.$store.state.email.regExp.test(this.form.email) ? false : true;
     }
   }
 };

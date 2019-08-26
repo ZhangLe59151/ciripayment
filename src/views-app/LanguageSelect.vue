@@ -2,12 +2,27 @@
   <div class="language-select">
     <app-common-header title="Language" />
     <div class="language">
-      <div class="title">{{$t("Language.en")}}</div>
-      <van-checkbox
-        class="icon"
-        v-model="checked"
-        checked-color="#04A777"
-      />
+      
+        <van-radio-group v-model="checked">
+        <div class="radio">
+          <div class="title">{{$t("Language.en")}}</div>
+          <van-radio
+            class="icon"
+            name="english"
+            checked-color="#04A777"
+            />
+        </div>
+
+        <div class="radio">
+          <div class="title">{{$t("Language.thai")}}</div>
+          <van-radio
+            class="icon"
+            name="thai"
+            checked-color="#04A777"
+            />
+        </div>
+
+        </van-radio-group>
     </div>
 
   </div>
@@ -18,7 +33,7 @@ export default {
   name: "LanguageSelect",
   data() {
     return {
-      checked: true
+      checked: "english"
     };
   },
   methods: {},
@@ -34,16 +49,21 @@ export default {
 }
 
 .language {
-  height: 50px;
+  height: auto;
+  margin: 7px 0 0 0;
+}
+
+.radio {
+  height:50px;
   line-height: 50px;
-  margin: 8px 0 0 0;
   background-color: white;
-  border: 1px solid #e9ebed;
+  margin: 1px 0 0 0;
   position: relative;
 
   .title {
     position: absolute;
     left: 16px;
+    font-size: 16px;
   }
 
   .icon {
@@ -52,4 +72,6 @@ export default {
     top: 0;
   }
 }
+
+
 </style>
