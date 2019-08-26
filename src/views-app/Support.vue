@@ -1,34 +1,31 @@
 <template>
   <div class="app-support">
-    <app-common-header title="Support" />
+    <app-common-header :title="$t('Setting.support')" />
     <div class="feedback">
       <div class="feedback_title">
-        Got feedback or
-        experiencing problems?
+        {{ $t('Setting.feedbackTitle') }}
       </div>
       <div class="feedback_word">
-        Drop us a message and our customer
-        support representatives will be happy to
-        assist you!
+        {{ $t('Setting.feedbackWord') }}
       </div>
     </div>
 
-    <div class="label_title">Your Email</div>
+    <div class="label_title">{{ $t('Setting.emailTitle') }}</div>
 
     <van-field
       v-model="form.email"
-      placeholder="email@domain.com"
+      :placeholder="$t('Setting.emailPlaceholder')"
       class="form-value"
     />
 
-    <div class="label_title">Your Message</div>
+    <div class="label_title">{{ $t('Setting.message') }}</div>
 
     <van-field
       class="form-value textarea"
       v-model="form.message"
       type="textarea"
       maxlength="500"
-      placeholder="Describe your problem or feedback"
+      :placeholder="$t('Setting.messagePlaceholder')"
       rows="5"
       @input="descInput"
     />
@@ -38,7 +35,7 @@
     <button
       class="submit_btn"
       @click="sendBtn"
-    >Submit</button>
+    >{{ $t('Setting.sendEmail') }}</button>
 
   </div>
 </template>
@@ -67,9 +64,9 @@ export default {
     sendBtn() {
       this.$api.feedback(this.form).then(res => {
         if (res.data.code === 200) {
-          this.$notify({ message: "Sent Sucessfully", background: "#04A777" });
+          this.$notify({ message: $t('Setting.sendSucceed') , background: "#04A777" });
         } else {
-          this.$notify({ message: "Failed to send", background: "#04A777" });
+          this.$notify({ message: $t('Setting.sendFailed'), background: "#04A777" });
         }
       });
     }

@@ -131,7 +131,16 @@
     "Logout": "Log Out",
     "Version": "version",
     "tc": "Terms & Conditions",
-    "support": "Support"
+    "support": "Support",
+    "feedbackTitle": "Got feedback or experiencing problems?",
+    "feedbackWord": "Drop us a message and our customer support representatives will be happy to assist you!",
+    "emailTitle": "Your Email",
+    "message": "Message",
+    "emailPlaceholder": "email@domain.com",
+    "messagePlaceholder": "Describe your problem or feedback",
+    "sendEmail": "Submit",
+    "sendSucceed": "Sent Sucessfully",
+    "sendFailed": "Failed to send"
   },
   "Language": {
     "en": "English"
