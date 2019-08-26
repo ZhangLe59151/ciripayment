@@ -15,7 +15,9 @@
     <van-field
       v-model="form.email"
       :placeholder="$t('Setting.emailPlaceholder')"
+      @blur="validateEmail"
       class="form-value"
+      :error="emailError"
     />
 
     <div class="label_title">{{ $t('Setting.message') }}</div>
@@ -50,7 +52,8 @@ export default {
       form: {
         email: "",
         message: ""
-      }
+      },
+      emailError: false
     };
   },
   methods: {
@@ -66,6 +69,9 @@ export default {
         this.$notify({
           message: this.$t('Setting.${res.data.code === 200 ? "sendSucceed" : "sendFailed"}'), background: "#04A777"});
       });
+    },
+    validateEmail() {
+      this.emailError = this.$store.state.email.regExp.test(this.form.email) ? false : true;
     }
   }
 };
@@ -129,6 +135,29 @@ export default {
     line-height: 24px;
     font-size: 16px;
     color: #2f3941;
+    border-bottom-color: #87929d;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    resize: none;
+  }
+}
+
+.form-value-error {
+  padding: 0;
+  width: 328px;
+  left: 16px;
+  height: 40px;
+  line-height: 40px;
+  border-bottom: 1px solid #c2c8cc !important;
+
+  &.textarea {
+    right: 16px;
+    height: 144px;
+    letter-spacing: 0;
+    line-height: 24px;
+    font-size: 16px;
+    color: #B41800;
     border-bottom-color: #87929d;
     border-top-width: 0;
     border-left-width: 0;
