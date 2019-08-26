@@ -63,11 +63,8 @@ export default {
     },
     sendBtn() {
       this.$api.feedback(this.form).then(res => {
-        if (res.data.code === 200) {
-          this.$notify({ message: $t('Setting.sendSucceed') , background: "#04A777" });
-        } else {
-          this.$notify({ message: $t('Setting.sendFailed'), background: "#04A777" });
-        }
+        this.$notify({
+          message: this.$t('Setting.${res.data.code === 200 ? "sendSucceed" : "sendFailed"}'), background: "#04A777"});
       });
     }
   }
