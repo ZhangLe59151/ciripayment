@@ -231,6 +231,8 @@ export default {
     },
     updateBtn() {
       const form = Object.assign({}, this.form);
+      form.incomeAmount = form.incomeAmount.replace(",","");
+      form.expenseAmount = form.expenseAmount.replace(",","");
       form.date = this.$moment(this.form.date).format(this.localDateFormatter);
       this.appear = false;
       const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
