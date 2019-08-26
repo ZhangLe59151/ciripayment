@@ -143,29 +143,6 @@ export default {
   }
 }
 
-.form-value-error {
-  padding: 0;
-  width: 328px;
-  left: 16px;
-  height: 40px;
-  line-height: 40px;
-  border-bottom: 1px solid #c2c8cc !important;
-
-  &.textarea {
-    right: 16px;
-    height: 144px;
-    letter-spacing: 0;
-    line-height: 24px;
-    font-size: 16px;
-    color: #B41800;
-    border-bottom-color: #87929d;
-    border-top-width: 0;
-    border-left-width: 0;
-    border-right-width: 0;
-    resize: none;
-  }
-}
-
 .remain {
   margin: 8px 0 0 16px;
   font-size: 12px;
