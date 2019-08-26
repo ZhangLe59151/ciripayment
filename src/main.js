@@ -17,26 +17,23 @@ import "element-ui/lib/theme-chalk/index.css";
 
 import moment from "moment-timezone";
 
-import Vant, { Notify, Swipe, SwipeItem, Checkbox, CheckboxGroup } from "vant";
+import Vant, { Notify } from "vant";
 import "@/amfe";
-import VueSignaturePad from "vue-signature-pad";
+// import VueSignaturePad from "vue-signature-pad";
 
-import VueAnalytics from "vue-analytics";
+// import VueAnalytics from "vue-analytics";
 
-Vue.use(VueAnalytics, {
-  id: process.env.VUE_APP_GAID,
-  router
-});
+// Vue.use(VueAnalytics, {
+//   id: process.env.VUE_APP_GAID,
+//   router
+// });
 
 Vue.use(ElementUI);
 
 Vue.use(VueAxios, axios);
 Vue.use(Vant);
-Vue.use(Notify);
-Vue.use(Swipe).use(SwipeItem);
-Vue.use(Checkbox).use(CheckboxGroup);
 Vue.use(VueI18n);
-Vue.use(VueSignaturePad);
+// Vue.use(VueSignaturePad);
 
 Vue.prototype.$api = api;
 Vue.prototype.$moment = moment;
