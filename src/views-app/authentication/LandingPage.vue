@@ -1,93 +1,16 @@
 <template>
   <div class="landing-page">
-    <!-- <WapHeader
-      :center="true"
-      style="top: 34px"
-    /> -->
-    <div class="landingPageContent">
-
-      <transition name="van-slide-up">
-        <div v-show="$store.state.deviceType && showComponents">
-          <!-- <div class="slogan-title center">
-            Grow Your Business with Moon Merchant Portal.
-          </div> -->
-          <div class="slogan-title center">
-            {{sloganTitle}}
-          </div>
-        </div>
-      </transition>
-
-      <div class="loginWrapper">
-        <div class="tips">
-          Your mobile number
-        </div>
-
-        <div class="otp landing">
-          <el-form
-            label-width="0px"
-            :model="form"
-            ref="elForm"
-            size="small"
-            style="margin-top: 15px;"
-          >
-            <el-form-item
-              label-width="80px"
-              prop="phone"
-              class="itemlanding"
-              :rules="[
-            {  message: 'Please enter a valid phone number', trigger: 'blur' },
-            {pattern: phoneValidationPattern, message: 'Incorrect mobile format. Please try again.', trigger: 'blur'}
-          ]"
-            >
-              <span
-                slot="label"
-                @click="show = true"
-                style="display: flex;justify-content: space-between;"
-              >
-                <span>{{form.nationalCode}}</span>
-                <i
-                  class="el-icon-caret-bottom"
-                  style="color: #FF8600; height: 14px; width: 14px; position: relative; top: 9px;"
-                ></i>
-              </span>
-              <el-input
-                v-model="form.phone"
-                placeholder=""
-                :maxlength="this.$store.state.phone.maxLen"
-                :minlength="this.$store.state.phone.minLen"
-                style="margin-left: 15px; width:90% ; color: lightgrey"
-                @focus="showComponents = false;"
-                @blur="showComponents = true"
-              ></el-input>
-            </el-form-item>
-          </el-form>
-        </div>
-
-        <van-button
-          size="large"
-          class="bottom-btn"
-          @click="handleStart"
-        >
-          Get Started
-        </van-button>
-
-      </div>
-
-    </div>
-
-    <van-popup
-      v-model="show"
-      position="bottom"
-      :overlay="false"
-    >
-      <van-picker
-        show-toolbar
-        title="National code"
-        :columns="columns"
-        @cancel="onCancel"
-        @confirm="onConfirm"
+    <van-nav-bar
+      :title="$t('Login.loginTitle')"
       />
-    </van-popup>
+    <div class="landingPageContent">
+      <van-button 
+        class="getStartBtn"
+        @click="getStart" >Get Started</van-button>
+      <van-button 
+        class="SigninBtn"
+        @click="signIn" >Sign In With Mobile</van-button>
+    </div>
   </div>
 </template>
 
@@ -190,17 +113,36 @@ export default {
   background: url("../../assets/imgs/landing_bg.png") no-repeat;
   background-size: cover;
   height: 100vh;
+  
   .landingPageContent {
     position: fixed;
     bottom: 0;
     width: 100%;
-    .loginWrapper {
-      padding-top: 30px;
+    height: 147px;
+    font-size: 16px;
+    background-color: white;
+
+    .getStartBtn {
+      position: absolute;
+      margin: 0 16px 0 16px;
+      height: 60px;
+      width: 328px;
+      color: white;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      background-color: #ff8600;
+    }
+
+    .SigninBtn {
+      position: absolute;
+      margin: 0 16px 0 16px;
+      bottom: 12px;
+      height: 60px;
+      width: 328px;
+      color: #ff8600;
       background-color: white;
       border-top-left-radius: 16px;
       border-top-right-radius: 16px;
-      padding-left: 5%;
-      padding-right: 5%;
     }
   }
 
