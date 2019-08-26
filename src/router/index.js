@@ -194,6 +194,11 @@ const AppRouteArr = [
     component: () => import("@/views-app/authentication/LandingPage.vue")
   },
   {
+    path: "/personal-question",
+    name: "PersonalQuestion",
+    component: () => import("@/views-app/authentication/PersonalQuestion.vue")
+  },
+  {
     path: "/enter-otp-sp",
     name: "EnterOtp",
     component: () => import("@/views-app/authentication/EnterOTP.vue")

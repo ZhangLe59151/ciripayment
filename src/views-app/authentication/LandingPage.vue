@@ -6,10 +6,10 @@
     <div class="landingPageContent">
       <van-button 
         class="getStartBtn"
-        @click="getStart" >Get Started</van-button>
+        @click="getStart" >{{ $t('Login.getStart') }}</van-button>
       <van-button 
         class="SigninBtn"
-        @click="signIn" >Sign In With Mobile</van-button>
+        @click="signIn" >{{ $t('Login.signIn') }}</van-button>
     </div>
   </div>
 </template>
@@ -46,6 +46,12 @@ export default {
     };
   },
   methods: {
+    getStart() {
+      this.$router.push({ name: "PersonalQuestion" });
+    },
+    signIn() {
+
+    },
     setPattern(nationalCode) {
       const item = this.nationCode.find(test => test.code === nationalCode);
       const expName = item ? item.nation + "Exp" : "sgExp";
@@ -119,11 +125,11 @@ export default {
     bottom: 0;
     width: 100%;
     height: 147px;
-    font-size: 16px;
     background-color: white;
 
     .getStartBtn {
       position: absolute;
+      font-size: 20px;
       margin: 0 16px 0 16px;
       height: 60px;
       width: 328px;
@@ -135,6 +141,7 @@ export default {
 
     .SigninBtn {
       position: absolute;
+      font-size: 20px;
       margin: 0 16px 0 16px;
       bottom: 12px;
       height: 60px;
@@ -144,42 +151,6 @@ export default {
       border-top-left-radius: 16px;
       border-top-right-radius: 16px;
     }
-  }
-
-  .slogan-title {
-    text-align: center;
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    width: 80%;
-    margin-left: 10%;
-  }
-  .slogan-sub {
-    text-align: center;
-    color: white;
-    font-size: 16px;
-    margin-bottom: 20px;
-    width: 80%;
-    margin-left: 8%;
-  }
-  .title {
-    font-size: 20px;
-    padding: 20px;
-  }
-  .tips {
-    font-size: 14px;
-  }
-
-  .otp {
-    text-align: left;
-    font-size: 15px;
-  }
-  .bottom-btn {
-    background-color: #ff8600;
-    border-radius: 4px;
-    margin: 1.25rem 0;
-    width: 100%;
   }
 }
 </style>
