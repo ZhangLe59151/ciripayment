@@ -30,10 +30,15 @@ export default {
   },
   computed: {
     ...mapState({
-      applicantPhoneNumber: state => userInfo.applicantPhoneNumber
+      applicantPhoneNumber: state => userInfo.applicantPhoneNumber,
+      firstLuanch: "firstLuanch"
     })
   },
   created() {
+    if (this.firstLuanch === "true") {
+      this.$router.push({ name: "LandingPage" });
+      return false;
+    }
     this.fetchHomePageData();
   },
   mounted() {},

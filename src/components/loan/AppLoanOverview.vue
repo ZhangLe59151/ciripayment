@@ -141,7 +141,7 @@
           <van-col
             class="info"
             span="12"
-          >Brandon Tam</van-col>
+          >{{loanProfile.applicant}}</van-col>
         </van-row>
 
         <van-row v-if="String(loanProfile.status) !== '2'"
@@ -172,7 +172,7 @@
           <van-col
             class="info"
             span="12"
-          >2.1 % p.a.</van-col>
+          >{{loanProfile.loanInterestRate}}</van-col>
         </van-row>
         <van-row v-if="String(loanProfile.status) === '1'"
                  class="loan-details"
@@ -186,7 +186,7 @@
           <van-col
             class="info"
             span="12"
-          >3 Months</van-col>
+          >{{loanProfile.loanTerm}}</van-col>
         </van-row>
         <van-row v-if="String(loanProfile.status) === '1'"
                  class="loan-details"
@@ -200,7 +200,7 @@
           <van-col
             class="info"
             span="12"
-          >{{this.$moment("2019-08-27 09:07:36").format("DD MMM YYYY")}}</van-col>
+          >{{this.$moment(loanProfile.firstRepaymentDate).format("DD MMM YYYY")}}</van-col>
         </van-row>
 
       </div>

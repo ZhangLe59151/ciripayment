@@ -8,7 +8,7 @@
     <div
       v-if="isLogin === false"
       class="logout"
-      @click="$router.push({name: 'LandingPage', query: {to: 'Settings'}})"
+      @click="$router.push({name: 'LoginPage', query: {to: 'Settings'}})"
     >{{$t("Setting.SoL")}}</div>
     <settings-app-setting-list />
     <div
