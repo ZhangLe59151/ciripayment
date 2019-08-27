@@ -6,8 +6,24 @@
     /> -->
     <div class="landingPageContent">
       <div class="slogan-title">Verify your mobile number to continue</div> 
-      
+      <div class="slogan-sub">Your Mobile Number</div>
+      <div class="input-block">
+        <div class="nationalCode" @click="show = true">
+          {{form.nationalCode}} <van-icon class="dropdownIcon" name="arrow-down" />
+        </div>
+        <van-field
+          class="phoneNumber"
+          v-model="form.expenseAmount"
+          @focus="showKeyboard('expenseAmount')"
+          maxlength="13"
+          readonly
+          />
+        <van-button class="goBtn"></van-button>
 
+
+
+
+      </div>
       
 
     </div>
@@ -55,6 +71,7 @@ export default {
     return {
       show: false,
       form: {},
+      value1: 0,
       phoneValidationPattern: this.$store.state.phone.thaiExp,
       showComponents: true
     };
@@ -136,45 +153,64 @@ export default {
     height: 194px;
     width: 328px;
     border-radius: 16px;
+
     .slogan-title {
-      padding: absolute;
-      top: 24px;
+      position: absolute;
+      margin: 24px 16px 0 16px;
       font-size: 20px;
       font-weight: bolder;
       color: #2F3941;
       text-align: left;
     }
+
+    .slogan-sub {
+      position: absolute;
+      text-align: left;
+      color: #2F3941;
+      font-size: 14px;
+      bottom: 72px;
+      left: 16px;
+    }
+
+    .nationalCode{
+      position: absolute;
+      left: 16px;
+      bottom: 24px;
+      font-size: 14px;
+      display: flex;
+      line-height: 40px;
+      width: 60px;
+      justify-content: space-between;
+      border-bottom: 1px solid #878787;
+
+      .dropdownIcon {
+        position: absolute;
+        left: 40px;
+        bottom: 14px;
+      }
+    }
+
+    .phoneNumber {
+      position: absolute;
+      left: 95px;
+      right: 80px;
+      bottom: 24px;
+      width: 150px;
+      border-bottom: 1px solid #878787;
+    }
+
+    .goBtn {
+      position: absolute;
+      right: 16px;
+      bottom: 24px;
+      background-color: #ff8600;
+      width: 50px;
+    }
+
+      
   }
 
-  .slogan-title {
-    text-align: center;
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    width: 80%;
-    margin-left: 10%;
-  }
-  .slogan-sub {
-    text-align: center;
-    color: white;
-    font-size: 16px;
-    margin-bottom: 20px;
-    width: 80%;
-    margin-left: 8%;
-  }
-  .title {
-    font-size: 20px;
-    padding: 20px;
-  }
-  .tips {
-    font-size: 14px;
-  }
-
-  .otp {
-    text-align: left;
-    font-size: 15px;
-  }
+  
   .bottom-btn {
     background-color: #ff8600;
     border-radius: 4px;
