@@ -1,20 +1,18 @@
 [
   {
-  "id": 1,
-  "name": "Master Cai",
-  "desc": "Specialises in Wealth",
-  "image": "master_01"
+    "id": 1,
+    "name": "อ.ตี๋ รามัญ",
+
+    "image": "master_01",
+    "detail": "Hailed as the new Rock Star of the Feng Shui world, scientific Feng Shui researcher Master Mas has dedicated almost three decades of his life researching, learning, testing out theories and decoding hidden secrets of Feng Shui and Chinese metaphysics.",
+    "subtitle": "Liked by You and 1,234,500+ others"
   },
   {
     "id": 2,
-    "name": "Master Yun",
-    "desc": "Specialises in Luck",
-    "image": "master_02"
-  },
-  {
-    "id": 3,
-    "name": "Master Fu",
-    "desc": "Specialises in Happiness",
-    "image": "master_03"
+    "name": "อ.แก้ว",
+
+    "image": "master_02",
+    "detail": "Hailed as the new Rock Star of the Feng Shui world, scientific Feng Shui researcher Master Mas has dedicated almost three decades of his life researching, learning, testing out theories and decoding hidden secrets of Feng Shui and Chinese metaphysics.",
+    "subtitle": "Liked by You and 1,234,500+ others"
   }
 ]

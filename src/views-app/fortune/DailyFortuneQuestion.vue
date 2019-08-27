@@ -66,9 +66,10 @@ export default {
         Math.random() * availableQuestionList.length
       );
       const randomQuestion = availableQuestionList[randomIndex];
+
       this.question = randomQuestion.content;
       this.fortuneInfo.fortuneQuestionUsed.push(randomQuestion.id);
-      return true
+      return true;
     }
   }
 };
@@ -77,7 +78,8 @@ export default {
 <style lang="scss" scoped>
 .daily-fortune-question {
   position: relative;
-  background: no-repeat center url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
+  background: no-repeat center
+    url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
   background-size: cover;
   height: 100vh;
   width: 100%;

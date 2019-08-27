@@ -201,7 +201,8 @@ const AppRouteArr = [
   {
     path: "/verified-first-time",
     name: "VerifiedFirstTime",
-    component: () => import("@/views-app/authentication/VerifiedFirstTimeLogin.vue")
+    component: () =>
+      import("@/views-app/authentication/VerifiedFirstTimeLogin.vue")
   },
   {
     path: "/create-password-sp",
@@ -242,6 +243,11 @@ const AppRouteArr = [
     path: "/daily-fortune-result",
     name: "DailyFortuneResult",
     component: () => import("@/views-app/fortune/DailyFortuneResult.vue")
+  },
+  {
+    path: "/master-profile/:id",
+    name: "MasterProfile",
+    component: () => import("@/views-app/fortune/MasterProfile.vue")
   }
 ];
 
