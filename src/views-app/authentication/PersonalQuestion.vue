@@ -9,10 +9,10 @@
           <van-tab 
             :disabled="this.tab1">
             <div class="questionTitle">{{ form1.question }}</div>
-            <van-button class="card1" @click="answer(form1.id, form1.options[0])">{{ form1.options[0] }}</van-button>
-            <van-button class="card2" @click="answer(form1.id, form1.options[1])">{{ form1.options[1] }}</van-button>
-            <van-button class="card3" @click="answer(form1.id, form1.options[2])" >{{ form1.options[2] }}</van-button>
-            <van-button class="card4" @click="answer(form1.id, form1.options[3])">{{ form1.options[3] }}</van-button>
+            <van-button class="card1" @click="answer(form1.id, form1.options[0])">{{ form1.options[0] }}<img class="icon" :src="icon11" /></van-button>
+            <van-button class="card2" @click="answer(form1.id, form1.options[1])">{{ form1.options[1] }}<img class="icon" :src="icon12" /></van-button>
+            <van-button class="card3" @click="answer(form1.id, form1.options[2])" >{{ form1.options[2] }}<img class="icon" :src="icon13" /></van-button>
+            <van-button class="card4" @click="answer(form1.id, form1.options[3])">{{ form1.options[3] }}<img class="icon" :src="icon14" /></van-button>
           
             
           
@@ -66,6 +66,13 @@ export default {
       tabActive: 0,
       tab1: false,
       tab2: false,
+      icon11: require("@/assets/imgs/personal/retailstoresignin.svg"),
+      icon12: require("@/assets/imgs/personal/restaurantsignin.svg"),
+      icon13: require("@/assets/imgs/personal/servicesignin.svg"),
+      icon14: require("@/assets/imgs/personal/servicesignin.svg"),
+      pathIcon: require("@/assets/imgs/personal/retailstoresignin.png"),
+      pathIcon: require("@/assets/imgs/personal/retailstoresignin.png"),
+      pathIcon: require("@/assets/imgs/personal/retailstoresignin.png"),
       form1: { },
       form2: { },
       form3: { }, 
@@ -138,6 +145,13 @@ export default {
     line-height: 80px;
     color: black;
     background-color: #5BCFF2;
+    .icon {
+      position: absolute;
+      height:40px;
+      width: 40px;
+      right: 16px;
+      top: 16px;
+    }
   }
 
   .card2 {
@@ -150,6 +164,13 @@ export default {
     line-height: 80px;
     color: black;
     background-color: #FDAE44;
+    .icon {
+      position: absolute;
+      height:40px;
+      width: 40px;
+      right: 16px;
+      top: 16px;
+    }
   }
 
   .card3 {
@@ -162,6 +183,13 @@ export default {
     line-height: 80px;
     color: black;
     background-color: #70CB9D;
+    .icon {
+      position: absolute;
+      height:40px;
+      width: 40px;
+      right: 16px;
+      top: 16px;
+    }
   }
 
   .card4 {
@@ -174,6 +202,13 @@ export default {
     line-height: 80px;
     color: black;
     background-color: #DDE0E2;
+    .icon {
+      position: absolute;
+      height:40px;
+      width: 40px;
+      right: 16px;
+      top: 16px;
+    }
   }
 
   .card5 {
@@ -188,6 +223,13 @@ export default {
     background-color: #76D69C;
     .cardSmailTitle{
       font-size: 16px;
+    }
+    .icon {
+      position: absolute;
+      height:40px;
+      width: 40px;
+      right: 16px;
+      top: 16px;
     }
   }
 }
