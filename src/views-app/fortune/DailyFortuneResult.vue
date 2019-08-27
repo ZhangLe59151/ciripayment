@@ -15,14 +15,14 @@
         @click="triggerLike"
       >
         <i :class="likeStatus ? 'iconfont iconlike' : 'iconfont iconunlike'" />
-        <span class="like-text">Like</span>
+        <span class="like-text">{{likeStatus ? $t("FortuneTelling.liked") : $t("FortuneTelling.like")}}</span>
       </div>
       <div
         class="like"
         @click="triggerShare"
       >
-        <i :class="likeStatus ? 'iconfont iconlike' : 'iconfont iconunlike'" />
-        <span class="like-text">Share</span>
+        <i class="iconfont iconshare" />
+        <span class="like-text">{{ $t("FortuneTelling.share") }}</span>
       </div>
     </section>
 
@@ -148,7 +148,8 @@ export default {
     text-align: left;
     margin-right: 20px;
 
-    .iconunlike {
+    .iconunlike,
+    .iconshare {
       color: white;
       font-size: 30px;
     }
@@ -156,6 +157,7 @@ export default {
       color: #d44832;
       font-size: 30px;
     }
+
     .like-text {
       color: white;
       font-size: 16px;

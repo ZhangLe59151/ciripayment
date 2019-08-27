@@ -13,7 +13,10 @@
     "LuckySalesDescription": "Record your daily income for better predictions.",
     "tellMyFortune": "Tell My Fortune",
     "viewProfile": "View Full Profile",
-    "shareCopy": "Share my Daily Fortune to:"
+    "shareCopy": "Share my Daily Fortune to:",
+    "like": "Like",
+    "liked": "Liked",
+    "share": "Share"
   },
   "Income": "TODAY'S SALES",
   "Expenses": "SPENDINGS",
