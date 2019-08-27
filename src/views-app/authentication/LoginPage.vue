@@ -1,16 +1,30 @@
 <template>
-  <div class="landing-page">
-    <van-nav-bar
-      :title="$t('Login.loginTitle')"
-      />
+  <div class="login-page">
+    <!-- <WapHeader
+      :center="true"
+      style="top: 34px"
+    /> -->
     <div class="landingPageContent">
-      <van-button 
-        class="getStartBtn"
-        @click="getStart" >{{ $t('Login.getStart') }}</van-button>
-      <van-button 
-        class="SigninBtn"
-        @click="signIn" >{{ $t('Login.signIn') }}</van-button>
+      <div class="slogan-title">Verify your mobile number to continue</div> 
+      
+
+      
+
     </div>
+
+    <van-popup
+      v-model="show"
+      position="bottom"
+      :overlay="false"
+    >
+      <van-picker
+        show-toolbar
+        title="National code"
+        :columns="columns"
+        @cancel="onCancel"
+        @confirm="onConfirm"
+      />
+    </van-popup>
   </div>
 </template>
 
@@ -18,7 +32,7 @@
 import { mapState } from "vuex";
 // import WapHeader from "@/components/WapHeader";
 export default {
-  name: "landing-page",
+  name: "login-page",
   components: {
     // WapHeader
   },
@@ -46,12 +60,6 @@ export default {
     };
   },
   methods: {
-    getStart() {
-      this.$router.push({ name: "PersonalQuestion" });
-    },
-    signIn() {
-      this.$router.push({ name: "LoginPage" });
-    },
     setPattern(nationalCode) {
       const item = this.nationCode.find(test => test.code === nationalCode);
       const expName = item ? item.nation + "Exp" : "sgExp";
@@ -115,42 +123,63 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../assets/css/bottom-btn";
-.landing-page {
+.login-page {
+  position: fixed;
   background: url("../../assets/imgs/landing_bg.png") no-repeat;
   background-size: cover;
   height: 100vh;
-  
+
   .landingPageContent {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 147px;
+    position: relative;
+    margin: 100px 16px 0 16px;
     background-color: white;
-
-    .getStartBtn {
-      position: absolute;
+    height: 194px;
+    width: 328px;
+    border-radius: 16px;
+    .slogan-title {
+      padding: absolute;
+      top: 24px;
       font-size: 20px;
-      margin: 0 16px 0 16px;
-      height: 60px;
-      width: 328px;
-      color: white;
-      border-top-left-radius: 16px;
-      border-top-right-radius: 16px;
-      background-color: #ff8600;
+      font-weight: bolder;
+      color: #2F3941;
+      text-align: left;
     }
+  }
 
-    .SigninBtn {
-      position: absolute;
-      font-size: 20px;
-      margin: 0 16px 0 16px;
-      bottom: 12px;
-      height: 60px;
-      width: 328px;
-      color: #ff8600;
-      background-color: white;
-      border-top-left-radius: 16px;
-      border-top-right-radius: 16px;
-    }
+  .slogan-title {
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    width: 80%;
+    margin-left: 10%;
+  }
+  .slogan-sub {
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 20px;
+    width: 80%;
+    margin-left: 8%;
+  }
+  .title {
+    font-size: 20px;
+    padding: 20px;
+  }
+  .tips {
+    font-size: 14px;
+  }
+
+  .otp {
+    text-align: left;
+    font-size: 15px;
+  }
+  .bottom-btn {
+    background-color: #ff8600;
+    border-radius: 4px;
+    margin: 1.25rem 0;
+    width: 100%;
   }
 }
 </style>
