@@ -76,17 +76,7 @@ export default {
   computed: {
     ...mapState({
       columns: "nationalCodeList",
-      nationCode: "nationalCode"
     }),
-    sloganTitle() {
-      const ob = {
-        EnterLoanInfo: "Sign In Now To Get An Instant Loan! ",
-        Credit: "Sign In Now To See Your Credit Limit! ",
-        fortuneTelling: "Sign In Now To Get Your Daily Fortune!"
-      };
-
-      return ob[this.$route.query.to];
-    }
   },
   data() {
     return {
@@ -98,6 +88,12 @@ export default {
       phoneValidationPattern: this.$store.state.phone.thaiExp,
       showComponents: true
     };
+  },
+  created() {
+    this.$api.getQuestion(1).then(res => {
+      if (res.data.code === 200) {
+      }
+    });
   },
   methods: {
     skipQuestion(){
