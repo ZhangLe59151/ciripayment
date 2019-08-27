@@ -152,6 +152,8 @@
     "signIn": "Sign In With Mobile",
     "enterOTP": "A One-Time-Passcode (OTP) has been sent to",
     "verifyPhone": "Verify your mobile number to continue",
-    "yourPhone": "Your Mobile Number"
+    "yourPhone": "Your Mobile Number",
+    "enterOTPtitle": "Enter OTP",
+    "resendOTP": "Resend OTP"
   }
 }

@@ -6,7 +6,7 @@
     /> -->
     <div class="landingPageContent">
       <div class="slogan-title">{{$t('Login.enterOTP')}} {{ phone }} </div> 
-      <div class="slogan-sub">Enter OTP</div>
+      <div class="slogan-sub">{{$t('Login.enterOTPtitle')}}</div>
       <van-password-input
         class="inputCode"
         :value="value"
@@ -20,13 +20,13 @@
       <div
         v-show="!show"
         class="resend"
-      >Resend OTP（{{count}}s）</div>
+      >{{$t('Login.resendOTP')}}（{{count}}s）</div>
 
       <div
         class="resend-active"
         v-show="show"
         @click="handleResend"
-      >Resend OTP
+      >{{$t('Login.resendOTP')}}
       </div>
 
 
