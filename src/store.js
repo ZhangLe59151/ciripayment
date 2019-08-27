@@ -30,6 +30,7 @@ export default new Vuex.Store({
     clientInfo: {
       bankName: "ABC Bank"
     },
+    firstLuanch: true,
     currency: "฿",
     serviceOverviewVo: {},
     form: {},
@@ -523,6 +524,9 @@ export default new Vuex.Store({
         }
       }
       window.localStorage.setItem("credit", JSON.stringify(state.credit));
+    },
+    UnfirstLaunch() {
+      window.localStorage.setItem("firstLuanch", false);
     }
   },
   actions: {}

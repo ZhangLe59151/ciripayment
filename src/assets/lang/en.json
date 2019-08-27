@@ -136,7 +136,7 @@
   },
   "Setting": {
     "Language": "Language",
-    "SoL": "Sign Up or Log In",
+    "SoL": "Sign In",
     "Logout": "Log Out",
     "Version": "version",
     "tc": "Terms & Conditions",
@@ -154,5 +154,15 @@
   "Language": {
     "en": "English",
     "thai": "Thai ภาษาไทย"
+  },
+  "Login": {
+    "loginTitle": "login?",
+    "getStart": "Get Started",
+    "signIn": "Sign In With Mobile",
+    "enterOTP": "A One-Time-Passcode (OTP) has been sent to",
+    "verifyPhone": "Verify your mobile number to continue",
+    "yourPhone": "Your Mobile Number",
+    "enterOTPtitle": "Enter OTP",
+    "resendOTP": "Resend OTP"
   }
 }
