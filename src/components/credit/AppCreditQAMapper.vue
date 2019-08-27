@@ -2,7 +2,8 @@
     <div class="app-credit-qa-mapper">
       <money-input-question v-if="String(question.type)==='1'" :question="question" />
       <text-input-question v-else-if="String(question.type)==='2'" :question="question" />
-      <radio-input-question v-else :question="question"/>
+      <radio-input-question v-else-if="String(question.type)==='3'" :question="question"/>
+      <picture-input-question v-else :question="question" />
     </div>
 </template>
 
@@ -10,9 +11,11 @@
 import MoneyInputQuestion from "@/components/credit/MoneyInputQuestion";
 import TextInputQuestion from "@/components/credit/TextInputQuestion";
 import RadioInputQuestion from "@/components/credit/RadioInputQuestion";
+import PictureInputQuestion from "@/components/credit/PictureInputQuestion";
 export default {
   name: "AppCreditQAMapper",
   components: {
+    PictureInputQuestion,
     RadioInputQuestion,
     TextInputQuestion,
     MoneyInputQuestion
