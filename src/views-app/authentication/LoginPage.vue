@@ -5,8 +5,8 @@
       style="top: 34px"
     /> -->
     <div class="landingPageContent">
-      <div class="slogan-title">Verify your mobile number to continue</div> 
-      <div class="slogan-sub">Your Mobile Number</div>
+      <div class="slogan-title">{{ $t('Login.verifyPhone')}}</div> 
+      <div class="slogan-sub">{{ $t('Login.yourPhone')}}</div>
       <div class="input-block">
         <div class="nationalCode" @click="show = true">
           {{form.nationalCode}} <van-icon class="dropdownIcon" name="arrow-down" />
@@ -19,7 +19,7 @@
           readonly
           />
         <van-button class="goBtn" @click="handleStart">
-          <img :src="pathIcon" />
+          <img class="icon" :src="pathIcon" />
         </van-button>
 
 
@@ -133,7 +133,7 @@ export default {
       }else {
         this.$notify({
             message: "Please input the validate mobile number",
-            background: "#04A777"
+            background: "#b41800"
           });
         return false;
       }
@@ -234,6 +234,14 @@ export default {
       bottom: 24px;
       background-color: #ff8600;
       width: 50px;
+    }
+
+    .icon {
+      position: absolute;
+      right: 4px;
+      bottom: 10px;
+      height: 20px;
+      width: 40px;
     }
 
       

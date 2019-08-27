@@ -5,7 +5,7 @@
       style="top: 34px"
     /> -->
     <div class="landingPageContent">
-      <div class="slogan-title">A One-Time-Passcode (OTP) has been sent to {{ phone }} </div> 
+      <div class="slogan-title">{{$t('Login.enterOTP')}} {{ phone }} </div> 
       <div class="slogan-sub">Enter OTP</div>
       <van-password-input
         class="inputCode"

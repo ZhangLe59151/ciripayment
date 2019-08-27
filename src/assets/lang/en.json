@@ -149,6 +149,9 @@
   "Login": {
     "loginTitle": "login?",
     "getStart": "Get Started",
-    "signIn": "Sign In With Mobile"
+    "signIn": "Sign In With Mobile",
+    "enterOTP": "A One-Time-Passcode (OTP) has been sent to",
+    "verifyPhone": "Verify your mobile number to continue",
+    "yourPhone": "Your Mobile Number"
   }
 }
