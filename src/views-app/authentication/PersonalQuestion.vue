@@ -85,12 +85,13 @@ export default {
         questionid: 0,
         answer: ""
       },
+      sourceType: { sourceType: 1 },
       phoneValidationPattern: this.$store.state.phone.thaiExp,
       showComponents: true
     };
   },
   created() {
-    this.$api.getQuestion(1).then(res => {
+    this.$api.getQuestion(this.sourceType).then(res => {
       if (res.data.code === 200) {
       }
     });
