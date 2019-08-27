@@ -1,21 +1,39 @@
 <template>
   <div class="app-fortune-master">
-    <van-row type="flex" justify="space-between">
-      <van-col span="12">
-        <fortune-telling-app-fortune-master-photo :masterId="master.id" />
+    <van-row
+      type="flex"
+      justify="space-between"
+    >
+      <van-col span="8">
+        <fortune-telling-app-fortune-master-photo
+          :masterId="master.id"
+          class="icon"
+        />
       </van-col>
-      <van-col span="12">
+      <van-col
+        span="16"
+        class="cnt"
+      >
         <div class="name">
           {{master.name}}
         </div>
+
+        <div
+          class="view"
+          @click="$router.push({name: 'MasterProfile', params: {id: master.id}})"
+        >
+          {{$t("FortuneTelling.viewProfile")}}
+          <van-icon name="play" />
+        </div>
         <div class="desc">
-          {{master.desc}}
+          {{master.subtitle}}
         </div>
         <van-button
           class="choose-btn"
           border="false"
-          @click="$emit('chooseMaster', master)">
-          I Choose You
+          @click="$emit('chooseMaster', master)"
+        >
+          {{$t("FortuneTelling.tellMyFortune")}}
         </van-button>
       </van-col>
     </van-row>
@@ -25,42 +43,66 @@
 <script>
 export default {
   name: "AppFortuneMaster",
+
   props: {
     master: {
       default() {
-        return {}
+        return {};
       },
       required: true,
       type: Object
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
 .app-fortune-master {
-  margin-left: 16px;
-  margin-right: 16px;
-  .name {
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    margin-top: 13px;
+  background: no-repeat center url("../../assets/imgs/fortune-telling/ppr.png");
+  height: 200px;
+
+  .icon {
+    margin-top: 50px;
   }
-  .desc {
-    font-size: 14px;
-    color: white;
-    margin-top: 8px;
-  }
-  .choose-btn {
-    background-color: #ff8600;
-    border-radius: 4px;
-    border-style: unset;
-    width: 90%;
-    height: 40px;
-    font-size: 14px;
-    margin-top: 20px;
-    color: white;
+
+  .cnt {
+    margin: 40px 0 0 15px;
+    .name {
+      font-size: 20px;
+      color: #2f3941;
+      letter-spacing: 0;
+      line-height: 20px;
+    }
+
+    .view {
+      font-size: 12px;
+      color: #1f73b7;
+      letter-spacing: 0;
+      line-height: 16px;
+      margin: 12px 0 8px;
+
+      .van-icon-play {
+        position: relative;
+        top: 2px;
+      }
+    }
+    .desc {
+      font-size: 12px;
+      color: #68737d;
+      letter-spacing: 0;
+      line-height: 16px;
+    }
+    .choose-btn {
+      background-color: #ff8600;
+      border-radius: 4px;
+      border-style: unset;
+      width: 90%;
+      height: 32px;
+      line-height: 32px;
+      font-size: 14px;
+      margin-top: 12px;
+      color: white;
+    }
   }
 }
 </style>

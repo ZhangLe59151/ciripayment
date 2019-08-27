@@ -36,6 +36,7 @@ export default new Vuex.Store({
     userInfo: {},
     application: {},
     recordList: JSON.parse(localStorage.getItem("recordList")) || [],
+    masterList: require("@/assets/data/fortuneMasterList.json"),
     localDateFormatter: "YYYYMMDD",
     nationalCodeList: [
       "+66",

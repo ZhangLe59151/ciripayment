@@ -245,7 +245,7 @@ const AppRouteArr = [
     component: () => import("@/views-app/fortune/DailyFortuneResult.vue")
   },
   {
-    path: "/master-profile",
+    path: "/master-profile/:id",
     name: "MasterProfile",
     component: () => import("@/views-app/fortune/MasterProfile.vue")
   }

@@ -10,7 +10,9 @@
     "LuckyNumberLabel": "Lucky Number",
     "LuckyWordsLabel": "Lucky Words",
     "LuckySalesLabel": "Sales Lucky Today",
-    "LuckySalesDescription": "Record your daily income for better predictions."
+    "LuckySalesDescription": "Record your daily income for better predictions.",
+    "tellMyFortune": "Tell My Fortune",
+    "viewProfile": "View Full Profile"
   },
   "Income": "TODAY'S SALES",
   "Expenses": "SPENDINGS",
@@ -122,7 +124,7 @@
     "emptyMsg": "Add sales and spendings to keep track of how your business is doing",
     "placeHolder": "E.g. Sales Item",
     "add": "Add",
-    "recordHistory":"Records History",
+    "recordHistory": "Records History",
     "editRecord": "Edit Record"
   },
   "Setting": {
