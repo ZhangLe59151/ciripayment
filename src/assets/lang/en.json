@@ -30,9 +30,14 @@
     "submittedNotification": "Application Sent Successfully",
     "submittedBack": "Back To Home",
     "yourApplication": "Your Application",
+    "applicationID": "Application ID",
     "applicantPhone": "Mobile Number",
-    "applicationTime": "Submission Time",
-    "applicationAmount": "Loan Amount"
+    "applicationTime": "Application Time",
+    "applicant": "Applicant",
+    "applicationAmount": "Loan Amount",
+    "interestRate": "Loan Interest Rate",
+    "loanTerm": "Loan Term",
+    "repaymentDate": "First Repayment Date"
   },
   "EnterLoanInfo": {
     "skip": "Skip",
@@ -84,7 +89,8 @@
     "ribbonTitle": "Earn more by answering questions every day!",
     "swipe": "Swipe left to skip this question for now",
     "errorEnterAmount": "Please enter an amount",
-    "errorEnterOption": "Please select an option"
+    "errorEnterOption": "Please select an option",
+    "errorImgInput": "Please upload a photo or file"
   },
   "Home": {
     "income": "TODAY'S SALES",

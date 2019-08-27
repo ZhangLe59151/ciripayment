@@ -87,7 +87,7 @@
   >
     <div class="loan-applied-wrapper">
       <div>
-        <van-row
+        <van-row style="margin-bottom: 14px;"
           type="flex"
           justify="space-between"
         >
@@ -107,11 +107,11 @@
           <van-col
             class="label"
             span="12"
-          >{{$t("AppLoanOverview.applicantPhone")}}</van-col>
+          >{{$t("AppLoanOverview.applicationID")}}</van-col>
           <van-col
             class="info"
             span="12"
-          >{{loanProfile.phoneNumber}}</van-col>
+          >{{loanProfile.id}}</van-col>
         </van-row>
 
         <van-row
@@ -129,7 +129,22 @@
           >{{this.$moment(loanProfile.createTime).format("DD MMM YYYY, HH:ss")}}</van-col>
         </van-row>
 
-        <van-row
+        <van-row v-if="String(loanProfile.status) !== '0'"
+                 class="loan-details"
+                 type="flex"
+                 justify="space-between"
+        >
+          <van-col
+            class="label"
+            span="12"
+          >{{$t("AppLoanOverview.applicant")}}</van-col>
+          <van-col
+            class="info"
+            span="12"
+          >Brandon Tam</van-col>
+        </van-row>
+
+        <van-row v-if="String(loanProfile.status) !== '2'"
           class="loan-details"
           type="flex"
           justify="space-between"
@@ -143,7 +158,53 @@
             span="12"
           >{{formatCurrency(loanProfile.amount)}} {{$store.state.currency}}</van-col>
         </van-row>
+
+<!--        Only If APPROVED-->
+        <van-row v-if="String(loanProfile.status) === '1'"
+                 class="loan-details"
+                 type="flex"
+                 justify="space-between"
+        >
+          <van-col
+            class="label"
+            span="12"
+          >{{$t("AppLoanOverview.interestRate")}}</van-col>
+          <van-col
+            class="info"
+            span="12"
+          >2.1 % p.a.</van-col>
+        </van-row>
+        <van-row v-if="String(loanProfile.status) === '1'"
+                 class="loan-details"
+                 type="flex"
+                 justify="space-between"
+        >
+          <van-col
+            class="label"
+            span="12"
+          >{{$t("AppLoanOverview.loanTerm")}}</van-col>
+          <van-col
+            class="info"
+            span="12"
+          >3 Months</van-col>
+        </van-row>
+        <van-row v-if="String(loanProfile.status) === '1'"
+                 class="loan-details"
+                 type="flex"
+                 justify="space-between"
+        >
+          <van-col
+            class="label"
+            span="12"
+          >{{$t("AppLoanOverview.repaymentDate")}}</van-col>
+          <van-col
+            class="info"
+            span="12"
+          >{{this.$moment("2019-08-27 09:07:36").format("DD MMM YYYY")}}</van-col>
+        </van-row>
+
       </div>
+      <app-loan-result-msg :status="String(loanProfile.status)"/>
       <van-button
         v-if="$route.query.justSubmitted"
         size="small"
@@ -162,8 +223,10 @@
 
 <script>
 import { mapState } from "vuex";
+import AppLoanResultMsg from "@/components/loan/AppLoanResultMsg";
 export default {
   name: "AppLoanOverview",
+  components: {AppLoanResultMsg},
   data() {
     return {
       showPopUp: false,
@@ -448,8 +511,8 @@ export default {
     }
     .loan-details {
       border-bottom: 1px solid #d8d8d8;
-      margin-top: 28px;
-      padding-bottom: 20px;
+      margin-top: 15px;
+      padding-bottom: 15px;
       .label {
         color: #87929d;
         font-size: 12px;

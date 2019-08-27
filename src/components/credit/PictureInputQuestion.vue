@@ -17,7 +17,7 @@
       class="elForm"
     >
       <el-form-item
-        class="upload-wrapper"
+        :class="error ? 'input-box-error upload-wrapper': 'upload-wrapper'"
         prop="answering">
         <el-upload
           action="answer"
@@ -46,7 +46,7 @@
       </div>
     </div>
 
-    <div v-if="error" class="error_msg">{{$t("Credit.errorEnterAmount")}}</div>
+    <div v-if="error" class="error_msg">{{$t("Credit.errorImgInput")}}</div>
     <van-button class="submit-btn" @click="handleSubmit">
       <div class="btn-text">+{{question.limitAmount}} {{$store.state.currency}} Credit</div>
       <img class="dollar-coin" src="../../assets/imgs/dollar_coin.png">
@@ -105,6 +105,7 @@ export default {
         var res = JSON.parse(xhr.response);
         if (res.code === 200) {
           vm[`${"form"}`] = { "answering": res.data.url };
+          vm[`${"error"}`] = false;
           vm[`${"backgroundStyle"}`] = `background: url(${res.data.url}) no-repeat`;
         } else {
           vm.$notify({
