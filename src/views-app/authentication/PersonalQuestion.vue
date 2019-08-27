@@ -62,6 +62,7 @@ export default {
   computed: {
     ...mapState({
       columns: "nationalCodeList",
+      firstLuanch: "firstLuanch"
     }),
   },
   data() {
@@ -91,6 +92,7 @@ export default {
     };
   },
   created() {
+    this.$store.commit("UnfirstLaunch");
     this.$api.getQuestion(1).then(res => {
       if (res.data.code === 200) {
         this.form1 = res.data.data.questions[0];

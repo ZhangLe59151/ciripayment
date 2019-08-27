@@ -35,8 +35,8 @@ export default {
     })
   },
   created() {
-    if (this.firstLuanch) {
-      this.$router.push({ name: "PersonalQuestion" });
+    if (this.firstLuanch === "true") {
+      this.$router.push({ name: "LandingPage" });
       return false;
     }
     this.fetchHomePageData();

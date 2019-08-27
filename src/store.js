@@ -523,6 +523,9 @@ export default new Vuex.Store({
         }
       }
       window.localStorage.setItem("credit", JSON.stringify(state.credit));
+    },
+    UnfirstLaunch() {
+      window.localStorage.setItem("firstLuanch", false);
     }
   },
   actions: {}
