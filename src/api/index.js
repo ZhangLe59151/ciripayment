@@ -146,9 +146,9 @@ export default {
     return Vue.axios.post("/api/logout", params);
   },
   getQuestion(params) {
-    return Vue.axios.get("/api/common-question", params);
+    return Vue.axios.get(`/api/common-question?sourceType=${params}`);
   },
   postAnswer(params) {
-    return Vue.axios.post("/api/common-question/answer", params);
+    return Vue.axios.post("/api/common-question/answer",params);
   }
 };

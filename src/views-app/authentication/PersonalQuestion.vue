@@ -6,19 +6,20 @@
         animated
         color="#ff8600"
         title-active-color="#ff8600">
-          <van-tab title="">
-            <div class="questionTitle">I Own A...</div>
+          <van-tab 
+            :disabled="this.tab1disable">
+            <div class="questionTitle">{{ form1.question }}</div>
             <div class="card1">
-              <div class="cardTitle">Retail Store</div>
+              <div class="cardTitle">{{ form1.options[0] }}</div>
             </div>
             <div class="card2">
-              <div class="cardTitle">Restaurant</div>
+              <div class="cardTitle">{{ form1.options[1] }}</div>
             </div>
             <div class="card3">
-              <div class="cardTitle">Service Business</div>
+              <div class="cardTitle">{{ form1.options[2] }}</div>
             </div>
             <div class="card4">
-              <div class="cardTitle">Others</div>
+              <div class="cardTitle">{{ form1.options[3] }}</div>
             </div>
           
             
@@ -26,31 +27,32 @@
           
           
           </van-tab>
-          <van-tab title="">
-            <div class="questionTitle">My Business Is...</div>
+          <van-tab 
+            :disabled="this.tab2disable">
+            <div class="questionTitle">{{ form2.question }}</div>
             <div class="card1">
               <div class="cardTitle">New <span class="cardSmailTitle">(Less than 3 Months)</span></div>
             </div>
             <div class="card5">
-              <div class="cardTitle">Growing (3 Months - 2 Years</div>
+              <div class="cardTitle">{{ form2.options[1] }}</div>
             </div>
             <div class="card3">
-              <div class="cardTitle">Established (2+ Years)</div>
+              <div class="cardTitle">{{ form2.options[2] }}</div>
             </div>
 
 
           </van-tab>
 
           <van-tab title="">
-            <div class="questionTitle">I Most Want To...</div>
+            <div class="questionTitle">{{ form3.question }}</div>
             <div class="card2">
-              <div class="cardTitle">Increase Sales</div>
+              <div class="cardTitle">{{ form3.options[0] }}</div>
             </div>
             <div class="card5">
-              <div class="cardTitle">Expand My Business</div>
+              <div class="cardTitle">{{ form3.options[1] }}</div>
             </div>
             <div class="card4">
-              <div class="cardTitle">Just Exploring The App</div>
+              <div class="cardTitle">{{ form3.options[2] }}</div>
             </div>
 
 
@@ -81,32 +83,36 @@ export default {
   data() {
     return {
       tabActive: 0,
-      form: {
-        questionid: 0,
-        answer: ""
-      },
-      sourceType: { sourceType: 1 },
+      form1: { },
+      form2: { },
+      form3: { }, 
       phoneValidationPattern: this.$store.state.phone.thaiExp,
-      showComponents: true
+      showComponents: true,
+      tab1disable: false,
+      tab2disable: false
     };
   },
   created() {
-    this.$api.getQuestion(this.sourceType).then(res => {
+    this.$api.getQuestion(1).then(res => {
       if (res.data.code === 200) {
+        //debugger
+        this.form1 = res.data.data.questions[0];
+        this.form2 = res.data.data.questions[1];
+        this.form3 = res.data.data.questions[2];
       }
     });
   },
   methods: {
     skipQuestion(){
-      if (this.tabActive < 2) {
+      if (this.tabActive === 0) {
+        tab1disable = true;
         this.tabActive = this.tabActive+1;
-      }else {
+      }else if (this.tabActive === 1){
+        tab2disable = true;
+        this.tabActive = this.tabActive+1;
         this.$router.push({ name: "Home" });
       }
     }
-  },
-  created() {
-    this.form.nationalCode = this.columns[0];
   }
 };
 </script>
