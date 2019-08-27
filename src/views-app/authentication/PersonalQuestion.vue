@@ -7,20 +7,12 @@
         color="#ff8600"
         title-active-color="#ff8600">
           <van-tab 
-            :disabled="this.tab1disable">
+            :disabled="this.tab1">
             <div class="questionTitle">{{ form1.question }}</div>
-            <div class="card1">
-              <div class="cardTitle">{{ form1.options[0] }}</div>
-            </div>
-            <div class="card2">
-              <div class="cardTitle">{{ form1.options[1] }}</div>
-            </div>
-            <div class="card3">
-              <div class="cardTitle">{{ form1.options[2] }}</div>
-            </div>
-            <div class="card4">
-              <div class="cardTitle">{{ form1.options[3] }}</div>
-            </div>
+            <van-button class="card1" @click="answer(form1.id, form1.options[0])">{{ form1.options[0] }}</van-button>
+            <van-button class="card2" @click="answer(form1.id, form1.options[1])">{{ form1.options[1] }}</van-button>
+            <van-button class="card3" @click="answer(form1.id, form1.options[2])" >{{ form1.options[2] }}</van-button>
+            <van-button class="card4" @click="answer(form1.id, form1.options[3])">{{ form1.options[3] }}</van-button>
           
             
           
@@ -28,32 +20,21 @@
           
           </van-tab>
           <van-tab 
-            :disabled="this.tab2disable">
+            :disabled="this.tab2">
             <div class="questionTitle">{{ form2.question }}</div>
-            <div class="card1">
-              <div class="cardTitle">New <span class="cardSmailTitle">(Less than 3 Months)</span></div>
-            </div>
-            <div class="card5">
-              <div class="cardTitle">{{ form2.options[1] }}</div>
-            </div>
-            <div class="card3">
-              <div class="cardTitle">{{ form2.options[2] }}</div>
-            </div>
+            <van-button class="card1" @click="answer(form2.id, form2.options[0])">{{ form2.options[0] }}</van-button>
+            <van-button class="card5" @click="answer(form2.id, form2.options[1])">{{ form2.options[1] }}</van-button>
+            <van-button class="card3" @click="answer(form2.id, form2.options[2])" >{{ form2.options[2] }}</van-button>
+
 
 
           </van-tab>
 
           <van-tab title="">
             <div class="questionTitle">{{ form3.question }}</div>
-            <div class="card2">
-              <div class="cardTitle">{{ form3.options[0] }}</div>
-            </div>
-            <div class="card5">
-              <div class="cardTitle">{{ form3.options[1] }}</div>
-            </div>
-            <div class="card4">
-              <div class="cardTitle">{{ form3.options[2] }}</div>
-            </div>
+            <van-button class="card2" @click="answer(form3.id, form3.options[0])">{{ form3.options[0] }}</van-button>
+            <van-button class="card5" @click="answer(form3.id, form3.options[1])">{{ form3.options[1] }}</van-button>
+            <van-button class="card4" @click="answer(form3.id, form3.options[2])" >{{ form3.options[2] }}</van-button>
 
 
 
@@ -83,13 +64,13 @@ export default {
   data() {
     return {
       tabActive: 0,
+      tab1: false,
+      tab2: false,
       form1: { },
       form2: { },
       form3: { }, 
       phoneValidationPattern: this.$store.state.phone.thaiExp,
-      showComponents: true,
-      tab1disable: false,
-      tab2disable: false
+      showComponents: true
     };
   },
   created() {
@@ -105,13 +86,24 @@ export default {
   methods: {
     skipQuestion(){
       if (this.tabActive === 0) {
-        tab1disable = true;
+        this.tab1= true;
         this.tabActive = this.tabActive+1;
       }else if (this.tabActive === 1){
-        tab2disable = true;
+        this.tab2 = true;
         this.tabActive = this.tabActive+1;
+      } else {
         this.$router.push({ name: "Home" });
       }
+    },
+    answer(id, answer) {
+      const form = Object.assign({}, { id: id, value: answer });
+      this.$api.postAnswer(form).then(res => {
+        if (res.data.code === 200) {
+          if (this.tabActive===0) { this.tabActive = this.tabActive + 1; this.tab1 = true; }
+          else if (this.tabActive===1) { this.tabActive = this.tabActive + 1; this.tab2 = true; }
+          else { this.$router.push({ name: "Home" }); }
+        }
+      });
     }
   }
 };
@@ -138,79 +130,62 @@ export default {
 
   .card1 {
     font-size: 20px;
+    text-align: left;
     position: relative;
-    margin: 16px 0 16px 0;
+    margin: 16px 0 0 0;
     height: 80px;
     width: 328px;
     line-height: 80px;
     color: black;
     background-color: #5BCFF2;
-    .cardTitle{
-      position: absolute;
-      left: 16px;
-    }
   }
 
   .card2 {
     font-size: 20px;
+    text-align: left;
     position: relative;
-    margin: 16px 0 16px 0;
+    margin: 16px 0 0 0;
     height: 80px;
     width: 328px;
     line-height: 80px;
     color: black;
     background-color: #FDAE44;
-    .cardTitle{
-      position: absolute;
-      left: 16px;
-    }
   }
 
   .card3 {
     font-size: 20px;
+    text-align: left;
     position: relative;
-    margin: 16px 0 16px 0;
+    margin: 16px 0 0 0;
     height: 80px;
     width: 328px;
     line-height: 80px;
     color: black;
     background-color: #70CB9D;
-    .cardTitle{
-      position: absolute;
-      left: 16px;
-    }
   }
 
   .card4 {
     font-size: 20px;
+    text-align: left;
     position: relative;
-    margin: 16px 0 16px 0;
+    margin: 16px 0 0 0;
     height: 80px;
     width: 328px;
     line-height: 80px;
     color: black;
     background-color: #DDE0E2;
-    .cardTitle{
-      position: absolute;
-      left: 16px;
-    }
   }
 
   .card5 {
     position: relative;
-    margin: 16px 0 16px 0;
+    font-size: 20px;
+    text-align: left;
+    margin: 16px 0 0 0;
     height: 80px;
     width: 328px;
     line-height: 80px;
     color: black;
     background-color: #76D69C;
-    
-    .cardTitle{
-      position: absolute;
-      left: 16px;
-      font-size: 20px;
-    }
-
     .cardSmailTitle{
       font-size: 16px;
     }
