@@ -12,7 +12,8 @@
     "LuckySalesLabel": "Sales Lucky Today",
     "LuckySalesDescription": "Record your daily income for better predictions.",
     "tellMyFortune": "Tell My Fortune",
-    "viewProfile": "View Full Profile"
+    "viewProfile": "View Full Profile",
+    "shareCopy": "Share my Daily Fortune to:"
   },
   "Income": "TODAY'S SALES",
   "Expenses": "SPENDINGS",
