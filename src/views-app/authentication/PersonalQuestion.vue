@@ -1,6 +1,6 @@
 <template>
-  <div class="peronal-question">
-    <div class="personalPageContent">
+  <div class="peronal-question" >
+    <div class="personalPageContent" v-show="questionPage">
       <van-tabs 
         v-model="tabActive"
         animated
@@ -22,9 +22,9 @@
           <van-tab 
             :disabled="this.tab2">
             <div class="questionTitle">{{ form2.question }}</div>
-            <van-button class="card1" @click="answer(form2.id, form2.options[0])">{{ form2.options[0] }}</van-button>
-            <van-button class="card5" @click="answer(form2.id, form2.options[1])">{{ form2.options[1] }}</van-button>
-            <van-button class="card3" @click="answer(form2.id, form2.options[2])" >{{ form2.options[2] }}</van-button>
+            <van-button class="card1" @click="answer(form2.id, form2.options[0])">{{ form2.options[0] }}<img class="icon" :src="icon21" /></van-button>
+            <van-button class="card5" @click="answer(form2.id, form2.options[1])">{{ form2.options[1] }}<img class="icon" :src="icon22" /></van-button>
+            <van-button class="card3" @click="answer(form2.id, form2.options[2])" >{{ form2.options[2] }}<img class="icon" :src="icon23" /></van-button>
 
 
 
@@ -32,9 +32,9 @@
 
           <van-tab title="">
             <div class="questionTitle">{{ form3.question }}</div>
-            <van-button class="card2" @click="answer(form3.id, form3.options[0])">{{ form3.options[0] }}</van-button>
-            <van-button class="card5" @click="answer(form3.id, form3.options[1])">{{ form3.options[1] }}</van-button>
-            <van-button class="card4" @click="answer(form3.id, form3.options[2])" >{{ form3.options[2] }}</van-button>
+            <van-button class="card2" @click="answer(form3.id, form3.options[0])">{{ form3.options[0] }}<img class="icon" :src="icon31" /></van-button>
+            <van-button class="card5" @click="answer(form3.id, form3.options[1])">{{ form3.options[1] }}<img class="icon" :src="icon32" /></van-button>
+            <van-button class="card4" @click="answer(form3.id, form3.options[2])" >{{ form3.options[2] }}<img class="icon" :src="icon33" /></van-button>
 
 
 
@@ -47,7 +47,10 @@
         class="skipword"
         @click="skipQuestion">Skip Question</div>
     </div>
-   
+    <div class="splashPage" v-show="splash">
+      <img class="icon" :src="iconSucceed" />
+      <div class="title">Profile saved.<br/> Let's get started</div>
+    </div>
   </div>
 </template>
 
@@ -63,16 +66,23 @@ export default {
   },
   data() {
     return {
+      splash: false,
+      questionPage: true,
+      timer: "",
       tabActive: 0,
       tab1: false,
       tab2: false,
       icon11: require("@/assets/imgs/personal/retailstoresignin.svg"),
       icon12: require("@/assets/imgs/personal/restaurantsignin.svg"),
       icon13: require("@/assets/imgs/personal/servicesignin.svg"),
-      icon14: require("@/assets/imgs/personal/servicesignin.svg"),
-      pathIcon: require("@/assets/imgs/personal/retailstoresignin.png"),
-      pathIcon: require("@/assets/imgs/personal/retailstoresignin.png"),
-      pathIcon: require("@/assets/imgs/personal/retailstoresignin.png"),
+      icon14: require("@/assets/imgs/personal/otherssignin.svg"),
+      icon21: require("@/assets/imgs/personal/phase1signin.svg"),
+      icon22: require("@/assets/imgs/personal/phase2signin.svg"),
+      icon23: require("@/assets/imgs/personal/phase3signin.svg"),
+      icon31: require("@/assets/imgs/personal/increasesalessignin.svg"),
+      icon32: require("@/assets/imgs/personal/expandsignin.svg"),
+      icon33: require("@/assets/imgs/personal/exploresignin.svg"),
+      iconSucceed: require("@/assets/imgs/personal/success.svg"),
       form1: { },
       form2: { },
       form3: { }, 
@@ -83,7 +93,6 @@ export default {
   created() {
     this.$api.getQuestion(1).then(res => {
       if (res.data.code === 200) {
-        //debugger
         this.form1 = res.data.data.questions[0];
         this.form2 = res.data.data.questions[1];
         this.form3 = res.data.data.questions[2];
@@ -108,7 +117,11 @@ export default {
         if (res.data.code === 200) {
           if (this.tabActive===0) { this.tabActive = this.tabActive + 1; this.tab1 = true; }
           else if (this.tabActive===1) { this.tabActive = this.tabActive + 1; this.tab2 = true; }
-          else { this.$router.push({ name: "Home" }); }
+          else { 
+            this.splash = true;
+            this.questionPage = false;
+            setTimeout(() => { this.$router.push({ name: "Home" }); }, 1500);
+          }
         }
       });
     }
@@ -117,6 +130,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.splashPage {
+  background-size: cover;
+  height: 100vh;
+
+  .title{
+    position: fixed;
+    margin: 406px 77px 0 77px;
+    color: black;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .icon {
+    position: fixed;
+    margin: 286px 130px 0 130px;
+    height: 100px;
+    weight: 100px;
+  }
+}
+
 .peronal-question {
   //background: url("../../assets/imgs/landing_bg.png") no-repeat;
   background-size: cover;
