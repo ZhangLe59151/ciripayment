@@ -13,12 +13,14 @@
         </div>
         <van-field
           class="phoneNumber"
-          v-model="form.expenseAmount"
-          @focus="showKeyboard('expenseAmount')"
+          v-model="form.phone"
+          @focus="showNumber=true"
           maxlength="13"
           readonly
           />
-        <van-button class="goBtn"></van-button>
+        <van-button class="goBtn" @click="handleStart">
+          <img :src="pathIcon" />
+        </van-button>
 
 
 
@@ -41,11 +43,21 @@
         @confirm="onConfirm"
       />
     </van-popup>
+
+    <van-number-keyboard
+      :show="showNumber"
+      close-button-text="Done"
+      @blur="showNumber = false"
+      @input="onInput"
+      @delete="onDelete"
+    />
+
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import { regEx } from "@/assets/reg/regEx.js";
 // import WapHeader from "@/components/WapHeader";
 export default {
   name: "login-page",
@@ -55,7 +67,8 @@ export default {
   computed: {
     ...mapState({
       columns: "nationalCodeList",
-      nationCode: "nationalCode"
+      nationCode: "nationalCode",
+      reg: "reg"
     }),
     sloganTitle() {
       const ob = {
@@ -69,8 +82,13 @@ export default {
   },
   data() {
     return {
+      showNumber: false,
+      pathIcon: require("@/assets/imgs/Path.svg"),
       show: false,
-      form: {},
+      form: {
+        phone: "",
+        nationalCode: ""
+      },
       value1: 0,
       phoneValidationPattern: this.$store.state.phone.thaiExp,
       showComponents: true
@@ -95,19 +113,30 @@ export default {
     onCancel() {
       this.show = false;
     },
+    onInput(value) {
+      this.form.phone += value;
+    },
+    onDelete() {
+      let kbt = this.form.phone.toString();
+      this.form.phone = kbt.length
+        ? kbt.substring(0, kbt.length - 1)
+        : kbt;
+    },
     handleStart() {
-      this.$refs["elForm"].validate(valid => {
-        if (valid) {
-          this.$store.commit("UpdateUserInfo", {
-            applicantPhoneNumber: this.form.nationalCode + this.form.phone,
-            nationalCode: this.form.nationalCode,
-            phone: this.form.phone
+      if (this.phoneValidationPattern.test(this.form.phone)) {
+        this.$store.commit("UpdateUserInfo", {
+        applicantPhoneNumber: this.form.nationalCode + this.form.phone,
+        nationalCode: this.form.nationalCode,
+        phone: this.form.phone
+        });
+        this.sendOtp();
+      }else {
+        this.$notify({
+            message: "Please input the validate mobile number",
+            background: "#04A777"
           });
-          this.sendOtp();
-        } else {
-          return false;
-        }
-      });
+        return false;
+      }
     },
 
     sendOtp() {
