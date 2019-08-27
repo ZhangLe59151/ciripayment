@@ -9,10 +9,10 @@
           <van-tab 
             :disabled="this.tab1">
             <div class="questionTitle">{{ form1.question }}</div>
-            <van-button class="card1" @click="answer(form1.id, form1.options[0])">{{ form1.options[0] }}<img class="icon" :src="icon11" /></van-button>
-            <van-button class="card2" @click="answer(form1.id, form1.options[1])">{{ form1.options[1] }}<img class="icon" :src="icon12" /></van-button>
-            <van-button class="card3" @click="answer(form1.id, form1.options[2])" >{{ form1.options[2] }}<img class="icon" :src="icon13" /></van-button>
-            <van-button class="card4" @click="answer(form1.id, form1.options[3])">{{ form1.options[3] }}<img class="icon" :src="icon14" /></van-button>
+            <van-button class="card1" @click="answer(0, form1.id, form1.options[0])">{{ form1.options[0] }}<img class="icon" :src="icon11" /></van-button>
+            <van-button class="card2" @click="answer(0, form1.id, form1.options[1])">{{ form1.options[1] }}<img class="icon" :src="icon12" /></van-button>
+            <van-button class="card3" @click="answer(0, form1.id, form1.options[2])" >{{ form1.options[2] }}<img class="icon" :src="icon13" /></van-button>
+            <van-button class="card4" @click="answer(0, form1.id, form1.options[3])">{{ form1.options[3] }}<img class="icon" :src="icon14" /></van-button>
           
             
           
@@ -22,9 +22,9 @@
           <van-tab 
             :disabled="this.tab2">
             <div class="questionTitle">{{ form2.question }}</div>
-            <van-button class="card1" @click="answer(form2.id, form2.options[0])">{{ form2.options[0] }}<img class="icon" :src="icon21" /></van-button>
-            <van-button class="card5" @click="answer(form2.id, form2.options[1])">{{ form2.options[1] }}<img class="icon" :src="icon22" /></van-button>
-            <van-button class="card3" @click="answer(form2.id, form2.options[2])" >{{ form2.options[2] }}<img class="icon" :src="icon23" /></van-button>
+            <van-button class="card1" @click="answer(1, form2.id, form2.options[0])">{{ form2.options[0] }}<img class="icon" :src="icon21" /></van-button>
+            <van-button class="card5" @click="answer(1, form2.id, form2.options[1])">{{ form2.options[1] }}<img class="icon" :src="icon22" /></van-button>
+            <van-button class="card3" @click="answer(1, form2.id, form2.options[2])" >{{ form2.options[2] }}<img class="icon" :src="icon23" /></van-button>
 
 
 
@@ -32,9 +32,9 @@
 
           <van-tab title="">
             <div class="questionTitle">{{ form3.question }}</div>
-            <van-button class="card2" @click="answer(form3.id, form3.options[0])">{{ form3.options[0] }}<img class="icon" :src="icon31" /></van-button>
-            <van-button class="card5" @click="answer(form3.id, form3.options[1])">{{ form3.options[1] }}<img class="icon" :src="icon32" /></van-button>
-            <van-button class="card4" @click="answer(form3.id, form3.options[2])" >{{ form3.options[2] }}<img class="icon" :src="icon33" /></van-button>
+            <van-button class="card2" @click="answer(2, form3.id, form3.options[0])">{{ form3.options[0] }}<img class="icon" :src="icon31" /></van-button>
+            <van-button class="card5" @click="answer(2, form3.id, form3.options[1])">{{ form3.options[1] }}<img class="icon" :src="icon32" /></van-button>
+            <van-button class="card4" @click="answer(2, form3.id, form3.options[2])" >{{ form3.options[2] }}<img class="icon" :src="icon33" /></van-button>
 
 
 
@@ -84,9 +84,15 @@ export default {
       icon32: require("@/assets/imgs/personal/expandsignin.svg"),
       icon33: require("@/assets/imgs/personal/exploresignin.svg"),
       iconSucceed: require("@/assets/imgs/personal/success.svg"),
+      iconBk: require("@/assets/imgs/personal/confetti.png"),
       form1: { },
       form2: { },
       form3: { }, 
+      answerList: [
+        { id: 0, value: "" },
+        { id: 1, value: "" },
+        { id: 2, value: "" }
+      ],
       phoneValidationPattern: this.$store.state.phone.thaiExp,
       showComponents: true
     };
@@ -95,9 +101,9 @@ export default {
     this.$store.commit("UnfirstLaunch");
     this.$api.getQuestion(1).then(res => {
       if (res.data.code === 200) {
-        this.form1 = res.data.data.questions[0];
+        this.form1 = res.data.data.questions[2];
         this.form2 = res.data.data.questions[1];
-        this.form3 = res.data.data.questions[2];
+        this.form3 = res.data.data.questions[0];
       }
     });
   },
@@ -105,7 +111,7 @@ export default {
     skipQuestion(){
       if (this.tabActive === 0) {
         this.tab1= true;
-        this.tabActive = this.tabActive+1;
+        this.tabActive += 1;
       }else if (this.tabActive === 1){
         this.tab2 = true;
         this.tabActive = this.tabActive+1;
@@ -113,19 +119,20 @@ export default {
         this.$router.push({ name: "Home" });
       }
     },
-    answer(id, answer) {
-      const form = Object.assign({}, { id: id, value: answer });
-      this.$api.postAnswer(form).then(res => {
+    answer(aid, id, answer) {
+      this.answerList[aid].id = id;
+      this.answerList[aid].value = answer;
+      if (this.tabActive === 2) {
+      this.$api.postAnswer(this.answerList).then(res => {
         if (res.data.code === 200) {
-          if (this.tabActive===0) { this.tabActive = this.tabActive + 1; this.tab1 = true; }
-          else if (this.tabActive===1) { this.tabActive = this.tabActive + 1; this.tab2 = true; }
-          else { 
             this.splash = true;
             this.questionPage = false;
             setTimeout(() => { this.$router.push({ name: "Home" }); }, 1500);
           }
-        }
-      });
+        });
+      } else {
+        this.tabActive += 1;
+      }
     }
   }
 };
@@ -133,6 +140,7 @@ export default {
 
 <style lang="scss" scoped>
 .splashPage {
+  background: "iconBk" no-repeat;
   background-size: cover;
   height: 100vh;
 

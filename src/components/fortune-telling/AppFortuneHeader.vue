@@ -17,6 +17,11 @@
 </template>
 
 <script>
+import Vue from 'vue';
+import { Dialog } from 'vant';
+
+Vue.use(Dialog);
+
 export default {
   props: {
     title: {
@@ -30,8 +35,16 @@ export default {
     }
   },
   methods: {
-    returnHome() {
-      this.$router.push({ name: "Home" });
+    returnHome() { 
+      Dialog.confirm({
+        title: 'Leaving Master Yun?',
+        message: 'Poor Master Yun will not be able to read your fortune if you leave now. Your selection will go to waste.'
+        }).then(() => {
+          // on confirm
+          this.$router.push({ name: "Home" });
+          }).catch(() => {
+            // on cancel
+            });
     }
   }
 };
