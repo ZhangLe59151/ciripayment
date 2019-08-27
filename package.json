@@ -4,12 +4,25 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --mode web",
-    "serve-app": "vue-cli-service serve --mode local",
     "build": "vue-cli-service build --mode web",
+    "lint": "vue-cli-service lint",
     "build-app": "vue-cli-service build --mode app",
     "build-pro-app": "vue-cli-service build --mode appPro",
     "build-pro-web": "vue-cli-service build --mode webPro",
-    "lint": "vue-cli-service lint"
+    "cordova-build-android": "cross-env CORDOVA_PLATFORM=android vue-cli-service cordova-build-android --mode app",
+    "cordova-build-browser": "cross-env CORDOVA_PLATFORM=browser vue-cli-service cordova-build-browser",
+    "cordova-build-ios": "cross-env CORDOVA_PLATFORM=ios vue-cli-service cordova-build-ios",
+    "cordova-build-only-www-android": "cross-env CORDOVA_PLATFORM=android vue-cli-service cordova-build-only-www-android --mode app",
+    "cordova-build-only-www-browser": "cross-env CORDOVA_PLATFORM=browser vue-cli-service cordova-build-only-www-browser",
+    "cordova-build-only-www-ios": "cross-env CORDOVA_PLATFORM=ios vue-cli-service cordova-build-only-www-ios",
+    "cordova-build-only-www-osx": "cross-env CORDOVA_PLATFORM=osx vue-cli-service cordova-build-only-www-osx",
+    "cordova-build-osx": "cross-env CORDOVA_PLATFORM=osx vue-cli-service cordova-build-osx",
+    "cordova-prepare": "vue-cli-service cordova-prepare",
+    "cordova-serve-android": "cross-env CORDOVA_PLATFORM=android vue-cli-service cordova-serve-android --mode app",
+    "cordova-serve-browser": "cross-env CORDOVA_PLATFORM=browser vue-cli-service cordova-serve-browser",
+    "cordova-serve-ios": "cross-env CORDOVA_PLATFORM=ios vue-cli-service cordova-serve-ios",
+    "cordova-serve-osx": "cross-env CORDOVA_PLATFORM=osx vue-cli-service cordova-serve-osx",
+    "serve-app": "vue-cli-service serve --mode local"
   },
   "dependencies": {
     "amfe-flexible": "^2.2.1",
@@ -43,6 +56,7 @@
     "node-sass": "^4.12.0",
     "postcss-pxtorem": "^4.0.1",
     "sass-loader": "^7.1.0",
+    "vue-cli-plugin-cordova": "^2.3.6",
     "vue-template-compiler": "^2.5.21"
   },
   "browserslist": [

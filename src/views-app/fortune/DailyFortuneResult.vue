@@ -37,7 +37,10 @@
       <div class="share-text">{{$t("FortuneTelling.shareCopy")}} </div>
       <div>
         <img :src="require('@/assets/imgs/fortune-telling/line_ico.png')">
-        <img :src="require('@/assets/imgs/fortune-telling/facebook_ico.png')">
+        <img
+          :src="require('@/assets/imgs/fortune-telling/facebook_ico.png')"
+          @click="shareOnAPP"
+        >
       </div>
     </van-popup>
   </div>
@@ -81,7 +84,23 @@ export default {
       const funcName = "shareOn".concat(this.deviceType);
       this[funcName]();
     },
-    shareOnAPP() {},
+    shareOnAPP() {
+      var onSuccess = function(result) {
+        console.log("Max Share completed? " + result.completed); // On Android apps mostly return false even while it's true
+        console.log("Max Shared to app: " + result.app); // On Android result.app since plugin version 5.4.0 this is no longer empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+      };
+
+      var onError = function(msg) {
+        console.log("Sharing failed with message: " + msg);
+      };
+
+      window.plugins.socialsharing.shareViaFacebook(
+        "Optional message, may be ignored by Facebook app",
+        ["https://www.google.nl/images/srpr/logo4w.png"],
+        onSuccess,
+        onError // called when sh*t hits the fan
+      );
+    },
     shareOnWEB() {},
     triggerLike() {
       this.likeStatus = !this.likeStatus;
