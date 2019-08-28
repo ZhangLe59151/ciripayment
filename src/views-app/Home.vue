@@ -36,7 +36,7 @@ export default {
   },
   created() {
     //this.$router.push({ name: "LandingPage" });
-    if (this.firstLuanch === "true") {
+    if (this.firstLuanch === true) {
       this.$router.push({ name: "LandingPage" });
       return false;
     }

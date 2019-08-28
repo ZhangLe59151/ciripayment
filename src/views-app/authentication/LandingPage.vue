@@ -1,8 +1,9 @@
 <template>
   <div class="landing-page">
-    <van-nav-bar
+    <authentication-app-login-header
       :title="$t('Login.loginTitle')"
       />
+      
     <div class="landingPageContent">
       <van-button 
         class="getStartBtn"
@@ -116,7 +117,7 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/css/bottom-btn";
 .landing-page {
-  background: url("../../assets/imgs/landing_bg.png") no-repeat;
+  //background: url("../../assets/imgs/landing_bg.png") no-repeat;
   background-size: cover;
   height: 100vh;
   
@@ -152,6 +153,7 @@ export default {
       border-top-right-radius: 16px;
     }
   }
+
 }
 </style>
 
