@@ -2,12 +2,13 @@
   <div class="daily-fortune-question">
     <fortune-telling-app-fortune-header :center="true" />
     <div class="introduction">
-      Answer these questions and we will predict today’s fortune for you.
+      Hang On, Master อ.ตี๋ รามัญ would like to ask you a few questions.
     </div>
     <fortune-telling-app-fortune-question-content
       @submitAnswer="submitAnswer"
       :index="index"
       :questionBody="question"
+      :questionSubtitle="subtitle"
     />
   </div>
 </template>
@@ -20,7 +21,8 @@ export default {
     return {
       index: 1,
       questionList: require("@/assets/data/fortuneQuestionList.json"),
-      question: "test"
+      question: "test",
+      subtitle: "Write down the first one that comes to your mind."
     };
   },
   computed: {
@@ -88,6 +90,6 @@ export default {
   font-size: 16px;
   color: white;
   text-align: center;
-  margin-bottom: 20px;
+  margin: 10px 16px 20px 16px;
 }
 </style>

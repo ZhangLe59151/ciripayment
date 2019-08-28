@@ -199,7 +199,7 @@ const AppRouteArr = [
     component: () => import("@/views-app/authentication/LoginPage.vue")
   },
   {
-    path: "/personal-question",
+    path: "/personal-question/:id",
     name: "PersonalQuestion",
     component: () => import("@/views-app/authentication/PersonalQuestion.vue")
   },
@@ -243,6 +243,11 @@ const AppRouteArr = [
     path: "/daily-fortune-question",
     name: "DailyFortuneQuestion",
     component: () => import("@/views-app/fortune/DailyFortuneQuestion.vue")
+  },
+  {
+    path: "/daily-fortune-loading",
+    name: "DailyFortuneLoading",
+    component: () => import("@/views-app/fortune/DailyFortuneLoading.vue")
   },
   {
     path: "/daily-fortune-loading",

@@ -3,8 +3,8 @@ module.exports = {
     cordovaPath: "src-cordova"
   },
   devServer: {
-    // proxy: "http://localhost:15005/"
-    proxy: process.env.VUE_APP_PROXY
+    proxy: "http://52.77.225.91:14002/"
+    // proxy: process.env.VUE_APP_PROXY
   },
   configureWebpack: config => {
     if (process.env.NODE_ENV === "production") {
@@ -13,7 +13,6 @@ module.exports = {
       // mutate for development...
     }
   },
-  publicPath: "",
   outputDir: process.env.VUE_APP_OUTPUTDIR,
   runtimeCompiler: true
 };

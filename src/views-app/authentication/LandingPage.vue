@@ -1,8 +1,9 @@
 <template>
   <div class="landing-page">
-    <van-nav-bar
+    <authentication-app-login-header
       :title="$t('Login.loginTitle')"
       />
+      
     <div class="landingPageContent">
       <van-button 
         class="getStartBtn"
@@ -45,9 +46,12 @@ export default {
       showComponents: true
     };
   },
+  created() {
+    this.$store.commit("UnfirstLaunch");
+  },
   methods: {
     getStart() {
-      this.$router.push({ name: "PersonalQuestion" });
+      this.$router.push({ name: "PersonalQuestion", params: { id: 0 } });
     },
     signIn() {
       this.$router.push({ name: "LoginPage" });
@@ -116,7 +120,7 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/css/bottom-btn";
 .landing-page {
-  background: url("../../assets/imgs/landing_bg.png") no-repeat;
+  //background: url("../../assets/imgs/landing_bg.png") no-repeat;
   background-size: cover;
   height: 100vh;
   
@@ -124,14 +128,14 @@ export default {
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 147px;
+    height: 107px;
     background-color: white;
 
     .getStartBtn {
       position: absolute;
       font-size: 20px;
       margin: 0 16px 0 16px;
-      height: 60px;
+      height: 40px;
       width: 328px;
       color: white;
       border-top-left-radius: 16px;
@@ -144,7 +148,7 @@ export default {
       font-size: 20px;
       margin: 0 16px 0 16px;
       bottom: 12px;
-      height: 60px;
+      height: 40px;
       width: 328px;
       color: #ff8600;
       background-color: white;
@@ -152,6 +156,7 @@ export default {
       border-top-right-radius: 16px;
     }
   }
+
 }
 </style>
 

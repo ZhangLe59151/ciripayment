@@ -126,7 +126,7 @@
           <van-col
             class="info"
             span="12"
-          >{{this.$moment(loanProfile.createTime).format("DD MMM YYYY, HH:ss")}}</van-col>
+          >{{formatTime(loanProfile.createTime,true)}}</van-col>
         </van-row>
 
         <van-row v-if="String(loanProfile.status) !== '0'"
@@ -200,7 +200,7 @@
           <van-col
             class="info"
             span="12"
-          >{{this.$moment(loanProfile.firstRepaymentDate).format("DD MMM YYYY")}}</van-col>
+          >{{formatTime(loanProfile.firstRepaymentDate)}}</van-col>
         </van-row>
 
       </div>
@@ -224,9 +224,11 @@
 <script>
 import { mapState } from "vuex";
 import AppLoanResultMsg from "@/components/loan/AppLoanResultMsg";
+import util from "@/util";
+
 export default {
   name: "AppLoanOverview",
-  components: {AppLoanResultMsg},
+  components: { AppLoanResultMsg },
   data() {
     return {
       showPopUp: false,
@@ -269,6 +271,9 @@ export default {
       return this.merchantApplyingChannelStatus.filter(
         status => String(status.value) === String(loanStatus)
       )[0];
+    },
+    formatTime(time, withHour = false) {
+      return util.convertUTCTimeToBuddhistTime(time, withHour);
     },
     formatNumber(n) {
       return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
