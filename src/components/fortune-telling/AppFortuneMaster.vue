@@ -14,6 +14,9 @@
         span="16"
         class="cnt"
       >
+        <div :class="master.image">
+
+        </div>
         <div class="name">
           {{master.name}}
         </div>
@@ -67,6 +70,30 @@ export default {
 
   .cnt {
     margin: 40px 0 0 15px;
+    position: relative;
+
+    .tattoo {
+      background: no-repeat center
+        url("../../assets/imgs/fortune-telling/tattoo.png");
+      background-size: contain;
+      height: 74px;
+      position: absolute;
+      top: -23px;
+      right: 22px;
+      width: 34px;
+    }
+
+    .astrology {
+      background: no-repeat center
+        url("../../assets/imgs/fortune-telling/astrology.png");
+      background-size: contain;
+      width: 74px;
+      height: 74px;
+      position: absolute;
+      top: -23px;
+      right: 22px;
+    }
+
     .name {
       font-size: 20px;
       color: #2f3941;
