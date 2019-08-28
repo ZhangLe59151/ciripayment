@@ -38,7 +38,6 @@ export default {
     chooseMaster(master) {
       this.fortuneInfo.selectedMaster = master;
       this.$store.commit("SaveFortuneInfo", this.fortuneInfo);
-      debugger
       this.$router.push({ name: "DailyFortuneQuestion" });
     }
   }

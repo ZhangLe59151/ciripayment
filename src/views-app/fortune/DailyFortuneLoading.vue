@@ -97,6 +97,10 @@ export default {
     color: white;
     font-size: 20px;
     line-height: 32px;
+    animation-name: test;
+    animation-duration: 3s;
+    animation-timing-function: ease-in;
+    animation-iteration-count: 1;
   }
   .bottom-title:after {
     overflow: hidden;
@@ -110,6 +114,10 @@ export default {
     to {
       width: 30px;
     }
+  }
+  @keyframes test {
+    from { transform: translateY(0); }
+    to { transform: translateY(-20px); }
   }
 }
 </style>

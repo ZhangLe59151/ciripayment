@@ -43,7 +43,6 @@ export default {
   },
   methods: {
     returnHome() { 
-      debugger
       if (this.fortuneResult && this.fortuneResult.length > 0) {
         this.$router.push({ name: "Home" });
       } else {
