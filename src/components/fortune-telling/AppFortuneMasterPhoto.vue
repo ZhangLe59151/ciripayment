@@ -37,8 +37,8 @@ export default {
   margin-left: 16px;
   margin-right: 16px;
   .photo-bg {
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
     background: #f8f9f9;
     border-radius: 65px;
     border-color: #bf3813;

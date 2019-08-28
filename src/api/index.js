@@ -4,10 +4,10 @@ import VueAxios from "vue-axios";
 
 Vue.use(VueAxios, axios);
 
-const instance = axios.create({
-  baseURL: "",
-  headers: { Cookie: document.cookie }
-});
+// const instance = axios.create({
+//   baseURL: "",
+//   headers: { Cookie: document.cookie }
+// });
 
 export default {
   sendOtp(params) {

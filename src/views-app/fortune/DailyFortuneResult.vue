@@ -2,7 +2,13 @@
   <div class="daily-fortune-result">
     <fortune-telling-app-fortune-header />
     <div class="top-desc">
-      Here's your fortune by {{fortuneInfo.selectedMaster.name}}!
+      <fortune-telling-app-fortune-master-photo
+        class="master-photo"
+        :masterId="fortuneInfo.selectedMaster.id"
+      />
+      <div class="master-des">
+        {{$tc("FortuneTelling.masterDes", fortuneInfo.selectedMaster.name)}}
+      </div>
     </div>
     <fortune-telling-app-fortune-result-content
       :fortuneInfo="fortuneInfo"
@@ -134,6 +140,7 @@ export default {
   background: no-repeat center
     url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
   background-size: cover;
+
   .top-desc {
     position: absolute;
     width: 100%;
@@ -141,6 +148,11 @@ export default {
     color: white;
     font-size: 16px;
     text-align: center;
+    .master-des {
+      position: absolute;
+      top: 20px;
+      left: 95px;
+    }
   }
   .app-fortune-result-content {
     margin-top: 20px;

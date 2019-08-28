@@ -16,7 +16,12 @@
     "shareCopy": "Share my Daily Fortune to:",
     "like": "Like",
     "liked": "Liked",
-    "share": "Share"
+    "share": "Share",
+    "masterDes": "Here’s your fortune by {n}! ",
+    "luckyDes": "Your Sales Luck Today",
+    "luckyAmountDes": "Today Luck Will Likely Bring You",
+    "recordDes": "Record yesterday’s income for master to predict your daily sales.",
+    "recordBtn": "Record Now"
   },
   "Income": "TODAY'S SALES",
   "Expenses": "SPENDINGS",
