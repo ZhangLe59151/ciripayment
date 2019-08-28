@@ -36,10 +36,10 @@
     >
       <div class="share-text">{{$t("FortuneTelling.shareCopy")}} </div>
       <div>
-        <img :src="require('@/assets/imgs/fortune-telling/line_ico.png')">
+        <img :src="require('@/assets/imgs/fortune-telling/line_ico.png')" @click="shareOnAPP('line')">
         <img
           :src="require('@/assets/imgs/fortune-telling/facebook_ico.png')"
-          @click="shareOnAPP"
+          @click="shareOnAPP('facebook')"
         >
       </div>
     </van-popup>
@@ -81,25 +81,42 @@ export default {
   methods: {
     triggerShare() {
       this.showPopUp = true;
-      const funcName = "shareOn".concat(this.deviceType);
-      this[funcName]();
+      // const funcName = "shareOn".concat(this.deviceType);
+      // this[funcName]();
     },
-    shareOnAPP() {
-      var onSuccess = function(result) {
-        console.log("Max Share completed? " + result.completed); // On Android apps mostly return false even while it's true
-        console.log("Max Shared to app: " + result.app); // On Android result.app since plugin version 5.4.0 this is no longer empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+    shareOnAPP(platform) {
+      
+      const onSuccess = function(result) {
+        console.log("Share completed!"); 
       };
 
-      var onError = function(msg) {
-        console.log("Sharing failed with message: " + msg);
+      const onError = function(msg) {
+        console.log("Sharing failed!" + msg);
       };
 
-      window.plugins.socialsharing.shareViaFacebook(
-        "Optional message, may be ignored by Facebook app",
-        ["https://www.google.nl/images/srpr/logo4w.png"],
-        onSuccess,
-        onError // called when sh*t hits the fan
-      );
+      const shareMsg = "";
+      const shareLink = "https://www.bbc.com/news";
+
+      if(platform=='facebook'){
+        window.plugins.socialsharing.shareViaFacebook(
+          shareMsg,
+          [""],
+          shareLink,
+          onSuccess,
+          onError 
+        );
+      }
+      else if(platform=='line'){
+        var options = {
+          message: shareMsg,
+          subject: '', 
+          files: [''], 
+          url: shareLink,
+          chooserTitle: '', 
+          appPackageName: 'jp.naver.line.android'
+        };
+        window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError);
+      }
     },
     shareOnWEB() {},
     triggerLike() {
