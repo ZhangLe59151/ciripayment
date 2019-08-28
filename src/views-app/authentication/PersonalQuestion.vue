@@ -69,7 +69,6 @@ export default {
     return {
       splash: false,
       questionPage: true,
-      timer: "",
       tabActive: 0,
       tab1: false,
       tab2: false,

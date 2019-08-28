@@ -125,14 +125,14 @@ export default {
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 147px;
+    height: 107px;
     background-color: white;
 
     .getStartBtn {
       position: absolute;
       font-size: 20px;
       margin: 0 16px 0 16px;
-      height: 60px;
+      height: 40px;
       width: 328px;
       color: white;
       border-top-left-radius: 16px;
@@ -145,7 +145,7 @@ export default {
       font-size: 20px;
       margin: 0 16px 0 16px;
       bottom: 12px;
-      height: 60px;
+      height: 40px;
       width: 328px;
       color: #ff8600;
       background-color: white;
