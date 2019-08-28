@@ -89,9 +89,9 @@ export default {
       form2: { },
       form3: { }, 
       answerList: [
-        { id: 0, value: "" },
-        { id: 1, value: "" },
-        { id: 2, value: "" }
+        { id: 0, value: " " },
+        { id: 1, value: " " },
+        { id: 2, value: " " }
       ],
       phoneValidationPattern: this.$store.state.phone.thaiExp,
       showComponents: true
@@ -123,7 +123,7 @@ export default {
       }else if (this.tabActive === 1){
         this.$router.push({ name: "PersonalQuestion", params: { id: 2 } });
       } else {
-        if (allSkip) { this.$router.push({ name: "Home" }); }
+        if (this.allSkip) { this.$router.push({ name: "Home" }); }
         else { this.sendAnswer(); }
       }
     },
@@ -140,6 +140,7 @@ export default {
     answer(aid, id, answer) {
       this.answerList[aid].id = id;
       this.answerList[aid].value = answer;
+      this.$router.push({ name: "PersonalQuestion", params: { id: aid } });
       if (this.tabActive === 2) {
         this.sendAnswer();
       } else {

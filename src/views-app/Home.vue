@@ -21,6 +21,7 @@ export default {
   data() {
     return {
       hasLoan: false,
+      isPersonalQ: false,
       records: {
         income: 0,
         expense: 0
@@ -35,7 +36,7 @@ export default {
     })
   },
   created() {
-    if (this.firstLuanch === 0) {
+    if (this.firstLuanch === true) {
       this.$router.push({ name: "LandingPage" });
     }
     this.fetchHomePageData();
