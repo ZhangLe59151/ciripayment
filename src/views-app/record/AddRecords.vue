@@ -254,6 +254,10 @@ export default {
         this.showNumber = false;
         return false;
       }
+      const regex1 = /^(([1-9][0-9]*)|(([0]\.\d{2}|[1-9][0-9]*\.\d{2})))$/;
+      if (regex1.test(this.form[this.type]) && this.form[this.type].indexOf(".") != -1) {
+        return false;
+      }
       this.form[this.type] += value;
     },
     onDelete() {
@@ -277,7 +281,7 @@ export default {
         this.$notify({ message: "Added Sucessfully", background: "#04A777" });
         return false;
       }
-      // this.$notify({ message: "Please input valid number", background: "#04A777" });
+      this.$notify({ message: "Please input valid number", background: "#b41800" });
     },
     convertForm(form) {
       const _date = form.accountDate.includes(",")
