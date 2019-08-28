@@ -56,7 +56,7 @@ export default {
         // this.$store.commit("UpdateCreditAnswer", { id: this.question.id, value: this.form.answering });
 
         // send to server
-        this.$api.submitQuestion({ id: this.question.id, value: this.form.answering }).then(
+        this.$api.submitCreditAnswer({ id: this.question.id, value: this.form.answering }).then(
           res => {
             if (res.data.code === 200) {
               // update vuex and localstorage

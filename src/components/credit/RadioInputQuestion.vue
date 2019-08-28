@@ -137,7 +137,7 @@ export default {
 
         // send to server
         this.$api
-          .submitQuestion({ id: this.question.id, value: this.form.value })
+          .submitCreditAnswer({ id: this.question.id, value: this.form.value })
           .then(res => {
             if (res.data.code === 200) {
               // update vuex and localstorage
@@ -154,8 +154,8 @@ export default {
           });
       }
     },
-    // submitQuestion() {
-    //   this.$api.submitQuestion(this.form).then(res => {
+    // submitCreditAnswer() {
+    //   this.$api.submitCreditAnswer(this.form).then(res => {
     //     if (res.data.code === 200) {
     //       // limitAmount += this.question.limitAmount;
     //       limitAmount = util.fmoney(this.question.limitAmount);

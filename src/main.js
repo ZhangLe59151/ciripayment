@@ -3,7 +3,6 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import "./autoMixinComponents";
-import VueI18n from "vue-i18n";
 
 import axios from "axios";
 import VueAxios from "vue-axios";
@@ -32,7 +31,7 @@ Vue.use(ElementUI);
 
 Vue.use(VueAxios, axios);
 Vue.use(Vant);
-Vue.use(VueI18n);
+
 // Vue.use(VueSignaturePad);
 
 Vue.prototype.$api = api;
@@ -41,12 +40,7 @@ Vue.prototype.$find = find;
 Vue.prototype.$notify = Notify;
 Vue.config.productionTip = false;
 
-const i18n = new VueI18n({
-  locale: "en",
-  messages: {
-    en: require("@/assets/lang/en.json")
-  }
-});
+import i18n from './assets/lang/i18n';
 
 new Vue({
   router,

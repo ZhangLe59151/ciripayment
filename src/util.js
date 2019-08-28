@@ -1,5 +1,6 @@
-import moment from "moment-timezone";
+import { moment } from "@/assets/js/main.js";
 import { find } from "lodash";
+
 export default {
   byteToMb: numBytes => {
     return Number.parseFloat(numBytes / 1024 / 1024).toFixed(2);
@@ -31,6 +32,15 @@ export default {
       .tz("Asia/Singapore")
       .format("MMMM D YYYY hh:mmA");
   },
+  convertUTCTimeToBuddhistTime(dateTime) {
+    if (!dateTime) {
+      return "-";
+    }
+
+    return moment(dateTime)
+      .add(543, "year")
+      .format("DD MMM YYYY");
+  },
   convertToCategoryName(id, list, i) {
     const arr = [];
     for (const value of Object.values(list)) {
@@ -46,7 +56,7 @@ export default {
   },
   fmoney(s, n) {
     n = n > 0 && n <= 20 ? n : 2;
-    s = parseFloat((s + "").replace(/[^\d\.-]/g, "")).toFixed(n) + "";
+    s = parseFloat((s + "").replace(/[^\d.-]/g, "")).toFixed(n) + "";
     var l = s
       .split(".")[0]
       .split("")

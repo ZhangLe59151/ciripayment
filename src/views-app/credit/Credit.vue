@@ -30,35 +30,32 @@ export default {
     })
   },
   created() {
-    this.$api.getQuestion().then(res => {
+    this.$api.getCreditQuestion().then(res => {
       if (res.data.code === 200) {
         this.$store.commit("InitCredit", res.data.data);
       }
     });
     // const creditMock =
     //   {
-    //     currentCreditLimit: 50000,
+    //     currentCreditLimit: 5000,
     //     questions: [
     //       {
     //         "id": 1,
-    //         "question": "Do you have a driving licence?",
-    //         "type": 3,
-    //         "options": [
-    //           "Yes",
-    //           "No"
-    //         ],
-    //         "limitAmount": 5000,
+    //         "question": "Take a photo of your product",
+    //         "type": 4,
+    //         "options": null,
+    //         "limitAmount": 8000,
     //         "value": null,
     //         "placeholder": ""
     //       },
     //       {
     //         "id": 5,
-    //         "question": "What is your monthly income?",
-    //         "type": 1,
+    //         "question": "Your income tax (personal / enterprise income tax)",
+    //         "type": 5,
     //         "options": null,
     //         "limitAmount": 7000,
     //         "value": "",
-    //         "placeholder": "25000"
+    //         "placeholder": ""
     //       },
     //       {
     //         "id": 9,
