@@ -5,6 +5,7 @@
       <fortune-telling-app-fortune-master-photo
         class="master-photo"
         :masterId="fortuneInfo.selectedMaster.id"
+        :imgSize="60"
       />
       <div class="master-des">
         {{$tc("FortuneTelling.masterDes", fortuneInfo.selectedMaster.name)}}
@@ -42,7 +43,10 @@
     >
       <div class="share-text">{{$t("FortuneTelling.shareCopy")}} </div>
       <div>
-        <img :src="require('@/assets/imgs/fortune-telling/line_ico.png')" @click="shareOnAPP('line')">
+        <img
+          :src="require('@/assets/imgs/fortune-telling/line_ico.png')"
+          @click="shareOnAPP('line')"
+        >
         <img
           :src="require('@/assets/imgs/fortune-telling/facebook_ico.png')"
           @click="shareOnAPP('facebook')"
@@ -91,9 +95,8 @@ export default {
       // this[funcName]();
     },
     shareOnAPP(platform) {
-      
       const onSuccess = function(result) {
-        console.log("Share completed!"); 
+        console.log("Share completed!");
       };
 
       const onError = function(msg) {
@@ -103,25 +106,28 @@ export default {
       const shareMsg = "";
       const shareLink = "https://www.bbc.com/news";
 
-      if(platform=='facebook'){
+      if (platform == "facebook") {
         window.plugins.socialsharing.shareViaFacebook(
           shareMsg,
           [""],
           shareLink,
           onSuccess,
-          onError 
+          onError
         );
-      }
-      else if(platform=='line'){
+      } else if (platform == "line") {
         var options = {
           message: shareMsg,
-          subject: '', 
-          files: [''], 
+          subject: "",
+          files: [""],
           url: shareLink,
-          chooserTitle: '', 
-          appPackageName: 'jp.naver.line.android'
+          chooserTitle: "",
+          appPackageName: "jp.naver.line.android"
         };
-        window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError);
+        window.plugins.socialsharing.shareWithOptions(
+          options,
+          onSuccess,
+          onError
+        );
       }
     },
     shareOnWEB() {},

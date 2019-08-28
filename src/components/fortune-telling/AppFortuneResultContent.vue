@@ -2,19 +2,19 @@
   <div class="app-fortune-result-content">
     <div class="background-card">
       <div class="date">
-        30 Sep 2562 BE
+        {{today}}
       </div>
       <div class="result-box">
 
         <div class="cnt">
-          แจกเงินเที่ยว 1,000 บาท” หลายคนไม่เห็นด้วย หลายคนตั้งหน้าตั้งตาเฝ้าคอย แต่อีกไม่กี่อึดใจ “เงิน 1,000 บาท” จะถูกแจกจ่ายไปถึงมือประชาชน 10 ล้านคนทั่วประ
+          {{fortuneResult.fortuneResult}}
         </div>
         <section class="fortune">
           <div class="fortune-desc">
             {{$t("FortuneTelling.luckyDes")}}
           </div>
           <div class="fortune-result">
-            {{fortuneResult.fortuneResult}}
+            {{fortuneResult.salesTarget.generalResult}}
           </div>
         </section>
 
@@ -23,19 +23,20 @@
             {{$t("FortuneTelling.luckyAmountDes")}}
           </div>
           <div class="sales-result">
-            <!-- fortuneResult.salesTarget.incomeResult.min -->
-            <span>{{ '10,000'}}</span>
+            <span>{{ fortuneResult.salesTarget.incomeResult.min}}</span>
             <span class="currency">{{currency}}</span>
             <span> ~ </span>
-            <!-- fortuneResult.salesTarget.incomeResult.max  -->
-            <span>{{'50,000'}}</span>
+            <span>{{fortuneResult.salesTarget.incomeResult.max}}</span>
             <span class="currency">{{currency}}</span>
           </div>
         </section>
 
         <section v-else>
           <div class="record-res">{{$t("FortuneTelling.recordDes")}}</div>
-          <div class="record-btn">{{$t("FortuneTelling.recordBtn")}}</div>
+          <div
+            class="record-btn"
+            @click="$router.push({name: 'AddRecord',query: {date: yesterday}})"
+          >{{$t("FortuneTelling.recordBtn")}}</div>
         </section>
 
       </div>
@@ -44,6 +45,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import util from "@/util";
 export default {
   name: "AppFortuneResultContent",
   props: {
@@ -59,18 +62,26 @@ export default {
     }
   },
   data() {
-    return {
-      today: "",
-      hasRecord: false
-    };
+    return {};
   },
   computed: {
+    ...mapState({
+      yesterday(state) {
+        return this.$moment()
+          .subtract(1, "days")
+          .format(state.localDateFormatter);
+      }
+    }),
     fortuneResult() {
       return this.fortuneInfo.fortuneResult;
+    },
+    today() {
+      return util.convertUTCTimeToBuddhistTime(new Date());
+    },
+    hasRecord() {
+      const result = this.fortuneInfo.fortuneResult;
+      return result.salesTarget.incomeResult !== null;
     }
-  },
-  mounted() {
-    this.today = this.$moment().format("DD MMM YYYY");
   }
 };
 </script>
@@ -178,9 +189,11 @@ export default {
         letter-spacing: 0;
         text-align: center;
         line-height: 20px;
+        margin-top: 12px;
       }
 
       .record-btn {
+        margin-top: 12px;
         background: #ff8600;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
         border-radius: 4px;
