@@ -5,33 +5,37 @@
         Question {{ index }}
       </div>
       <div class="question-body">
-        {{ questionList[questionindex].question }}
+        {{ questionList[questionIndex].question }}
       </div>
       <div class="question-subtitle">
-        {{ questionList[questionindex].description }}
+        {{ questionList[questionIndex].description }}
       </div>
       <div class="bottom-actions">
         <van-field
           v-model="answer"
           class="answer-input"
           :border="true"
-          :placeholder="questionList[questionindex].placeholder"
-          v-if="questionList[questionindex].answerType === 2"
+          :placeholder="questionList[questionIndex].placeholder"
+          v-if="questionList[questionIndex].answerType === 2"
+          :v-model="answer"
         />
 
-        <div class="flex-container" v-if="questionList[questionindex].answerType === 3 && questionList[questionindex].options.length < 4">
-          <div :v-for="item in questionList[questionindex].options">
-            <van-button :class="(answer === item ? 'tab3Selected' : 'tab3')" @click="onSelect(item)" > item </van-button>
+        <div class="flex-container" v-if="questionList[questionIndex].answerType === 3 && questionList[questionIndex].options.length < 4">
+          <div v-for="(item,index) in questionList[questionIndex].options" :key="index">
+             <van-button 
+              :class="(answer === item ? 'tab3Selected' : 'tab3')" 
+              @click="onSelect(item)" >{{ item }}
+            </van-button>
           </div>
         </div>
 
         <div 
           class="flex-container" 
-           v-if="questionList[questionindex].answerType === 3 && questionList[questionindex].options.length < 4">
-           <div :v-for="item in questionList[questionindex].options">
+           v-if="questionList[questionIndex].answerType === 3 && questionList[questionIndex].options.length > 3">
+           <div v-for="(item,index) in questionList[questionIndex].options" :key="index">
             <van-button 
-              :class="(answer === 1 ? 'tab7Selected' : 'tab7')" 
-              @click="onSelect(1)" >{{ item }}
+              :class="(answer === item ? 'tab7Selected' : 'tab7')" 
+              @click="onSelect(item)" >{{ item }}
             </van-button>
           </div>
         </div>
@@ -51,35 +55,45 @@
 </template>
 
 <script>
+const today = new Date();
 export default {
   name: "AppFortuneQuestionContent",
   data() {
     return {
       index: 1,
-      questionindex: 0,
+      questionIndex: 0,
       answer: "",
-      answerform: [ { id: 0, value: "" }, { id: 0, value: "" } ],
-      questionList: [],
-      test1: ["1","1","1","1"]
+      answerForm: [ 
+        { id: 0, value: " ", answerDate: this.$moment(today).format("YYYYMMDD"), allowRepeat: 0 }, 
+        { id: 0, value: " ", answerDate: this.$moment(today).format("YYYYMMDD"), allowRepeat: 0 } ],
+      questionList: []
     };
   },
   created() {
     this.$api.getQuestionF().then(res => {
         if (res.data.code === 200) {
-          debugger
+          // debugger
           this.questionList = res.data.data.questions;
-          this.answerform[0].id = res.data.data.questions[0].id;
-          this.answerform[1].id = res.data.data.questions[1].id;
+          this.answerForm[0].allowRepeat = res.data.data.questions[0].allowRepeat;
+          this.answerForm[1].allowRepeat = res.data.data.questions[1].allowRepeat;
+          this.answerForm[0].id = res.data.data.questions[0].id;
+          this.answerForm[1].id = res.data.data.questions[1].id;
         }
       });
   },
   methods: {
     next() {
-      this.answerform[this.index].value = this.value
+      this.answerForm[this.questionIndex].value = this.answer;
       this.answer = "";
       this.index += 1;
-      this.questionindex += 1;
-      //setTimeout(() => { this.$router.push({ name: "DailyFortuneLoading" }); }, 1500);
+      this.questionIndex += 1;
+      if (this.questionIndex == 2) {
+        this.$api.postAnswerF(this.answerForm).then(res => {
+        if (res.data.code === 200) {
+          setTimeout(() => { this.$router.push({ name: "DailyFortuneLoading" }); }, 1500);
+          }
+        });       
+      }
     },
     onSelect(item) {
       this.answer = item;
