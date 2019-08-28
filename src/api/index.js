@@ -4,10 +4,10 @@ import VueAxios from "vue-axios";
 
 Vue.use(VueAxios, axios);
 
-const instance = axios.create({
-  baseURL: "",
-  headers: { Cookie: document.cookie }
-});
+// const instance = axios.create({
+//   baseURL: "",
+//   headers: { Cookie: document.cookie }
+// });
 
 export default {
   sendOtp(params) {
@@ -136,10 +136,10 @@ export default {
   feedback(params) {
     return Vue.axios.post("/api/feedback", params);
   },
-  getQuestion() {
+  getCreditQuestion() {
     return Vue.axios.get("/api/credit/limit");
   },
-  submitQuestion(params) {
+  submitCreditAnswer(params) {
     return Vue.axios.post("/api/credit/limit/answer", params);
   },
   logout(params) {

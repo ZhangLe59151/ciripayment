@@ -2,7 +2,7 @@
   <div class="daily-fortune">
     <fortune-telling-app-fortune-header />
     <div class="top-desc">
-      Select a Master to tell your fortune.
+      {{$t("FortuneTelling.selectMasterDes")}}
     </div>
     <div class="master-select">
       <fortune-telling-app-fortune-master

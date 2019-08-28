@@ -2,7 +2,7 @@ import axios from "axios";
 // import router from "@/router";
 // import { Dialog } from "vant";
 import { Toast } from 'vant';
-import i18n from '../assets/lang/i18n';
+import i18n from '@/assets/lang/i18n';
 
 // axios config
 axios.defaults.timeout = 30000;

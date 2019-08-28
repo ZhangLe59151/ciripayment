@@ -2,14 +2,34 @@
   <div class="daily-fortune-result">
     <fortune-telling-app-fortune-header />
     <div class="top-desc">
-      Here's your fortune by {{fortuneInfo.selectedMaster.name}}!
+      <fortune-telling-app-fortune-master-photo
+        class="master-photo"
+        :masterId="fortuneInfo.selectedMaster.id"
+        :imgSize="60"
+      />
+      <div class="master-des">
+        {{$tc("FortuneTelling.masterDes", fortuneInfo.selectedMaster.name)}}
+      </div>
     </div>
+
+    <div
+      class="web-get-fortune"
+      v-if="$route.query.shareKey"
+    >
+      <img :src="require('@/assets/imgs/fortune-telling/finger.gif')">
+
+      <div class="web-get-fortune-btn">{{$t("FortuneTelling.getFortuneBtn")}}</div>
+    </div>
+
     <fortune-telling-app-fortune-result-content
       :fortuneInfo="fortuneInfo"
       :currency="currency"
     />
 
-    <section class="action">
+    <section
+      class="action"
+      v-if="!$route.query.shareKey"
+    >
       <div
         class="like"
         @click="triggerLike"
@@ -36,7 +56,10 @@
     >
       <div class="share-text">{{$t("FortuneTelling.shareCopy")}} </div>
       <div>
-        <img :src="require('@/assets/imgs/fortune-telling/line_ico.png')" @click="shareOnAPP('line')">
+        <img
+          :src="require('@/assets/imgs/fortune-telling/line_ico.png')"
+          @click="shareOnAPP('line')"
+        >
         <img
           :src="require('@/assets/imgs/fortune-telling/facebook_ico.png')"
           @click="shareOnAPP('facebook')"
@@ -48,8 +71,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { Toast } from 'vant';
-import i18n from '../../assets/lang/i18n';
+import i18n from '@/assets/lang/i18n';
 
 export default {
   name: "DailyFortuneResult",
@@ -88,39 +110,41 @@ export default {
       // this[funcName]();
     },
     shareOnAPP(platform) {
-      
       const onSuccess = function(result) {
-        // console.log("Share completed!"); 
-        Toast(i18n.t("FortuneTelling.shareSuccess"));
+        this.$toast(i18n.t("FortuneTelling.shareSuccess"));
+        console.log("Share completed!");
       };
 
       const onError = function(msg) {
         console.log("Sharing failed!" + msg);
-        Toast(i18n.t("FortuneTelling.shareFailed"));
+        this.$toast(i18n.t("FortuneTelling.shareFailed"));
       };
 
       const shareMsg = "";
       const shareLink = "https://www.bbc.com/news";
 
-      if(platform=='facebook'){
+      if (platform === "facebook") {
         window.plugins.socialsharing.shareViaFacebook(
           shareMsg,
           [""],
           shareLink,
           onSuccess,
-          onError 
+          onError
         );
-      }
-      else if(platform=='line'){
+      } else if (platform === "line") {
         var options = {
           message: shareMsg,
-          subject: '', 
-          files: [''], 
+          subject: "",
+          files: [""],
           url: shareLink,
-          chooserTitle: '', 
-          appPackageName: 'jp.naver.line.android'
+          chooserTitle: "",
+          appPackageName: "jp.naver.line.android"
         };
-        window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError);
+        window.plugins.socialsharing.shareWithOptions(
+          options,
+          onSuccess,
+          onError
+        );
       }
     },
     shareOnWEB() {},
@@ -156,13 +180,45 @@ export default {
   background: no-repeat center
     url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
   background-size: cover;
+  overflow: hidden;
+
+  .web-get-fortune {
+    height: 40px;
+    top: 40px;
+    position: relative;
+    margin: 10px 16px;
+    img {
+      height: 40px;
+      position: absolute;
+    }
+    .web-get-fortune-btn {
+      background: #ff8600;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      font-size: 14px;
+      color: #ffffff;
+      letter-spacing: 0;
+      text-align: center;
+      line-height: 40px;
+      height: 40px;
+      width: 260px;
+      position: absolute;
+      right: 0;
+    }
+  }
+
   .top-desc {
-    position: absolute;
+    position: relative;
     width: 100%;
     height: 24px;
     color: white;
     font-size: 16px;
     text-align: center;
+    .master-des {
+      position: absolute;
+      top: 20px;
+      left: 95px;
+    }
   }
   .app-fortune-result-content {
     margin-top: 20px;

@@ -131,7 +131,7 @@ export default {
           var resUpload = JSON.parse(xhr.response);
           if (resUpload.code === 200) {
             // send to server
-            vm.$api.submitQuestion({ id: vm.question.id, value: resUpload.data.url }).then(
+            vm.$api.submitCreditAnswer({ id: vm.question.id, value: resUpload.data.url }).then(
               res => {
                 if (res.data.code === 200) {
                   // update vuex and localstorage

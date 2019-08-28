@@ -1,6 +1,9 @@
 <template>
   <div class="app-fortune-master-photo">
-    <div class="photo-bg">
+    <div
+      class="photo-bg"
+      :style="imgStyle"
+    >
       <div
         class="photo"
         :class="currentMasterImage"
@@ -20,12 +23,23 @@ export default {
       },
       required: true,
       type: Number
+    },
+    imgSize: {
+      default: 100,
+      type: Number
     }
   },
   computed: {
     ...mapState({
       currentMasterImage(state) {
         return `master-img-0${this.masterId}`;
+      },
+      imgStyle() {
+        const size = this.imgSize + "px";
+        return {
+          width: size,
+          height: size
+        };
       }
     })
   }
@@ -41,20 +55,15 @@ export default {
     height: 100px;
     background: #f8f9f9;
     border-radius: 65px;
-    border-color: #bf3813;
-    border-width: 1px;
-    border-style: solid;
     overflow: hidden;
     .photo {
       width: 100%;
       height: 100%;
-      background: no-repeat center url("../../assets/imgs/master_01.png");
+      background: no-repeat center
+        url("../../assets/imgs/fortune-telling/ico_master_01.png");
       background-size: contain;
       &.master-img-02 {
-        background-image: url("../../assets/imgs/master_02.png");
-      }
-      &.master-img-03 {
-        background-image: url("../../assets/imgs/master_03.png");
+        background-image: url("../../assets/imgs/fortune-telling/master_02.png");
       }
     }
   }

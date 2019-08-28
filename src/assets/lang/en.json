@@ -18,7 +18,14 @@
     "liked": "Liked",
     "share": "Share",
     "shareSuccess": "Sharing in progress!",
-    "shareFailed": "Sharing failed!"
+    "shareFailed": "Sharing failed!",
+    "masterDes": "Here’s your fortune by {n}! ",
+    "luckyDes": "Your Sales Luck Today",
+    "luckyAmountDes": "Today Luck Will Likely Bring You",
+    "recordDes": "Record yesterday’s income for master to predict your daily sales.",
+    "recordBtn": "Record Now",
+    "selectMasterDes": "Select a Master to tell your fortune.",
+    "getFortuneBtn": "Get Your Business Fortune Now"
   },
   "Income": "TODAY'S SALES",
   "Expenses": "SPENDINGS",

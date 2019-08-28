@@ -20,7 +20,7 @@
         :class="error ? 'input-box-error upload-wrapper': 'upload-wrapper'"
         prop="answering">
         <div
-          id="camera-input-field"
+          id="camera-input-field" @click="takePhoto"
         >
           <div class="placeholder">
             <van-row style="padding-left: 75px;">
@@ -89,20 +89,56 @@ export default {
   data() {
     return {
       url: "",
-      backgroundStyle: this.question.value || "",
+      backgroundStyle: `background: url(${this.question.value || ""}) no-repeat`,
       form: {
         answering: ""
       },
-      error: false
+      error: false,
+      photoFromCamera: false
     }
   },
-
+  mounted() {
+    // this is to activate cordova camera plugin
+    document.addEventListener("deviceready", () => console.log("device-ready"));
+  },
   methods: {
     validateInput() {
       this.error = !this.form.answering;
     },
+    takePhoto() {
+      let opts = {
+        quality: 80,
+        destinationType: Camera.DestinationType.DATA_URL,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        mediaType: Camera.MediaType.PICTURE,
+        encodingType: Camera.EncodingType.JPEG,
+        cameraDirection: Camera.Direction.BACK
+      };
+      navigator.camera.getPicture(this.onSuccessPhotoTaking, this.onFailPhotoTaking, opts);
+    },
+    onSuccessPhotoTaking(imgURI) {
+      let dataURI = "data:image/jpeg;base64," + imgURI;
+      var vm = this;
+      vm[`${"form"}`] = { "answering": dataURI };
+      vm[`${"error"}`] = false;
+      vm[`${"photoFromCamera"}`] = true;
+      vm[`${"backgroundStyle"}`] = `background: url(${dataURI}) no-repeat`;
+    },
+    onFailPhotoTaking() {
+
+    },
     deleteImage() {
       this.form.answering = "";
+      this.photoFromCamera = false;
+    },
+    dataURItoBlob(dataURI) {
+      var byteString = atob(dataURI.split(",")[1]);
+      var ab = new ArrayBuffer(byteString.length);
+      var ia = new Uint8Array(ab);
+      for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+      return new Blob([ab], { type: "image/jpeg" });
     },
     uploadImg(param) {
       var vm = this;
@@ -154,6 +190,13 @@ export default {
       xhr.send(form);
     },
     handleSubmit() {
+      if (this.photoFromCamera) {
+        this.handleSubmitTakingPhoto();
+      } else {
+        this.handleSubmitUploadFromGallery()
+      }
+    },
+    handleSubmitUploadFromGallery() {
       event.preventDefault();
       this.validateInput();
       if (!this.error) {
@@ -161,7 +204,7 @@ export default {
         // this.$store.commit("UpdateCreditAnswer", { id: this.question.id, value: this.form.answering });
 
         // send to server
-        this.$api.submitQuestion({ id: this.question.id, value: this.form.answering }).then(
+        this.$api.submitCreditAnswer({ id: this.question.id, value: this.form.answering }).then(
           res => {
             if (res.data.code === 200) {
               // update vuex and localstorage
@@ -170,6 +213,49 @@ export default {
             }
           }
         )
+      }
+    },
+    handleSubmitTakingPhoto() {
+      event.preventDefault();
+      this.validateInput();
+      if (!this.error) {
+        // upload to cloud
+        var vm = this;
+        var UploadApi = this.$store.state.uploadImgUrl;
+        var fileObj = this.dataURItoBlob(this.form.answering);
+
+        var type = "creditAnswer";
+
+        var form = new FormData();
+        form.append("file", fileObj);
+        form.append("type", type);
+
+        // XMLHttpRequest 对象
+        var xhr = new XMLHttpRequest();
+        xhr.open("post", UploadApi, true);
+        xhr.onload = function() {
+          var resUpload = JSON.parse(xhr.response);
+          if (resUpload.code === 200) {
+            // send to server
+            vm.$api.submitCreditAnswer({ id: vm.question.id, value: resUpload.data.url }).then(
+              res => {
+                if (res.data.code === 200) {
+                  // update vuex and localstorage
+                  vm.$store.commit("UpdateCreditLimit", vm.$store.state.credit.currentCreditLimit + vm.question.limitAmount);
+                  vm.$store.commit("UpdateCreditAnswer", { id: vm.question.id, value: resUpload.data.url });
+                }
+              }
+            )
+          } else {
+            vm.$notify({
+              message:
+                "Upload failed. Please check your internet connection is stable before trying again.",
+              duration: 3000
+            });
+            return false;
+          }
+        };
+        xhr.send(form);
       }
     }
   }
