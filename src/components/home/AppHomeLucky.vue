@@ -68,7 +68,7 @@ export default {
     fortuneResult: {
       handler(val, oldVal) {
         if (val && val.fortuneResult && val.fortuneResult.length > 0) {
-          //this.fortuneTold = true;
+          this.fortuneTold = true;
           let salesTarget = val.salesTarget;
           if (salesTarget.type === 0) {
             this.inputedIncome = true;

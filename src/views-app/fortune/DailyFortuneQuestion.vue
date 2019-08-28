@@ -7,8 +7,6 @@
     <fortune-telling-app-fortune-question-content
       @submitAnswer="submitAnswer"
       :index="index"
-      :questionBody="question"
-      :questionSubtitle="subtitle"
     />
   </div>
 </template>

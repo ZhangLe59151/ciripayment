@@ -36,6 +36,7 @@ export default new Vuex.Store({
     form: {},
     userInfo: {},
     application: {},
+    furtuneQuestion: {},
     recordList: JSON.parse(localStorage.getItem("recordList")) || [],
     masterList: require("@/assets/data/fortuneMasterList.json"),
     localDateFormatter: "YYYYMMDD",
@@ -527,6 +528,17 @@ export default new Vuex.Store({
     },
     UnfirstLaunch() {
       window.localStorage.setItem("firstLuanch", false);
+    },
+    UpdateFurtuneQuestionInfo(state, fortuneQ) {
+      state.furtuneQuestion = Object.assign(state.furtuneQuestion, fortuneQ);
+      window.localStorage.setItem(
+        "furtuneQuestion",
+        JSON.stringify(state.furtuneQ)
+      );
+    },
+    ClearFortuneQuestion(state) {
+      state.furtuneQuestion = {};
+      window.localStorage.removeItem("furtuneQuestion");
     }
   },
   actions: {}

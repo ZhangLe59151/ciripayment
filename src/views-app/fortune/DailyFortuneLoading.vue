@@ -19,14 +19,22 @@ export default {
   computed: {
     ...mapState({
       localDateFormatter: "localDateFormatter",
-      fortuneInfo: "fortuneInfo"
+      fortuneInfo: "fortuneInfo",
+      isLogin: "OTPVerified",
+      answerForm: "furtuneQuestion"
     }),
     today() {
       return this.$moment().format(this.localDateFormatter);
     }
   },
   mounted() {
-    this.getFortunetellingByAPI();
+    if (this.isLogin) {
+      this.getFortunetellingByAPI();
+      this.sendAnswer();
+    }else {
+      this.$router.push({name: 'LoginPage', query: {to: 'Settings'}})
+    }
+    
   },
   methods: {
     getFortunetellingByAPI() {
@@ -42,6 +50,13 @@ export default {
             this.$router.push({ name: "Home" });
           }
         });
+    },
+    sendAnswer() {
+      this.$api.postAnswerF(this.answerForm).then(res => {
+        if (res.data.code === 200) {
+          this.$store.commit("ClearFortuneQuestion");
+        }
+      });
     },
     showResult() {
       setTimeout(() => {
