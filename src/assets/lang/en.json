@@ -16,7 +16,9 @@
     "shareCopy": "Share my Daily Fortune to:",
     "like": "Like",
     "liked": "Liked",
-    "share": "Share"
+    "share": "Share",
+    "shareSuccess": "Sharing in progress!",
+    "shareFailed": "Sharing failed!"
   },
   "Income": "TODAY'S SALES",
   "Expenses": "SPENDINGS",
@@ -167,5 +169,8 @@
     "yourPhone": "Your Mobile Number",
     "enterOTPtitle": "Enter OTP",
     "resendOTP": "Resend OTP"
+  },
+  "Common":{
+    "serverRequestError": "Server request error. Please try again!"
   }
 }

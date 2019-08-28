@@ -48,6 +48,9 @@
 
 <script>
 import { mapState } from "vuex";
+import { Toast } from 'vant';
+import i18n from '../../assets/lang/i18n';
+
 export default {
   name: "DailyFortuneResult",
   data() {
@@ -87,11 +90,13 @@ export default {
     shareOnAPP(platform) {
       
       const onSuccess = function(result) {
-        console.log("Share completed!"); 
+        // console.log("Share completed!"); 
+        Toast(i18n.t("FortuneTelling.shareSuccess"));
       };
 
       const onError = function(msg) {
         console.log("Sharing failed!" + msg);
+        Toast(i18n.t("FortuneTelling.shareFailed"));
       };
 
       const shareMsg = "";
