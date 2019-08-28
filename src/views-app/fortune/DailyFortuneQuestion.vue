@@ -2,7 +2,7 @@
   <div class="daily-fortune-question">
     <fortune-telling-app-fortune-header :center="true" />
     <div class="introduction">
-      Hang On, Master อ.ตี๋ รามัญ would like to ask you a few questions.
+      Hang On, Master {{fortuneInfo.selectedMaster.name}} would like to ask you a few questions.
     </div>
     <fortune-telling-app-fortune-question-content
       @submitAnswer="submitAnswer"
@@ -26,7 +26,8 @@ export default {
   computed: {
     ...mapState({
       fortuneInfo: "fortuneInfo",
-      OTPVerified: "OTPVerified"
+      OTPVerified: "OTPVerified",
+      fortuneInfo: "fortuneInfo"
     })
   },
   mounted() {

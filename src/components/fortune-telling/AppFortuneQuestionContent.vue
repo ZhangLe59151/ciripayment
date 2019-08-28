@@ -79,7 +79,6 @@ export default {
   created() {
     this.$api.getQuestionF().then(res => {
         if (res.data.code === 200) {
-          // debugger
           this.questionList = res.data.data.questions;
           this.answerForm[0].allowRepeat = res.data.data.questions[0].allowRepeat;
           this.answerForm[1].allowRepeat = res.data.data.questions[1].allowRepeat;
@@ -102,7 +101,6 @@ export default {
           });
         }
         else {
-          debugger
           this.$store.commit("UpdateFurtuneQuestionInfo", this.answerForm);
           this.$router.push({ name: "LoginPage", query: { to: "DailyFortuneLoading" } });
         }       
