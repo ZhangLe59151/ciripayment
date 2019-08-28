@@ -211,6 +211,7 @@ export default {
           "accountDate",
           val ? (kv[_selected] ? kv[_selected] : "") + formDate : ""
         );
+        var a = this.$moment(val).format(this.localDateFormatter);
 
         this.fetchDataUpdate(this.$moment(val).format(this.localDateFormatter));
       }
@@ -263,9 +264,10 @@ export default {
     },
     updateBtn() {
       const form = Object.assign({}, this.form);
-      form.accountDate = this.$moment(this.form.accountDate).format(
+      form.accountDate = this.$moment(this.form.currentDate).format(
         this.localDateFormatter
       );
+      debugger
       this.appear = false;
       const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
       if (regex.test(form[this.type])) {
