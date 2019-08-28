@@ -20,7 +20,7 @@
         :class="error ? 'input-box-error upload-wrapper': 'upload-wrapper'"
         prop="answering">
         <div
-          id="camera-input-field"
+          id="camera-input-field" @click="takePhoto"
         >
           <div class="placeholder">
             <i class="iconfont iconcamera" />
@@ -69,103 +69,87 @@ export default {
     }
   },
   mounted() {
-    let app = {
-      init: function() {
-        document.getElementById("camera-input-field").addEventListener("click", app.takephoto);
-      },
-      takephoto: function() {
-        let opts = {
-          quality: 80,
-          destinationType: Camera.DestinationType.FILE_URI,
-          sourceType: Camera.PictureSourceType.CAMERA,
-          mediaType: Camera.MediaType.PICTURE,
-          encodingType: Camera.EncodingType.JPEG,
-          cameraDirection: Camera.Direction.BACK,
-        };
-        navigator.camera.getPicture(app.ftw, app.wtf, opts);
-      },
-      ftw: function(imgURI) {
-        console.log(imgURI);
-        this.form.answering = imgURI;
-
-        document.getElementById("photo-question").style.background = `background: url(${imgURI}) no-repeat`;
-      },
-      wtf: function(msg) {
-        document.getElementById("msg").textContent = msg;
-      }
-    };
-    document.addEventListener("deviceready", app.init);
+    // this is to activate cordova camera plugin
+    document.addEventListener("deviceready", () => console.log("device-ready"));
   },
   methods: {
     validateInput() {
       this.error = !this.form.answering;
     },
+    takePhoto() {
+      let opts = {
+        quality: 80,
+        destinationType: Camera.DestinationType.DATA_URL,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        mediaType: Camera.MediaType.PICTURE,
+        encodingType: Camera.EncodingType.JPEG,
+        cameraDirection: Camera.Direction.BACK
+      };
+      navigator.camera.getPicture(this.onSuccessPhotoTaking, this.onFailPhotoTaking, opts);
+    },
+    onSuccessPhotoTaking(imgURI) {
+      let dataURI = "data:image/jpeg;base64," + imgURI;
+      var vm = this;
+      vm[`${"form"}`] = { "answering": dataURI };
+      vm[`${"error"}`] = false;
+      vm[`${"backgroundStyle"}`] = `background: url(${dataURI}) no-repeat`;
+    },
+    onFailPhotoTaking() {
+
+    },
     deleteImage() {
       this.form.answering = "";
     },
-    uploadImg(param) {
-      var vm = this;
-      var UploadApi = this.$store.state.uploadImgUrl;
-      var fileObj = param.file;
-      var originalFileName = fileObj.name;
-      var originalFileSizeMb = util.byteToMb(fileObj.size);
-
-      console.log("original file size: ", originalFileSizeMb);
-      console.log("original file name: ", originalFileName);
-
-      var type = param.action;
-
-      var form = new FormData();
-      form.append("file", fileObj);
-      form.append("type", type);
-
-      // XMLHttpRequest 对象
-      var xhr = new XMLHttpRequest();
-      xhr.open("post", UploadApi, true);
-      xhr.onload = function() {
-        var res = JSON.parse(xhr.response);
-        if (res.code === 200) {
-          vm[`${"form"}`] = { "answering": res.data.url };
-          vm[`${"error"}`] = false;
-          vm[`${"backgroundStyle"}`] = `background: url(${res.data.url}) no-repeat`;
-        } else {
-          vm.$notify({
-            message:
-                "Upload failed. Please check your internet connection is stable before trying again.",
-            duration: 3000
-          });
-          return false;
-        }
-      };
-      //
-      // xhr.onerror = function() {
-      //   vm[`${nextStausKey}`] = 0;
-      //   vm.$notify({
-      //     message:
-      //       "Upload failed. Please check your internet connection is stable before trying again.",
-      //     duration: 3000
-      //   });
-      // };
-
-      xhr.send(form);
+    dataURItoBlob(dataURI) {
+      var byteString = atob(dataURI.split(",")[1]);
+      var ab = new ArrayBuffer(byteString.length);
+      var ia = new Uint8Array(ab);
+      for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+      return new Blob([ab], { type: "image/jpeg" });
     },
     handleSubmit() {
       event.preventDefault();
       this.validateInput();
       if (!this.error) {
-        // this.$store.commit("UpdateCreditLimit", this.$store.state.credit.currentCreditLimit + this.question.limitAmount);
-        // this.$store.commit("UpdateCreditAnswer", { id: this.question.id, value: this.form.answering });
+        // upload to cloud
+        var vm = this;
+        var UploadApi = this.$store.state.uploadImgUrl;
+        var fileObj = this.dataURItoBlob(this.form.answering);
 
-        // send to server
-        this.$api.submitQuestion({ id: this.question.id, value: this.form.answering }).then(
-          res => {
-            if (res.data.code === 200) {
-              // update vuex and localstorage
-              this.$store.commit("UpdateCreditLimit", this.$store.state.credit.currentCreditLimit + this.question.limitAmount);
-              this.$store.commit("UpdateCreditAnswer", { id: this.question.id, value: this.form.answering });
-            }
+        var type = "creditAnswer";
+
+        var form = new FormData();
+        form.append("file", fileObj);
+        form.append("type", type);
+
+        // XMLHttpRequest 对象
+        var xhr = new XMLHttpRequest();
+        xhr.open("post", UploadApi, true);
+        xhr.onload = function() {
+          var resUpload = JSON.parse(xhr.response);
+          if (resUpload.code === 200) {
+            // send to server
+            vm.$api.submitCreditAnswer({ id: vm.question.id, value: resUpload.data.url }).then(
+              res => {
+                if (res.data.code === 200) {
+                  // update vuex and localstorage
+                  vm.$store.commit("UpdateCreditLimit", vm.$store.state.credit.currentCreditLimit + vm.question.limitAmount);
+                  vm.$store.commit("UpdateCreditAnswer", { id: vm.question.id, value: resUpload.data.url });
+                }
+              }
+            )
+          } else {
+            vm.$notify({
+              message:
+                "Upload failed. Please check your internet connection is stable before trying again.",
+              duration: 3000
+            });
+            return false;
           }
-        )
+        };
+        xhr.send(form);
       }
     }
   }
