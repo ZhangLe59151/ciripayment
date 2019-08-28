@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve --mode local",
     "build": "vue-cli-service build --mode app",
     "lint": "vue-cli-service lint",
-    "build-app": "vue-cli-service build --mode app",
+    "build-web": "vue-cli-service build --mode web",
     "build-pro-app": "vue-cli-service build --mode appPro",
     "build-pro-web": "vue-cli-service build --mode webPro",
     "cordova-prepare": "vue-cli-service cordova-prepare",
