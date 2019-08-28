@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     getStart() {
-      this.$router.push({ name: "PersonalQuestion" });
+      this.$router.push({ name: "PersonalQuestion", params: { id: 0 } });
     },
     signIn() {
       this.$router.push({ name: "LoginPage" });

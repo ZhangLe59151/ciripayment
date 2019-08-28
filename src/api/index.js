@@ -145,10 +145,16 @@ export default {
   logout(params) {
     return Vue.axios.post("/api/logout", params);
   },
-  getQuestion(params) {
+  getQuestionPersonal(params) {
     return Vue.axios.get(`/api/common-question?sourceType=${params}`);
   },
-  postAnswer(params) {
+  postAnswerPersonal(params) {
     return Vue.axios.post("/api/common-question/answer",params);
+  },
+  getQuestionF() {
+    return Vue.axios.get("/api/fortune-telling/question");
+  },
+  postAnswerF(params) {
+    return Vue.axios.post("/api/fortune-telling/question/answer",params);
   }
 };

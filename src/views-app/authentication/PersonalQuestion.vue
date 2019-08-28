@@ -72,6 +72,7 @@ export default {
       tabActive: 0,
       tab1: false,
       tab2: false,
+      allSkip: true,
       icon11: require("@/assets/imgs/personal/retailstoresignin.svg"),
       icon12: require("@/assets/imgs/personal/restaurantsignin.svg"),
       icon13: require("@/assets/imgs/personal/servicesignin.svg"),
@@ -98,41 +99,53 @@ export default {
   },
   created() {
     //this.$store.commit("UnfirstLaunch");
-    debugger
-    this.$api.getQuestion(1).then(res => {
-      if (res.data.code === 200) {
-        debugger
-        this.form1 = res.data.data.questions[2];
-        this.form2 = res.data.data.questions[1];
-        this.form3 = res.data.data.questions[0];
-      }
-    });
+    if (this.$route.params.id === 1) {
+      this.tab1 = true;
+      this.tabActive = 1;
+    }
+    if (this.$route.params.id === 2) {
+      this.tab1 = this.tab2 = true;
+      this.tabActive = 2;
+    } else {
+      this.$api.getQuestionPersonal(1).then(res => {
+        if (res.data.code === 200) {
+          this.form1 = res.data.data.questions[2];
+          this.form2 = res.data.data.questions[1];
+          this.form3 = res.data.data.questions[0];
+        }
+      });
+    }
+    
   },
   methods: {
     skipQuestion(){
       if (this.tabActive === 0) {
-        this.tab1= true;
-        this.tabActive += 1;
+        this.$router.push({ name: "PersonalQuestion", params: { id: 1 } });
       }else if (this.tabActive === 1){
-        this.tab2 = true;
-        this.tabActive = this.tabActive+1;
+        this.$router.push({ name: "PersonalQuestion", params: { id: 2 } });
       } else {
-        this.$router.push({ name: "Home" });
+        if (allSkip) { this.$router.push({ name: "Home" }); }
+        else { this.sendAnswer(); }
       }
+    },
+    sendAnswer() {
+      //this.answerList.remove('');
+      this.$api.postAnswerPersonal(this.answerList).then(res => {
+        if (res.data.code === 200) {
+          this.splash = true;
+          this.questionPage = false;
+          setTimeout(() => { this.$router.push({ name: "Home" }); }, 1500);
+        }
+      });
     },
     answer(aid, id, answer) {
       this.answerList[aid].id = id;
       this.answerList[aid].value = answer;
       if (this.tabActive === 2) {
-      this.$api.postAnswer(this.answerList).then(res => {
-        if (res.data.code === 200) {
-            this.splash = true;
-            this.questionPage = false;
-            setTimeout(() => { this.$router.push({ name: "Home" }); }, 1500);
-          }
-        });
+        this.sendAnswer();
       } else {
-        this.tabActive += 1;
+        this.tabActive += 1
+        this.$router.push({ name: "PersonalQuestion", params: { id: this.tabActive } });
       }
     }
   }
@@ -141,7 +154,8 @@ export default {
 
 <style lang="scss" scoped>
 .splashPage {
-  background: "iconBk" no-repeat;
+  background: url("../../assets/imgs/personal/confetti.png") no-repeat;
+  //background: "iconBk" no-repeat;
   background-size: cover;
   height: 100vh;
 

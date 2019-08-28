@@ -199,7 +199,7 @@ const AppRouteArr = [
     component: () => import("@/views-app/authentication/LoginPage.vue")
   },
   {
-    path: "/personal-question",
+    path: "/personal-question/:id",
     name: "PersonalQuestion",
     component: () => import("@/views-app/authentication/PersonalQuestion.vue")
   },

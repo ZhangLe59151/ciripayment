@@ -35,8 +35,6 @@ export default {
     })
   },
   created() {
-    //this.$router.push({ name: "LandingPage" });
-    debugger
     if (this.firstLuanch === 0) {
       this.$router.push({ name: "LandingPage" });
     }

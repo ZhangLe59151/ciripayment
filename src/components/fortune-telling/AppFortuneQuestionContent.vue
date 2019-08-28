@@ -2,37 +2,41 @@
   <div class="app-fortune-question-content">
     <div class="background-card">
       <div class="question-header">
-        Question {{index}}
+        Question {{ index }}
       </div>
       <div class="question-body">
-        {{questionBody}}
+        {{ questionList[questionindex].question }}
       </div>
       <div class="question-subtitle">
-        {{questionSubtitle}}
+        {{ questionList[questionindex].description }}
       </div>
       <div class="bottom-actions">
         <van-field
           v-model="answer"
           class="answer-input"
           :border="true"
-          placeholder="E.g. Orange Juice"
-          v-if="type === '1'"
+          :placeholder="questionList[questionindex].placeholder"
+          v-if="questionList[questionindex].answerType === 2"
         />
 
-        <div class="flex-container" v-if="type === '2'">
-          <van-button :class="(answer === 1 ? 'tab3Selected' : 'tab3')" @click="onSelect(1)" >1</van-button>
-          <van-button :class="(answer === 2 ? 'tab3Selected' : 'tab3')" @click="onSelect(2)" >1</van-button>
-          <van-button :class="(answer === 3 ? 'tab3Selected' : 'tab3')" @click="onSelect(3)" >1</van-button>
+        <div class="flex-container" v-if="questionList[questionindex].answerType === 3 && questionList[questionindex].options.length < 4">
+          <div :v-for="item in questionList[questionindex].options">
+            <van-button :class="(answer === item ? 'tab3Selected' : 'tab3')" @click="onSelect(item)" > item </van-button>
+          </div>
         </div>
 
-        <div class="flex-container" v-if="type === '3'">
-          <van-button :class="(answer === 1 ? 'tab7Selected' : 'tab7')" @click="onSelect(1)" >1</van-button>
-          <van-button :class="(answer === 2 ? 'tab7Selected' : 'tab7')" @click="onSelect(2)" >1</van-button>
-          <van-button :class="(answer === 3 ? 'tab7Selected' : 'tab7')" @click="onSelect(3)" >1</van-button>
-          <van-button :class="(answer === 4 ? 'tab7Selected' : 'tab7')" @click="onSelect(4)" >1</van-button>
-          <van-button :class="(answer === 5 ? 'tab7Selected' : 'tab7')" @click="onSelect(5)" >1</van-button>
-          <van-button :class="(answer === 6 ? 'tab7Selected' : 'tab7')" @click="onSelect(6)" >1</van-button>
-          <van-button :class="(answer === 7 ? 'tab7Selected' : 'tab7')" @click="onSelect(7)" >1</van-button>
+        <div 
+          class="flex-container" 
+          v-if="questionList[questionindex].answerType === 3 && questionList[questionindex].options.length > 3"
+           >
+           <div 
+            :v-for="item in questionList[questionindex].options"
+            :v-key="item">{{ item }}
+            <van-button 
+              :class="(answer === item ? 'tab7Selected' : 'tab7')" 
+              @click="onSelect(item)" >{{ item }}
+            </van-button>
+           </div>
         </div>
 
           
@@ -52,37 +56,35 @@
 <script>
 export default {
   name: "AppFortuneQuestionContent",
-  props: {
-    index: {
-      default: 1,
-      type: Number
-    },
-    questionBody: {
-      default: "",
-      type: String
-    },
-    questionSubtitle: {
-      default: "",
-      type: String
-    },
-    type: {
-      default: "3"
-    }
-  },
   data() {
     return {
-      answer: ""
+      index: 1,
+      questionindex: 0,
+      answer: "",
+      answerform: [ { id: 0, value: "" }, { id: 0, value: "" } ],
+      questionList: []
     };
+  },
+  created() {
+    this.$api.getQuestionF().then(res => {
+        if (res.data.code === 200) {
+          debugger
+          this.questionList = res.data.data.questions;
+          this.answerform[0].id = res.data.data.questions[0].id;
+          this.answerform[1].id = res.data.data.questions[1].id;
+        }
+      });
   },
   methods: {
     next() {
-      this.$emit("submitAnswer", this.answer);
+      this.answerform[this.index].value = this.value
       this.answer = "";
-      this.type="2";
-      setTimeout(() => { this.$router.push({ name: "DailyFortuneLoading" }); }, 1500);
+      this.index += 1;
+      this.questionindex += 1;
+      //setTimeout(() => { this.$router.push({ name: "DailyFortuneLoading" }); }, 1500);
     },
-    onSelect(id) {
-      this.answer = id;
+    onSelect(item) {
+      this.answer = item;
     } 
   }
 };
@@ -129,7 +131,7 @@ export default {
   position: absolute;
   color: #68737D;
   font-size: 14px;
-  top: 114px;
+  top: 164px;
   height: 24px;
   width: 90%;
   text-align: center;
@@ -152,6 +154,7 @@ export default {
     font-size: 24px;
     text-align: center;
     line-height: 80px;
+    top: 34px;
     height: 80px;
     width: 264px;
     border-radius: 4px;
@@ -185,6 +188,7 @@ export default {
     .tab7 {
       width: 124px;
       height: 40px;
+      top: 30px;
       margin: 0 4px 5px 4px;
       border: 1px solid #87929D;
       border-radius: 4px;
@@ -194,6 +198,7 @@ export default {
     .tab7Selected {
       width: 124px;
       height: 40px;
+      top: 30px;
       margin: 0 4px 5px 4px;
       border: 1px solid #87929D;
       border-radius: 4px;
