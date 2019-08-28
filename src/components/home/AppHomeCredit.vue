@@ -102,7 +102,8 @@ export default {
     color: #363f47;
     letter-spacing: 0;
     text-align: center;
-    padding: 6px 16px;
+    padding: 6px 0;
+    width: 70px;
     position: absolute;
     left: 16px;
     bottom: 16px;

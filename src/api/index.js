@@ -149,12 +149,15 @@ export default {
     return Vue.axios.get(`/api/common-question?sourceType=${params}`);
   },
   postAnswerPersonal(params) {
-    return Vue.axios.post("/api/common-question/answer",params);
+    return Vue.axios.post("/api/common-question/answer", params);
   },
   getQuestionF() {
     return Vue.axios.get("/api/fortune-telling/question");
   },
   postAnswerF(params) {
-    return Vue.axios.post("/api/fortune-telling/question/answer",params);
+    return Vue.axios.post("/api/fortune-telling/question/answer", params);
+  },
+  getLikeCount() {
+    return Vue.axios.get("/api/lucky-draw/like-count");
   }
 };

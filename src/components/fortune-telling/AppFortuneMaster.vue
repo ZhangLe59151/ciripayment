@@ -23,13 +23,13 @@
 
         <div
           class="view"
-          @click="$router.push({name: 'MasterProfile', params: {id: master.id}})"
+          @click="$router.push({name: 'MasterProfile', params: {id: master.id},query: {subtitle: subtitle}})"
         >
           {{$t("FortuneTelling.viewProfile")}}
           <van-icon name="play" />
         </div>
         <div class="desc">
-          {{master.subtitle}}
+          {{subtitle}}
         </div>
         <van-button
           class="choose-btn"
@@ -54,6 +54,16 @@ export default {
       },
       required: true,
       type: Object
+    }
+  },
+
+  computed: {
+    subtitle() {
+      return this.$tc(
+        "FortuneTelling.likeDes",
+        this.master.like === 1 ? 1 : 2,
+        { n: this.master.likeCount }
+      );
     }
   }
 };

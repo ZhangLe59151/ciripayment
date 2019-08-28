@@ -25,7 +25,8 @@
     "recordDes": "Record yesterday’s income for master to predict your daily sales.",
     "recordBtn": "Record Now",
     "selectMasterDes": "Select a Master to tell your fortune.",
-    "getFortuneBtn": "Get Your Business Fortune Now"
+    "getFortuneBtn": "Get Your Business Fortune Now",
+    "likeDes": "Liked by You and {n}+ others | Liked {n}+ others"
   },
   "Income": "TODAY'S SALES",
   "Expenses": "SPENDINGS",
@@ -112,8 +113,8 @@
     "expenses": "SPENDINGS",
     "loan": "Get Cash!",
     "loanBtn": "Apply Now",
-    "luckyTitle": "Get Today's",
-    "luckySubtitle": "Fortune",
+    "luckyTitle": "Get Today’s Fortune",
+    "luckySubtitle": "For Your Business",
     "luckyBtn": "Go!",
     "encourageLuckyTitle": "Your Sales Target Today",
     "encourageWording": "Almost there! You can do it.",
@@ -177,7 +178,7 @@
     "enterOTPtitle": "Enter OTP",
     "resendOTP": "Resend OTP"
   },
-  "Common":{
+  "Common": {
     "serverRequestError": "Server request error. Please try again!"
   }
 }

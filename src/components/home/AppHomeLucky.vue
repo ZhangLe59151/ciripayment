@@ -4,12 +4,20 @@
     @click="$router.push({name: 'DailyFortunePrepare'})"
     v-if="!fortuneTold"
   >
-    <img :src="require('@/assets/imgs/home_master.png')">
+    <img
+      :src="require('@/assets/imgs/lady_teller.png')"
+      class="lady_teller"
+    >
     <div class="subtitle">
       <div>{{$t("Home.luckyTitle")}}</div>
       <div>{{$t("Home.luckySubtitle")}}</div>
     </div>
     <div class="btn">{{$t("Home.luckyBtn")}}</div>
+    <img
+      :src="require('@/assets/imgs/male_teller.png')"
+      class="male_teller"
+    >
+
   </div>
   <div
     class="app-home-lucky"
@@ -117,8 +125,14 @@ export default {
   > img {
     height: 120px;
     position: absolute;
-    left: 0;
-    bottom: -7px;
+    bottom: 0;
+    &.lady_teller {
+      left: 0;
+    }
+
+    &.male_teller {
+      right: 0;
+    }
 
     &.single {
       left: 20px;
@@ -136,11 +150,17 @@ export default {
 
     &.subtitle {
       font-weight: bold;
-      font-size: 22px;
+      font-size: 16px;
       color: #ffffff;
-      position: absolute;
-      top: 16px;
-      right: 16px;
+      margin: 0 auto;
+      padding: 24px 0 10px;
+      width: 174px;
+      text-align: center; // font-weight: bold;
+      // font-size: 22px;
+      // color: #ffffff;
+      // position: absolute;
+      // top: 16px;
+      // right: 16px;
       &.single-subtitle {
         top: 44px;
       }
@@ -159,10 +179,12 @@ export default {
       font-size: 14px;
       color: #2f3941;
       text-align: center;
-      padding: 6px 16px;
-      position: absolute;
-      right: 16px;
-      bottom: 16px;
+      padding: 6px 0;
+      width: 70px;
+      margin: 0 auto;
+      // position: absolute;
+      // right: 16px;
+      // bottom: 16px;
     }
   }
   .subscript {
