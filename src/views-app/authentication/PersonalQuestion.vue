@@ -97,9 +97,11 @@ export default {
     };
   },
   created() {
-    this.$store.commit("UnfirstLaunch");
+    //this.$store.commit("UnfirstLaunch");
+    debugger
     this.$api.getQuestion(1).then(res => {
       if (res.data.code === 200) {
+        debugger
         this.form1 = res.data.data.questions[2];
         this.form2 = res.data.data.questions[1];
         this.form3 = res.data.data.questions[0];
