@@ -22,7 +22,8 @@
     "luckyAmountDes": "Today Luck Will Likely Bring You",
     "recordDes": "Record yesterday’s income for master to predict your daily sales.",
     "recordBtn": "Record Now",
-    "selectMasterDes": "Select a Master to tell your fortune."
+    "selectMasterDes": "Select a Master to tell your fortune.",
+    "getFortuneBtn": "Get Your Business Fortune Now"
   },
   "Income": "TODAY'S SALES",
   "Expenses": "SPENDINGS",

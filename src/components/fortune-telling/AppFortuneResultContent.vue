@@ -18,7 +18,7 @@
           </div>
         </section>
 
-        <section v-if="hasRecord">
+        <section v-if="hasRecord === '1'">
           <div class="sales-desc">
             {{$t("FortuneTelling.luckyAmountDes")}}
           </div>
@@ -29,6 +29,13 @@
             <span>{{fortuneResult.salesTarget.incomeResult.max}}</span>
             <span class="currency">{{currency}}</span>
           </div>
+        </section>
+
+        <section v-else-if="hasRecord === '2'">
+          <div class="sales-desc">
+            {{$t("FortuneTelling.luckyAmountDes")}}
+          </div>
+          <img :src="require('@/assets/imgs/fortune-telling/censored.png')">
         </section>
 
         <section v-else>
@@ -79,8 +86,11 @@ export default {
       return util.convertUTCTimeToBuddhistTime(new Date());
     },
     hasRecord() {
+      if (this.$route.query.shareKey) {
+        return "2";
+      }
       const result = this.fortuneInfo.fortuneResult;
-      return result.salesTarget.incomeResult !== null;
+      return result.salesTarget.incomeResult === null ? "0" : "1";
     }
   }
 };
@@ -100,6 +110,13 @@ export default {
     top: 50px;
     width: 100%;
     height: 100%;
+
+    img {
+      height: 28px;
+      width: 156px;
+      position: relative;
+      top: 60px;
+    }
 
     .date {
       height: 26px;

@@ -11,12 +11,25 @@
         {{$tc("FortuneTelling.masterDes", fortuneInfo.selectedMaster.name)}}
       </div>
     </div>
+
+    <div
+      class="web-get-fortune"
+      v-if="$route.query.shareKey"
+    >
+      <img :src="require('@/assets/imgs/fortune-telling/finger.gif')">
+
+      <div class="web-get-fortune-btn">{{$t("FortuneTelling.getFortuneBtn")}}</div>
+    </div>
+
     <fortune-telling-app-fortune-result-content
       :fortuneInfo="fortuneInfo"
       :currency="currency"
     />
 
-    <section class="action">
+    <section
+      class="action"
+      v-if="!$route.query.shareKey"
+    >
       <div
         class="like"
         @click="triggerLike"
@@ -163,9 +176,35 @@ export default {
   background: no-repeat center
     url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
   background-size: cover;
+  overflow: hidden;
+
+  .web-get-fortune {
+    height: 40px;
+    top: 40px;
+    position: relative;
+    margin: 10px 16px;
+    img {
+      height: 40px;
+      position: absolute;
+    }
+    .web-get-fortune-btn {
+      background: #ff8600;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      font-size: 14px;
+      color: #ffffff;
+      letter-spacing: 0;
+      text-align: center;
+      line-height: 40px;
+      height: 40px;
+      width: 260px;
+      position: absolute;
+      right: 0;
+    }
+  }
 
   .top-desc {
-    position: absolute;
+    position: relative;
     width: 100%;
     height: 24px;
     color: white;
