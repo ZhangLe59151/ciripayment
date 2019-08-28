@@ -27,16 +27,13 @@
 
         <div 
           class="flex-container" 
-          v-if="questionList[questionindex].answerType === 3 && questionList[questionindex].options.length > 3"
-           >
-           <div 
-            :v-for="item in questionList[questionindex].options"
-            :v-key="item">{{ item }}
+           v-if="questionList[questionindex].answerType === 3 && questionList[questionindex].options.length < 4">
+           <div :v-for="item in questionList[questionindex].options">
             <van-button 
-              :class="(answer === item ? 'tab7Selected' : 'tab7')" 
-              @click="onSelect(item)" >{{ item }}
+              :class="(answer === 1 ? 'tab7Selected' : 'tab7')" 
+              @click="onSelect(1)" >{{ item }}
             </van-button>
-           </div>
+          </div>
         </div>
 
           
@@ -62,7 +59,8 @@ export default {
       questionindex: 0,
       answer: "",
       answerform: [ { id: 0, value: "" }, { id: 0, value: "" } ],
-      questionList: []
+      questionList: [],
+      test1: ["1","1","1","1"]
     };
   },
   created() {
