@@ -18,7 +18,10 @@
     >
       <img :src="require('@/assets/imgs/fortune-telling/finger.gif')">
 
-      <div class="web-get-fortune-btn">{{$t("FortuneTelling.getFortuneBtn")}}</div>
+      <div
+        class="web-get-fortune-btn"
+        @click="getFortuneOnWeb"
+      >{{$t("FortuneTelling.getFortuneBtn")}}</div>
     </div>
 
     <fortune-telling-app-fortune-result-content
@@ -89,7 +92,8 @@ export default {
       fortuneInfo: "fortuneInfo",
       localDateFormatter: "localDateFormatter",
       currency: "currency",
-      deviceType: "deviceType"
+      deviceType: "deviceType",
+      BaseWebUrl: "BaseWebUrl"
     }),
     today() {
       return this.$moment().format(this.localDateFormatter);
@@ -167,6 +171,9 @@ export default {
         .catch(() => {
           this.processingLike = false;
         });
+    },
+    getFortuneOnWeb() {
+      window.location.href = this.BaseWebUrl + "daily-fortune-prepare";
     }
   }
 };

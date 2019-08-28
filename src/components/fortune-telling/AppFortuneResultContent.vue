@@ -109,13 +109,13 @@ export default {
     background-size: contain;
     top: 50px;
     width: 100%;
-    height: 100%;
+    height: 400px;
 
     img {
       height: 28px;
       width: 156px;
       position: relative;
-      top: 60px;
+      top: 40px;
     }
 
     .date {
@@ -145,7 +145,7 @@ export default {
         color: #2f3941;
         letter-spacing: 0;
         text-align: center;
-        margin-top: 70px;
+        margin-top: 60px;
         height: 140px;
         display: -webkit-box;
         -webkit-box-orient: vertical;
