@@ -121,7 +121,7 @@ export default {
       };
 
       const shareMsg = "";
-      const shareLink = "https://www.bbc.com/news";
+      const shareLink = `https://${process.env.VUE_APP_WEBURL}/daily-fortune-result?shareKey=${this.fortuneInfo.shareKey}`;
 
       if (platform === "facebook") {
         window.plugins.socialsharing.shareViaFacebook(
