@@ -32,12 +32,14 @@ export default {
       .tz("Asia/Singapore")
       .format("MMMM D YYYY hh:mmA");
   },
-  convertUTCTimeToBuddhistTime(dateTime) {
+  convertUTCTimeToBuddhistTime(dateTime, withHour = false) {
     if (!dateTime) {
       return "-";
     }
 
-    return moment(dateTime)
+    return (withHour) ? moment(dateTime)
+      .add(543, "year")
+      .format("DD MMM YYYY HH:ss") : moment(dateTime)
       .add(543, "year")
       .format("DD MMM YYYY");
   },
