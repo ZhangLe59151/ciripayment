@@ -250,6 +250,11 @@ const AppRouteArr = [
     component: () => import("@/views-app/fortune/DailyFortuneLoading.vue")
   },
   {
+    path: "/daily-fortune-loading",
+    name: "DailyFortuneLoading",
+    component: () => import("@/views-app/fortune/DailyFortuneLoading.vue")
+  },
+  {
     path: "/daily-fortune-result",
     name: "DailyFortuneResult",
     component: () => import("@/views-app/fortune/DailyFortuneResult.vue")

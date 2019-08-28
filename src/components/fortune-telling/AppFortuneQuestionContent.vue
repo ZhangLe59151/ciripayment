@@ -20,9 +20,9 @@
         />
 
         <div class="flex-container" v-if="type === '2'">
-          <van-button class="tab3" @click="onSelect(1)" >1</van-button>
-          <van-button class="tab3" @click="onSelect(2)" >1</van-button>
-          <van-button class="tab3" @click="onSelect(3)" >1</van-button>
+          <van-button :class="(answer === 1 ? 'tab3Selected' : 'tab3')" @click="onSelect(1)" >1</van-button>
+          <van-button :class="(answer === 2 ? 'tab3Selected' : 'tab3')" @click="onSelect(2)" >1</van-button>
+          <van-button :class="(answer === 3 ? 'tab3Selected' : 'tab3')" @click="onSelect(3)" >1</van-button>
         </div>
 
         <div class="flex-container" v-if="type === '3'">
@@ -79,6 +79,7 @@ export default {
       this.$emit("submitAnswer", this.answer);
       this.answer = "";
       this.type="2";
+      setTimeout(() => { this.$router.push({ name: "DailyFortuneLoading" }); }, 1500);
     },
     onSelect(id) {
       this.answer = id;
