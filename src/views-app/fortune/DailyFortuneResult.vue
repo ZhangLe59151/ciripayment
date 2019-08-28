@@ -74,6 +74,8 @@
 
 <script>
 import { mapState } from "vuex";
+import i18n from '@/assets/lang/i18n';
+
 export default {
   name: "DailyFortuneResult",
   data() {
@@ -113,17 +115,19 @@ export default {
     },
     shareOnAPP(platform) {
       const onSuccess = function(result) {
+        this.$toast(i18n.t("FortuneTelling.shareSuccess"));
         console.log("Share completed!");
       };
 
       const onError = function(msg) {
         console.log("Sharing failed!" + msg);
+        this.$toast(i18n.t("FortuneTelling.shareFailed"));
       };
 
       const shareMsg = "";
       const shareLink = "https://www.bbc.com/news";
 
-      if (platform == "facebook") {
+      if (platform === "facebook") {
         window.plugins.socialsharing.shareViaFacebook(
           shareMsg,
           [""],
@@ -131,7 +135,7 @@ export default {
           onSuccess,
           onError
         );
-      } else if (platform == "line") {
+      } else if (platform === "line") {
         var options = {
           message: shareMsg,
           subject: "",

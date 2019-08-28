@@ -17,6 +17,8 @@
     "like": "Like",
     "liked": "Liked",
     "share": "Share",
+    "shareSuccess": "Sharing in progress!",
+    "shareFailed": "Sharing failed!",
     "masterDes": "Here’s your fortune by {n}! ",
     "luckyDes": "Your Sales Luck Today",
     "luckyAmountDes": "Today Luck Will Likely Bring You",
@@ -174,5 +176,8 @@
     "yourPhone": "Your Mobile Number",
     "enterOTPtitle": "Enter OTP",
     "resendOTP": "Resend OTP"
+  },
+  "Common":{
+    "serverRequestError": "Server request error. Please try again!"
   }
 }

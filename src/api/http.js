@@ -1,6 +1,8 @@
 import axios from "axios";
 // import router from "@/router";
 // import { Dialog } from "vant";
+import { Toast } from 'vant';
+import i18n from '@/assets/lang/i18n';
 
 // axios config
 axios.defaults.timeout = 30000;
@@ -19,6 +21,11 @@ axios.interceptors.request.use(
       _t: Date.parse(new Date()) / 1000,
       clientId: clientId
     };
+    Toast.loading({
+      duration: 0, 
+      forbidClick: true,
+      mask: false
+    });
     return config;
   },
   function(error) {
@@ -30,10 +37,12 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   // eslint-disable-next-line space-before-function-paren
   function(response) {
+    Toast.clear();
     return response;
   },
   // eslint-disable-next-line space-before-function-paren
   function(error) {
+    Toast.clear();
     if (error.response.status === 401) {
       // Dialog.alert({
       //   message: "You have been inactive for a while. Please login again.",
@@ -44,6 +53,7 @@ axios.interceptors.response.use(
       //     router.push({ name: "Home" });
       //   }
       // });
+      Toast(i18n.t("Common.serverRequestError"));
       return error.response;
     }
 
@@ -52,6 +62,7 @@ axios.interceptors.response.use(
       //   name: "ServerError",
       //   query: { url: window.location.href }
       // });
+      Toast(i18n.t("Common.serverRequestError"));
       return error.response;
     }
     return Promise.reject(error);
