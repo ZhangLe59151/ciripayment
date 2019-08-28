@@ -1,20 +1,20 @@
 <template>
-  <div v-if="!!question.value" class="picture-input-question">
+  <div v-if="!!question.value" class="camera-input-question">
     <i class="iconfont iconsuccess" />
     <div class="title">{{question.question}}</div>
     <div class="img-container" :style="backgroundStyle">
     </div>
     <van-button class="submit-btn-disabled" disabled >{{question.limitAmount}} {{$store.state.currency}} Earned</van-button>
   </div>
-  <div v-else class="picture-input-question">
+  <div v-else class="camera-input-question">
     <div class="title">{{question.question}}</div>
     <el-form v-if="!form.answering"
-      label-width="0px"
-      :model="form"
-      ref="elForm"
-      size="small"
-      label-position="top"
-      class="elForm"
+             label-width="0px"
+             :model="form"
+             ref="elForm"
+             size="small"
+             label-position="top"
+             class="elForm"
     >
       <el-form-item
         :class="error ? 'input-box-error upload-wrapper': 'upload-wrapper'"
@@ -23,42 +23,15 @@
           id="camera-input-field"
         >
           <div class="placeholder">
-            <van-row style="padding-left: 75px;">
-              <van-col span="1">
-                <i class="iconfont iconcamera" />
-              </van-col>
-              <van-col span="12" offset="3">
-                <div class="placeholder-text">Take a photo</div>
-              </van-col>
-            </van-row>
+            <i class="iconfont iconcamera" />
+            <div class="placeholder-text">Take a photo</div>
           </div>
         </div>
 
       </el-form-item>
-      <el-form-item
-        :class="error ? 'input-box-error upload-wrapper': 'upload-wrapper'"
-        prop="answering">
-        <el-upload
-          action="answer"
-          :show-file-list="false"
-          :http-request="uploadImg"
-        >
-          <div class="placeholder">
-            <van-row type="flex" justify="center">
-              <van-col span="1">
-                <i class="iconfont iconalbum" />
-              </van-col>
-              <van-col span="12" offset="2">
-                <div class="placeholder-text">Select from album</div>
-              </van-col>
-            </van-row>
-          </div>
-        </el-upload>
-
-      </el-form-item>
     </el-form>
     <div v-else>
-      <div class="img-container" :style="backgroundStyle">
+      <div id="photo-question" class="img-container" :style="backgroundStyle">
       </div>
       <div
         class="img-delete"
@@ -82,21 +55,47 @@
 <script>
 import util from "@/util.js";
 export default {
-  name: "PictureInputQuestion",
+  name: "CameraInputQuestion",
   props: {
     question: Object
   },
   data() {
     return {
-      url: "",
-      backgroundStyle: this.question.value || "",
+      backgroundStyle: `background: url(${this.question.value || ""}) no-repeat`,
       form: {
         answering: ""
       },
       error: false
     }
   },
+  mounted() {
+    let app = {
+      init: function() {
+        document.getElementById("camera-input-field").addEventListener("click", app.takephoto);
+      },
+      takephoto: function() {
+        let opts = {
+          quality: 80,
+          destinationType: Camera.DestinationType.FILE_URI,
+          sourceType: Camera.PictureSourceType.CAMERA,
+          mediaType: Camera.MediaType.PICTURE,
+          encodingType: Camera.EncodingType.JPEG,
+          cameraDirection: Camera.Direction.BACK,
+        };
+        navigator.camera.getPicture(app.ftw, app.wtf, opts);
+      },
+      ftw: function(imgURI) {
+        console.log(imgURI);
+        this.form.answering = imgURI;
 
+        document.getElementById("photo-question").style.background = `background: url(${imgURI}) no-repeat`;
+      },
+      wtf: function(msg) {
+        document.getElementById("msg").textContent = msg;
+      }
+    };
+    document.addEventListener("deviceready", app.init);
+  },
   methods: {
     validateInput() {
       this.error = !this.form.answering;
@@ -115,9 +114,6 @@ export default {
       console.log("original file name: ", originalFileName);
 
       var type = param.action;
-      // show uploading gif
-      var nextStausKey = type + "Status";
-      this[`${nextStausKey}`] = 1;
 
       var form = new FormData();
       form.append("file", fileObj);
@@ -135,7 +131,7 @@ export default {
         } else {
           vm.$notify({
             message:
-              "Upload failed. Please check your internet connection is stable before trying again.",
+                "Upload failed. Please check your internet connection is stable before trying again.",
             duration: 3000
           });
           return false;
@@ -177,7 +173,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .picture-input-question{
+  .camera-input-question{
     background-color: #ffffff;
     min-height: 320px;
     width: 304px;
@@ -213,16 +209,17 @@ export default {
 
     .upload-wrapper {
       width: 264px;
-      height: 52px;
+      height: 98px;
       border: 1px solid #C2C8CC;
       border-radius: 4px;
-      padding-top:10px;
-      box-sizing: border-box;
       .placeholder {
-        /*margin-top: 20px;*/
-        .iconcamera,.iconalbum {
+        position: absolute;
+        top:18px;
+        left:94px;
+        text-align: center;
+        .iconcamera {
           color: #ff8600;
-          font-size: 17px;
+          font-size: 27px;
         }
         .placeholder-text{
           font-size:14px;
@@ -308,7 +305,7 @@ export default {
 </style>
 
 <style lang="scss">
-  .picture-input-question{
+  .camera-input-question{
     .el-input--small .el-input__inner{
       border: none;
       border-radius: 4px;
@@ -318,10 +315,6 @@ export default {
       color: #87929D;
       text-align: center;
       padding-right:0;
-    }
-    .el-upload {
-      display: unset;
-       text-align: left;
     }
   }
 </style>
