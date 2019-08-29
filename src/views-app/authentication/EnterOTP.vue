@@ -267,8 +267,8 @@ export default {
 
 .enterOtpPage {
   position: fixed;
-  background: url("../../assets/imgs/landing_bg.png") no-repeat;
-  background-size: cover;
+  background: url("../../assets/imgs/authentication/otpBak.png") no-repeat;
+  background-size: contain;
   height: 100vh;
 
   .landingPageContent {
@@ -278,6 +278,7 @@ export default {
     height: 258px;
     width: 328px;
     border-radius: 16px;
+    box-shadow: 0 2px 4px 2px #A9A9A9;
 
     .slogan-title {
       position: absolute;
