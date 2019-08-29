@@ -1,5 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
+import analytics from "../firebase/analytics";
+
 // import store from "../store";
 
 Vue.use(Router);
@@ -8,9 +10,8 @@ const routeArr = [
   {
     path: "/",
     redirect: to => {
-      return localStorage.getItem("firstLaunch") ? "/home" : "/landing-page"
+      return localStorage.getItem("firstLaunch") ? "/home" : "/landing-page";
     }
-
   },
   {
     path: "/enter-info",
@@ -459,7 +460,6 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  console.log("sss");
   // these pages can enter directly without logined
   // if (
   //   !store.state.logInWithPassword &&
@@ -487,6 +487,8 @@ router.beforeEach((to, from, next) => {
   //   next({ name: "LandingPage" });
   //   return false;
   // }
+  analytics.setCurrentScreen(to.meta.title);
+  analytics.setCurrentScreen(to.fullPath);
   next();
 });
 
