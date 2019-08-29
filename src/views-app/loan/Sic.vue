@@ -1,5 +1,5 @@
 <template>
-  <div class="sic">
+  <div class="sic" style="min-height: 100vh;">
     <van-nav-bar
       title="Business Category"
       left-text=""
