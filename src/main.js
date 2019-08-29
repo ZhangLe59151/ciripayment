@@ -18,6 +18,8 @@ import moment from "moment-timezone";
 
 import Vant, { Notify } from "vant";
 import "@/amfe";
+
+import i18n from "./assets/lang/i18n";
 // import VueSignaturePad from "vue-signature-pad";
 
 // import VueAnalytics from "vue-analytics";
@@ -39,8 +41,6 @@ Vue.prototype.$moment = moment;
 Vue.prototype.$find = find;
 Vue.prototype.$notify = Notify;
 Vue.config.productionTip = false;
-
-import i18n from './assets/lang/i18n';
 
 new Vue({
   router,
