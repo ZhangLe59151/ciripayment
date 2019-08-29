@@ -37,13 +37,13 @@ export default {
   },
   computed: {
     ...mapState({
-      fortuneInfo: "fortuneInfo",
-      fortuneResult: state => state.fortuneInfo.fortuneResult.fortuneResult
+      fortuneInfo: "fortuneInfo"
     })
   },
   methods: {
     returnHome() { 
-      if (this.fortuneResult && this.fortuneResult.length > 0) {
+      debugger
+      if (this.fortuneInfo.fortuneResult !== null) {
         this.$router.push({ name: "Home" });
       } else {
         Dialog.confirm({
