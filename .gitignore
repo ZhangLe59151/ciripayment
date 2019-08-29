@@ -30,6 +30,7 @@ vue.config.js
 # Cordova
 /src-cordova/platforms
 /src-cordova/plugins
+www
+google-services.json
 /public/cordova.js
-src-cordova
 /signatural
