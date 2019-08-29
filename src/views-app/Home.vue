@@ -37,11 +37,17 @@ export default {
   },
   created() {
     if (this.firstLuanch === true) {
+      this.$store.commit("UnfirstLaunch");
       this.$router.push({ name: "LandingPage" });
     }
     this.fetchHomePageData();
   },
-  mounted() {},
+  mounted() {
+    if (this.firstLuanch === true) {
+      this.$store.commit("UnfirstLaunch");
+      this.$router.push({ name: "LandingPage" });
+    }
+  },
   methods: {
     fetchHomePageData() {
       this.$api.getHomePageInfo().then(res => {
