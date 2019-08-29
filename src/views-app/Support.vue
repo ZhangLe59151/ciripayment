@@ -32,7 +32,7 @@
       @input="descInput"
     />
 
-    <div class="remain">{{remnant}}/500</div>
+    <div class="remain">{{remnant}}</div>
 
     <button
       class="submit_btn"
@@ -75,7 +75,9 @@ export default {
       });
     },
     validateEmail() {
-      this.emailError = this.$store.state.email.regExp.test(this.form.email) ? false : true;
+      this.emailError = this.$store.state.email.regExp.test(this.form.email)
+        ? false
+        : true;
     }
   }
 };
