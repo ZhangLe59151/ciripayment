@@ -174,7 +174,7 @@ export default {
 .radio-input-question {
   background-color: #ffffff;
   min-height: 320px;
-  width: 304px;
+  width: calc(84vw);
   margin: auto;
   border-radius: 8px;
   color: #2f3941;
@@ -216,7 +216,7 @@ export default {
       margin: 4px 6px 4px 6px;
       white-space: normal;
       height: 90px;
-      width: 120px;
+      width: 44%;
       font-size: 20px;
     }
 
@@ -233,7 +233,7 @@ export default {
       margin: 4px 6px 4px 6px;
       white-space: normal;
       height: 90px;
-      width: 120px;
+      width: 44%;
       font-size: 20px;
     }
 
@@ -251,7 +251,7 @@ export default {
       white-space: normal;
       height: 60px;
       font-size: 14px;
-      width: 120px;
+      width: 44%;
     }
 
     .error-4 {
@@ -268,7 +268,7 @@ export default {
       white-space: normal;
       height: 60px;
       font-size: 14px;
-      width: 120px;
+      width: 44%;
     }
 
     .error-6 {
@@ -285,7 +285,7 @@ export default {
       white-space: normal;
       height: 40px;
       font-size: 16px;
-      width: 120px;
+      width: 44%;
     }
 
     .option-6 {
@@ -302,7 +302,7 @@ export default {
       white-space: normal;
       height: 40px;
       font-size: 16px;
-      width: 120px;
+      width: 44%;
     }
 
     .selecting {
@@ -314,6 +314,8 @@ export default {
       background-color: #87929d !important;
       color: white !important;
       opacity: 1 !important;
+      border: 0px;
+      box-shadow: none !important;
     }
     .unselected {
       background-color: #e9ebed !important;
@@ -327,8 +329,8 @@ export default {
 
   .error-msg {
     position: absolute;
-    bottom: 76px;
-    left: 87px;
+    bottom: 220px;
+    left: 70px;
     font-size: 14px;
     color: #c44834;
     letter-spacing: 0;
@@ -338,7 +340,7 @@ export default {
     position: absolute;
     bottom: 20px;
     left: 20px;
-    width: 260px;
+    width: 85%;
     height: 40px;
     background-color: #ff8600;
     color: white;
@@ -361,7 +363,7 @@ export default {
     position: absolute;
     bottom: 20px;
     left: 20px;
-    width: 260px;
+    width: 85%;
     height: 40px;
     background-color: #c2c8cc !important;
     color: white !important;

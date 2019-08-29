@@ -160,7 +160,7 @@ export default {
   .camera-input-question{
     background-color: #ffffff;
     min-height: 320px;
-    width: 304px;
+    width: calc(84vw);
     margin: auto;
     border-radius: 8px;
     color: #2F3941;
@@ -192,14 +192,14 @@ export default {
     }
 
     .upload-wrapper {
-      width: 264px;
+      width: 98%;
       height: 98px;
       border: 1px solid #C2C8CC;
       border-radius: 4px;
       .placeholder {
         position: absolute;
         top:18px;
-        left:94px;
+        left:35%;
         text-align: center;
         .iconcamera {
           color: #ff8600;
@@ -214,14 +214,14 @@ export default {
 
     .img-container {
       width: auto;
-      height: 98px;
+      height: 80px;
       background-size: contain !important;
       background-position: center center !important;
       background-repeat: no-repeat !important;
     }
     .img-delete{
       text-align: center;
-      width: 264px;
+      width: 98%;
       height:40px;
       margin-top:12px;
       border: 1px solid #ff8600;
@@ -240,7 +240,7 @@ export default {
       position:absolute;
       bottom:20px;
       left:20px;
-      width: 264px;
+      width: 85%;
       height:40px;
       background-color: #C2C8CC !important;
       color:white !important;
@@ -267,7 +267,7 @@ export default {
       position:absolute;
       bottom:20px;
       left:20px;
-      width: 264px;
+      width: 85%;
       height:40px;
       background-color: #FF8600;
       color:white;
