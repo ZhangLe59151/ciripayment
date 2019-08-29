@@ -110,10 +110,15 @@ export default {
   methods: {
     triggerShare() {
       this.showPopUp = true;
-      // const funcName = "shareOn".concat(this.deviceType);
-      // this[funcName]();
+    },
+    share(platform){
+      const funcName = "shareOn".concat(this.deviceType);
+      this[funcName](platform);
     },
     shareOnAPP(platform) {
+      const shareMsg = "";
+      const shareLink = `https://${process.env.VUE_APP_WEBURL}/daily-fortune-result?shareKey=${this.fortuneInfo.shareKey}`;
+      
       const onSuccess = function(result) {
         this.$toast(i18n.t("FortuneTelling.shareSuccess"));
         console.log("Share completed!");
@@ -123,9 +128,6 @@ export default {
         console.log("Sharing failed!" + msg);
         this.$toast(i18n.t("FortuneTelling.shareFailed"));
       };
-
-      const shareMsg = "";
-      const shareLink = `https://${process.env.VUE_APP_WEBURL}/daily-fortune-result?shareKey=${this.fortuneInfo.shareKey}`;
 
       if (platform === "facebook") {
         window.plugins.socialsharing.shareViaFacebook(
@@ -151,7 +153,25 @@ export default {
         );
       }
     },
-    shareOnWEB() {},
+    shareOnWEB(platform) {
+      const shareMsg = "";
+      const shareLink = `https://${process.env.VUE_APP_WEBURL}/daily-fortune-result?shareKey=${this.fortuneInfo.shareKey}`;
+
+      if (platform === "facebook"){
+        window.open(
+          `https://www.facebook.com/sharer/sharer.php` +
+            objectToGetParams({
+              u: shareLink
+            }),
+          '__blank'
+        );
+      }else if (platform === "line"){
+        window.open(
+          `line://msg/text/?` + shareLink,
+          '__blank'
+        );
+      }
+    },
     triggerLike() {
       this.likeStatus = !this.likeStatus;
       if (!this.processingLike) {
