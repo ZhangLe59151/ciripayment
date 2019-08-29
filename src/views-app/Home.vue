@@ -26,7 +26,8 @@ export default {
         income: 0,
         expense: 0
       },
-      creditLimit: {}
+      creditLimit: {},
+      isFirst: this.firstLuanch ? true : false
     };
   },
   computed: {
@@ -36,14 +37,15 @@ export default {
     })
   },
   created() {
-    if (this.firstLuanch === true) {
+    if (this.isFirst) {
+      this.isFirst = false;
       this.$store.commit("UnfirstLaunch");
       this.$router.push({ name: "LandingPage" });
     }
     this.fetchHomePageData();
   },
   mounted() {
-    if (this.firstLuanch === true) {
+    if (this.isFirst) {
       this.$store.commit("UnfirstLaunch");
       this.$router.push({ name: "LandingPage" });
     }
