@@ -20,11 +20,15 @@
     </van-row>
 
     <div>
-      <div class="btnView btn" @click="$router.push({name: 'RecordList'})">
+      <div class="btnView btn"
+           @click="$router.push({name: 'RecordList'})"
+           v-analytics="{event: 'home_record_history'}">
         <van-icon name="bars"/>
         {{$t('Home.homeRecordViewHistoryBtn')}}
       </div>
-      <div class="btnAdd btn" @click="$router.push({name: 'AddRecord'})">
+      <div class="btnAdd btn"
+           @click="$router.push({name: 'AddRecord'})"
+           v-analytics="{event: 'home_record_add'}">
         <van-icon name="plus"/>
         {{$t('Home.homeRecordAddBtn')}}
       </div>
