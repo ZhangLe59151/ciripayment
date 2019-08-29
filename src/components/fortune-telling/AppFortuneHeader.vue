@@ -18,6 +18,7 @@
 
 <script>
 import Vue from 'vue';
+import { mapState } from "vuex";
 import { Dialog } from 'vant';
 
 Vue.use(Dialog);
@@ -34,17 +35,28 @@ export default {
       default: false
     }
   },
+  computed: {
+    ...mapState({
+      fortuneInfo: "fortuneInfo",
+      fortuneResult: state => state.fortuneInfo.fortuneResult.fortuneResult
+    })
+  },
   methods: {
     returnHome() { 
-      Dialog.confirm({
-        title: 'Leaving Master Yun?',
-        message: 'Poor Master Yun will not be able to read your fortune if you leave now. Your selection will go to waste.'
+      if (this.fortuneResult && this.fortuneResult.length > 0) {
+        this.$router.push({ name: "Home" });
+      } else {
+        Dialog.confirm({
+        title: 'Leaving Master' + this.fortuneInfo.selectedMaster.name + '?',
+        message: 'Poor Master' + this.fortuneInfo.selectedMaster.name + '? will not be able to read your fortune if you leave now. Your selection will go to waste.'
         }).then(() => {
           // on confirm
           this.$router.push({ name: "Home" });
           }).catch(() => {
             // on cancel
-            });
+        });
+      }
+      
     }
   }
 };

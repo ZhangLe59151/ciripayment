@@ -221,6 +221,10 @@ export default {
       if (this.form[this.type] === "" && value === ".") {
         return false;
       }
+      const regex1 = /^(([1-9][0-9]*)|(([0]\.\d{2}|[1-9][0-9]*\.\d{2})))$/;
+      if (regex1.test(this.form[this.type]) && this.form[this.type].indexOf(".") != -1) {
+        return false;
+      }
       this.form[this.type] += value;
     },
     onDelete() {

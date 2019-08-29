@@ -27,12 +27,14 @@
 export default {
   name: "Loan",
   created() {
-    this.$api.getLoanProfile().then(res => {
-      if (res.data.code === 200) {
-        this.$store.commit("initLoanProfile", res.data.data);
-      }
-    });
-    this.$store.commit("fetchDataFromLocal");
+    if (this.$store.state.OTPVerified) {
+      this.$api.getLoanProfile().then(res => {
+        if (res.data.code === 200) {
+          this.$store.commit("initLoanProfile", res.data.data);
+        }
+      });
+    }
+    // this.$store.commit("fetchDataFromLocal");
   }
 };
 </script>

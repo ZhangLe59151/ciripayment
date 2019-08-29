@@ -21,11 +21,13 @@ export default {
   data() {
     return {
       hasLoan: false,
+      isPersonalQ: false,
       records: {
         income: 0,
         expense: 0
       },
-      creditLimit: {}
+      creditLimit: {},
+      isFirst: this.firstLuanch ? true : false
     };
   },
   computed: {
@@ -35,12 +37,19 @@ export default {
     })
   },
   created() {
-    if (this.firstLuanch === 0) {
+    if (this.isFirst) {
+      this.isFirst = false;
+      this.$store.commit("UnfirstLaunch");
       this.$router.push({ name: "LandingPage" });
     }
     this.fetchHomePageData();
   },
-  mounted() {},
+  mounted() {
+    if (this.isFirst) {
+      this.$store.commit("UnfirstLaunch");
+      this.$router.push({ name: "LandingPage" });
+    }
+  },
   methods: {
     fetchHomePageData() {
       this.$api.getHomePageInfo().then(res => {

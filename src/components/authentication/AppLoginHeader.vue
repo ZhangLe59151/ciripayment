@@ -51,13 +51,12 @@ export default {
     font-size: 20px;
     width: 58px;
     height: 32px;
-    top: 10px;
+    top: 20px;
   }
   .title {
     position: absolute;
     text-align: center;
     line-height: 70px;
-    font-weight: bold;
     font-size: 24px;
     color: black;
     width: 100%;

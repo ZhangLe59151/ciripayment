@@ -30,12 +30,13 @@ export default new Vuex.Store({
     clientInfo: {
       bankName: "ABC Bank"
     },
-    firstLuanch: true,
+    firstLuanch: localStorage.getItem("firstLuanch") || true,
     currency: "฿",
     serviceOverviewVo: {},
     form: {},
     userInfo: {},
     application: {},
+    furtuneQuestion: [],
     recordList: JSON.parse(localStorage.getItem("recordList")) || [],
     masterList: require("@/assets/data/fortuneMasterList.json"),
     localDateFormatter: "YYYYMMDD",
@@ -527,6 +528,17 @@ export default new Vuex.Store({
     },
     UnfirstLaunch() {
       window.localStorage.setItem("firstLuanch", false);
+    },
+    UpdateFurtuneQuestionInfo(state, fortuneQ) {
+      state.furtuneQuestion = Object.assign(state.furtuneQuestion, fortuneQ);
+      window.localStorage.setItem(
+        "furtuneQuestion",
+        JSON.stringify(state.furtuneQ)
+      );
+    },
+    ClearFortuneQuestion(state) {
+      state.furtuneQuestion = {};
+      window.localStorage.removeItem("furtuneQuestion");
     }
   },
   actions: {}

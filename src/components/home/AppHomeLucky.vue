@@ -20,7 +20,7 @@
 
   </div>
   <div
-    class="app-home-lucky"
+    class="app-home-lucky app-home-lucky-single"
     @click="$router.push({name: 'DailyFortuneResult',query: {id: fortuneResult.id}})"
     v-else
   >
@@ -30,8 +30,8 @@
     >
     <div class="title">{{$t("Home.encourageLuckyTitle")}}</div>
     <div class="subtitle single-subtitle">
+      <div>{{subtitle}}</div>
       <div v-if="inputedIncome">{{incomeMin}}<span class="subscript">{{$t("Home.currency")}}</span> ~ {{incomeMax}}<span class="subscript">{{$t("Home.currency")}}</span></div>
-      <div v-else>{{subtitle}}</div>
     </div>
     <div class="encourage">{{$t("Home.encourageWording")}}</div>
   </div>
@@ -64,9 +64,8 @@ export default {
     imgUrl() {
       const masterId = this.fortuneResult.masterId;
       const imgList = {
-        "1": require("@/assets/imgs/master_01.png"),
-        "2": require("@/assets/imgs/master_02.png"),
-        "3": require("@/assets/imgs/master_03.png")
+        "1": require("@/assets/imgs/male_teller.png"),
+        "2": require("@/assets/imgs/lady_teller.png")
       };
       return imgList[masterId];
     }
@@ -76,7 +75,7 @@ export default {
     fortuneResult: {
       handler(val, oldVal) {
         if (val && val.fortuneResult && val.fortuneResult.length > 0) {
-          //this.fortuneTold = true;
+          this.fortuneTold = true;
           let salesTarget = val.salesTarget;
           if (salesTarget.type === 0) {
             this.inputedIncome = true;
@@ -122,16 +121,21 @@ export default {
   margin: 8px 0;
   position: relative;
 
+  &.app-home-lucky-single {
+    background-image: url(../../assets/imgs/home_master_bg_single.png);
+  }
+
   > img {
-    height: 120px;
+    height: 100px;
     position: absolute;
     bottom: 0;
+
     &.lady_teller {
-      left: 0;
+      left: 10px;
     }
 
     &.male_teller {
-      right: 0;
+      right: 10px;
     }
 
     &.single {
@@ -162,14 +166,21 @@ export default {
       // top: 16px;
       // right: 16px;
       &.single-subtitle {
-        top: 44px;
+        position: absolute;
+        right: 16px;
+        text-align: right;
+        top: 15px;
+        width: 200px;
+        > div:first-child {
+          margin: 2px 0;
+        }
       }
     }
     &.encourage {
       font-size: 14px;
       color: #ffffff;
       position: absolute;
-      bottom: 30px;
+      bottom: 20px;
       right: 16px;
     }
     &.btn {

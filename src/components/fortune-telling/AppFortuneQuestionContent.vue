@@ -55,6 +55,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 const today = new Date();
 export default {
   name: "AppFortuneQuestionContent",
@@ -69,10 +71,14 @@ export default {
       questionList: []
     };
   },
+  computed: {
+    ...mapState({
+      isLogin: "OTPVerified"
+    })
+  },
   created() {
     this.$api.getQuestionF().then(res => {
         if (res.data.code === 200) {
-          // debugger
           this.questionList = res.data.data.questions;
           this.answerForm[0].allowRepeat = res.data.data.questions[0].allowRepeat;
           this.answerForm[1].allowRepeat = res.data.data.questions[1].allowRepeat;
@@ -87,12 +93,17 @@ export default {
       this.answer = "";
       this.index += 1;
       this.questionIndex += 1;
-      if (this.questionIndex == 2) {
-        this.$api.postAnswerF(this.answerForm).then(res => {
-        if (res.data.code === 200) {
-          setTimeout(() => { this.$router.push({ name: "DailyFortuneLoading" }); }, 1500);
-          }
-        });       
+      if (this.questionIndex === 2) {
+        if (this.isLogin) {
+          this.$api.postAnswerF(this.answerForm).then(res => {
+          if (res.data.code === 200) {
+            setTimeout(() => { this.$router.push({ name: "DailyFortuneLoading" }); }, 1500); }
+          });
+        }
+        else {
+          this.$store.commit("UpdateFurtuneQuestionInfo", this.answerForm);
+          this.$router.push({ name: "LoginPage", query: { to: "DailyFortuneLoading" } });
+        }       
       }
     },
     onSelect(item) {

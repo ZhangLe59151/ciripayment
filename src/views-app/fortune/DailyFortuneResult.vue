@@ -74,7 +74,7 @@
 
 <script>
 import { mapState } from "vuex";
-import i18n from '@/assets/lang/i18n';
+import i18n from "@/assets/lang/i18n";
 
 export default {
   name: "DailyFortuneResult",
@@ -267,10 +267,9 @@ export default {
   }
 
   .like {
-    color: white;
-    margin-top: 70px;
+    color: #ffffff;
     text-align: left;
-    margin-right: 20px;
+    margin: 40px 20px 0 0;
 
     .iconunlike,
     .iconshare {

@@ -89,41 +89,39 @@ export default {
       form2: { },
       form3: { }, 
       answerList: [
-        { id: 0, value: "" },
-        { id: 1, value: "" },
-        { id: 2, value: "" }
+        { id: 0, value: " " },
+        { id: 1, value: " " },
+        { id: 2, value: " " }
       ],
       phoneValidationPattern: this.$store.state.phone.thaiExp,
       showComponents: true
     };
   },
   created() {
-    //this.$store.commit("UnfirstLaunch");
-    if (this.$route.params.id === 1) {
-      this.tab1 = true;
-      this.tabActive = 1;
-    }
-    if (this.$route.params.id === 2) {
-      this.tab1 = this.tab2 = true;
-      this.tabActive = 2;
-    } else {
-      this.$api.getQuestionPersonal(1).then(res => {
+    this.$store.commit("UnfirstLaunch");
+    this.$api.getQuestionPersonal(1).then(res => {
         if (res.data.code === 200) {
           this.form1 = res.data.data.questions[2];
           this.form2 = res.data.data.questions[1];
           this.form3 = res.data.data.questions[0];
         }
       });
-    }
+  },
+  mounted() {
+    this.$store.commit("UnfirstLaunch");
   },
   methods: {
     skipQuestion(){
       if (this.tabActive === 0) {
         this.$router.push({ name: "PersonalQuestion", params: { id: 1 } });
+        this.tab1 = true;
+        this.tabActive = 1;
       }else if (this.tabActive === 1){
         this.$router.push({ name: "PersonalQuestion", params: { id: 2 } });
+        this.tab1 = this.tab2 = true;
+        this.tabActive = 2;
       } else {
-        if (allSkip) { this.$router.push({ name: "Home" }); }
+        if (this.allSkip) { this.$router.push({ name: "Home" }); }
         else { this.sendAnswer(); }
       }
     },
@@ -138,8 +136,10 @@ export default {
       });
     },
     answer(aid, id, answer) {
+      this.allSkip = false;
       this.answerList[aid].id = id;
       this.answerList[aid].value = answer;
+      this.$router.push({ name: "PersonalQuestion", params: { id: aid } });
       if (this.tabActive === 2) {
         this.sendAnswer();
       } else {
@@ -160,7 +160,7 @@ export default {
 
   .title{
     position: fixed;
-    margin: 406px 77px 0 77px;
+    margin: 406px 87px 0 87px;
     color: black;
     font-size: 24px;
     text-align: center;
