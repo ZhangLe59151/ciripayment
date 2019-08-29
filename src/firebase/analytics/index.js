@@ -1,5 +1,5 @@
 function analyticsWithCondition(func) {
-  if (process.env.VUE_APP_DEVICETYPE === "APP") {
+  if (window.location.protocol === "file:") {
     func();
   }
 }

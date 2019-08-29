@@ -32,3 +32,4 @@ vue.config.js
 /src-cordova/plugins
 /public/cordova.js
 src-cordova
+/signatural
