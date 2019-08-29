@@ -117,7 +117,7 @@ export default {
   }
   @keyframes test {
     from { transform: translateY(0); }
-    to { transform: translateY(-20px); }
+    to { transform: translateY(-30px); }
   }
 }
 </style>
