@@ -5,7 +5,7 @@
       name="arrow-left"
       class="arrow-left"
       @click="$router.back()"
-      v-if="showKLeftIcon"
+      v-if="showLeftIcon"
     />
     <van-icon
       name="cross"
@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import Vue from 'vue';
+import Vue from "vue";
 import { mapState } from "vuex";
-import { Dialog } from 'vant';
+import { Dialog } from "vant";
 
 Vue.use(Dialog);
 
@@ -31,7 +31,7 @@ export default {
     showRightIcon: {
       default: true
     },
-    showKLeftIcon: {
+    showLeftIcon: {
       default: false
     }
   },
@@ -41,21 +41,25 @@ export default {
     })
   },
   methods: {
-    returnHome() { 
+    returnHome() {
       if (this.fortuneInfo.fortuneResult !== null) {
         this.$router.push({ name: "Home" });
       } else {
         Dialog.confirm({
-        title: 'Leaving Master' + this.fortuneInfo.selectedMaster.name + '?',
-        message: 'Poor Master' + this.fortuneInfo.selectedMaster.name + '? will not be able to read your fortune if you leave now. Your selection will go to waste.'
-        }).then(() => {
-          // on confirm
-          this.$router.push({ name: "Home" });
-          }).catch(() => {
+          title: "Leaving Master" + this.fortuneInfo.selectedMaster.name + "?",
+          message:
+            "Poor Master" +
+            this.fortuneInfo.selectedMaster.name +
+            "? will not be able to read your fortune if you leave now. Your selection will go to waste."
+        })
+          .then(() => {
+            // on confirm
+            this.$router.push({ name: "Home" });
+          })
+          .catch(() => {
             // on cancel
-        });
+          });
       }
-      
     }
   }
 };

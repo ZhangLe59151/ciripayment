@@ -1,55 +1,114 @@
 <template>
-  <div class="peronal-question" >
-    <div class="personalPageContent" v-show="questionPage">
-      <van-tabs 
+  <div class="peronal-question">
+    <div
+      class="personalPageContent"
+      v-show="questionPage"
+    >
+      <van-tabs
         v-model="tabActive"
         animated
         color="#ff8600"
-        title-active-color="#ff8600">
-          <van-tab 
-            :disabled="this.tab1">
-            <div class="questionTitle">{{ form1.question }}</div>
-            <van-button class="card1" @click="answer(0, form1.id, form1.options[0])">{{ form1.options[0] }}<img class="icon" :src="icon11" /></van-button>
-            <van-button class="card2" @click="answer(0, form1.id, form1.options[1])">{{ form1.options[1] }}<img class="icon" :src="icon12" /></van-button>
-            <van-button class="card3" @click="answer(0, form1.id, form1.options[2])" >{{ form1.options[2] }}<img class="icon" :src="icon13" /></van-button>
-            <van-button class="card4" @click="answer(0, form1.id, form1.options[3])">{{ form1.options[3] }}<img class="icon" :src="icon14" /></van-button>
-          
-            
-          
-          
-          
-          </van-tab>
-          <van-tab 
-            :disabled="this.tab2">
-            <div class="questionTitle">{{ form2.question }}</div>
-            <van-button class="card1" @click="answer(1, form2.id, form2.options[0])">{{ form2.options[0] }}<img class="icon" :src="icon21" /></van-button>
-            <van-button class="card5" @click="answer(1, form2.id, form2.options[1])">{{ form2.options[1] }}<img class="icon" :src="icon22" /></van-button>
-            <van-button class="card3" @click="answer(1, form2.id, form2.options[2])" >{{ form2.options[2] }}<img class="icon" :src="icon23" /></van-button>
+        title-active-color="#ff8600"
+      >
+        <van-tab :disabled="this.tab1">
+          <div class="questionTitle">{{ form1.question }}</div>
+          <van-button
+            class="card1"
+            @click="answer(0, form1.id, form1.options[0])"
+          >{{ form1.options[0] }}<img
+              class="icon"
+              :src="icon11"
+            /></van-button>
+          <van-button
+            class="card2"
+            @click="answer(0, form1.id, form1.options[1])"
+          >{{ form1.options[1] }}<img
+              class="icon"
+              :src="icon12"
+            /></van-button>
+          <van-button
+            class="card3"
+            @click="answer(0, form1.id, form1.options[2])"
+          >{{ form1.options[2] }}<img
+              class="icon"
+              :src="icon13"
+            /></van-button>
+          <van-button
+            class="card4"
+            @click="answer(0, form1.id, form1.options[3])"
+          >{{ form1.options[3] }}<img
+              class="icon"
+              :src="icon14"
+            /></van-button>
 
+        </van-tab>
+        <van-tab :disabled="this.tab2">
+          <div class="questionTitle">{{ form2.question }}</div>
+          <van-button
+            class="card1"
+            @click="answer(1, form2.id, form2.options[0])"
+          >{{ form2.options[0] }}<img
+              class="icon"
+              :src="icon21"
+            /></van-button>
+          <van-button
+            class="card5"
+            @click="answer(1, form2.id, form2.options[1])"
+          >{{ form2.options[1] }}<img
+              class="icon"
+              :src="icon22"
+            /></van-button>
+          <van-button
+            class="card3"
+            @click="answer(1, form2.id, form2.options[2])"
+          >{{ form2.options[2] }}<img
+              class="icon"
+              :src="icon23"
+            /></van-button>
 
+        </van-tab>
 
-          </van-tab>
+        <van-tab title="">
+          <div class="questionTitle">{{ form3.question }}</div>
+          <van-button
+            class="card2"
+            @click="answer(2, form3.id, form3.options[0])"
+          >{{ form3.options[0] }}<img
+              class="icon"
+              :src="icon31"
+            /></van-button>
+          <van-button
+            class="card5"
+            @click="answer(2, form3.id, form3.options[1])"
+          >{{ form3.options[1] }}<img
+              class="icon"
+              :src="icon32"
+            /></van-button>
+          <van-button
+            class="card4"
+            @click="answer(2, form3.id, form3.options[2])"
+          >{{ form3.options[2] }}<img
+              class="icon"
+              :src="icon33"
+            /></van-button>
 
-          <van-tab title="">
-            <div class="questionTitle">{{ form3.question }}</div>
-            <van-button class="card2" @click="answer(2, form3.id, form3.options[0])">{{ form3.options[0] }}<img class="icon" :src="icon31" /></van-button>
-            <van-button class="card5" @click="answer(2, form3.id, form3.options[1])">{{ form3.options[1] }}<img class="icon" :src="icon32" /></van-button>
-            <van-button class="card4" @click="answer(2, form3.id, form3.options[2])" >{{ form3.options[2] }}<img class="icon" :src="icon33" /></van-button>
-
-
-
-          </van-tab>
+        </van-tab>
       </van-tabs>
 
-
-
-      <div 
+      <div
         class="skipword"
-        @click="skipQuestion">Skip Question</div>
+        @click="skipQuestion"
+      >Skip Question</div>
     </div>
-    <div class="splashPage" v-show="splash">
-      <img class="icon" :src="iconSucceed" />
-      <div class="title">Profile saved.<br/> Let's get started</div>
+    <div
+      class="splashPage"
+      v-show="splash"
+    >
+      <img
+        class="icon"
+        :src="iconSucceed"
+      />
+      <div class="title">Profile saved.<br /> Let's get started</div>
     </div>
   </div>
 </template>
@@ -62,7 +121,7 @@ export default {
   computed: {
     ...mapState({
       columns: "nationalCodeList"
-    }),
+    })
   },
   data() {
     return {
@@ -84,9 +143,9 @@ export default {
       icon33: require("@/assets/imgs/personal/exploresignin.svg"),
       iconSucceed: require("@/assets/imgs/personal/success.svg"),
       iconBk: require("@/assets/imgs/personal/confetti.png"),
-      form1: { },
-      form2: { },
-      form3: { }, 
+      form1: {},
+      form2: {},
+      form3: {},
       answerList: [
         { id: 0, value: " " },
         { id: 1, value: " " },
@@ -98,26 +157,29 @@ export default {
   },
   created() {
     this.$api.getQuestionPersonal(1).then(res => {
-        if (res.data.code === 200) {
-          this.form1 = res.data.data.questions[2];
-          this.form2 = res.data.data.questions[1];
-          this.form3 = res.data.data.questions[0];
-        }
-      });
+      if (res.data.code === 200) {
+        this.form1 = res.data.data.questions[2];
+        this.form2 = res.data.data.questions[1];
+        this.form3 = res.data.data.questions[0];
+      }
+    });
   },
   methods: {
-    skipQuestion(){
+    skipQuestion() {
       if (this.tabActive === 0) {
         this.$router.push({ name: "PersonalQuestion", params: { id: 1 } });
         this.tab1 = true;
         this.tabActive = 1;
-      }else if (this.tabActive === 1){
+      } else if (this.tabActive === 1) {
         this.$router.push({ name: "PersonalQuestion", params: { id: 2 } });
         this.tab1 = this.tab2 = true;
         this.tabActive = 2;
       } else {
-        if (this.allSkip) { this.$router.push({ name: "Home" }); }
-        else { this.sendAnswer(); }
+        if (this.allSkip) {
+          this.$router.push({ name: "Home" });
+        } else {
+          this.sendAnswer();
+        }
       }
     },
     sendAnswer() {
@@ -126,7 +188,9 @@ export default {
         if (res.data.code === 200) {
           this.splash = true;
           this.questionPage = false;
-          setTimeout(() => { this.$router.push({ name: "Home" }); }, 1500);
+          setTimeout(() => {
+            this.$router.push({ name: "Home" });
+          }, 1500);
         }
       });
     },
@@ -138,8 +202,11 @@ export default {
       if (this.tabActive === 2) {
         this.sendAnswer();
       } else {
-        this.tabActive += 1
-        this.$router.push({ name: "PersonalQuestion", params: { id: this.tabActive } });
+        this.tabActive += 1;
+        this.$router.push({
+          name: "PersonalQuestion",
+          params: { id: this.tabActive }
+        });
       }
     }
   }
@@ -153,7 +220,7 @@ export default {
   background-size: cover;
   height: 100vh;
 
-  .title{
+  .title {
     position: fixed;
     margin: 406px 87px 0 87px;
     color: black;
@@ -173,7 +240,7 @@ export default {
   //background: url("../../assets/imgs/landing_bg.png") no-repeat;
   background-size: cover;
   height: 100vh;
-  
+
   .personalPageContent {
     position: fixed;
     margin: 0 16px 0 16px;
@@ -196,10 +263,10 @@ export default {
     width: 328px;
     line-height: 80px;
     color: black;
-    background-color: #5BCFF2;
+    background-color: #5bcff2;
     .icon {
       position: absolute;
-      height:40px;
+      height: 40px;
       width: 40px;
       right: 16px;
       top: 16px;
@@ -215,10 +282,10 @@ export default {
     width: 328px;
     line-height: 80px;
     color: black;
-    background-color: #FDAE44;
+    background-color: #fdae44;
     .icon {
       position: absolute;
-      height:40px;
+      height: 40px;
       width: 40px;
       right: 16px;
       top: 16px;
@@ -234,10 +301,10 @@ export default {
     width: 328px;
     line-height: 80px;
     color: black;
-    background-color: #70CB9D;
+    background-color: #70cb9d;
     .icon {
       position: absolute;
-      height:40px;
+      height: 40px;
       width: 40px;
       right: 16px;
       top: 16px;
@@ -253,10 +320,10 @@ export default {
     width: 328px;
     line-height: 80px;
     color: black;
-    background-color: #DDE0E2;
+    background-color: #dde0e2;
     .icon {
       position: absolute;
-      height:40px;
+      height: 40px;
       width: 40px;
       right: 16px;
       top: 16px;
@@ -272,13 +339,13 @@ export default {
     width: 328px;
     line-height: 80px;
     color: black;
-    background-color: #76D69C;
-    .cardSmailTitle{
+    background-color: #76d69c;
+    .cardSmailTitle {
       font-size: 16px;
     }
     .icon {
       position: absolute;
-      height:40px;
+      height: 40px;
       width: 40px;
       right: 16px;
       top: 16px;
@@ -288,7 +355,7 @@ export default {
 
 .skipword {
   position: fixed;
-  color: #87929D;
+  color: #87929d;
   text-align: center;
   font-size: 14px;
   left: 0;

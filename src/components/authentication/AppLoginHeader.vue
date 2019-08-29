@@ -1,13 +1,18 @@
 <template>
   <div class="app-login-header">
-    <div class="title">{{ title }}</div>
+    <div class="title">
+      <img
+        class="icon"
+        :src="iconNav"
+      />{{ title }}
+    </div>
     <van-icon
       name="arrow-left"
       class="arrow-left"
       @click="$router.back()"
-      v-if="showKLeftIcon"
+      v-if="showLeftIcon"
     />
-    <img class="icon" :src="iconNav" />
+
   </div>
 </template>
 
@@ -18,7 +23,7 @@ export default {
     title: {
       default: "Login"
     },
-    showKLeftIcon: {
+    showLeftIcon: {
       default: true
     }
   },
@@ -27,8 +32,7 @@ export default {
       iconNav: require("@/assets/imgs/authentication/loginIcon.png")
     };
   },
-  methods: {
-  }
+  methods: {}
 };
 </script>
 
@@ -45,13 +49,13 @@ export default {
     font-size: 20px;
   }
   .icon {
-    position: absolute;
-    left: 116px;
-    line-height: 70px;
+    // position: absolute;
+    position: relative;
+    right: 10px;
+    top: 10px;
     font-size: 20px;
     width: 34px;
     height: 34px;
-    top: 18px;
   }
   .title {
     position: absolute;

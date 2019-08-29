@@ -1,7 +1,7 @@
 <template>
   <div class="master-profile">
     <fortune-telling-app-fortune-header
-      :showKLeftIcon="true"
+      :showLeftIcon="true"
       title="Master's Profile"
     />
     <div class="cnt">

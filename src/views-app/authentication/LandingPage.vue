@@ -2,16 +2,19 @@
   <div class="landing-page">
     <authentication-app-login-header
       :title="$t('Login.loginTitle')"
-      />
-      
+      :showLeftIcon="false"
+    />
+
     <div class="landingPageContent">
       <div class="titleFont">Be a Happy TaoKae</div>
-      <van-button 
+      <van-button
         class="getStartBtn"
-        @click="getStart" >{{ $t('Login.getStart') }}</van-button>
-      <van-button 
+        @click="getStart"
+      >{{ $t('Login.getStart') }}</van-button>
+      <van-button
         class="SigninBtn"
-        @click="signIn" >{{ $t('Login.signIn') }}</van-button>
+        @click="signIn"
+      >{{ $t('Login.signIn') }}</van-button>
       <div class="bottomTitle">By using this app, you agree to the terms and conditions.</div>
     </div>
   </div>
@@ -122,7 +125,7 @@ export default {
   background: url("../../assets/imgs/authentication/landBak.png") no-repeat;
   background-size: contain;
   height: 100vh;
-  
+
   .landingPageContent {
     position: fixed;
     bottom: 20px;
@@ -137,7 +140,7 @@ export default {
       font-size: 24px;
       margin: 0 16px 0 16px;
       text-align: center;
-      width: 328px;
+      width: calc(100% - 32px);
     }
 
     .getStartBtn {
@@ -146,7 +149,7 @@ export default {
       margin: 0 16px 0 16px;
       bottom: 88px;
       height: 40px;
-      width: 328px;
+      width: calc(100% - 32px);
       color: white;
       border-top-left-radius: 16px;
       border-top-right-radius: 16px;
@@ -159,7 +162,7 @@ export default {
       margin: 0 16px 0 16px;
       bottom: 38px;
       height: 40px;
-      width: 328px;
+      width: calc(100% - 32px);
       color: #ff8600;
       background-color: white;
       border: 1px solid #ff8600;
@@ -170,12 +173,11 @@ export default {
     .bottomTitle {
       position: absolute;
       font-size: 12px;
-      color: #68737D;
+      color: #68737d;
       left: 27px;
       bottom: 0;
     }
   }
-
 }
 </style>
 
