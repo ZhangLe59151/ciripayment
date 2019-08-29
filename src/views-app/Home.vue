@@ -32,16 +32,15 @@ export default {
   computed: {
     ...mapState({
       applicantPhoneNumber: state => userInfo.applicantPhoneNumber,
+      firstLaunch: "firstLaunch"
     })
   },
   created() {
-    this.fetchHomePageData();
-  },
-  mounted() {
-    if (this.isFirst) {
+    /*if (!this.firstLaunch) {
       this.$store.commit("UnfirstLaunch");
       this.$router.push({ name: "LandingPage" });
-    }
+    }*/
+    this.fetchHomePageData();
   },
   methods: {
     fetchHomePageData() {

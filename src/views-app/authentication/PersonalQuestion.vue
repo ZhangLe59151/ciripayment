@@ -97,7 +97,6 @@ export default {
     };
   },
   created() {
-    this.$store.commit("UnfirstLaunch");
     this.$api.getQuestionPersonal(1).then(res => {
         if (res.data.code === 200) {
           this.form1 = res.data.data.questions[2];
@@ -105,9 +104,6 @@ export default {
           this.form3 = res.data.data.questions[0];
         }
       });
-  },
-  mounted() {
-    this.$store.commit("UnfirstLaunch");
   },
   methods: {
     skipQuestion(){

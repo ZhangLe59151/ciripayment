@@ -48,9 +48,6 @@ export default {
       showComponents: true
     };
   },
-  created() {
-    this.$store.commit("UnfirstLaunch");
-  },
   methods: {
     getStart() {
       this.$router.push({ name: "PersonalQuestion", params: { id: 0 } });
