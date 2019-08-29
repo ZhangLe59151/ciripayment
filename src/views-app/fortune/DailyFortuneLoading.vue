@@ -19,14 +19,22 @@ export default {
   computed: {
     ...mapState({
       localDateFormatter: "localDateFormatter",
-      fortuneInfo: "fortuneInfo"
+      fortuneInfo: "fortuneInfo",
+      isLogin: "OTPVerified",
+      answerForm: "furtuneQuestion"
     }),
     today() {
       return this.$moment().format(this.localDateFormatter);
     }
   },
   mounted() {
-    this.getFortunetellingByAPI();
+    if (this.isLogin) {
+      this.getFortunetellingByAPI();
+      this.sendAnswer();
+    }else {
+      this.$router.push({name: 'LoginPage', query: {to: 'Settings'}})
+    }
+    
   },
   methods: {
     getFortunetellingByAPI() {
@@ -42,6 +50,13 @@ export default {
             this.$router.push({ name: "Home" });
           }
         });
+    },
+    sendAnswer() {
+      this.$api.postAnswerF(this.answerForm).then(res => {
+        if (res.data.code === 200) {
+          this.$store.commit("ClearFortuneQuestion");
+        }
+      });
     },
     showResult() {
       setTimeout(() => {
@@ -82,6 +97,10 @@ export default {
     color: white;
     font-size: 20px;
     line-height: 32px;
+    animation-name: test;
+    animation-duration: 3s;
+    animation-timing-function: ease-in;
+    animation-iteration-count: 1;
   }
   .bottom-title:after {
     overflow: hidden;
@@ -95,6 +114,10 @@ export default {
     to {
       width: 30px;
     }
+  }
+  @keyframes test {
+    from { transform: translateY(0); }
+    to { transform: translateY(-20px); }
   }
 }
 </style>
