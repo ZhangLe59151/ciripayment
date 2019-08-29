@@ -260,7 +260,7 @@ export default {
       });
       if (!this.OTPVerified) {
         this.$router.push({
-          name: "LandingPage",
+          name: "LoginPage",
           query: { to: "EnterLoanInfo" }
         });
         return false;
