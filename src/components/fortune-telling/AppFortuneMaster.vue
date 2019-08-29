@@ -14,19 +14,22 @@
         span="16"
         class="cnt"
       >
+        <div :class="master.image">
+
+        </div>
         <div class="name">
           {{master.name}}
         </div>
 
         <div
           class="view"
-          @click="$router.push({name: 'MasterProfile', params: {id: master.id}})"
+          @click="$router.push({name: 'MasterProfile', params: {id: master.id},query: {subtitle: subtitle}})"
         >
           {{$t("FortuneTelling.viewProfile")}}
           <van-icon name="play" />
         </div>
         <div class="desc">
-          {{master.subtitle}}
+          {{subtitle}}
         </div>
         <van-button
           class="choose-btn"
@@ -52,6 +55,16 @@ export default {
       required: true,
       type: Object
     }
+  },
+
+  computed: {
+    subtitle() {
+      return this.$tc(
+        "FortuneTelling.likeDes",
+        this.master.like === 1 ? 1 : 2,
+        { n: this.master.likeCount }
+      );
+    }
   }
 };
 </script>
@@ -67,6 +80,30 @@ export default {
 
   .cnt {
     margin: 40px 0 0 15px;
+    position: relative;
+
+    .tattoo {
+      background: no-repeat center
+        url("../../assets/imgs/fortune-telling/tattoo.png");
+      background-size: contain;
+      height: 74px;
+      position: absolute;
+      top: -23px;
+      right: 22px;
+      width: 34px;
+    }
+
+    .astrology {
+      background: no-repeat center
+        url("../../assets/imgs/fortune-telling/astrology.png");
+      background-size: contain;
+      width: 74px;
+      height: 74px;
+      position: absolute;
+      top: -23px;
+      right: 22px;
+    }
+
     .name {
       font-size: 20px;
       color: #2f3941;

@@ -47,7 +47,15 @@
       v-else
       class="empty-box"
     >
-      {{$t("Record.emptyMsg")}}
+      <div>{{$t("Record.emptyMsg")}}</div>
+      <div
+        class="add-record"
+        @click="$router.push({name: 'AddRecord'})"
+      >
+        <van-icon
+          name="plus"
+          color="#ff8600"
+        />{{$t('Record.addRecord')}}</div>
     </div>
   </div>
 </template>
@@ -88,8 +96,8 @@ export default {
       return util.fmoney(item["amount"]);
     },
     formatTotalIncome(number) {
-      if (number<0) {
-        return util.fmoney(number).replace("-,","-")
+      if (number < 0) {
+        return util.fmoney(number).replace("-,", "-");
       }
       return util.fmoney(number);
     },
@@ -135,6 +143,25 @@ export default {
     padding: 55px 18px;
     margin: 20px 18px;
     background: #d8d8d8;
+    text-align: center;
+
+    .add-record {
+      height: 40px;
+      line-height: 40px;
+      background: #ffffff;
+      box-shadow: 0 3px 8px -4px rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+      width: 160px;
+      margin: 30px auto 0;
+      color: #2f3941;
+      letter-spacing: 0;
+
+      .van-icon {
+        margin-right: 5px;
+        position: relative;
+        top: 2px;
+      }
+    }
   }
   .group {
     font-family: HelveticaNeue;

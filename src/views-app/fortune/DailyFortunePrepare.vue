@@ -21,7 +21,7 @@
 
 <script>
 import { mapState } from "vuex";
-
+import { find } from "lodash";
 export default {
   name: "DailyFortunePrepare",
   data() {
@@ -39,7 +39,27 @@ export default {
       this.fortuneInfo.selectedMaster = master;
       this.$store.commit("SaveFortuneInfo", this.fortuneInfo);
       this.$router.push({ name: "DailyFortuneQuestion" });
+    },
+    bindLikeObIntoMasterList(likeArr) {
+      const arr = [];
+      this.masterList.map(item => {
+        const likeOb = find(likeArr, { masterId: item.id });
+        const _item = Object.assign({}, item, likeOb);
+        arr.push(_item);
+      });
+
+      return arr;
     }
+  },
+  mounted() {
+    this.$api.getLikeCount().then(res => {
+      if (res.data.code === 200) {
+        this.masterList = this.bindLikeObIntoMasterList(res.data.data);
+        return;
+      }
+
+      this.$toast(res.data.msg);
+    });
   }
 };
 </script>

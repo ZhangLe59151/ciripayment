@@ -7,7 +7,7 @@
     <div class="cnt">
       <img :src="imgList[info.id]">
       <div class="name">{{info.name}}</div>
-      <div class="subtitle">{{info.subtitle}}</div>
+      <div class="subtitle">{{$route.query.subtitle}}</div>
       <div class="detail">{{info.detail}}</div>
       <div class="btn"> {{$t("FortuneTelling.tellMyFortune")}}</div>
     </div>
