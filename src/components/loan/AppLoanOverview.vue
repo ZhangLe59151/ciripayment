@@ -106,12 +106,12 @@
         >
           <van-col
             class="label"
-            span="12"
+            span="7"
           >{{$t("AppLoanOverview.applicationID")}}</van-col>
           <van-col
             class="info"
-            span="12"
-          >{{loanProfile.id}}</van-col>
+            span="17"
+          >{{loanProfile.applicationId}}</van-col>
         </van-row>
 
         <van-row

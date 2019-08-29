@@ -84,6 +84,11 @@ export default {
       this.mccName = value.name;
       this.selectedValue = value.name;
     },
+    pad(num, size) {
+      var s = num + "";
+      while (s.length < size) s = "0" + s;
+      return s;
+    },
     onClickRight(value) {
       if (!this.mccID) {
         this.$toast("please choose MCC first.");
@@ -94,7 +99,7 @@ export default {
         sicName: this.sicName,
         // subsicId: this.subsicId,
         subsicName: this.subsicName,
-        mccID: this.mccID,
+        mccID: this.pad(this.mccID, 4),
         mccName: this.mccName
         // sic: this.subsicId
       });

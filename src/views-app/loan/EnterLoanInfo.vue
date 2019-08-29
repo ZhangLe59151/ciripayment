@@ -113,14 +113,18 @@
             class="action-area"
             v-if="frontStatus === 0"
           >
-            <el-upload
-              action="front"
-              :show-file-list="false"
-              :http-request="uploadImg"
-              :before-upload="fileCheck"
+<!--            <el-upload-->
+<!--              action="front"-->
+<!--              :show-file-list="false"-->
+<!--              :http-request="uploadImg"-->
+<!--              :before-upload="fileCheck"-->
+<!--            >-->
+<!--              <i class="el-icon-camera-solid"></i>-->
+<!--            </el-upload>-->
+            <div class="camera-input-question" @click="takePhoto('front')"
             >
               <i class="el-icon-camera-solid"></i>
-            </el-upload>
+            </div>
           </div>
           <div
             class="action-area-spinner"
@@ -151,14 +155,10 @@
             class="action-area"
             v-if="backStatus === 0"
           >
-            <el-upload
-              action="back"
-              :show-file-list="false"
-              :http-request="uploadImg"
-              :before-upload="fileCheck"
+            <div class="camera-input-question" @click="takePhoto('back')"
             >
               <i class="el-icon-camera-solid"></i>
-            </el-upload>
+            </div>
           </div>
           <div
             class="action-area-spinner"
@@ -190,14 +190,10 @@
             class="action-area"
             v-if="faceStatus === 0"
           >
-            <el-upload
-              action="face"
-              :show-file-list="false"
-              :http-request="uploadImg"
-              :before-upload="fileCheck"
+            <div class="camera-input-question" @click="takePhoto('face')"
             >
               <i class="el-icon-camera-solid"></i>
-            </el-upload>
+            </div>
           </div>
           <div
             class="action-area-spinner"
@@ -219,47 +215,47 @@
           </div>
         </div>
         <!-- business information -->
-        <template v-if="isBizRegNumberValid">
-          <div class="section-header">Business Registration</div>
-          <!-- personal information -->
-          <div class="document-cell">
-            <div class="document-name-container">
-              <div class="label-title required double-line">Business Registration Document </div>
-              <div class="file-name">{{certName}}</div>
-            </div>
-            <div
-              class="action-area"
-              v-if="certStatus === 0"
-            >
-              <el-upload
-                action="cert"
-                :show-file-list="false"
-                :http-request="uploadImg"
-                :before-upload="fileCheck"
-              >
-                <i class="el-icon-camera-solid"></i>
-              </el-upload>
-            </div>
-            <div
-              class="action-area-spinner"
-              v-if="certStatus === 1"
-            >
-              <van-loading
-                style="padding: 14px 8px;width: 100%;"
-                type="spinner"
-              />
-            </div>
-            <div
-              class="action-area-delete"
-              v-if="certStatus === 2"
-            >
-              <i
-                class="el-icon-delete"
-                @click="deleteImage('cert')"
-              ></i>
-            </div>
-          </div>
-        </template>
+<!--        <template v-if="isBizRegNumberValid">-->
+<!--          <div class="section-header">Business Registration</div>-->
+<!--          &lt;!&ndash; personal information &ndash;&gt;-->
+<!--          <div class="document-cell">-->
+<!--            <div class="document-name-container">-->
+<!--              <div class="label-title required double-line">Business Registration Document </div>-->
+<!--              <div class="file-name">{{certName}}</div>-->
+<!--            </div>-->
+<!--            <div-->
+<!--              class="action-area"-->
+<!--              v-if="certStatus === 0"-->
+<!--            >-->
+<!--              <el-upload-->
+<!--                action="cert"-->
+<!--                :show-file-list="false"-->
+<!--                :http-request="uploadImg"-->
+<!--                :before-upload="fileCheck"-->
+<!--              >-->
+<!--                <i class="el-icon-camera-solid"></i>-->
+<!--              </el-upload>-->
+<!--            </div>-->
+<!--            <div-->
+<!--              class="action-area-spinner"-->
+<!--              v-if="certStatus === 1"-->
+<!--            >-->
+<!--              <van-loading-->
+<!--                style="padding: 14px 8px;width: 100%;"-->
+<!--                type="spinner"-->
+<!--              />-->
+<!--            </div>-->
+<!--            <div-->
+<!--              class="action-area-delete"-->
+<!--              v-if="certStatus === 2"-->
+<!--            >-->
+<!--              <i-->
+<!--                class="el-icon-delete"-->
+<!--                @click="deleteImage('cert')"-->
+<!--              ></i>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </template>-->
       </el-card>
     </el-form>
     <van-popup
@@ -359,7 +355,8 @@ export default {
       },
       resAddrValidated: false,
       bizNameEnValidated: false,
-      bizAddrValidated: false
+      bizAddrValidated: false,
+      processingDoc: ""
     };
   },
   created() {
@@ -378,6 +375,8 @@ export default {
     this.form = Object.assign(form);
   },
   mounted() {
+    // this is to activate cordova camera plugin
+    document.addEventListener("deviceready", () => console.log("device-ready"));
     if (!this.$route.query.position) {
       // Scroll to top whenever apply new application
       window.scrollTo(0, 0);
@@ -499,6 +498,35 @@ export default {
         return true;
       }
     },
+    takePhoto(field) {
+      this.processingDoc = field;
+      let opts = {
+        quality: 80,
+        destinationType: Camera.DestinationType.DATA_URL,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        mediaType: Camera.MediaType.PICTURE,
+        encodingType: Camera.EncodingType.JPEG,
+        cameraDirection: Camera.Direction.BACK
+      };
+      navigator.camera.getPicture(this.onSuccessPhotoTaking, this.onFailPhotoTaking, opts);
+    },
+    onSuccessPhotoTaking(imgURI) {
+      let dataURI = "data:image/jpeg;base64," + imgURI;
+      var vm = this;
+      this.uploadImg({ file: this.dataURItoBlob(dataURI), action: this.processingDoc, name: "Checked" })
+    },
+    onFailPhotoTaking() {
+
+    },
+    dataURItoBlob(dataURI) {
+      var byteString = atob(dataURI.split(",")[1]);
+      var ab = new ArrayBuffer(byteString.length);
+      var ia = new Uint8Array(ab);
+      for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+      return new Blob([ab], { type: "image/jpeg" });
+    },
     handleNext() {
       this.form.contactPersonFirstName = this.form.applicantFirstName;
       this.form.contactPersonLastName = this.form.applicantLastName;
@@ -606,7 +634,7 @@ export default {
       var vm = this;
       var UploadApi = this.$store.state.uploadImgUrl;
       var fileObj = param.file;
-      var originalFileName = fileObj.name;
+      var originalFileName = fileObj.name || param.name;
       var originalFileSizeMb = util.byteToMb(fileObj.size);
 
       console.log("original file size: ", originalFileSizeMb);
