@@ -54,7 +54,7 @@ export default {
     width: 100px;
     height: 100px;
     background: #f8f9f9;
-    border-radius: 65px;
+    border-radius: 50%;
     overflow: hidden;
     .photo {
       width: 100%;
@@ -63,7 +63,7 @@ export default {
         url("../../assets/imgs/fortune-telling/ico_master_01.png");
       background-size: contain;
       &.master-img-02 {
-        background-image: url("../../assets/imgs/fortune-telling/master_02.png");
+        background-image: url("../../assets/imgs/fortune-telling/ico_master_02.png");
       }
     }
   }

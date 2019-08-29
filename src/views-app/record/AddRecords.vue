@@ -255,7 +255,10 @@ export default {
         return false;
       }
       const regex1 = /^(([1-9][0-9]*)|(([0]\.\d{2}|[1-9][0-9]*\.\d{2})))$/;
-      if (regex1.test(this.form[this.type]) && this.form[this.type].indexOf(".") != -1) {
+      if (
+        regex1.test(this.form[this.type]) &&
+        this.form[this.type].indexOf(".") != -1
+      ) {
         return false;
       }
       this.form[this.type] += value;
@@ -271,7 +274,7 @@ export default {
       form.accountDate = this.$moment(this.form.currentDate).format(
         this.localDateFormatter
       );
-      debugger
+
       this.appear = false;
       const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
       if (regex.test(form[this.type])) {
@@ -281,7 +284,10 @@ export default {
         this.$notify({ message: "Added Sucessfully", background: "#04A777" });
         return false;
       }
-      this.$notify({ message: "Please input valid number", background: "#b41800" });
+      this.$notify({
+        message: "Please input valid number",
+        background: "#b41800"
+      });
     },
     convertForm(form) {
       const _date = form.accountDate.includes(",")
