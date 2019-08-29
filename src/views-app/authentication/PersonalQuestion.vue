@@ -84,9 +84,9 @@ export default {
       icon33: require("@/assets/imgs/personal/exploresignin.svg"),
       iconSucceed: require("@/assets/imgs/personal/success.svg"),
       iconBk: require("@/assets/imgs/personal/confetti.png"),
-      form1: { },
-      form2: { },
-      form3: { }, 
+      form1: { options: [] },
+      form2: { options: [] },
+      form3: { options: [] }, 
       answerList: [
         { id: 0, value: " " },
         { id: 1, value: " " },
@@ -121,7 +121,6 @@ export default {
       }
     },
     sendAnswer() {
-      //this.answerList.remove('');
       this.$api.postAnswerPersonal(this.answerList).then(res => {
         if (res.data.code === 200) {
           this.splash = true;
