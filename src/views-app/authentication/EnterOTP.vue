@@ -275,7 +275,7 @@ export default {
     margin: 100px 16px 0 16px;
     background-color: white;
     height: 258px;
-    width: 328px;
+    width: calc(100vw - 32px);
     border-radius: 16px;
     box-shadow: 0 2px 4px 2px #A9A9A9;
 
