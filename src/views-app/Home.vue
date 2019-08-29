@@ -36,10 +36,10 @@ export default {
     })
   },
   created() {
-    /*if (!this.firstLaunch) {
+    /* if (!this.firstLaunch) {
       this.$store.commit("UnfirstLaunch");
       this.$router.push({ name: "LandingPage" });
-    }*/
+    } */
     this.fetchHomePageData();
   },
   methods: {

@@ -75,9 +75,7 @@ export default {
       });
     },
     validateEmail() {
-      this.emailError = this.$store.state.email.regExp.test(this.form.email)
-        ? false
-        : true;
+      this.emailError = !this.$store.state.email.regExp.test(this.form.email);
     }
   }
 };

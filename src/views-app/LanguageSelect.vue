@@ -2,7 +2,7 @@
   <div class="language-select">
     <app-common-header title="Language" />
     <div class="language">
-      
+
         <van-radio-group v-model="checked">
         <div class="radio">
           <div class="title">{{$t("Language.en")}}</div>
@@ -72,6 +72,5 @@ export default {
     top: 0;
   }
 }
-
 
 </style>

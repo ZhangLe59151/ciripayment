@@ -31,10 +31,9 @@ export default {
     if (this.isLogin) {
       this.getFortunetellingByAPI();
       this.sendAnswer();
-    }else {
-      this.$router.push({name: 'LoginPage', query: {to: 'Settings'}})
+    } else {
+      this.$router.push({ name: "LoginPage", query: { to: "Settings" } })
     }
-    
   },
   methods: {
     getFortunetellingByAPI() {

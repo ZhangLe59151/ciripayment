@@ -5,7 +5,7 @@
       style="top: 34px"
     /> -->
     <div class="landingPageContent">
-      <div class="slogan-title">{{ $t('Login.verifyPhone')}}</div> 
+      <div class="slogan-title">{{ $t('Login.verifyPhone')}}</div>
       <div class="slogan-sub">{{ $t('Login.yourPhone')}}</div>
       <div class="input-block">
         <div class="nationalCode" @click="show = true">
@@ -22,11 +22,7 @@
           <img class="icon" :src="pathIcon" />
         </van-button>
 
-
-
-
       </div>
-      
 
     </div>
 
@@ -69,7 +65,7 @@ export default {
       columns: "nationalCodeList",
       nationCode: "nationalCode",
       reg: "reg",
-      imgBk: require("@/assets/imgs/authentication/otpBak.png"),
+      imgBk: require("@/assets/imgs/authentication/otpBak.png")
     }),
     sloganTitle() {
       const ob = {
@@ -126,16 +122,16 @@ export default {
     handleStart() {
       if (this.phoneValidationPattern.test(this.form.phone)) {
         this.$store.commit("UpdateUserInfo", {
-        applicantPhoneNumber: this.form.nationalCode + this.form.phone,
-        nationalCode: this.form.nationalCode,
-        phone: this.form.phone
+          applicantPhoneNumber: this.form.nationalCode + this.form.phone,
+          nationalCode: this.form.nationalCode,
+          phone: this.form.phone
         });
         this.sendOtp();
-      }else {
+      } else {
         this.$notify({
-            message: "Please input the validate mobile number",
-            background: "#b41800"
-          });
+          message: "Please input the validate mobile number",
+          background: "#b41800"
+        });
         return false;
       }
     },
@@ -246,10 +242,8 @@ export default {
       width: 40px;
     }
 
-      
   }
 
-  
   .bottom-btn {
     background-color: #ff8600;
     border-radius: 4px;

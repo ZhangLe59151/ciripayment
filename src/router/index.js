@@ -9,7 +9,7 @@ const routeArr = [
     path: "/",
     redirect: to => {
       return localStorage.getItem("firstLaunch") ? "/home" : "/landing-page"
-    },
+    }
 
   },
   {

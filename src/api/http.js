@@ -1,8 +1,8 @@
 import axios from "axios";
 // import router from "@/router";
 // import { Dialog } from "vant";
-import { Toast } from 'vant';
-import i18n from '@/assets/lang/i18n';
+import { Toast } from "vant";
+import i18n from "@/assets/lang/i18n";
 
 // axios config
 axios.defaults.timeout = 30000;
@@ -22,7 +22,7 @@ axios.interceptors.request.use(
       clientId: clientId
     };
     Toast.loading({
-      duration: 0, 
+      duration: 0,
       forbidClick: true,
       mask: false
     });

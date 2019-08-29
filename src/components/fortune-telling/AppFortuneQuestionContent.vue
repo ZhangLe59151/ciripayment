@@ -22,25 +22,23 @@
 
         <div class="flex-container" v-if="questionList[questionIndex].answerType === 3 && questionList[questionIndex].options.length < 4">
           <div v-for="(item,index) in questionList[questionIndex].options" :key="index">
-             <van-button 
-              :class="(answer === item ? 'tab3Selected' : 'tab3')" 
+             <van-button
+              :class="(answer === item ? 'tab3Selected' : 'tab3')"
               @click="onSelect(item)" >{{ item }}
             </van-button>
           </div>
         </div>
 
-        <div 
-          class="flex-container" 
+        <div
+          class="flex-container"
            v-if="questionList[questionIndex].answerType === 3 && questionList[questionIndex].options.length > 3">
            <div v-for="(item,index) in questionList[questionIndex].options" :key="index">
-            <van-button 
-              :class="(answer === item ? 'tab7Selected' : 'tab7')" 
+            <van-button
+              :class="(answer === item ? 'tab7Selected' : 'tab7')"
               @click="onSelect(item)" >{{ item }}
             </van-button>
           </div>
         </div>
-
-          
 
       </div>
       <van-button
@@ -65,11 +63,11 @@ export default {
       index: 1,
       questionIndex: 0,
       answer: "",
-      answerForm: [ 
-        { id: 0, value: " ", answerDate: this.$moment(today).format("YYYYMMDD"), allowRepeat: 0 }, 
+      answerForm: [
+        { id: 0, value: " ", answerDate: this.$moment(today).format("YYYYMMDD"), allowRepeat: 0 },
         { id: 0, value: " ", answerDate: this.$moment(today).format("YYYYMMDD"), allowRepeat: 0 } ],
       questionList: [
-        { "question" : "" }
+        { "question": "" }
       ]
     };
   },
@@ -80,14 +78,14 @@ export default {
   },
   created() {
     this.$api.getQuestionF().then(res => {
-        if (res.data.code === 200) {
-          this.questionList = res.data.data.questions;
-          this.answerForm[0].allowRepeat = res.data.data.questions[0].allowRepeat;
-          this.answerForm[1].allowRepeat = res.data.data.questions[1].allowRepeat;
-          this.answerForm[0].id = res.data.data.questions[0].id;
-          this.answerForm[1].id = res.data.data.questions[1].id;
-        }
-      });
+      if (res.data.code === 200) {
+        this.questionList = res.data.data.questions;
+        this.answerForm[0].allowRepeat = res.data.data.questions[0].allowRepeat;
+        this.answerForm[1].allowRepeat = res.data.data.questions[1].allowRepeat;
+        this.answerForm[0].id = res.data.data.questions[0].id;
+        this.answerForm[1].id = res.data.data.questions[1].id;
+      }
+    });
   },
   methods: {
     next() {
@@ -97,20 +95,20 @@ export default {
       if (this.index === 3) {
         if (this.isLogin) {
           this.$api.postAnswerF(this.answerForm).then(res => {
-          if (res.data.code === 200) {
-            setTimeout(() => { this.$router.push({ name: "DailyFortuneLoading" }); }, 1500); }
+            if (res.data.code === 200) {
+              setTimeout(() => { this.$router.push({ name: "DailyFortuneLoading" }); }, 1500);
+            }
           });
-        }
-        else {
+        } else {
           this.questionIndex += 1;
           this.$store.commit("UpdateFurtuneQuestionInfo", this.answerForm);
           this.$router.push({ name: "LoginPage", query: { to: "DailyFortuneLoading" } });
-        }       
+        }
       }
     },
     onSelect(item) {
       this.answer = item;
-    } 
+    }
   }
 };
 </script>
@@ -172,7 +170,7 @@ export default {
   bottom: 0;
   height: 140px;
   width: 264px;
-  
+
   .answer-input {
     position: absolute;
     background-color: white;

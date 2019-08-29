@@ -111,14 +111,14 @@ export default {
     triggerShare() {
       this.showPopUp = true;
     },
-    share(platform){
+    share(platform) {
       const funcName = "shareOn".concat(this.deviceType);
       this[funcName](platform);
     },
     shareOnAPP(platform) {
       const shareMsg = "";
       const shareLink = `https://${process.env.VUE_APP_WEBURL}/daily-fortune-result?shareKey=${this.fortuneInfo.shareKey}`;
-      
+
       const onSuccess = function(result) {
         this.$toast(i18n.t("FortuneTelling.shareSuccess"));
         console.log("Share completed!");
@@ -157,18 +157,18 @@ export default {
       const shareMsg = "";
       const shareLink = `https://${process.env.VUE_APP_WEBURL}/daily-fortune-result?shareKey=${this.fortuneInfo.shareKey}`;
 
-      if (platform === "facebook"){
+      if (platform === "facebook") {
         window.open(
-          `https://www.facebook.com/sharer/sharer.php` +
+          "https://www.facebook.com/sharer/sharer.php" +
             objectToGetParams({
               u: shareLink
             }),
-          '__blank'
+          "__blank"
         );
-      }else if (platform === "line"){
+      } else if (platform === "line") {
         window.open(
-          `line://msg/text/?` + shareLink,
-          '__blank'
+          "line://msg/text/?" + shareLink,
+          "__blank"
         );
       }
     },

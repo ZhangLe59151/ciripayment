@@ -5,7 +5,7 @@
       style="top: 34px"
     /> -->
     <div class="landingPageContent">
-      <div class="slogan-title">{{$t('Login.enterOTP')}} {{ phone }} </div> 
+      <div class="slogan-title">{{$t('Login.enterOTP')}} {{ phone }} </div>
       <div class="slogan-sub">{{$t('Login.enterOTPtitle')}}</div>
       <van-password-input
         class="inputCode"
@@ -28,7 +28,6 @@
         @click="handleResend"
       >{{$t('Login.resendOTP')}}
       </div>
-
 
     </div>
 
@@ -74,13 +73,13 @@ export default {
     }
   },
   watch: {
-    /*value: function(val) {
+    /* value: function(val) {
       // watch input if verified account
       debugger
       if (this.form.accountVerified) {
         this.handleVerifyOtpVerifiedAccount();
       }
-    }*/
+    } */
   },
   created() {
     this.countTime();
@@ -325,7 +324,7 @@ export default {
       font-size: 14px;
       color: #037aff;
     }
-      
+
   }
 
 }
