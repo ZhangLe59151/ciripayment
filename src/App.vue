@@ -23,15 +23,6 @@ export default {
       transitionStyle: "van-fade"
     };
   },
-  watch: {
-    $route: function(to, from) {
-      if (["SIC", "SubSIC", "MCC"].includes(to.name)) {
-        this.transitionStyle = "fade";
-      } else {
-        this.transitionStyle = "van-fade";
-      }
-    }
-  },
   created() {
     // const h = document.body.scrollHeight; // 用onresize事件监控窗口或框架被调整大小，先把一开始的高度记录下来
     // window.onresize = function() {
