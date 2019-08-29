@@ -75,7 +75,7 @@ export default {
   .money-input-question{
     background-color: #ffffff;
     min-height: 320px;
-    width: 304px;
+    width: calc(84vw);;
     margin: auto;
     border-radius: 8px;
     color: #2F3941;
@@ -96,7 +96,7 @@ export default {
       margin-bottom: 35px;
     }
     .answer {
-      width: 264px;
+      width: 98%;
       height: 80px;
       box-sizing: border-box;
       background-color: #E9EBED;
@@ -116,7 +116,7 @@ export default {
       position:absolute;
       bottom:20px;
       left:20px;
-      width: 264px;
+      width: 85%;
       height:40px;
       background-color: #C2C8CC !important;
       color:white !important;
@@ -150,7 +150,7 @@ export default {
       position:absolute;
       bottom:20px;
       left:20px;
-      width: 264px;
+      width: 85%;
       height:40px;
       background-color: #FF8600;
       color:white;
@@ -176,11 +176,14 @@ export default {
     .el-input--small .el-input__inner{
       border: none;
       border-radius: 4px;
-      width:264px;
+      width:95%;
       height: 80px;
       font-size:24px;
       color: #87929D;
       text-align: center;
+    }
+    .el-input {
+      width: 97%;
     }
     .el-input--suffix .el-input__inner{
       padding-left: 30px;

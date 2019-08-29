@@ -52,7 +52,7 @@
     "applicant": "Applicant",
     "applicationAmount": "Loan Amount",
     "interestRate": "Loan Interest Rate",
-    "loanTerm": "Loan Term",
+    "loanTerm": "Loan Period",
     "repaymentDate": "First Repayment Date"
   },
   "EnterLoanInfo": {
