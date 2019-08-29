@@ -211,7 +211,6 @@ export default {
           "accountDate",
           val ? (kv[_selected] ? kv[_selected] : "") + formDate : ""
         );
-        var a = this.$moment(val).format(this.localDateFormatter);
 
         this.fetchDataUpdate(this.$moment(val).format(this.localDateFormatter));
       }
@@ -220,6 +219,7 @@ export default {
   methods: {
     fetchData(form) {
       this.$api.addRecord(form).then(res => {
+        console.log(form.accountDate)
         if (res.data.code === 200) {
           this.fetchDataUpdate(form.accountDate);
           this.form.incomeAmount = "";
@@ -268,7 +268,7 @@ export default {
     },
     updateBtn() {
       const form = Object.assign({}, this.form);
-      form.accountDate = this.$moment(this.form.currentDate).format(
+      form.accountDate = this.$moment(this.currentDate).format(
         this.localDateFormatter
       );
       this.appear = false;
