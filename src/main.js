@@ -49,12 +49,12 @@ Vue.directive("analytics", {
   }
 });
 
-// if (window.location.protocol === "file:") {
-//   let cordovaScript = document.createElement("script");
-//   cordovaScript.setAttribute("type", "text/javascript");
-//   cordovaScript.setAttribute("src", "cordova.js");
-//   document.body.appendChild(cordovaScript);
-// }
+if (window.location.protocol === "file:") {
+  let cordovaScript = document.createElement("script");
+  cordovaScript.setAttribute("type", "text/javascript");
+  cordovaScript.setAttribute("src", "cordova.js");
+  document.body.appendChild(cordovaScript);
+}
 
 new Vue({
   router,
