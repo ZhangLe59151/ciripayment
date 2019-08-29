@@ -48,7 +48,8 @@
 </template>
 
 <script>
-import { MCC } from "@/assets/data/mcc.js";
+// import { MCC } from "@/assets/data/mcc.js";
+import { SUBSIC as MCC } from "@/assets/data/subsic.js";
 
 export default {
   data() {
@@ -58,7 +59,7 @@ export default {
       finished: false,
       sicId: "",
       sicName: "",
-      subsicId: "",
+      // subsicId: "",
       subsicName: "",
       mccID: "",
       mccName: "",
@@ -68,12 +69,13 @@ export default {
   created() {
     this.sicId = this.$route.query.sicId;
     this.sicName = this.$route.query.sicName;
-    this.subsicId = this.$route.query.subsicId;
+    // this.subsicId = this.$route.query.subsicId;
     this.subsicName = this.$route.query.subsicName;
   },
   methods: {
     onLoad() {
-      this.list = MCC[`mcc-${this.$route.query.subsicId}`];
+      // this.list = MCC[`mcc-${this.$route.query.subsicId}`];
+      this.list = MCC[`subsic-${this.$route.query.sicId}`];
       this.finished = true;
     },
     handleClick(value) {
@@ -90,11 +92,11 @@ export default {
       this.$store.commit("UpdateForm", {
         sicId: this.sicId,
         sicName: this.sicName,
-        subsicId: this.subsicId,
+        // subsicId: this.subsicId,
         subsicName: this.subsicName,
         mccID: this.mccID,
-        mccName: this.mccName,
-        sic: this.subsicId
+        mccName: this.mccName
+        // sic: this.subsicId
       });
       this.$router.push({
         name: this.$route.query.origin,

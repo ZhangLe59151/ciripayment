@@ -63,19 +63,6 @@
             <i class="iconfont iconsuccess success-validator"/></div>
         </el-form-item>
 
-        <el-form-item
-          :label="$t('EnterLoanInfo.bizCat')"
-          prop="sicName"
-          :rules="[
-        { required: true, message: $t('EnterLoanInfo.errorSelectCategory'), trigger: 'blur'}
-        ]"
-        >
-          <van-cell
-            :title="`${this.form.mccName || $t('EnterLoanInfo.selectCat')} `"
-            is-link
-            @click="handleGotoSIC"
-          />
-        </el-form-item>
         <!-- business address -->
         <el-form-item
           :label="$t('EnterLoanInfo.bizAdd')"
@@ -95,6 +82,21 @@
           <div v-if="bizAddrValidated" class="bottom-right-position">
             <i class="iconfont iconsuccess success-validator"/></div>
         </el-form-item>
+
+        <el-form-item
+          :label="$t('EnterLoanInfo.bizCat')"
+          prop="sicName"
+          :rules="[
+        { required: true, message: $t('EnterLoanInfo.errorSelectCategory'), trigger: 'blur'}
+        ]"
+        >
+          <van-cell
+            :title="`${this.form.mccName || $t('EnterLoanInfo.selectCat')} `"
+            is-link
+            @click="handleGotoSIC"
+          />
+        </el-form-item>
+
       </el-card>
 
       <el-card class="box-card">

@@ -56,7 +56,7 @@ export default {
     handleClick(value) {
       this.sic = value;
       this.$router.push({
-        name: "SubSIC",
+        name: "MCC",
         query: {
           sicId: this.sic.id,
           sicName: value.name,
