@@ -36,7 +36,7 @@ export default new Vuex.Store({
     form: {},
     userInfo: {},
     application: {},
-    furtuneQuestion: {},
+    furtuneQuestion: [],
     recordList: JSON.parse(localStorage.getItem("recordList")) || [],
     masterList: require("@/assets/data/fortuneMasterList.json"),
     localDateFormatter: "YYYYMMDD",
