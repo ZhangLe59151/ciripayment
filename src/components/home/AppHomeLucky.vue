@@ -20,7 +20,7 @@
 
   </div>
   <div
-    class="app-home-lucky"
+    class="app-home-lucky app-home-lucky-single"
     @click="$router.push({name: 'DailyFortuneResult',query: {id: fortuneResult.id}})"
     v-else
   >
@@ -121,16 +121,21 @@ export default {
   margin: 8px 0;
   position: relative;
 
+  &.app-home-lucky-single {
+    background-image: url(../../assets/imgs/home_master_bg_single.png);
+  }
+
   > img {
-    height: 120px;
+    height: 100px;
     position: absolute;
     bottom: 0;
+
     &.lady_teller {
-      left: 0;
+      left: 10px;
     }
 
     &.male_teller {
-      right: 0;
+      right: 10px;
     }
 
     &.single {
