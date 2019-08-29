@@ -68,7 +68,9 @@ export default {
       answerForm: [ 
         { id: 0, value: " ", answerDate: this.$moment(today).format("YYYYMMDD"), allowRepeat: 0 }, 
         { id: 0, value: " ", answerDate: this.$moment(today).format("YYYYMMDD"), allowRepeat: 0 } ],
-      questionList: []
+      questionList: [
+        { "question" : "" }
+      ]
     };
   },
   computed: {
@@ -92,8 +94,7 @@ export default {
       this.answerForm[this.questionIndex].value = this.answer;
       this.answer = "";
       this.index += 1;
-      this.questionIndex += 1;
-      if (this.questionIndex === 2) {
+      if (this.index === 3) {
         if (this.isLogin) {
           this.$api.postAnswerF(this.answerForm).then(res => {
           if (res.data.code === 200) {
@@ -101,6 +102,7 @@ export default {
           });
         }
         else {
+          this.questionIndex += 1;
           this.$store.commit("UpdateFurtuneQuestionInfo", this.answerForm);
           this.$router.push({ name: "LoginPage", query: { to: "DailyFortuneLoading" } });
         }       
