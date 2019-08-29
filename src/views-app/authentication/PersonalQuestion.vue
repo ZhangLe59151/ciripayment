@@ -118,11 +118,7 @@ import { mapState } from "vuex";
 
 export default {
   name: "personal-question",
-  computed: {
-    ...mapState({
-      columns: "nationalCodeList"
-    })
-  },
+
   data() {
     return {
       splash: false,
@@ -154,6 +150,11 @@ export default {
       phoneValidationPattern: this.$store.state.phone.thaiExp,
       showComponents: true
     };
+  },
+  computed: {
+    ...mapState({
+      columns: "nationalCodeList"
+    })
   },
   created() {
     this.$api.getQuestionPersonal(1).then(res => {

@@ -3,7 +3,7 @@
     <div class="title">
       <img
         class="icon"
-        :src="iconNav"
+        :src="require('@/assets/imgs/authentication/loginIcon.png')"
       />{{ title }}
     </div>
     <van-icon
@@ -21,16 +21,14 @@ export default {
   name: "AppLoginHeader",
   props: {
     title: {
-      default: "Login"
+      default: ""
     },
     showLeftIcon: {
       default: true
     }
   },
   data() {
-    return {
-      iconNav: require("@/assets/imgs/authentication/loginIcon.png")
-    };
+    return {};
   },
   methods: {}
 };

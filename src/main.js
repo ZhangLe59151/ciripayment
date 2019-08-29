@@ -21,14 +21,6 @@ import Vant, { Notify } from "vant";
 import "@/amfe";
 
 import i18n from "./assets/lang/i18n";
-// import VueSignaturePad from "vue-signature-pad";
-
-// import VueAnalytics from "vue-analytics";
-
-// Vue.use(VueAnalytics, {
-//   id: process.env.VUE_APP_GAID,
-//   router
-// });
 
 Vue.use(ElementUI);
 
