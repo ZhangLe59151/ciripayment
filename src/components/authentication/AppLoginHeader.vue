@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      iconNav: require("@/assets/imgs/authentication/group6.png")
+      iconNav: require("@/assets/imgs/authentication/loginIcon.png")
     };
   },
   methods: {
@@ -40,25 +40,25 @@ export default {
   .arrow-left {
     position: absolute;
     left: 16px;
-    color: black;
+    color: white;
     line-height: 70px;
     font-size: 20px;
   }
   .icon {
     position: absolute;
-    left: 66px;
+    left: 116px;
     line-height: 70px;
     font-size: 20px;
-    width: 58px;
-    height: 32px;
-    top: 20px;
+    width: 34px;
+    height: 34px;
+    top: 18px;
   }
   .title {
     position: absolute;
     text-align: center;
     line-height: 70px;
     font-size: 24px;
-    color: black;
+    color: white;
     width: 100%;
   }
 }
