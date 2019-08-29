@@ -27,7 +27,7 @@
               <van-col span="1">
                 <i class="iconfont iconcamera" />
               </van-col>
-              <van-col span="12" offset="3">
+              <van-col span="20" offset="3">
                 <div class="placeholder-text">Take a photo</div>
               </van-col>
             </van-row>
@@ -44,11 +44,11 @@
           :http-request="uploadImg"
         >
           <div class="placeholder">
-            <van-row type="flex" justify="center">
+            <van-row style="padding-left: 55px;">
               <van-col span="1">
                 <i class="iconfont iconalbum" />
               </van-col>
-              <van-col span="12" offset="2">
+              <van-col span="18" offset="3">
                 <div class="placeholder-text">Select from album</div>
               </van-col>
             </van-row>
