@@ -67,7 +67,7 @@ export default {
   },
   data() {
     return {
-      splash: true,
+      splash: false,
       questionPage: true,
       tabActive: 0,
       tab1: false,
