@@ -12,65 +12,101 @@ const routeArr = [
   {
     path: "/enter-info",
     name: "EnterInfo",
-    component: () => import("@/views-app/EnterInfo.vue")
+    component: () => import("@/views-app/EnterInfo.vue"),
+    meta: {
+      title: ""
+    }
   },
 
   {
     path: "/sic",
     name: "SIC",
-    component: () => import("@/views-app/loan/Sic.vue")
+    component: () => import("@/views-app/loan/Sic.vue"),
+    meta: {
+      title: ""
+    }
   },
   {
     path: "/subsic",
     name: "SubSIC",
-    component: () => import("@/views-app/loan/SubSic.vue")
+    component: () => import("@/views-app/loan/SubSic.vue"),
+    meta: {
+      title: ""
+    }
   },
   {
     path: "/mcc",
     name: "MCC",
-    component: () => import("@/views-app/loan/Mcc.vue")
+    component: () => import("@/views-app/loan/Mcc.vue"),
+    meta: {
+      title: "MCC"
+    }
   },
   {
     path: "/province",
     name: "Province",
-    component: () => import("@/views-app/Province.vue")
+    component: () => import("@/views-app/Province.vue"),
+    meta: {
+      title: "Province"
+    }
   },
   {
     path: "/success",
     name: "Success",
-    component: () => import("@/views-app/Success.vue")
+    component: () => import("@/views-app/Success.vue"),
+    meta: {
+      title: ""
+    }
   },
   {
     path: "/view-application",
     name: "ViewApplication",
-    component: () => import("@/views-app/ViewApplication.vue")
+    component: () => import("@/views-app/ViewApplication.vue"),
+    meta: {
+      title: ""
+    }
   },
   {
     path: "/tc",
     name: "TermsAndConditions",
-    component: () => import("@/views-app/TermsAndConditions.vue")
+    component: () => import("@/views-app/TermsAndConditions.vue"),
+    meta: {
+      title: "SettingTnC"
+    }
   },
   {
     path: "/preview-info",
     name: "PreviewInfo",
-    component: () => import("@/views-app/PreviewInfo.vue")
+    component: () => import("@/views-app/PreviewInfo.vue"),
+    meta: {
+      title: ""
+    }
   },
 
   {
     path: "/services-info",
     name: "ServicesInfo",
-    component: () => import("@/views-app/ServicesInfo.vue")
+    component: () => import("@/views-app/ServicesInfo.vue"),
+    meta: {
+      title: ""
+    }
   },
   {
     path: "/update-profile",
     name: "UpdateProfile",
-    component: () => import("@/views-app/UpdateProfile.vue")
+    component: () => import("@/views-app/UpdateProfile.vue"),
+    meta: {
+      title: ""
+    }
   },
   // Other Area
   {
     path: "/admin",
     name: "Admin",
-    component: () => import("@/views-app/Admin.vue")
+    component: () => import("@/views-app/Admin.vue"),
+    meta: {
+      title: ""
+    }
   }
 ];
 
@@ -78,186 +114,294 @@ const AppRouteArr = [
   {
     path: "/home",
     name: "Home",
-    component: () => import("@/views-app/Home.vue")
+    component: () => import("@/views-app/Home.vue"),
+    meta: {
+      title: "Home"
+    }
   },
   {
     path: "/records",
     name: "Records",
-    component: () => import("@/views-app/record/Records.vue")
+    component: () => import("@/views-app/record/Records.vue"),
+    meta: {
+      title: ""
+    }
   },
   {
     path: "/add-record",
     name: "AddRecord",
-    component: () => import("@/views-app/record/AddRecords.vue")
+    component: () => import("@/views-app/record/AddRecords.vue"),
+    meta: {
+      title: "LedgerAddRecord"
+    }
   },
   {
     path: "/edit-record/:id",
     name: "EditRecord",
-    component: () => import("@/views-app/record/EditRecords.vue")
+    component: () => import("@/views-app/record/EditRecords.vue"),
+    meta: {
+      title: "LedgerEditRecord"
+    }
   },
   {
     path: "/record-list",
     name: "RecordList",
-    component: () => import("@/views-app/record/RecordList.vue")
+    component: () => import("@/views-app/record/RecordList.vue"),
+    meta: {
+      title: "LedgerRecordHistory"
+    }
   },
   {
     path: "/services",
     name: "Services",
-    component: () => import("@/views-app/service/Services.vue")
+    component: () => import("@/views-app/service/Services.vue"),
+    meta: {
+      title: ""
+    }
   },
   {
     path: "/credit",
     name: "Credit",
-    component: () => import("@/views-app/credit/Credit.vue")
+    component: () => import("@/views-app/credit/Credit.vue"),
+    meta: {
+      title: "CreditLine"
+    }
   },
   {
     path: "/loan",
     name: "Loan",
-    component: () => import("@/views-app/loan/Loan.vue")
+    component: () => import("@/views-app/loan/Loan.vue"),
+    meta: {
+      title: "LoanInformation"
+    }
   },
 
   {
     path: "/enter-loan-info",
     name: "EnterLoanInfo",
-    component: () => import("@/views-app/loan/EnterLoanInfo.vue")
+    component: () => import("@/views-app/loan/EnterLoanInfo.vue"),
+    meta: {
+      title: "LoanForm"
+    }
   },
   {
     path: "/enter-loan-amount",
     name: "EnterLoanAmount",
-    component: () => import("@/views-app/loan/EnterLoanAmount.vue")
+    component: () => import("@/views-app/loan/EnterLoanAmount.vue"),
+    meta: {
+      title: ""
+    }
   },
   {
     path: "/services-apply-more-channel",
     name: "ApplyMoreChannel",
-    component: () => import("@/views-app/service/ApplyMoreChannel.vue")
+    component: () => import("@/views-app/service/ApplyMoreChannel.vue"),
+    meta: {
+      title: ""
+    }
   },
   {
     path: "/settings",
     name: "Settings",
-    component: () => import("@/views-app/Settings.vue")
+    component: () => import("@/views-app/Settings.vue"),
+    meta: {
+      title: "Setting"
+    }
   },
   {
     path: "/language",
     name: "LanguageSelect",
-    component: () => import("@/views-app/LanguageSelect.vue")
+    component: () => import("@/views-app/LanguageSelect.vue"),
+    meta: {
+      title: "SettingLanguage"
+    }
   },
   {
     path: "/support",
     name: "Support",
-    component: () => import("@/views-app/Support.vue")
+    component: () => import("@/views-app/Support.vue"),
+    meta: {
+      title: "SettingFeedback"
+    }
   },
   {
     path: "/manage-settlement",
     name: "ManageSettlement",
-    component: () => import("@/views-app/service/ManageSettlement.vue")
+    component: () => import("@/views-app/service/ManageSettlement.vue"),
+    meta: {
+      title: ""
+    }
   },
   {
     path: "/manage-channels",
     name: "ManageChannels",
-    component: () => import("@/views-app/service/ManageChannels.vue")
+    component: () => import("@/views-app/service/ManageChannels.vue"),
+    meta: {
+      title: ""
+    }
   },
   {
     path: "/qrcode",
     name: "Qrcode",
-    component: () => import("@/views-app/Qrcode.vue")
+    component: () => import("@/views-app/Qrcode.vue"),
+    meta: {
+      title: ""
+    }
   },
   {
     path: "/scan",
     name: "Scan",
-    component: () => import("@/views-app/Scan.vue")
+    component: () => import("@/views-app/Scan.vue"),
+    meta: {
+      title: ""
+    }
   },
 
   {
     path: "/profile",
     name: "Profile",
-    component: () => import("@/views-app/Profile.vue")
+    component: () => import("@/views-app/Profile.vue"),
+    meta: {
+      title: ""
+    }
   },
   {
     path: "/select-bank",
     name: "SelectBank",
-    component: () => import("@/views-app/SelectBank.vue")
+    component: () => import("@/views-app/SelectBank.vue"),
+    meta: {
+      title: ""
+    }
   },
   {
     path: "/select-bank/:id",
     name: "BankDetails",
-    component: () => import("@/views-app/BankDetails.vue")
+    component: () => import("@/views-app/BankDetails.vue"),
+    meta: {
+      title: ""
+    }
   },
   {
     path: "/search",
     name: "Search",
-    component: () => import("@/views-app/Search.vue")
+    component: () => import("@/views-app/Search.vue"),
+    meta: {
+      title: ""
+    }
   },
 
   {
     path: "/landing-page",
     name: "LandingPage",
-    component: () => import("@/views-app/authentication/LandingPage.vue")
+    component: () => import("@/views-app/authentication/LandingPage.vue"),
+    meta: {
+      title: "LoginPage"
+    }
   },
   {
     path: "/login-page",
     name: "LoginPage",
-    component: () => import("@/views-app/authentication/LoginPage.vue")
+    component: () => import("@/views-app/authentication/LoginPage.vue"),
+    meta: {
+      title: "SigninMobile"
+    }
   },
   {
     path: "/personal-question/:id",
     name: "PersonalQuestion",
-    component: () => import("@/views-app/authentication/PersonalQuestion.vue")
+    component: () => import("@/views-app/authentication/PersonalQuestion.vue"),
+    meta: {
+      title: "PersonalQuestion"
+    }
   },
   {
     path: "/enter-otp-sp",
     name: "EnterOtp",
-    component: () => import("@/views-app/authentication/EnterOTP.vue")
+    component: () => import("@/views-app/authentication/EnterOTP.vue"),
+    meta: {
+      title: "SigninVerify"
+    }
   },
   {
     path: "/verified-first-time",
     name: "VerifiedFirstTime",
     component: () =>
-      import("@/views-app/authentication/VerifiedFirstTimeLogin.vue")
+      import("@/views-app/authentication/VerifiedFirstTimeLogin.vue"),
+    meta: {
+      title: ""
+    }
   },
   {
     path: "/create-password-sp",
     name: "CreatePasswordSP",
-    component: () => import("@/views-app/authentication/CreatePassword.vue")
+    component: () => import("@/views-app/authentication/CreatePassword.vue"),
+    meta: {
+      title: ""
+    }
   },
   {
     path: "/enter-password-sp",
     name: "EnterPasswordSP",
-    component: () => import("@/views-app/authentication/EnterPassword.vue")
+    component: () => import("@/views-app/authentication/EnterPassword.vue"),
+    meta: {
+      title: ""
+    }
   },
   {
     path: "/forgot-password-sp",
     name: "ForgotPasswordSP",
-    component: () => import("@/views-app/authentication/ForgotPassword.vue")
+    component: () => import("@/views-app/authentication/ForgotPassword.vue"),
+    meta: {
+      title: ""
+    }
   },
   {
     path: "/reset-password-sp",
     name: "ResetPasswordSP",
-    component: () => import("@/views-app/authentication/ResetPassword.vue")
+    component: () => import("@/views-app/authentication/ResetPassword.vue"),
+    meta: {
+      title: ""
+    }
   },
   {
     path: "/daily-fortune-prepare",
     name: "DailyFortunePrepare",
-    component: () => import("@/views-app/fortune/DailyFortunePrepare.vue")
+    component: () => import("@/views-app/fortune/DailyFortunePrepare.vue"),
+    meta: {
+      title: "FortuneTellingLanding"
+    }
   },
   {
     path: "/daily-fortune-question",
     name: "DailyFortuneQuestion",
-    component: () => import("@/views-app/fortune/DailyFortuneQuestion.vue")
+    component: () => import("@/views-app/fortune/DailyFortuneQuestion.vue"),
+    meta: {
+      title: "FortuneTellingQuestion"
+    }
   },
   {
     path: "/daily-fortune-loading",
     name: "DailyFortuneLoading",
-    component: () => import("@/views-app/fortune/DailyFortuneLoading.vue")
+    component: () => import("@/views-app/fortune/DailyFortuneLoading.vue"),
+    meta: {
+      title: "FortuneTellingCalculating"
+    }
   },
   {
     path: "/daily-fortune-result",
     name: "DailyFortuneResult",
-    component: () => import("@/views-app/fortune/DailyFortuneResult.vue")
+    component: () => import("@/views-app/fortune/DailyFortuneResult.vue"),
+    meta: {
+      title: "FortuneTellingResult"
+    }
   },
   {
     path: "/master-profile/:id",
     name: "MasterProfile",
-    component: () => import("@/views-app/fortune/MasterProfile.vue")
+    component: () => import("@/views-app/fortune/MasterProfile.vue"),
+    meta: {
+      title: "FortuneTellingMasterProfile"
+    }
   }
 ];
 
@@ -265,12 +409,18 @@ const ArticleArr = [
   {
     path: "/article",
     name: "ArticleExternal",
-    component: () => import("@/article/ArticleExternal.vue")
+    component: () => import("@/article/ArticleExternal.vue"),
+    meta: {
+      title: "ArticleContent"
+    }
   },
   {
     path: "/article-internal",
     name: "ArticleInternal",
-    component: () => import("@/article/ArticleInternal.vue")
+    component: () => import("@/article/ArticleInternal.vue"),
+    meta: {
+      title: ""
+    }
   }
 ];
 
@@ -278,12 +428,18 @@ const ErrorRouteArr = [
   {
     path: "/*",
     name: "PageNotFound",
-    component: () => import("@/views-app/404.vue")
+    component: () => import("@/views-app/404.vue"),
+    meta: {
+      title: "PageNotFound"
+    }
   },
   {
     path: "/server-error",
     name: "ServerError",
-    component: () => import("@/views-app/500.vue")
+    component: () => import("@/views-app/500.vue"),
+    meta: {
+      title: "ServerError"
+    }
   }
 ];
 

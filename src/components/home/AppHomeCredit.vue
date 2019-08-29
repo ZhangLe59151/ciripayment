@@ -62,7 +62,7 @@ export default {
     handleCreditClick() {
       if (!this.OTPVerified) {
         this.$router.push({
-          name: "LandingPage",
+          name: "LoginPage",
           query: { to: "Credit" }
         });
         return false;
