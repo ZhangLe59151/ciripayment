@@ -5,12 +5,14 @@
       />
       
     <div class="landingPageContent">
+      <div class="titleFont">Be a Happy TaoKae</div>
       <van-button 
         class="getStartBtn"
         @click="getStart" >{{ $t('Login.getStart') }}</van-button>
       <van-button 
         class="SigninBtn"
         @click="signIn" >{{ $t('Login.signIn') }}</van-button>
+      <div class="bottomTitle">By using this app, you agree to the terms and conditions.</div>
     </div>
   </div>
 </template>
@@ -120,21 +122,32 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/css/bottom-btn";
 .landing-page {
-  //background: url("../../assets/imgs/landing_bg.png") no-repeat;
-  background-size: cover;
+  background: url("../../assets/imgs/authentication/landBak.png") no-repeat;
+  background-size: contain;
   height: 100vh;
   
   .landingPageContent {
     position: fixed;
-    bottom: 0;
+    bottom: 20px;
     width: 100%;
-    height: 107px;
+    height: 207px;
     background-color: white;
+
+    .titleFont {
+      position: absolute;
+      top: 10px;
+      font-weight: bolder;
+      font-size: 24px;
+      margin: 0 16px 0 16px;
+      text-align: center;
+      width: 328px;
+    }
 
     .getStartBtn {
       position: absolute;
-      font-size: 20px;
+      font-size: 16px;
       margin: 0 16px 0 16px;
+      bottom: 88px;
       height: 40px;
       width: 328px;
       color: white;
@@ -145,15 +158,24 @@ export default {
 
     .SigninBtn {
       position: absolute;
-      font-size: 20px;
+      font-size: 16px;
       margin: 0 16px 0 16px;
-      bottom: 12px;
+      bottom: 38px;
       height: 40px;
       width: 328px;
       color: #ff8600;
       background-color: white;
+      border: 1px solid #ff8600;
       border-top-left-radius: 16px;
       border-top-right-radius: 16px;
+    }
+
+    .bottomTitle {
+      position: absolute;
+      font-size: 12px;
+      color: #68737D;
+      left: 27px;
+      bottom: 0;
     }
   }
 

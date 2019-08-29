@@ -7,7 +7,10 @@ Vue.use(Router);
 const routeArr = [
   {
     path: "/",
-    redirect: "/home"
+    redirect: to => {
+      return localStorage.getItem("Launch") ? "/landing-page" : "/home"
+    },
+
   },
   {
     path: "/enter-info",
@@ -300,6 +303,7 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
+  console.log("sss");
   // these pages can enter directly without logined
   // if (
   //   !store.state.logInWithPassword &&

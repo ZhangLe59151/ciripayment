@@ -61,8 +61,7 @@ export default {
   name: "personal-question",
   computed: {
     ...mapState({
-      columns: "nationalCodeList",
-      firstLuanch: "firstLuanch"
+      columns: "nationalCodeList"
     }),
   },
   data() {

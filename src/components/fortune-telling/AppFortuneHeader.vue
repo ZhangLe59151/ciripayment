@@ -42,7 +42,6 @@ export default {
   },
   methods: {
     returnHome() { 
-      debugger
       if (this.fortuneInfo.fortuneResult !== null) {
         this.$router.push({ name: "Home" });
       } else {
