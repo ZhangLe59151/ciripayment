@@ -115,6 +115,7 @@ export default {
 <style lang="scss" scoped>
 .sic {
   overflow-x: hidden;
+  min-height: 100vh;
 
   .category {
     width: 100%;

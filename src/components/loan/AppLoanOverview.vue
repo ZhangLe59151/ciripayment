@@ -73,7 +73,7 @@
             size="small"
             class="bottom-btn"
             @click="handleStart"
-            :disabled="form.loanAmount === ''"
+            :disabled="parseInt(this.form.loanAmount.replace(/,/g, '')) === 0"
           >{{$t("AppLoanOverview.applyNow")}}</van-button>
           <div class="consent-agreement">{{$t("AppLoanOverview.consent")}}</div>
         </el-card>
@@ -252,6 +252,10 @@ export default {
     setTimeout(() => (this.showPopUp = false), 2000);
   },
   methods: {
+    checkInvalidAmount() {
+      console.log(this.form.loanAmount, parseInt(this.form.loanAmount.replace(/,/g, "")) === 0);
+      return parseInt(this.form.loanAmount.replace(/,/g, "")) === 0;
+    },
     handleStart() {
       // update Loan Amount
       event.preventDefault();
@@ -295,19 +299,20 @@ export default {
 
         // split number by decimal point`
         var leftSide = val.substring(0, decimalPos);
-        var rightSide = val.substring(decimalPos);
-
-        // add commas to left side of number
-        leftSide = this.formatNumber(leftSide);
-
-        // validate right side
-        rightSide = this.formatNumber(rightSide);
-
-        // Limit decimal to only 2 digits
-        rightSide = rightSide.substring(0, 2);
-
-        // join number by .
-        val = leftSide + "." + rightSide;
+        // var rightSide = val.substring(decimalPos);
+        //
+        // // add commas to left side of number
+        // leftSide = this.formatNumber(leftSide);
+        //
+        // // validate right side
+        // rightSide = this.formatNumber(rightSide);
+        //
+        // // Limit decimal to only 2 digits
+        // rightSide = rightSide.substring(0, 2);
+        //
+        // // join number by .
+        // val = leftSide + "." + rightSide;
+        val = leftSide;
       } else {
         // no decimal entered
         // add commas to number
