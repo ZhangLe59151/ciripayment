@@ -66,7 +66,7 @@
             v-model="form.memo"
             @focus="inputNote"
             maxlength="50"
-            :placeholder="$t('Record.placeHolder')"
+            :placeholder="$t('Record.placeHolderRent')"
           />
         </div>
 

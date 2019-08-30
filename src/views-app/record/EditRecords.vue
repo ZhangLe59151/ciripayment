@@ -24,7 +24,7 @@
             v-model="form.memo"
             @focus="inputNote"
             maxlength="50"
-            placeholder="E.g. Sales Item"
+            placeholder="$t('Record.placeHolder')"
           />
         </div>
 
@@ -73,7 +73,7 @@
             v-model="form.memo"
             @focus="inputNote"
             maxlength="50"
-            placeholder="E.g. Sales Item"
+            placeholder="$t('Record.placeHolderRent')"
           />
         </div>
 

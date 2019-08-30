@@ -130,10 +130,10 @@
   },
   "Record": {
     "Income": "SALES",
-    "Incomes": "Sales",
+    "Incomes": "Sales Amount",
     "IncomeName": "Description (Optional)",
     "Expenses": "SPENDINGS",
-    "ExpensesS": "Spendings",
+    "ExpensesS": "Spendings Amount",
     "ExpensesName": "Description (Optional)",
     "TotalIncome": "SALES OF THE DAY",
     "TotalExpenses": "SPENDINGS OF THE DAY",
@@ -143,6 +143,7 @@
     "deleteRecord": "Delete",
     "emptyMsg": "Add sales and spendings to keep track of how your business is doing",
     "placeHolder": "E.g. Sales Item",
+    "placeHolderRent": "E.g. Rent",
     "add": "Add",
     "recordHistory": "Records History",
     "editRecord": "Edit Record"
