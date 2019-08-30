@@ -31,5 +31,6 @@ vue.config.js
 /src-cordova/platforms
 /src-cordova/plugins
 /public/cordova.js
-src-cordova
+www
+google-services.json
 /signatural
