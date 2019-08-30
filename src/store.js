@@ -30,7 +30,7 @@ export default new Vuex.Store({
     clientInfo: {
       bankName: "ABC Bank"
     },
-    firstLaunch: !!localStorage.getItem("firstLaunch"),
+    firstLaunch: localStorage.getItem("firstLaunch") || "false",
     currency: "฿",
     serviceOverviewVo: {},
     form: {},

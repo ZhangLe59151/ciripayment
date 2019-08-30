@@ -234,13 +234,13 @@ export default {
 }
 
 .bottom-btn {
-  position: relative;
+  position: absolute;
   background-color: #ff8600;
   color: white;
   font-size: 14px;
   left: 32px;
   height: 40px;
   width: 264px;
-  top: 260px;
+  bottom: 50px;
 }
 </style>

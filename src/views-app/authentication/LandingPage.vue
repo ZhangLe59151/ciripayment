@@ -31,17 +31,9 @@ export default {
   computed: {
     ...mapState({
       columns: "nationalCodeList",
-      nationCode: "nationalCode"
-    }),
-    sloganTitle() {
-      const ob = {
-        EnterLoanInfo: "Sign In Now To Get An Instant Loan! ",
-        Credit: "Sign In Now To See Your Credit Limit! ",
-        fortuneTelling: "Sign In Now To Get Your Daily Fortune!"
-      };
-
-      return ob[this.$route.query.to];
-    }
+      nationCode: "nationalCode",
+      isFirst: "firstLaunch"
+    })
   },
   data() {
     return {
@@ -53,7 +45,12 @@ export default {
   },
   methods: {
     getStart() {
-      this.$router.push({ name: "PersonalQuestion", params: { id: 0 } });
+      debugger
+      if (this.isFirst===true) {
+        this.$router.push({ name: "Home" });
+      } else {
+        this.$router.push({ name: "PersonalQuestion", params: { id: 0 } });
+      }
     },
     signIn() {
       this.$router.push({ name: "LoginPage" });

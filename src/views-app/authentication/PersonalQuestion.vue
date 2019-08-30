@@ -166,6 +166,7 @@ export default {
       this.$router.push({ name: "PersonalQuestion", params: { id: answerid } });
       if (this.tabActive === 2) {
         this.sendAnswer();
+        this.$store.commit("UnfirstLaunch");
       } else {
         this.tabActive += 1;
         this.$router.push({

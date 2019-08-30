@@ -131,10 +131,10 @@
   "Record": {
     "Income": "SALES",
     "Incomes": "Sales",
-    "IncomeName": "Description",
+    "IncomeName": "Description (Optional)",
     "Expenses": "SPENDINGS",
     "ExpensesS": "Spendings",
-    "ExpensesName": "Description",
+    "ExpensesName": "Description (Optional)",
     "TotalIncome": "SALES OF THE DAY",
     "TotalExpenses": "SPENDINGS OF THE DAY",
     "Date": "Date",
