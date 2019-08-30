@@ -61,11 +61,11 @@
       <div>
         <img
           :src="require('@/assets/imgs/fortune-telling/line_ico.png')"
-          @click="shareOnAPP('line')"
+          @click="share('line')"
         >
         <img
           :src="require('@/assets/imgs/fortune-telling/facebook_ico.png')"
-          @click="shareOnAPP('facebook')"
+          @click="share('facebook')"
         >
       </div>
     </van-popup>
@@ -117,7 +117,7 @@ export default {
     },
     shareOnAPP(platform) {
       const shareMsg = "";
-      const shareLink = `https://${process.env.VUE_APP_WEBURL}/daily-fortune-result?shareKey=${this.fortuneInfo.shareKey}`;
+      const shareLink = `${process.env.VUE_APP_WEBURL}/daily-fortune-result?shareKey=${this.fortuneInfo.fortuneResult.shareKey}`;
 
       const onSuccess = function(result) {
         this.$toast(i18n.t("FortuneTelling.shareSuccess"));
@@ -155,14 +155,11 @@ export default {
     },
     shareOnWEB(platform) {
       const shareMsg = "";
-      const shareLink = `https://${process.env.VUE_APP_WEBURL}/daily-fortune-result?shareKey=${this.fortuneInfo.shareKey}`;
+      const shareLink = `${process.env.VUE_APP_WEBURL}/daily-fortune-result?shareKey=${this.fortuneInfo.fortuneResult.shareKey}`;
 
       if (platform === "facebook") {
         window.open(
-          "https://www.facebook.com/sharer/sharer.php" +
-            objectToGetParams({
-              u: shareLink
-            }),
+          "https://www.facebook.com/sharer/sharer.php?u=" + shareLink,
           "__blank"
         );
       } else if (platform === "line") {

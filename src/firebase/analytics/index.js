@@ -1,10 +1,9 @@
 function analyticsWithCondition(func) {
-  if (process.env.VUE_APP_DEVICETYPE === "APP") {
+  if (window.location.protocol === "file:" && window.cordova) {
     func();
   }
 }
 
-const cordova = window.cordova;
 /* eslint-disable no-undef */
 export default {
   logEvent(event, params) {
