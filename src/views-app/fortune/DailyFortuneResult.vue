@@ -190,7 +190,7 @@ export default {
       console.log("====================================");
       console.log(this.BaseWebUrl + "/daily-fortune-prepare");
       console.log("====================================");
-      window.location.href = this.BaseWebUrl + "/daily-fortune-prepare";
+      // window.location.href = this.BaseWebUrl + "/daily-fortune-prepare";
     }
   }
 };
