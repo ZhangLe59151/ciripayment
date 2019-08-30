@@ -73,7 +73,7 @@
             size="small"
             class="bottom-btn"
             @click="handleStart"
-            :disabled="parseInt(this.form.loanAmount.replace(/,/g, '')) === 0"
+            :disabled="this.form.loanAmount === '' || parseInt(this.form.loanAmount.replace(/,/g, '')) === 0"
           >{{$t("AppLoanOverview.applyNow")}}</van-button>
           <div class="consent-agreement">{{$t("AppLoanOverview.consent")}}</div>
         </el-card>
