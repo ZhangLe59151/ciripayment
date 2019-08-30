@@ -91,7 +91,7 @@ export default {
     next() {
       this.answerForm[this.questionIndex].value = this.answer;
       this.answer = "";
-      this.index += 1;
+      this.index += 1;     
       if (this.index === 3) {
         if (this.isLogin) {
           this.$api.postAnswerF(this.answerForm).then(res => {
@@ -100,10 +100,11 @@ export default {
             }
           });
         } else {
-          this.questionIndex += 1;
           this.$store.commit("UpdateFurtuneQuestionInfo", this.answerForm);
           this.$router.push({ name: "LoginPage", query: { to: "DailyFortuneLoading" } });
         }
+      } else {
+        this.questionIndex += 1;
       }
     },
     onSelect(item) {
