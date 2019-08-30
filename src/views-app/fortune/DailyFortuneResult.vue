@@ -163,10 +163,7 @@ export default {
           "__blank"
         );
       } else if (platform === "line") {
-        window.open(
-          "line://msg/text/?" + shareLink,
-          "__blank"
-        );
+        window.open("line://msg/text/?" + shareLink, "__blank");
       }
     },
     triggerLike() {
@@ -190,6 +187,9 @@ export default {
         });
     },
     getFortuneOnWeb() {
+      console.log("====================================");
+      console.log(this.BaseWebUrl + "/daily-fortune-prepare");
+      console.log("====================================");
       window.location.href = this.BaseWebUrl + "/daily-fortune-prepare";
     }
   }
