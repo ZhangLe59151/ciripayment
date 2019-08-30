@@ -190,7 +190,7 @@ export default {
         });
     },
     getFortuneOnWeb() {
-      window.location.href = this.BaseWebUrl + "daily-fortune-prepare";
+      window.location.href = this.BaseWebUrl + "/daily-fortune-prepare";
     }
   }
 };
