@@ -51,7 +51,7 @@ export default {
 
     .link_view_history {
       font-size: 14px;
-      color: #ff8600;
+      color: #ffa702;
       text-align: right;
       height: auto;
       position: absolute;

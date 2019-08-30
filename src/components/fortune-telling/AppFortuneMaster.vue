@@ -130,7 +130,7 @@ export default {
       line-height: 16px;
     }
     .choose-btn {
-      background-color: #ff8600;
+      background-color: #ffa702;
       border-radius: 4px;
       border-style: unset;
       width: 90%;

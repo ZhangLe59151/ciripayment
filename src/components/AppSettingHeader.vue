@@ -23,7 +23,7 @@ export default {
   }
 
   .app-setting-header {
-    background: #FF8600;
+    background: #FFA702;
     height: 80px;
     width: 100%;
     position: relative;

@@ -244,7 +244,7 @@ export default {
 
 .bottom-btn {
   position: relative;
-  background-color: #ff8600;
+  background-color: #ffa702;
   color: white;
   font-size: 14px;
   left: 32px;

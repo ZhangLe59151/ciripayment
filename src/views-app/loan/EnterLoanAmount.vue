@@ -251,7 +251,7 @@ export default {
       .apply-btn {
         height: 40px;
         width: 100%;
-        background-color: #ff8600;
+        background-color: #ffa702;
         border-radius: 4px;
         font-size: 14px;
       }
@@ -274,7 +274,7 @@ export default {
       .apply-btn {
         height: 40px;
         width: 100%;
-        background-color: #ff8600;
+        background-color: #ffa702;
         border-radius: 4px;
         font-size: 14px;
       }
@@ -311,9 +311,9 @@ export default {
         height: 40px;
       }
       .plain {
-        color: #ff8600;
+        color: #ffa702;
         background-color: #ffffff;
-        border: 1px solid #ff8600;
+        border: 1px solid #ffa702;
       }
     }
   }

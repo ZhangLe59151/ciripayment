@@ -203,7 +203,7 @@ export default {
           }
 
           .blue {
-            color: #FF8600;
+            color: #FFA702;
           }
 
           > i {
@@ -220,7 +220,7 @@ export default {
       .enable-btn,.disable-btn {
         padding: 3px 5px 2px 8px ;
         text-align: center;
-        border: 1px solid #FF8600;
+        border: 1px solid #FFA702;
         font-size: 12px;
 
       }
@@ -233,12 +233,12 @@ export default {
         border-bottom-left-radius: 4px;
       }
       .active-btn {
-        background: #FF8600 !important;
+        background: #FFA702 !important;
         color:white !important;
       }
       btn{
         background: #ffffff;
-        color: #FF8600;
+        color: #FFA702;
       }
 
     }
@@ -257,9 +257,9 @@ export default {
         height: auto;
       }
       .plain{
-        color: #FF8600;
+        color: #FFA702;
         background-color: #ffffff ;
-        border-color: #FF8600;
+        border-color: #FFA702;
       }
     }
     .view-pmt-detail{

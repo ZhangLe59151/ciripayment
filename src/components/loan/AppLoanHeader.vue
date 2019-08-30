@@ -23,7 +23,7 @@ export default {
 }
 
 .app-loan-header {
-  background: #ff8600;
+  background: #ffa702;
   height: 44px;
   width: 100%;
   position: relative;

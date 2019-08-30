@@ -62,7 +62,7 @@ export default {
 
 <style lang="scss" scoped>
 .app-home-header {
-  background: #ff8600;
+  background: #ffa702;
   height: 132px;
   width: 100%;
   position: relative;
@@ -82,14 +82,14 @@ export default {
     letter-spacing: 0;
     text-align: center;
     > .van-icon-bars {
-      color: #ff8600;
+      color: #ffa702;
       position: relative;
       left: -6px;
       top: 4px;
       font-size: 18px;
     }
     > .van-icon-plus {
-      color: #ff8600;
+      color: #ffa702;
       position: relative;
       left: -6px;
       top: 4px;

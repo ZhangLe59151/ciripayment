@@ -173,7 +173,7 @@ export default {
           }
 
           .blue {
-            color: #FF8600;
+            color: #FFA702;
           }
 
           > i {
@@ -217,9 +217,9 @@ export default {
         height: auto;
       }
       .plain{
-        color: #FF8600;
+        color: #FFA702;
         background-color: #ffffff ;
-        border-color: #FF8600;
+        border-color: #FFA702;
       }
     }
     .view-pmt-detail{
