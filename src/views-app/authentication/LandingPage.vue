@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     getStart() {
-      if (this.isFirst + "" === "true") {
+      if (this.isFirst === "No") {
         this.$router.push({ name: "Home" });
       } else {
         this.$router.push({ name: "PersonalQuestion", params: { id: 0 } });

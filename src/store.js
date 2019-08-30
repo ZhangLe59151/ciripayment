@@ -30,7 +30,7 @@ export default new Vuex.Store({
     clientInfo: {
       bankName: "ABC Bank"
     },
-    firstLaunch: localStorage.getItem("firstLaunch") || "false",
+    firstLaunch: localStorage.getItem("firstLaunch") || "No",
     currency: "฿",
     serviceOverviewVo: {},
     form: {},
@@ -527,7 +527,7 @@ export default new Vuex.Store({
       window.localStorage.setItem("credit", JSON.stringify(state.credit));
     },
     UnfirstLaunch(state) {
-      state.firstLaunch = true;
+      state.firstLaunch = "No";
       window.localStorage.setItem("firstLaunch", state.firstLaunch);
     },
     UpdateFurtuneQuestionInfo(state, fortuneQ) {

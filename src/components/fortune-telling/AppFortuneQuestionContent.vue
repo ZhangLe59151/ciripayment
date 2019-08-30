@@ -2,7 +2,7 @@
   <div class="app-fortune-question-content">
     <div class="background-card">
       <div class="question-header">
-        Question {{ index }}
+        {{ $t("Furtune.question") }} {{ index }}
       </div>
       <div class="question-body">
         {{ questionList[questionIndex].question }}

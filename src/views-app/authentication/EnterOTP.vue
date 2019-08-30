@@ -247,7 +247,7 @@ export default {
                 }
               }
             });
-            if (this.isFirst) {
+            if (this.isFirst === "No") {
               this.$router.push(to ? { name: to } : { name: "Home" });
             } else {
               this.$router.push({
