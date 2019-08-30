@@ -1,24 +1,27 @@
 <template>
   <div class="app-loan-result-msg">
     <div v-if="status === '0' ">
-      <div>
-        Thank you for applying. We will update your application result as soon as possible.
+      <div style="font-size: 16px;">
+        {{$t("AppLoanOverview.resultMsg.pending.heading")}}
+      </div>
+      <div style="margin-top: 10px ">
+        {{$t("AppLoanOverview.resultMsg.pending.desc")}}
       </div>
     </div>
     <div v-else-if="status === '1' ">
       <div>
-        Congratulations on your successful application!
+        {{$t("AppLoanOverview.resultMsg.approved.heading")}}
       </div>
       <div style="margin-top: 20px ">
-        You may increase how much your business is worth in Credit Line before applying again.
+        {{$t("AppLoanOverview.resultMsg.approved.desc")}}
       </div>
     </div>
     <div v-else>
       <div>
-        We regret to inform you that your application was not successful.
+        {{$t("AppLoanOverview.resultMsg.rejected.heading")}}
       </div>
       <div style="margin-top: 20px ">
-        You may increase how much your business is worth in Credit Line before applying again.
+        {{$t("AppLoanOverview.resultMsg.rejected.desc")}}
       </div>
     </div>
   </div>

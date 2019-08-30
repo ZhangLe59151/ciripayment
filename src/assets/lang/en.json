@@ -47,13 +47,27 @@
     "submittedBack": "Back To Home",
     "yourApplication": "Your Application",
     "applicationID": "Application ID",
-    "applicantPhone": "Mobile Number",
+    "applicantPhone": "Applicant Mobile Number",
     "applicationTime": "Application Time",
     "applicant": "Applicant",
     "applicationAmount": "Loan Amount",
     "interestRate": "Loan Interest Rate",
     "loanTerm": "Loan Period",
-    "repaymentDate": "First Repayment Date"
+    "repaymentDate": "First Repayment Date",
+    "resultMsg": {
+      "pending": {
+        "heading": "Thank you for applying.",
+        "desc": "Application processing time and result is dependent on credit analysis. We will notify you of your result."
+      },
+      "rejected": {
+        "heading": "We regret to inform you that your application was not successful.",
+        "desc": "You may increase how much your business is worth in Credit Line before applying again."
+      },
+      "approved": {
+        "heading": "Congratulations on your successful application!",
+        "desc": "You may increase how much your business is worth in Credit Line before applying again."
+      }
+    }
   },
   "EnterLoanInfo": {
     "skip": "Skip",

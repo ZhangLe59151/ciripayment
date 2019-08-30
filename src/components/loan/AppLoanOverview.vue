@@ -129,6 +129,21 @@
           >{{formatTime(loanProfile.createTime,true)}}</van-col>
         </van-row>
 
+        <van-row v-if="String(loanProfile.status) === '0'"
+                 class="loan-details"
+                 type="flex"
+                 justify="space-between"
+        >
+          <van-col
+            class="label"
+            span="12"
+          >{{$t("AppLoanOverview.applicantPhone")}}</van-col>
+          <van-col
+            class="info"
+            span="12"
+          >{{loanProfile.phoneNumber}}</van-col>
+        </van-row>
+
         <van-row v-if="String(loanProfile.status) !== '0'"
                  class="loan-details"
                  type="flex"
