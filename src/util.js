@@ -38,7 +38,7 @@ export default {
     }
 
     return (withHour) ? moment(dateTime)
-      .add(543, "year")
+      .add(543, "year").tz("Asia/Bangkok")
       .format("DD MMM YYYY HH:ss") : moment(dateTime)
       .add(543, "year")
       .format("DD MMM YYYY");
