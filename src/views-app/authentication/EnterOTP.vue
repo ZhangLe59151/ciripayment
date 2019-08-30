@@ -1,5 +1,5 @@
 <template>
- <div class="enterOtpPage">
+  <div class="enterOtpPage">
     <!-- <WapHeader
       :center="true"
       style="top: 34px"
@@ -46,6 +46,7 @@
 // @ is an alias to /src
 import util from "@/util";
 import WapHeader from "@/components/WapHeader";
+import { mapState } from "vuex";
 export default {
   name: "enter-otp",
   components: {
@@ -54,7 +55,10 @@ export default {
   data() {
     return {
       active: 2,
-      phone: this.$store.state.userInfo.nationalCode + " " + this.$store.state.userInfo.phone,
+      phone:
+        this.$store.state.userInfo.nationalCode +
+        " " +
+        this.$store.state.userInfo.phone,
       value: "",
       showNumber: true,
       show: true,
@@ -68,9 +72,9 @@ export default {
     };
   },
   computed: {
-    serviceType() {
-      return this.$store.state.userInfo.serviceType;
-    }
+    ...mapState({
+      isFirst: "firstLaunch"
+    })
   },
   watch: {
     /* value: function(val) {
@@ -246,7 +250,10 @@ export default {
             if (this.isFirst) {
               this.$router.push(to ? { name: to } : { name: "Home" });
             } else {
-              this.$router.push({ name: "PersonalQuestion", params: { id: 0 } });
+              this.$router.push({
+                name: "PersonalQuestion",
+                params: { id: 0 }
+              });
             }
             // this.$router.push({ name: "Home" });
           } else {
@@ -267,7 +274,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .enterOtpPage {
   position: fixed;
   background: url("../../assets/imgs/authentication/otpBak.png") no-repeat;
@@ -281,21 +287,21 @@ export default {
     height: 258px;
     width: calc(100vw - 32px);
     border-radius: 16px;
-    box-shadow: 0 2px 4px 2px #A9A9A9;
+    box-shadow: 0 2px 4px 2px #a9a9a9;
 
     .slogan-title {
       position: absolute;
       margin: 24px 16px 0 16px;
       font-size: 20px;
       font-weight: bolder;
-      color: #2F3941;
+      color: #2f3941;
       text-align: left;
     }
 
     .slogan-sub {
       position: absolute;
       text-align: left;
-      color: #2F3941;
+      color: #2f3941;
       font-size: 14px;
       top: 120px;
       left: 16px;
@@ -307,7 +313,7 @@ export default {
     }
 
     .van-hairline {
-      border: 1px solid #2F3941;
+      border: 1px solid #2f3941;
       border-radius: 4px;
       margin: 0 2px 0 2px;
     }
@@ -328,8 +334,6 @@ export default {
       font-size: 14px;
       color: #037aff;
     }
-
   }
-
 }
 </style>

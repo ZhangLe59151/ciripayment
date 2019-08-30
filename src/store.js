@@ -526,8 +526,9 @@ export default new Vuex.Store({
       }
       window.localStorage.setItem("credit", JSON.stringify(state.credit));
     },
-    UnfirstLaunch() {
-      window.localStorage.setItem("firstLaunch", true);
+    UnfirstLaunch(state) {
+      state.firstLaunch = true;
+      window.localStorage.setItem("firstLaunch", state.firstLaunch);
     },
     UpdateFurtuneQuestionInfo(state, fortuneQ) {
       state.furtuneQuestion = Object.assign(state.furtuneQuestion, fortuneQ);

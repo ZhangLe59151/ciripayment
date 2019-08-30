@@ -2,25 +2,30 @@
   <div class="peronal-question">
     <div
       class="personalPageContent"
-      v-show="questionPage">
+      v-show="questionPage"
+    >
       <van-tabs
         v-model="tabActive"
         animated
         color="#ff8600"
         title-active-color="#ff8600"
       >
-        <van-tab title="" :disabled="this.tab1" >
+        <van-tab
+          title=""
+          :disabled="this.tab1"
+        >
           <div class="questionTitle">{{ form[2].question }}</div>
           <div
             v-for="(item,index) in form[2].options"
-            :key="index">
+            :key="index"
+          >
             <van-button
               :class="formClass.classId1[index].className"
               @click="answer(0, form[2].id, item)"
             >{{ item }}
-            <i :class="formClass.classId1[index].iconName" />
+              <i :class="formClass.classId1[index].iconName" />
             </van-button>
-            
+
           </div>
 
         </van-tab>
@@ -28,28 +33,30 @@
           <div class="questionTitle">{{ form[1].question }}</div>
           <div
             v-for="(item,index) in form[1].options"
-            :key="index">
+            :key="index"
+          >
             <van-button
               :class="formClass.classId2[index].className"
               @click="answer(0, form[1].id, item)"
             >{{ item }}
-            <i :class="formClass.classId2[index].iconName" />
+              <i :class="formClass.classId2[index].iconName" />
             </van-button>
-            
+
           </div>
 
         </van-tab>
 
         <van-tab title="">
-           <div class="questionTitle">{{ form[0].question }}</div>
+          <div class="questionTitle">{{ form[0].question }}</div>
           <div
             v-for="(item,index) in form[0].options"
-            :key="index">
+            :key="index"
+          >
             <van-button
               :class="formClass.classId3[index].className"
               @click="answer(0, form[0].id, item)"
             >{{ item }}
-            <i :class="formClass.classId3[index].iconName" />
+              <i :class="formClass.classId3[index].iconName" />
             </van-button>
           </div>
 
@@ -92,21 +99,71 @@ export default {
       iconBk: require("@/assets/imgs/personal/confetti.png"),
       formClass: {
         classId1: [
-           { iconName: "iconfont iconretail", btnBackgroundColor: "#5bcff2", iconColor: "#3D9AC7", className:"card1" },
-           { iconName: "iconfont iconrestaurant", btnBackgroundColor: "#fdae44", iconColor: "#E2761E", className:"card2" },
-           { iconName: "iconfont iconservice", btnBackgroundColor: "#70cb9d", iconColor: "#32A974", className:"card3" },
-           { iconName: "iconfont iconlike", btnBackgroundColor: "#fdae44", iconColor: "#E2761E", className:"card4" } 
-           ],
+          {
+            iconName: "iconfont iconretail",
+            btnBackgroundColor: "#5bcff2",
+            iconColor: "#3D9AC7",
+            className: "card1"
+          },
+          {
+            iconName: "iconfont iconrestaurant",
+            btnBackgroundColor: "#fdae44",
+            iconColor: "#E2761E",
+            className: "card2"
+          },
+          {
+            iconName: "iconfont iconservice",
+            btnBackgroundColor: "#70cb9d",
+            iconColor: "#32A974",
+            className: "card3"
+          },
+          {
+            iconName: "iconfont iconlike",
+            btnBackgroundColor: "#fdae44",
+            iconColor: "#E2761E",
+            className: "card4"
+          }
+        ],
         classId2: [
-           { iconName: "iconfont iconphasesignin1", btnBackgroundColor: "#5bcff2", iconColor: "#3D9AC7", className:"card1" },
-           { iconName: "iconfont iconphasesignin", btnBackgroundColor: "#fdae44", iconColor: "#E2761E", className:"card5" },
-           { iconName: "iconfont iconmaturedbusiness", btnBackgroundColor: "#70cb9d", iconColor: "#32A974", className:"card3" }
-           ],
+          {
+            iconName: "iconfont iconphasesignin1",
+            btnBackgroundColor: "#5bcff2",
+            iconColor: "#3D9AC7",
+            className: "card1"
+          },
+          {
+            iconName: "iconfont iconphasesignin",
+            btnBackgroundColor: "#fdae44",
+            iconColor: "#E2761E",
+            className: "card5"
+          },
+          {
+            iconName: "iconfont iconmaturedbusiness",
+            btnBackgroundColor: "#70cb9d",
+            iconColor: "#32A974",
+            className: "card3"
+          }
+        ],
         classId3: [
-           { iconName: "iconfont iconincrease-sales", btnBackgroundColor: "#5bcff2", iconColor: "#3D9AC7", className:"card1" },
-           { iconName: "iconfont iconexpandsignin", btnBackgroundColor: "#fdae44", iconColor: "#E2761E", className:"card5" },
-           { iconName: "iconfont iconexploresignin", btnBackgroundColor: "#70cb9d", iconColor: "#32A974", className:"card4" }
-           ]
+          {
+            iconName: "iconfont iconincrease-sales",
+            btnBackgroundColor: "#5bcff2",
+            iconColor: "#3D9AC7",
+            className: "card1"
+          },
+          {
+            iconName: "iconfont iconexpandsignin",
+            btnBackgroundColor: "#fdae44",
+            iconColor: "#E2761E",
+            className: "card5"
+          },
+          {
+            iconName: "iconfont iconexploresignin",
+            btnBackgroundColor: "#70cb9d",
+            iconColor: "#32A974",
+            className: "card4"
+          }
+        ]
       },
       form: [{ options: [] }, { options: [] }, { options: [] }],
       answerList: [
@@ -152,10 +209,11 @@ export default {
       this.$api.postAnswerPersonal(this.answerList).then(res => {
         if (res.data.code === 200) {
           this.splash = true;
+          this.$store.commit("UnfirstLaunch");
           this.questionPage = false;
           setTimeout(() => {
             this.$router.push({ name: "Home" });
-          }, 1500);
+          }, 1000);
         }
       });
     },
@@ -166,7 +224,6 @@ export default {
       this.$router.push({ name: "PersonalQuestion", params: { id: answerid } });
       if (this.tabActive === 2) {
         this.sendAnswer();
-        this.$store.commit("UnfirstLaunch");
       } else {
         this.tabActive += 1;
         this.$router.push({
@@ -230,13 +287,13 @@ export default {
     width: calc(100% - 32px);
     color: black;
     background-color: #5bcff2;
-    
+
     .iconretail {
       position: absolute;
       height: 40px;
       width: 40px;
       right: 16px;
-      color: #3D9AC7;
+      color: #3d9ac7;
     }
 
     .iconphasesignin1 {
@@ -244,7 +301,7 @@ export default {
       height: 40px;
       width: 40px;
       right: 16px;
-      color: #3D9AC7;
+      color: #3d9ac7;
     }
 
     .iconincrease-sales {
@@ -252,7 +309,7 @@ export default {
       height: 40px;
       width: 40px;
       right: 16px;
-      color: #3D9AC7;
+      color: #3d9ac7;
     }
   }
 
@@ -272,10 +329,8 @@ export default {
       height: 40px;
       width: 40px;
       right: 16px;
-      color: #E2761E;
+      color: #e2761e;
     }
-
-    
   }
 
   .card3 {
@@ -294,7 +349,7 @@ export default {
       height: 40px;
       width: 40px;
       right: 16px;
-      color: #32A974;
+      color: #32a974;
     }
 
     .iconmaturedbusiness {
@@ -302,7 +357,7 @@ export default {
       height: 40px;
       width: 40px;
       right: 16px;
-      color: #32A974;
+      color: #32a974;
     }
 
     .iconexploresignin {
@@ -310,7 +365,7 @@ export default {
       height: 40px;
       width: 40px;
       right: 16px;
-      color: #32A974;
+      color: #32a974;
     }
   }
 
@@ -324,13 +379,13 @@ export default {
     line-height: 80px;
     color: black;
     background-color: #dde0e2;
-    
+
     .iconlike {
       position: absolute;
       height: 40px;
       width: 40px;
       right: 16px;
-      color: #BAC1C5;
+      color: #bac1c5;
     }
 
     .iconexploresignin {
@@ -338,7 +393,7 @@ export default {
       height: 40px;
       width: 40px;
       right: 16px;
-      color: #BAC1C5;
+      color: #bac1c5;
     }
   }
 
@@ -362,17 +417,16 @@ export default {
       height: 40px;
       width: 40px;
       right: 16px;
-      color: #32A974;
-    } 
+      color: #32a974;
+    }
 
     .iconexpandsignin {
       position: absolute;
       height: 40px;
       width: 40px;
       right: 16px;
-      color: #32A974;
-    } 
-
+      color: #32a974;
+    }
   }
 }
 
