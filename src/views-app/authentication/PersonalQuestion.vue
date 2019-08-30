@@ -260,7 +260,7 @@ export default {
     position: relative;
     margin: 16px 0 0 0;
     height: 80px;
-    width: 328px;
+    width: calc(100vw - 32px);
     line-height: 80px;
     color: black;
     background-color: #5bcff2;
@@ -279,7 +279,7 @@ export default {
     position: relative;
     margin: 16px 0 0 0;
     height: 80px;
-    width: 328px;
+    width: calc(100vw - 32px);
     line-height: 80px;
     color: black;
     background-color: #fdae44;
@@ -298,7 +298,7 @@ export default {
     position: relative;
     margin: 16px 0 0 0;
     height: 80px;
-    width: 328px;
+    width: calc(100vw - 32px);
     line-height: 80px;
     color: black;
     background-color: #70cb9d;
@@ -317,7 +317,7 @@ export default {
     position: relative;
     margin: 16px 0 0 0;
     height: 80px;
-    width: 328px;
+    width: calc(100vw - 32px);
     line-height: 80px;
     color: black;
     background-color: #dde0e2;
@@ -336,7 +336,7 @@ export default {
     text-align: left;
     margin: 16px 0 0 0;
     height: 80px;
-    width: 328px;
+    width: calc(100vw - 32px);
     line-height: 80px;
     color: black;
     background-color: #76d69c;
