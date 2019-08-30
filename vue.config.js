@@ -15,5 +15,5 @@ module.exports = {
   },
   outputDir: process.env.VUE_APP_OUTPUTDIR,
   runtimeCompiler: true,
-  publicPath: ""
+  publicPath: process.env.VUE_APP_DEVICETYPE === "APP" ? "" : "/"
 };
