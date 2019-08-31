@@ -90,7 +90,7 @@ export default {
     font-weight: bold;
     color: #ffffff;
     position: relative;
-    width: 140px;
+    width: 220px;
     top: 9px;
     left: 16px;
   }
