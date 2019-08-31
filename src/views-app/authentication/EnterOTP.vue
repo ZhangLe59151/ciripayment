@@ -73,7 +73,8 @@ export default {
   },
   computed: {
     ...mapState({
-      isFirst: "firstLaunch"
+      isFirst: "firstLaunch",
+      deviceType: "deviceType"
     })
   },
   watch: {
@@ -247,15 +248,15 @@ export default {
                 }
               }
             });
-            if (this.isFirst === "No") {
-              this.$router.push(to ? { name: to } : { name: "Home" });
-            } else {
+
+            if (this.isFirst === "Yes" && this.deviceType === "APP") {
               this.$router.push({
                 name: "PersonalQuestion",
                 params: { id: 0 }
               });
+            } else {
+              this.$router.push(to ? { name: to } : { name: "Home" });
             }
-            // this.$router.push({ name: "Home" });
           } else {
             this.$notify({
               message: otpCodeErrorMessage,
