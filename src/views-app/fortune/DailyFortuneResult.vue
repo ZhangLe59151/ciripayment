@@ -223,7 +223,14 @@ export default {
         });
     },
     getFortuneOnWeb() {
-      window.location.href = this.BaseWebUrl + "/daily-fortune-prepare";
+      try {
+        window.open = "taokae://daily-fortune-prepare";
+        setTimeout(function() {
+          window.location.href = this.BaseWebUrl + "/daily-fortune-prepare";
+        }, 2000);
+      } catch {
+        window.location.href = this.BaseWebUrl + "/daily-fortune-prepare";
+      }
     }
   }
 };
