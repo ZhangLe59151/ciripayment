@@ -14,7 +14,6 @@
       </div>
     </div>
 
-<!--      <div class="credit-instruction">Earn credit by answering questions everyday!</div>-->
   </div>
 </template>
 
@@ -31,9 +30,10 @@ export default {
   computed: {
     ...mapState({
       creditLimit: state => state.credit.currentCreditLimit,
-      // creditAnswers: state => state.credit.questions.map(question => question.value),
       creditAnswers: state =>
-        (Array.isArray(state.credit.questions)) ? state.credit.questions.map(item => item.value) : []
+        Array.isArray(state.credit.questions)
+          ? state.credit.questions.map(item => item.value)
+          : []
     })
   },
   watch: {
