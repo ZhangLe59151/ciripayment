@@ -26,7 +26,7 @@ Vue.use(Dialog);
 export default {
   props: {
     title: {
-      default: this.$t("Furtune.dailyFortune")
+      default: ""
     },
     showRightIcon: {
       default: true
