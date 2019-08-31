@@ -239,13 +239,12 @@ export default {
 <style lang="scss" scoped>
 .splashPage {
   background: url("../../assets/imgs/personal/confetti.png") no-repeat;
-  //background: "iconBk" no-repeat;
   background-size: cover;
   height: 100vh;
 
   .title {
     position: fixed;
-    margin: 406px 87px 0 87px;
+    top: calc(50vh - 50px);
     color: black;
     font-size: 24px;
     text-align: center;
@@ -253,9 +252,10 @@ export default {
 
   .icon {
     position: fixed;
-    margin: 286px 130px 0 130px;
+    top: calc(50vh - 50px);
+    left: calc(50vh - 50px);
     height: 100px;
-    weight: 100px;
+    width: 100px;
   }
 }
 
