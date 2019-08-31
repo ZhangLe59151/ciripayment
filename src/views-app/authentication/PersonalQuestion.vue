@@ -244,7 +244,9 @@ export default {
 
   .title {
     position: fixed;
-    top: calc(50vh - 50px);
+    top: calc(50vh + 110px);
+    left: calc(50vw - 102px);
+    width: 204px;
     color: black;
     font-size: 24px;
     text-align: center;
@@ -253,7 +255,7 @@ export default {
   .icon {
     position: fixed;
     top: calc(50vh - 50px);
-    left: calc(50vh - 50px);
+    left: calc(50vw - 50px);
     height: 100px;
     width: 100px;
   }
