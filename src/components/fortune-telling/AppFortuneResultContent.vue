@@ -43,6 +43,7 @@
           <div
             class="record-btn"
             @click="$router.push({name: 'AddRecord',query: {date: yesterday}})"
+            v-analytics="{event: 'FortuneTellingResult_AddRecordBtn'}"
           >{{$t("FortuneTelling.recordBtn")}}</div>
         </section>
 

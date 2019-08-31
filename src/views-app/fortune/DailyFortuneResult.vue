@@ -4,7 +4,7 @@
     <div class="top-desc">
       <fortune-telling-app-fortune-master-photo
         class="master-photo"
-        :masterId="fortuneInfo.selectedMaster || fortuneResult.masterId"
+        :masterId="+fortuneInfo.selectedMaster || +fortuneResult.masterId"
         :imgSize="60"
       />
       <div class="master-des">
@@ -21,6 +21,7 @@
       <div
         class="web-get-fortune-btn"
         @click="getFortuneOnWeb"
+        v-analytics="{event: 'FortuneTellingSharedResultWeb_GetMineBtn'}"
       >{{$t("FortuneTelling.getFortuneBtn")}}</div>
     </div>
 
@@ -43,10 +44,15 @@
       <div
         class="like"
         @click="triggerShare"
+        v-analytics="{event: 'FortuneTellingResult_ShareBtn'}"
       >
         <i class="iconfont iconshare" />
         <span class="like-text">{{ $t("FortuneTelling.share") }}</span>
       </div>
+    </section>
+
+    <section>
+      <fortune-telling-app-fortune-download />
     </section>
 
     <van-popup
@@ -218,9 +224,6 @@ export default {
         });
     },
     getFortuneOnWeb() {
-      console.log("====================================");
-      console.log(this.BaseWebUrl + "/daily-fortune-prepare");
-      console.log("====================================");
       window.location.href = this.BaseWebUrl + "/daily-fortune-prepare";
     },
     updateMetaData(){
@@ -233,7 +236,7 @@ export default {
 <style lang="scss" scoped>
 .daily-fortune-result {
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   background: no-repeat center
     url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");

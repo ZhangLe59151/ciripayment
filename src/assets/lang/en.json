@@ -27,7 +27,8 @@
     "recordBtn": "Record Now",
     "selectMasterDes": "Select a Master to tell your fortune.",
     "getFortuneBtn": "Get Your Business Fortune Now",
-    "likeDes": "Liked by You and {n}+ others | Liked {n}+ others"
+    "likeDes": "Liked by You and {n}+ others | Liked {n}+ others",
+    "downloadDes": "Download the TaoKae app to get your daily fortune on the go!"
   },
   "Income": "TODAY'S SALES",
   "Expenses": "SPENDINGS",

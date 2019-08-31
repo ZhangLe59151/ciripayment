@@ -10,10 +10,12 @@
       <van-button
         class="getStartBtn"
         @click="getStart"
+        v-analytics="{event: 'Landing_Start'}"
       >{{ $t('Login.getStart') }}</van-button>
       <van-button
         class="SigninBtn"
         @click="signIn"
+        v-analytics="{event: 'Landing_Signin'}"
       >{{ $t('Login.signIn') }}</van-button>
       <div class="bottomTitle">By using this app, you agree to the terms and conditions.</div>
     </div>
