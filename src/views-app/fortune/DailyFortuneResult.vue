@@ -80,7 +80,6 @@
 
 <script>
 import { mapState } from "vuex";
-import i18n from "@/assets/lang/i18n";
 import { find } from "lodash";
 
 export default {
@@ -95,9 +94,7 @@ export default {
       masterList: require("@/assets/data/fortuneMasterList.json")
     };
   },
-  created(){
-    document.title = i18n.t("FortuneTelling.sharePageDesc");
-  },
+
   computed: {
     ...mapState({
       fortuneInfo: "fortuneInfo",
@@ -118,6 +115,8 @@ export default {
     }
   },
   mounted() {
+    document.title = this.$t("FortuneTelling.sharePageDesc");
+
     const shareKey = this.$route.query.shareKey;
 
     if (shareKey) {
@@ -157,13 +156,13 @@ export default {
       const shareLink = `${process.env.VUE_APP_WEBURL}/daily-fortune-result?shareKey=${this.fortuneInfo.fortuneResult.shareKey}`;
 
       const onSuccess = function(result) {
-        this.$toast(i18n.t("FortuneTelling.shareSuccess"));
+        this.$toast(this.$t("FortuneTelling.shareSuccess"));
         console.log("Share completed!");
       };
 
       const onError = function(msg) {
         console.log("Sharing failed!" + msg);
-        this.$toast(i18n.t("FortuneTelling.shareFailed"));
+        this.$toast(this.$t("FortuneTelling.shareFailed"));
       };
 
       if (platform === "facebook") {
@@ -225,9 +224,6 @@ export default {
     },
     getFortuneOnWeb() {
       window.location.href = this.BaseWebUrl + "/daily-fortune-prepare";
-    },
-    updateMetaData(){
-      document.title = i18n.t("FortuneTelling.sharePageDesc");
     }
   }
 };
