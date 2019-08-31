@@ -2,7 +2,7 @@
   <div class="daily-fortune-question">
     <fortune-telling-app-fortune-header :center="true" />
     <div class="introduction">
-      Hang On, Master {{fortuneInfo.selectedMaster.name}} would like to ask you a few questions.
+      {{$t('Fortune.hang')}} {{fortuneInfo.selectedMaster.name}} {{ $t('Fortune.isCalc') }}}
     </div>
     <fortune-telling-app-fortune-question-content
       @submitAnswer="submitAnswer"
