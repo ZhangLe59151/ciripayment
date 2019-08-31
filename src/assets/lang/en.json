@@ -121,7 +121,13 @@
     "swipe": "Swipe left to skip this question for now",
     "errorEnterAmount": "Please enter an amount",
     "errorEnterOption": "Please select an option",
-    "errorImgInput": "Please upload a photo or file"
+    "errorImgInput": "Please upload a photo or file",
+    "questionHasBeenDone": "All of today’s questions have been answered.",
+    "comeBack": "Come back tomorrow for more questions!",
+    "takePhoto": "Take a photo",
+    "credit": "Credit",
+    "selectAlbum": "Select from album",
+    "earned": "Earned"
   },
   "Home": {
     "income": "TODAY'S SALES",
@@ -141,15 +147,16 @@
     "creditLimitTitle2": "{n} Question Left For Today! | {n} Questions Left For Today!",
     "creditLimitTitle3": "All done! Come Back Tomorrow",
     "creditLimitBtn1": "Go!",
-    "creditLimitBtn2": "View Business' Worth"
+    "creditLimitBtn2": "View Business' Worth",
+    "latestTransaction": "Latest Transactions"
   },
   "Record": {
     "Income": "SALES",
-    "Incomes": "Sales",
-    "IncomeName": "Description",
+    "Incomes": "Sales Amount",
+    "IncomeName": "Description (Optional)",
     "Expenses": "SPENDINGS",
-    "ExpensesS": "Spendings",
-    "ExpensesName": "Description",
+    "ExpensesS": "Spendings Amount",
+    "ExpensesName": "Description (Optional)",
     "TotalIncome": "SALES OF THE DAY",
     "TotalExpenses": "SPENDINGS OF THE DAY",
     "Date": "Date",
@@ -158,6 +165,7 @@
     "deleteRecord": "Delete",
     "emptyMsg": "Add sales and spendings to keep track of how your business is doing",
     "placeHolder": "E.g. Sales Item",
+    "placeHolderRent": "E.g. Rent",
     "add": "Add",
     "recordHistory": "Records History",
     "editRecord": "Edit Record"
@@ -195,5 +203,11 @@
   },
   "Common": {
     "serverRequestError": "Server request error. Please try again!"
+  },
+  "Fortune": {
+    "dailyFortune": "Daily Fortune",
+    "poorMaster": "Poor Master",
+    "leaveMessage": "? will not be able to read your fortune if you leave now. Your selection will go to waste.",
+    "question": "Question"
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <app-common-header title="Terms & Conditions" />
+    <app-common-header :title="$t('Setting.tc')" />
     <iframe
       :src="url"
       class="iframeOnTc"

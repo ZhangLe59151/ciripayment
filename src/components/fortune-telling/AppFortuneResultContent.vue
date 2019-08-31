@@ -115,7 +115,7 @@ export default {
       height: 28px;
       width: 156px;
       position: relative;
-      top: 40px;
+      top: 50px;
     }
 
     .date {

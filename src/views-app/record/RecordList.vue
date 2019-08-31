@@ -25,7 +25,7 @@
             v-for="record in item.recordList"
             :key="record.id"
             :title="formatIncome(record)"
-            :label="formatTime(record.createTime)"
+            :label="formatTime(record.accountDate)"
             @click="$router.push({'name':'EditRecord', 'params':{ 'id': record.id }})"
           >
             <div

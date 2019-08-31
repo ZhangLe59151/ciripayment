@@ -72,6 +72,8 @@ export default {
           ),
           background: "#04A777"
         });
+        Object.entries(this.form).forEach(([key, value]) => { this.form[`${key}`] = ""; }); 
+
       });
     },
     validateEmail() {
