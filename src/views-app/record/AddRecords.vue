@@ -1,5 +1,5 @@
 <template>
-  <div class="app-add-record">
+  <div class="app-add-record" id="add-record">
     <app-common-header :title="$t('Record.addRecord')" />
     <van-tabs
       v-model="tabActive"
@@ -19,12 +19,13 @@
           <van-field
             v-model="form.memo"
             @focus="inputNote"
-            maxlength="50"
+            maxlength="30"
+            @input="checkLength"
             :placeholder="$t('Record.placeHolder')"
           />
         </div>
 
-        <div class="label-left">{{$t("Record.Date")}}</div>
+        <div class="label-left"> {{$t("Record.Date")}}</div>
 
         <div class="pick_date">
           <van-field
@@ -65,8 +66,9 @@
           <van-field
             v-model="form.memo"
             @focus="inputNote"
-            maxlength="50"
-            :placeholder="$t('Record.placeHolder')"
+            maxlength="30"
+            @input="checkLength"
+            :placeholder="$t('Record.placeHolderRent')"
           />
         </div>
 
@@ -101,7 +103,7 @@
       </van-tab>
     </van-tabs>
 
-    <button
+    <button id="btn" ref="btn"
       class="update_btn"
       @click="updateBtn"
     >{{$t("Record.add")}}</button>
@@ -127,6 +129,8 @@
       @blur="showNumber = false"
       @input="onInput"
       @delete="onDelete"
+      @hide="onHide"
+      @close="onClose"
     />
 
   </div>
@@ -236,10 +240,21 @@ export default {
         }
       });
     },
+    checkLength(value) {
+      if (value.length > 30) {
+        this.form.memo = value.slice(0, 30);
+      }
+    },
     showKeyboard(type) {
       this.appear = false;
       this.showNumber = true;
       this.type = type;
+      // increase height of app
+      document.getElementById("add-record").style.height = `${window.innerHeight * 1.3 - 50}px`;
+      // scroll to btn
+      var element = this.$refs["btn"];
+      var top = element.offsetTop;
+      window.scrollTo(0, top);
     },
     onInput(value) {
       if (this.form[this.type].indexOf(".") != -1 && value == ".") {
@@ -268,6 +283,13 @@ export default {
       this.form[this.type] = kbt.length
         ? kbt.substring(0, kbt.length - 1)
         : kbt;
+    },
+    onHide() {
+      document.getElementById("add-record").style.height = `${window.innerHeight - 50}px`;
+    },
+    onClose() {
+      this.showNumber = false;
+      document.getElementById("add-record").style.height = `${window.innerHeight - 50}px`;
     },
     updateBtn() {
       const form = Object.assign({}, this.form);
@@ -368,7 +390,7 @@ export default {
 }
 
 .input_note {
-  height: 40px;
+  min-height: 40px;
   font-size: 24px;
   margin: 0 16px 0 16px;
   border-bottom: 1px solid #c2c8cc;
@@ -392,7 +414,7 @@ export default {
 }
 
 .van-field {
-  height: 40px;
+  min-height: 40px;
   line-height: 40px;
   padding: 0;
 }

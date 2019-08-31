@@ -1,8 +1,10 @@
 <template>
   <div class="daily-fortune-question">
-    <fortune-telling-app-fortune-header :center="true" />
+    <fortune-telling-app-fortune-header :showTitle="title"
+      :showLeftIcon="true" 
+      :showRightIcon="true" /> />
     <div class="introduction">
-      Hang On, Master {{fortuneInfo.selectedMaster.name}} would like to ask you a few questions.
+      {{$t('Fortune.hang')}} {{fortuneInfo.selectedMaster.name}} {{ $t('Fortune.isCalc') }}
     </div>
     <fortune-telling-app-fortune-question-content
       @submitAnswer="submitAnswer"
@@ -20,7 +22,8 @@ export default {
       index: 1,
       questionList: require("@/assets/data/fortuneQuestionList.json"),
       question: "test",
-      subtitle: "Write down the first one that comes to your mind."
+      subtitle: "Write down the first one that comes to your mind.",
+      title: this.$t('Fortune.dailyTitle')
     };
   },
   computed: {
@@ -82,8 +85,8 @@ export default {
   background: no-repeat center
     url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
   background-size: cover;
-  min-height: 100vh;
-  width: 100%;
+  min-height: 170vh;
+  width: 100vw;
 }
 .introduction {
   font-size: 16px;

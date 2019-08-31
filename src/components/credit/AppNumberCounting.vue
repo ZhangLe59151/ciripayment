@@ -1,6 +1,6 @@
 <template>
     <div class="app-numberTo-counting">
-      {{displayNumber}} {{$store.state.currency}}
+      {{formatCurrency(displayNumber)}} {{$store.state.currency}}
     </div>
 </template>
 
@@ -18,6 +18,38 @@ export default {
   },
   created() {
     this.displayNumber = this.numberTo;
+  },
+  methods: {
+    formatNumber(n) {
+      return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+    formatCurrency(val) {
+      // change to string
+      val = String(val);
+      // don't validate empty input
+      if (val === "") {
+        return;
+      }
+
+      // check for decimal
+      if (val.indexOf(".") >= 0) {
+        // get position of first decimal
+        // this prevents multiple decimals from
+        // being entered
+        var decimalPos = val.indexOf(".");
+
+        // split number by decimal point`
+        var leftSide = val.substring(0, decimalPos);
+        val = leftSide;
+      } else {
+        // no decimal entered
+        // add commas to number
+        // remove all non-digits
+        val = this.formatNumber(val);
+      }
+      // send updated string to input
+      return val;
+    }
   },
 
   watch: {

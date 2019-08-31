@@ -1,6 +1,6 @@
 <template>
   <section class="article-section">
-    <app-common-header v-if="$store.state.deviceType === 'APP'"/>
+    <app-common-header v-if="$store.state.deviceType === 'APP'" />
     <!-- <div class="article">
       <div class="title">"พระจูเลียน" รับเสพเมถุน ขอโทษคนไทย เตรียมสึกพรุ่งนี้</div>
       <div class="date">12 July 2019</div>
@@ -13,9 +13,21 @@
     </div>-->
     <!-- <van-button type="primary" text="显示遮罩层" @click="showOverlay = true"/> -->
 
-    <van-overlay :show="loadingIframe" :class="{'showOverlay': loadingIframe}"></van-overlay>
-    <van-loading type="spinner" color="#ffffff" class="loading" v-show="loadingIframe"/>
-    <iframe id="show-iframe" class="article-iframe" :src="this.$route.query.url"/>
+    <van-overlay
+      :show="loadingIframe"
+      :class="{'showOverlay': loadingIframe}"
+    />
+    <van-loading
+      type="spinner"
+      color="#ffffff"
+      class="loading"
+      v-show="loadingIframe"
+    />
+    <iframe
+      id="show-iframe"
+      class="article-iframe"
+      :src="this.$route.query.url"
+    />
   </section>
 </template>
 

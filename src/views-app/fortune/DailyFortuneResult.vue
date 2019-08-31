@@ -1,14 +1,17 @@
 <template>
   <div class="daily-fortune-result">
-    <fortune-telling-app-fortune-header />
+    <fortune-telling-app-fortune-header 
+      :showLeftIcon="true"
+      :showRightIcon="false"
+      :showTitle="title"/>
     <div class="top-desc">
       <fortune-telling-app-fortune-master-photo
         class="master-photo"
-        :masterId="fortuneInfo.selectedMaster.id"
+        :masterId="+fortuneInfo.selectedMaster || +fortuneResult.masterId"
         :imgSize="60"
       />
       <div class="master-des">
-        {{$tc("FortuneTelling.masterDes", fortuneInfo.selectedMaster.name)}}
+        {{$tc("FortuneTelling.masterDes", fortuneInfo.selectedMaster.name || masterName)}}
       </div>
     </div>
 
@@ -21,6 +24,7 @@
       <div
         class="web-get-fortune-btn"
         @click="getFortuneOnWeb"
+        v-analytics="{event: 'FortuneTellingSharedResultWeb_GetMineBtn'}"
       >{{$t("FortuneTelling.getFortuneBtn")}}</div>
     </div>
 
@@ -43,10 +47,15 @@
       <div
         class="like"
         @click="triggerShare"
+        v-analytics="{event: 'FortuneTellingResult_ShareBtn'}"
       >
         <i class="iconfont iconshare" />
         <span class="like-text">{{ $t("FortuneTelling.share") }}</span>
       </div>
+    </section>
+
+    <section>
+      <fortune-telling-app-fortune-download />
     </section>
 
     <van-popup
@@ -74,19 +83,22 @@
 
 <script>
 import { mapState } from "vuex";
-import i18n from "@/assets/lang/i18n";
+import { find } from "lodash";
 
 export default {
   name: "DailyFortuneResult",
   data() {
     return {
       showPopUp: false,
-      fortuneResult: "",
+      fortuneResult: {},
       salesResult: "",
       likeStatus: false,
-      processingLike: false
+      processingLike: false,
+      masterList: require("@/assets/data/fortuneMasterList.json"),
+      title: this.$t('Fortune.dailyTitle')
     };
   },
+
   computed: {
     ...mapState({
       fortuneInfo: "fortuneInfo",
@@ -97,17 +109,45 @@ export default {
     }),
     today() {
       return this.$moment().format(this.localDateFormatter);
+    },
+    masterName() {
+      const item = find(this.masterList, {
+        id: this.fortuneInfo.fortuneResult.masterId
+      });
+
+      return item ? item.name : "";
     }
   },
   mounted() {
-    let savedResult = this.fortuneInfo.fortuneResult;
-    this.fortuneResult = savedResult.fortuneResult;
-    this.likeStatus = savedResult.like;
+    document.title = this.$t("FortuneTelling.sharePageDesc");
+
+    const shareKey = this.$route.query.shareKey;
+
+    if (shareKey) {
+      this.getInfoOnWeb(shareKey);
+    } else {
+      this.initFortuneResult(this.fortuneInfo.fortuneResult);
+    }
   },
   destroyed() {
     this.updateLikeStatusWithApi();
   },
   methods: {
+    initFortuneResult(savedResult) {
+      this.fortuneResult = savedResult.fortuneResult;
+      this.likeStatus = savedResult.like;
+    },
+    getInfoOnWeb(shareKey) {
+      this.$api.getResultOnWeb(shareKey).then(res => {
+        if (res.data.code === 200) {
+          const fortuneResult = res.data.data;
+          this.initFortuneResult(fortuneResult);
+          this.$store.commit("SaveFortuneInfo", {
+            fortuneResult: fortuneResult
+          });
+        }
+      });
+    },
     triggerShare() {
       this.showPopUp = true;
     },
@@ -120,13 +160,13 @@ export default {
       const shareLink = `${process.env.VUE_APP_WEBURL}/daily-fortune-result?shareKey=${this.fortuneInfo.fortuneResult.shareKey}`;
 
       const onSuccess = function(result) {
-        this.$toast(i18n.t("FortuneTelling.shareSuccess"));
+        this.$toast(this.$t("FortuneTelling.shareSuccess"));
         console.log("Share completed!");
       };
 
       const onError = function(msg) {
         console.log("Sharing failed!" + msg);
-        this.$toast(i18n.t("FortuneTelling.shareFailed"));
+        this.$toast(this.$t("FortuneTelling.shareFailed"));
       };
 
       if (platform === "facebook") {
@@ -187,10 +227,14 @@ export default {
         });
     },
     getFortuneOnWeb() {
-      console.log("====================================");
-      console.log(this.BaseWebUrl + "/daily-fortune-prepare");
-      console.log("====================================");
-      window.location.href = this.BaseWebUrl + "/daily-fortune-prepare";
+      try {
+        window.open = "taokae://daily-fortune-prepare";
+        setTimeout(function() {
+          window.location.href = this.BaseWebUrl + "/daily-fortune-prepare";
+        }, 2000);
+      } catch {
+        window.location.href = this.BaseWebUrl + "/daily-fortune-prepare";
+      }
     }
   }
 };
@@ -199,7 +243,7 @@ export default {
 <style lang="scss" scoped>
 .daily-fortune-result {
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   background: no-repeat center
     url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
@@ -249,6 +293,7 @@ export default {
   }
 
   .action {
+    position: relative;
     display: flex;
     flex: 1 1;
     margin: 0 66px;

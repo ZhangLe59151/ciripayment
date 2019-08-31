@@ -3,6 +3,7 @@
     class="app-home-lucky"
     @click="$router.push({name: 'DailyFortunePrepare'})"
     v-if="!fortuneTold"
+    v-analytics="{event: 'Home_FortuneTellingBanner'}"
   >
     <img
       :src="require('@/assets/imgs/lady_teller.png')"
@@ -22,6 +23,7 @@
   <div
     class="app-home-lucky app-home-lucky-single"
     @click="$router.push({name: 'DailyFortuneResult',query: {id: fortuneResult.id}})"
+    v-analytics="{event: 'Home_FortuneTellingBanner'}"
     v-else
   >
     <img
@@ -31,7 +33,9 @@
     <div class="title">{{$t("Home.encourageLuckyTitle")}}</div>
     <div class="subtitle single-subtitle">
       <div>{{subtitle}}</div>
-      <div v-if="inputedIncome">{{incomeMin}}<span class="subscript">{{$t("Home.currency")}}</span> ~ {{incomeMax}}<span class="subscript">{{$t("Home.currency")}}</span></div>
+      <div v-if="inputedIncome">
+        {{incomeMin}}<span class="subscript">{{$t("Home.currency")}}</span> 
+        ~ {{incomeMax}}<span class="subscript">{{$t("Home.currency")}}</span></div>
     </div>
     <div class="encourage">{{$t("Home.encourageWording")}}</div>
   </div>
@@ -41,13 +45,13 @@
 import { mapState } from "vuex";
 export default {
   name: "AppHomeLucky",
-
   data() {
     return {
       fortuneTold: false,
       inputedIncome: false,
       incomeMin: 0,
-      incomeMax: 0
+      incomeMax: 0,
+      subtitle: ""
     };
   },
   computed: {
@@ -77,7 +81,7 @@ export default {
         if (val && val.fortuneResult && val.fortuneResult.length > 0) {
           this.fortuneTold = true;
           let salesTarget = val.salesTarget;
-          if (salesTarget.type === 0) {
+          if (salesTarget.incomeResult) {
             this.inputedIncome = true;
             this.incomeMin = (salesTarget.incomeResult.min + "").replace(
               /\d{1,3}(?=(\d{3})+(\.\d*)?$)/g,
@@ -89,8 +93,9 @@ export default {
             );
           } else {
             this.inputedIncome = false;
-            this.subtitle = salesTarget.generalResult;
+            
           }
+          this.subtitle = salesTarget.generalResult;
         }
       },
       deep: true

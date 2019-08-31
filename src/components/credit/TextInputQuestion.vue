@@ -22,9 +22,9 @@
         </el-input>
       </el-form-item>
     </el-form>
-    <div v-if="error" class="error_msg">{{$t("Credit.errorEnterAmount")}}</div>
+    <div v-if="error" class="error_msg">{{$t("Credit.errorEnterRequired")}}</div>
     <van-button class="submit-btn" @click="handleSubmit">
-      <div class="btn-text">+{{question.limitAmount}} {{$store.state.currency}} Credit</div>
+      <div class="btn-text">+{{question.limitAmount}} {{$store.state.currency}} {{ $t("Credit.credit") }}</div>
       <img class="dollar-coin" src="../../assets/imgs/dollar_coin.png">
     </van-button>
   </div>

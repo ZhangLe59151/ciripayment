@@ -24,10 +24,10 @@
       <div class="app-credit-finish-questions">
         <i class="iconfont iconsuccess" />
         <div class="msg-1">
-          All of today’s questions have been answered.
+          {{ $t('Credit.questionHasBeenDone') }}
         </div>
         <div class="msg-2">
-          Come back tomorrow for more questions!
+          {{ $t('Credit.comeBack') }}
         </div>
       </div>
     </div>

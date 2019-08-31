@@ -30,13 +30,16 @@ export default new Vuex.Store({
     clientInfo: {
       bankName: "ABC Bank"
     },
-    firstLaunch: !!localStorage.getItem("firstLaunch"),
+    firstLaunch: localStorage.getItem("firstLaunch")
+      ? localStorage.getItem("firstLaunch")
+      : "Yes",
     currency: "฿",
     serviceOverviewVo: {},
     form: {},
     userInfo: {},
     application: {},
     furtuneQuestion: [],
+    showDownloadIcon: process.env.VUE_APP_DEVICETYPE === "WEB",
     recordList: JSON.parse(localStorage.getItem("recordList")) || [],
     masterList: require("@/assets/data/fortuneMasterList.json"),
     localDateFormatter: "YYYYMMDD",
@@ -283,6 +286,10 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    UpdateDownloadIcon(state) {
+      const hide = false
+      state.showDownloadIcon = hide
+    },
     InitForm(state) {
       var originForm = state.form !== null ? state.form : {};
       var formString = window.localStorage.getItem("form");
@@ -526,8 +533,9 @@ export default new Vuex.Store({
       }
       window.localStorage.setItem("credit", JSON.stringify(state.credit));
     },
-    UnfirstLaunch() {
-      window.localStorage.setItem("firstLaunch", true);
+    UnfirstLaunch(state) {
+      state.firstLaunch = "No";
+      window.localStorage.setItem("firstLaunch", state.firstLaunch);
     },
     UpdateFurtuneQuestionInfo(state, fortuneQ) {
       state.furtuneQuestion = Object.assign(state.furtuneQuestion, fortuneQ);

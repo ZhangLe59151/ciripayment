@@ -2,7 +2,8 @@
   <div class="master-profile">
     <fortune-telling-app-fortune-header
       :showLeftIcon="true"
-      title="Master's Profile"
+      :showRightIcon="false"
+      :showTitle="this.title"
     />
     <div class="cnt">
       <img :src="imgList[info.id]">
@@ -24,10 +25,11 @@ export default {
   name: "MasterProfile",
   data() {
     return {
+      title: this.$t('Fortune.masterProfile'),
       imgList: {
         "1": require("@/assets/imgs/fortune-telling/master_01.png"),
         "2": require("@/assets/imgs/fortune-telling/master_02.png")
-      }
+      } 
     };
   },
   computed: {
@@ -53,7 +55,7 @@ export default {
 .master-profile {
   position: relative;
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   background: no-repeat center
     url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
   background-size: cover;
@@ -93,6 +95,7 @@ export default {
     }
 
     .btn {
+      position: absolute;
       background: #ffa702;
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
       border-radius: 4px;
@@ -104,6 +107,7 @@ export default {
       line-height: 40px;
       width: calc(100% - 80px);
       margin-left: 40px;
+      bottom: 60px;
     }
   }
 }

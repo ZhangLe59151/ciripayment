@@ -2,7 +2,7 @@
   <div class="app-fortune-question-content" id="appFortuneQuestionContent">
     <div class="background-card">
       <div class="question-header">
-        Question {{ index }}
+        {{ $t("Fortune.question") }} {{ index }}
       </div>
       <div class="question-body">
         {{ questionList[questionIndex].question }}
@@ -100,7 +100,7 @@ export default {
     next() {
       this.answerForm[this.questionIndex].value = this.answer;
       this.answer = "";
-      this.index += 1;
+      this.index += 1;     
       if (this.index === 3) {
         if (this.isLogin) {
           this.$api.postAnswerF(this.answerForm).then(res => {
@@ -109,10 +109,11 @@ export default {
             }
           });
         } else {
-          this.questionIndex += 1;
           this.$store.commit("UpdateFurtuneQuestionInfo", this.answerForm);
           this.$router.push({ name: "LoginPage", query: { to: "DailyFortuneLoading" } });
         }
+      } else {
+        this.questionIndex += 1;
       }
     },
     onSelect(item) {
@@ -133,53 +134,64 @@ export default {
 
 }
 .background-card {
-  position: absolute;
-  background: url("../../assets/imgs/fortune-telling/fortune_telling_question_card.png")
-    no-repeat center;
-  background-size: cover;
-  width: 100%;
-  height: 100%;
-}
-.question-header {
-  position: absolute;
-  font-size: 14px;
-  top: 48px;
-  width: 100%;
-  height: 16px;
-  text-align: center;
-}
-.question-body {
-  position: absolute;
-  font-weight: bolder;
-  color: black;
-  font-size: 20px;
-  top: 84px;
-  height: 24px;
-  width: 90%;
-  text-align: center;
-  margin-left: 20px;
-  margin-right: 20px;
-}
-.question-subtitle {
-  position: absolute;
-  color: #68737D;
-  font-size: 14px;
-  top: 164px;
-  height: 24px;
-  width: 90%;
-  text-align: center;
-  margin-left: 20px;
-  margin-right: 20px;
-}
-
-.bottom-actions {
   position: relative;
-  left: 37px;
-  right: 37px;
-  top: 180px;
-  bottom: 0;
-  height: 140px;
-  width: 264px;
+  background: url("../../assets/imgs/fortune-telling/fortune_telling_question_card.png") no-repeat center;
+  background-size: cover;
+  width: calc(100vw - 22px);
+  height: 75vh;
+
+  .question-header {
+    position: absolute;
+    font-size: 14px;
+    top: 48px;
+    width: calc(100vw - 22px);
+    height: 16px;
+    text-align: center;
+  }
+
+  .question-body {
+    position: absolute;
+    font-weight: bolder;
+    color: black;
+    font-size: 20px;
+    top: 84px;
+    height: 24px;
+    width: calc(100vw - 64px);
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .question-subtitle {
+    position: absolute;
+    color: #68737D;
+    font-size: 14px;
+    top: 144px;
+    height: 24px;
+    width: calc(100vw - 64px);
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .bottom-btn {
+    position: absolute;
+    background-color: #ffa702;
+    color: white;
+    font-size: 14px;
+    height: 40px;
+    width: calc(100vw - 80px);
+    bottom: 40px;
+    left: 32px;
+  }
+
+  .bottom-actions {
+    position: relative;
+    left: 37px;
+    right: 37px;
+    top: 190px;
+    height: 140px;
+    width: calc(100vw - 70px);
 
   .answer-input {
     position: absolute;
@@ -189,7 +201,7 @@ export default {
     line-height: 80px;
     top: 34px;
     height: 80px;
-    width: 264px;
+    width: calc(100vw - 95px);
     border-radius: 4px;
     border: 1px solid #87929D;
     box-sizing: border-box;
@@ -200,7 +212,7 @@ export default {
     flex-wrap: wrap;
 
     .tab3 {
-      width: 264px;
+      width: calc(100vw - 110px);
       height: 40px;
       margin: 0 0 10px 0;
       border: 1px solid #87929D;
@@ -209,7 +221,7 @@ export default {
     }
 
     .tab3Selected {
-      width: 264px;
+     width: calc(100vw - 110px);
       height: 40px;
       margin: 0 0 10px 0;
       border: 1px solid #87929D;
@@ -219,7 +231,7 @@ export default {
     }
 
     .tab7 {
-      width: 124px;
+      width: calc(50vw - 56px);
       height: 40px;
       top: 30px;
       margin: 0 4px 5px 4px;
@@ -229,7 +241,7 @@ export default {
     }
 
     .tab7Selected {
-      width: 124px;
+      width: calc(50vw - 56px);
       height: 40px;
       top: 30px;
       margin: 0 4px 5px 4px;
@@ -239,17 +251,21 @@ export default {
       color: white;
     }
   }
+  
+  }
+
+
+  
+
 
 }
 
-.bottom-btn {
-  position: relative;
-  background-color: #ffa702;
-  color: white;
-  font-size: 14px;
-  left: 32px;
-  height: 40px;
-  width: 264px;
-  top: 260px;
-}
+
+
+
+
+
+
+
+
 </style>

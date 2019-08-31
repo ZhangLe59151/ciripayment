@@ -19,6 +19,7 @@
     "share": "Share",
     "shareSuccess": "Sharing in progress!",
     "shareFailed": "Sharing failed!",
+    "sharePageDesc": "My business will get extremely good luck today. How about yours ?",
     "masterDes": "Here’s your fortune by {n}! ",
     "luckyDes": "Your Sales Luck Today",
     "luckyAmountDes": "Today Luck Will Likely Bring You",
@@ -26,7 +27,8 @@
     "recordBtn": "Record Now",
     "selectMasterDes": "Select a Master to tell your fortune.",
     "getFortuneBtn": "Get Your Business Fortune Now",
-    "likeDes": "Liked by You and {n}+ others | Liked {n}+ others"
+    "likeDes": "Liked by You and {n}+ others | Liked {n}+ others",
+    "downloadDes": "Download the TaoKae app to get your daily fortune on the go!"
   },
   "Income": "TODAY'S SALES",
   "Expenses": "SPENDINGS",
@@ -119,8 +121,15 @@
     "ribbonTitle": "Earn more by answering questions every day!",
     "swipe": "Swipe left to skip this question for now",
     "errorEnterAmount": "Please enter an amount",
+    "errorEnterRequired": "This field is required.",
     "errorEnterOption": "Please select an option",
-    "errorImgInput": "Please upload a photo or file"
+    "errorImgInput": "Please upload a photo or file",
+    "questionHasBeenDone": "All of today’s questions have been answered.",
+    "comeBack": "Come back tomorrow for more questions!",
+    "takePhoto": "Take a photo",
+    "credit": "Credit",
+    "selectAlbum": "Select from album",
+    "earned": "Earned"
   },
   "Home": {
     "income": "TODAY'S SALES",
@@ -136,19 +145,20 @@
     "homeRecordAddBtn": "Add Records",
     "homeRecordViewHistoryBtn": "Record History",
     "currency": "฿",
-    "creditLimitTitle1": "Increase Your Credit Limit",
-    "creditLimitTitle2": "{n} Question Left For Today! | {n} Questions Left For Today!",
-    "creditLimitTitle3": "All done! Come Back Tomorrow",
+    "creditLimitTitle1": "Increase How Much Your Business Is Worth",
+    "creditLimitTitle2": "{n} Question Left To Increase Your Business’ Worth! | {n} Questions Left To Increase Your Business’ Worth!",
+    "creditLimitTitle3": "All Done! Come Back Tomorrow",
     "creditLimitBtn1": "Go!",
-    "creditLimitBtn2": "View Business' Worth"
+    "creditLimitBtn2": "View Business' Worth",
+    "latestTransaction": "Latest Transactions"
   },
   "Record": {
     "Income": "SALES",
-    "Incomes": "Sales",
-    "IncomeName": "Description",
+    "Incomes": "Sales Amount",
+    "IncomeName": "Description (Optional)",
     "Expenses": "SPENDINGS",
-    "ExpensesS": "Spendings",
-    "ExpensesName": "Description",
+    "ExpensesS": "Spendings Amount",
+    "ExpensesName": "Description (Optional)",
     "TotalIncome": "SALES OF THE DAY",
     "TotalExpenses": "SPENDINGS OF THE DAY",
     "Date": "Date",
@@ -157,6 +167,7 @@
     "deleteRecord": "Delete",
     "emptyMsg": "Add sales and spendings to keep track of how your business is doing",
     "placeHolder": "E.g. Sales Item",
+    "placeHolderRent": "E.g. Rent",
     "add": "Add",
     "recordHistory": "Records History",
     "editRecord": "Edit Record"
@@ -190,9 +201,21 @@
     "verifyPhone": "Verify your mobile number to continue",
     "yourPhone": "Your Mobile Number",
     "enterOTPtitle": "Enter OTP",
-    "resendOTP": "Resend OTP"
+    "resendOTP": "Resend OTP",
+    "completeQuestion": "Profile saved. Let's get started",
+    "skipQuestion": "Skip Question"
   },
   "Common": {
     "serverRequestError": "Server request error. Please try again!"
+  },
+  "Fortune": {
+    "dailyFortune": "Daily Fortune",
+    "poorMaster": "Poor Master",
+    "leaveMessage": "? will not be able to read your fortune if you leave now. Your selection will go to waste.",
+    "question": "Question",
+    "isCalc": "is calculating your fortune",
+    "hang": "Hang in there!",
+    "dailyTitle": "Daily Fortune",
+    "masterProfile": "Master's Profile"
   }
 }

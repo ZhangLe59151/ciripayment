@@ -25,7 +25,7 @@
             v-for="record in item.recordList"
             :key="record.id"
             :title="formatIncome(record)"
-            :label="formatTime(record.createTime)"
+            :label="formatTime(record.accountDate)"
             @click="$router.push({'name':'EditRecord', 'params':{ 'id': record.id }})"
           >
             <div
@@ -51,6 +51,7 @@
       <div
         class="add-record"
         @click="$router.push({name: 'AddRecord'})"
+        v-analytics="{event: 'RecordHistory_AddBtn'}"
       >
         <van-icon
           name="plus"

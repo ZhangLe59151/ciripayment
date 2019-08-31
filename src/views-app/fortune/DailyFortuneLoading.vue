@@ -1,12 +1,13 @@
 <template>
   <div class="daily-fortune-loading">
-    <fortune-telling-app-fortune-header />
+    <fortune-telling-app-fortune-header
+      />
     <div class="text-box">
       <div class="top-title">
-        Hang in there!
+        {{ $t('Fortune.hang') }}
       </div>
       <div class="bottom-title">
-        {{fortuneInfo.selectedMaster.name}} is calculating your fortune
+        {{fortuneInfo.selectedMaster.name}} {{ $t('Fortune.isCalc') }}
       </div>
     </div>
   </div>

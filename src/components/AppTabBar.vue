@@ -8,6 +8,7 @@
       replace
       :to="item.to"
       v-for="item in tabbar"
+      v-analytics="{event: item.eventName}"
       :key="item.label"
     >
       {{item.label}}
@@ -54,7 +55,7 @@ export default {
     letter-spacing: 0;
     line-height: 20px;
     &.van-tabbar-item--active {
-      color: #FFA702;
+      color: #ffa702;
     }
 
     .van-tabbar-item__text {

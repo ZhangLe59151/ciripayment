@@ -40,6 +40,7 @@ export default {
       this.$store.commit("UnfirstLaunch");
       this.$router.push({ name: "LandingPage" });
     } */
+
     this.fetchHomePageData();
   },
   methods: {
@@ -52,6 +53,7 @@ export default {
           this.records.expense = util.fmoney(
             data.merchantRecordSum.expensesSum
           );
+          
 
           this.creditLimit = data.creditLimit;
           this.$store.commit("SaveFortuneInfo", {

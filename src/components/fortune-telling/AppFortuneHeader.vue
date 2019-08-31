@@ -1,6 +1,6 @@
 <template>
   <div class="app-fortune-header">
-    <div class="title">{{title}}</div>
+    <div class="title">{{ this.showTitle }}</div>
     <van-icon
       name="arrow-left"
       class="arrow-left"
@@ -29,10 +29,13 @@ export default {
       default: "Daily Fortune"
     },
     showRightIcon: {
-      default: true
+      default: false
     },
     showLeftIcon: {
       default: false
+    },
+    showTitle: {
+      default: ""
     }
   },
   computed: {
@@ -43,14 +46,14 @@ export default {
   methods: {
     returnHome() {
       if (this.fortuneInfo.fortuneResult !== null) {
-        this.$router.push({ name: "Home" });
+        this.$router.push({ name: "MasterProfile" });
       } else {
         Dialog.confirm({
           title: "Leaving Master" + this.fortuneInfo.selectedMaster.name + "?",
           message:
-            "Poor Master" +
+            this.$t("Furtune.poorMaster") +
             this.fortuneInfo.selectedMaster.name +
-            "? will not be able to read your fortune if you leave now. Your selection will go to waste."
+            this.$t("Furtune.leaveMessage")
         })
           .then(() => {
             // on confirm

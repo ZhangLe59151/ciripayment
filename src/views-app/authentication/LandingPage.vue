@@ -10,10 +10,12 @@
       <van-button
         class="getStartBtn"
         @click="getStart"
+        v-analytics="{event: 'Landing_Start'}"
       >{{ $t('Login.getStart') }}</van-button>
       <van-button
         class="SigninBtn"
         @click="signIn"
+        v-analytics="{event: 'Landing_Signin'}"
       >{{ $t('Login.signIn') }}</van-button>
       <div class="bottomTitle">By using this app, you agree to the terms and conditions.</div>
     </div>
@@ -31,17 +33,9 @@ export default {
   computed: {
     ...mapState({
       columns: "nationalCodeList",
-      nationCode: "nationalCode"
-    }),
-    sloganTitle() {
-      const ob = {
-        EnterLoanInfo: "Sign In Now To Get An Instant Loan! ",
-        Credit: "Sign In Now To See Your Credit Limit! ",
-        fortuneTelling: "Sign In Now To Get Your Daily Fortune!"
-      };
-
-      return ob[this.$route.query.to];
-    }
+      nationCode: "nationalCode",
+      isFirst: "firstLaunch"
+    })
   },
   data() {
     return {
@@ -53,7 +47,11 @@ export default {
   },
   methods: {
     getStart() {
-      this.$router.push({ name: "PersonalQuestion", params: { id: 0 } });
+      if (this.isFirst === "No") {
+        this.$router.push({ name: "Home" });
+      } else {
+        this.$router.push({ name: "PersonalQuestion", params: { id: 0 } });
+      }
     },
     signIn() {
       this.$router.push({ name: "LoginPage" });

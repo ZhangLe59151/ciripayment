@@ -18,6 +18,7 @@
         <el-form-item
           prop="answering">
           <el-input :class="error? 'input-box-error': 'input-box'" inputmode="numeric" v-model="form.answering"
+                    maxlength="9" @input="formatCurrency"
                     :placeholder="question.placeholder">
             <div class="currency" slot="suffix">{{$store.state.currency}}</div>
           </el-input>
@@ -46,6 +47,50 @@ export default {
     }
   },
   methods: {
+    formatNumber(n) {
+      return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+    formatCurrency(val) {
+      // change to string
+      val = String(val);
+      // don't validate empty input
+      if (val === "") {
+        return;
+      }
+
+      // check for decimal
+      if (val.indexOf(".") >= 0) {
+        // get position of first decimal
+        // this prevents multiple decimals from
+        // being entered
+        var decimalPos = val.indexOf(".");
+
+        // split number by decimal point`
+        var leftSide = val.substring(0, decimalPos);
+        // var rightSide = val.substring(decimalPos);
+        //
+        // // add commas to left side of number
+        // leftSide = this.formatNumber(leftSide);
+        //
+        // // validate right side
+        // rightSide = this.formatNumber(rightSide);
+        //
+        // // Limit decimal to only 2 digits
+        // rightSide = rightSide.substring(0, 2);
+        //
+        // // join number by .
+        // val = leftSide + "." + rightSide;
+        val = leftSide;
+      } else {
+        // no decimal entered
+        // add commas to number
+        // remove all non-digits
+        val = this.formatNumber(val);
+      }
+      this.form.answering = val;
+      // send updated string to input
+      return val;
+    },
     validateInput() {
       this.error = !this.form.answering;
     },

@@ -2,7 +2,7 @@
   <div
     class="app-home-loan"
     @click="handleLoanClick"
-    v-analytics="{event: 'home_loan_apply'}"
+    v-analytics="{event: 'Home_LoanBanner'}"
   >
     <div class="des">{{$t("Home.loan")}}</div>
     <div class="applyNow">{{$t("Home.loanBtn")}}</div>
@@ -16,7 +16,8 @@ export default {
   computed: {},
   methods: {
     handleLoanClick() {
-      this.$router.push({ name: "Loan", query: { origin: "banner" } });
+      window.open('taokae://daily-fortune-prepare', '_system')
+      // this.$router.push({ name: "Loan", query: { origin: "banner" } });
     }
   }
 };

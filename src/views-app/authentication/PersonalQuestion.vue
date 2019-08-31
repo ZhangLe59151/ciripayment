@@ -10,87 +10,55 @@
         color="#ffa702"
         title-active-color="#ffa702"
       >
-        <van-tab :disabled="this.tab1">
-          <div class="questionTitle">{{ form1.question }}</div>
-          <van-button
-            class="card1"
-            @click="answer(0, form1.id, form1.options[0])"
-          >{{ form1.options[0] }}<img
-              class="icon"
-              :src="icon11"
-            /></van-button>
-          <van-button
-            class="card2"
-            @click="answer(0, form1.id, form1.options[1])"
-          >{{ form1.options[1] }}<img
-              class="icon"
-              :src="icon12"
-            /></van-button>
-          <van-button
-            class="card3"
-            @click="answer(0, form1.id, form1.options[2])"
-          >{{ form1.options[2] }}<img
-              class="icon"
-              :src="icon13"
-            /></van-button>
-          <van-button
-            class="card4"
-            @click="answer(0, form1.id, form1.options[3])"
-          >{{ form1.options[3] }}<img
-              class="icon"
-              :src="icon14"
-            /></van-button>
+        <van-tab
+          title=""
+          :disabled="this.tab1"
+        >
+          <div class="questionTitle">{{ form[2].question }}</div>
+          <div
+            v-for="(item,index) in form[2].options"
+            :key="index"
+          >
+            <van-button
+              :class="formClass.classId1[index].className"
+              @click="answer(0, form[2].id, item)"
+            >{{ item }}
+              <i :class="formClass.classId1[index].iconName" />
+            </van-button>
+
+          </div>
 
         </van-tab>
         <van-tab :disabled="this.tab2">
-          <div class="questionTitle">{{ form2.question }}</div>
-          <van-button
-            class="card1"
-            @click="answer(1, form2.id, form2.options[0])"
-          >{{ form2.options[0] }}<img
-              class="icon"
-              :src="icon21"
-            /></van-button>
-          <van-button
-            class="card5"
-            @click="answer(1, form2.id, form2.options[1])"
-          >{{ form2.options[1] }}<img
-              class="icon"
-              :src="icon22"
-            /></van-button>
-          <van-button
-            class="card3"
-            @click="answer(1, form2.id, form2.options[2])"
-          >{{ form2.options[2] }}<img
-              class="icon"
-              :src="icon23"
-            /></van-button>
+          <div class="questionTitle">{{ form[1].question }}</div>
+          <div
+            v-for="(item,index) in form[1].options"
+            :key="index"
+          >
+            <van-button
+              :class="formClass.classId2[index].className"
+              @click="answer(0, form[1].id, item)"
+            >{{ item }}
+              <i :class="formClass.classId2[index].iconName" />
+            </van-button>
+
+          </div>
 
         </van-tab>
 
         <van-tab title="">
-          <div class="questionTitle">{{ form3.question }}</div>
-          <van-button
-            class="card2"
-            @click="answer(2, form3.id, form3.options[0])"
-          >{{ form3.options[0] }}<img
-              class="icon"
-              :src="icon31"
-            /></van-button>
-          <van-button
-            class="card5"
-            @click="answer(2, form3.id, form3.options[1])"
-          >{{ form3.options[1] }}<img
-              class="icon"
-              :src="icon32"
-            /></van-button>
-          <van-button
-            class="card4"
-            @click="answer(2, form3.id, form3.options[2])"
-          >{{ form3.options[2] }}<img
-              class="icon"
-              :src="icon33"
-            /></van-button>
+          <div class="questionTitle">{{ form[0].question }}</div>
+          <div
+            v-for="(item,index) in form[0].options"
+            :key="index"
+          >
+            <van-button
+              :class="formClass.classId3[index].className"
+              @click="answer(0, form[0].id, item)"
+            >{{ item }}
+              <i :class="formClass.classId3[index].iconName" />
+            </van-button>
+          </div>
 
         </van-tab>
       </van-tabs>
@@ -98,7 +66,7 @@
       <div
         class="skipword"
         @click="skipQuestion"
-      >Skip Question</div>
+      >{{ $t('Login.skipQuestion') }}</div>
     </div>
     <div
       class="splashPage"
@@ -108,7 +76,7 @@
         class="icon"
         :src="iconSucceed"
       />
-      <div class="title">Profile saved.<br /> Let's get started</div>
+      <div class="title">{{ $t('Login.completeQuestion')}}</div>
     </div>
   </div>
 </template>
@@ -127,21 +95,77 @@ export default {
       tab1: false,
       tab2: false,
       allSkip: true,
-      icon11: require("@/assets/imgs/personal/retailstoresignin.svg"),
-      icon12: require("@/assets/imgs/personal/restaurantsignin.svg"),
-      icon13: require("@/assets/imgs/personal/servicesignin.svg"),
-      icon14: require("@/assets/imgs/personal/otherssignin.svg"),
-      icon21: require("@/assets/imgs/personal/phase1signin.svg"),
-      icon22: require("@/assets/imgs/personal/phase2signin.svg"),
-      icon23: require("@/assets/imgs/personal/phase3signin.svg"),
-      icon31: require("@/assets/imgs/personal/increasesalessignin.svg"),
-      icon32: require("@/assets/imgs/personal/expandsignin.svg"),
-      icon33: require("@/assets/imgs/personal/exploresignin.svg"),
       iconSucceed: require("@/assets/imgs/personal/success.svg"),
       iconBk: require("@/assets/imgs/personal/confetti.png"),
-      form1: { options: [] },
-      form2: { options: [] },
-      form3: { options: [] },
+      formClass: {
+        classId1: [
+          {
+            iconName: "iconfont iconretail",
+            btnBackgroundColor: "#5bcff2",
+            iconColor: "#3D9AC7",
+            className: "card1"
+          },
+          {
+            iconName: "iconfont iconrestaurant",
+            btnBackgroundColor: "#fdae44",
+            iconColor: "#E2761E",
+            className: "card2"
+          },
+          {
+            iconName: "iconfont iconservice",
+            btnBackgroundColor: "#70cb9d",
+            iconColor: "#32A974",
+            className: "card3"
+          },
+          {
+            iconName: "iconfont iconlike",
+            btnBackgroundColor: "#fdae44",
+            iconColor: "#E2761E",
+            className: "card4"
+          }
+        ],
+        classId2: [
+          {
+            iconName: "iconfont iconphasesignin1",
+            btnBackgroundColor: "#5bcff2",
+            iconColor: "#3D9AC7",
+            className: "card1"
+          },
+          {
+            iconName: "iconfont iconphasesignin",
+            btnBackgroundColor: "#fdae44",
+            iconColor: "#E2761E",
+            className: "card5"
+          },
+          {
+            iconName: "iconfont iconmaturedbusiness",
+            btnBackgroundColor: "#70cb9d",
+            iconColor: "#32A974",
+            className: "card3"
+          }
+        ],
+        classId3: [
+          {
+            iconName: "iconfont iconincrease-sales",
+            btnBackgroundColor: "#5bcff2",
+            iconColor: "#3D9AC7",
+            className: "card1"
+          },
+          {
+            iconName: "iconfont iconexpandsignin",
+            btnBackgroundColor: "#fdae44",
+            iconColor: "#E2761E",
+            className: "card5"
+          },
+          {
+            iconName: "iconfont iconexploresignin",
+            btnBackgroundColor: "#70cb9d",
+            iconColor: "#32A974",
+            className: "card4"
+          }
+        ]
+      },
+      form: [{ options: [] }, { options: [] }, { options: [] }],
       answerList: [
         { id: 0, value: " " },
         { id: 1, value: " " },
@@ -159,14 +183,13 @@ export default {
   created() {
     this.$api.getQuestionPersonal(1).then(res => {
       if (res.data.code === 200) {
-        this.form1 = res.data.data.questions[2];
-        this.form2 = res.data.data.questions[1];
-        this.form3 = res.data.data.questions[0];
+        this.form = res.data.data.questions;
       }
     });
   },
   methods: {
     skipQuestion() {
+    const to = this.$route.query.to;
       if (this.tabActive === 0) {
         this.$router.push({ name: "PersonalQuestion", params: { id: 1 } });
         this.tab1 = true;
@@ -177,7 +200,8 @@ export default {
         this.tabActive = 2;
       } else {
         if (this.allSkip) {
-          this.$router.push({ name: "Home" });
+          this.$store.commit("UnfirstLaunch");
+          this.$router.push(to? { name:to } : { name: "Home" });
         } else {
           this.sendAnswer();
         }
@@ -186,19 +210,21 @@ export default {
     sendAnswer() {
       this.$api.postAnswerPersonal(this.answerList).then(res => {
         if (res.data.code === 200) {
+          const to = this.$route.query.to;
           this.splash = true;
+          this.$store.commit("UnfirstLaunch");
           this.questionPage = false;
           setTimeout(() => {
-            this.$router.push({ name: "Home" });
-          }, 1500);
+            this.$router.push(to? { name: to } : { name: "Home" });
+          }, 1000);
         }
       });
     },
-    answer(aid, id, answer) {
+    answer(answerid, id, answer) {
       this.allSkip = false;
-      this.answerList[aid].id = id;
-      this.answerList[aid].value = answer;
-      this.$router.push({ name: "PersonalQuestion", params: { id: aid } });
+      this.answerList[answerid].id = id;
+      this.answerList[answerid].value = answer;
+      this.$router.push({ name: "PersonalQuestion", params: { id: answerid } });
       if (this.tabActive === 2) {
         this.sendAnswer();
       } else {
@@ -216,13 +242,14 @@ export default {
 <style lang="scss" scoped>
 .splashPage {
   background: url("../../assets/imgs/personal/confetti.png") no-repeat;
-  //background: "iconBk" no-repeat;
   background-size: cover;
   height: 100vh;
 
   .title {
     position: fixed;
-    margin: 406px 87px 0 87px;
+    top: calc(50vh + 110px);
+    left: calc(50vw - 102px);
+    width: 204px;
     color: black;
     font-size: 24px;
     text-align: center;
@@ -230,9 +257,10 @@ export default {
 
   .icon {
     position: fixed;
-    margin: 286px 130px 0 130px;
+    top: calc(50vh - 50px);
+    left: calc(50vw - 50px);
     height: 100px;
-    weight: 100px;
+    width: 100px;
   }
 }
 
@@ -262,14 +290,32 @@ export default {
     height: 80px;
     width: calc(100vw - 32px);
     line-height: 80px;
+    width: calc(100% - 32px);
     color: black;
     background-color: #5bcff2;
-    .icon {
+
+    .iconretail {
       position: absolute;
       height: 40px;
       width: 40px;
       right: 16px;
-      top: 16px;
+      color: #3d9ac7;
+    }
+
+    .iconphasesignin1 {
+      position: absolute;
+      height: 40px;
+      width: 40px;
+      right: 16px;
+      color: #3d9ac7;
+    }
+
+    .iconincrease-sales {
+      position: absolute;
+      height: 40px;
+      width: 40px;
+      right: 16px;
+      color: #3d9ac7;
     }
   }
 
@@ -283,12 +329,13 @@ export default {
     line-height: 80px;
     color: black;
     background-color: #fdae44;
-    .icon {
+
+    .iconrestaurant {
       position: absolute;
       height: 40px;
       width: 40px;
       right: 16px;
-      top: 16px;
+      color: #e2761e;
     }
   }
 
@@ -302,12 +349,29 @@ export default {
     line-height: 80px;
     color: black;
     background-color: #70cb9d;
-    .icon {
+
+    .iconservice {
       position: absolute;
       height: 40px;
       width: 40px;
       right: 16px;
-      top: 16px;
+      color: #32a974;
+    }
+
+    .iconmaturedbusiness {
+      position: absolute;
+      height: 40px;
+      width: 40px;
+      right: 16px;
+      color: #32a974;
+    }
+
+    .iconexploresignin {
+      position: absolute;
+      height: 40px;
+      width: 40px;
+      right: 16px;
+      color: #32a974;
     }
   }
 
@@ -321,12 +385,21 @@ export default {
     line-height: 80px;
     color: black;
     background-color: #dde0e2;
-    .icon {
+
+    .iconlike {
       position: absolute;
       height: 40px;
       width: 40px;
       right: 16px;
-      top: 16px;
+      color: #bac1c5;
+    }
+
+    .iconexploresignin {
+      position: absolute;
+      height: 40px;
+      width: 40px;
+      right: 16px;
+      color: #bac1c5;
     }
   }
 
@@ -340,15 +413,25 @@ export default {
     line-height: 80px;
     color: black;
     background-color: #76d69c;
+
     .cardSmailTitle {
       font-size: 16px;
     }
-    .icon {
+
+    .iconphasesignin {
       position: absolute;
       height: 40px;
       width: 40px;
       right: 16px;
-      top: 16px;
+      color: #32a974;
+    }
+
+    .iconexpandsignin {
+      position: absolute;
+      height: 40px;
+      width: 40px;
+      right: 16px;
+      color: #32a974;
     }
   }
 }
@@ -361,14 +444,5 @@ export default {
   left: 0;
   width: 100%;
   bottom: 40px;
-}
-</style>
-
-<style lang="scss">
-.loginWrapper {
-  .el-form-item__error {
-    position: relative;
-    left: 15px;
-  }
 }
 </style>
