@@ -24,7 +24,6 @@ export default {
     };
   },
   mounted() {
-    this.addElement();
     var vm = this;
     document.addEventListener(
       "backbutton",
@@ -54,19 +53,6 @@ export default {
     //   }
     // };
   },
-  methods: {
-    addElement() {
-      // let meta = document.createElement("meta");
-      // meta.content =
-      //   "https://cdn.pixabay.com/photo/2017/04/03/15/52/love-you-2198772_960_720.png";
-      // meta.name = "og:image";
-      // meta.property = "og:image";
-      // document.getElementsByTagName("head")[0].appendChild(meta);
-
-      const imgMeta = document.getElementById("metaImage");
-      imgMeta.content =
-        "https://cdn.pixabay.com/photo/2017/04/03/15/52/love-you-2198772_960_720.png";
-    }
-  }
+  methods: {}
 };
 </script>
