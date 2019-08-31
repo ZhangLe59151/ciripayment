@@ -23,8 +23,8 @@ export default {
       transitionStyle: "van-fade"
     };
   },
-  created() {
-    thhis.addElement();
+  mounted() {
+    this.addElement();
     var vm = this;
     document.addEventListener(
       "backbutton",
@@ -56,12 +56,12 @@ export default {
   },
   methods: {
     addElement() {
-      // <meta property="og:image" content="https://cdn.pixabay.com/photo/2017/04/03/15/52/love-you-2198772_960_720.png">
-      let el = document.createElement("meta");
-      el.property = "og:image";
-      el.content =
+      let meta = document.createElement("meta");
+      meta.content =
         "https://cdn.pixabay.com/photo/2017/04/03/15/52/love-you-2198772_960_720.png";
-      document.getElementsByTagName("head")[0].appendChild(el);
+      meta.name = "og:image";
+      meta.property = "og:image";
+      document.getElementsByTagName("head")[0].appendChild(meta);
     }
   }
 };
