@@ -201,7 +201,9 @@
     "verifyPhone": "Verify your mobile number to continue",
     "yourPhone": "Your Mobile Number",
     "enterOTPtitle": "Enter OTP",
-    "resendOTP": "Resend OTP"
+    "resendOTP": "Resend OTP",
+    "completeQuestion": "Profile saved. Let's get started",
+    "skipQuestion": "Skip Question"
   },
   "Common": {
     "serverRequestError": "Server request error. Please try again!"
@@ -210,6 +212,8 @@
     "dailyFortune": "Daily Fortune",
     "poorMaster": "Poor Master",
     "leaveMessage": "? will not be able to read your fortune if you leave now. Your selection will go to waste.",
-    "question": "Question"
+    "question": "Question",
+    "isCalc": "is calculating your fortune",
+    "hang": "Hang in there!"
   }
 }
