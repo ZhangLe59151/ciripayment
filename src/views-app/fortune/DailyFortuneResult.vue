@@ -21,6 +21,7 @@
       <div
         class="web-get-fortune-btn"
         @click="getFortuneOnWeb"
+        v-analytics="{event: 'FortuneTellingSharedResultWeb_GetMineBtn'}"
       >{{$t("FortuneTelling.getFortuneBtn")}}</div>
     </div>
 
@@ -43,6 +44,7 @@
       <div
         class="like"
         @click="triggerShare"
+        v-analytics="{event: 'FortuneTellingResult_ShareBtn'}"
       >
         <i class="iconfont iconshare" />
         <span class="like-text">{{ $t("FortuneTelling.share") }}</span>
@@ -218,9 +220,6 @@ export default {
         });
     },
     getFortuneOnWeb() {
-      console.log("====================================");
-      console.log(this.BaseWebUrl + "/daily-fortune-prepare");
-      console.log("====================================");
       window.location.href = this.BaseWebUrl + "/daily-fortune-prepare";
     }
   }

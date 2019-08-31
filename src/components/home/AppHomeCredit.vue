@@ -3,6 +3,7 @@
     class="app-home-credit"
     :to="{name: 'Credit',query: {origin: 'banner'}}"
     @click="handleCreditClick"
+    v-analytics="{event: 'Home_CreditlineBanner'}"
   >
     <div class="des">{{ctx.label}}</div>
 

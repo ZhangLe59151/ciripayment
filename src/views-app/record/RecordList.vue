@@ -51,6 +51,7 @@
       <div
         class="add-record"
         @click="$router.push({name: 'AddRecord'})"
+        v-analytics="{event: 'RecordHistory_AddBtn'}"
       >
         <van-icon
           name="plus"

@@ -3,6 +3,7 @@
     class="app-home-lucky"
     @click="$router.push({name: 'DailyFortunePrepare'})"
     v-if="!fortuneTold"
+    v-analytics="{event: 'Home_FortuneTellingBanner'}"
   >
     <img
       :src="require('@/assets/imgs/lady_teller.png')"
@@ -22,6 +23,7 @@
   <div
     class="app-home-lucky app-home-lucky-single"
     @click="$router.push({name: 'DailyFortuneResult',query: {id: fortuneResult.id}})"
+    v-analytics="{event: 'Home_FortuneTellingBanner'}"
     v-else
   >
     <img
