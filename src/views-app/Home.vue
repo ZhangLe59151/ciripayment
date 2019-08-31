@@ -40,6 +40,7 @@ export default {
       this.$store.commit("UnfirstLaunch");
       this.$router.push({ name: "LandingPage" });
     } */
+
     this.fetchHomePageData();
   },
   methods: {
