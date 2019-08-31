@@ -396,7 +396,7 @@ const AppRouteArr = [
     name: "DailyFortuneResult",
     component: () => import("@/views-app/fortune/DailyFortuneResult.vue"),
     meta: {
-      title: "FortuneTellingResult"
+      title: "FortuneTellingResult",
     }
   },
   {
