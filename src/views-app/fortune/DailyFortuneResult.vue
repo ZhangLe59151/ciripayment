@@ -224,7 +224,7 @@ export default {
     },
     getFortuneOnWeb() {
       try {
-        window.location.href = "";
+        window.open = "taokae://daily-fortune-prepare";
         setTimeout(function() {
           window.location.href = this.BaseWebUrl + "/daily-fortune-prepare";
         }, 2000);
