@@ -189,6 +189,7 @@ export default {
   },
   methods: {
     skipQuestion() {
+    const to = this.$route.query.to;
       if (this.tabActive === 0) {
         this.$router.push({ name: "PersonalQuestion", params: { id: 1 } });
         this.tab1 = true;
@@ -199,7 +200,8 @@ export default {
         this.tabActive = 2;
       } else {
         if (this.allSkip) {
-          this.$router.push({ name: "Home" });
+          this.$store.commit("UnfirstLaunch");
+          this.$router.push(to? { name:to } : { name: "Home" });
         } else {
           this.sendAnswer();
         }
@@ -208,11 +210,12 @@ export default {
     sendAnswer() {
       this.$api.postAnswerPersonal(this.answerList).then(res => {
         if (res.data.code === 200) {
+          const to = this.$route.query.to;
           this.splash = true;
           this.$store.commit("UnfirstLaunch");
           this.questionPage = false;
           setTimeout(() => {
-            this.$router.push({ name: "Home" });
+            this.$router.push(to? { name: to } : { name: "Home" });
           }, 1000);
         }
       });

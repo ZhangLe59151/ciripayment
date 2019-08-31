@@ -2,7 +2,7 @@
   <div class="app-fortune-question-content" id="appFortuneQuestionContent">
     <div class="background-card">
       <div class="question-header">
-        {{ $t("Furtune.question") }} {{ index }}
+        {{ $t("Fortune.question") }} {{ index }}
       </div>
       <div class="question-body">
         {{ questionList[questionIndex].question }}
@@ -134,51 +134,62 @@ export default {
 
 }
 .background-card {
-  position: absolute;
-  background: url("../../assets/imgs/fortune-telling/fortune_telling_question_card.png")
-    no-repeat center;
+  position: relative;
+  background: url("../../assets/imgs/fortune-telling/fortune_telling_question_card.png") no-repeat center;
   background-size: cover;
   width: calc(100vw - 22px);
-  height: 100%;
-}
-.question-header {
-  position: absolute;
-  font-size: 14px;
-  top: 48px;
-  width: calc(100vw - 22px);
-  height: 16px;
-  text-align: center;
-}
-.question-body {
-  position: absolute;
-  font-weight: bolder;
-  color: black;
-  font-size: 20px;
-  top: 84px;
-  height: 24px;
-  width: calc(100vw - 64px);
-  text-align: center;
-  margin-left: 20px;
-  margin-right: 20px;
-}
-.question-subtitle {
-  position: absolute;
-  color: #68737D;
-  font-size: 14px;
-  top: 144px;
-  height: 24px;
-  width: calc(100vw - 64px);
-  text-align: center;
-  margin-left: 20px;
-  margin-right: 20px;
-}
+  height: 75vh;
 
-.bottom-actions {
+  .question-header {
+    position: absolute;
+    font-size: 14px;
+    top: 48px;
+    width: calc(100vw - 22px);
+    height: 16px;
+    text-align: center;
+  }
+
+  .question-body {
+    position: absolute;
+    font-weight: bolder;
+    color: black;
+    font-size: 20px;
+    top: 84px;
+    height: 24px;
+    width: calc(100vw - 64px);
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .question-subtitle {
+    position: absolute;
+    color: #68737D;
+    font-size: 14px;
+    top: 144px;
+    height: 24px;
+    width: calc(100vw - 64px);
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .bottom-btn {
+    position: absolute;
+    background-color: #ffa702;
+    color: white;
+    font-size: 14px;
+    height: 40px;
+    width: calc(100vw - 95px);
+    bottom: 40px;
+    left: 32px;
+  }
+
+  .bottom-actions {
   position: relative;
   left: 37px;
   right: 37px;
   top: 190px;
-  bottom: 0;
   height: 140px;
   width: calc(100vw - 70px);
 
@@ -240,21 +251,21 @@ export default {
       color: white;
     }
   }
+  
+  }
+
 
   
 
+
 }
 
-.bottom-btn {
-    position: absolute;
-    background-color: #ffa702;
-    color: white;
-    font-size: 14px;
-    height: 40px;
-    width: calc(100vw - 95px);
-    top: 410px;
-    left: 32px;
-}
+
+
+
+
+
+
 
 
 </style>

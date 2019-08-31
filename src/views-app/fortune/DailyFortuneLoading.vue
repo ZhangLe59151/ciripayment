@@ -1,6 +1,7 @@
 <template>
   <div class="daily-fortune-loading">
-    <fortune-telling-app-fortune-header />
+    <fortune-telling-app-fortune-header
+      />
     <div class="text-box">
       <div class="top-title">
         {{ $t('Fortune.hang') }}

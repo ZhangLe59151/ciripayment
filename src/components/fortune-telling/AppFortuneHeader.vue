@@ -1,6 +1,6 @@
 <template>
   <div class="app-fortune-header">
-    <div class="title">{{title}}</div>
+    <div class="title">{{ this.title }}</div>
     <van-icon
       name="arrow-left"
       class="arrow-left"
@@ -29,7 +29,7 @@ export default {
       default: ""
     },
     showRightIcon: {
-      default: true
+      default: false
     },
     showLeftIcon: {
       default: false

@@ -1,6 +1,9 @@
 <template>
   <div class="daily-fortune">
-    <fortune-telling-app-fortune-header />
+  <fortune-telling-app-fortune-header 
+      :title="title"
+      :showLeftIcon="true" 
+      :showRightIcon="false" />
     <div class="top-desc">
       {{$t("FortuneTelling.selectMasterDes")}}
     </div>
@@ -25,6 +28,7 @@ import { find } from "lodash";
 export default {
   name: "DailyFortunePrepare",
   data() {
+    title: "Daily Fortune"
     return {
       masterList: require("@/assets/data/fortuneMasterList.json")
     };
@@ -67,7 +71,7 @@ export default {
 <style lang="scss" scoped>
 .daily-fortune {
   position: relative;
-  height: 100vh;
+  height: 170vh;
   width: 100%;
   background: no-repeat center
     url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
