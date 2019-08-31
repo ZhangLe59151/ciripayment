@@ -26,7 +26,7 @@ Vue.use(Dialog);
 export default {
   props: {
     title: {
-      default: $t("Furtune.dailyFortune")
+      default: this.$t("Furtune.dailyFortune")
     },
     showRightIcon: {
       default: true
@@ -48,9 +48,9 @@ export default {
         Dialog.confirm({
           title: "Leaving Master" + this.fortuneInfo.selectedMaster.name + "?",
           message:
-            $t("Furtune.poorMaster") +
+            this.$t("Furtune.poorMaster") +
             this.fortuneInfo.selectedMaster.name +
-            $t("Furtune.leaveMessage")
+            this.$t("Furtune.leaveMessage")
         })
           .then(() => {
             // on confirm
