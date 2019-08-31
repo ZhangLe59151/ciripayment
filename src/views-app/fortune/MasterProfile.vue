@@ -2,7 +2,7 @@
   <div class="master-profile">
     <fortune-telling-app-fortune-header
       :showLeftIcon="true"
-      title="Master's Profile"
+      :showTitle="title"
     />
     <div class="cnt">
       <img :src="imgList[info.id]">
@@ -27,7 +27,8 @@ export default {
       imgList: {
         "1": require("@/assets/imgs/fortune-telling/master_01.png"),
         "2": require("@/assets/imgs/fortune-telling/master_02.png")
-      }
+      },
+      title: this.$t('Fortune.masterProfile')
     };
   },
   computed: {

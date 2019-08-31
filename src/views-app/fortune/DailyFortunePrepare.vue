@@ -1,7 +1,7 @@
 <template>
   <div class="daily-fortune">
   <fortune-telling-app-fortune-header 
-      :title="title"
+      :showTitle="title"
       :showLeftIcon="true" 
       :showRightIcon="false" />
     <div class="top-desc">
@@ -28,9 +28,9 @@ import { find } from "lodash";
 export default {
   name: "DailyFortunePrepare",
   data() {
-    title: "Daily Fortune"
     return {
-      masterList: require("@/assets/data/fortuneMasterList.json")
+      masterList: require("@/assets/data/fortuneMasterList.json"),
+      title: this.$t('Fortune.dailyTitle')
     };
   },
   computed: {

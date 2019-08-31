@@ -214,6 +214,8 @@
     "leaveMessage": "? will not be able to read your fortune if you leave now. Your selection will go to waste.",
     "question": "Question",
     "isCalc": "is calculating your fortune",
-    "hang": "Hang in there!"
+    "hang": "Hang in there!",
+    "dailyTitle": "Daily Fortune",
+    "masterProfile": "Master's Profile"
   }
 }

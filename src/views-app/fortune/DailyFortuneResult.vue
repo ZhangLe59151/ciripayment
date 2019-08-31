@@ -1,6 +1,9 @@
 <template>
   <div class="daily-fortune-result">
-    <fortune-telling-app-fortune-header />
+    <fortune-telling-app-fortune-header 
+      :showLeftIcon="true"
+      :showRightIcon="false"
+      :showTitle="title"/>
     <div class="top-desc">
       <fortune-telling-app-fortune-master-photo
         class="master-photo"
@@ -91,7 +94,8 @@ export default {
       salesResult: "",
       likeStatus: false,
       processingLike: false,
-      masterList: require("@/assets/data/fortuneMasterList.json")
+      masterList: require("@/assets/data/fortuneMasterList.json"),
+      title: this.$t('Fortune.dailyTitle')
     };
   },
 
@@ -282,6 +286,7 @@ export default {
   }
 
   .action {
+    position: relative;
     display: flex;
     flex: 1 1;
     margin: 0 66px;
