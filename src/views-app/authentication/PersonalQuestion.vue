@@ -189,6 +189,7 @@ export default {
   },
   methods: {
     skipQuestion() {
+    const to = this.$route.query.to;
       if (this.tabActive === 0) {
         this.$router.push({ name: "PersonalQuestion", params: { id: 1 } });
         this.tab1 = true;
@@ -199,7 +200,8 @@ export default {
         this.tabActive = 2;
       } else {
         if (this.allSkip) {
-          this.$router.push({ name: "Home" });
+          this.$store.commit("UnfirstLaunch");
+          this.$router.push(to? { name:to } : { name: "Home" });
         } else {
           this.sendAnswer();
         }
@@ -208,11 +210,12 @@ export default {
     sendAnswer() {
       this.$api.postAnswerPersonal(this.answerList).then(res => {
         if (res.data.code === 200) {
+          const to = this.$route.query.to;
           this.splash = true;
           this.$store.commit("UnfirstLaunch");
           this.questionPage = false;
           setTimeout(() => {
-            this.$router.push({ name: "Home" });
+            this.$router.push(to? { name: to } : { name: "Home" });
           }, 1000);
         }
       });
@@ -239,13 +242,14 @@ export default {
 <style lang="scss" scoped>
 .splashPage {
   background: url("../../assets/imgs/personal/confetti.png") no-repeat;
-  //background: "iconBk" no-repeat;
   background-size: cover;
   height: 100vh;
 
   .title {
     position: fixed;
-    margin: 406px 87px 0 87px;
+    top: calc(50vh + 110px);
+    left: calc(50vw - 102px);
+    width: 204px;
     color: black;
     font-size: 24px;
     text-align: center;
@@ -253,9 +257,10 @@ export default {
 
   .icon {
     position: fixed;
-    margin: 286px 130px 0 130px;
+    top: calc(50vh - 50px);
+    left: calc(50vw - 50px);
     height: 100px;
-    weight: 100px;
+    width: 100px;
   }
 }
 

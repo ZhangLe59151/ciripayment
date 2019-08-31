@@ -25,7 +25,7 @@
           />
         </div>
 
-        <div class="label-left">{{$t("Record.Date")}}</div>
+        <div class="label-left"> {{$t("Record.Date")}}</div>
 
         <div class="pick_date">
           <van-field
