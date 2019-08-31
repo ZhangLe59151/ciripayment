@@ -64,3 +64,9 @@ new Vue({
   render: h => h(App),
   el: "#app"
 }).$mount("#app");
+
+window.handleOpenURL = function (url) {
+  console.log("received url: " + url);
+  const _url = url.split("taokae://")[1]
+  router.push(_url)
+}
