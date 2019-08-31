@@ -24,7 +24,7 @@ export default {
     };
   },
   created() {
-    thhis.addElement();
+    this.addElement();
     var vm = this;
     document.addEventListener(
       "backbutton",
