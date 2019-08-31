@@ -152,7 +152,7 @@ export default {
       left:20px;
       width: 85%;
       height:40px;
-      background-color: #FF8600;
+      background-color: #FFA702;
       color:white;
       font-size: 14px;
       .btn-text{

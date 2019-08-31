@@ -440,7 +440,7 @@ export default {
     .requirements{
       margin-bottom: 16px;
       .iconidcard{
-        color: #ff8600;
+        color: #ffa702;
         margin-right: 5px;
       }
     }
@@ -472,7 +472,7 @@ export default {
       margin-bottom: 32px;
     }
     .bottom-btn {
-      background-color: #ff8600;
+      background-color: #ffa702;
       border-radius: 4px;
       width: 100%;
       height: 40px;
@@ -492,7 +492,7 @@ export default {
     flex-grow: 1;
     padding: 10px 0 60px 0;
     .bottom-btn {
-      background-color: #ff8600;
+      background-color: #ffa702;
       border-radius: 4px;
       width: 100%;
       height: 40px;

@@ -398,7 +398,7 @@ export default {
   .label-title {
     font-size: 14px;
     line-height: 24px;
-    color: #ff8600;
+    color: #ffa702;
     &.required:before {
       color: #f56c6c;
       content: "*";
@@ -486,9 +486,9 @@ export default {
   }
 
   .plain {
-    color: #ff8600;
+    color: #ffa702;
     background-color: #ffffff;
-    border-color: #ff8600;
+    border-color: #ffa702;
   }
 }
 </style>

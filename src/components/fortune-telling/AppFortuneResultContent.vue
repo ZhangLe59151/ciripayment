@@ -211,7 +211,7 @@ export default {
 
       .record-btn {
         margin-top: 12px;
-        background: #ff8600;
+        background: #ffa702;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
         border-radius: 4px;
 

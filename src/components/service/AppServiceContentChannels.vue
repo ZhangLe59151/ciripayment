@@ -278,7 +278,7 @@ export default {
           }
 
           .blue {
-            color: #FF8600;
+            color: #FFA702;
           }
 
           > i {
@@ -306,9 +306,9 @@ export default {
         height: 34px;
       }
       .plain{
-        color: #FF8600;
+        color: #FFA702;
         background-color: #ffffff ;
-        border-color: #FF8600;
+        border-color: #FFA702;
       }
     }
 

@@ -89,7 +89,7 @@ export default {
   }
   .el-input.is-active .el-input__inner,
   .el-input__inner:focus {
-    border-color: #ff8600;
+    border-color: #ffa702;
   }
   .el-input__suffix {
     color: #363f47;
@@ -107,7 +107,7 @@ export default {
 }
 .el-input.is-active .el-input__inner,
 .el-input__inner:focus {
-  border-color: #ff8600;
+  border-color: #ffa702;
 }
 .el-input__suffix {
   color: #363f47;

@@ -153,7 +153,7 @@ export default {
       color: white;
       border-top-left-radius: 16px;
       border-top-right-radius: 16px;
-      background-color: #ff8600;
+      background-color: #ffa702;
     }
 
     .SigninBtn {
@@ -163,9 +163,9 @@ export default {
       bottom: 38px;
       height: 40px;
       width: calc(100% - 32px);
-      color: #ff8600;
+      color: #ffa702;
       background-color: white;
-      border: 1px solid #ff8600;
+      border: 1px solid #ffa702;
       border-top-left-radius: 16px;
       border-top-right-radius: 16px;
     }

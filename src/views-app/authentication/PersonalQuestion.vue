@@ -7,8 +7,8 @@
       <van-tabs
         v-model="tabActive"
         animated
-        color="#ff8600"
-        title-active-color="#ff8600"
+        color="#ffa702"
+        title-active-color="#ffa702"
       >
         <van-tab :disabled="this.tab1">
           <div class="questionTitle">{{ form1.question }}</div>

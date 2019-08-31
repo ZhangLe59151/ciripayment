@@ -887,7 +887,7 @@ export default {
     font-size: 17px;
     padding: 20px 10px;
     text-align: center;
-    color: #FF8600;
+    color: #FFA702;
     text-transform: uppercase;
     font-weight: bold;
   }
@@ -903,7 +903,7 @@ export default {
 
   .label-title {
     font-size: 14px;
-    color: #FF8600;
+    color: #FFA702;
     height: 40px;
     line-height: 40px;
 

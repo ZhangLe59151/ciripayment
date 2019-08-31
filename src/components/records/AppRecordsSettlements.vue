@@ -225,7 +225,7 @@ export default {
     display: inline-block;
     text-align: right;
     .withdraw-btn {
-      background: #FF8600;
+      background: #FFA702;
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
       border-radius: 4px;
 

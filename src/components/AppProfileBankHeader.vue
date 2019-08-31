@@ -39,7 +39,7 @@ export default {
 }
 
 .app-profile-select-bank-header {
-  background: #ff8600;
+  background: #ffa702;
   height: 68px;
   width: 100%;
   position: relative;

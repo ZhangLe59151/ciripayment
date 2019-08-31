@@ -230,7 +230,7 @@ export default {
       position: absolute;
       right: 16px;
       bottom: 24px;
-      background-color: #ff8600;
+      background-color: #ffa702;
       width: 50px;
     }
 
@@ -245,7 +245,7 @@ export default {
   }
 
   .bottom-btn {
-    background-color: #ff8600;
+    background-color: #ffa702;
     border-radius: 4px;
     margin: 1.25rem 0;
     width: 100%;

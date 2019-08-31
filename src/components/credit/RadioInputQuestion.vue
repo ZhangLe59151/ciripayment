@@ -306,9 +306,9 @@ export default {
     }
 
     .selecting {
-      background-color: #ff8600;
+      background-color: #ffa702;
       color: white;
-      border-color: #ff8600;
+      border-color: #ffa702;
     }
     .selected {
       background-color: #87929d !important;
@@ -342,7 +342,7 @@ export default {
     left: 20px;
     width: 85%;
     height: 40px;
-    background-color: #ff8600;
+    background-color: #ffa702;
     color: white;
     font-size: 14px;
     .btn-text {
