@@ -3,17 +3,20 @@
     {
       "to": "/home",
       "class": "iconfont iconhome",
-      "label": "Home"
+      "label": "Home",
+      "eventName": "Home_Tab"
     },
     {
       "to": "/loan",
       "class": "iconfont iconmoneybag",
-      "label": "Loan"
+      "label": "Loan",
+      "eventName": "Loan_Tab"
     },
     {
       "to": "/settings",
       "class": "iconfont iconsetting",
-      "label": "Settings"
+      "label": "Settings",
+      "eventName": "Setting_Tab"
     }
   ]
 }

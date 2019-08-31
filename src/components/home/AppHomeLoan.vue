@@ -2,7 +2,7 @@
   <div
     class="app-home-loan"
     @click="handleLoanClick"
-    v-analytics="{event: 'home_loan_apply'}"
+    v-analytics="{event: 'Home_LoanBanner'}"
   >
     <div class="des">{{$t("Home.loan")}}</div>
     <div class="applyNow">{{$t("Home.loanBtn")}}</div>

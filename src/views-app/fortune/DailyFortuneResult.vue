@@ -4,11 +4,11 @@
     <div class="top-desc">
       <fortune-telling-app-fortune-master-photo
         class="master-photo"
-        :masterId="fortuneInfo.selectedMaster.id"
+        :masterId="+fortuneInfo.selectedMaster || +fortuneResult.masterId"
         :imgSize="60"
       />
       <div class="master-des">
-        {{$tc("FortuneTelling.masterDes", fortuneInfo.selectedMaster.name)}}
+        {{$tc("FortuneTelling.masterDes", fortuneInfo.selectedMaster.name || masterName)}}
       </div>
     </div>
 
@@ -21,6 +21,7 @@
       <div
         class="web-get-fortune-btn"
         @click="getFortuneOnWeb"
+        v-analytics="{event: 'FortuneTellingSharedResultWeb_GetMineBtn'}"
       >{{$t("FortuneTelling.getFortuneBtn")}}</div>
     </div>
 
@@ -43,10 +44,15 @@
       <div
         class="like"
         @click="triggerShare"
+        v-analytics="{event: 'FortuneTellingResult_ShareBtn'}"
       >
         <i class="iconfont iconshare" />
         <span class="like-text">{{ $t("FortuneTelling.share") }}</span>
       </div>
+    </section>
+
+    <section>
+      <fortune-telling-app-fortune-download />
     </section>
 
     <van-popup
@@ -75,17 +81,22 @@
 <script>
 import { mapState } from "vuex";
 import i18n from "@/assets/lang/i18n";
+import { find } from "lodash";
 
 export default {
   name: "DailyFortuneResult",
   data() {
     return {
       showPopUp: false,
-      fortuneResult: "",
+      fortuneResult: {},
       salesResult: "",
       likeStatus: false,
-      processingLike: false
+      processingLike: false,
+      masterList: require("@/assets/data/fortuneMasterList.json")
     };
+  },
+  created(){
+    document.title = i18n.t("FortuneTelling.sharePageDesc");
   },
   computed: {
     ...mapState({
@@ -97,17 +108,43 @@ export default {
     }),
     today() {
       return this.$moment().format(this.localDateFormatter);
+    },
+    masterName() {
+      const item = find(this.masterList, {
+        id: this.fortuneInfo.fortuneResult.masterId
+      });
+
+      return item ? item.name : "";
     }
   },
   mounted() {
-    let savedResult = this.fortuneInfo.fortuneResult;
-    this.fortuneResult = savedResult.fortuneResult;
-    this.likeStatus = savedResult.like;
+    const shareKey = this.$route.query.shareKey;
+
+    if (shareKey) {
+      this.getInfoOnWeb(shareKey);
+    } else {
+      this.initFortuneResult(this.fortuneInfo.fortuneResult);
+    }
   },
   destroyed() {
     this.updateLikeStatusWithApi();
   },
   methods: {
+    initFortuneResult(savedResult) {
+      this.fortuneResult = savedResult.fortuneResult;
+      this.likeStatus = savedResult.like;
+    },
+    getInfoOnWeb(shareKey) {
+      this.$api.getResultOnWeb(shareKey).then(res => {
+        if (res.data.code === 200) {
+          const fortuneResult = res.data.data;
+          this.initFortuneResult(fortuneResult);
+          this.$store.commit("SaveFortuneInfo", {
+            fortuneResult: fortuneResult
+          });
+        }
+      });
+    },
     triggerShare() {
       this.showPopUp = true;
     },
@@ -187,10 +224,10 @@ export default {
         });
     },
     getFortuneOnWeb() {
-      console.log("====================================");
-      console.log(this.BaseWebUrl + "/daily-fortune-prepare");
-      console.log("====================================");
       window.location.href = this.BaseWebUrl + "/daily-fortune-prepare";
+    },
+    updateMetaData(){
+      document.title = i18n.t("FortuneTelling.sharePageDesc");
     }
   }
 };
@@ -199,7 +236,7 @@ export default {
 <style lang="scss" scoped>
 .daily-fortune-result {
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   background: no-repeat center
     url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
