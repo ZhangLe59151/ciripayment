@@ -7,7 +7,7 @@
   >
     <div class="des">{{ctx.label}}</div>
 
-    <div class="checkNow">{{ctx.btn}}</div>
+    <div :class="String(creditLimit.remaining)==='0'?'checkNow-finish':'checkNow'">{{ctx.btn}}</div>
 
   </div>
 </template>
@@ -37,7 +37,7 @@ export default {
         "3": "pending",
         "0": "finish"
       };
-      const k = this.creditLimit.remaining || -1 + "";
+      const k = (!this.creditLimit.remaining) ? "0" : this.creditLimit.remaining || -1 + "";
 
       const ob = {
         start: {
@@ -95,6 +95,20 @@ export default {
     left: 16px;
   }
 
+  .checkNow-finish{
+    background: #ffffff;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    font-size: 14px;
+    color: #363f47;
+    letter-spacing: 0;
+    text-align: center;
+    padding: 6px 0;
+    width: 150px;
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+  }
   .checkNow {
     background: #ffffff;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
@@ -110,5 +124,6 @@ export default {
     bottom: 16px;
     max-width: 130px;
   }
+
 }
 </style>
