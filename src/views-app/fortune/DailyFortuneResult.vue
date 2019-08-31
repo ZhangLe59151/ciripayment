@@ -89,6 +89,9 @@ export default {
       masterList: require("@/assets/data/fortuneMasterList.json")
     };
   },
+  created(){
+    document.title = i18n.t("FortuneTelling.sharePageDesc");
+  },
   computed: {
     ...mapState({
       fortuneInfo: "fortuneInfo",
@@ -110,6 +113,7 @@ export default {
   },
   mounted() {
     const shareKey = this.$route.query.shareKey;
+
     if (shareKey) {
       this.getInfoOnWeb(shareKey);
     } else {
@@ -218,6 +222,9 @@ export default {
       console.log(this.BaseWebUrl + "/daily-fortune-prepare");
       console.log("====================================");
       window.location.href = this.BaseWebUrl + "/daily-fortune-prepare";
+    },
+    updateMetaData(){
+      document.title = i18n.t("FortuneTelling.sharePageDesc");
     }
   }
 };

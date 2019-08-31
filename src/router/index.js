@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
 import analytics from "../firebase/analytics";
-import i18n from "@/assets/lang/i18n"
 
 // import store from "../store";
 
@@ -406,12 +405,6 @@ const AppRouteArr = [
     component: () => import("@/views-app/fortune/DailyFortuneResult.vue"),
     meta: {
       title: "FortuneTellingResult",
-      metaTags: [
-        {
-          name: i18n.t("FortuneTelling.sharePageDesc"),
-          description: i18n.t("FortuneTelling.sharePageDesc")
-        }
-      ]
     }
   },
   {
