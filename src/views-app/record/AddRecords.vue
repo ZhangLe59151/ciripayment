@@ -19,7 +19,8 @@
           <van-field
             v-model="form.memo"
             @focus="inputNote"
-            maxlength="50"
+            maxlength="30"
+            @input="checkLength"
             :placeholder="$t('Record.placeHolder')"
           />
         </div>
@@ -65,7 +66,8 @@
           <van-field
             v-model="form.memo"
             @focus="inputNote"
-            maxlength="50"
+            maxlength="30"
+            @input="checkLength"
             :placeholder="$t('Record.placeHolderRent')"
           />
         </div>
@@ -124,10 +126,11 @@
       :show="showNumber"
       extra-key="."
       close-button-text="Done"
-      @blur="onHide"
+      @blur="showNumber = false"
       @input="onInput"
       @delete="onDelete"
       @hide="onHide"
+      @close="onClose"
     />
 
   </div>
@@ -237,6 +240,11 @@ export default {
         }
       });
     },
+    checkLength(value) {
+      if (value.length > 30) {
+        this.form.memo = value.slice(0, 30);
+      }
+    },
     showKeyboard(type) {
       this.appear = false;
       this.showNumber = true;
@@ -277,6 +285,9 @@ export default {
         : kbt;
     },
     onHide() {
+      document.getElementById("add-record").style.height = `${window.innerHeight - 50}px`;
+    },
+    onClose() {
       this.showNumber = false;
       document.getElementById("add-record").style.height = `${window.innerHeight - 50}px`;
     },
@@ -379,7 +390,7 @@ export default {
 }
 
 .input_note {
-  height: 40px;
+  min-height: 40px;
   font-size: 24px;
   margin: 0 16px 0 16px;
   border-bottom: 1px solid #c2c8cc;
@@ -403,7 +414,7 @@ export default {
 }
 
 .van-field {
-  height: 40px;
+  min-height: 40px;
   line-height: 40px;
   padding: 0;
 }

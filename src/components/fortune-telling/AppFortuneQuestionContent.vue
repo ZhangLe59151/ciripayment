@@ -138,14 +138,14 @@ export default {
   background: url("../../assets/imgs/fortune-telling/fortune_telling_question_card.png")
     no-repeat center;
   background-size: cover;
-  width: 100%;
+  width: calc(100vw - 22px);
   height: 100%;
 }
 .question-header {
   position: absolute;
   font-size: 14px;
   top: 48px;
-  width: 100%;
+  width: calc(100vw - 22px);
   height: 16px;
   text-align: center;
 }
@@ -156,7 +156,7 @@ export default {
   font-size: 20px;
   top: 84px;
   height: 24px;
-  width: 90%;
+  width: calc(100vw - 64px);
   text-align: center;
   margin-left: 20px;
   margin-right: 20px;
@@ -165,9 +165,9 @@ export default {
   position: absolute;
   color: #68737D;
   font-size: 14px;
-  top: 164px;
+  top: 144px;
   height: 24px;
-  width: 90%;
+  width: calc(100vw - 64px);
   text-align: center;
   margin-left: 20px;
   margin-right: 20px;
@@ -177,10 +177,10 @@ export default {
   position: relative;
   left: 37px;
   right: 37px;
-  top: 180px;
+  top: 190px;
   bottom: 0;
   height: 140px;
-  width: 264px;
+  width: calc(100vw - 70px);
 
   .answer-input {
     position: absolute;
@@ -190,7 +190,7 @@ export default {
     line-height: 80px;
     top: 34px;
     height: 80px;
-    width: 264px;
+    width: calc(100vw - 80px);
     border-radius: 4px;
     border: 1px solid #87929D;
     box-sizing: border-box;
@@ -201,7 +201,7 @@ export default {
     flex-wrap: wrap;
 
     .tab3 {
-      width: 264px;
+      width: calc(100vw - 110px);
       height: 40px;
       margin: 0 0 10px 0;
       border: 1px solid #87929D;
@@ -210,7 +210,7 @@ export default {
     }
 
     .tab3Selected {
-      width: 264px;
+     width: calc(100vw - 110px);
       height: 40px;
       margin: 0 0 10px 0;
       border: 1px solid #87929D;
@@ -220,7 +220,7 @@ export default {
     }
 
     .tab7 {
-      width: 124px;
+      width: calc(50vw - 56px);
       height: 40px;
       top: 30px;
       margin: 0 4px 5px 4px;
@@ -230,7 +230,7 @@ export default {
     }
 
     .tab7Selected {
-      width: 124px;
+      width: calc(50vw - 56px);
       height: 40px;
       top: 30px;
       margin: 0 4px 5px 4px;
@@ -241,16 +241,20 @@ export default {
     }
   }
 
+  
+
 }
 
 .bottom-btn {
-  position: relative;
-  background-color: #ffa702;
-  color: white;
-  font-size: 14px;
-  left: 32px;
-  height: 40px;
-  width: 264px;
-  bottom: 50px;
+    position: absolute;
+    background-color: #ffa702;
+    color: white;
+    font-size: 14px;
+    height: 40px;
+    width: calc(100vw - 95px);
+    top: 410px;
+    left: 32px;
 }
+
+
 </style>

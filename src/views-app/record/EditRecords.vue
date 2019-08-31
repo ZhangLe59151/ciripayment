@@ -1,5 +1,5 @@
 <template>
-  <div class="app-add-record">
+  <div class="app-add-record" id="edit-record">
     <app-common-header :title="$t('Record.editRecord')" />
 
     <van-tabs
@@ -23,7 +23,8 @@
           <van-field
             v-model="form.memo"
             @focus="inputNote"
-            maxlength="50"
+            maxlength="30"
+            @input="checkLength"
             placeholder="$t('Record.placeHolder')"
           />
         </div>
@@ -72,7 +73,8 @@
           <van-field
             v-model="form.memo"
             @focus="inputNote"
-            maxlength="50"
+            maxlength="30"
+            @input="checkLength"
             placeholder="$t('Record.placeHolderRent')"
           />
         </div>
@@ -110,6 +112,7 @@
     <van-row>
       <van-col span="12">
         <div
+          ref="btn"
           class="delete_btn"
           @click="deleteBtn"
         >{{$t("Record.deleteRecord")}}</div>
@@ -126,9 +129,11 @@
       :show="showNumber"
       extra-key="."
       close-button-text="Done"
-      @blur="showNumberFalse"
+      @blur="showNumber = false"
       @input="onInput"
       @delete="onDelete"
+      @hide="onHide"
+      @close="onClose"
     />
   </div>
 </template>
@@ -204,13 +209,32 @@ export default {
         }
       });
     },
+    checkLength(value) {
+      if (value.length > 30) {
+        this.form.memo = value.slice(0, 30);
+      }
+    },
     showKeyboard(type) {
       this.appear = false;
       this.showNumber = true;
       this.type = type;
+      // increase height of app
+      document.getElementById("edit-record").style.height = `${window.innerHeight * 1.3 - 50}px`;
+      // scroll to btn
+      var element = this.$refs["btn"];
+      var top = element.offsetTop;
+      window.scrollTo(0, top);
     },
     showNumberFalse() {
+      console.log("blur");
       this.showNumber = false;
+    },
+    onHide() {
+      document.getElementById("edit-record").style.height = `${window.innerHeight - 50}px`;
+    },
+    onClose() {
+      this.showNumber = false;
+      document.getElementById("edit-record").style.height = `${window.innerHeight - 50}px`;
     },
     onInput(value) {
       if (this.form[this.type].indexOf(".") !== -1 && value === ".") {
@@ -345,7 +369,7 @@ export default {
 }
 
 .input_note {
-  height: 40px;
+  min-height: 40px;
   font-size: 24px;
   margin: 0 16px 0 16px;
   border-bottom: 1px solid #c2c8cc;
@@ -386,7 +410,7 @@ export default {
 }
 
 .van-field {
-  height: 40px;
+  min-height: 40px;
   line-height: 40px;
   padding: 0;
 }
