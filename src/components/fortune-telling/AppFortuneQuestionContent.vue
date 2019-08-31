@@ -2,7 +2,7 @@
   <div class="app-fortune-question-content" id="appFortuneQuestionContent">
     <div class="background-card">
       <div class="question-header">
-        Question {{ index }}
+        {{ $t("Furtune.question") }} {{ index }}
       </div>
       <div class="question-body">
         {{ questionList[questionIndex].question }}
@@ -100,7 +100,7 @@ export default {
     next() {
       this.answerForm[this.questionIndex].value = this.answer;
       this.answer = "";
-      this.index += 1;
+      this.index += 1;     
       if (this.index === 3) {
         if (this.isLogin) {
           this.$api.postAnswerF(this.answerForm).then(res => {
@@ -109,10 +109,11 @@ export default {
             }
           });
         } else {
-          this.questionIndex += 1;
           this.$store.commit("UpdateFurtuneQuestionInfo", this.answerForm);
           this.$router.push({ name: "LoginPage", query: { to: "DailyFortuneLoading" } });
         }
+      } else {
+        this.questionIndex += 1;
       }
     },
     onSelect(item) {
@@ -250,6 +251,6 @@ export default {
   left: 32px;
   height: 40px;
   width: 264px;
-  top: 260px;
+  bottom: 50px;
 }
 </style>

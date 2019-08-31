@@ -24,7 +24,7 @@
             v-model="form.memo"
             @focus="inputNote"
             maxlength="50"
-            placeholder="E.g. Sales Item"
+            placeholder="$t('Record.placeHolder')"
           />
         </div>
 
@@ -73,7 +73,7 @@
             v-model="form.memo"
             @focus="inputNote"
             maxlength="50"
-            placeholder="E.g. Sales Item"
+            placeholder="$t('Record.placeHolderRent')"
           />
         </div>
 
@@ -186,9 +186,7 @@ export default {
             res.data.data.type === 0 ? "incomeAmount" : "expenseAmount";
           this.disable[this.type] = true;
           this.tabActive = res.data.data.type;
-          this.currentDate = this.$moment(res.data.data.accountDate).format(
-            "D MMM YYYYY"
-          );
+          this.currentDate = this.$moment(res.data.data.accountDate).format("D MMM YYYY");
           this.form[this.type] = util.fmoney(res.data.data.amount);
           this.dailyIncome = util.fmoney(res.data.data.incomeSum);
           this.dailyExpense = util.fmoney(res.data.data.expensesSum);

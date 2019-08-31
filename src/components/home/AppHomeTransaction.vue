@@ -1,7 +1,7 @@
 <template>
   <div class="app-home-transaction">
     <div class="title">
-      Latest Transactions
+      {{ $t("Home.latestTransaction") }}
     </div>
 
     <div

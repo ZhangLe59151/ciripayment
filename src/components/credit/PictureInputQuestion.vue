@@ -4,7 +4,7 @@
     <div class="title">{{question.question}}</div>
     <div class="img-container" :style="backgroundStyle">
     </div>
-    <van-button class="submit-btn-disabled" disabled >{{question.limitAmount}} {{$store.state.currency}} Earned</van-button>
+    <van-button class="submit-btn-disabled" disabled >{{question.limitAmount}} {{$store.state.currency}} {{$t("Credit.earned")}}</van-button>
   </div>
   <div v-else class="picture-input-question">
     <div class="title">{{question.question}}</div>
@@ -28,7 +28,7 @@
                 <i class="iconfont iconcamera" />
               </van-col>
               <van-col span="20" offset="3">
-                <div class="placeholder-text">Take a photo</div>
+                <div class="placeholder-text">{{ $t('Credit.takePhoto') }}</div>
               </van-col>
             </van-row>
           </div>
@@ -49,7 +49,7 @@
                 <i class="iconfont iconalbum" />
               </van-col>
               <van-col span="18" offset="3">
-                <div class="placeholder-text">Select from album</div>
+                <div class="placeholder-text">{{ $t("Credit.selectAlbum") }}</div>
               </van-col>
             </van-row>
           </div>
@@ -73,7 +73,7 @@
 
     <div v-if="error" class="error_msg">{{$t("Credit.errorImgInput")}}</div>
     <van-button class="submit-btn" @click="handleSubmit">
-      <div class="btn-text">+{{question.limitAmount}} {{$store.state.currency}} Credit</div>
+      <div class="btn-text">+{{question.limitAmount}} {{$store.state.currency}} {{ $t("Credit.credit") }}</div>
       <img class="dollar-coin" src="../../assets/imgs/dollar_coin.png">
     </van-button>
   </div>
