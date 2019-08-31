@@ -1,6 +1,8 @@
 <template>
   <div class="daily-fortune-question">
-    <fortune-telling-app-fortune-header :center="true" />
+    <fortune-telling-app-fortune-header :title="title"
+      :showLeftIcon="true" 
+      :showRightIcon="true" /> />
     <div class="introduction">
       {{$t('Fortune.hang')}} {{fortuneInfo.selectedMaster.name}} {{ $t('Fortune.isCalc') }}}
     </div>

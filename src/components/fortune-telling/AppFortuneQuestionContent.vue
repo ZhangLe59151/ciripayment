@@ -180,18 +180,18 @@ export default {
     color: white;
     font-size: 14px;
     height: 40px;
-    width: calc(100vw - 95px);
+    width: calc(100vw - 80px);
     bottom: 40px;
     left: 32px;
   }
 
   .bottom-actions {
-  position: relative;
-  left: 37px;
-  right: 37px;
-  top: 190px;
-  height: 140px;
-  width: calc(100vw - 70px);
+    position: relative;
+    left: 37px;
+    right: 37px;
+    top: 190px;
+    height: 140px;
+    width: calc(100vw - 70px);
 
   .answer-input {
     position: absolute;
@@ -201,7 +201,7 @@ export default {
     line-height: 80px;
     top: 34px;
     height: 80px;
-    width: calc(100vw - 80px);
+    width: calc(100vw - 95px);
     border-radius: 4px;
     border: 1px solid #87929D;
     box-sizing: border-box;
