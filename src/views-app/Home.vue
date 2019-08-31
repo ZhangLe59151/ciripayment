@@ -53,6 +53,7 @@ export default {
           this.records.expense = util.fmoney(
             data.merchantRecordSum.expensesSum
           );
+          
 
           this.creditLimit = data.creditLimit;
           this.$store.commit("SaveFortuneInfo", {
