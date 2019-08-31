@@ -1,5 +1,5 @@
 <template>
-  <div class="app-add-record">
+  <div class="app-add-record" id="add-record">
     <app-common-header :title="$t('Record.addRecord')" />
     <van-tabs
       v-model="tabActive"
@@ -101,7 +101,7 @@
       </van-tab>
     </van-tabs>
 
-    <button
+    <button id="btn" ref="btn"
       class="update_btn"
       @click="updateBtn"
     >{{$t("Record.add")}}</button>
@@ -124,9 +124,10 @@
       :show="showNumber"
       extra-key="."
       close-button-text="Done"
-      @blur="showNumber = false"
+      @blur="onHide"
       @input="onInput"
       @delete="onDelete"
+      @hide="onHide"
     />
 
   </div>
@@ -240,6 +241,12 @@ export default {
       this.appear = false;
       this.showNumber = true;
       this.type = type;
+      // increase height of app
+      document.getElementById("add-record").style.height = `${window.innerHeight * 1.3 - 50}px`;
+      // scroll to btn
+      var element = this.$refs["btn"];
+      var top = element.offsetTop;
+      window.scrollTo(0, top);
     },
     onInput(value) {
       if (this.form[this.type].indexOf(".") != -1 && value == ".") {
@@ -268,6 +275,10 @@ export default {
       this.form[this.type] = kbt.length
         ? kbt.substring(0, kbt.length - 1)
         : kbt;
+    },
+    onHide() {
+      this.showNumber = false;
+      document.getElementById("add-record").style.height = `${window.innerHeight - 50}px`;
     },
     updateBtn() {
       const form = Object.assign({}, this.form);
