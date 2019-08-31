@@ -423,7 +423,7 @@ export default {
   }
   @media screen and (min-height: 630px) {
       .bottom-btn-password {
-        background-color: #FF8600;
+        background-color: #FFA702;
         border-radius: 4px;
         width: calc(100% - 40px);
         position: fixed;
@@ -436,7 +436,7 @@ export default {
   }
   @media screen and (max-height: 630px) {
       .bottom-btn-password {
-        background-color: #FF8600;
+        background-color: #FFA702;
         border-radius: 4px;
         display: block !important;
         color: #fff;

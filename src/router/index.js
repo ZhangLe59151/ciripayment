@@ -79,6 +79,14 @@ const routeArr = [
     }
   },
   {
+    path: "/tc-web",
+    name: "TermsAndConditionsOnWeb",
+    component: () => import("@/views-app/TermsAndConditionsOnWeb.vue"),
+    meta: {
+      title: ""
+    }
+  },
+  {
     path: "/preview-info",
     name: "PreviewInfo",
     component: () => import("@/views-app/PreviewInfo.vue"),

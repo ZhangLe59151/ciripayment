@@ -307,7 +307,7 @@ export default {
       .placeholder {
         /*margin-top: 20px;*/
         .iconcamera,.iconalbum {
-          color: #ff8600;
+          color: #ffa702;
           font-size: 17px;
         }
         .placeholder-text{
@@ -329,12 +329,12 @@ export default {
       width: 98%;
       height:40px;
       margin-top:12px;
-      border: 1px solid #ff8600;
+      border: 1px solid #ffa702;
       border-radius: 4px;
       font-size: 14px;
       padding-top:10px;
       box-sizing: border-box;
-      color: #ff8600;
+      color: #ffa702;
 
       .iconclose {
         position: relative;
@@ -374,7 +374,7 @@ export default {
       left:20px;
       width: 85%;
       height:40px;
-      background-color: #FF8600;
+      background-color: #FFA702;
       color:white;
       font-size: 14px;
       .btn-text{

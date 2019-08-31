@@ -148,12 +148,12 @@ export default {
       .link-btn {
         width: 100%;
         margin-top: 10px;
-        border: 1px solid #ff8600;
+        border: 1px solid #ffa702;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
         border-radius: 4px;
 
         font-size: 14px;
-        color: #ff8600;
+        color: #ffa702;
         letter-spacing: 0;
         text-align: center;
         line-height: 20px;

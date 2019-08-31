@@ -78,7 +78,7 @@ export default {
 }
 
 .app-profile-header {
-  background: #FF8600;
+  background: #FFA702;
   height: 130px;
   width: 100%;
   position: relative;
@@ -130,7 +130,7 @@ export default {
         letter-spacing: 0;
         text-align: center;
         line-height: 22px;
-        background: #FF8600;
+        background: #FFA702;
         padding: 0 16px;
       }
     }

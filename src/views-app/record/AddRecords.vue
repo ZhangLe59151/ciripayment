@@ -4,8 +4,8 @@
     <van-tabs
       v-model="tabActive"
       animated
-      color="#ff8600"
-      title-active-color="#ff8600"
+      color="#ffa702"
+      title-active-color="#ffa702"
     >
       <van-tab :title="$t('Record.Income')">
         <div class="record-status">
@@ -376,7 +376,7 @@ export default {
 
 .update_btn {
   border-radius: 4px;
-  background-color: #ff8600;
+  background-color: #ffa702;
   border: none;
   color: white;
   font-size: 16px;

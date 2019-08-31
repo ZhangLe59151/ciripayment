@@ -163,10 +163,7 @@ export default {
           "__blank"
         );
       } else if (platform === "line") {
-        window.open(
-          "line://msg/text/?" + shareLink,
-          "__blank"
-        );
+        window.open("line://msg/text/?" + shareLink, "__blank");
       }
     },
     triggerLike() {
@@ -190,7 +187,10 @@ export default {
         });
     },
     getFortuneOnWeb() {
-      window.location.href = this.BaseWebUrl + "daily-fortune-prepare";
+      console.log("====================================");
+      console.log(this.BaseWebUrl + "/daily-fortune-prepare");
+      console.log("====================================");
+      window.location.href = this.BaseWebUrl + "/daily-fortune-prepare";
     }
   }
 };
@@ -216,7 +216,7 @@ export default {
       position: absolute;
     }
     .web-get-fortune-btn {
-      background: #ff8600;
+      background: #ffa702;
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
       border-radius: 4px;
       font-size: 14px;

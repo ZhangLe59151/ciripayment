@@ -123,7 +123,7 @@
 <!--            </el-upload>-->
             <div class="camera-input-question" @click="takePhoto('front')"
             >
-              <i class="el-icon-camera-solid"></i>
+              <i class="iconfont iconcamera"></i>
             </div>
           </div>
           <div
@@ -157,7 +157,7 @@
           >
             <div class="camera-input-question" @click="takePhoto('back')"
             >
-              <i class="el-icon-camera-solid"></i>
+              <i class="iconfont iconcamera"></i>
             </div>
           </div>
           <div
@@ -192,7 +192,7 @@
           >
             <div class="camera-input-question" @click="takePhoto('face')"
             >
-              <i class="el-icon-camera-solid"></i>
+              <i class="iconfont iconcamera"></i>
             </div>
           </div>
           <div
@@ -857,15 +857,22 @@ export default {
         align-items: center;
         width: 44px;
         height: 40px;
-        border: #FF8600 1px solid;
-        border-radius: 3px;
+        border: #FFA702 1px solid;
+        border-radius: 8px;
         text-align: center;
         box-sizing: border-box;
+        background-color: #FFA702;
 
         .el-icon-camera-solid {
           padding: 14px 7px;
           width: 100%;
-          color: #FF8600;
+          color: #FFA702;
+        }
+        .iconcamera {
+          font-size: 20px;
+          padding: 12px 9px;
+          width: 100%;
+          color: white;
         }
       }
       .action-area-spinner {
@@ -885,13 +892,14 @@ export default {
         align-items: center;
         width: 46px;
         height: 44px;
-        border: #929292 1px solid;
-        border-radius: 3px;
+        border: #ffa702 1px solid;
+        border-radius: 8px;
         text-align: center;
 
         .el-icon-delete {
           padding: 14px 8px;
           width: 100%;
+          color: #ffa702
         }
       }
     }
@@ -909,7 +917,7 @@ export default {
       padding: 0 16px 0 16px;
       .bottom-btn{
         width: 100%;
-        background-color: #ff8600;
+        background-color: #ffa702;
         border-radius: 4px;
         height: 40px;
         font-size: 14px;

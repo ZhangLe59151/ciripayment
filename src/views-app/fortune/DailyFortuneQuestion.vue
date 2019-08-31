@@ -82,7 +82,7 @@ export default {
   background: no-repeat center
     url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
   background-size: cover;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
 }
 .introduction {

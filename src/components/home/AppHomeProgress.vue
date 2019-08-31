@@ -110,7 +110,7 @@ export default {
     width: 230px;
     .title {
       font-size: 16px;
-      color: #ff8600;
+      color: #ffa702;
       letter-spacing: 0;
       font-weight: bold;
       position: relative;

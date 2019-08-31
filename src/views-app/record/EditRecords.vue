@@ -5,8 +5,8 @@
     <van-tabs
       v-model="tabActive"
       animated
-      color="#ff8600"
-      title-active-color="#ff8600"
+      color="#ffa702"
+      title-active-color="#ffa702"
     >
       <van-tab
         :title="$t('Record.Income')"
@@ -289,7 +289,7 @@ export default {
 
   .link_view_history {
     font-size: 14px;
-    color: #ff8600;
+    color: #ffa702;
     text-align: right;
   }
 }
@@ -353,31 +353,31 @@ export default {
 
 .delete_btn {
   border-radius: 4px;
-  border: 1px solid #ff8600;
+  border: 1px solid #ffa702;
   font-size: 16px;
   margin: 16px 8px 0 16px;
   text-align: center;
   line-height: 40px;
   text-align: center;
   height: 40px;
-  border-color: #ff8600;
+  border-color: #ffa702;
   background-color: white;
-  color: #ff8600;
+  color: #ffa702;
   width: 90%;
 }
 
 .update_btn {
   border-radius: 4px;
-  border: 1px solid #ff8600;
+  border: 1px solid #ffa702;
   font-size: 16px;
   margin: 16px 16px 0 8px;
   text-align: center;
   line-height: 40px;
   text-align: center;
   height: 40px;
-  border-color: #ff8600;
+  border-color: #ffa702;
   color: white;
-  background-color: #ff8600;
+  background-color: #ffa702;
   width: 90%;
 }
 

@@ -9,7 +9,10 @@
       <div class="name">{{info.name}}</div>
       <div class="subtitle">{{$route.query.subtitle}}</div>
       <div class="detail">{{info.detail}}</div>
-      <div class="btn"> {{$t("FortuneTelling.tellMyFortune")}}</div>
+      <div
+        class="btn"
+        @click="handleClick"
+      > {{$t("FortuneTelling.tellMyFortune")}}</div>
     </div>
   </div>
 </template>
@@ -32,8 +35,16 @@ export default {
       info(state) {
         const item = find(state.masterList, { id: +this.$route.params.id });
         return item;
-      }
+      },
+      fortuneInfo: "fortuneInfo"
     })
+  },
+  methods: {
+    handleClick() {
+      this.fortuneInfo.selectedMaster = this.$route.params.id;
+      this.$store.commit("SaveFortuneInfo", this.fortuneInfo);
+      this.$router.push({ name: "DailyFortuneQuestion" });
+    }
   }
 };
 </script>
@@ -82,7 +93,7 @@ export default {
     }
 
     .btn {
-      background: #ff8600;
+      background: #ffa702;
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
       border-radius: 4px;
       font-size: 14px;

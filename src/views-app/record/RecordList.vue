@@ -54,7 +54,7 @@
       >
         <van-icon
           name="plus"
-          color="#ff8600"
+          color="#ffa702"
         />{{$t('Record.addRecord')}}</div>
     </div>
   </div>

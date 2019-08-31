@@ -47,7 +47,7 @@ export default {
   }
 
   .app-service-header {
-    background: #FF8600;
+    background: #FFA702;
     height: 130px;
     width: 100%;
     position: relative;

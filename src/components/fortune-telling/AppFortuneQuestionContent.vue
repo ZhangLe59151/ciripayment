@@ -1,5 +1,5 @@
 <template>
-  <div class="app-fortune-question-content">
+  <div class="app-fortune-question-content" id="appFortuneQuestionContent">
     <div class="background-card">
       <div class="question-header">
         {{ $t("Furtune.question") }} {{ index }}
@@ -77,6 +77,15 @@ export default {
     })
   },
   created() {
+    window.addEventListener("native.keyboardshow", keyboardShowHandler);
+    function keyboardShowHandler(e) {
+      document.getElementById("appFortuneQuestionContent").style.height = `${window.innerHeight * 0.75 + e.keyboardHeight}px`;
+    }
+    // This event fires when the keyboard will hide
+    window.addEventListener("native.keyboardhide", keyboardHideHandler);
+    function keyboardHideHandler(e) {
+      document.getElementById("appFortuneQuestionContent").style.height = `${window.innerHeight * 0.75}px`;
+    }
     this.$api.getQuestionF().then(res => {
       if (res.data.code === 200) {
         this.questionList = res.data.data.questions;
@@ -119,9 +128,10 @@ export default {
 .app-fortune-question-content {
   position: relative;
   height: 75vh;
-  width: 337px;
+  width: calc(100vw - 22px);
   margin-left: 11px;
   margin-right: 11px;
+
 }
 .background-card {
   position: absolute;
@@ -234,8 +244,8 @@ export default {
 }
 
 .bottom-btn {
-  position: absolute;
-  background-color: #ff8600;
+  position: relative;
+  background-color: #ffa702;
   color: white;
   font-size: 14px;
   left: 32px;

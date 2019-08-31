@@ -24,7 +24,7 @@ yarn-error.log*
 *.tar.gz
 
 #config
-vue.config.js
+# vue.config.js
 
 
 # Cordova
