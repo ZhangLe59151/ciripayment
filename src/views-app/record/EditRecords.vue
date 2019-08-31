@@ -177,7 +177,8 @@ export default {
       disable: {
         incomeAmount: false,
         expenseAmount: false
-      }
+      },
+      today: ""
     };
   },
   created() {
@@ -191,7 +192,11 @@ export default {
             res.data.data.type === 0 ? "incomeAmount" : "expenseAmount";
           this.disable[this.type] = true;
           this.tabActive = res.data.data.type;
-          this.currentDate = this.$moment(res.data.data.accountDate).format("D MMM YYYY");
+          const _today = this.$moment().format(this.localDateFormatter);
+          const _yesterday = this.$moment().subtract(1, "days").format(this.localDateFormatter);
+          var cDate = this.$moment(res.data.data.accountDate).format(this.localDateFormatter); //"D MMM YYYY"
+          const kv = { [_today]: "Today, ", [_yesterday]: "Yesterday, " };
+          this.currentDate = cDate ? (kv[cDate] ? kv[cDate] : "") + this.$moment(res.data.data.accountDate).format("D MMM YYYY") : "";
           this.form[this.type] = util.fmoney(res.data.data.amount);
           this.dailyIncome = util.fmoney(res.data.data.incomeSum);
           this.dailyExpense = util.fmoney(res.data.data.expensesSum);
