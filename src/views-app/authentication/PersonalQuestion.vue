@@ -66,7 +66,7 @@
       <div
         class="skipword"
         @click="skipQuestion"
-      >Skip Question</div>
+      >{{ $t('Login.skipQuestion') }}</div>
     </div>
     <div
       class="splashPage"
@@ -76,7 +76,7 @@
         class="icon"
         :src="iconSucceed"
       />
-      <div class="title">Profile saved.<br /> Let's get started</div>
+      <div class="title">{{ $t('Login.completeQuestion')}}</div>
     </div>
   </div>
 </template>
