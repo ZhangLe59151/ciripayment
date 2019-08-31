@@ -53,7 +53,7 @@ export default {
 .master-profile {
   position: relative;
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   background: no-repeat center
     url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
   background-size: cover;
@@ -93,6 +93,7 @@ export default {
     }
 
     .btn {
+      position: absolute;
       background: #ffa702;
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
       border-radius: 4px;
@@ -104,6 +105,7 @@ export default {
       line-height: 40px;
       width: calc(100% - 80px);
       margin-left: 40px;
+      bottom: 60px;
     }
   }
 }
