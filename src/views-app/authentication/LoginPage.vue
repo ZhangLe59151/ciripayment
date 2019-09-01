@@ -31,7 +31,7 @@
         show-toolbar
         title="National code"
         :columns="columns"
-        @cancel="onCancel"
+        @cancel="show = false;"
         @confirm="onConfirm"
       />
     </van-popup>
@@ -68,12 +68,12 @@ export default {
     ...mapState({
       columns: "nationalCodeList",
       nationCode: "nationalCode",
-      reg: "reg",
-      imgBk: require("@/assets/imgs/authentication/otpBak.png")
+      reg: "reg"
     })
   },
   created() {
     this.phoneValidationPattern = this.reg.regEx.phone.thaiExp;
+    this.form.nationalCode = this.columns[0];
   },
   methods: {
     setPattern(nationalCode) {
@@ -87,9 +87,6 @@ export default {
     onConfirm(value, index) {
       this.form.nationalCode = value;
       this.setPattern(value);
-      this.show = false;
-    },
-    onCancel() {
       this.show = false;
     },
     onInput(value) {
@@ -139,9 +136,6 @@ export default {
           });
         });
     }
-  },
-  created() {
-    this.form.nationalCode = this.columns[0];
   }
 };
 </script>
@@ -179,6 +173,7 @@ export default {
       font-size: 14px;
       bottom: 72px;
       left: 16px;
+      height: 20px;
     }
 
     .nationalCode{
@@ -201,6 +196,7 @@ export default {
 
     .phoneNumber {
       position: absolute;
+      font-size: 16px;
       left: 95px;
       right: 80px;
       bottom: 24px;
