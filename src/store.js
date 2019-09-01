@@ -61,6 +61,7 @@ export default new Vuex.Store({
     ],
     nationalCode: require("@/assets/data/nationalCode.json"),
     dateInMonth: require("@/assets/data/dateInMonth.json"),
+    reg: require("@/assets/reg/regEx.js"),
     phone: {
       regExp: /^(0[1-9]{1}[0-9]{8}|[1-9]{1}[0-9]{8}|[1-9]{1}[0-9]{7})$/,
       thaiExp: /^(0[1-9]{1}[0-9]{8}|[1-9]{1}[0-9]{8})$/,

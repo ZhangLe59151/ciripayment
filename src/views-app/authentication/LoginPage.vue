@@ -1,9 +1,5 @@
 <template>
   <div class="login-page">
-    <!-- <WapHeader
-      :center="true"
-      style="top: 34px"
-    /> -->
     <div class="landingPageContent">
       <div class="slogan-title">{{ $t('Login.verifyPhone')}}</div>
       <div class="slogan-sub">{{ $t('Login.yourPhone')}}</div>
@@ -53,30 +49,9 @@
 
 <script>
 import { mapState } from "vuex";
-import { regEx } from "@/assets/reg/regEx.js";
-// import WapHeader from "@/components/WapHeader";
+
 export default {
   name: "login-page",
-  components: {
-    // WapHeader
-  },
-  computed: {
-    ...mapState({
-      columns: "nationalCodeList",
-      nationCode: "nationalCode",
-      reg: "reg",
-      imgBk: require("@/assets/imgs/authentication/otpBak.png")
-    }),
-    sloganTitle() {
-      const ob = {
-        EnterLoanInfo: "Sign In Now To Get An Instant Loan! ",
-        Credit: "Sign In Now To See Your Credit Limit! ",
-        fortuneTelling: "Sign In Now To Get Your Daily Fortune!"
-      };
-
-      return ob[this.$route.query.to];
-    }
-  },
   data() {
     return {
       showNumber: false,
@@ -87,20 +62,28 @@ export default {
         nationalCode: ""
       },
       value1: 0,
-      phoneValidationPattern: this.$store.state.phone.thaiExp,
-      showComponents: true
+      phoneValidationPattern: ""
     };
+  },
+  computed: {
+    ...mapState({
+      columns: "nationalCodeList",
+      nationCode: "nationalCode",
+      reg: "reg",
+      imgBk: require("@/assets/imgs/authentication/otpBak.png")
+    })
+  },
+  created() {
+    this.phoneValidationPattern = this.reg.regEx.phone.thaiExp;
   },
   methods: {
     setPattern(nationalCode) {
       const item = this.nationCode.find(test => test.code === nationalCode);
       const expName = item ? item.nation + "Exp" : "sgExp";
-      if (this.$store.state.phone[expName] !== undefined) {
-        this.phoneValidationPattern = this.$store.state.phone[expName];
-      } else {
-        this.phoneValidationPattern = this.$store.state.phone.sgExp;
-      }
-      console.log(this.phoneValidationPattern);
+      this.phoneValidationPattern = 
+        (this.reg.regEx.phone[expName] !== undefined) ? 
+        this.reg.regEx.phone[expName] : 
+        this.reg.regEx.phone.sgExp;
     },
     onConfirm(value, index) {
       this.form.nationalCode = value;

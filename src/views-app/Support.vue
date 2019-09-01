@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "Support",
   data() {
@@ -55,6 +57,11 @@ export default {
       },
       emailError: false
     };
+  },
+  computed: {
+    ...mapState({
+      reg: "reg"
+    })
   },
   methods: {
     descInput() {
@@ -77,7 +84,7 @@ export default {
       });
     },
     validateEmail() {
-      this.emailError = !this.$store.state.email.regExp.test(this.form.email);
+      this.emailError = !this.reg.regEx.email.regExp.test(this.form.email);
     }
   }
 };

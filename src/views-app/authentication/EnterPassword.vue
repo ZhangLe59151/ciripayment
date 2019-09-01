@@ -211,6 +211,7 @@
 // @ is an alias to /src
 import util from "@/util";
 import WapHeader from "@/components/WapHeader";
+import { mapState } from "vuex";
 
 export default {
   name: "enter-password",
@@ -227,11 +228,16 @@ export default {
       passwordErrorMsg: "Invalid password. Please try again."
     };
   },
+  computed: {
+    ...mapState({
+      reg: "reg"
+    })
+  },
   methods: {
     handleLogin() {
       if (
         this.password === "" ||
-        !this.$store.state.password.regExp.test(this.password)
+        !this.reg.regExp.password.regExp.test(this.password)
       ) {
         this.passwordError = true;
         return false;
