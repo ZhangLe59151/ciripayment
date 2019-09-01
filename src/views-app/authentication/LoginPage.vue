@@ -15,7 +15,7 @@
           readonly
           />
         <van-button class="goBtn" @click="handleStart">
-          <img class="icon" :src="pathIcon" />
+          <span class="icon iconfont iconPath"></span>
         </van-button>
 
       </div>
@@ -55,7 +55,6 @@ export default {
   data() {
     return {
       showNumber: false,
-      pathIcon: require("@/assets/imgs/Path.svg"),
       show: false,
       form: {
         phone: "",
@@ -215,15 +214,14 @@ export default {
       bottom: 24px;
       background-color: #ffa702;
       width: 50px;
+      .iconPath {
+        color: white;
+        height: 20px;
+        width: 40px;
+      }
     }
 
-    .icon {
-      position: absolute;
-      right: 4px;
-      bottom: 10px;
-      height: 20px;
-      width: 40px;
-    }
+    
 
   }
 

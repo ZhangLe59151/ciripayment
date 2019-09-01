@@ -28,16 +28,8 @@
 </template>
 
 <script>
-import AppSearchHeader from "@/components/AppSearchHeader";
-import AppRecordsTransactions from "@/components/records/AppRecordsTransactions";
-import AppRecordsSettlements from "@/components/records/AppRecordsSettlements";
 export default {
   name: "Search",
-  components: {
-    AppSearchHeader,
-    AppRecordsTransactions,
-    AppRecordsSettlements
-  },
   data() {
     return {
       searchValue: "",
