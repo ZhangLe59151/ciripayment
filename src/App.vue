@@ -23,16 +23,32 @@ export default {
       transitionStyle: "van-fade"
     };
   },
+  computed:{
+    backEvent() {
+      return this.$store.getters.backEvent;
+    }
+  },
   mounted() {
+    var that = this;
+    if (window.history && window.history.pushState) {
+      window.onpopstate = function() {
+        if(that.backEvent){
+          that.backEvent()
+          that.$store.commit("backEvent", null)
+        }
+      }
+    }
     var vm = this;
     document.addEventListener(
       "backbutton",
       function(e) {
         switch (vm.$route.name) {
+          case "DailyFortuneResult":
           case "EnterLoanInfo": {
             e.preventDefault();
             break;
           }
+          case "DailyFortuneResult":
           case "Loan": {
             vm.$router.push({ name: "Home" });
             break;
