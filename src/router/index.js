@@ -3,7 +3,7 @@ import Router from "vue-router";
 import analytics from "../firebase/analytics";
 import { Store } from "vuex";
 
-// import store from "../store";
+import store from "../store";
 
 Vue.use(Router);
 
@@ -316,7 +316,8 @@ const AppRouteArr = [
     name: "PersonalQuestion",
     component: () => import("@/views-app/authentication/PersonalQuestion.vue"),
     meta: {
-      title: "PersonalQuestion"
+      title: "PersonalQuestion",
+      allowBack: false
     }
   },
   {
@@ -389,7 +390,8 @@ const AppRouteArr = [
     name: "DailyFortuneLoading",
     component: () => import("@/views-app/fortune/DailyFortuneLoading.vue"),
     meta: {
-      title: "FortuneTellingCalculating"
+      title: "FortuneTellingCalculating",
+      allowBack: false
     }
   },
   {
@@ -397,7 +399,8 @@ const AppRouteArr = [
     name: "DailyFortuneResult",
     component: () => import("@/views-app/fortune/DailyFortuneResult.vue"),
     meta: {
-      title: "FortuneTellingResult"
+      title: "FortuneTellingResult",
+      allowBack: false
     }
   },
   {
@@ -491,6 +494,14 @@ router.beforeEach((to, from, next) => {
   analytics.setCurrentScreen(to.meta.title);
   analytics.setCurrentScreen(to.fullPath);
   next();
+  let allowBack = true;
+  if (to.meta.allowBack !== undefined) {
+    allowBack = to.meta.allowBack
+  }
+  if (!allowBack) {
+    history.pushState(null, null, location.href)
+  }    
+  store.dispatch('updateAppSetting', { allowBack: allowBack });
 });
 
 export default router;

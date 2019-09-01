@@ -57,7 +57,7 @@ export default {
         })
           .then(() => {
             // on confirm
-            this.$router.push({ name: "Home" });
+            this.$router.push({ name: "MasterProfile" });
           })
           .catch(() => {
             // on cancel

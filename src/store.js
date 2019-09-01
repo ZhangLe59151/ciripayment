@@ -34,7 +34,6 @@ export default new Vuex.Store({
       ? localStorage.getItem("firstLaunch")
       : "Yes",
     currency: "฿",
-    backEvent: null,
     serviceOverviewVo: {},
     form: {},
     userInfo: {},
@@ -499,9 +498,6 @@ export default new Vuex.Store({
     ClearFortuneQuestion(state) {
       state.furtuneQuestion = {};
       window.localStorage.removeItem("furtuneQuestion");
-    },
-    backEvent(state,val) {
-      state.backEvent = val
     }
   },
   actions: {}

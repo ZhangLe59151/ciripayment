@@ -23,19 +23,10 @@ export default {
       transitionStyle: "van-fade"
     };
   },
-  computed:{
-    backEvent() {
-      return this.$store.getters.backEvent;
-    }
-  },
   mounted() {
-    var that = this;
-    if (window.history && window.history.pushState) {
-      window.onpopstate = function() {
-        if(that.backEvent){
-          that.backEvent()
-          that.$store.commit("backEvent", null)
-        }
+    window.onpopstate = () => {
+    if (!this.allowBack) { 
+      history.go(1) 
       }
     }
     var vm = this;
@@ -43,7 +34,7 @@ export default {
       "backbutton",
       function(e) {
         switch (vm.$route.name) {
-          case "DailyFortuneResult":
+          case "DailyFortuneLoading":
           case "EnterLoanInfo": {
             e.preventDefault();
             break;
