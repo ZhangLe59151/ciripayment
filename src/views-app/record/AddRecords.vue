@@ -146,16 +146,6 @@ const today = new Date();
 const startDate = new Date("2019/01/01");
 export default {
   name: "AppRecords",
-  
-  computed: {
-    ...mapState({
-      localDateFormatter: "localDateFormatter",
-      isLogin: "OTPVerified",
-      reg: "reg",
-      currency: "currency"
-    })
-  },
-
   data() {
     return {
       tabActive: 0,
@@ -174,6 +164,14 @@ export default {
       dailyIncome: 0,
       dailyExpense: 0
     };
+  },
+  computed: {
+    ...mapState({
+      localDateFormatter: "localDateFormatter",
+      isLogin: "OTPVerified",
+      reg: "reg",
+      currency: "currency"
+    })
   },
   created() {
     this.fetchDataUpdate(

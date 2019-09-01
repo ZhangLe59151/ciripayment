@@ -14,7 +14,7 @@
       >
         <div class="record-status">
           <span class="name">{{$t("Record.TotalIncome")}}</span>
-          <span class="amount">+ {{ dailyIncome }} <i>{{$store.state.currency}}</i></span>
+          <span class="amount">+ {{ dailyIncome }} <i>{{currency}}</i></span>
         </div>
 
         <div class="label-left">{{$t("Record.IncomeName")}}</div>
@@ -53,7 +53,7 @@
             maxlength="13"
             readonly
           />
-          <div class="plus currency">{{$store.state.currency}}</div>
+          <div class="plus currency">{{currency}}</div>
         </div>
 
       </van-tab>
@@ -64,7 +64,7 @@
 
         <div class="record-status expenses">
           <span class="name">{{$t("Record.TotalExpenses")}}</span>
-          <span class="amount">- {{ dailyExpense }} <i>{{$store.state.currency}}</i></span>
+          <span class="amount">- {{ dailyExpense }} <i>{{currency}}</i></span>
         </div>
 
         <div class="label-left">{{$t("Record.ExpensesName")}}</div>
@@ -103,7 +103,7 @@
             maxlength="13"
             readonly
           />
-          <div class="plus currency">{{$store.state.currency}}</div>
+          <div class="plus currency">{{currency}}</div>
         </div>
 
       </van-tab>
@@ -148,14 +148,7 @@ const today = new Date();
 const startDate = new Date("2019/01/01");
 export default {
   name: "AppRecords",
-
-  computed: {
-    ...mapState({
-      localDateFormatter: "localDateFormatter",
-      reg: "reg"
-    })
-  },
-
+  
   data() {
     return {
       tabActive: 0,
@@ -181,6 +174,13 @@ export default {
       },
       today: ""
     };
+  },
+  computed: {
+    ...mapState({
+      localDateFormatter: "localDateFormatter",
+      reg: "reg",
+      currency: "currency"
+    })
   },
   created() {
     this.viewRecord();
