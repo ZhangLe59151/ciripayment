@@ -95,6 +95,11 @@ export default {
     }
   }
 };
+
+history.pushState(null, null, document.URL);
+  window.addEventListener('popstate', function () {
+    history.pushState(null, null, document.URL);
+});
 </script>
 
 <style lang="scss" scoped>

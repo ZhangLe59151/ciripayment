@@ -397,8 +397,7 @@ const AppRouteArr = [
     name: "DailyFortuneResult",
     component: () => import("@/views-app/fortune/DailyFortuneResult.vue"),
     meta: {
-      title: "FortuneTellingResult",
-      allowBack: false
+      title: "FortuneTellingResult"
     }
   },
   {
@@ -462,13 +461,6 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  let allowBack = true;
-  if (to.meta.allowBack !== undefined) {
-    allowBack = to.meta.allowBack;
-  }
-  if (!allowBack) {
-    history.pushState(null, null, location.href)
-  }
   // these pages can enter directly without logined
   // if (
   //   !store.state.logInWithPassword &&
