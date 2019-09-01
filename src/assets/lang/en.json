@@ -204,7 +204,8 @@
     "resendOTP": "Resend OTP",
     "completeQuestion": "Profile saved. Let's get started",
     "skipQuestion": "Skip Question",
-    "LoginPageTitle": "Be a Happy TaoKae"
+    "LoginPageTitle": "Be a Happy TaoKae",
+    "announce": "By using this app, you agree to the terms and conditions."
   },
   "Common": {
     "serverRequestError": "Server request error. Please try again!"

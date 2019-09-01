@@ -17,7 +17,7 @@
         @click="signIn"
         v-analytics="{event: 'Landing_Signin'}"
       >{{ $t('Login.signIn') }}</van-button>
-      <div class="bottomTitle">By using this app, you agree to the terms and conditions.</div>
+      <div class="bottomTitle">{{ $t('Login.announce') }}</div>
     </div>
   </div>
 </template>
