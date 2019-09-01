@@ -156,9 +156,9 @@ export default {
 
   computed: {
     ...mapState({
-      localDateFormatter: state => state.localDateFormatter,
-      recordList: state => state.recordList,
-      isLogin: "OTPVerified"
+      localDateFormatter: "localDateFormatter",
+      isLogin: "OTPVerified",
+      reg: "reg"
     })
   },
 
@@ -297,8 +297,8 @@ export default {
         this.localDateFormatter
       );
       this.appear = false;
-      const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
-      if (regex.test(form[this.type])) {
+      //const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
+      if (this.reg.regEx.financeAmount.with2dec.test(form[this.type])) {
         // this.$store.commit("UpdateRecord", this.convertForm(form));
         form[this.type] = parseFloat(form[this.type]);
         this.fetchData(form);

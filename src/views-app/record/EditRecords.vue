@@ -151,7 +151,8 @@ export default {
 
   computed: {
     ...mapState({
-      localDateFormatter: state => state.localDateFormatter
+      localDateFormatter: "localDateFormatter",
+      reg: "reg"
     })
   },
 
@@ -266,11 +267,7 @@ export default {
       form[this.type] = form[this.type].replace(",", "");
       form.date = this.$moment(this.form.date).format(this.localDateFormatter);
       this.appear = false;
-      const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
-      // if (!regex.test(form[this.type])) {
-      //  form[this.type] = form[this.type]+".00";
-      // }
-      if (regex.test(form[this.type])) {
+      if (this.reg.regEx.financeAmount.with2dec.test(form[this.type])) {
         form[this.type] = parseFloat(form[this.type]);
         // this.$store.commit("UpdateRecord", this.convertForm(form));
         this.updateRecord(form);
