@@ -170,15 +170,8 @@ export default {
         { id: 0, value: " " },
         { id: 1, value: " " },
         { id: 2, value: " " }
-      ],
-      phoneValidationPattern: this.$store.state.phone.thaiExp,
-      showComponents: true
+      ]
     };
-  },
-  computed: {
-    ...mapState({
-      columns: "nationalCodeList"
-    })
   },
   created() {
     this.$api.getQuestionPersonal(1).then(res => {
