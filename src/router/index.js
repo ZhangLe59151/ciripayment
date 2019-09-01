@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import analytics from "../firebase/analytics";
+import { Store } from "vuex";
 
 // import store from "../store";
 
@@ -461,6 +462,13 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
+  let allowBack = true;
+  if (to.meta.allowBack !== undefined) {
+    allowBack = to.meta.allowBack;
+  }
+  if (!allowBack) {
+    history.pushState(null, null, location.href)
+  }
   // these pages can enter directly without logined
   // if (
   //   !store.state.logInWithPassword &&
