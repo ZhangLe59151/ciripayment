@@ -203,7 +203,8 @@
     "enterOTPtitle": "Enter OTP",
     "resendOTP": "Resend OTP",
     "completeQuestion": "Profile saved. Let's get started",
-    "skipQuestion": "Skip Question"
+    "skipQuestion": "Skip Question",
+    "LoginPageTitle": "Be a Happy TaoKae"
   },
   "Common": {
     "serverRequestError": "Server request error. Please try again!"

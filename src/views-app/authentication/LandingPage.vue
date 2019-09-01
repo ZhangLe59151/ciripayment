@@ -6,7 +6,7 @@
     />
 
     <div class="landingPageContent">
-      <div class="titleFont">Be a Happy TaoKae</div>
+      <div class="titleFont">{{ $t('Login.loginPageTitle') }}</div>
       <van-button
         class="getStartBtn"
         @click="getStart"

@@ -80,7 +80,7 @@ export default {
       return this.$moment(date).format("D MMM YYYY");
     },
     formatTime(date) {
-      return this.$moment(date).format("D MMM YYYY HH:mm:ss");
+      return this.$moment(date).format("D MMM YYYY HH:mm");
     },
     formatIncome(item) {
       if (item["type"] === 0) {
