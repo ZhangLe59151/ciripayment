@@ -13,7 +13,9 @@
         :imgSize="60"
       />
       <div class="master-des">
-        {{$tc("FortuneTelling.masterDes", fortuneInfo.selectedMaster.name || masterName)}}
+        {{$tc("FortuneTelling.masterDes", $route.query.shareKey ? 2: 1, {
+          n: fortuneInfo.selectedMaster.name || masterName
+        })}}
       </div>
     </div>
 

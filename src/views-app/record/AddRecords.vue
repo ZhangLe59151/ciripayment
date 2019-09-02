@@ -1,5 +1,8 @@
 <template>
-  <div class="app-add-record" id="add-record">
+  <div
+    class="app-add-record"
+    id="add-record"
+  >
     <app-common-header :title="$t('Record.addRecord')" />
     <van-tabs
       v-model="tabActive"
@@ -103,7 +106,9 @@
       </van-tab>
     </van-tabs>
 
-    <button id="btn" ref="btn"
+    <button
+      id="btn"
+      ref="btn"
       class="update_btn"
       @click="updateBtn"
     >{{$t("Record.add")}}</button>
@@ -215,7 +220,7 @@ export default {
   methods: {
     fetchData(form) {
       this.$api.addRecord(form).then(res => {
-        console.log(form.accountDate)
+        console.log(form.accountDate);
         if (res.data.code === 200) {
           this.fetchDataUpdate(form.accountDate);
           this.form.incomeAmount = "";
@@ -242,7 +247,9 @@ export default {
       this.showNumber = true;
       this.type = type;
       // increase height of app
-      document.getElementById("add-record").style.height = `${window.innerHeight * 1.3 - 50}px`;
+      document.getElementById(
+        "add-record"
+      ).style.height = `${window.innerHeight * 1.3 - 50}px`;
       // scroll to btn
       var element = this.$refs["btn"];
       var top = element.offsetTop;
@@ -277,11 +284,15 @@ export default {
         : kbt;
     },
     onHide() {
-      document.getElementById("add-record").style.height = `${window.innerHeight - 50}px`;
+      document.getElementById(
+        "add-record"
+      ).style.height = `${window.innerHeight - 50}px`;
     },
     onClose() {
       this.showNumber = false;
-      document.getElementById("add-record").style.height = `${window.innerHeight - 50}px`;
+      document.getElementById(
+        "add-record"
+      ).style.height = `${window.innerHeight - 50}px`;
     },
     updateBtn() {
       const form = Object.assign({}, this.form);
