@@ -1,25 +1,12 @@
 <template>
   <div class="app-fortune-master">
-    <van-row
-      type="flex"
-      justify="space-between"
-    >
+    <van-row type="flex" justify="space-between">
       <van-col span="8">
-        <fortune-telling-app-fortune-master-photo
-          :masterId="master.id"
-          class="icon"
-        />
+        <fortune-telling-app-fortune-master-photo :masterId="master.id" class="icon" />
       </van-col>
-      <van-col
-        span="16"
-        class="cnt"
-      >
-        <div :class="master.image">
-
-        </div>
-        <div class="name">
-          {{master.name}}
-        </div>
+      <van-col span="16" class="cnt">
+        <div :class="master.image"></div>
+        <div class="name">{{master.name}}</div>
 
         <div
           class="view"
@@ -28,16 +15,12 @@
           {{$t("FortuneTelling.viewProfile")}}
           <van-icon name="play" />
         </div>
-        <div class="desc">
-          {{subtitle}}
-        </div>
+        <div class="desc">{{subtitle}}</div>
         <van-button
           class="choose-btn"
           border="false"
           @click="$emit('chooseMaster', master)"
-        >
-          {{$t("FortuneTelling.tellMyFortune")}}
-        </van-button>
+        >{{$t("FortuneTelling.tellMyFortune")}}</van-button>
       </van-col>
     </van-row>
   </div>
@@ -62,7 +45,7 @@ export default {
       return this.$tc(
         "FortuneTelling.likeDes",
         this.master.like === 1 ? 1 : 2,
-        { n: this.master.likeCount }
+        { n: parseInt(this.master.likeCount / 10) * 10 }
       );
     }
   }

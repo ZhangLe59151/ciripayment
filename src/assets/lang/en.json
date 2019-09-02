@@ -182,18 +182,18 @@
   "Setting": {
     "Language": "Language",
     "SoL": "Sign In",
-    "Logout": "Log Out",
+    "Logout": "Sign Out",
     "Version": "version",
     "tc": "Terms & Conditions",
     "support": "Support",
     "feedbackTitle": "Got feedback or experiencing problems?",
     "feedbackWord": "Drop us a message and our customer support representatives will be happy to assist you!",
     "emailTitle": "Your Email (Optional)",
-    "message": "Message",
+    "message": "Your Message",
     "emailPlaceholder": "email@domain.com",
     "messagePlaceholder": "Describe your problem or feedback",
     "sendEmail": "Submit",
-    "sendSucceed": "Sent Sucessfully",
+    "sendSucceed": "Feedback submitted successfully",
     "sendFailed": "Failed to send"
   },
   "Language": {
