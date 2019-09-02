@@ -1,6 +1,6 @@
 <template>
   <div class="app-fortune-question-content" id="appFortuneQuestionContent">
-    <div class="background-card">
+    <div class="background-card" id="backgroundCard">
       <div class="question-header">
         {{ $t("Fortune.question") }} {{ index }}
       </div>
@@ -80,11 +80,13 @@ export default {
     window.addEventListener("native.keyboardshow", keyboardShowHandler);
     function keyboardShowHandler(e) {
       document.getElementById("appFortuneQuestionContent").style.height = `${window.innerHeight * 0.75 + e.keyboardHeight}px`;
+      document.getElementById("backgroundCard").style.height = `${window.innerHeight * 0.75 + e.keyboardHeight}px`;
     }
     // This event fires when the keyboard will hide
     window.addEventListener("native.keyboardhide", keyboardHideHandler);
     function keyboardHideHandler(e) {
       document.getElementById("appFortuneQuestionContent").style.height = `${window.innerHeight * 0.75}px`;
+      document.getElementById("backgroundCard").style.height = `${window.innerHeight * 0.75}px`;
     }
     this.$api.getQuestionF().then(res => {
       if (res.data.code === 200) {
@@ -100,7 +102,7 @@ export default {
     next() {
       this.answerForm[this.questionIndex].value = this.answer;
       this.answer = "";
-      this.index += 1;     
+      this.index += 1;
       if (this.index === 3) {
         if (this.isLogin) {
           this.$api.postAnswerF(this.answerForm).then(res => {
@@ -251,11 +253,11 @@ export default {
       color: white;
     }
   }
-  
+
   }
 
 
-  
+
 
 
 }

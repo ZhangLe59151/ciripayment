@@ -45,7 +45,7 @@ export default {
           btn: this.$t("Home.creditLimitBtn1")
         },
         pending: {
-          label: this.$tc("Home.creditLimitTitle2", k === "1" ? 1 : 2, {
+          label: this.$tc("Home.creditLimitTitle2", String(k) === "1" ? 1 : 2, {
             n: k
           }),
           btn: this.$t("Home.creditLimitBtn1")
