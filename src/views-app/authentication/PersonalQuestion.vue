@@ -184,16 +184,39 @@ export default {
     skipQuestion() {
       const to = this.$route.query.to;
       if (this.tabActive === 0) {
-        this.$router.push({ name: "PersonalQuestion", params: { id: 1 } });
+        this.$router.push({ name: "PersonalQuestion", params: { id: 1 } ,query: { to: to }});
         this.tab1 = true;
         this.tabActive = 1;
       } else if (this.tabActive === 1) {
-        this.$router.push({ name: "PersonalQuestion", params: { id: 2 } });
+        this.$router.push({ name: "PersonalQuestion", params: { id: 2 } ,query: { to: to }});
         this.tab1 = this.tab2 = true;
         this.tabActive = 2;
       } else {
         if (this.allSkip) {
           this.$store.commit("UnfirstLaunch");
+          if (to === "EnterLoanInfo") {
+            this.$api.getHomePageInfo().then(res => {
+              if (res.data.code === 200) {
+                // check if user already has loan
+                const hasLoan = res.data.data.hasLoan;
+                // if already got loan, move to Loan result page instead of Loan Form
+                if (hasLoan && ["EnterLoanInfo"].includes(to)) {
+                  this.$router.push({ name: "Loan" });
+                  return false;
+                }
+                // else- check credit limit to see if he can apply loan
+                this.$api.verifyLoanApplyAble().then(res => {
+                  if (res.data.code === 200) {
+                    (res.data.data.verifyResult) ? this.$router.push({ name: "EnterLoanInfo" })
+                      : this.$router.push({ name: "LoanAmountExceedLimitError" });
+                  } else {
+                    this.$notify(res.data.msg);
+                  }
+                });
+              }
+            });
+            return false;
+          }
           this.$router.push(to ? { name: to } : { name: "Home" });
         } else {
           this.sendAnswer();
@@ -208,23 +231,48 @@ export default {
           this.$store.commit("UnfirstLaunch");
           this.questionPage = false;
           setTimeout(() => {
+            if (to === "EnterLoanInfo") {
+              this.$api.getHomePageInfo().then(res => {
+                if (res.data.code === 200) {
+                  // check if user already has loan
+                  const hasLoan = res.data.data.hasLoan;
+                  // if already got loan, move to Loan result page instead of Loan Form
+                  if (hasLoan && ["EnterLoanInfo"].includes(to)) {
+                    this.$router.push({ name: "Loan" });
+                    return false;
+                  }
+                  // else- check credit limit to see if he can apply loan
+                  this.$api.verifyLoanApplyAble().then(res => {
+                    if (res.data.code === 200) {
+                      (res.data.data.verifyResult) ? this.$router.push({ name: "EnterLoanInfo" })
+                        : this.$router.push({ name: "LoanAmountExceedLimitError" });
+                    } else {
+                      this.$notify(res.data.msg);
+                    }
+                  });
+                }
+              });
+              return false;
+            }
             this.$router.push(to ? { name: to } : { name: "Home" });
           }, 1000);
         }
       });
     },
     answer(answerid, id, answer) {
+      const to = this.$route.query.to;
       this.allSkip = false;
       this.answerList[answerid].id = id;
       this.answerList[answerid].value = answer;
-      this.$router.push({ name: "PersonalQuestion", params: { id: answerid } });
+      this.$router.push({ name: "PersonalQuestion", params: { id: answerid }, query: { to: to } });
       if (this.tabActive === 2) {
         this.sendAnswer();
       } else {
         this.tabActive += 1;
         this.$router.push({
           name: "PersonalQuestion",
-          params: { id: this.tabActive }
+          params: { id: this.tabActive },
+          query: { to: to }
         });
       }
     }

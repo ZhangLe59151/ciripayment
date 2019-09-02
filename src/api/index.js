@@ -104,6 +104,9 @@ export default {
   getHomePageInfo() {
     return Vue.axios.get("/api/homepage");
   },
+  verifyLoanApplyAble() {
+    return Vue.axios.post("/api/loan/verify");
+  },
   applyLoan(params) {
     return Vue.axios.post("/api/loan-application?loanAmount", params);
   },
