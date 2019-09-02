@@ -1,9 +1,10 @@
 <template>
   <div class="daily-fortune-result">
-    <fortune-telling-app-fortune-header 
+    <fortune-telling-app-fortune-header
       :showLeftIcon="true"
       :showRightIcon="false"
-      :showTitle="title"/>
+      :showTitle="$t('Fortune.dailyTitle')"
+    />
     <div class="top-desc">
       <fortune-telling-app-fortune-master-photo
         class="master-photo"
@@ -61,7 +62,6 @@
     <van-popup
       v-model="showPopUp"
       round
-      :overlay="false"
       position="bottom"
       get-container="daily-fortune-result"
       class="popup"
@@ -94,8 +94,7 @@ export default {
       salesResult: "",
       likeStatus: false,
       processingLike: false,
-      masterList: require("@/assets/data/fortuneMasterList.json"),
-      title: this.$t('Fortune.dailyTitle')
+      masterList: require("@/assets/data/fortuneMasterList.json")
     };
   },
 
@@ -119,9 +118,7 @@ export default {
     }
   },
   mounted() {
-    // document.title = this.$t("FortuneTelling.sharePageDesc");
     const shareKey = this.$route.query.shareKey;
-
     if (shareKey) {
       this.getInfoOnWeb(shareKey);
     } else {
@@ -158,14 +155,16 @@ export default {
       const shareMsg = "";
       const shareLink = `${process.env.VUE_APP_WEBURL}/daily-fortune-result?shareKey=${this.fortuneInfo.fortuneResult.shareKey}`;
 
+      const vm = this;
+
       const onSuccess = function(result) {
-        this.$toast(this.$t("FortuneTelling.shareSuccess"));
         console.log("Share completed!");
+        vm.$toast(vm.$t("FortuneTelling.shareSuccess"));
       };
 
       const onError = function(msg) {
         console.log("Sharing failed!" + msg);
-        this.$toast(this.$t("FortuneTelling.shareFailed"));
+        vm.$toast(vm.$t("FortuneTelling.shareFailed"));
       };
 
       if (platform === "facebook") {
@@ -247,7 +246,7 @@ export default {
   background: no-repeat center
     url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
   background-size: cover;
-  overflow: hidden;
+  // overflow: hidden;
 
   .web-get-fortune {
     height: 40px;
@@ -288,7 +287,7 @@ export default {
     }
   }
   .app-fortune-result-content {
-    margin-top: 20px;
+    // margin-top: 20px;
   }
 
   .action {

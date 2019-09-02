@@ -100,6 +100,7 @@ export default {
 <style lang="scss" scoped>
 .app-fortune-result-content {
   position: relative;
+  top: 50px;
   height: 65vh;
   width: 100%;
   text-align: center;
@@ -108,7 +109,7 @@ export default {
     background: no-repeat center
       url("../../assets/imgs/fortune-telling/fortune_telling_result_card.png");
     background-size: contain;
-    top: 50px;
+
     width: 100%;
     height: 400px;
 
