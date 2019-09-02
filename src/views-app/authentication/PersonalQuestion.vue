@@ -4,11 +4,13 @@
       class="personalPageContent"
       v-show="questionPage"
     >
+    <div class="tabLine"></div>
+    <div class="tabLine"></div>
       <van-tabs
         v-model="tabActive"
         animated
-        color="#ffa702"
-        title-active-color="#ffa702"
+        color="#fdae44"
+        title-active-color="#fdae44"
       >
         <van-tab
           title=""
@@ -310,6 +312,15 @@ export default {
   background-size: cover;
   height: 100vh;
 
+  .tabLine {
+    position: fixed;
+    left: 0px;
+    top: 44px;
+    z-index: -1;
+    height: 2px;
+    background-color: #fdae44;
+  }
+
   .personalPageContent {
     position: fixed;
     margin: 0 16px 0 16px;
@@ -319,7 +330,7 @@ export default {
   }
 
   .questionTitle {
-    margin: 92px 0 0 0;
+    margin: 48px 0 0 0;
     font-size: 24px;
   }
 
@@ -479,6 +490,7 @@ export default {
   .iconfont {
     font-size: 34px;
   }
+
 }
 
 .skipword {
@@ -491,16 +503,23 @@ export default {
   bottom: 40px;
 }
 
+
+
 </style>
 
 <style lang="scss">
 .van-tabs__line {
   padding-top: 0 !important;
+  width: 56px !important;
+  background-color: #fdae44;
 }
 .van-tabs__wrap {
   height: 56px !important;
+  width: 179x !important;
 }
 .van-hairline--top-bottom {
-  width: 100px !important;
+  width: 179px !important;
 }
+
+
 </style>
