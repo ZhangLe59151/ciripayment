@@ -16,8 +16,7 @@ export default {
   computed: {},
   methods: {
     handleLoanClick() {
-      window.open('taokae://daily-fortune-prepare', '_system')
-      // this.$router.push({ name: "Loan", query: { origin: "banner" } });
+      this.$router.push({ name: "Loan", query: { origin: "banner" } });
     }
   }
 };
