@@ -239,6 +239,7 @@ export default {
           if (res.data.code === 200) {
             // Verify OTP success
             this.$store.commit("OTPVerified");
+            this.$analytics.setUserId(res.data.data.uid);
             // TODO get Home information
             let to = this.$route.query.to;
             // If first time, then go to personal question
