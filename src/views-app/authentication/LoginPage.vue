@@ -228,10 +228,7 @@ export default {
         height: 20px;
         width: 40px;
       }
-    }
-
-    
-
+    } 
   }
 
   .bottom-btn {
