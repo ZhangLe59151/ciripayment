@@ -51,13 +51,13 @@ export default {
         Dialog.confirm({
           title: "Leaving Master" + this.fortuneInfo.selectedMaster.name + "?",
           message:
-            this.$t("Furtune.poorMaster") +
+            this.$t("Fortune.poorMaster") +
             this.fortuneInfo.selectedMaster.name +
-            this.$t("Furtune.leaveMessage")
+            this.$t("Fortune.leaveMessage")
         })
           .then(() => {
             // on confirm
-            this.$router.push({ name: "Home" });
+            this.$router.push({ name: "DailyFortunePrepare" });
           })
           .catch(() => {
             // on cancel

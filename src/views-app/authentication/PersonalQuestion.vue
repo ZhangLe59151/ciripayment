@@ -173,11 +173,6 @@ export default {
       ]
     };
   },
-  computed: {
-    ...mapState({
-      columns: "nationalCodeList"
-    })
-  },
   created() {
     this.$api.getQuestionPersonal(1).then(res => {
       if (res.data.code === 200) {
