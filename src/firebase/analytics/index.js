@@ -23,6 +23,7 @@ export default {
     console.log("setUserId:", id);
     analyticsWithCondition(() => {
       cordova.plugins.firebase.analytics.setUserId(id);
+      cordova.plugins.silot.analytics.setUserId(id);
     });
   },
   setUserProperty(name, value) {
