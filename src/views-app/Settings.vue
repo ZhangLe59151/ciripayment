@@ -17,7 +17,7 @@
       @click="handleLogout"
     >{{$t("Setting.Logout")}}</div>
     <div class="version">
-      {{$t("Setting.Version")}} 0.2
+      {{$t("Setting.Version")}} 1.0
     </div>
     <app-tab-bar :active="(deviceType === 'APP' ? 2 : 2 )" />
   </div>
