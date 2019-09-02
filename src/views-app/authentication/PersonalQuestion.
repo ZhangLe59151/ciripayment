@@ -170,7 +170,9 @@ export default {
         { id: 0, value: " " },
         { id: 1, value: " " },
         { id: 2, value: " " }
-      ]
+      ],
+      phoneValidationPattern: this.$store.state.phone.thaiExp,
+      showComponents: true
     };
   },
   computed: {
@@ -431,10 +433,6 @@ export default {
       right: 16px;
       color: #32a974;
     }
-  }
-
-  .iconfont {
-    font-size: 34px;
   }
 }
 
