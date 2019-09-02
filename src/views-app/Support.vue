@@ -72,6 +72,13 @@ export default {
       this.remnant = 500 - txtVal;
     },
     sendBtn() {
+      if (!this.form.message) {
+        this.$notify({
+          message: this.$t("marketingServiceErrorMsg"),
+          background: "#b41800"
+        });
+        return false;
+      }
       this.$api.feedback(this.form).then(res => {
         this.$notify({
           message: this.$t(

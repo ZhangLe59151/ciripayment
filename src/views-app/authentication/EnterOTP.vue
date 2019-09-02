@@ -246,7 +246,8 @@ export default {
                 // check credit
                 let creditLimit = res.data.data.creditLimit;
                 this.$store.commit("InitCredit", creditLimit);
-                if (parseInt(creditLimit) < this.$store.state.minBusinessWorthForLoan) {
+                console.log(parseInt(creditLimit.currentCreditLimit) < this.$store.state.minBusinessWorthForLoan);
+                if (parseInt(creditLimit.currentCreditLimit) < this.$store.state.minBusinessWorthForLoan) {
                   to = "LoanAmountExceedLimitError";
                 }
                 const hasLoan = res.data.data.hasLoan;
@@ -255,17 +256,16 @@ export default {
                   this.$router.push({ name: "Loan" });
                   return false;
                 }
+                if (this.isFirst === "Yes" && this.deviceType === "APP") {
+                  this.$router.push({
+                    name: "PersonalQuestion",
+                    params: { id: 0 }
+                  });
+                } else {
+                  this.$router.push(to ? { name: to } : { name: "Home" });
+                }
               }
             });
-
-            if (this.isFirst === "Yes" && this.deviceType === "APP") {
-              this.$router.push({
-                name: "PersonalQuestion",
-                params: { id: 0 }
-              });
-            } else {
-              this.$router.push(to ? { name: to } : { name: "Home" });
-            }
           } else {
             this.$notify({
               message: otpCodeErrorMessage,
