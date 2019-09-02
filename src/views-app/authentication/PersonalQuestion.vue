@@ -319,7 +319,7 @@ export default {
   }
 
   .questionTitle {
-    margin: 48px 0 0 0;
+    margin: 92px 0 0 0;
     font-size: 24px;
   }
 
@@ -443,7 +443,7 @@ export default {
       color: #bac1c5;
     }
   }
-
+ 
   .card5 {
     position: relative;
     font-size: 20px;
@@ -489,5 +489,18 @@ export default {
   left: 0;
   width: 100%;
   bottom: 40px;
+}
+
+</style>
+
+<style lang="scss">
+.van-tabs__line {
+  padding-top: 0 !important;
+}
+.van-tabs__wrap {
+  height: 56px !important;
+}
+.van-hairline--top-bottom {
+  width: 100px !important;
 }
 </style>
