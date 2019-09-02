@@ -191,7 +191,7 @@
     "emailPlaceholder": "email@domain.com",
     "messagePlaceholder": "Describe your problem or feedback",
     "sendEmail": "Submit",
-    "sendSucceed": "Sent Sucessfully",
+    "sendSucceed": "Feedback submitted successfully",
     "sendFailed": "Failed to send"
   },
   "Language": {

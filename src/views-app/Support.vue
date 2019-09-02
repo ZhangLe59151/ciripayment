@@ -143,7 +143,7 @@ export default {
 
 .form-value {
   padding: 0;
-  width: 328px;
+  width: calc(100vw - 32px);
   left: 16px;
   height: 40px;
   line-height: 40px;
