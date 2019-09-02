@@ -179,7 +179,14 @@ const AppRouteArr = [
       title: "LoanInformation"
     }
   },
-
+  {
+    path: "/loan-exceed-limit",
+    name: "LoanAmountExceedLimitError",
+    component: () => import("@/views-app/loan/LoanAmountExceedLimitError.vue"),
+    meta: {
+      title: "LoanInformation"
+    }
+  },
   {
     path: "/enter-loan-info",
     name: "EnterLoanInfo",
