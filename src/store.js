@@ -61,7 +61,7 @@ export default new Vuex.Store({
     ],
     nationalCode: require("@/assets/data/nationalCode.json"),
     dateInMonth: require("@/assets/data/dateInMonth.json"),
-    reg: require("@/assets/reg/regEx.js"),
+    reg: require("@/assets/reg/regEx.js").regEx,
     applicationStatus: {
       pending: "0",
       approved: "1",
@@ -249,8 +249,8 @@ export default new Vuex.Store({
   },
   mutations: {
     UpdateDownloadIcon(state) {
-      const hide = false
-      state.showDownloadIcon = hide
+      const hide = false;
+      state.showDownloadIcon = hide;
     },
     InitForm(state) {
       var originForm = state.form !== null ? state.form : {};
