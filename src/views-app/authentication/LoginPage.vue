@@ -28,7 +28,7 @@
           <img
             class="icon"
             :src="pathIcon"
-          />
+          /></van-button>
         <van-button class="goBtn" @click="handleStart">
           <span class="icon iconfont iconPath"></span>
         </van-button>
