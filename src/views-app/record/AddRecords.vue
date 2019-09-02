@@ -289,7 +289,7 @@ export default {
         this.localDateFormatter
       );
       this.appear = false;
-      if (this.reg.regEx.financeAmount.with2dec.test(form[this.type])) {
+      if (this.reg.financeAmount.with2dec.test(form[this.type])) {
         // this.$store.commit("UpdateRecord", this.convertForm(form));
         form[this.type] = parseFloat(form[this.type]);
         this.fetchData(form);

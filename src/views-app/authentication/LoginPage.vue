@@ -4,8 +4,15 @@
       <div class="slogan-title">{{ $t('Login.verifyPhone')}}</div>
       <div class="slogan-sub">{{ $t('Login.yourPhone')}}</div>
       <div class="input-block">
-        <div class="nationalCode" @click="show = true">
-          {{form.nationalCode}} <van-icon class="dropdownIcon" name="arrow-down" />
+        <div
+          class="nationalCode"
+          @click="show = true"
+        >
+          {{form.nationalCode}}
+          <van-icon
+            class="dropdownIcon"
+            name="arrow-down"
+          />
         </div>
         <van-field
           class="phoneNumber"
@@ -13,9 +20,17 @@
           @focus="showNumber=true"
           maxlength="13"
           readonly
-          />
+        />
+        <van-button
+          class="goBtn"
+          @click="handleStart"
+        >
+          <img
+            class="icon"
+            :src="pathIcon"
+          /></van-button>
         <van-button class="goBtn" @click="handleStart">
-          <img class="icon" :src="pathIcon" />
+          <span class="icon iconfont iconPath"></span>
         </van-button>
 
       </div>
@@ -31,7 +46,7 @@
         show-toolbar
         title="National code"
         :columns="columns"
-        @cancel="onCancel"
+        @cancel="show = false;"
         @confirm="onConfirm"
       />
     </van-popup>
@@ -55,7 +70,6 @@ export default {
   data() {
     return {
       showNumber: false,
-      pathIcon: require("@/assets/imgs/Path.svg"),
       show: false,
       form: {
         phone: "",
@@ -69,28 +83,25 @@ export default {
     ...mapState({
       columns: "nationalCodeList",
       nationCode: "nationalCode",
-      reg: "reg",
-      imgBk: require("@/assets/imgs/authentication/otpBak.png")
+      reg: "reg"
     })
   },
   created() {
     this.phoneValidationPattern = this.reg.regEx.phone.thaiExp;
+    this.form.nationalCode = this.columns[0];
   },
   methods: {
     setPattern(nationalCode) {
       const item = this.nationCode.find(test => test.code === nationalCode);
       const expName = item ? item.nation + "Exp" : "sgExp";
-      this.phoneValidationPattern = 
-        (this.reg.regEx.phone[expName] !== undefined) ? 
-        this.reg.regEx.phone[expName] : 
-        this.reg.regEx.phone.sgExp;
+      this.phoneValidationPattern =
+        this.reg.phone[expName] !== undefined
+          ? this.reg.phone[expName]
+          : this.reg.phone.sgExp;
     },
     onConfirm(value, index) {
       this.form.nationalCode = value;
       this.setPattern(value);
-      this.show = false;
-    },
-    onCancel() {
       this.show = false;
     },
     onInput(value) {
@@ -98,9 +109,7 @@ export default {
     },
     onDelete() {
       let kbt = this.form.phone.toString();
-      this.form.phone = kbt.length
-        ? kbt.substring(0, kbt.length - 1)
-        : kbt;
+      this.form.phone = kbt.length ? kbt.substring(0, kbt.length - 1) : kbt;
     },
     handleStart() {
       if (this.phoneValidationPattern.test(this.form.phone)) {
@@ -140,9 +149,6 @@ export default {
           });
         });
     }
-  },
-  created() {
-    this.form.nationalCode = this.columns[0];
   }
 };
 </script>
@@ -162,27 +168,28 @@ export default {
     height: 194px;
     width: calc(100vw - 32px);
     border-radius: 16px;
-    box-shadow: 0 2px 4px 2px #A9A9A9;
+    box-shadow: 0 2px 4px 2px #a9a9a9;
 
     .slogan-title {
       position: absolute;
       margin: 24px 16px 0 16px;
       font-size: 20px;
       font-weight: bolder;
-      color: #2F3941;
+      color: #2f3941;
       text-align: left;
     }
 
     .slogan-sub {
       position: absolute;
       text-align: left;
-      color: #2F3941;
+      color: #2f3941;
       font-size: 14px;
       bottom: 72px;
       left: 16px;
+      height: 20px;
     }
 
-    .nationalCode{
+    .nationalCode {
       position: absolute;
       left: 16px;
       bottom: 24px;
@@ -202,6 +209,7 @@ export default {
 
     .phoneNumber {
       position: absolute;
+      font-size: 16px;
       left: 95px;
       right: 80px;
       bottom: 24px;
@@ -215,15 +223,14 @@ export default {
       bottom: 24px;
       background-color: #ffa702;
       width: 50px;
+      .iconPath {
+        color: white;
+        height: 20px;
+        width: 40px;
+      }
     }
 
-    .icon {
-      position: absolute;
-      right: 4px;
-      bottom: 10px;
-      height: 20px;
-      width: 40px;
-    }
+    
 
   }
 

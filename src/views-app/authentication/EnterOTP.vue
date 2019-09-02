@@ -80,7 +80,7 @@ export default {
   watch: {
     /* value: function(val) {
       // watch input if verified account
-      debugger
+
       if (this.form.accountVerified) {
         this.handleVerifyOtpVerifiedAccount();
       }
@@ -311,6 +311,7 @@ export default {
     .inputCode {
       position: absolute;
       top: 145px;
+      height: 50px;
     }
 
     .van-hairline {

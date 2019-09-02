@@ -34,6 +34,7 @@ export default new Vuex.Store({
       ? localStorage.getItem("firstLaunch")
       : "Yes",
     currency: "฿",
+    allowBack: true,
     serviceOverviewVo: {},
     form: {},
     userInfo: {},
@@ -43,24 +44,8 @@ export default new Vuex.Store({
     recordList: JSON.parse(localStorage.getItem("recordList")) || [],
     masterList: require("@/assets/data/fortuneMasterList.json"),
     localDateFormatter: "YYYYMMDD",
-    nationalCodeList: [
-      "+66",
-      "+65",
-      "+62",
-      "+880",
-      "+855",
-      "+86",
-      "+852",
-      "+91",
-      "+81",
-      "+82",
-      "+60",
-      "+63",
-      "+84",
-      "+95"
-    ],
+    nationalCodeList: require("@/assets/data/nationalCodeList.json"),
     nationalCode: require("@/assets/data/nationalCode.json"),
-    dateInMonth: require("@/assets/data/dateInMonth.json"),
     reg: require("@/assets/reg/regEx.js"),
     applicationStatus: {
       pending: "0",
@@ -247,10 +232,15 @@ export default new Vuex.Store({
       questions: {}
     }
   },
+  getters: {
+    backEvent(state, getters){
+      return state.backEvent
+    }
+  },
   mutations: {
     UpdateDownloadIcon(state) {
-      const hide = false
-      state.showDownloadIcon = hide
+      const hide = false;
+      state.showDownloadIcon = hide;
     },
     InitForm(state) {
       var originForm = state.form !== null ? state.form : {};
@@ -509,7 +499,12 @@ export default new Vuex.Store({
     ClearFortuneQuestion(state) {
       state.furtuneQuestion = {};
       window.localStorage.removeItem("furtuneQuestion");
-    }
+    }    
   },
-  actions: {}
+  actions: {
+    updateAppSetting(state, allowBack) {
+      state.allowBack = allowBack;
+      window.localStorage.setItem("allowBack", allowBack);
+    }
+  }
 });

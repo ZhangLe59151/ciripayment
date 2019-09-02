@@ -17,18 +17,35 @@ body,
 </style>
 
 <script>
+import Vue from "vue";
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {
       transitionStyle: "van-fade"
     };
   },
+  computed: {
+    ...mapState({
+      allowBack: "allowBack"
+    })
+  },
   mounted() {
+    window.onpopstate = () => {
+      if (!this.allowBack) { 
+        console.log(this.allowBack);
+        history.go(1) 
+        } else {
+          console.log(this.allowBack);
+        }
+    }
     var vm = this;
     document.addEventListener(
       "backbutton",
       function(e) {
         switch (vm.$route.name) {
+          case "FortuneTellingResult":
           case "EnterLoanInfo": {
             e.preventDefault();
             break;
