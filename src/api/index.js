@@ -8,162 +8,163 @@ Vue.use(VueAxios, axios);
 //   baseURL: "",
 //   headers: { Cookie: document.cookie }
 // });
+const API_VERSION_V1 = "/api/v1";
 
 export default {
   sendOtp(params) {
-    return Vue.axios.post("/api/self-onboarding/otp/send", params);
+    return Vue.axios.post(API_VERSION_V1 + "/self-onboarding/otp/send", params);
   },
   sendMerchantOtp(params) {
-    return Vue.axios.post("/api/merchant/otp/send", params);
+    return Vue.axios.post(API_VERSION_V1 + "/merchant/otp/send", params);
   },
   verifyOtp(params) {
-    return Vue.axios.post("/api/self-onboarding/otp/verify", params);
+    return Vue.axios.post(API_VERSION_V1 + "/self-onboarding/otp/verify", params);
   },
   verifyMerchantOtp(params) {
-    return Vue.axios.post("/api/merchant/otp/verify", params);
+    return Vue.axios.post(API_VERSION_V1 + "/merchant/otp/verify", params);
   },
   uploadImage(params) {
-    return Vue.axios.post("/api/self-onboarding/image/upload", params);
+    return Vue.axios.post(API_VERSION_V1 + "/self-onboarding/image/upload", params);
   },
   submitAppliction(params) {
-    return Vue.axios.post("/api/self-onboarding/application/submit", params);
+    return Vue.axios.post(API_VERSION_V1 + "/self-onboarding/application/submit", params);
   },
   serviceOverview(params) {
-    return Vue.axios.get("/api/self-onboarding/application/service-overview");
+    return Vue.axios.get(API_VERSION_V1 + "/self-onboarding/application/service-overview");
   },
   getApplictionStatus(params) {
     // it use in Setting page & home page
-    return Vue.axios.get("/api/self-onboarding/application/status", params);
+    return Vue.axios.get(API_VERSION_V1 + "/self-onboarding/application/status", params);
   },
   getAccountInfo(params) {
-    return Vue.axios.get("/api/self-onboarding/account/info", params);
+    return Vue.axios.get(API_VERSION_V1 + "/self-onboarding/account/info", params);
   },
   getMerchantAccountInfo() {
-    return Vue.axios.get("/api/merchant/check-status");
+    return Vue.axios.get(API_VERSION_V1 + "/merchant/check-status");
   },
   checkPasswordExistence(params) {
     return Vue.axios.get(
-      "/api/self-onboarding/password/check-existence",
+      API_VERSION_V1 + "/self-onboarding/password/check-existence",
       params
     );
   },
   merchantLoginPassword(params) {
-    return Vue.axios.post("/api/self-onboarding/login", params);
+    return Vue.axios.post(API_VERSION_V1 + "/self-onboarding/login", params);
   },
   merchantCreateNewPassword(params) {
-    return Vue.axios.post("/api/self-onboarding/password/set-password", params);
+    return Vue.axios.post(API_VERSION_V1 + "/self-onboarding/password/set-password", params);
   },
   deleteApplication(params) {
-    return Vue.axios.post("/api/admin/deleteApplication", params);
+    return Vue.axios.post(API_VERSION_V1 + "/admin/deleteApplication", params);
   },
   checkDuplicate(params) {
     return Vue.axios.post(
-      "/api/self-onboarding/application/check-duplicate",
+      API_VERSION_V1 + "/self-onboarding/application/check-duplicate",
       params
     );
   },
   checkNationId(params) {
     return Vue.axios.post(
-      "/api/self-onboarding/application/check-nationalId",
+      API_VERSION_V1 + "/self-onboarding/application/check-nationalId",
       params
     );
   },
   getProfileInfo() {
-    return Vue.axios.get("/api/self-onboarding/application/profile");
+    return Vue.axios.get(API_VERSION_V1 + "/self-onboarding/application/profile");
   },
   getMerchantProfile(params) {
-    return Vue.axios.get("/api/merchant/profile", params);
+    return Vue.axios.get(API_VERSION_V1 + "/merchant/profile", params);
   },
   updateMerchantSettlement(params) {
-    return Vue.axios.post("/api/merchant/settlement/update", params);
+    return Vue.axios.post(API_VERSION_V1 + "/merchant/settlement/update", params);
   },
   updateBankAcc(params) {
-    return Vue.axios.post("/api/merchant/bank-account/update", params);
+    return Vue.axios.post(API_VERSION_V1 + "/merchant/bank-account/update", params);
   },
   updateMerchantChannels(params) {
-    return Vue.axios.post("/api/merchant/channels/update", params);
+    return Vue.axios.post(API_VERSION_V1 + "/merchant/channels/update", params);
   },
   updateBusinessProfile(params) {
-    return Vue.axios.post("/api/merchant/profile/update", params);
+    return Vue.axios.post(API_VERSION_V1 + "/merchant/profile/update", params);
   },
   submitMerchantChannels(params) {
-    return Vue.axios.post("/api/merchant/channels/submit", params);
+    return Vue.axios.post(API_VERSION_V1 + "/merchant/channels/submit", params);
   },
   getFortunetelling(params) {
-    return Vue.axios.get(`/api/lucky-draw?masterId=${params}`);
+    return Vue.axios.get(API_VERSION_V1 + `/lucky-draw?masterId=${params}`);
   },
   getResultOnWeb(params) {
-    return Vue.axios.get(`/api/lucky-draw/view?shareKey=${params}`);
+    return Vue.axios.get(API_VERSION_V1 + `/lucky-draw/view?shareKey=${params}`);
   },
   likeFortunetellingResult(params) {
-    return Vue.axios.get(`/api/lucky-draw/like?id=${params}`);
+    return Vue.axios.get(API_VERSION_V1 + `/lucky-draw/like?id=${params}`);
   },
   unlikeFortunetellingResult(params) {
-    return Vue.axios.get(`/api/lucky-draw/unlike?id=${params}`);
+    return Vue.axios.get(API_VERSION_V1 + `/lucky-draw/unlike?id=${params}`);
   },
   getHomePageInfo() {
-    return Vue.axios.get("/api/homepage");
+    return Vue.axios.get(API_VERSION_V1 + "/homepage");
   },
   verifyLoanApplyAble() {
-    return Vue.axios.post("/api/loan/verify");
+    return Vue.axios.post(API_VERSION_V1 + "/loan/verify");
   },
   applyLoan(params) {
-    return Vue.axios.post("/api/loan-application?loanAmount", params);
+    return Vue.axios.post(API_VERSION_V1 + "/loan-application?loanAmount", params);
   },
   getLoanProfile() {
-    return Vue.axios.get("/api/loan/view");
+    return Vue.axios.get(API_VERSION_V1 + "/loan/view");
   },
   getHomeInformation() {
-    return Vue.axios.get("/api/information");
+    return Vue.axios.get(API_VERSION_V1 + "/information");
   },
   getRecordList() {
-    return Vue.axios.get("/api/merchant/record/list");
+    return Vue.axios.get(API_VERSION_V1 + "/merchant/record/list");
   },
   getArticleContent(params) {
     return Vue.axios.get(
-      `/api/information/article-detail?articleDetailId=${params}`
+      API_VERSION_V1 + `/information/article-detail?articleDetailId=${params}`
     );
   },
   addRecord(params) {
-    return Vue.axios.post("/api/merchant/record/add", params);
+    return Vue.axios.post(API_VERSION_V1 + "/merchant/record/add", params);
   },
   viewRecordSum(params) {
-    return Vue.axios.get(`/api/merchant/record/view/sum?accountDate=${params}`);
+    return Vue.axios.get(API_VERSION_V1 + `/merchant/record/view/sum?accountDate=${params}`);
   },
   viewRecord(params) {
-    return Vue.axios.get(`/api/merchant/record/view?id=${params}`);
+    return Vue.axios.get(API_VERSION_V1 + `/merchant/record/view?id=${params}`);
   },
   deleteRecord(params) {
-    return Vue.axios.get(`/api/merchant/record/delete?id=${params}`);
+    return Vue.axios.get(API_VERSION_V1 + `/merchant/record/delete?id=${params}`);
   },
   updateRecord(params) {
-    return Vue.axios.post("/api/merchant/record/update", params);
+    return Vue.axios.post(API_VERSION_V1 + "/merchant/record/update", params);
   },
   feedback(params) {
-    return Vue.axios.post("/api/feedback", params);
+    return Vue.axios.post(API_VERSION_V1 + "/feedback", params);
   },
   getCreditQuestion() {
-    return Vue.axios.get("/api/credit/limit");
+    return Vue.axios.get(API_VERSION_V1 + "/credit/limit");
   },
   submitCreditAnswer(params) {
-    return Vue.axios.post("/api/credit/limit/answer", params);
+    return Vue.axios.post(API_VERSION_V1 + "/credit/limit/answer", params);
   },
   logout(params) {
-    return Vue.axios.post("/api/logout", params);
+    return Vue.axios.post(API_VERSION_V1 + "/logout", params);
   },
   getQuestionPersonal(params) {
-    return Vue.axios.get(`/api/common-question?sourceType=${params}`);
+    return Vue.axios.get(API_VERSION_V1 + `/common-question?sourceType=${params}`);
   },
   postAnswerPersonal(params) {
-    return Vue.axios.post("/api/common-question/answer", params);
+    return Vue.axios.post(API_VERSION_V1 + "/common-question/answer", params);
   },
   getQuestionF() {
-    return Vue.axios.get("/api/fortune-telling/question");
+    return Vue.axios.get(API_VERSION_V1 + "/fortune-telling/question");
   },
   postAnswerF(params) {
-    return Vue.axios.post("/api/fortune-telling/question/answer", params);
+    return Vue.axios.post(API_VERSION_V1 + "/fortune-telling/question/answer", params);
   },
   getLikeCount() {
-    return Vue.axios.get("/api/lucky-draw/like-count");
+    return Vue.axios.get(API_VERSION_V1 + "/lucky-draw/like-count");
   }
 };
