@@ -34,6 +34,7 @@ export default new Vuex.Store({
       ? localStorage.getItem("firstLaunch")
       : "Yes",
     currency: "฿",
+    allowBack: true,
     serviceOverviewVo: {},
     form: {},
     userInfo: {},
@@ -498,7 +499,12 @@ export default new Vuex.Store({
     ClearFortuneQuestion(state) {
       state.furtuneQuestion = {};
       window.localStorage.removeItem("furtuneQuestion");
-    }
+    }    
   },
-  actions: {}
+  actions: {
+    updateAppSetting(state, allowBack) {
+      state.allowBack = allowBack;
+      window.localStorage.setItem("allowBack", allowBack);
+    }
+  }
 });

@@ -129,7 +129,8 @@ const AppRouteArr = [
     name: "Home",
     component: () => import("@/views-app/Home.vue"),
     meta: {
-      title: "Home"
+      title: "Home",
+      allowBack: false
     }
   },
   {
@@ -408,7 +409,8 @@ const AppRouteArr = [
     name: "MasterProfile",
     component: () => import("@/views-app/fortune/MasterProfile.vue"),
     meta: {
-      title: "FortuneTellingMasterProfile"
+      title: "FortuneTellingMasterProfile",
+      allowBack: true
     }
   }
 ];
@@ -494,14 +496,15 @@ router.beforeEach((to, from, next) => {
   analytics.setCurrentScreen(to.meta.title);
   analytics.setCurrentScreen(to.fullPath);
   next();
+  //disable back button
   let allowBack = true;
   if (to.meta.allowBack !== undefined) {
     allowBack = to.meta.allowBack
   }
   if (!allowBack) {
-    history.pushState(null, null, location.href)
+    history.pushState(null, null, location.href);
   }    
-  store.dispatch('updateAppSetting', { allowBack: allowBack });
+  store.dispatch("updateAppSetting", { allowBack: allowBack });
 });
 
 export default router;
