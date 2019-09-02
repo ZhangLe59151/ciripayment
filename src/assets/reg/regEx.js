@@ -42,5 +42,9 @@ export var regEx = {
     bankAccount: /^[0-9A-Za-z]{5,20}$/,
     postalCode: /[0-9]{5}/,
     englishAlphabetAndThai: /^[a-z\u0E00-\u0E7F]+$/i
+  },
+  financeAmount: {
+    with2dec: /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/,
+    format2dec: /^(([0-9]\.\d{2}|[1-9][0-9]*\.\d{2}))$/
   }
 }

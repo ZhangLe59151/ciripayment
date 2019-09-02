@@ -170,15 +170,8 @@ export default {
         { id: 0, value: " " },
         { id: 1, value: " " },
         { id: 2, value: " " }
-      ],
-      phoneValidationPattern: this.$store.state.phone.thaiExp,
-      showComponents: true
+      ]
     };
-  },
-  computed: {
-    ...mapState({
-      columns: "nationalCodeList"
-    })
   },
   created() {
     this.$api.getQuestionPersonal(1).then(res => {
@@ -189,7 +182,7 @@ export default {
   },
   methods: {
     skipQuestion() {
-    const to = this.$route.query.to;
+      const to = this.$route.query.to;
       if (this.tabActive === 0) {
         this.$router.push({ name: "PersonalQuestion", params: { id: 1 } });
         this.tab1 = true;
@@ -201,7 +194,7 @@ export default {
       } else {
         if (this.allSkip) {
           this.$store.commit("UnfirstLaunch");
-          this.$router.push(to? { name:to } : { name: "Home" });
+          this.$router.push(to ? { name: to } : { name: "Home" });
         } else {
           this.sendAnswer();
         }
@@ -215,7 +208,7 @@ export default {
           this.$store.commit("UnfirstLaunch");
           this.questionPage = false;
           setTimeout(() => {
-            this.$router.push(to? { name: to } : { name: "Home" });
+            this.$router.push(to ? { name: to } : { name: "Home" });
           }, 1000);
         }
       });
@@ -433,6 +426,10 @@ export default {
       right: 16px;
       color: #32a974;
     }
+  }
+
+  .iconfont {
+    font-size: 34px;
   }
 }
 

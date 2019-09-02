@@ -14,7 +14,7 @@
       >
         <div class="record-status">
           <span class="name">{{$t("Record.TotalIncome")}}</span>
-          <span class="amount">+ {{ dailyIncome }} <i>{{$store.state.currency}}</i></span>
+          <span class="amount">+ {{ dailyIncome }} <i>{{currency}}</i></span>
         </div>
 
         <div class="label-left">{{$t("Record.IncomeName")}}</div>
@@ -53,7 +53,7 @@
             maxlength="13"
             readonly
           />
-          <div class="plus currency">{{$store.state.currency}}</div>
+          <div class="plus currency">{{currency}}</div>
         </div>
 
       </van-tab>
@@ -64,7 +64,7 @@
 
         <div class="record-status expenses">
           <span class="name">{{$t("Record.TotalExpenses")}}</span>
-          <span class="amount">- {{ dailyExpense }} <i>{{$store.state.currency}}</i></span>
+          <span class="amount">- {{ dailyExpense }} <i>{{currency}}</i></span>
         </div>
 
         <div class="label-left">{{$t("Record.ExpensesName")}}</div>
@@ -103,7 +103,7 @@
             maxlength="13"
             readonly
           />
-          <div class="plus currency">{{$store.state.currency}}</div>
+          <div class="plus currency">{{currency}}</div>
         </div>
 
       </van-tab>
@@ -148,13 +148,7 @@ const today = new Date();
 const startDate = new Date("2019/01/01");
 export default {
   name: "AppRecords",
-
-  computed: {
-    ...mapState({
-      localDateFormatter: state => state.localDateFormatter
-    })
-  },
-
+  
   data() {
     return {
       tabActive: 0,
@@ -180,6 +174,13 @@ export default {
       },
       today: ""
     };
+  },
+  computed: {
+    ...mapState({
+      localDateFormatter: "localDateFormatter",
+      reg: "reg",
+      currency: "currency"
+    })
   },
   created() {
     this.viewRecord();
@@ -266,11 +267,7 @@ export default {
       form[this.type] = form[this.type].replace(",", "");
       form.date = this.$moment(this.form.date).format(this.localDateFormatter);
       this.appear = false;
-      const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
-      // if (!regex.test(form[this.type])) {
-      //  form[this.type] = form[this.type]+".00";
-      // }
-      if (regex.test(form[this.type])) {
+      if (this.reg.financeAmount.with2dec.test(form[this.type])) {
         form[this.type] = parseFloat(form[this.type]);
         // this.$store.commit("UpdateRecord", this.convertForm(form));
         this.updateRecord(form);

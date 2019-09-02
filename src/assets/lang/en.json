@@ -150,7 +150,12 @@
     "creditLimitTitle3": "All Done! Come Back Tomorrow",
     "creditLimitBtn1": "Go!",
     "creditLimitBtn2": "View Business' Worth",
-    "latestTransaction": "Latest Transactions"
+    "latestTransaction": "Latest Transactions",
+    "applyNow": "Apply Now",
+    "approximately": "Approximately",
+    "min": "5 minutes",
+    "nationalId": "National ID",
+    "require": "What's required:"
   },
   "Record": {
     "Income": "SALES",
@@ -203,7 +208,9 @@
     "enterOTPtitle": "Enter OTP",
     "resendOTP": "Resend OTP",
     "completeQuestion": "Profile saved. Let's get started",
-    "skipQuestion": "Skip Question"
+    "skipQuestion": "Skip Question",
+    "loginPageTitle": "Be a Happy TaoKae",
+    "announce": "By using this app, you agree to the terms and conditions."
   },
   "Common": {
     "serverRequestError": "Server request error. Please try again!"

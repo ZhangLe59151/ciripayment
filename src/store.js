@@ -34,6 +34,7 @@ export default new Vuex.Store({
       ? localStorage.getItem("firstLaunch")
       : "Yes",
     currency: "฿",
+    allowBack: true,
     serviceOverviewVo: {},
     form: {},
     userInfo: {},
@@ -43,67 +44,13 @@ export default new Vuex.Store({
     recordList: JSON.parse(localStorage.getItem("recordList")) || [],
     masterList: require("@/assets/data/fortuneMasterList.json"),
     localDateFormatter: "YYYYMMDD",
-    nationalCodeList: [
-      "+66",
-      "+65",
-      "+62",
-      "+880",
-      "+855",
-      "+86",
-      "+852",
-      "+91",
-      "+81",
-      "+82",
-      "+60",
-      "+63",
-      "+84",
-      "+95"
-    ],
+    nationalCodeList: require("@/assets/data/nationalCodeList.json"),
     nationalCode: require("@/assets/data/nationalCode.json"),
-    dateInMonth: require("@/assets/data/dateInMonth.json"),
-    phone: {
-      regExp: /^(0[1-9]{1}[0-9]{8}|[1-9]{1}[0-9]{8}|[1-9]{1}[0-9]{7})$/,
-      thaiExp: /^(0[1-9]{1}[0-9]{8}|[1-9]{1}[0-9]{8})$/,
-      sgExp: /^([1-9]{1}[0-9]{7})$/,
-      minLen: 9,
-      maxLen: 10
-    },
-    revenue: {
-      regExp: /^[0-9]{1,10}$/,
-      minLen: 1,
-      maxLen: 10
-    },
-    url: {
-      regExp: /^(:\/\/)?[\w.-]+(?:\.[\w.-]+)+[\w\-._~:/?#[\]@!$&'()*+,;=.]+$/,
-      httpExp: /http:\/\/|https:\/\//,
-      minLen: 9,
-      maxLen: 120
-    },
-    email: {
-      regExp: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      maxlen: 320
-    },
-    password: {
-      minLen: 8,
-      maxLen: 25,
-      regExp: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[~`!@#$%^&*()_\-+=])[A-Za-z\d@$!%*?&]{8,}$/,
-      lowercase: /[a-z]/,
-      uppercase: /[A-Z]/,
-      number: /\d/,
-      specialChar: /[!@#$%^\-&*)(_+=]/,
-      noSpace: /^\S+$/
-    },
+    reg: require("@/assets/reg/regEx.js").regEx,
     applicationStatus: {
       pending: "0",
       approved: "1",
       rejected: "2"
-    },
-    validationPatterns: {
-      invalidCharset: "~`!@#$%^&*()_-+=",
-      nationaldID: /[0-9]{13}/,
-      bankAccount: /^[0-9A-Za-z]{5,20}$/,
-      postalCode: /[0-9]{5}/,
-      englishAlphabetAndThai: /^[a-z\u0E00-\u0E7F]+$/i
     },
     applicationStatusWording: {
       pending: "UNDER REVIEW",
@@ -285,10 +232,15 @@ export default new Vuex.Store({
       questions: {}
     }
   },
+  getters: {
+    backEvent(state, getters){
+      return state.backEvent
+    }
+  },
   mutations: {
     UpdateDownloadIcon(state) {
-      const hide = false
-      state.showDownloadIcon = hide
+      const hide = false;
+      state.showDownloadIcon = hide;
     },
     InitForm(state) {
       var originForm = state.form !== null ? state.form : {};
@@ -547,7 +499,12 @@ export default new Vuex.Store({
     ClearFortuneQuestion(state) {
       state.furtuneQuestion = {};
       window.localStorage.removeItem("furtuneQuestion");
-    }
+    }    
   },
-  actions: {}
+  actions: {
+    updateAppSetting(state, allowBack) {
+      state.allowBack = allowBack;
+      window.localStorage.setItem("allowBack", allowBack);
+    }
+  }
 });

@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "Support",
   data() {
@@ -55,6 +57,11 @@ export default {
       },
       emailError: false
     };
+  },
+  computed: {
+    ...mapState({
+      reg: "reg"
+    })
   },
   methods: {
     descInput() {
@@ -72,12 +79,13 @@ export default {
           ),
           background: "#04A777"
         });
-        Object.entries(this.form).forEach(([key, value]) => { this.form[`${key}`] = ""; }); 
-
+        Object.entries(this.form).forEach(([key, value]) => {
+          this.form[`${key}`] = "";
+        });
       });
     },
     validateEmail() {
-      this.emailError = !this.$store.state.email.regExp.test(this.form.email);
+      this.emailError = !this.reg.email.regExp.test(this.form.email);
     }
   }
 };

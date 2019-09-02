@@ -80,7 +80,7 @@ export default {
   watch: {
     /* value: function(val) {
       // watch input if verified account
-      debugger
+
       if (this.form.accountVerified) {
         this.handleVerifyOtpVerifiedAccount();
       }
@@ -195,6 +195,9 @@ export default {
               const to = this.$route.query.to;
               this.$api.getHomePageInfo().then(res => {
                 if (res.data.code === 200) {
+                  // check credit
+                  let creditLimit = res.data.data.creditLimit;
+                  this.$store.commit("InitCredit", creditLimit);
                   const hasLoan = res.data.data.hasLoan;
                   // if already got loan, move to Loan result page instead of Loan Form
                   if (hasLoan && to === "EnterLoanInfo") {
@@ -237,12 +240,18 @@ export default {
             // Verify OTP success
             this.$store.commit("OTPVerified");
             // TODO get Home information
-            const to = this.$route.query.to;
+            let to = this.$route.query.to;
             this.$api.getHomePageInfo().then(res => {
               if (res.data.code === 200) {
+                // check credit
+                let creditLimit = res.data.data.creditLimit;
+                this.$store.commit("InitCredit", creditLimit);
+                if (parseInt(creditLimit) < 100000) {
+                  to = "LoanAmountExceedLimitError";
+                }
                 const hasLoan = res.data.data.hasLoan;
                 // if already got loan, move to Loan result page instead of Loan Form
-                if (hasLoan && to === "EnterLoanInfo") {
+                if (hasLoan && ["LoanAmountExceedLimitError", "EnterLoanInfo"].includes(to)) {
                   this.$router.push({ name: "Loan" });
                   return false;
                 }
@@ -311,6 +320,7 @@ export default {
     .inputCode {
       position: absolute;
       top: 145px;
+      height: 50px;
     }
 
     .van-hairline {

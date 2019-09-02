@@ -6,7 +6,7 @@
     />
 
     <div class="landingPageContent">
-      <div class="titleFont">Be a Happy TaoKae</div>
+      <div class="titleFont">{{ $t('Login.loginPageTitle') }}</div>
       <van-button
         class="getStartBtn"
         @click="getStart"
@@ -17,33 +17,19 @@
         @click="signIn"
         v-analytics="{event: 'Landing_Signin'}"
       >{{ $t('Login.signIn') }}</van-button>
-      <div class="bottomTitle">By using this app, you agree to the terms and conditions.</div>
+      <div class="bottomTitle">{{ $t('Login.announce') }}</div>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
-// import WapHeader from "@/components/WapHeader";
 export default {
   name: "landing-page",
-  components: {
-    // WapHeader
-  },
   computed: {
     ...mapState({
-      columns: "nationalCodeList",
-      nationCode: "nationalCode",
       isFirst: "firstLaunch"
     })
-  },
-  data() {
-    return {
-      show: false,
-      form: {},
-      phoneValidationPattern: this.$store.state.phone.thaiExp,
-      showComponents: true
-    };
   },
   methods: {
     getStart() {
@@ -55,64 +41,7 @@ export default {
     },
     signIn() {
       this.$router.push({ name: "LoginPage" });
-    },
-    setPattern(nationalCode) {
-      const item = this.nationCode.find(test => test.code === nationalCode);
-      const expName = item ? item.nation + "Exp" : "sgExp";
-      if (this.$store.state.phone[expName] !== undefined) {
-        this.phoneValidationPattern = this.$store.state.phone[expName];
-      } else {
-        this.phoneValidationPattern = this.$store.state.phone.sgExp;
-      }
-      console.log(this.phoneValidationPattern);
-    },
-    onConfirm(value, index) {
-      this.form.nationalCode = value;
-      this.setPattern(value);
-      this.show = false;
-    },
-    onCancel() {
-      this.show = false;
-    },
-    handleStart() {
-      this.$refs["elForm"].validate(valid => {
-        if (valid) {
-          this.$store.commit("UpdateUserInfo", {
-            applicantPhoneNumber: this.form.nationalCode + this.form.phone,
-            nationalCode: this.form.nationalCode,
-            phone: this.form.phone
-          });
-          this.sendOtp();
-        } else {
-          return false;
-        }
-      });
-    },
-
-    sendOtp() {
-      this.$api
-        .sendOtp({
-          phoneNumber: this.form.nationalCode + this.form.phone
-        })
-        .then(res => {
-          if (res.data.code !== 200) {
-            this.$notify(
-              res.data.code === 10003 ? this.$t("OTPErrorMsg") : res.data.msg
-            );
-            return;
-          }
-          this.$store.commit("UpdateUserInfo", {
-            accountVerified: res.data.data.merchantExist
-          });
-          this.$router.push({
-            name: "EnterOtp",
-            query: this.$route.query
-          });
-        });
     }
-  },
-  created() {
-    this.form.nationalCode = this.columns[0];
   }
 };
 </script>
@@ -123,6 +52,7 @@ export default {
   background: url("../../assets/imgs/authentication/landBak.png") no-repeat;
   background-size: contain;
   height: 100vh;
+  width: 100vw;
 
   .landingPageContent {
     position: fixed;
@@ -175,15 +105,6 @@ export default {
       left: 27px;
       bottom: 0;
     }
-  }
-}
-</style>
-
-<style lang="scss">
-.loginWrapper {
-  .el-form-item__error {
-    position: relative;
-    left: 15px;
   }
 }
 </style>

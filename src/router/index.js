@@ -1,8 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
 import analytics from "../firebase/analytics";
+import { Store } from "vuex";
 
-// import store from "../store";
+import store from "../store";
 
 Vue.use(Router);
 
@@ -128,7 +129,8 @@ const AppRouteArr = [
     name: "Home",
     component: () => import("@/views-app/Home.vue"),
     meta: {
-      title: "Home"
+      title: "Home",
+      allowBack: false
     }
   },
   {
@@ -179,7 +181,14 @@ const AppRouteArr = [
       title: "LoanInformation"
     }
   },
-
+  {
+    path: "/loan-exceed-limit",
+    name: "LoanAmountExceedLimitError",
+    component: () => import("@/views-app/loan/LoanAmountExceedLimitError.vue"),
+    meta: {
+      title: "LoanInformation"
+    }
+  },
   {
     path: "/enter-loan-info",
     name: "EnterLoanInfo",
@@ -315,7 +324,8 @@ const AppRouteArr = [
     name: "PersonalQuestion",
     component: () => import("@/views-app/authentication/PersonalQuestion.vue"),
     meta: {
-      title: "PersonalQuestion"
+      title: "PersonalQuestion",
+      allowBack: false
     }
   },
   {
@@ -388,7 +398,8 @@ const AppRouteArr = [
     name: "DailyFortuneLoading",
     component: () => import("@/views-app/fortune/DailyFortuneLoading.vue"),
     meta: {
-      title: "FortuneTellingCalculating"
+      title: "FortuneTellingCalculating",
+      allowBack: false
     }
   },
   {
@@ -397,6 +408,7 @@ const AppRouteArr = [
     component: () => import("@/views-app/fortune/DailyFortuneResult.vue"),
     meta: {
       title: "FortuneTellingResult",
+      allowBack: false
     }
   },
   {
@@ -404,7 +416,8 @@ const AppRouteArr = [
     name: "MasterProfile",
     component: () => import("@/views-app/fortune/MasterProfile.vue"),
     meta: {
-      title: "FortuneTellingMasterProfile"
+      title: "FortuneTellingMasterProfile",
+      allowBack: true
     }
   }
 ];
@@ -490,6 +503,15 @@ router.beforeEach((to, from, next) => {
   analytics.setCurrentScreen(to.meta.title);
   analytics.setCurrentScreen(to.fullPath);
   next();
+  //disable back button
+  let allowBack = true;
+  if (to.meta.allowBack !== undefined) {
+    allowBack = to.meta.allowBack
+  }
+  if (!allowBack) {
+    history.pushState(null, null, location.href);
+  }    
+  store.dispatch("updateAppSetting", { allowBack: allowBack });
 });
 
 export default router;

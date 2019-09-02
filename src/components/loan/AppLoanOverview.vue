@@ -21,16 +21,6 @@
       </div>
     </div>
     <div class="instruction">
-<!--      <div class="instruction-title">{{$t("AppLoanOverview.instructionTitle")}}</div>-->
-<!--      <div class="instruction-content-1">{{$t("AppLoanOverview.instructionContent1")}}</div>-->
-<!--      <ul class="instruction-content-2">-->
-<!--        <li>-->
-<!--          <span>Applicant Information</span>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--          <span>{{$t("AppLoanOverview.instructionContent2.photos")}}</span>-->
-<!--        </li>-->
-<!--      </ul>-->
       <div class="instruction-qs">
         {{$t("AppLoanOverview.instruction.qs")}}
       </div>
@@ -254,6 +244,7 @@ export default {
   },
   computed: {
     ...mapState({
+      creditLimit: state => state.credit.currentCreditLimit,
       loanProfile: state => state.loanProfile,
       merchantApplyingChannelStatus: state =>
         state.merchantApplyingChannelStatus,
@@ -284,7 +275,7 @@ export default {
         });
         return false;
       }
-      this.$router.push({ name: "EnterLoanInfo" });
+      this.$router.push({ name: (parseInt(this.creditLimit) < 100000) ? "LoanAmountExceedLimitError" : "EnterLoanInfo" });
     },
     formatStatus(loanStatus) {
       return this.merchantApplyingChannelStatus.filter(

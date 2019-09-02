@@ -18,7 +18,7 @@
         <el-form-item
           prop="answering">
           <el-input :class="error? 'input-box-error': 'input-box'" inputmode="numeric" v-model="form.answering"
-                    maxlength="9" @input="formatCurrency"
+                    maxlength="11" @input="formatCurrency"
                     :placeholder="question.placeholder">
             <div class="currency" slot="suffix">{{$store.state.currency}}</div>
           </el-input>
