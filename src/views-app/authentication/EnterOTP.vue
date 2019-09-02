@@ -80,7 +80,7 @@ export default {
   watch: {
     /* value: function(val) {
       // watch input if verified account
-      debugger
+
       if (this.form.accountVerified) {
         this.handleVerifyOtpVerifiedAccount();
       }

@@ -10,7 +10,7 @@
       <van-tab :title="$t('Record.Income')">
         <div class="record-status">
           <span class="name">{{$t("Record.TotalIncome")}}</span>
-          <span class="amount">+ {{ dailyIncome }} <i>{{$store.state.currency}}</i></span>
+          <span class="amount">+ {{ dailyIncome }} <i>{{currency}}</i></span>
         </div>
 
         <div class="label-left">{{$t("Record.IncomeName")}}</div>
@@ -50,7 +50,7 @@
             maxlength="13"
             readonly
           />
-          <div class="plus currency">{{$store.state.currency}}</div>
+          <div class="plus currency">{{currency}}</div>
         </div>
 
       </van-tab>
@@ -58,7 +58,7 @@
 
         <div class="record-status expenses">
           <span class="name">{{$t("Record.TotalExpenses")}}</span>
-          <span class="amount">- {{ dailyExpense }} <i>{{$store.state.currency}}</i></span>
+          <span class="amount">- {{ dailyExpense }} <i>{{currency}}</i></span>
         </div>
         <div class="label-left">{{$t("Record.ExpensesName")}}</div>
 
@@ -97,7 +97,7 @@
             maxlength="13"
             readonly
           />
-          <div class="plus currency">{{$store.state.currency}}</div>
+          <div class="plus currency">{{currency}}</div>
         </div>
 
       </van-tab>
@@ -137,8 +137,6 @@
 </template>
 
 <script>
-import AppTabBar from "@/components/AppTabBar";
-import AppCommonHeader from "@/components/AppCommonHeader";
 import { findIndex } from "lodash";
 
 import { mapState } from "vuex";
@@ -148,20 +146,6 @@ const today = new Date();
 const startDate = new Date("2019/01/01");
 export default {
   name: "AppRecords",
-
-  components: {
-    AppTabBar,
-    AppCommonHeader
-  },
-
-  computed: {
-    ...mapState({
-      localDateFormatter: "localDateFormatter",
-      isLogin: "OTPVerified",
-      reg: "reg"
-    })
-  },
-
   data() {
     return {
       tabActive: 0,
@@ -180,6 +164,14 @@ export default {
       dailyIncome: 0,
       dailyExpense: 0
     };
+  },
+  computed: {
+    ...mapState({
+      localDateFormatter: "localDateFormatter",
+      isLogin: "OTPVerified",
+      reg: "reg",
+      currency: "currency"
+    })
   },
   created() {
     this.fetchDataUpdate(
@@ -297,8 +289,7 @@ export default {
         this.localDateFormatter
       );
       this.appear = false;
-      //const regex = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
-      if (this.reg.regEx.financeAmount.with2dec.test(form[this.type])) {
+      if (this.reg.financeAmount.with2dec.test(form[this.type])) {
         // this.$store.commit("UpdateRecord", this.convertForm(form));
         form[this.type] = parseFloat(form[this.type]);
         this.fetchData(form);

@@ -163,7 +163,7 @@
             <el-form-item
               class="spec-mobile"
               prop="revenuePerMonth"
-              :rules="[{ required: true, message: 'This field is required.', trigger: 'blur' },{ pattern: this.reg.regEx.revenue.regExp, message: 'Please enter a valid Revenue', trigger: 'blur'}]"
+              :rules="[{ required: true, message: 'This field is required.', trigger: 'blur' },{ pattern: this.reg.revenue.regExp, message: 'Please enter a valid Revenue', trigger: 'blur'}]"
             >
               <span
                 class="pre-fill"
@@ -185,7 +185,7 @@
               prop="sellingUrl"
               :rules="[
       { required: false, message: 'This field is required.', trigger: 'blur' },
-      { pattern: this.reg.regEx.url.regExp, message: 'Please enter a valid URL', trigger: 'blur'}
+      { pattern: this.reg.url.regExp, message: 'Please enter a valid URL', trigger: 'blur'}
     ]"
             >
               <span

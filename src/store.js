@@ -239,8 +239,8 @@ export default new Vuex.Store({
   },
   mutations: {
     UpdateDownloadIcon(state) {
-      const hide = false
-      state.showDownloadIcon = hide
+      const hide = false;
+      state.showDownloadIcon = hide;
     },
     InitForm(state) {
       var originForm = state.form !== null ? state.form : {};

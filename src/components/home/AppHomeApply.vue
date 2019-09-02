@@ -15,15 +15,15 @@
     <div class="require">
       <ul>
         <li>
-          What's required:
+          {{ $t('Home.require') }}
         </li>
         <li>
           <i class="iconfont icondocument" />
-          National ID
+          {{ $t('Home.nationalId') }}
         </li>
         <li>
           <i class="iconfont icontime" />
-          Approximately <strong>5 minutes</strong>
+          {{ $t('Home.approximately') }} <strong>{{ $t('Home.min') }}</strong>
         </li>
       </ul>
       <van-button
@@ -31,7 +31,7 @@
         class="bottom-btn"
         @click="handleNext"
       >
-        Apply Now
+        {{ $t('Home.applyNow') }}
       </van-button>
     </div>
   </div>

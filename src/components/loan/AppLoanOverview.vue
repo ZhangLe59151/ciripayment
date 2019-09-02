@@ -21,16 +21,6 @@
       </div>
     </div>
     <div class="instruction">
-<!--      <div class="instruction-title">{{$t("AppLoanOverview.instructionTitle")}}</div>-->
-<!--      <div class="instruction-content-1">{{$t("AppLoanOverview.instructionContent1")}}</div>-->
-<!--      <ul class="instruction-content-2">-->
-<!--        <li>-->
-<!--          <span>Applicant Information</span>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--          <span>{{$t("AppLoanOverview.instructionContent2.photos")}}</span>-->
-<!--        </li>-->
-<!--      </ul>-->
       <div class="instruction-qs">
         {{$t("AppLoanOverview.instruction.qs")}}
       </div>

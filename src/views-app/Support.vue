@@ -79,12 +79,13 @@ export default {
           ),
           background: "#04A777"
         });
-        Object.entries(this.form).forEach(([key, value]) => { this.form[`${key}`] = ""; }); 
-
+        Object.entries(this.form).forEach(([key, value]) => {
+          this.form[`${key}`] = "";
+        });
       });
     },
     validateEmail() {
-      this.emailError = !this.reg.regEx.email.regExp.test(this.form.email);
+      this.emailError = !this.reg.email.regExp.test(this.form.email);
     }
   }
 };
