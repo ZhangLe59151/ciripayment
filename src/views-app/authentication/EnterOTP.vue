@@ -246,7 +246,7 @@ export default {
                 // check credit
                 let creditLimit = res.data.data.creditLimit;
                 this.$store.commit("InitCredit", creditLimit);
-                if (parseInt(creditLimit) < 100000) {
+                if (parseInt(creditLimit) < this.$store.state.minBusinessWorthForLoan) {
                   to = "LoanAmountExceedLimitError";
                 }
                 const hasLoan = res.data.data.hasLoan;

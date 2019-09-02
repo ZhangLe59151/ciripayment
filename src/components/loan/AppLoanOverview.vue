@@ -275,7 +275,7 @@ export default {
         });
         return false;
       }
-      this.$router.push({ name: (parseInt(this.creditLimit) < 100000) ? "LoanAmountExceedLimitError" : "EnterLoanInfo" });
+      this.$router.push({ name: (parseInt(this.creditLimit) < this.$store.state.minBusinessWorthForLoan) ? "LoanAmountExceedLimitError" : "EnterLoanInfo" });
     },
     formatStatus(loanStatus) {
       return this.merchantApplyingChannelStatus.filter(

@@ -34,6 +34,7 @@ export default new Vuex.Store({
       ? localStorage.getItem("firstLaunch")
       : "Yes",
     currency: "฿",
+    minBusinessWorthForLoan: 120000,
     allowBack: true,
     serviceOverviewVo: {},
     form: {},
@@ -499,7 +500,7 @@ export default new Vuex.Store({
     ClearFortuneQuestion(state) {
       state.furtuneQuestion = {};
       window.localStorage.removeItem("furtuneQuestion");
-    }    
+    }
   },
   actions: {
     updateAppSetting(state, allowBack) {
