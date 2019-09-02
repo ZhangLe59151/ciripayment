@@ -33,12 +33,12 @@ export default {
   },
   mounted() {
     window.onpopstate = () => {
-      if (!this.allowBack) { 
+      if (!this.allowBack) {
         console.log(this.allowBack);
-        history.go(1) 
-        } else {
-          console.log(this.allowBack);
-        }
+        history.go(1)
+      } else {
+        console.log(this.allowBack);
+      }
     }
     var vm = this;
     document.addEventListener(
@@ -50,6 +50,7 @@ export default {
             e.preventDefault();
             break;
           }
+          case "LoanAmountExceedLimitError":
           case "Loan": {
             vm.$router.push({ name: "Home" });
             break;
