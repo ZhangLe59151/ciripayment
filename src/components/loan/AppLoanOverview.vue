@@ -275,7 +275,15 @@ export default {
         });
         return false;
       }
-      this.$router.push({ name: (parseInt(this.creditLimit) < 100000) ? "LoanAmountExceedLimitError" : "EnterLoanInfo" });
+      this.$api.verifyLoanApplyAble().then(res => {
+        if (res.data.code === 200) {
+          (res.data.data.verifyResult) ? this.$router.push({ name: "EnterLoanInfo" })
+            : this.$router.push({ name: "LoanAmountExceedLimitError" });
+        } else {
+          this.$notify(res.data.msg);
+        }
+      });
+      // this.$router.push({ name: (parseInt(this.creditLimit) < this.$store.state.minBusinessWorthForLoan) ? "LoanAmountExceedLimitError" : "EnterLoanInfo" });
     },
     formatStatus(loanStatus) {
       return this.merchantApplyingChannelStatus.filter(

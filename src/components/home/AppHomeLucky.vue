@@ -34,7 +34,7 @@
     <div class="subtitle single-subtitle">
       <div>{{subtitle}}</div>
       <div v-if="inputedIncome">
-        {{incomeMin}}<span class="subscript">{{$t("Home.currency")}}</span> 
+        {{incomeMin}}<span class="subscript">{{$t("Home.currency")}}</span>
         ~ {{incomeMax}}<span class="subscript">{{$t("Home.currency")}}</span></div>
     </div>
     <div class="encourage">{{$t("Home.encourageWording")}}</div>
@@ -93,7 +93,6 @@ export default {
             );
           } else {
             this.inputedIncome = false;
-            
           }
           this.subtitle = salesTarget.generalResult;
         }
@@ -178,6 +177,11 @@ export default {
         width: 200px;
         > div:first-child {
           margin: 2px 0;
+        }
+        > div:nth-child(2) {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
       }
     }

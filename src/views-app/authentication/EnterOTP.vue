@@ -239,33 +239,44 @@ export default {
           if (res.data.code === 200) {
             // Verify OTP success
             this.$store.commit("OTPVerified");
+            this.$analytics.setUserId(res.data.data.uid);
             // TODO get Home information
             let to = this.$route.query.to;
-            this.$api.getHomePageInfo().then(res => {
-              if (res.data.code === 200) {
-                // check credit
-                let creditLimit = res.data.data.creditLimit;
-                this.$store.commit("InitCredit", creditLimit);
-                if (parseInt(creditLimit) < 100000) {
-                  to = "LoanAmountExceedLimitError";
-                }
-                const hasLoan = res.data.data.hasLoan;
-                // if already got loan, move to Loan result page instead of Loan Form
-                if (hasLoan && ["LoanAmountExceedLimitError", "EnterLoanInfo"].includes(to)) {
-                  this.$router.push({ name: "Loan" });
-                  return false;
-                }
-              }
-            });
-
+            // If first time, then go to personal question
             if (this.isFirst === "Yes" && this.deviceType === "APP") {
               this.$router.push({
                 name: "PersonalQuestion",
-                params: { id: 0 }
+                params: { id: 0 },
+                query: { to: to }
               });
-            } else {
-              this.$router.push(to ? { name: to } : { name: "Home" });
+              return false;
             }
+            // If user come from Loan page
+            if (to === "EnterLoanInfo") {
+              this.$api.getHomePageInfo().then(res => {
+                if (res.data.code === 200) {
+                  // check if user already has loan
+                  const hasLoan = res.data.data.hasLoan;
+                  // if already got loan, move to Loan result page instead of Loan Form
+                  if (hasLoan && ["EnterLoanInfo"].includes(to)) {
+                    this.$router.push({ name: "Loan" });
+                    return false;
+                  }
+                  // else- check credit limit to see if he can apply loan
+                  this.$api.verifyLoanApplyAble().then(res => {
+                    if (res.data.code === 200) {
+                      (res.data.data.verifyResult) ? this.$router.push({ name: "EnterLoanInfo" })
+                        : this.$router.push({ name: "LoanAmountExceedLimitError" });
+                    } else {
+                      this.$notify(res.data.msg);
+                    }
+                  });
+                }
+              });
+              return false;
+            }
+            // otherwise : go to Homepage or anywhere they want to
+            this.$router.push(to ? { name: to } : { name: "Home" });
           } else {
             this.$notify({
               message: otpCodeErrorMessage,
