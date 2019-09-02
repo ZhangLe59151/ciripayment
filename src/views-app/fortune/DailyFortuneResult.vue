@@ -119,8 +119,7 @@ export default {
     }
   },
   mounted() {
-    document.title = this.$t("FortuneTelling.sharePageDesc");
-
+    // document.title = this.$t("FortuneTelling.sharePageDesc");
     const shareKey = this.$route.query.shareKey;
 
     if (shareKey) {
