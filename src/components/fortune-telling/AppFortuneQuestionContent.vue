@@ -1,6 +1,12 @@
 <template>
-  <div class="app-fortune-question-content" id="appFortuneQuestionContent">
-    <div class="background-card" id="backgroundCard">
+  <div
+    class="app-fortune-question-content"
+    id="appFortuneQuestionContent"
+  >
+    <div
+      class="background-card"
+      id="backgroundCard"
+    >
       <div class="question-header">
         {{ $t("Fortune.question") }} {{ index }}
       </div>
@@ -20,22 +26,34 @@
           :v-model="answer"
         />
 
-        <div class="flex-container" v-if="questionList[questionIndex].answerType === 3 && questionList[questionIndex].options.length < 4">
-          <div v-for="(item,index) in questionList[questionIndex].options" :key="index">
-             <van-button
+        <div
+          class="flex-container"
+          v-if="questionList[questionIndex].answerType === 3 && questionList[questionIndex].options.length < 4"
+        >
+          <div
+            v-for="(item,index) in questionList[questionIndex].options"
+            :key="index"
+          >
+            <van-button
               :class="(answer === item ? 'tab3Selected' : 'tab3')"
-              @click="onSelect(item)" >{{ item }}
+              @click="onSelect(item)"
+            >{{ item }}
             </van-button>
           </div>
         </div>
 
         <div
           class="flex-container"
-           v-if="questionList[questionIndex].answerType === 3 && questionList[questionIndex].options.length > 3">
-           <div v-for="(item,index) in questionList[questionIndex].options" :key="index">
+          v-if="questionList[questionIndex].answerType === 3 && questionList[questionIndex].options.length > 3"
+        >
+          <div
+            v-for="(item,index) in questionList[questionIndex].options"
+            :key="index"
+          >
             <van-button
               :class="(answer === item ? 'tab7Selected' : 'tab7')"
-              @click="onSelect(item)" >{{ item }}
+              @click="onSelect(item)"
+            >{{ item }}
             </van-button>
           </div>
         </div>
@@ -45,9 +63,9 @@
         class="bottom-btn"
         :disabled="answer.length === 0"
         @click="next"
-        >
-          {{index === 1 ? "Next" : "Get My Fortune"}}
-        </van-button>
+      >
+        {{index === 1 ? "Next" : "Get My Fortune"}}
+      </van-button>
     </div>
   </div>
 </template>
@@ -58,17 +76,27 @@ import { mapState } from "vuex";
 const today = new Date();
 export default {
   name: "AppFortuneQuestionContent",
+
   data() {
     return {
       index: 1,
       questionIndex: 0,
       answer: "",
       answerForm: [
-        { id: 0, value: " ", answerDate: this.$moment(today).format("YYYYMMDD"), allowRepeat: 0 },
-        { id: 0, value: " ", answerDate: this.$moment(today).format("YYYYMMDD"), allowRepeat: 0 } ],
-      questionList: [
-        { "question": "" }
-      ]
+        {
+          id: 0,
+          value: " ",
+          answerDate: this.$moment(today).format("YYYYMMDD"),
+          allowRepeat: 0
+        },
+        {
+          id: 0,
+          value: " ",
+          answerDate: this.$moment(today).format("YYYYMMDD"),
+          allowRepeat: 0
+        }
+      ],
+      questionList: [{ question: "" }]
     };
   },
   computed: {
@@ -76,17 +104,26 @@ export default {
       isLogin: "OTPVerified"
     })
   },
+
   created() {
     window.addEventListener("native.keyboardshow", keyboardShowHandler);
     function keyboardShowHandler(e) {
-      document.getElementById("appFortuneQuestionContent").style.height = `${window.innerHeight * 0.75 + e.keyboardHeight}px`;
-      document.getElementById("backgroundCard").style.height = `${window.innerHeight * 0.75 + e.keyboardHeight}px`;
+      document.getElementById(
+        "appFortuneQuestionContent"
+      ).style.height = `${window.innerHeight * 0.75 + e.keyboardHeight}px`;
+      document.getElementById(
+        "backgroundCard"
+      ).style.height = `${window.innerHeight * 0.75 + e.keyboardHeight}px`;
     }
     // This event fires when the keyboard will hide
     window.addEventListener("native.keyboardhide", keyboardHideHandler);
     function keyboardHideHandler(e) {
-      document.getElementById("appFortuneQuestionContent").style.height = `${window.innerHeight * 0.75}px`;
-      document.getElementById("backgroundCard").style.height = `${window.innerHeight * 0.75}px`;
+      document.getElementById(
+        "appFortuneQuestionContent"
+      ).style.height = `${window.innerHeight * 0.75}px`;
+      document.getElementById(
+        "backgroundCard"
+      ).style.height = `${window.innerHeight * 0.75}px`;
     }
     this.$api.getQuestionF().then(res => {
       if (res.data.code === 200) {
@@ -107,12 +144,17 @@ export default {
         if (this.isLogin) {
           this.$api.postAnswerF(this.answerForm).then(res => {
             if (res.data.code === 200) {
-              setTimeout(() => { this.$router.push({ name: "DailyFortuneLoading" }); }, 1500);
+              setTimeout(() => {
+                this.$router.push({ name: "DailyFortuneLoading" });
+              }, 1500);
             }
           });
         } else {
           this.$store.commit("UpdateFurtuneQuestionInfo", this.answerForm);
-          this.$router.push({ name: "LoginPage", query: { to: "DailyFortuneLoading" } });
+          this.$router.push({
+            name: "LoginPage",
+            query: { to: "DailyFortuneLoading" }
+          });
         }
       } else {
         this.questionIndex += 1;
@@ -133,11 +175,11 @@ export default {
   width: calc(100vw - 22px);
   margin-left: 11px;
   margin-right: 11px;
-
 }
 .background-card {
   position: relative;
-  background: url("../../assets/imgs/fortune-telling/fortune_telling_question_card.png") no-repeat center;
+  background: url("../../assets/imgs/fortune-telling/fortune_telling_question_card.png")
+    no-repeat center;
   background-size: cover;
   width: calc(100vw - 22px);
   height: 75vh;
@@ -166,7 +208,7 @@ export default {
 
   .question-subtitle {
     position: absolute;
-    color: #68737D;
+    color: #68737d;
     font-size: 14px;
     top: 144px;
     height: 24px;
@@ -195,79 +237,64 @@ export default {
     height: 140px;
     width: calc(100vw - 70px);
 
-  .answer-input {
-    position: absolute;
-    background-color: white;
-    font-size: 24px;
-    text-align: center;
-    line-height: 80px;
-    top: 34px;
-    height: 80px;
-    width: calc(100vw - 95px);
-    border-radius: 4px;
-    border: 1px solid #87929D;
-    box-sizing: border-box;
+    .answer-input {
+      position: absolute;
+      background-color: white;
+      font-size: 24px;
+      text-align: center;
+      line-height: 80px;
+      top: 34px;
+      height: 80px;
+      width: calc(100vw - 95px);
+      border-radius: 4px;
+      border: 1px solid #87929d;
+      box-sizing: border-box;
+    }
+
+    .flex-container {
+      display: flex;
+      flex-wrap: wrap;
+
+      .tab3 {
+        width: calc(100vw - 110px);
+        height: 40px;
+        margin: 0 0 10px 0;
+        border: 1px solid #87929d;
+        border-radius: 4px;
+        background-color: transparent;
+      }
+
+      .tab3Selected {
+        width: calc(100vw - 110px);
+        height: 40px;
+        margin: 0 0 10px 0;
+        border: 1px solid #87929d;
+        border-radius: 4px;
+        background-color: #2f3941;
+        color: white;
+      }
+
+      .tab7 {
+        width: calc(50vw - 56px);
+        height: 40px;
+        top: 30px;
+        margin: 0 4px 5px 4px;
+        border: 1px solid #87929d;
+        border-radius: 4px;
+        background-color: transparent;
+      }
+
+      .tab7Selected {
+        width: calc(50vw - 56px);
+        height: 40px;
+        top: 30px;
+        margin: 0 4px 5px 4px;
+        border: 1px solid #87929d;
+        border-radius: 4px;
+        background-color: #2f3941;
+        color: white;
+      }
+    }
   }
-
-  .flex-container {
-    display: flex;
-    flex-wrap: wrap;
-
-    .tab3 {
-      width: calc(100vw - 110px);
-      height: 40px;
-      margin: 0 0 10px 0;
-      border: 1px solid #87929D;
-      border-radius: 4px;
-      background-color: transparent;
-    }
-
-    .tab3Selected {
-     width: calc(100vw - 110px);
-      height: 40px;
-      margin: 0 0 10px 0;
-      border: 1px solid #87929D;
-      border-radius: 4px;
-      background-color: #2F3941;
-      color: white;
-    }
-
-    .tab7 {
-      width: calc(50vw - 56px);
-      height: 40px;
-      top: 30px;
-      margin: 0 4px 5px 4px;
-      border: 1px solid #87929D;
-      border-radius: 4px;
-      background-color: transparent;
-    }
-
-    .tab7Selected {
-      width: calc(50vw - 56px);
-      height: 40px;
-      top: 30px;
-      margin: 0 4px 5px 4px;
-      border: 1px solid #87929D;
-      border-radius: 4px;
-      background-color: #2F3941;
-      color: white;
-    }
-  }
-
-  }
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
 </style>
