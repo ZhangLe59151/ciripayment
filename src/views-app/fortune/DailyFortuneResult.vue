@@ -3,12 +3,13 @@
     <fortune-telling-app-fortune-header
       :showLeftIcon="true"
       :showRightIcon="false"
+      :letfFunc="leftFunc"
       :showTitle="$t('Fortune.dailyTitle')"
     />
     <div class="top-desc">
       <fortune-telling-app-fortune-master-photo
         class="master-photo"
-        :masterId="+fortuneInfo.selectedMaster || +fortuneResult.masterId"
+        :masterId="+fortuneInfo.fortuneResult.masterId || +fortuneResult.masterId"
         :imgSize="60"
       />
       <div class="master-des">
@@ -129,6 +130,9 @@ export default {
     this.updateLikeStatusWithApi();
   },
   methods: {
+    leftFunc() {
+      this.$router.replace({ name: "Home" });
+    },
     initFortuneResult(savedResult) {
       this.fortuneResult = savedResult.fortuneResult;
       this.likeStatus = savedResult.like;

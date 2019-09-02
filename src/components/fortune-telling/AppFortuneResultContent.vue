@@ -188,7 +188,7 @@ export default {
 
       .sales-result {
         position: absolute;
-        color: black;
+        color: #000000;
         font-size: 24px;
         bottom: 72px;
         width: 100%;
