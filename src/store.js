@@ -46,7 +46,7 @@ export default new Vuex.Store({
     localDateFormatter: "YYYYMMDD",
     nationalCodeList: require("@/assets/data/nationalCodeList.json"),
     nationalCode: require("@/assets/data/nationalCode.json"),
-    reg: require("@/assets/reg/regEx.js"),
+    reg: require("@/assets/reg/regEx.js").regEx,
     applicationStatus: {
       pending: "0",
       approved: "1",
