@@ -89,6 +89,18 @@ export default {
         this.handleVerifyOtpVerifiedAccount();
       }
     } */
+    showNumber(newv, oldv) {
+      if (newv) {
+        if (window.innerHeight < 560) {
+          document.getElementById("otp-content").style.marginTop = 0;
+        }
+        if (window.innerHeight < 500) {
+          document.getElementById("otp-content").style.marginTop = "-100px";
+        }
+      } else {
+        document.getElementById("otp-content").style.marginTop = "100px";
+      }
+    }
   },
   created() {
     this.countTime();

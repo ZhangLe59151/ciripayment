@@ -87,6 +87,32 @@ export default {
       reg: "reg"
     })
   },
+  watch: {
+    show(newv, oldv) {
+      if (newv) {
+        if (window.innerHeight < 560) {
+          document.getElementById("login-content").style.marginTop = 0;
+        }
+        if (window.innerHeight < 415) {
+          document.getElementById("login-content").style.marginTop = "-100px";
+        }
+      } else {
+        document.getElementById("login-content").style.marginTop = "100px";
+      }
+    },
+    showNumber(newv, oldv) {
+      if (newv) {
+        if (window.innerHeight < 560) {
+          document.getElementById("login-content").style.marginTop = 0;
+        }
+        if (window.innerHeight < 415) {
+          document.getElementById("login-content").style.marginTop = "-100px";
+        }
+      } else {
+        document.getElementById("login-content").style.marginTop = "100px";
+      }
+    }
+  },
   created() {
     this.phoneValidationPattern = this.reg.phone.thaiExp;
     this.form.nationalCode = this.columns[0];
@@ -160,7 +186,7 @@ export default {
   position: fixed;
   background: url("../../assets/imgs/authentication/otpBak.png") no-repeat;
   background-size: contain;
-  height: 100vh;
+  min-height: 100vh;
 
   .landingPageContent {
     position: relative;
@@ -229,7 +255,7 @@ export default {
         height: 20px;
         width: 40px;
       }
-    } 
+    }
   }
 
   .bottom-btn {

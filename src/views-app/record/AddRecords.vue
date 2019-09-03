@@ -35,7 +35,7 @@
             :value="form.accountDate"
             confirm-button-text="confirm"
             cancel-button-text="cancel"
-            @focus="appear = true"
+            @focus="onBeginInputDate"
             maxlength="13"
             readonly
           />
@@ -116,12 +116,13 @@
     <van-row>
       <van-col span="24">
         <van-datetime-picker
+          ref="dateTimePicker"
           v-show="appear"
-          v-model="currentDate"
+          v-model="choosingDate"
           type="date"
           :min-date="minDate"
           :max-date="maxDate"
-          @cancel="appear = false"
+          @cancel="cancelSetDate"
           @confirm="setDate"
         />
       </van-col>
@@ -165,6 +166,7 @@ export default {
       appear: false,
       minDate: startDate,
       maxDate: today,
+      choosingDate: this.$route.query.date ? this.$route.query.date : today,
       currentDate: this.$route.query.date ? this.$route.query.date : today,
       dailyIncome: 0,
       dailyExpense: 0
@@ -242,14 +244,32 @@ export default {
         this.form.memo = value.slice(0, 30);
       }
     },
+    onBeginInputDate() {
+      this.appear = true;
+      // increase height of app
+      if (window.innerHeight >= 700) {
+        return false;
+      }
+      document.getElementById(
+        "add-record"
+      ).style.height = `${window.innerHeight + 250 - 50}px`;
+      // scroll to btn
+      var element = this.$refs["btn"];
+      var top = element.offsetTop;
+      console.log("scroll", element, top);
+      window.scrollTo(0, top);
+    },
     showKeyboard(type) {
       this.appear = false;
       this.showNumber = true;
       this.type = type;
-      // increase height of app
+      // increase height of app if too small
+      if (window.innerHeight >= 700) {
+        return false;
+      }
       document.getElementById(
         "add-record"
-      ).style.height = `${window.innerHeight * 1.3 - 50}px`;
+      ).style.height = `${window.innerHeight + 250 - 50}px`;
       // scroll to btn
       var element = this.$refs["btn"];
       var top = element.offsetTop;
@@ -321,6 +341,12 @@ export default {
     },
     setDate(value) {
       this.appear = false;
+      this.currentDate = value;
+      this.onHide();
+    },
+    cancelSetDate(value) {
+      this.appear = false;
+      this.onHide();
     },
     inputNote() {
       this.appear = false;
