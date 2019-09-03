@@ -51,6 +51,7 @@ export default {
         if (res.data.code === 200) {
           this.$toast("Logout success");
           this.$store.commit("logOut");
+          this.$analytics.setUserId("");
           this.$router.push({ name: "LandingPage" });
         } else {
           this.$toast("Logout failed");
