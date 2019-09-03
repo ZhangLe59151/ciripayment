@@ -88,6 +88,7 @@ export default {
   },
   data() {
     return {
+      sendingRequest: false,
       url: "",
       backgroundStyle: `background: url(${this.question.value || ""}) no-repeat`,
       form: {
@@ -190,6 +191,9 @@ export default {
       xhr.send(form);
     },
     handleSubmit() {
+      if (this.sendingRequest) {
+        return false;
+      }
       if (this.photoFromCamera) {
         this.handleSubmitTakingPhoto();
       } else {
@@ -200,9 +204,7 @@ export default {
       event.preventDefault();
       this.validateInput();
       if (!this.error) {
-        // this.$store.commit("UpdateCreditLimit", this.$store.state.credit.currentCreditLimit + this.question.limitAmount);
-        // this.$store.commit("UpdateCreditAnswer", { id: this.question.id, value: this.form.answering });
-
+        this.sendingRequest = true;
         // send to server
         this.$api.submitCreditAnswer({ id: this.question.id, value: this.form.answering }).then(
           res => {
@@ -211,6 +213,7 @@ export default {
               this.$store.commit("UpdateCreditLimit", this.$store.state.credit.currentCreditLimit + this.question.limitAmount);
               this.$store.commit("UpdateCreditAnswer", { id: this.question.id, value: this.form.answering });
             }
+            this.sendingRequest = false;
           }
         )
       }
@@ -220,6 +223,7 @@ export default {
       this.validateInput();
       if (!this.error) {
         // upload to cloud
+        this.sendingRequest = true;
         var vm = this;
         var UploadApi = this.$store.state.uploadImgUrl;
         var fileObj = this.dataURItoBlob(this.form.answering);
@@ -244,6 +248,7 @@ export default {
                   vm.$store.commit("UpdateCreditLimit", vm.$store.state.credit.currentCreditLimit + vm.question.limitAmount);
                   vm.$store.commit("UpdateCreditAnswer", { id: vm.question.id, value: resUpload.data.url });
                 }
+                vm.sendingRequest = false;
               }
             )
           } else {
@@ -252,6 +257,7 @@ export default {
                 "Upload failed. Please check your internet connection is stable before trying again.",
               duration: 3000
             });
+            vm.sendingRequest = false;
             return false;
           }
         };
