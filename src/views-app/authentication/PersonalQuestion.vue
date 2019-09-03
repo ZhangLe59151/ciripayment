@@ -81,7 +81,7 @@
         class="icon"
         :src="iconSucceed"
       />
-      <div class="title">{{ $t('Login.completeQuestion')}}</div>
+      <div class="title">{{ $tc('Login.completeQuestion', 1)}}<br>{{ $tc('Login.completeQuestion', 2)}}</div>
     </div>
   </div>
 </template>
