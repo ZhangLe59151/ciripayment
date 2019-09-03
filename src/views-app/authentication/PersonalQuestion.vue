@@ -4,8 +4,11 @@
       class="personalPageContent"
       v-show="questionPage"
     >
-    <div class="tabLine"></div>
-    <div class="tabLine"></div>
+    <div class="am-progress">
+      <div class="am-progress-bar1"></div>
+      <div class="am-progress-bar2" :style="tabActive > 0 ? 'background-color: #fdae44;' : ''"></div>
+      <div class="am-progress-bar3" :style="tabActive === 2 ? 'background-color: #fdae44;' : ''"></div>
+    </div>
       <van-tabs
         v-model="tabActive"
         animated
@@ -330,14 +333,38 @@ export default {
   background-size: cover;
   height: 100vh;
 
-  .tabLine {
+  .am-progress {
     position: fixed;
-    left: 0px;
-    top: 44px;
-    z-index: -1;
-    height: 2px;
-    background-color: #fdae44;
+    top: 45px;
+    left: 16px;
+    height: 6px;
+    width: 196px;
+    z-index: 999;
+
+    .am-progress-bar1 {
+      position: absolute;
+      width: 65px;
+      height: 6px;
+      background-color: #fdae44;
+    }
+
+    .am-progress-bar2 {
+      position: absolute;
+      width: 65px;
+      height: 6px;
+      left: 72px;
+      background-color: #dde0e2;
+    }
+
+    .am-progress-bar3 {
+      position: absolute;
+      width: 65px;
+      height: 6px;
+      left: 143px;
+      background-color: #dde0e2;
+    }
   }
+
 
   .personalPageContent {
     position: fixed;
@@ -529,11 +556,11 @@ export default {
 .van-tabs__line {
   padding-top: 0 !important;
   width: 56px !important;
-  background-color: #fdae44;
+  background-color: white !important;
 }
 .van-tabs__wrap {
   height: 56px !important;
-  width: 179x !important;
+  width: 179px !important;
 }
 .van-hairline--top-bottom {
   width: 179px !important;
