@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-cd ..
+cd ../..
+npm run build-pro-app
+cd src-cordova || exit
 rm -rf platforms
 rm -rf plugins
 cordova prepare
