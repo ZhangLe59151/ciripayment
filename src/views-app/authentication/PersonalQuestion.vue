@@ -528,13 +528,15 @@ export default {
     .van-hairline--top-bottom {
       height: 0 !important;
     }
+    .van-tabs__wrap {
+      height: 56px !important;
+      width: 179px !important;
+    }
+    .van-hairline--top-bottom {
+      width: 179px !important;
+    }
   }
-  .van-tabs__wrap {
-    height: 56px !important;
-    width: 179px !important;
-  }
-  .van-hairline--top-bottom {
-    width: 179px !important;
-  }
-}
+  
+
+
 </style>
