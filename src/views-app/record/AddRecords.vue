@@ -207,7 +207,10 @@ export default {
           .subtract(1, "days")
           .format(this.localDateFormatter);
         const _selected = this.$moment(val).format(this.localDateFormatter);
-        const kv = { [_today]: "Today, ", [_yesterday]: "Yesterday, " };
+        const kv = {
+          [_today]: this.$t("Record.today"),
+          [_yesterday]: this.$t("Record.yesterday")
+        };
 
         this.$set(
           this.form,

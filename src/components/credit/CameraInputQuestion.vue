@@ -1,26 +1,41 @@
 <template>
-  <div v-if="!!question.value" class="camera-input-question">
+  <div
+    v-if="!!question.value"
+    class="camera-input-question"
+  >
     <i class="iconfont iconsuccess" />
     <div class="title">{{question.question}}</div>
-    <div class="img-container" :style="backgroundStyle">
+    <div
+      class="img-container"
+      :style="backgroundStyle"
+    >
     </div>
-    <van-button class="submit-btn-disabled" disabled >{{question.limitAmount}} {{$store.state.currency}} Earned</van-button>
+    <van-button
+      class="submit-btn-disabled"
+      disabled
+    >{{question.limitAmount}} {{$store.state.currency}} {{$t("Credit.earned")}}</van-button>
   </div>
-  <div v-else class="camera-input-question">
+  <div
+    v-else
+    class="camera-input-question"
+  >
     <div class="title">{{question.question}}</div>
-    <el-form v-if="!form.answering"
-             label-width="0px"
-             :model="form"
-             ref="elForm"
-             size="small"
-             label-position="top"
-             class="elForm"
+    <el-form
+      v-if="!form.answering"
+      label-width="0px"
+      :model="form"
+      ref="elForm"
+      size="small"
+      label-position="top"
+      class="elForm"
     >
       <el-form-item
         :class="error ? 'input-box-error upload-wrapper': 'upload-wrapper'"
-        prop="answering">
+        prop="answering"
+      >
         <div
-          id="camera-input-field" @click="takePhoto"
+          id="camera-input-field"
+          @click="takePhoto"
         >
           <div class="placeholder">
             <i class="iconfont iconcamera" />
@@ -31,23 +46,34 @@
       </el-form-item>
     </el-form>
     <div v-else>
-      <div id="photo-question" class="img-container" :style="backgroundStyle">
+      <div
+        id="photo-question"
+        class="img-container"
+        :style="backgroundStyle"
+      >
       </div>
       <div
         class="img-delete"
         @click="deleteImage"
       >
-        <i
-          class="iconfont iconclose"
-        ></i>
+        <i class="iconfont iconclose"></i>
         Remove
       </div>
     </div>
 
-    <div v-if="error" class="error_msg">{{$t("Credit.errorImgInput")}}</div>
-    <van-button class="submit-btn" @click="handleSubmit">
+    <div
+      v-if="error"
+      class="error_msg"
+    >{{$t("Credit.errorImgInput")}}</div>
+    <van-button
+      class="submit-btn"
+      @click="handleSubmit"
+    >
       <div class="btn-text">+{{question.limitAmount}} {{$store.state.currency}} {{ $t("Credit.credit") }}</div>
-      <img class="dollar-coin" src="../../assets/imgs/dollar_coin.png">
+      <img
+        class="dollar-coin"
+        src="../../assets/imgs/dollar_coin.png"
+      >
     </van-button>
   </div>
 </template>
@@ -62,12 +88,13 @@ export default {
   data() {
     return {
       sendingRequest: false,
-      backgroundStyle: `background: url(${this.question.value || ""}) no-repeat`,
+      backgroundStyle: `background: url(${this.question.value ||
+        ""}) no-repeat`,
       form: {
         answering: ""
       },
       error: false
-    }
+    };
   },
   mounted() {
     // this is to activate cordova camera plugin
@@ -86,18 +113,20 @@ export default {
         encodingType: Camera.EncodingType.JPEG,
         cameraDirection: Camera.Direction.BACK
       };
-      navigator.camera.getPicture(this.onSuccessPhotoTaking, this.onFailPhotoTaking, opts);
+      navigator.camera.getPicture(
+        this.onSuccessPhotoTaking,
+        this.onFailPhotoTaking,
+        opts
+      );
     },
     onSuccessPhotoTaking(imgURI) {
       let dataURI = "data:image/jpeg;base64," + imgURI;
       var vm = this;
-      vm[`${"form"}`] = { "answering": dataURI };
+      vm[`${"form"}`] = { answering: dataURI };
       vm[`${"error"}`] = false;
       vm[`${"backgroundStyle"}`] = `background: url(${dataURI}) no-repeat`;
     },
-    onFailPhotoTaking() {
-
-    },
+    onFailPhotoTaking() {},
     deleteImage() {
       this.form.answering = "";
     },
@@ -136,16 +165,26 @@ export default {
           var resUpload = JSON.parse(xhr.response);
           if (resUpload.code === 200) {
             // send to server
-            vm.$api.submitCreditAnswer({ id: vm.question.id, value: resUpload.data.url }).then(
-              res => {
+            vm.$api
+              .submitCreditAnswer({
+                id: vm.question.id,
+                value: resUpload.data.url
+              })
+              .then(res => {
                 if (res.data.code === 200) {
                   // update vuex and localstorage
-                  vm.$store.commit("UpdateCreditLimit", vm.$store.state.credit.currentCreditLimit + vm.question.limitAmount);
-                  vm.$store.commit("UpdateCreditAnswer", { id: vm.question.id, value: resUpload.data.url });
+                  vm.$store.commit(
+                    "UpdateCreditLimit",
+                    vm.$store.state.credit.currentCreditLimit +
+                      vm.question.limitAmount
+                  );
+                  vm.$store.commit("UpdateCreditAnswer", {
+                    id: vm.question.id,
+                    value: resUpload.data.url
+                  });
                 }
                 vm.sendingRequest = false;
-              }
-            )
+              });
           } else {
             vm.$notify({
               message:
@@ -160,152 +199,152 @@ export default {
       }
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  .camera-input-question{
-    background-color: #ffffff;
-    min-height: 320px;
-    width: calc(84vw);
-    margin: auto;
-    border-radius: 8px;
-    color: #2F3941;
-    padding: 30px 20px 20px 20px;
+.camera-input-question {
+  background-color: #ffffff;
+  min-height: 320px;
+  width: calc(84vw);
+  margin: auto;
+  border-radius: 8px;
+  color: #2f3941;
+  padding: 30px 20px 20px 20px;
+  box-sizing: border-box;
+  position: relative;
+  .iconsuccess {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #04a777;
+    font-size: 24px;
+  }
+  .title {
+    font-size: 20px;
+    font-weight: bolder;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .answer {
+    width: 264px;
+    height: 98px;
     box-sizing: border-box;
-    position:relative;
-    .iconsuccess{
+    background-color: #e9ebed;
+    padding-top: 26px;
+    font-size: 24px;
+    text-align: center;
+    position: relative;
+  }
+
+  .upload-wrapper {
+    width: 98%;
+    height: 98px;
+    border: 1px solid #c2c8cc;
+    border-radius: 4px;
+    .placeholder {
       position: absolute;
-      top: 10px;
-      right:10px;
-      color: #04a777;
-      font-size:24px;
-    }
-    .title{
-      font-size: 20px;
-      font-weight: bolder;
+      top: 18px;
+      left: 35%;
       text-align: center;
-      margin-bottom: 20px;
-    }
-    .answer {
-      width: 264px;
-      height: 98px;
-      box-sizing: border-box;
-      background-color: #E9EBED;
-      padding-top:26px;
-      font-size:24px;
-      text-align:center;
-      position: relative;
-    }
-
-    .upload-wrapper {
-      width: 98%;
-      height: 98px;
-      border: 1px solid #C2C8CC;
-      border-radius: 4px;
-      .placeholder {
-        position: absolute;
-        top:18px;
-        left:35%;
-        text-align: center;
-        .iconcamera {
-          color: #ffa702;
-          font-size: 27px;
-        }
-        .placeholder-text{
-          font-size:14px;
-          color:#68737D;
-        }
+      .iconcamera {
+        color: #ffa702;
+        font-size: 27px;
       }
-    }
-
-    .img-container {
-      width: auto;
-      height: 80px;
-      background-size: contain !important;
-      background-position: center center !important;
-      background-repeat: no-repeat !important;
-    }
-    .img-delete{
-      text-align: center;
-      width: 98%;
-      height:40px;
-      margin-top:12px;
-      border: 1px solid #ffa702;
-      border-radius: 4px;
-      font-size: 14px;
-      padding-top:10px;
-      box-sizing: border-box;
-      color: #ffa702;
-
-      .iconclose {
-        position: relative;
-        top: 2px;
-      }
-    }
-    .submit-btn-disabled{
-      position:absolute;
-      bottom:20px;
-      left:20px;
-      width: 85%;
-      height:40px;
-      background-color: #C2C8CC !important;
-      color:white !important;
-      opacity: 1 !important;
-      box-shadow: none !important;
-      font-size: 14px;
-    }
-
-    .error_msg {
-      font-size: 14px;
-      color: #B41800;
-      text-align: center;
-      width: 100%;
-    }
-    .input-box{
-      border: 1px solid #DCDFE6;
-      border-radius: 4px;
-    }
-    .input-box-error {
-      border: 1px solid #B41800;
-      border-radius: 4px;
-    }
-    .submit-btn{
-      position:absolute;
-      bottom:20px;
-      left:20px;
-      width: 85%;
-      height:40px;
-      background-color: #FFA702;
-      color:white;
-      font-size: 14px;
-      .btn-text{
-        position: relative;
-        left: -20px;
-        top: -2px;
-      }
-      .dollar-coin{
-        width: 24px;
-        height:24px;
-        position: absolute;
-        top: 7px;
-        right: 55px;
+      .placeholder-text {
+        font-size: 14px;
+        color: #68737d;
       }
     }
   }
+
+  .img-container {
+    width: auto;
+    height: 80px;
+    background-size: contain !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+  }
+  .img-delete {
+    text-align: center;
+    width: 98%;
+    height: 40px;
+    margin-top: 12px;
+    border: 1px solid #ffa702;
+    border-radius: 4px;
+    font-size: 14px;
+    padding-top: 10px;
+    box-sizing: border-box;
+    color: #ffa702;
+
+    .iconclose {
+      position: relative;
+      top: 2px;
+    }
+  }
+  .submit-btn-disabled {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 85%;
+    height: 40px;
+    background-color: #c2c8cc !important;
+    color: white !important;
+    opacity: 1 !important;
+    box-shadow: none !important;
+    font-size: 14px;
+  }
+
+  .error_msg {
+    font-size: 14px;
+    color: #b41800;
+    text-align: center;
+    width: 100%;
+  }
+  .input-box {
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+  }
+  .input-box-error {
+    border: 1px solid #b41800;
+    border-radius: 4px;
+  }
+  .submit-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 85%;
+    height: 40px;
+    background-color: #ffa702;
+    color: white;
+    font-size: 14px;
+    .btn-text {
+      position: relative;
+      left: -20px;
+      top: -2px;
+    }
+    .dollar-coin {
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      top: 7px;
+      right: 55px;
+    }
+  }
+}
 </style>
 
 <style lang="scss">
-  .camera-input-question{
-    .el-input--small .el-input__inner{
-      border: none;
-      border-radius: 4px;
-      width:264px;
-      height: 98px;
-      font-size:24px;
-      color: #87929D;
-      text-align: center;
-      padding-right:0;
-    }
+.camera-input-question {
+  .el-input--small .el-input__inner {
+    border: none;
+    border-radius: 4px;
+    width: 264px;
+    height: 98px;
+    font-size: 24px;
+    color: #87929d;
+    text-align: center;
+    padding-right: 0;
   }
+}
 </style>

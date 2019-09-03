@@ -63,7 +63,7 @@
         :disabled="!answer.trim() || answer.length === 0"
         @click="next"
       >
-        {{index === 1 ? "Next" : "Get My Fortune"}}
+        {{index === 1 ? $t("FortuneTelling.next") : $t("FortuneTelling.getMyFortune")}}
       </van-button>
     </div>
   </div>

@@ -107,7 +107,7 @@ export default {
       localDateFormatter: "localDateFormatter",
       currency: "currency",
       deviceType: "deviceType",
-      BaseWebUrl: "BaseWebUrl"
+      WebUrl: "WebUrl"
     }),
     today() {
       return this.$moment().format(this.localDateFormatter);
@@ -235,10 +235,10 @@ export default {
       try {
         window.open = "taokae://daily-fortune-prepare";
         setTimeout(function() {
-          window.location.href = vm.BaseWebUrl + "/daily-fortune-prepare";
+          window.location.href = vm.WebUrl + "/daily-fortune-prepare";
         }, 2000);
       } catch {
-        window.location.href = vm.BaseWebUrl + "/daily-fortune-prepare";
+        window.location.href = vm.WebUrl + "/daily-fortune-prepare";
       }
     }
   }

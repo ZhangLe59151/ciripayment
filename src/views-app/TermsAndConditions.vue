@@ -14,21 +14,21 @@ import { mapState } from "vuex";
 
 export default {
   data() {
-    return {
-      urltest: ""
-    };
+    return {};
   },
   computed: {
     ...mapState({
       url: state =>
         state.deviceType === "APP"
-          ? state.BaseWebUrl + "/#/tc-web"
+          ? state.WebUrl + "/tc-web"
           : location.href.replace("tc", "tc-web")
     })
   },
   mounted() {
     window.scrollTo(0, 0);
-    this.urltest = this.url;
+    console.log("====================================");
+    console.log(this.url);
+    console.log("====================================");
   }
 };
 </script>

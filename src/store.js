@@ -31,7 +31,7 @@ export default new Vuex.Store({
   state: {
     ClientId: storage.getItem("ClientId"),
     deviceType: process.env.VUE_APP_DEVICETYPE,
-    BaseWebUrl: process.env.VUE_APP_WEBURL,
+    WebUrl: process.env.VUE_APP_WEBURL,
     Config:
       process.env.VUE_APP_DEVICETYPE === "APP"
         ? require("@/config/AppConfig")

@@ -101,7 +101,7 @@
     <van-button
       class="submit-btn-done"
       disabled
-    >{{question.limitAmount}} {{$store.state.currency}} Earned</van-button>
+    >{{question.limitAmount}} {{$store.state.currency}} {{$t("Credit.earned")}}</van-button>
   </div>
 </template>
 

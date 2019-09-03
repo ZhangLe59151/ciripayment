@@ -59,7 +59,6 @@ export default {
       fortunetellingFrame: "fortunetellingFrame",
       localDateFormatter: "localDateFormatter",
       fortuneResult: state => state.fortuneInfo.fortuneResult,
-      BaseWebUrl: "BaseWebUrl",
       deviceType: "deviceType"
     }),
     today() {

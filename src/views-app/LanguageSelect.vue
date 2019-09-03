@@ -15,7 +15,7 @@
         </div>
 
         <div class="radio">
-          <div class="title">{{$t("Language.thai")}}</div>
+          <div class="title">{{$t("Language.th")}}</div>
           <van-radio
             class="icon"
             name="th"

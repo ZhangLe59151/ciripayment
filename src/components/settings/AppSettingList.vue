@@ -5,7 +5,7 @@
       <van-cell
         :title="$t('Setting.Language')"
         is-link
-        :value="$t('Language.en')"
+        :value="$t(`Language.${lang}`)"
         :to="{name: 'LanguageSelect'}"
       />
       <van-cell
@@ -54,7 +54,8 @@ export default {
   },
   computed: {
     ...mapState({
-      isLogin: "OTPVerified"
+      isLogin: "OTPVerified",
+      lang: state => state.settings.lang
     })
   },
   watch: {

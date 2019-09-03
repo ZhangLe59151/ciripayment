@@ -1,5 +1,8 @@
 <template>
-  <div class="app-add-record" id="edit-record">
+  <div
+    class="app-add-record"
+    id="edit-record"
+  >
     <app-common-header :title="$t('Record.editRecord')" />
 
     <van-tabs
@@ -148,7 +151,7 @@ const today = new Date();
 const startDate = new Date("2019/01/01");
 export default {
   name: "AppRecords",
-  
+
   data() {
     return {
       tabActive: 0,
@@ -194,10 +197,20 @@ export default {
           this.disable[this.type] = true;
           this.tabActive = res.data.data.type;
           const _today = this.$moment().format(this.localDateFormatter);
-          const _yesterday = this.$moment().subtract(1, "days").format(this.localDateFormatter);
-          var cDate = this.$moment(res.data.data.accountDate).format(this.localDateFormatter); //"D MMM YYYY"
-          const kv = { [_today]: "Today, ", [_yesterday]: "Yesterday, " };
-          this.currentDate = cDate ? (kv[cDate] ? kv[cDate] : "") + this.$moment(res.data.data.accountDate).format("D MMM YYYY") : "";
+          const _yesterday = this.$moment()
+            .subtract(1, "days")
+            .format(this.localDateFormatter);
+          var cDate = this.$moment(res.data.data.accountDate).format(
+            this.localDateFormatter
+          ); //"D MMM YYYY"
+          const kv = {
+            [_today]: this.$t("Record.today"),
+            [_yesterday]: this.$t("Record.yesterday")
+          };
+          this.currentDate = cDate
+            ? (kv[cDate] ? kv[cDate] : "") +
+              this.$moment(res.data.data.accountDate).format("D MMM YYYY")
+            : "";
           this.form[this.type] = util.fmoney(res.data.data.amount);
           this.dailyIncome = util.fmoney(res.data.data.incomeSum);
           this.dailyExpense = util.fmoney(res.data.data.expensesSum);
@@ -225,7 +238,9 @@ export default {
       this.showNumber = true;
       this.type = type;
       // increase height of app
-      document.getElementById("edit-record").style.height = `${window.innerHeight * 1.3 - 50}px`;
+      document.getElementById(
+        "edit-record"
+      ).style.height = `${window.innerHeight * 1.3 - 50}px`;
       // scroll to btn
       var element = this.$refs["btn"];
       var top = element.offsetTop;
@@ -236,11 +251,15 @@ export default {
       this.showNumber = false;
     },
     onHide() {
-      document.getElementById("edit-record").style.height = `${window.innerHeight - 50}px`;
+      document.getElementById(
+        "edit-record"
+      ).style.height = `${window.innerHeight - 50}px`;
     },
     onClose() {
       this.showNumber = false;
-      document.getElementById("edit-record").style.height = `${window.innerHeight - 50}px`;
+      document.getElementById(
+        "edit-record"
+      ).style.height = `${window.innerHeight - 50}px`;
     },
     onInput(value) {
       if (this.form[this.type].indexOf(".") !== -1 && value === ".") {
@@ -250,7 +269,10 @@ export default {
         return false;
       }
       const regex1 = /^(([1-9][0-9]*)|(([0]\.\d{2}|[1-9][0-9]*\.\d{2})))$/;
-      if (regex1.test(this.form[this.type]) && this.form[this.type].indexOf(".") != -1) {
+      if (
+        regex1.test(this.form[this.type]) &&
+        this.form[this.type].indexOf(".") != -1
+      ) {
         return false;
       }
       this.form[this.type] += value;
