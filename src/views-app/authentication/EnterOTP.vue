@@ -4,6 +4,10 @@
       :center="true"
       style="top: 34px"
     /> -->
+    <authentication-app-login-header
+      :title="$t('Login.loginTitle')"
+      :showLeftIcon="true"
+    />
     <div class="landingPageContent">
       <div class="slogan-title">{{$t('Login.enterOTP')}} {{ phone }} </div>
       <div class="slogan-sub">{{$t('Login.enterOTPtitle')}}</div>

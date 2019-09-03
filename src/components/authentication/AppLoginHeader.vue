@@ -42,7 +42,7 @@ export default {
   .arrow-left {
     position: absolute;
     left: 16px;
-    color: white;
+    color: black;
     line-height: 70px;
     font-size: 20px;
   }
@@ -60,7 +60,7 @@ export default {
     text-align: center;
     line-height: 70px;
     font-size: 24px;
-    color: white;
+    color: black;
     width: 100%;
   }
 }

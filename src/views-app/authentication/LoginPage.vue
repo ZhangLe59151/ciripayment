@@ -1,5 +1,9 @@
 <template>
   <div class="login-page">
+    <authentication-app-login-header
+      :title="$t('Login.loginTitle')"
+      :showLeftIcon="true"
+    />
     <div class="landingPageContent">
       <div class="slogan-title">{{ $t('Login.verifyPhone')}}</div>
       <div class="slogan-sub">{{ $t('Login.yourPhone')}}</div>
@@ -233,6 +237,10 @@ export default {
     border-radius: 4px;
     margin: 1.25rem 0;
     width: 100%;
+  }
+
+  .van-picker {
+    z-index: 2000;
   }
 }
 </style>
