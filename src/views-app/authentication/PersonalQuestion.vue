@@ -548,23 +548,4 @@ export default {
   bottom: 40px;
 }
 
-
-
-</style>
-
-<style lang="scss">
-.van-tabs__line {
-  padding-top: 0 !important;
-  width: 56px !important;
-  background-color: white !important;
-}
-.van-tabs__wrap {
-  height: 56px !important;
-  width: 179px !important;
-}
-.van-hairline--top-bottom {
-  width: 179px !important;
-}
-
-
 </style>

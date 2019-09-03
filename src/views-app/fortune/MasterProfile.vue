@@ -11,7 +11,7 @@
       <div class="subtitle">{{$route.query.subtitle}}</div>
       <div class="detail">{{info.detail}}</div>
       <div
-        class="btn"
+        class="bottom-btn"
         @click="handleClick"
       > {{$t("FortuneTelling.tellMyFortune")}}</div>
     </div>
@@ -55,6 +55,7 @@ export default {
 .master-profile {
   position: relative;
   height: 100vh;
+  min-height: 510px;
   width: 100vw;
   background: no-repeat center
     url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
@@ -66,6 +67,7 @@ export default {
     background-size: 100% 100%;
     width: 100%;
     height: calc(100vh - 120px);
+    min-height: 510px;
     position: relative;
     text-align: center;
     img {
@@ -94,20 +96,14 @@ export default {
       line-height: 18px;
     }
 
-    .btn {
-      position: absolute;
-      background: #ffa702;
-      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-      border-radius: 4px;
-      font-size: 14px;
+    .bottom-btn {
+      background-color: #ffa702;
       color: #ffffff;
-      letter-spacing: 0;
-      text-align: center;
+      font-size: 14px;
       height: 40px;
-      line-height: 40px;
-      width: calc(100% - 80px);
-      margin-left: 40px;
-      bottom: 60px;
+      width: calc(100vw - 92px);
+      border-radius: 4px;
+      margin: 10px 46px 0 46px;
     }
   }
 }
