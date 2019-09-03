@@ -4,7 +4,7 @@
       :center="true"
       style="top: 34px"
     /> -->
-    <div class="landingPageContent">
+    <div class="landingPageContent" id="otp-content">
       <div class="slogan-title">{{$t('Login.enterOTP')}} {{ phone }} </div>
       <div class="slogan-sub">{{$t('Login.enterOTPtitle')}}</div>
       <van-password-input
@@ -85,6 +85,18 @@ export default {
         this.handleVerifyOtpVerifiedAccount();
       }
     } */
+    showNumber(newv, oldv) {
+      if (newv) {
+        if (window.innerHeight < 560) {
+          document.getElementById("otp-content").style.marginTop = 0;
+        }
+        if (window.innerHeight < 500) {
+          document.getElementById("otp-content").style.marginTop = "-100px";
+        }
+      } else {
+        document.getElementById("otp-content").style.marginTop = "100px";
+      }
+    }
   },
   created() {
     this.countTime();
