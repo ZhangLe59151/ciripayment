@@ -1,7 +1,6 @@
 <template>
   <div class="daily-fortune-loading">
-    <fortune-telling-app-fortune-header
-      />
+    <fortune-telling-app-fortune-header />
     <div class="text-box">
       <div class="top-title">
         {{ $t('Fortune.hang') }}
@@ -33,23 +32,24 @@ export default {
       this.getFortunetellingByAPI();
       this.sendAnswer();
     } else {
-      this.$router.push({ name: "LoginPage", query: { to: "Settings" } })
+      this.$router.push({ name: "LoginPage", query: { to: "Settings" } });
     }
   },
   methods: {
     getFortunetellingByAPI() {
-      this.$api
-        .getFortunetelling(this.fortuneInfo.selectedMaster.id)
-        .then(res => {
-          if (res.data.code === 200) {
-            this.fortuneInfo.fortuneResult = res.data.data;
-            this.$store.commit("SaveFortuneInfo", this.fortuneInfo);
-            this.showResult();
-          } else {
-            this.$toast.fail(res.data.msg);
-            this.$router.push({ name: "Home" });
-          }
-        });
+      const masterId =
+        this.fortuneInfo.selectedMaster.id ||
+        this.fortuneInfo.fortuneResult.masterId;
+      this.$api.getFortunetelling(masterId).then(res => {
+        if (res.data.code === 200) {
+          this.fortuneInfo.fortuneResult = res.data.data;
+          this.$store.commit("SaveFortuneInfo", this.fortuneInfo);
+          this.showResult();
+        } else {
+          this.$toast.fail(res.data.msg);
+          this.$router.push({ name: "Home" });
+        }
+      });
     },
     sendAnswer() {
       this.$api.postAnswerF(this.answerForm).then(res => {
@@ -116,8 +116,12 @@ export default {
     }
   }
   @keyframes test {
-    from { transform: translateY(0); }
-    to { transform: translateY(-30px); }
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-30px);
+    }
   }
 }
 </style>

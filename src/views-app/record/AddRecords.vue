@@ -178,7 +178,10 @@ export default {
       isLogin: "OTPVerified",
       reg: "reg",
       currency: "currency"
-    })
+    }),
+    routeQuery() {
+      return this.$route.query;
+    }
   },
   created() {
     this.fetchDataUpdate(
@@ -231,8 +234,15 @@ export default {
           this.form.incomeAmount = "";
           this.form.expenseAmount = "";
           this.form.memo = "";
+
+          if (this.routeQuery.to === "DailyFortuneLoading") {
+            this.continueFortuneTelling();
+          }
         }
       });
+    },
+    continueFortuneTelling() {
+      this.$router.replace({ name: "DailyFortuneLoading" });
     },
     fetchDataUpdate(currentDate) {
       this.$api.viewRecordSum(currentDate).then(res => {
