@@ -412,6 +412,10 @@ export default {
 }
 
 .van-picker {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  height: 200px;
   z-index: 2000;
 }
 
