@@ -61,6 +61,7 @@ export default {
   },
   data() {
     return {
+      sendingRequest: false,
       backgroundStyle: `background: url(${this.question.value || ""}) no-repeat`,
       form: {
         answering: ""
@@ -111,9 +112,13 @@ export default {
     },
     handleSubmit() {
       event.preventDefault();
+      if (this.sendingRequest) {
+        return false;
+      }
       this.validateInput();
       if (!this.error) {
         // upload to cloud
+        this.sendingRequest = true;
         var vm = this;
         var UploadApi = this.$store.state.uploadImgUrl;
         var fileObj = this.dataURItoBlob(this.form.answering);
@@ -138,6 +143,7 @@ export default {
                   vm.$store.commit("UpdateCreditLimit", vm.$store.state.credit.currentCreditLimit + vm.question.limitAmount);
                   vm.$store.commit("UpdateCreditAnswer", { id: vm.question.id, value: resUpload.data.url });
                 }
+                vm.sendingRequest = false;
               }
             )
           } else {
@@ -146,6 +152,7 @@ export default {
                 "Upload failed. Please check your internet connection is stable before trying again.",
               duration: 3000
             });
+            vm.sendingRequest = false;
             return false;
           }
         };

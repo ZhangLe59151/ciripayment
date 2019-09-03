@@ -213,8 +213,8 @@ export default new Vuex.Store({
     logInWithPassword: localStorage.getItem("logInWithPassword") === "true",
     uploadImgUrl:
       process.env.VUE_APP_DEVICETYPE === "APP"
-        ? process.env.VUE_APP_BASEURL + "/api/self-onboarding/image/upload"
-        : "/api/self-onboarding/image/upload",
+        ? process.env.VUE_APP_BASEURL + "/api/v1/self-onboarding/image/upload"
+        : "/api/v1/self-onboarding/image/upload",
     bankList: require("./assets/data/bankInfo.json").list,
     merchantProfile: {},
     recommendChannelsStore: [],
