@@ -34,7 +34,7 @@
             v-for="(item,index) in questionList[questionIndex].options"
             :key="index"
             class="tab3"
-            :class="{'tab3Selected' : answer === item} "
+            :class="{'tabSelected' : answer === item} "
             @click="onSelect(item)"
           >{{ item }}
           </van-button>
@@ -49,7 +49,7 @@
             v-for="(item,index) in questionList[questionIndex].options"
             :key="index"
             class="tab7"
-            :class="{'tab7Selected' :answer === item }"
+            :class="{'tabSelected' :answer === item }"
             @click="onSelect(item)"
           >{{ item }}
           </van-button>
@@ -185,6 +185,7 @@ export default {
   width: calc(100vw - 22px);
   margin-left: 11px;
   margin-right: 11px;
+  min-height: 470px;
 }
 .background-card {
   position: relative;
@@ -192,7 +193,8 @@ export default {
     no-repeat center;
   background-size: cover;
   width: calc(100vw - 22px);
-  height: 75vh;
+  height: 100%;
+  min-height: 470px;
 
   .question-header {
     font-size: 14px;
@@ -235,14 +237,14 @@ export default {
   }
 
   .bottom-btn {
-    position: absolute;
     background-color: #ffa702;
-    color: white;
+    color: #ffffff;
     font-size: 14px;
     height: 40px;
-    width: calc(100vw - 80px);
+    width: calc(100vw - 92px);
+    position: absolute;
     bottom: 40px;
-    left: 32px;
+    left: 38px;
   }
 
   .bottom-actions {
@@ -254,7 +256,7 @@ export default {
 
     .answer-input {
       position: absolute;
-      background-color: white;
+      background-color: #ffffff;
       font-size: 24px;
       text-align: center;
       line-height: 80px;
@@ -276,12 +278,13 @@ export default {
         border-radius: 4px;
         background-color: transparent;
         margin-top: 10px;
+        line-height: normal;
+        &.tabSelected {
+          background-color: #2f3941;
+          color: #ffffff;
+        }
       }
 
-      .tab3Selected {
-        background-color: #2f3941;
-        color: white;
-      }
       .tab7 {
         width: calc(50% - 8px);
         height: 40px;
@@ -290,11 +293,11 @@ export default {
         border: 1px solid #87929d;
         border-radius: 4px;
         background-color: transparent;
-      }
-
-      .tab7Selected {
-        background-color: #2f3941;
-        color: white;
+        line-height: normal;
+        &.tabSelected {
+          background-color: #2f3941;
+          color: #ffffff;
+        }
       }
     }
   }
