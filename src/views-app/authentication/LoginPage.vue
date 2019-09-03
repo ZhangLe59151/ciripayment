@@ -47,6 +47,7 @@
         show-toolbar
         title="National code"
         :columns="columns"
+        :default-index="2"
         @cancel="show = false;"
         @confirm="onConfirm"
       />
@@ -115,7 +116,7 @@ export default {
   },
   created() {
     this.phoneValidationPattern = this.reg.phone.thaiExp;
-    this.form.nationalCode = this.columns[0];
+    this.form.nationalCode = this.columns[2];
   },
   methods: {
     setPattern(nationalCode) {
