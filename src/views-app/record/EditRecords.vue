@@ -1,6 +1,6 @@
 <template>
   <div
-    class="app-add-record"
+    class="app-edit-record"
     id="edit-record"
   >
     <app-common-header :title="$t('Record.editRecord')" />
@@ -326,7 +326,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.app-add-record {
+.app-edit-record {
   height: calc(100vh - 50px);
 }
 .label-left {
@@ -347,12 +347,18 @@ export default {
   font-size: 16px;
   margin: 4px 16px 0 16px;
   position: relative;
+  > .van-field {
+    background: #e9ebed;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 0 10px;
+  }
 }
 
 .van-icon-arrow-down {
   position: absolute;
-  top: 10px;
-  right: 0;
+  top: 13px;
+  right: 10px;
 }
 
 .input_income_expense {
