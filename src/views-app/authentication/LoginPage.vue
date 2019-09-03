@@ -4,7 +4,7 @@
       :title="$t('Login.loginTitle')"
       :showLeftIcon="true"
     />
-    <div class="landingPageContent">
+    <div class="landingPageContent" id="login-content">
       <div class="slogan-title">{{ $t('Login.verifyPhone')}}</div>
       <div class="slogan-sub">{{ $t('Login.yourPhone')}}</div>
       <div class="input-block">
