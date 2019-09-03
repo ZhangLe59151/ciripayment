@@ -2,6 +2,8 @@ import Vue from "vue";
 import Vuex from "vuex";
 import { find, findIndex } from "lodash";
 import util from "@/util";
+import i18n from "@/assets/lang/i18n";
+
 Vue.use(Vuex);
 
 const storage = window.localStorage;
@@ -20,6 +22,11 @@ if (!storage.getItem("ClientId")) {
   storage.setItem("ClientId", ClientId);
 }
 
+if (!storage.getItem("lang")) {
+  const lang = process.env.VUE_APP_LANG;
+  storage.setItem("lang", lang);
+}
+
 export default new Vuex.Store({
   state: {
     ClientId: storage.getItem("ClientId"),
@@ -34,6 +41,9 @@ export default new Vuex.Store({
       ? storage.getItem("firstLaunch")
       : "Yes",
     currency: "฿",
+    settings: {
+      lang: storage.getItem("lang")
+    },
     minBusinessWorthForLoan: 120000,
     allowBack: true,
     serviceOverviewVo: {},
@@ -114,6 +124,11 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    UpdateSettings(state, settings) {
+      Object.assign(state.settings, settings);
+      storage.setItem("lang", state.settings.lang);
+      i18n.locale = state.settings.lang;
+    },
     UpdateDownloadIcon(state) {
       const hide = false;
       state.showDownloadIcon = hide;

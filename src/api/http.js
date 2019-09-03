@@ -3,12 +3,13 @@ import axios from "axios";
 // import { Dialog } from "vant";
 import { Toast } from "vant";
 import i18n from "@/assets/lang/i18n";
+import store from "@/store";
 
 // axios config
 axios.defaults.timeout = 30000;
 // axios.defaults.withCredentials = true
 axios.defaults.headers = {
-  lang: "en"
+  lang: store.state.settings.lang
 };
 
 axios.defaults.baseURL = process.env.VUE_APP_BASEURL;
