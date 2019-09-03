@@ -18,13 +18,13 @@
       </div>
       <div class="bottom-actions">
         <van-field
-          v-model="answer"
           class="answer-input"
           :border="true"
-          :placeholder="questionList[questionIndex].placeholder"
+          :placeholder="(questionList[questionIndex].placeholder)"
           v-if="questionList[questionIndex].answerType === 2"
-          :v-model="answer"
-        />
+          v-model="answer"
+        >
+        </van-field>
 
         <div
           class="flex-container"
@@ -60,7 +60,7 @@
       </div>
       <van-button
         class="bottom-btn"
-        :disabled="answer.length === 0"
+        :disabled="!answer.replace(/\s/g, '') || answer.length === 0"
         @click="next"
       >
         {{index === 1 ? "Next" : "Get My Fortune"}}
@@ -135,6 +135,11 @@ export default {
       }
     });
   },
+  mounted() {
+    if (!this.answer.replace(/\s/g, "")) {
+      this.answer = "";
+    }
+  },
   watch: {
     $route: {
       immediate: true,
@@ -148,7 +153,7 @@ export default {
   methods: {
     next() {
       this.answerForm[this.questionIndex].value = this.answer;
-      this.$store.commit("UpdateFurtuneQuestionInfo", this.answerForm);
+      this.$store.commit("UpdateFurtuneQuestionInfo", this.answerForm[this.questionIndex]);
 
       this.answer = "";
 
@@ -157,11 +162,14 @@ export default {
         this.$router.push({ name: "DailyFortuneQuestion", params: { id: 2 } });
         this.questionIndex += 1;
       } else if (this.index === 2 && this.isLogin) {
-        this.$api.postAnswerF(this.furtuneQuestion).then(res => {
-          if (res.data.code === 200) {
-            this.$router.push({ name: "DailyFortuneLoading" });
-          }
-        });
+        // this.$api.postAnswerF(
+        //   this.answerForm
+        // ).then(res => {
+        //   if (res.data.code === 200) {
+        //     this.$router.push({ name: "DailyFortuneLoading" });
+        //   }
+        // });
+        this.$router.push({ name: "DailyFortuneLoading" });
       } else if (this.index === 2 && !this.isLogin) {
         this.$router.push({
           name: "LoginPage",

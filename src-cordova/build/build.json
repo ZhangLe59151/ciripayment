@@ -1,0 +1,11 @@
+{
+  "android": {
+    "release": {
+      "keystore": "taokae.jks",
+      "keystoreType": "jks",
+      "storePassword": "silot2019",
+      "alias": "silot",
+      "password" : "silot2019"
+    }
+  }
+}

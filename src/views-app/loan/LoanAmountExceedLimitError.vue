@@ -2,7 +2,7 @@
   <div class="loan-amt-exd-limit-error">
     <div class="app-loan-amt-exd-limit-error-header">
       <van-icon name="cross" class="close" @click="$router.push({name:'Home'})"/>
-      <div class="title">Loan Application</div>
+      <div class="title">{{$t("AppLoanOverview.headerTitle")}}</div>
     </div>
     <loan-app-loan-exceed-limit-msg></loan-app-loan-exceed-limit-msg>
     <loan-app-loan-exceed-limit-instruction></loan-app-loan-exceed-limit-instruction>

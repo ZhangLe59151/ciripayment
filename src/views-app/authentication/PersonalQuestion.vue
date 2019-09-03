@@ -21,8 +21,9 @@
       <van-tabs
         v-model="tabActive"
         animated
-        color="#fdae44"
-        title-active-color="#fdae44"
+        color="#000000"
+        title-active-color="#000000"
+        border="false"
       >
 
         <van-tab
@@ -405,18 +406,25 @@ export default {
 </style>
 
 <style lang="scss">
-.peronal-question {
-  .van-tabs__line {
-    padding-top: 0 !important;
-    width: 56px !important;
-    background-color: white !important;
+  .peronal-question {
+    .van-tabs__line {
+      height: 0 !important;
+    }
+    .van-tabs__wrap {
+      height: 0 !important;
+    }
+    .van-hairline--top-bottom {
+      height: 0 !important;
+    }
+    .van-tabs__wrap {
+      height: 56px !important;
+      width: 179px !important;
+    }
+    .van-hairline--top-bottom {
+      width: 179px !important;
+    }
   }
-  .van-tabs__wrap {
-    height: 56px !important;
-    width: 179px !important;
-  }
-  .van-hairline--top-bottom {
-    width: 179px !important;
-  }
-}
+  
+
+
 </style>
