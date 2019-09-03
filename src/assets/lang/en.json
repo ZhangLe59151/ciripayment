@@ -20,7 +20,7 @@
     "shareSuccess": "Sharing in progress!",
     "shareFailed": "Sharing failed!",
     "sharePageDesc": "My business will get extremely good luck today. How about yours ?",
-    "masterDes": "Here’s your fortune by {n}! ",
+    "masterDes": "Here’s your fortune by {n}! | Here's your friend's fortune by {n}!",
     "luckyDes": "Your Sales Luck Today",
     "luckyAmountDes": "Today Luck Will Likely Bring You",
     "recordDes": "Record yesterday’s income for master to predict your daily sales.",
@@ -28,7 +28,9 @@
     "selectMasterDes": "Select a Master to tell your fortune.",
     "getFortuneBtn": "Get Your Business Fortune Now",
     "likeDes": "Liked by You and {n}+ others | Liked {n}+ others",
-    "downloadDes": "Download the TaoKae app to get your daily fortune on the go!"
+    "downloadDes": "Download the TaoKae app to get your daily fortune on the go!",
+    "question1": "Hang on, {n} would like to ask you a few questions.",
+    "question2": "You are halfway towards your fortune!"
   },
   "Income": "TODAY'S SALES",
   "Expenses": "SPENDINGS",
@@ -180,18 +182,18 @@
   "Setting": {
     "Language": "Language",
     "SoL": "Sign In",
-    "Logout": "Log Out",
+    "Logout": "Sign Out",
     "Version": "version",
     "tc": "Terms & Conditions",
     "support": "Support",
     "feedbackTitle": "Got feedback or experiencing problems?",
     "feedbackWord": "Drop us a message and our customer support representatives will be happy to assist you!",
     "emailTitle": "Your Email (Optional)",
-    "message": "Message",
+    "message": "Your Message",
     "emailPlaceholder": "email@domain.com",
     "messagePlaceholder": "Describe your problem or feedback",
     "sendEmail": "Submit",
-    "sendSucceed": "Sent Sucessfully",
+    "sendSucceed": "Feedback submitted successfully",
     "sendFailed": "Failed to send"
   },
   "Language": {

@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import analytics from "../firebase/analytics";
-import { Store } from "vuex";
+// import { Store } from "vuex";
 
 import store from "../store";
 
@@ -386,7 +386,7 @@ const AppRouteArr = [
     }
   },
   {
-    path: "/daily-fortune-question",
+    path: "/daily-fortune-question/:id",
     name: "DailyFortuneQuestion",
     component: () => import("@/views-app/fortune/DailyFortuneQuestion.vue"),
     meta: {
@@ -503,14 +503,14 @@ router.beforeEach((to, from, next) => {
   analytics.setCurrentScreen(to.meta.title);
   analytics.setCurrentScreen(to.fullPath);
   next();
-  //disable back button
+  // disable back button
   let allowBack = true;
   if (to.meta.allowBack !== undefined) {
-    allowBack = to.meta.allowBack
+    allowBack = to.meta.allowBack;
   }
   if (!allowBack) {
     history.pushState(null, null, location.href);
-  }    
+  }
   store.dispatch("updateAppSetting", { allowBack: allowBack });
 });
 

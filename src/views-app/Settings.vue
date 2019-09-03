@@ -6,18 +6,18 @@
       leftText="Settings"
     />
     <div
-      v-if="isLogin === false"
+      v-if="isLogin + '' === 'false'"
       class="logout"
       @click="$router.push({name: 'LoginPage', query: {to: 'Settings'}})"
     >{{$t("Setting.SoL")}}</div>
     <settings-app-setting-list />
     <div
-      v-if="isLogin"
+      v-if="isLogin + '' !== 'false'"
       class="logout"
       @click="handleLogout"
     >{{$t("Setting.Logout")}}</div>
     <div class="version">
-      {{$t("Setting.Version")}} 0.2
+      {{$t("Setting.Version")}} 1.0
     </div>
     <app-tab-bar :active="(deviceType === 'APP' ? 2 : 2 )" />
   </div>
@@ -40,7 +40,11 @@ export default {
       deviceType: "deviceType"
     })
   },
-  created() {},
+  created() {
+    console.log("====================================");
+    console.log(this.isLogin);
+    console.log("====================================");
+  },
   methods: {
     handleLogout() {
       this.$api.logout({}).then(res => {

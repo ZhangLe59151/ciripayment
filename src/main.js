@@ -39,11 +39,6 @@ Vue.config.productionTip = false;
 Vue.directive("analytics", {
   bind: function(el, binding, vnode) {
     el.addEventListener("click", () => {
-      if (!binding.value.params) {
-        binding.value.params = {};
-      }
-      binding.value.params["login"] = true;
-      binding.value.params["lang"] = "en";
       analytics.logEvent(binding.value.event, binding.value.params);
     });
   }

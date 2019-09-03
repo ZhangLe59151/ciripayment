@@ -1,9 +1,11 @@
 <template>
   <div class="daily-fortune">
-  <fortune-telling-app-fortune-header 
+    <fortune-telling-app-fortune-header
       :showTitle="title"
-      :showLeftIcon="true" 
-      :showRightIcon="false" />
+      :showLeftIcon="true"
+      :showRightIcon="false"
+      :letfFunc="handleLeftFunc"
+    />
     <div class="top-desc">
       {{$t("FortuneTelling.selectMasterDes")}}
     </div>
@@ -30,7 +32,7 @@ export default {
   data() {
     return {
       masterList: require("@/assets/data/fortuneMasterList.json"),
-      title: this.$t('Fortune.dailyTitle')
+      title: this.$t("Fortune.dailyTitle")
     };
   },
   computed: {
@@ -39,10 +41,13 @@ export default {
     })
   },
   methods: {
+    handleLeftFunc() {
+      this.$router.replace({ name: "Home" });
+    },
     chooseMaster(master) {
       this.fortuneInfo.selectedMaster = master;
       this.$store.commit("SaveFortuneInfo", this.fortuneInfo);
-      this.$router.push({ name: "DailyFortuneQuestion" });
+      this.$router.push({ name: "DailyFortuneQuestion", params: { id: 1 } });
     },
     bindLikeObIntoMasterList(likeArr) {
       const arr = [];
@@ -71,7 +76,7 @@ export default {
 <style lang="scss" scoped>
 .daily-fortune {
   position: relative;
-  height: 170vh;
+  min-height: 100vh;
   width: 100%;
   background: no-repeat center
     url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");

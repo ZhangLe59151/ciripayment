@@ -209,12 +209,12 @@ export default new Vuex.Store({
       idleTimeout:
         "You’ve been inactive for too long. For security reasons, please start your application over again."
     },
-    OTPVerified: localStorage.getItem("OTPVerified") === "false",
+    OTPVerified: localStorage.getItem("OTPVerified") === "true",
     logInWithPassword: localStorage.getItem("logInWithPassword") === "true",
     uploadImgUrl:
       process.env.VUE_APP_DEVICETYPE === "APP"
-        ? process.env.VUE_APP_BASEURL + "/api/self-onboarding/image/upload"
-        : "/api/self-onboarding/image/upload",
+        ? process.env.VUE_APP_BASEURL + "/api/v1/self-onboarding/image/upload"
+        : "/api/v1/self-onboarding/image/upload",
     bankList: require("./assets/data/bankInfo.json").list,
     merchantProfile: {},
     recommendChannelsStore: [],
@@ -234,8 +234,8 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    backEvent(state, getters){
-      return state.backEvent
+    backEvent(state, getters) {
+      return state.backEvent;
     }
   },
   mutations: {
