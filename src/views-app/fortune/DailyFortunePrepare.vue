@@ -18,9 +18,6 @@
         :key="index"
       />
     </div>
-    <!-- <div class="powered-tips">
-      This service is powered by Master Cai, Master Yun and Master Fu
-    </div> -->
   </div>
 </template>
 

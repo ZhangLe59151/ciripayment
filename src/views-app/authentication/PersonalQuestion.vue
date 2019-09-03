@@ -4,11 +4,19 @@
       class="personalPageContent"
       v-show="questionPage"
     >
-    <div class="am-progress">
-      <div class="am-progress-bar1"></div>
-      <div class="am-progress-bar2" :style="tabActive > 0 ? 'background-color: #fdae44;' : ''"></div>
-      <div class="am-progress-bar3" :style="tabActive === 2 ? 'background-color: #fdae44;' : ''"></div>
-    </div>
+      <div class="am-progress">
+        <div class="am-progress-bar1"></div>
+        <div
+          class="am-progress-bar2"
+          :style="tabActive > 0 ? 'background-color: #fdae44;' : ''"
+        >
+        </div>
+        <div
+          class="am-progress-bar3"
+          :style="tabActive === 2 ? 'background-color: #fdae44;' : ''"
+        >
+        </div>
+      </div>
       <van-tabs
         v-model="tabActive"
         animated
@@ -77,11 +85,11 @@
       class="splashPage"
       v-show="splash"
     >
-      <img
-        class="icon"
-        :src="iconSucceed"
-      />
-      <div class="title">{{ $tc('Login.completeQuestion', 1)}}<br>{{ $tc('Login.completeQuestion', 2)}}</div>
+      <div>
+        <i class="iconfont iconsuccess" />
+        <div class="title">{{ $tc('Login.completeQuestion', 1)}}<br>{{ $tc('Login.completeQuestion', 2)}}</div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -100,8 +108,6 @@ export default {
       tab1: false,
       tab2: false,
       allSkip: true,
-      iconSucceed: require("@/assets/imgs/personal/success.svg"),
-      iconBk: require("@/assets/imgs/personal/confetti.png"),
       formClass: {
         classId1: [
           {
@@ -223,8 +229,8 @@ export default {
                     res.data.data.verifyResult
                       ? this.$router.push({ name: "EnterLoanInfo" })
                       : this.$router.push({
-                        name: "LoanAmountExceedLimitError"
-                      });
+                          name: "LoanAmountExceedLimitError"
+                        });
                   } else {
                     this.$notify(res.data.msg);
                   }
@@ -263,8 +269,8 @@ export default {
                       res.data.data.verifyResult
                         ? this.$router.push({ name: "EnterLoanInfo" })
                         : this.$router.push({
-                          name: "LoanAmountExceedLimitError"
-                        });
+                            name: "LoanAmountExceedLimitError"
+                          });
                     } else {
                       this.$notify(res.data.msg);
                     }
@@ -308,28 +314,29 @@ export default {
   background: url("../../assets/imgs/personal/confetti.png") no-repeat;
   background-size: cover;
   height: 100vh;
-
-  .title {
+  > div {
+    width: 200px;
+    height: 140px;
     position: fixed;
-    top: calc(50vh + 110px);
-    left: calc(50vw - 102px);
-    width: 204px;
-    color: #000000;
-    font-size: 24px;
+    top: 50%;
+    left: 50%;
+    margin-top: -70px;
+    margin-left: -100px;
     text-align: center;
-  }
-
-  .icon {
-    position: fixed;
-    top: calc(50vh - 50px);
-    left: calc(50vw - 50px);
-    height: 100px;
-    width: 100px;
+    .title {
+      height: 70px;
+      color: #000000;
+      font-size: 24px;
+      text-align: center;
+    }
+    .iconfont.iconsuccess {
+      font-size: 70px;
+      color: #32a974;
+    }
   }
 }
 
 .peronal-question {
-  //background: url("../../assets/imgs/landing_bg.png") no-repeat;
   background-size: cover;
   height: 100vh;
 
@@ -341,25 +348,25 @@ export default {
     width: 196px;
     z-index: 999;
 
-    .am-progress-bar1 {
+    @mixin am-position {
       position: absolute;
       width: 65px;
       height: 6px;
+    }
+
+    .am-progress-bar1 {
+      @include am-position;
       background-color: #fdae44;
     }
 
     .am-progress-bar2 {
-      position: absolute;
-      width: 65px;
-      height: 6px;
+      @include am-position;
       left: 72px;
       background-color: #dde0e2;
     }
 
     .am-progress-bar3 {
-      position: absolute;
-      width: 65px;
-      height: 6px;
+      @include am-position;
       left: 143px;
       background-color: #dde0e2;
     }
@@ -446,26 +453,8 @@ export default {
     color: #000000;
     background-color: #70cb9d;
 
-    .iconservice {
+    > .iconfont {
       position: absolute;
-      height: 40px;
-      width: 40px;
-      right: 16px;
-      color: #32a974;
-    }
-
-    .iconmaturedbusiness {
-      position: absolute;
-      height: 40px;
-      width: 40px;
-      right: 16px;
-      color: #32a974;
-    }
-
-    .iconexploresignin {
-      position: absolute;
-      height: 40px;
-      width: 40px;
       right: 16px;
       color: #32a974;
     }
@@ -482,18 +471,8 @@ export default {
     color: #000000;
     background-color: #dde0e2;
 
-    .iconlike {
+    > .iconfont {
       position: absolute;
-      height: 40px;
-      width: 40px;
-      right: 16px;
-      color: #bac1c5;
-    }
-
-    .iconexploresignin {
-      position: absolute;
-      height: 40px;
-      width: 40px;
       right: 16px;
       color: #bac1c5;
     }
@@ -514,18 +493,8 @@ export default {
       font-size: 16px;
     }
 
-    .iconphasesignin {
+    > .iconfont {
       position: absolute;
-      height: 40px;
-      width: 40px;
-      right: 16px;
-      color: #32a974;
-    }
-
-    .iconexpandsignin {
-      position: absolute;
-      height: 40px;
-      width: 40px;
       right: 16px;
       color: #32a974;
     }
@@ -534,7 +503,6 @@ export default {
   .iconfont {
     font-size: 34px;
   }
-
 }
 
 .skipword {
@@ -546,23 +514,21 @@ export default {
   width: 100%;
   bottom: 40px;
 }
-
 </style>
 
 <style lang="scss">
-  .peronal-question {
-    .van-tabs__line {
-      padding-top: 0 !important;
-      width: 56px !important;
-      background-color: white !important;
-    }
-    .van-tabs__wrap {
-      height: 56px !important;
-      width: 179px !important;
-    }
-    .van-hairline--top-bottom {
-      width: 179px !important;
-    }
+.peronal-question {
+  .van-tabs__line {
+    padding-top: 0 !important;
+    width: 56px !important;
+    background-color: white !important;
   }
-
+  .van-tabs__wrap {
+    height: 56px !important;
+    width: 179px !important;
+  }
+  .van-hairline--top-bottom {
+    width: 179px !important;
+  }
+}
 </style>
