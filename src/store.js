@@ -491,14 +491,30 @@ export default new Vuex.Store({
       window.localStorage.setItem("firstLaunch", state.firstLaunch);
     },
     UpdateFurtuneQuestionInfo(state, fortuneQ) {
-      state.furtuneQuestion = Object.assign(state.furtuneQuestion, fortuneQ);
+      // state.furtuneQuestion = Object.assign(state.furtuneQuestion, fortuneQ);
+
+      let furtuneQuestion = state.furtuneQuestion;
+      // if dont have, append it
+      if (state.furtuneQuestion.length === 0) {
+        state.furtuneQuestion = [fortuneQ];
+      }
+      for (let i = 0; i < furtuneQuestion.length; i++) {
+        if (furtuneQuestion[i].id === fortuneQ.id) {
+          furtuneQuestion[i] = fortuneQ;
+        } else {
+          // if not found, append it
+          if (i === furtuneQuestion.length - 1) {
+            state.furtuneQuestion = state.furtuneQuestion.concat(fortuneQ);
+          }
+        }
+      }
       window.localStorage.setItem(
         "furtuneQuestion",
-        JSON.stringify(state.furtuneQ)
+        JSON.stringify(state.furtuneQuestion)
       );
     },
     ClearFortuneQuestion(state) {
-      state.furtuneQuestion = {};
+      state.furtuneQuestion = [];
       window.localStorage.removeItem("furtuneQuestion");
     }
   },
