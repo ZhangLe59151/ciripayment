@@ -101,6 +101,7 @@ export default {
       color: #ffffff;
       font-size: 14px;
       height: 40px;
+      line-height: 40px;
       width: calc(100vw - 92px);
       border-radius: 4px;
       margin: 10px 46px 0 46px;

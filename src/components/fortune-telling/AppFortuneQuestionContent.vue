@@ -153,7 +153,10 @@ export default {
   methods: {
     next() {
       this.answerForm[this.questionIndex].value = this.answer;
-      this.$store.commit("UpdateFurtuneQuestionInfo", this.answerForm[this.questionIndex]);
+      this.$store.commit(
+        "UpdateFurtuneQuestionInfo",
+        this.answerForm[this.questionIndex]
+      );
 
       this.answer = "";
 
@@ -219,7 +222,7 @@ export default {
     color: #2f3941;
     font-size: 20px;
     min-height: 24px;
-    max-height: 72px;
+    max-height: 78px;
     width: calc(100vw - 64px);
     text-align: center;
     margin-left: 20px;
@@ -235,7 +238,7 @@ export default {
     color: #68737d;
     font-size: 14px;
     min-height: 24px;
-    max-height: 54px;
+    max-height: 58px;
     width: calc(100vw - 64px);
     text-align: center;
     margin: 0 20px 10px;
