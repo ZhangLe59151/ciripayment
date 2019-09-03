@@ -4,12 +4,13 @@
     :left-text="leftText"
     :right-text="rightText"
     :left-arrow="hasLeftArrow"
-    @click-left="leftFunc ? leftFunc : $router.back()"
+    @click-left="leftFunc"
     @click-right="rightFunc"
   />
 </template>
 
 <script>
+import router from "@/router";
 export default {
   props: {
     leftText: {
@@ -32,7 +33,10 @@ export default {
       type: Function
     },
     leftFunc: {
-      type: Function
+      type: Function,
+      default() {
+        router.back();
+      }
     },
     hasLeftArrow: {
       default: true,

@@ -7,14 +7,14 @@
     />
     <div
       class="introduction"
-      v-show="index === 1"
+      v-if="questionId === '1'"
     >
       {{$tc("FortuneTelling.question1", fortuneInfo.selectedMaster.name)}}
     </div>
 
     <div
       class="introduction"
-      v-show="index === 2"
+      v-else
     >
       {{$t("FortuneTelling.question2")}}
     </div>
@@ -30,15 +30,18 @@ export default {
   name: "DailyFortuneQuestion",
   data() {
     return {
-      index: 1,
       questionList: require("@/assets/data/fortuneQuestionList.json")
     };
   },
   computed: {
     ...mapState({
       fortuneInfo: "fortuneInfo"
-    })
+    }),
+    questionId() {
+      return this.$route.params.id + "";
+    }
   },
+
   methods: {}
 };
 </script>
@@ -49,7 +52,7 @@ export default {
   background: no-repeat center
     url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
   background-size: cover;
-  min-height: 170vh;
+  min-height: 100vh;
   width: 100vw;
 }
 .introduction {

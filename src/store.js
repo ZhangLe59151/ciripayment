@@ -209,7 +209,7 @@ export default new Vuex.Store({
       idleTimeout:
         "You’ve been inactive for too long. For security reasons, please start your application over again."
     },
-    OTPVerified: localStorage.getItem("OTPVerified") === "false",
+    OTPVerified: localStorage.getItem("OTPVerified") === "true",
     logInWithPassword: localStorage.getItem("logInWithPassword") === "true",
     uploadImgUrl:
       process.env.VUE_APP_DEVICETYPE === "APP"
@@ -234,8 +234,8 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    backEvent(state, getters){
-      return state.backEvent
+    backEvent(state, getters) {
+      return state.backEvent;
     }
   },
   mutations: {

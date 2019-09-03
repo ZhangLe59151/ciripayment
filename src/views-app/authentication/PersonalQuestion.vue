@@ -186,11 +186,19 @@ export default {
     skipQuestion() {
       const to = this.$route.query.to;
       if (this.tabActive === 0) {
-        this.$router.push({ name: "PersonalQuestion", params: { id: 1 } ,query: { to: to }});
+        this.$router.push({
+          name: "PersonalQuestion",
+          params: { id: 1 },
+          query: { to: to }
+        });
         this.tab1 = true;
         this.tabActive = 1;
       } else if (this.tabActive === 1) {
-        this.$router.push({ name: "PersonalQuestion", params: { id: 2 } ,query: { to: to }});
+        this.$router.push({
+          name: "PersonalQuestion",
+          params: { id: 2 },
+          query: { to: to }
+        });
         this.tab1 = this.tab2 = true;
         this.tabActive = 2;
       } else {
@@ -209,8 +217,11 @@ export default {
                 // else- check credit limit to see if he can apply loan
                 this.$api.verifyLoanApplyAble().then(res => {
                   if (res.data.code === 200) {
-                    (res.data.data.verifyResult) ? this.$router.push({ name: "EnterLoanInfo" })
-                      : this.$router.push({ name: "LoanAmountExceedLimitError" });
+                    res.data.data.verifyResult
+                      ? this.$router.push({ name: "EnterLoanInfo" })
+                      : this.$router.push({
+                          name: "LoanAmountExceedLimitError"
+                        });
                   } else {
                     this.$notify(res.data.msg);
                   }
@@ -246,8 +257,11 @@ export default {
                   // else- check credit limit to see if he can apply loan
                   this.$api.verifyLoanApplyAble().then(res => {
                     if (res.data.code === 200) {
-                      (res.data.data.verifyResult) ? this.$router.push({ name: "EnterLoanInfo" })
-                        : this.$router.push({ name: "LoanAmountExceedLimitError" });
+                      res.data.data.verifyResult
+                        ? this.$router.push({ name: "EnterLoanInfo" })
+                        : this.$router.push({
+                            name: "LoanAmountExceedLimitError"
+                          });
                     } else {
                       this.$notify(res.data.msg);
                     }
@@ -266,7 +280,11 @@ export default {
       this.allSkip = false;
       this.answerList[answerid].id = id;
       this.answerList[answerid].value = answer;
-      this.$router.push({ name: "PersonalQuestion", params: { id: answerid }, query: { to: to } });
+      this.$router.push({
+        name: "PersonalQuestion",
+        params: { id: answerid },
+        query: { to: to }
+      });
       if (this.tabActive === 2) {
         this.sendAnswer();
       } else {
@@ -293,7 +311,7 @@ export default {
     top: calc(50vh + 110px);
     left: calc(50vw - 102px);
     width: 204px;
-    color: black;
+    color: #000000;
     font-size: 24px;
     text-align: center;
   }
@@ -343,7 +361,7 @@ export default {
     width: calc(100vw - 32px);
     line-height: 80px;
     width: calc(100% - 32px);
-    color: black;
+    color: #000000;
     background-color: #5bcff2;
 
     .iconretail {
@@ -379,7 +397,7 @@ export default {
     height: 80px;
     width: calc(100vw - 32px);
     line-height: 80px;
-    color: black;
+    color: #000000;
     background-color: #fdae44;
 
     .iconrestaurant {
@@ -399,7 +417,7 @@ export default {
     height: 80px;
     width: calc(100vw - 32px);
     line-height: 80px;
-    color: black;
+    color: #000000;
     background-color: #70cb9d;
 
     .iconservice {
@@ -435,7 +453,7 @@ export default {
     height: 80px;
     width: calc(100vw - 32px);
     line-height: 80px;
-    color: black;
+    color: #000000;
     background-color: #dde0e2;
 
     .iconlike {
@@ -463,7 +481,7 @@ export default {
     height: 80px;
     width: calc(100vw - 32px);
     line-height: 80px;
-    color: black;
+    color: #000000;
     background-color: #76d69c;
 
     .cardSmailTitle {

@@ -25,11 +25,11 @@ export default {
   name: "MasterProfile",
   data() {
     return {
-      title: this.$t('Fortune.masterProfile'),
+      title: this.$t("Fortune.masterProfile"),
       imgList: {
         "1": require("@/assets/imgs/fortune-telling/master_01.png"),
         "2": require("@/assets/imgs/fortune-telling/master_02.png")
-      } 
+      }
     };
   },
   computed: {
@@ -45,7 +45,7 @@ export default {
     handleClick() {
       this.fortuneInfo.selectedMaster = this.$route.params.id;
       this.$store.commit("SaveFortuneInfo", this.fortuneInfo);
-      this.$router.push({ name: "DailyFortuneQuestion" });
+      this.$router.push({ name: "DailyFortuneQuestion", params: { id: 1 } });
     }
   }
 };

@@ -4,7 +4,7 @@
     <van-icon
       name="arrow-left"
       class="arrow-left"
-      @click="$router.back()"
+      @click="letfFunc"
       v-if="showLeftIcon"
     />
     <van-icon
@@ -20,6 +20,7 @@
 import Vue from "vue";
 import { mapState } from "vuex";
 import { Dialog } from "vant";
+import router from "@/router";
 
 Vue.use(Dialog);
 
@@ -33,6 +34,12 @@ export default {
     },
     showLeftIcon: {
       default: false
+    },
+    letfFunc: {
+      default() {
+        router.back();
+      },
+      type: Function
     },
     showTitle: {
       default: ""
