@@ -162,13 +162,14 @@ export default {
         this.$router.push({ name: "DailyFortuneQuestion", params: { id: 2 } });
         this.questionIndex += 1;
       } else if (this.index === 2 && this.isLogin) {
-        this.$api.postAnswerF(
-          this.answerForm
-        ).then(res => {
-          if (res.data.code === 200) {
-            this.$router.push({ name: "DailyFortuneLoading" });
-          }
-        });
+        // this.$api.postAnswerF(
+        //   this.answerForm
+        // ).then(res => {
+        //   if (res.data.code === 200) {
+        //     this.$router.push({ name: "DailyFortuneLoading" });
+        //   }
+        // });
+        this.$router.push({ name: "DailyFortuneLoading" });
       } else if (this.index === 2 && !this.isLogin) {
         this.$router.push({
           name: "LoginPage",
