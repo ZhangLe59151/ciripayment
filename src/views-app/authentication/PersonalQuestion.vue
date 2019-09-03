@@ -223,8 +223,8 @@ export default {
                     res.data.data.verifyResult
                       ? this.$router.push({ name: "EnterLoanInfo" })
                       : this.$router.push({
-                          name: "LoanAmountExceedLimitError"
-                        });
+                        name: "LoanAmountExceedLimitError"
+                      });
                   } else {
                     this.$notify(res.data.msg);
                   }
@@ -263,8 +263,8 @@ export default {
                       res.data.data.verifyResult
                         ? this.$router.push({ name: "EnterLoanInfo" })
                         : this.$router.push({
-                            name: "LoanAmountExceedLimitError"
-                          });
+                          name: "LoanAmountExceedLimitError"
+                        });
                     } else {
                       this.$notify(res.data.msg);
                     }
@@ -364,7 +364,6 @@ export default {
       background-color: #dde0e2;
     }
   }
-
 
   .personalPageContent {
     position: fixed;
@@ -499,7 +498,7 @@ export default {
       color: #bac1c5;
     }
   }
- 
+
   .card5 {
     position: relative;
     font-size: 20px;
@@ -548,23 +547,22 @@ export default {
   bottom: 40px;
 }
 
-
-
 </style>
 
 <style lang="scss">
-.van-tabs__line {
-  padding-top: 0 !important;
-  width: 56px !important;
-  background-color: white !important;
-}
-.van-tabs__wrap {
-  height: 56px !important;
-  width: 179px !important;
-}
-.van-hairline--top-bottom {
-  width: 179px !important;
-}
-
+  .peronal-question {
+    .van-tabs__line {
+      padding-top: 0 !important;
+      width: 56px !important;
+      background-color: white !important;
+    }
+    .van-tabs__wrap {
+      height: 56px !important;
+      width: 179px !important;
+    }
+    .van-hairline--top-bottom {
+      width: 179px !important;
+    }
+  }
 
 </style>
