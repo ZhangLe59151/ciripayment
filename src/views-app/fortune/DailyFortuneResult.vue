@@ -234,10 +234,9 @@ export default {
       const vm = this;
       try {
         window.open = "taokae://daily-fortune-prepare";
-
-        // setTimeout(function() {
-        //   window.location.href = vm.BaseWebUrl + "/daily-fortune-prepare";
-        // }, 2000);
+        setTimeout(function() {
+          window.location.href = vm.BaseWebUrl + "/daily-fortune-prepare";
+        }, 2000);
       } catch {
         window.location.href = vm.BaseWebUrl + "/daily-fortune-prepare";
       }
