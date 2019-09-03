@@ -12,8 +12,9 @@
       <van-tabs
         v-model="tabActive"
         animated
-        color="#fdae44"
-        title-active-color="#fdae44"
+        color="#000000"
+        title-active-color="#000000"
+        border="false"
       >
         <van-tab
           title=""
@@ -223,8 +224,8 @@ export default {
                     res.data.data.verifyResult
                       ? this.$router.push({ name: "EnterLoanInfo" })
                       : this.$router.push({
-                          name: "LoanAmountExceedLimitError"
-                        });
+                        name: "LoanAmountExceedLimitError"
+                      });
                   } else {
                     this.$notify(res.data.msg);
                   }
@@ -263,8 +264,8 @@ export default {
                       res.data.data.verifyResult
                         ? this.$router.push({ name: "EnterLoanInfo" })
                         : this.$router.push({
-                            name: "LoanAmountExceedLimitError"
-                          });
+                          name: "LoanAmountExceedLimitError"
+                        });
                     } else {
                       this.$notify(res.data.msg);
                     }
@@ -364,7 +365,6 @@ export default {
       background-color: #dde0e2;
     }
   }
-
 
   .personalPageContent {
     position: fixed;
@@ -499,7 +499,7 @@ export default {
       color: #bac1c5;
     }
   }
- 
+
   .card5 {
     position: relative;
     font-size: 20px;
@@ -547,5 +547,20 @@ export default {
   width: 100%;
   bottom: 40px;
 }
+
+</style>
+
+<style lang="scss">
+  .peronal-question {
+    .van-tabs__line {
+      height: 0 !important;
+    }
+    .van-tabs__wrap {
+      height: 0 !important;
+    }
+    .van-hairline--top-bottom {
+      height: 0 !important;
+    }
+  }
 
 </style>

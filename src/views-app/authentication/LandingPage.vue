@@ -71,6 +71,9 @@ export default {
       width: calc(100% - 32px);
     }
 
+    .van-button {
+      line-height: 20px;
+    }
     .getStartBtn {
       position: absolute;
       font-size: 16px;
