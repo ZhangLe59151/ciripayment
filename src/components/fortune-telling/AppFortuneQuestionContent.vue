@@ -60,7 +60,7 @@
       </div>
       <van-button
         class="bottom-btn"
-        :disabled="!answer.replace(/\s/g, '') || answer.length === 0"
+        :disabled="!answer.trim() || answer.length === 0"
         @click="next"
       >
         {{index === 1 ? "Next" : "Get My Fortune"}}
@@ -136,9 +136,7 @@ export default {
     });
   },
   mounted() {
-    if (!this.answer.replace(/\s/g, "")) {
-      this.answer = "";
-    }
+    this.answer = this.answer.trim();
   },
   watch: {
     $route: {
