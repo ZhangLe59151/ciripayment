@@ -4,6 +4,7 @@
       :showTitle="title"
       :showLeftIcon="true"
       :showRightIcon="false"
+      :letfFunc="handleLeftFunc"
     />
     <div class="top-desc">
       {{$t("FortuneTelling.selectMasterDes")}}
@@ -40,6 +41,9 @@ export default {
     })
   },
   methods: {
+    handleLeftFunc() {
+      this.$router.replace({ name: "Home" });
+    },
     chooseMaster(master) {
       this.fortuneInfo.selectedMaster = master;
       this.$store.commit("SaveFortuneInfo", this.fortuneInfo);
