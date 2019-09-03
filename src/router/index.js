@@ -457,6 +457,14 @@ const ErrorRouteArr = [
     meta: {
       title: "ServerError"
     }
+  },
+  {
+    path: "/no-connection",
+    name: "NoConnectionError",
+    component: () => import("@/views-app/NoConnection.vue"),
+    meta: {
+      title: "ServerError"
+    }
   }
 ];
 
@@ -473,6 +481,11 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
+  // if no connection- goes to noConnectionError page
+  if (!navigator.onLine && to.name !== "NoConnectionError") {
+    next({ name: "NoConnectionError" });
+    return false;
+  }
   // these pages can enter directly without logined
   // if (
   //   !store.state.logInWithPassword &&

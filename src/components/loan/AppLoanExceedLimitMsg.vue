@@ -2,7 +2,7 @@
   <div class="app-loan-exceed-limit-msg">
     <img src="@/assets/imgs/loan/TaokaeIconWithShadow.svg" id="taokae_icon"/>
     <div class="msg">
-      We need more information to understand you better before enabling loan services.
+      {{$t("LoanExceedLimitError.title")}}
     </div>
   </div>
 </template>

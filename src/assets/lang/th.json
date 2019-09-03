@@ -33,7 +33,16 @@
   "Income": "ยอดขายวันนี้",
   "Expenses": "ค่าใช้จ่าย",
   "LoanTitle": "เงินด่วน",
+  "LoanExceedLimitError": {
+    "title": "We need more information to understand you better before enabling loan services.",
+    "ins": {
+      "title": "Keep doing these to get closer to your first instant loan!",
+      "bullet1": "Record your daily sales using Add Record",
+      "bullet2": "Answer daily questions to increase how much your business is worth"
+    }
+  },
   "AppLoanOverview": {
+    "headerTitle": "Loan Application",
     "bannerTitle": "รับเงินด่วนในไม่กี่นาที!",
     "lowerRate": "ดอกเบี้ยต่ำกว่า",
     "higherLimit": "วงเงินสูงกว่า",
@@ -224,5 +233,10 @@
     "hang": "ไม่ดูดวงแล้วเหรอ",
     "dailyTitle": "ดูดวงรายวัน",
     "masterProfile": "รู้จักหมอดู"
+  },
+  "Offline": {
+    "title": "You’re offline.",
+    "ins": "Check your internet connection and try again.",
+    "button": "Refresh"
   }
 }

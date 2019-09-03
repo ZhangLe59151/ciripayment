@@ -36,7 +36,8 @@
             class="tab3"
             :class="{'tabSelected' : answer === item} "
             @click="onSelect(item)"
-          >{{ item }}
+          >
+            {{ item }}
           </van-button>
         </div>
 
