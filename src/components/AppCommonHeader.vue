@@ -7,6 +7,7 @@
     @click-left="leftFunc"
     @click-right="rightFunc"
   />
+
 </template>
 
 <script>

@@ -1,10 +1,14 @@
 <template>
   <div class="enterOtpPage">
-    <!-- <WapHeader
-      :center="true"
-      style="top: 34px"
-    /> -->
-    <div class="landingPageContent">
+
+    <authentication-app-login-header
+      :title="$t('Login.loginTitle')"
+      :showLeftIcon="true"
+    />
+    <div
+      class="landingPageContent"
+      id="otp-content"
+    >
       <div class="slogan-title">{{$t('Login.enterOTP')}} {{ phone }} </div>
       <div class="slogan-sub">{{$t('Login.enterOTPtitle')}}</div>
       <van-password-input
@@ -43,15 +47,11 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import util from "@/util";
-import WapHeader from "@/components/WapHeader";
 import { mapState } from "vuex";
 export default {
   name: "enter-otp",
-  components: {
-    WapHeader
-  },
+
   data() {
     return {
       active: 2,
@@ -85,6 +85,18 @@ export default {
         this.handleVerifyOtpVerifiedAccount();
       }
     } */
+    showNumber(newv, oldv) {
+      if (newv) {
+        if (window.innerHeight < 560) {
+          document.getElementById("otp-content").style.marginTop = 0;
+        }
+        if (window.innerHeight < 500) {
+          document.getElementById("otp-content").style.marginTop = "-100px";
+        }
+      } else {
+        document.getElementById("otp-content").style.marginTop = "100px";
+      }
+    }
   },
   created() {
     this.countTime();
@@ -265,8 +277,11 @@ export default {
                   // else- check credit limit to see if he can apply loan
                   this.$api.verifyLoanApplyAble().then(res => {
                     if (res.data.code === 200) {
-                      (res.data.data.verifyResult) ? this.$router.push({ name: "EnterLoanInfo" })
-                        : this.$router.push({ name: "LoanAmountExceedLimitError" });
+                      res.data.data.verifyResult
+                        ? this.$router.push({ name: "EnterLoanInfo" })
+                        : this.$router.push({
+                            name: "LoanAmountExceedLimitError"
+                          });
                     } else {
                       this.$notify(res.data.msg);
                     }

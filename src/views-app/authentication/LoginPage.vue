@@ -1,6 +1,10 @@
 <template>
   <div class="login-page">
-    <div class="landingPageContent">
+    <authentication-app-login-header
+      :title="$t('Login.loginTitle')"
+      :showLeftIcon="true"
+    />
+    <div class="landingPageContent" id="login-content">
       <div class="slogan-title">{{ $t('Login.verifyPhone')}}</div>
       <div class="slogan-sub">{{ $t('Login.yourPhone')}}</div>
       <div class="input-block">
@@ -43,6 +47,7 @@
         show-toolbar
         title="National code"
         :columns="columns"
+        :default-index="2"
         @cancel="show = false;"
         @confirm="onConfirm"
       />
@@ -83,9 +88,35 @@ export default {
       reg: "reg"
     })
   },
+  watch: {
+    show(newv, oldv) {
+      if (newv) {
+        if (window.innerHeight < 560) {
+          document.getElementById("login-content").style.marginTop = 0;
+        }
+        if (window.innerHeight < 415) {
+          document.getElementById("login-content").style.marginTop = "-100px";
+        }
+      } else {
+        document.getElementById("login-content").style.marginTop = "100px";
+      }
+    },
+    showNumber(newv, oldv) {
+      if (newv) {
+        if (window.innerHeight < 560) {
+          document.getElementById("login-content").style.marginTop = 0;
+        }
+        if (window.innerHeight < 415) {
+          document.getElementById("login-content").style.marginTop = "-100px";
+        }
+      } else {
+        document.getElementById("login-content").style.marginTop = "100px";
+      }
+    }
+  },
   created() {
     this.phoneValidationPattern = this.reg.phone.thaiExp;
-    this.form.nationalCode = this.columns[0];
+    this.form.nationalCode = this.columns[2];
   },
   methods: {
     setPattern(nationalCode) {
@@ -156,7 +187,7 @@ export default {
   position: fixed;
   background: url("../../assets/imgs/authentication/otpBak.png") no-repeat;
   background-size: contain;
-  height: 100vh;
+  min-height: 100vh;
 
   .landingPageContent {
     position: relative;
@@ -225,7 +256,7 @@ export default {
         height: 20px;
         width: 40px;
       }
-    } 
+    }
   }
 
   .bottom-btn {
@@ -233,6 +264,10 @@ export default {
     border-radius: 4px;
     margin: 1.25rem 0;
     width: 100%;
+  }
+
+  .van-picker {
+    z-index: 2000;
   }
 }
 </style>

@@ -4,62 +4,49 @@
       class="personalPageContent"
       v-show="questionPage"
     >
+      <div class="am-progress">
+        <div class="am-progress-bar1"></div>
+        <div
+          class="am-progress-bar2"
+          :style="tabActive > 0 ? 'background-color: #fdae44;' : ''"
+        >
+        </div>
+        <div
+          class="am-progress-bar3"
+          :style="tabActive === 2 ? 'background-color: #fdae44;' : ''"
+        >
+        </div>
+      </div>
+
       <van-tabs
         v-model="tabActive"
         animated
-        color="#ffa702"
-        title-active-color="#ffa702"
+        color="#000000"
+        title-active-color="#000000"
+        border="false"
       >
+
         <van-tab
           title=""
-          :disabled="this.tab1"
+          v-for="(fm,i) in form"
+          :key="fm.id"
         >
-          <div class="questionTitle">{{ form[2].question }}</div>
+          <div class="questionTitle">{{ fm.question }}</div>
           <div
-            v-for="(item,index) in form[2].options"
+            v-for="(item,index) in fm.options"
             :key="index"
           >
             <van-button
-              :class="formClass.classId1[index].className"
-              @click="answer(0, form[2].id, item)"
+              class="card"
+              :style="{'backgroundColor': formClass[`classId${i+1}`][index].btnBgColor}"
+              @click="answer(0, fm.id, item)"
             >{{ item }}
-              <i :class="formClass.classId1[index].iconName" />
-            </van-button>
-
-          </div>
-
-        </van-tab>
-        <van-tab :disabled="this.tab2">
-          <div class="questionTitle">{{ form[1].question }}</div>
-          <div
-            v-for="(item,index) in form[1].options"
-            :key="index"
-          >
-            <van-button
-              :class="formClass.classId2[index].className"
-              @click="answer(0, form[1].id, item)"
-            >{{ item }}
-              <i :class="formClass.classId2[index].iconName" />
-            </van-button>
-
-          </div>
-
-        </van-tab>
-
-        <van-tab title="">
-          <div class="questionTitle">{{ form[0].question }}</div>
-          <div
-            v-for="(item,index) in form[0].options"
-            :key="index"
-          >
-            <van-button
-              :class="formClass.classId3[index].className"
-              @click="answer(0, form[0].id, item)"
-            >{{ item }}
-              <i :class="formClass.classId3[index].iconName" />
+              <i
+                :class="formClass[`classId${i+1}`][index].iconName"
+                :style="{'color': formClass[`classId${i+1}`][index].iconColor}"
+              />
             </van-button>
           </div>
-
         </van-tab>
       </van-tabs>
 
@@ -72,11 +59,11 @@
       class="splashPage"
       v-show="splash"
     >
-      <img
-        class="icon"
-        :src="iconSucceed"
-      />
-      <div class="title">{{ $t('Login.completeQuestion')}}</div>
+      <div>
+        <i class="iconfont iconsuccess" />
+        <div class="title">{{ $tc('Login.completeQuestion', 1)}}<br>{{ $tc('Login.completeQuestion', 2)}}</div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -92,76 +79,65 @@ export default {
       splash: false,
       questionPage: true,
       tabActive: 0,
+      tab0: false,
       tab1: false,
       tab2: false,
       allSkip: true,
-      iconSucceed: require("@/assets/imgs/personal/success.svg"),
-      iconBk: require("@/assets/imgs/personal/confetti.png"),
       formClass: {
         classId1: [
           {
             iconName: "iconfont iconretail",
-            btnBackgroundColor: "#5bcff2",
-            iconColor: "#3D9AC7",
-            className: "card1"
+            btnBgColor: "#5bcff2",
+            iconColor: "#3D9AC7"
           },
           {
             iconName: "iconfont iconrestaurant",
-            btnBackgroundColor: "#fdae44",
-            iconColor: "#E2761E",
-            className: "card2"
+            btnBgColor: "#fdae44",
+            iconColor: "#E2761E"
           },
           {
             iconName: "iconfont iconservice",
-            btnBackgroundColor: "#70cb9d",
-            iconColor: "#32A974",
-            className: "card3"
+            btnBgColor: "#70cb9d",
+            iconColor: "#32A974"
           },
           {
             iconName: "iconfont iconlike",
-            btnBackgroundColor: "#fdae44",
-            iconColor: "#E2761E",
-            className: "card4"
+            btnBgColor: "#e9ebed",
+            iconColor: "#c2c8cc"
           }
         ],
         classId2: [
           {
             iconName: "iconfont iconphasesignin1",
-            btnBackgroundColor: "#5bcff2",
-            iconColor: "#3D9AC7",
-            className: "card1"
+            btnBgColor: "#5bcff2",
+            iconColor: "#3D9AC7"
           },
           {
             iconName: "iconfont iconphasesignin",
-            btnBackgroundColor: "#fdae44",
-            iconColor: "#E2761E",
-            className: "card5"
+            btnBgColor: "#8fd1cd",
+            iconColor: "#3c9e98"
           },
           {
             iconName: "iconfont iconmaturedbusiness",
-            btnBackgroundColor: "#70cb9d",
-            iconColor: "#32A974",
-            className: "card3"
+            btnBgColor: "#70cb9d",
+            iconColor: "#32A974"
           }
         ],
         classId3: [
           {
             iconName: "iconfont iconincrease-sales",
-            btnBackgroundColor: "#5bcff2",
-            iconColor: "#3D9AC7",
-            className: "card1"
+            btnBgColor: "#fdae44",
+            iconColor: "#E2761E"
           },
           {
             iconName: "iconfont iconexpandsignin",
-            btnBackgroundColor: "#fdae44",
-            iconColor: "#E2761E",
-            className: "card5"
+            btnBgColor: "#70cb9d",
+            iconColor: "#32A974"
           },
           {
             iconName: "iconfont iconexploresignin",
-            btnBackgroundColor: "#70cb9d",
-            iconColor: "#32A974",
-            className: "card4"
+            btnBgColor: "#e9ebed",
+            iconColor: "#c2c8cc"
           }
         ]
       },
@@ -176,7 +152,7 @@ export default {
   created() {
     this.$api.getQuestionPersonal(1).then(res => {
       if (res.data.code === 200) {
-        this.form = res.data.data.questions;
+        this.form = res.data.data.questions.reverse();
       }
     });
   },
@@ -287,7 +263,7 @@ export default {
         this.sendAnswer();
       } else {
         this.tabActive += 1;
-        this.$router.push({
+        this.$router.replace({
           name: "PersonalQuestion",
           params: { id: this.tabActive },
           query: { to: to }
@@ -303,30 +279,63 @@ export default {
   background: url("../../assets/imgs/personal/confetti.png") no-repeat;
   background-size: cover;
   height: 100vh;
-
-  .title {
+  > div {
+    width: 200px;
+    height: 140px;
     position: fixed;
-    top: calc(50vh + 110px);
-    left: calc(50vw - 102px);
-    width: 204px;
-    color: #000000;
-    font-size: 24px;
+    top: 50%;
+    left: 50%;
+    margin-top: -70px;
+    margin-left: -100px;
     text-align: center;
-  }
-
-  .icon {
-    position: fixed;
-    top: calc(50vh - 50px);
-    left: calc(50vw - 50px);
-    height: 100px;
-    width: 100px;
+    .title {
+      height: 70px;
+      color: #000000;
+      font-size: 24px;
+      text-align: center;
+    }
+    .iconfont.iconsuccess {
+      font-size: 70px;
+      color: #32a974;
+    }
   }
 }
 
 .peronal-question {
-  //background: url("../../assets/imgs/landing_bg.png") no-repeat;
   background-size: cover;
   height: 100vh;
+
+  .am-progress {
+    position: fixed;
+    top: 45px;
+    left: 16px;
+    height: 6px;
+    width: 196px;
+    z-index: 999;
+
+    @mixin am-position {
+      position: absolute;
+      width: 65px;
+      height: 6px;
+    }
+
+    .am-progress-bar1 {
+      @include am-position;
+      background-color: #fdae44;
+    }
+
+    .am-progress-bar2 {
+      @include am-position;
+      left: 72px;
+      background-color: #dde0e2;
+    }
+
+    .am-progress-bar3 {
+      @include am-position;
+      left: 143px;
+      background-color: #dde0e2;
+    }
+  }
 
   .personalPageContent {
     position: fixed;
@@ -341,7 +350,7 @@ export default {
     font-size: 24px;
   }
 
-  .card1 {
+  .card {
     font-size: 20px;
     text-align: left;
     position: relative;
@@ -351,114 +360,10 @@ export default {
     line-height: 80px;
     width: calc(100% - 32px);
     color: #000000;
-    background-color: #5bcff2;
-
-    .iconretail {
+    .iconfont {
       position: absolute;
-      height: 40px;
-      width: 40px;
       right: 16px;
       color: #3d9ac7;
-    }
-
-    .iconphasesignin1 {
-      position: absolute;
-      height: 40px;
-      width: 40px;
-      right: 16px;
-      color: #3d9ac7;
-    }
-
-    .iconincrease-sales {
-      position: absolute;
-      height: 40px;
-      width: 40px;
-      right: 16px;
-      color: #3d9ac7;
-    }
-  }
-
-  .card2 {
-    font-size: 20px;
-    text-align: left;
-    position: relative;
-    margin: 16px 0 0 0;
-    height: 80px;
-    width: calc(100vw - 32px);
-    line-height: 80px;
-    color: #000000;
-    background-color: #fdae44;
-
-    .iconrestaurant {
-      position: absolute;
-      height: 40px;
-      width: 40px;
-      right: 16px;
-      color: #e2761e;
-    }
-  }
-
-  .card3 {
-    font-size: 20px;
-    text-align: left;
-    position: relative;
-    margin: 16px 0 0 0;
-    height: 80px;
-    width: calc(100vw - 32px);
-    line-height: 80px;
-    color: #000000;
-    background-color: #70cb9d;
-
-    .iconservice {
-      position: absolute;
-      height: 40px;
-      width: 40px;
-      right: 16px;
-      color: #32a974;
-    }
-
-    .iconmaturedbusiness {
-      position: absolute;
-      height: 40px;
-      width: 40px;
-      right: 16px;
-      color: #32a974;
-    }
-
-    .iconexploresignin {
-      position: absolute;
-      height: 40px;
-      width: 40px;
-      right: 16px;
-      color: #32a974;
-    }
-  }
-
-  .card4 {
-    font-size: 20px;
-    text-align: left;
-    position: relative;
-    margin: 16px 0 0 0;
-    height: 80px;
-    width: calc(100vw - 32px);
-    line-height: 80px;
-    color: #000000;
-    background-color: #dde0e2;
-
-    .iconlike {
-      position: absolute;
-      height: 40px;
-      width: 40px;
-      right: 16px;
-      color: #bac1c5;
-    }
-
-    .iconexploresignin {
-      position: absolute;
-      height: 40px;
-      width: 40px;
-      right: 16px;
-      color: #bac1c5;
     }
   }
 
@@ -477,18 +382,8 @@ export default {
       font-size: 16px;
     }
 
-    .iconphasesignin {
+    > .iconfont {
       position: absolute;
-      height: 40px;
-      width: 40px;
-      right: 16px;
-      color: #32a974;
-    }
-
-    .iconexpandsignin {
-      position: absolute;
-      height: 40px;
-      width: 40px;
       right: 16px;
       color: #32a974;
     }
@@ -508,4 +403,28 @@ export default {
   width: 100%;
   bottom: 40px;
 }
+</style>
+
+<style lang="scss">
+  .peronal-question {
+    .van-tabs__line {
+      height: 0 !important;
+    }
+    .van-tabs__wrap {
+      height: 0 !important;
+    }
+    .van-hairline--top-bottom {
+      height: 0 !important;
+    }
+    .van-tabs__wrap {
+      height: 56px !important;
+      width: 179px !important;
+    }
+    .van-hairline--top-bottom {
+      width: 179px !important;
+    }
+  }
+  
+
+
 </style>

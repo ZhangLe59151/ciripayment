@@ -1,10 +1,12 @@
 {
-  "noSelectServiceErrorMsg": "Select at least one service to proceed.",
-  "noSelectPaymentChannelErrorMsg": "At least one payment channel needs to be selected.",
-  "noSelectSettlementErrorMsg": "Please select one of the settlement options to proceed.",
   "marketingServiceErrorMsg": "There are errors in your form. Please correct them before trying again.",
   "OTPErrorMsg": "OTP request too frequent. Please wait for a minute and try again.",
   "missingDocumentErrorMsg": "Missing documents. Please upload all the necessary documents before proceeding to the next step.",
+  "Tabbars": {
+    "Home": "Home",
+    "Loan": "Loan",
+    "Settings": "Settings"
+  },
   "FortuneTelling": {
     "TapChestTips": "Tap on the treasure chest!",
     "LuckyNumberLabel": "Lucky Number",
@@ -30,12 +32,23 @@
     "likeDes": "Liked by You and {n}+ others | Liked {n}+ others",
     "downloadDes": "Download the TaoKae app to get your daily fortune on the go!",
     "question1": "Hang on, {n} would like to ask you a few questions.",
-    "question2": "You are halfway towards your fortune!"
+    "question2": "You are halfway towards your fortune!",
+    "next": "Next",
+    "getMyFortune": "Get My Fortune"
   },
   "Income": "TODAY'S SALES",
   "Expenses": "SPENDINGS",
   "LoanTitle": "Instant Cash",
+  "LoanExceedLimitError": {
+    "title": "We need more information to understand you better before enabling loan services.",
+    "ins": {
+      "title": "Keep doing these to get closer to your first instant loan!",
+      "bullet1": "Record your daily sales using Add Record",
+      "bullet2": "Answer daily questions to increase how much your business is worth"
+    }
+  },
   "AppLoanOverview": {
+    "headerTitle": "Loan Application",
     "bannerTitle": "Get instant cash in minutes!",
     "lowerRate": "Lower Rate",
     "higherLimit": "Higher Limit",
@@ -131,7 +144,8 @@
     "takePhoto": "Take a photo",
     "credit": "Credit",
     "selectAlbum": "Select from album",
-    "earned": "Earned"
+    "earned": "Earned",
+    "remove": "Remove"
   },
   "Home": {
     "income": "TODAY'S SALES",
@@ -177,7 +191,9 @@
     "placeHolderRent": "E.g. Rent",
     "add": "Add",
     "recordHistory": "Records History",
-    "editRecord": "Edit Record"
+    "editRecord": "Edit Record",
+    "today": "Today, ",
+    "yesterday": "Yesterday, "
   },
   "Setting": {
     "Language": "Language",
@@ -198,7 +214,7 @@
   },
   "Language": {
     "en": "English",
-    "thai": "Thai ภาษาไทย"
+    "th": "Thai ภาษาไทย"
   },
   "Login": {
     "loginTitle": "login",
@@ -209,7 +225,7 @@
     "yourPhone": "Your Mobile Number",
     "enterOTPtitle": "Enter OTP",
     "resendOTP": "Resend OTP",
-    "completeQuestion": "Profile saved. Let's get started",
+    "completeQuestion": "Profile saved.| Let's get started",
     "skipQuestion": "Skip Question",
     "loginPageTitle": "Be a Happy TaoKae",
     "announce": "By using this app, you agree to the terms and conditions."
@@ -226,5 +242,10 @@
     "hang": "Hang in there!",
     "dailyTitle": "Daily Fortune",
     "masterProfile": "Master's Profile"
+  },
+  "Offline": {
+    "title": "You’re offline.",
+    "ins": "Check your internet connection and try again.",
+    "button": "Refresh"
   }
 }

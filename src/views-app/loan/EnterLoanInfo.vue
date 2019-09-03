@@ -1,10 +1,10 @@
 <template>
   <div class="enter-loan-info">
-        <van-nav-bar
-          title="Loan Application"
-          @click-left="handleDiscard"
-          left-arrow
-        />
+    <van-nav-bar
+      title="Loan Application"
+      @click-left="handleDiscard"
+      left-arrow
+    />
 
     <div class="heading">
       <h1>{{$t("EnterLoanInfo.heading")}}</h1>
@@ -23,28 +23,31 @@
     >
       <el-card class="box-card">
         <!-- merchant information -->
-        <div ref="bizInfo" class="title">{{$t("EnterLoanInfo.subTitle")}}</div>
+        <div
+          ref="bizInfo"
+          class="title"
+        >{{$t("EnterLoanInfo.subTitle")}}</div>
         <div class="title-line"></div>
 
-<!--        <el-form-item-->
-<!--          label="Residential Address"-->
-<!--          prop="resAddr"-->
-<!--          :rules="[-->
-<!--      { required: true, message: 'This field is required.', trigger: 'blur' }-->
-<!--    ]"-->
-<!--        >-->
-<!--          <el-input-->
-<!--            v-model="form.resAddr"-->
-<!--            placeholder="Residential Address"-->
-<!--            type="textarea"-->
-<!--            :maxlength="110"-->
-<!--            :autosize="{minRows: 0, maxRows: 3}"-->
-<!--            @blur="validateResAddr"-->
-<!--          >-->
-<!--          </el-input>-->
-<!--          <div v-if="resAddrValidated" class="bottom-right-position">-->
-<!--            <i class="iconfont iconsuccess success-validator"/></div>-->
-<!--        </el-form-item>-->
+        <!--        <el-form-item-->
+        <!--          label="Residential Address"-->
+        <!--          prop="resAddr"-->
+        <!--          :rules="[-->
+        <!--      { required: true, message: 'This field is required.', trigger: 'blur' }-->
+        <!--    ]"-->
+        <!--        >-->
+        <!--          <el-input-->
+        <!--            v-model="form.resAddr"-->
+        <!--            placeholder="Residential Address"-->
+        <!--            type="textarea"-->
+        <!--            :maxlength="110"-->
+        <!--            :autosize="{minRows: 0, maxRows: 3}"-->
+        <!--            @blur="validateResAddr"-->
+        <!--          >-->
+        <!--          </el-input>-->
+        <!--          <div v-if="resAddrValidated" class="bottom-right-position">-->
+        <!--            <i class="iconfont iconsuccess success-validator"/></div>-->
+        <!--        </el-form-item>-->
 
         <el-form-item
           :label="$t('EnterLoanInfo.bizNameEng')"
@@ -59,8 +62,11 @@
             :maxlength="25"
             @blur="validateBizName"
           ></el-input>
-          <div v-if="bizNameEnValidated" class="bottom-right-position">
-            <i class="iconfont iconsuccess success-validator"/></div>
+          <div
+            v-if="bizNameEnValidated"
+            class="bottom-right-position"
+          >
+            <i class="iconfont iconsuccess success-validator" /></div>
         </el-form-item>
 
         <!-- business address -->
@@ -79,8 +85,11 @@
             :autosize="{minRows: 0, maxRows: 3}"
             @blur="validateBizAddr"
           ></el-input>
-          <div v-if="bizAddrValidated" class="bottom-right-position">
-            <i class="iconfont iconsuccess success-validator"/></div>
+          <div
+            v-if="bizAddrValidated"
+            class="bottom-right-position"
+          >
+            <i class="iconfont iconsuccess success-validator" /></div>
         </el-form-item>
 
         <el-form-item
@@ -107,21 +116,26 @@
         <div class="document-cell">
           <div class="document-name-container">
             <div class="label-title required">{{$t("EnterLoanInfo.frontNat")}}</div>
-            <div class="file-name"><i v-if="!!frontName" class="iconfont iconsuccess success-validator margin-right-8"/>{{frontName}}</div>
+            <div class="file-name"><i
+                v-if="!!frontName"
+                class="iconfont iconsuccess success-validator margin-right-8"
+              />{{frontName}}</div>
           </div>
           <div
             class="action-area"
             v-if="frontStatus === 0"
           >
-<!--            <el-upload-->
-<!--              action="front"-->
-<!--              :show-file-list="false"-->
-<!--              :http-request="uploadImg"-->
-<!--              :before-upload="fileCheck"-->
-<!--            >-->
-<!--              <i class="el-icon-camera-solid"></i>-->
-<!--            </el-upload>-->
-            <div class="camera-input-question" @click="takePhoto('front')"
+            <!--            <el-upload-->
+            <!--              action="front"-->
+            <!--              :show-file-list="false"-->
+            <!--              :http-request="uploadImg"-->
+            <!--              :before-upload="fileCheck"-->
+            <!--            >-->
+            <!--              <i class="el-icon-camera-solid"></i>-->
+            <!--            </el-upload>-->
+            <div
+              class="camera-input-question"
+              @click="takePhoto('front')"
             >
               <i class="iconfont iconcamera"></i>
             </div>
@@ -149,13 +163,18 @@
           <div class="document-name-container">
             <div class="label-title required">{{$t("EnterLoanInfo.backNat")}}</div>
             <div class="file-name">
-              <i v-if="!!backName" class="iconfont iconsuccess success-validator margin-right-8"/>{{backName}}</div>
+              <i
+                v-if="!!backName"
+                class="iconfont iconsuccess success-validator margin-right-8"
+              />{{backName}}</div>
           </div>
           <div
             class="action-area"
             v-if="backStatus === 0"
           >
-            <div class="camera-input-question" @click="takePhoto('back')"
+            <div
+              class="camera-input-question"
+              @click="takePhoto('back')"
             >
               <i class="iconfont iconcamera"></i>
             </div>
@@ -183,14 +202,19 @@
         <div class="document-cell">
           <div class="document-name-container">
             <div class="label-title required double-line">{{$t("EnterLoanInfo.photos")}}</div>
-            <div class="file-name"><i v-if="!!faceName" class="iconfont iconsuccess success-validator margin-right-8"/>
+            <div class="file-name"><i
+                v-if="!!faceName"
+                class="iconfont iconsuccess success-validator margin-right-8"
+              />
               {{faceName}}</div>
           </div>
           <div
             class="action-area"
             v-if="faceStatus === 0"
           >
-            <div class="camera-input-question" @click="takePhoto('face')"
+            <div
+              class="camera-input-question"
+              @click="takePhoto('face')"
             >
               <i class="iconfont iconcamera"></i>
             </div>
@@ -215,47 +239,47 @@
           </div>
         </div>
         <!-- business information -->
-<!--        <template v-if="isBizRegNumberValid">-->
-<!--          <div class="section-header">Business Registration</div>-->
-<!--          &lt;!&ndash; personal information &ndash;&gt;-->
-<!--          <div class="document-cell">-->
-<!--            <div class="document-name-container">-->
-<!--              <div class="label-title required double-line">Business Registration Document </div>-->
-<!--              <div class="file-name">{{certName}}</div>-->
-<!--            </div>-->
-<!--            <div-->
-<!--              class="action-area"-->
-<!--              v-if="certStatus === 0"-->
-<!--            >-->
-<!--              <el-upload-->
-<!--                action="cert"-->
-<!--                :show-file-list="false"-->
-<!--                :http-request="uploadImg"-->
-<!--                :before-upload="fileCheck"-->
-<!--              >-->
-<!--                <i class="el-icon-camera-solid"></i>-->
-<!--              </el-upload>-->
-<!--            </div>-->
-<!--            <div-->
-<!--              class="action-area-spinner"-->
-<!--              v-if="certStatus === 1"-->
-<!--            >-->
-<!--              <van-loading-->
-<!--                style="padding: 14px 8px;width: 100%;"-->
-<!--                type="spinner"-->
-<!--              />-->
-<!--            </div>-->
-<!--            <div-->
-<!--              class="action-area-delete"-->
-<!--              v-if="certStatus === 2"-->
-<!--            >-->
-<!--              <i-->
-<!--                class="el-icon-delete"-->
-<!--                @click="deleteImage('cert')"-->
-<!--              ></i>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </template>-->
+        <!--        <template v-if="isBizRegNumberValid">-->
+        <!--          <div class="section-header">Business Registration</div>-->
+        <!--          &lt;!&ndash; personal information &ndash;&gt;-->
+        <!--          <div class="document-cell">-->
+        <!--            <div class="document-name-container">-->
+        <!--              <div class="label-title required double-line">Business Registration Document </div>-->
+        <!--              <div class="file-name">{{certName}}</div>-->
+        <!--            </div>-->
+        <!--            <div-->
+        <!--              class="action-area"-->
+        <!--              v-if="certStatus === 0"-->
+        <!--            >-->
+        <!--              <el-upload-->
+        <!--                action="cert"-->
+        <!--                :show-file-list="false"-->
+        <!--                :http-request="uploadImg"-->
+        <!--                :before-upload="fileCheck"-->
+        <!--              >-->
+        <!--                <i class="el-icon-camera-solid"></i>-->
+        <!--              </el-upload>-->
+        <!--            </div>-->
+        <!--            <div-->
+        <!--              class="action-area-spinner"-->
+        <!--              v-if="certStatus === 1"-->
+        <!--            >-->
+        <!--              <van-loading-->
+        <!--                style="padding: 14px 8px;width: 100%;"-->
+        <!--                type="spinner"-->
+        <!--              />-->
+        <!--            </div>-->
+        <!--            <div-->
+        <!--              class="action-area-delete"-->
+        <!--              v-if="certStatus === 2"-->
+        <!--            >-->
+        <!--              <i-->
+        <!--                class="el-icon-delete"-->
+        <!--                @click="deleteImage('cert')"-->
+        <!--              ></i>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </template>-->
       </el-card>
     </el-form>
     <van-popup
@@ -336,13 +360,10 @@ export default {
       faceStatus: this.$store.state.form.faceUrl ? 2 : 0,
       certStatus: this.$store.state.form.certUrl ? 2 : 0,
       ls: window.localStorage,
-      idleTimer: null,
+
       active: 0,
       value: "",
       show: false,
-      merchantProfileInfoActive: require("@/assets/imgs/stepper_active.png"),
-      uploadDefault: require("@/assets/imgs/upload_default.png"),
-      servicesInfoDefault: require("@/assets/imgs/stepper_default.png"),
       provinceHasError: false,
       provinceError: "",
       validateProvince: (rule, value, callback) => {
@@ -382,20 +403,6 @@ export default {
       window.scrollTo(0, 0);
     }
 
-    if (!this.idleTimer) {
-      this.idleTimer = new Idle()
-        .whenNotInteractive()
-        .within(this.$store.state.idleTime, 1000) // minute
-        .do(() => {
-          console.log("EnterInfo page idle");
-
-          util.redirectToHome(this, this.$store.state.messages.idleTimeout);
-        });
-    }
-    console.log("idletimer start enter info");
-
-    this.idleTimer.start();
-
     // scroll to saved position - change to refs, position value somehow not working in Vue with refs
     if (this.$route.query.position) {
       var element = this.$refs["bizInfo"];
@@ -406,13 +413,7 @@ export default {
       this.$refs["elForm"].validate();
     }
   },
-  beforeDestroy() {
-    if (this.idleTimer) {
-      console.log("idle timer stop enter info");
 
-      this.idleTimer.stop();
-    }
-  },
   methods: {
     handleDiscard() {
       this.$dialog
@@ -432,17 +433,17 @@ export default {
         });
     },
     validateResAddr() {
-      this.resAddrValidated = !!(this.form.resAddr);
+      this.resAddrValidated = !!this.form.resAddr;
     },
     validateBizName() {
-      this.bizNameEnValidated = !!(this.form.bizNameEn);
+      this.bizNameEnValidated = !!this.form.bizNameEn;
     },
     validateBizAddr() {
-      this.bizAddrValidated = !!(this.form.bizAddr);
+      this.bizAddrValidated = !!this.form.bizAddr;
     },
     handleGotoSIC() {
       var savedPosition =
-          document.documentElement.scrollTop || document.body.scrollTop;
+        document.documentElement.scrollTop || document.body.scrollTop;
       this.$store.commit("UpdateForm", this.form);
 
       this.$router.push({
@@ -455,8 +456,8 @@ export default {
     },
     handleGotoProvince() {
       var savedPosition =
-          document.documentElement.scrollTop || document.body.scrollTop;
-        // go to select province page
+        document.documentElement.scrollTop || document.body.scrollTop;
+      // go to select province page
       this.$store.commit("UpdateForm", this.form);
       this.$router.push({
         name: "Province",
@@ -488,7 +489,7 @@ export default {
       if (this.form.postal && this.form.provinceName) {
         if (
           this.form.postal.toString().substring(0, 2) !==
-            this.form.provincePostalPrefix.toString()
+          this.form.provincePostalPrefix.toString()
         ) {
           return false;
         } else {
@@ -508,16 +509,22 @@ export default {
         encodingType: Camera.EncodingType.JPEG,
         cameraDirection: Camera.Direction.BACK
       };
-      navigator.camera.getPicture(this.onSuccessPhotoTaking, this.onFailPhotoTaking, opts);
+      navigator.camera.getPicture(
+        this.onSuccessPhotoTaking,
+        this.onFailPhotoTaking,
+        opts
+      );
     },
     onSuccessPhotoTaking(imgURI) {
       let dataURI = "data:image/jpeg;base64," + imgURI;
       var vm = this;
-      this.uploadImg({ file: this.dataURItoBlob(dataURI), action: this.processingDoc, name: "Checked" })
+      this.uploadImg({
+        file: this.dataURItoBlob(dataURI),
+        action: this.processingDoc,
+        name: "Checked"
+      });
     },
-    onFailPhotoTaking() {
-
-    },
+    onFailPhotoTaking() {},
     dataURItoBlob(dataURI) {
       var byteString = atob(dataURI.split(",")[1]);
       var ab = new ArrayBuffer(byteString.length);
@@ -540,8 +547,7 @@ export default {
 
       this.$refs["elForm"].validate(valid => {
         if (valid) {
-          var errMsg =
-              this.$t("missingDocumentErrorMsg");
+          var errMsg = this.$t("missingDocumentErrorMsg");
           if (!this.frontUrl || !this.backUrl || !this.faceUrl) {
             this.$notify({
               message: errMsg,
@@ -562,8 +568,7 @@ export default {
           this.gotoNextPage();
         } else {
           this.$notify({
-            message:
-                this.$t("marketingServiceErrorMsg"),
+            message: this.$t("marketingServiceErrorMsg"),
             duration: 5000
           });
           return false;
@@ -664,7 +669,7 @@ export default {
           vm[`${nextStausKey}`] = 0;
           vm.$notify({
             message:
-                "Upload failed. Please check your internet connection is stable before trying again.",
+              "Upload failed. Please check your internet connection is stable before trying again.",
             duration: 3000
           });
           return false;
@@ -675,7 +680,7 @@ export default {
         vm[`${nextStausKey}`] = 0;
         vm.$notify({
           message:
-              "Upload failed. Please check your internet connection is stable before trying again.",
+            "Upload failed. Please check your internet connection is stable before trying again.",
           duration: 3000
         });
       };
@@ -714,238 +719,238 @@ export default {
       e.preventDefault();
       this.$store.commit("removeUselessForm");
       e.returnValue =
-          "Your previous application was discarded, please start your application over again.";
+        "Your previous application was discarded, please start your application over again.";
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-  .enter-loan-info {
-    background-color: #E9EBED;
-    .spec-mobile {
-      background-color: #f5f7fa;
-      border-color: #e4e7ed;
+.enter-loan-info {
+  background-color: #e9ebed;
+  .spec-mobile {
+    background-color: #f5f7fa;
+    border-color: #e4e7ed;
+    color: #c0c4cc;
+    cursor: not-allowed;
+    span {
       color: #c0c4cc;
-      cursor: not-allowed;
-      span {
-        color: #c0c4cc;
-      }
     }
-    .van-nav-bar {
-      background-color: #ffffff;
-    }
-    .title {
-      font-size: 17px;
-      padding: 20px 10px;
-      text-align: center;
-      color: #2F3941;
-      text-transform: uppercase;
-      font-weight: bold;
-    }
+  }
+  .van-nav-bar {
+    background-color: #ffffff;
+  }
+  .title {
+    font-size: 17px;
+    padding: 20px 10px;
+    text-align: center;
+    color: #2f3941;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
 
-    .title-line {
-      width: 50px;
-      height: 4px;
-      background-color: #d7d7d7;
-      margin-left: calc(50% - 25px);
-      position: relative;
-      top: -8px;
-    }
+  .title-line {
+    width: 50px;
+    height: 4px;
+    background-color: #d7d7d7;
+    margin-left: calc(50% - 25px);
+    position: relative;
+    top: -8px;
+  }
 
-    .label-title {
-      font-size: 14px;
-      color: #2F3941;
+  .label-title {
+    font-size: 14px;
+    color: #2f3941;
+    height: 40px;
+    line-height: 40px;
+
+    &.double-line {
       height: 40px;
-      line-height: 40px;
-
-      &.double-line {
-        height: 40px;
-        width: 160px;
-        line-height: 20px;
-      }
-
-      &.required:before {
-        color: #f56c6c;
-        content: "*";
-        margin-right: 0.25rem;
-      }
+      width: 160px;
+      line-height: 20px;
     }
 
-    .steps {
-      width: 80%;
-      margin-left: 10%;
+    &.required:before {
+      color: #f56c6c;
+      content: "*";
+      margin-right: 0.25rem;
     }
+  }
 
-    .heading {
-      text-align: center;
-      .description {
-        margin: 0 10px 0 10px;
+  .steps {
+    width: 80%;
+    margin-left: 10%;
+  }
 
-        font-size: 16px;
-        color: #2f3941;
-        letter-spacing: 0;
-        text-align: center;
-        line-height: 24px;
-      }
+  .heading {
+    text-align: center;
+    .description {
+      margin: 0 10px 0 10px;
 
-      > h1 {
-        font-size: 24px;
-        color: #2f3941;
-        letter-spacing: 0;
-        text-align: center;
-        line-height: 36px;
-        margin-bottom: 8px;
-      }
-    }
-
-    .box-card {
-      padding: 10px;
-      // margin: 30px 10px;
-    }
-    .success-validator {
-      color: #04a777;
-    }
-    .bottom-right-position {
-      position:absolute;
-      bottom:0;
-      right:0;
-    }
-    .margin-right-8 {
-      margin-right: 8px;
-    }
-    .tips {
       font-size: 16px;
-      margin-top: 30px;
-    }
-    .inner-tips {
-      font-size: 16px;
-      margin-top: 30px;
-    }
-    .subtitle {
-      font-size: 16px;
-    }
-    // Document area start
-    .document-cell {
-      display: flex;
-      flex-direction: row;
-      padding: 10px 10px;
-      border: 1px solid #d8dee6;
-      border-radius: 8px;
-      font-size: 16px;
+      color: #2f3941;
       letter-spacing: 0;
+      text-align: center;
       line-height: 24px;
-      margin: 16px 0 20px;
+    }
 
-      .document-name-container {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
+    > h1 {
+      font-size: 24px;
+      color: #2f3941;
+      letter-spacing: 0;
+      text-align: center;
+      line-height: 36px;
+      margin-bottom: 8px;
+    }
+  }
 
-        .file-name {
-          font-size: 12px;
-          color: #929292;
-          width: 180px;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-        }
-      }
+  .box-card {
+    padding: 10px;
+    // margin: 30px 10px;
+  }
+  .success-validator {
+    color: #04a777;
+  }
+  .bottom-right-position {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+  .margin-right-8 {
+    margin-right: 8px;
+  }
+  .tips {
+    font-size: 16px;
+    margin-top: 30px;
+  }
+  .inner-tips {
+    font-size: 16px;
+    margin-top: 30px;
+  }
+  .subtitle {
+    font-size: 16px;
+  }
+  // Document area start
+  .document-cell {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 10px;
+    border: 1px solid #d8dee6;
+    border-radius: 8px;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 24px;
+    margin: 16px 0 20px;
 
-      .action-area {
-        display: flex;
-        align-items: center;
-        width: 44px;
-        height: 40px;
-        border: #FFA702 1px solid;
-        border-radius: 8px;
-        text-align: center;
-        box-sizing: border-box;
-        background-color: #FFA702;
+    .document-name-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
 
-        .el-icon-camera-solid {
-          padding: 14px 7px;
-          width: 100%;
-          color: #FFA702;
-        }
-        .iconcamera {
-          font-size: 20px;
-          padding: 12px 9px;
-          width: 100%;
-          color: white;
-        }
-      }
-      .action-area-spinner {
-        display: flex;
-        align-items: center;
-        width: 46px;
-        height: 44px;
-        text-align: center;
-
-        .el-icon-spinner {
-          padding: 14px 8px;
-          width: 100%;
-        }
-      }
-      .action-area-delete {
-        display: flex;
-        align-items: center;
-        width: 46px;
-        height: 44px;
-        border: #ffa702 1px solid;
-        border-radius: 8px;
-        text-align: center;
-
-        .el-icon-delete {
-          padding: 14px 8px;
-          width: 100%;
-          color: #ffa702
-        }
+      .file-name {
+        font-size: 12px;
+        color: #929292;
+        width: 180px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
     }
-    .section-header {
+
+    .action-area {
+      display: flex;
+      align-items: center;
+      width: 44px;
+      height: 40px;
+      border: #ffa702 1px solid;
+      border-radius: 8px;
       text-align: center;
-      font-size: 16px;
-      line-height: 24px;
-      text-align: center;
-      // text-transform: uppercase;
-      margin: 35px 20px 15px 20px;
-      font-weight: bold;
-    }
-    // Document area end
-    .btn-group{
-      padding: 0 16px 0 16px;
-      .bottom-btn{
+      box-sizing: border-box;
+      background-color: #ffa702;
+
+      .el-icon-camera-solid {
+        padding: 14px 7px;
         width: 100%;
-        background-color: #ffa702;
-        border-radius: 4px;
-        height: 40px;
-        font-size: 14px;
-        margin-bottom: 12px;
-        margin-top:20px;
+        color: #ffa702;
+      }
+      .iconcamera {
+        font-size: 20px;
+        padding: 12px 9px;
+        width: 100%;
+        color: white;
+      }
+    }
+    .action-area-spinner {
+      display: flex;
+      align-items: center;
+      width: 46px;
+      height: 44px;
+      text-align: center;
+
+      .el-icon-spinner {
+        padding: 14px 8px;
+        width: 100%;
+      }
+    }
+    .action-area-delete {
+      display: flex;
+      align-items: center;
+      width: 46px;
+      height: 44px;
+      border: #ffa702 1px solid;
+      border-radius: 8px;
+      text-align: center;
+
+      .el-icon-delete {
+        padding: 14px 8px;
+        width: 100%;
+        color: #ffa702;
       }
     }
   }
+  .section-header {
+    text-align: center;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    // text-transform: uppercase;
+    margin: 35px 20px 15px 20px;
+    font-weight: bold;
+  }
+  // Document area end
+  .btn-group {
+    padding: 0 16px 0 16px;
+    .bottom-btn {
+      width: 100%;
+      background-color: #ffa702;
+      border-radius: 4px;
+      height: 40px;
+      font-size: 14px;
+      margin-bottom: 12px;
+      margin-top: 20px;
+    }
+  }
+}
 </style>
 
 <style lang="scss">
-  .enter-loan-info{
-    .el-textarea__inner{
-      border-left:none;
-      border-top:none;
-      border-right:none;
-      resize: none;
-      border-radius: 0;
-      font-size:16px;
-    }
-    .el-input__inner{
-      font-size:16px;
-    }
-    textarea::placeholder {
-      font-size: 14px!important;
-    }
-    input::placeholder {
-      font-size: 14px!important;
-    }
+.enter-loan-info {
+  .el-textarea__inner {
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    resize: none;
+    border-radius: 0;
+    font-size: 16px;
   }
+  .el-input__inner {
+    font-size: 16px;
+  }
+  textarea::placeholder {
+    font-size: 14px !important;
+  }
+  input::placeholder {
+    font-size: 14px !important;
+  }
+}
 </style>

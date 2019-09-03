@@ -107,8 +107,7 @@ export default {
   },
   computed: {
     ...mapState({
-      deviceType: "deviceType",
-      BaseWebUrl: "BaseWebUrl"
+      deviceType: "deviceType"
     })
   },
   mounted() {

@@ -1,14 +1,27 @@
 <template>
-  <div v-if="!!question.value" class="picture-input-question">
+  <div
+    v-if="!!question.value"
+    class="picture-input-question"
+  >
     <i class="iconfont iconsuccess" />
     <div class="title">{{question.question}}</div>
-    <div class="img-container" :style="backgroundStyle">
+    <div
+      class="img-container"
+      :style="backgroundStyle"
+    >
     </div>
-    <van-button class="submit-btn-disabled" disabled >{{question.limitAmount}} {{$store.state.currency}} {{$t("Credit.earned")}}</van-button>
+    <van-button
+      class="submit-btn-disabled"
+      disabled
+    >{{question.limitAmount}} {{$store.state.currency}} {{$t("Credit.earned")}}</van-button>
   </div>
-  <div v-else class="picture-input-question">
+  <div
+    v-else
+    class="picture-input-question"
+  >
     <div class="title">{{question.question}}</div>
-    <el-form v-if="!form.answering"
+    <el-form
+      v-if="!form.answering"
       label-width="0px"
       :model="form"
       ref="elForm"
@@ -18,16 +31,21 @@
     >
       <el-form-item
         :class="error ? 'input-box-error upload-wrapper': 'upload-wrapper'"
-        prop="answering">
+        prop="answering"
+      >
         <div
-          id="camera-input-field" @click="takePhoto"
+          id="camera-input-field"
+          @click="takePhoto"
         >
           <div class="placeholder">
             <van-row style="padding-left: 75px;">
               <van-col span="1">
                 <i class="iconfont iconcamera" />
               </van-col>
-              <van-col span="20" offset="3">
+              <van-col
+                span="20"
+                offset="3"
+              >
                 <div class="placeholder-text">{{ $t('Credit.takePhoto') }}</div>
               </van-col>
             </van-row>
@@ -37,7 +55,8 @@
       </el-form-item>
       <el-form-item
         :class="error ? 'input-box-error upload-wrapper': 'upload-wrapper'"
-        prop="answering">
+        prop="answering"
+      >
         <el-upload
           action="answer"
           :show-file-list="false"
@@ -48,7 +67,10 @@
               <van-col span="1">
                 <i class="iconfont iconalbum" />
               </van-col>
-              <van-col span="18" offset="3">
+              <van-col
+                span="18"
+                offset="3"
+              >
                 <div class="placeholder-text">{{ $t("Credit.selectAlbum") }}</div>
               </van-col>
             </van-row>
@@ -58,23 +80,33 @@
       </el-form-item>
     </el-form>
     <div v-else>
-      <div class="img-container" :style="backgroundStyle">
+      <div
+        class="img-container"
+        :style="backgroundStyle"
+      >
       </div>
       <div
         class="img-delete"
         @click="deleteImage"
       >
-        <i
-          class="iconfont iconclose"
-        ></i>
-        Remove
+        <i class="iconfont iconclose"></i>
+        {{$t("Credit.remove")}}
       </div>
     </div>
 
-    <div v-if="error" class="error_msg">{{$t("Credit.errorImgInput")}}</div>
-    <van-button class="submit-btn" @click="handleSubmit">
+    <div
+      v-if="error"
+      class="error_msg"
+    >{{$t("Credit.errorImgInput")}}</div>
+    <van-button
+      class="submit-btn"
+      @click="handleSubmit"
+    >
       <div class="btn-text">+{{question.limitAmount}} {{$store.state.currency}} {{ $t("Credit.credit") }}</div>
-      <img class="dollar-coin" src="../../assets/imgs/dollar_coin.png">
+      <img
+        class="dollar-coin"
+        src="../../assets/imgs/dollar_coin.png"
+      >
     </van-button>
   </div>
 </template>
@@ -90,13 +122,14 @@ export default {
     return {
       sendingRequest: false,
       url: "",
-      backgroundStyle: `background: url(${this.question.value || ""}) no-repeat`,
+      backgroundStyle: `background: url(${this.question.value ||
+        ""}) no-repeat`,
       form: {
         answering: ""
       },
       error: false,
       photoFromCamera: false
-    }
+    };
   },
   mounted() {
     // this is to activate cordova camera plugin
@@ -115,19 +148,21 @@ export default {
         encodingType: Camera.EncodingType.JPEG,
         cameraDirection: Camera.Direction.BACK
       };
-      navigator.camera.getPicture(this.onSuccessPhotoTaking, this.onFailPhotoTaking, opts);
+      navigator.camera.getPicture(
+        this.onSuccessPhotoTaking,
+        this.onFailPhotoTaking,
+        opts
+      );
     },
     onSuccessPhotoTaking(imgURI) {
       let dataURI = "data:image/jpeg;base64," + imgURI;
       var vm = this;
-      vm[`${"form"}`] = { "answering": dataURI };
+      vm[`${"form"}`] = { answering: dataURI };
       vm[`${"error"}`] = false;
       vm[`${"photoFromCamera"}`] = true;
       vm[`${"backgroundStyle"}`] = `background: url(${dataURI}) no-repeat`;
     },
-    onFailPhotoTaking() {
-
-    },
+    onFailPhotoTaking() {},
     deleteImage() {
       this.form.answering = "";
       this.photoFromCamera = false;
@@ -166,9 +201,11 @@ export default {
       xhr.onload = function() {
         var res = JSON.parse(xhr.response);
         if (res.code === 200) {
-          vm[`${"form"}`] = { "answering": res.data.url };
+          vm[`${"form"}`] = { answering: res.data.url };
           vm[`${"error"}`] = false;
-          vm[`${"backgroundStyle"}`] = `background: url(${res.data.url}) no-repeat`;
+          vm[
+            `${"backgroundStyle"}`
+          ] = `background: url(${res.data.url}) no-repeat`;
         } else {
           vm.$notify({
             message:
@@ -197,7 +234,7 @@ export default {
       if (this.photoFromCamera) {
         this.handleSubmitTakingPhoto();
       } else {
-        this.handleSubmitUploadFromGallery()
+        this.handleSubmitUploadFromGallery();
       }
     },
     handleSubmitUploadFromGallery() {
@@ -206,16 +243,26 @@ export default {
       if (!this.error) {
         this.sendingRequest = true;
         // send to server
-        this.$api.submitCreditAnswer({ id: this.question.id, value: this.form.answering }).then(
-          res => {
+        this.$api
+          .submitCreditAnswer({
+            id: this.question.id,
+            value: this.form.answering
+          })
+          .then(res => {
             if (res.data.code === 200) {
               // update vuex and localstorage
-              this.$store.commit("UpdateCreditLimit", this.$store.state.credit.currentCreditLimit + this.question.limitAmount);
-              this.$store.commit("UpdateCreditAnswer", { id: this.question.id, value: this.form.answering });
+              this.$store.commit(
+                "UpdateCreditLimit",
+                this.$store.state.credit.currentCreditLimit +
+                  this.question.limitAmount
+              );
+              this.$store.commit("UpdateCreditAnswer", {
+                id: this.question.id,
+                value: this.form.answering
+              });
             }
             this.sendingRequest = false;
-          }
-        )
+          });
       }
     },
     handleSubmitTakingPhoto() {
@@ -241,16 +288,26 @@ export default {
           var resUpload = JSON.parse(xhr.response);
           if (resUpload.code === 200) {
             // send to server
-            vm.$api.submitCreditAnswer({ id: vm.question.id, value: resUpload.data.url }).then(
-              res => {
+            vm.$api
+              .submitCreditAnswer({
+                id: vm.question.id,
+                value: resUpload.data.url
+              })
+              .then(res => {
                 if (res.data.code === 200) {
                   // update vuex and localstorage
-                  vm.$store.commit("UpdateCreditLimit", vm.$store.state.credit.currentCreditLimit + vm.question.limitAmount);
-                  vm.$store.commit("UpdateCreditAnswer", { id: vm.question.id, value: resUpload.data.url });
+                  vm.$store.commit(
+                    "UpdateCreditLimit",
+                    vm.$store.state.credit.currentCreditLimit +
+                      vm.question.limitAmount
+                  );
+                  vm.$store.commit("UpdateCreditAnswer", {
+                    id: vm.question.id,
+                    value: resUpload.data.url
+                  });
                 }
                 vm.sendingRequest = false;
-              }
-            )
+              });
           } else {
             vm.$notify({
               message:
@@ -265,155 +322,156 @@ export default {
       }
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-  .picture-input-question{
-    background-color: #ffffff;
-    min-height: 320px;
-    width: calc(84vw);
-    margin: auto;
-    border-radius: 8px;
-    color: #2F3941;
-    padding: 30px 20px 20px 20px;
+.picture-input-question {
+  background-color: #ffffff;
+  min-height: 320px;
+  width: calc(84vw);
+  margin: auto;
+  border-radius: 8px;
+  color: #2f3941;
+  padding: 30px 20px 20px 20px;
+  box-sizing: border-box;
+  position: relative;
+  .iconsuccess {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #04a777;
+    font-size: 24px;
+  }
+  .title {
+    font-size: 20px;
+    font-weight: bolder;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .answer {
+    width: 264px;
+    height: 98px;
     box-sizing: border-box;
-    position:relative;
-    .iconsuccess{
-      position: absolute;
-      top: 10px;
-      right:10px;
-      color: #04a777;
-      font-size:24px;
-    }
-    .title{
-      font-size: 20px;
-      font-weight: bolder;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .answer {
-      width: 264px;
-      height: 98px;
-      box-sizing: border-box;
-      background-color: #E9EBED;
-      padding-top:26px;
-      font-size:24px;
-      text-align:center;
-      position: relative;
-    }
+    background-color: #e9ebed;
+    padding-top: 26px;
+    font-size: 24px;
+    text-align: center;
+    position: relative;
+  }
 
-    .upload-wrapper {
-      width: 98%;
-      height: 52px;
-      border: 1px solid #C2C8CC;
-      border-radius: 4px;
-      padding-top:10px;
-      box-sizing: border-box;
-      .placeholder {
-        /*margin-top: 20px;*/
-        .iconcamera,.iconalbum {
-          color: #ffa702;
-          font-size: 17px;
-        }
-        .placeholder-text{
-          font-size:14px;
-          color:#68737D;
-        }
+  .upload-wrapper {
+    width: 98%;
+    height: 52px;
+    border: 1px solid #c2c8cc;
+    border-radius: 4px;
+    padding-top: 10px;
+    box-sizing: border-box;
+    .placeholder {
+      /*margin-top: 20px;*/
+      .iconcamera,
+      .iconalbum {
+        color: #ffa702;
+        font-size: 17px;
       }
-    }
-
-    .img-container {
-      width: auto;
-      height: 80px;
-      background-size: contain !important;
-      background-position: center center !important;
-      background-repeat: no-repeat !important;
-    }
-    .img-delete{
-      text-align: center;
-      width: 98%;
-      height:40px;
-      margin-top:12px;
-      border: 1px solid #ffa702;
-      border-radius: 4px;
-      font-size: 14px;
-      padding-top:10px;
-      box-sizing: border-box;
-      color: #ffa702;
-
-      .iconclose {
-        position: relative;
-        top: 2px;
-      }
-    }
-    .submit-btn-disabled{
-      position:absolute;
-      bottom:20px;
-      left:20px;
-      width: 85%;
-      height:40px;
-      background-color: #C2C8CC !important;
-      color:white !important;
-      opacity: 1 !important;
-      box-shadow: none !important;
-      font-size: 14px;
-    }
-
-    .error_msg {
-      font-size: 14px;
-      color: #B41800;
-      text-align: center;
-      width: 100%;
-    }
-    .input-box{
-      border: 1px solid #DCDFE6;
-      border-radius: 4px;
-    }
-    .input-box-error {
-      border: 1px solid #B41800;
-      border-radius: 4px;
-    }
-    .submit-btn{
-      position:absolute;
-      bottom:20px;
-      left:20px;
-      width: 85%;
-      height:40px;
-      background-color: #FFA702;
-      color:white;
-      font-size: 14px;
-      .btn-text{
-        position: relative;
-        left: -20px;
-        top: -2px;
-      }
-      .dollar-coin{
-        width: 24px;
-        height:24px;
-        position: absolute;
-        top: 7px;
-        right: 55px;
+      .placeholder-text {
+        font-size: 14px;
+        color: #68737d;
       }
     }
   }
+
+  .img-container {
+    width: auto;
+    height: 80px;
+    background-size: contain !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+  }
+  .img-delete {
+    text-align: center;
+    width: 98%;
+    height: 40px;
+    margin-top: 12px;
+    border: 1px solid #ffa702;
+    border-radius: 4px;
+    font-size: 14px;
+    padding-top: 10px;
+    box-sizing: border-box;
+    color: #ffa702;
+
+    .iconclose {
+      position: relative;
+      top: 2px;
+    }
+  }
+  .submit-btn-disabled {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 85%;
+    height: 40px;
+    background-color: #c2c8cc !important;
+    color: white !important;
+    opacity: 1 !important;
+    box-shadow: none !important;
+    font-size: 14px;
+  }
+
+  .error_msg {
+    font-size: 14px;
+    color: #b41800;
+    text-align: center;
+    width: 100%;
+  }
+  .input-box {
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+  }
+  .input-box-error {
+    border: 1px solid #b41800;
+    border-radius: 4px;
+  }
+  .submit-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 85%;
+    height: 40px;
+    background-color: #ffa702;
+    color: white;
+    font-size: 14px;
+    .btn-text {
+      position: relative;
+      left: -20px;
+      top: -2px;
+    }
+    .dollar-coin {
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      top: 7px;
+      right: 55px;
+    }
+  }
+}
 </style>
 
 <style lang="scss">
-  .picture-input-question{
-    .el-input--small .el-input__inner{
-      border: none;
-      border-radius: 4px;
-      width:264px;
-      height: 98px;
-      font-size:24px;
-      color: #87929D;
-      text-align: center;
-      padding-right:0;
-    }
-    .el-upload {
-      display: unset;
-       text-align: left;
-    }
+.picture-input-question {
+  .el-input--small .el-input__inner {
+    border: none;
+    border-radius: 4px;
+    width: 264px;
+    height: 98px;
+    font-size: 24px;
+    color: #87929d;
+    text-align: center;
+    padding-right: 0;
   }
+  .el-upload {
+    display: unset;
+    text-align: left;
+  }
+}
 </style>

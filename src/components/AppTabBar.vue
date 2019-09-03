@@ -11,7 +11,7 @@
       v-analytics="{event: item.eventName}"
       :key="item.label"
     >
-      {{item.label}}
+      {{$t(`Tabbars.${item.label}`)}}
     </van-tabbar-item>
 
   </van-tabbar>

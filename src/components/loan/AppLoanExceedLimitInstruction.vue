@@ -1,13 +1,13 @@
 <template>
   <div class="app-loan-exceed-limit-instruction">
-    <div class="ins-title">Keep doing these to get closer to your first instant loan!</div>
+    <div class="ins-title">{{$t("LoanExceedLimitError.ins.title")}}</div>
     <div class="ins-wrapper">
       <div>
         <div class="bullet">
           1
         </div>
         <div class="bullet-msg">
-          Record your daily sales using Add Record
+          {{$t("LoanExceedLimitError.ins.bullet1")}}
           <div class="img-wrapper" style="width: 100%">
             <img src="@/assets/imgs/loan/addRecord.svg" class="add-record" />
           </div>
@@ -18,7 +18,7 @@
           2
         </div>
         <div class="bullet-msg">
-          Answer daily questions to increase how much your business is worth
+          {{$t("LoanExceedLimitError.ins.bullet2")}}
           <div class="img-wrapper" style="width: 100%;">
               <img src="@/assets/imgs/loan/credit.svg" class="credit" />
           </div>

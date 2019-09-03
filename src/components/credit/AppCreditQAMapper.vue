@@ -1,11 +1,26 @@
 <template>
-    <div class="app-credit-qa-mapper">
-      <money-input-question v-if="String(question.type)==='1'" :question="question" />
-      <text-input-question v-else-if="String(question.type)==='2'" :question="question" />
-      <radio-input-question v-else-if="String(question.type)==='3'" :question="question"/>
-      <camera-input-question v-else-if="String(question.type)==='4'" :question="question"/>
-      <picture-input-question v-else :question="question" />
-    </div>
+  <div class="app-credit-qa-mapper">
+    <money-input-question
+      v-if="question.type + ''==='1'"
+      :question="question"
+    />
+    <text-input-question
+      v-else-if="question.type + ''==='2'"
+      :question="question"
+    />
+    <radio-input-question
+      v-else-if="question.type + ''==='3'"
+      :question="question"
+    />
+    <camera-input-question
+      v-else-if="question.type + ''==='4'"
+      :question="question"
+    />
+    <picture-input-question
+      v-else
+      :question="question"
+    />
+  </div>
 </template>
 
 <script>
@@ -28,6 +43,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.app-credit-qa-mapper {
-}
 </style>

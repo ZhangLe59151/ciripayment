@@ -2,7 +2,11 @@ import Vue from "vue";
 import Vuex from "vuex";
 import { find, findIndex } from "lodash";
 import util from "@/util";
+import i18n from "@/assets/lang/i18n";
+
 Vue.use(Vuex);
+
+const storage = window.localStorage;
 
 function guid() {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
@@ -13,27 +17,33 @@ function guid() {
   });
 }
 
-if (!localStorage.getItem("ClientId")) {
+if (!storage.getItem("ClientId")) {
   const ClientId = guid();
-  localStorage.setItem("ClientId", ClientId);
+  storage.setItem("ClientId", ClientId);
+}
+
+if (!storage.getItem("lang")) {
+  const lang = process.env.VUE_APP_LANG;
+  storage.setItem("lang", lang);
 }
 
 export default new Vuex.Store({
   state: {
-    BaseWebUrl: process.env.VUE_APP_WEBURL,
-    ClientId: localStorage.getItem("ClientId"),
+    ClientId: storage.getItem("ClientId"),
+    deviceType: process.env.VUE_APP_DEVICETYPE,
+    WebUrl: process.env.VUE_APP_WEBURL,
     Config:
       process.env.VUE_APP_DEVICETYPE === "APP"
         ? require("@/config/AppConfig")
         : require("@/config/WapConfig"),
-    deviceType: process.env.VUE_APP_DEVICETYPE,
-    clientInfo: {
-      bankName: "ABC Bank"
-    },
-    firstLaunch: localStorage.getItem("firstLaunch")
-      ? localStorage.getItem("firstLaunch")
+
+    firstLaunch: storage.getItem("firstLaunch")
+      ? storage.getItem("firstLaunch")
       : "Yes",
     currency: "฿",
+    settings: {
+      lang: storage.getItem("lang")
+    },
     minBusinessWorthForLoan: 120000,
     allowBack: true,
     serviceOverviewVo: {},
@@ -42,96 +52,13 @@ export default new Vuex.Store({
     application: {},
     furtuneQuestion: [],
     showDownloadIcon: process.env.VUE_APP_DEVICETYPE === "WEB",
-    recordList: JSON.parse(localStorage.getItem("recordList")) || [],
+    recordList: JSON.parse(storage.getItem("recordList")) || [],
     masterList: require("@/assets/data/fortuneMasterList.json"),
     localDateFormatter: "YYYYMMDD",
     nationalCodeList: require("@/assets/data/nationalCodeList.json"),
     nationalCode: require("@/assets/data/nationalCode.json"),
     reg: require("@/assets/reg/regEx.js").regEx,
-    applicationStatus: {
-      pending: "0",
-      approved: "1",
-      rejected: "2"
-    },
-    applicationStatusWording: {
-      pending: "UNDER REVIEW",
-      approved: "APPROVED",
-      rejected: "REJECTED"
-    },
-    settlementType: [
-      {
-        id: "1",
-        label: "Manual"
-      },
-      {
-        id: "2",
-        label: "Auto"
-      }
-    ],
-    paymentChannelIds: {
-      visa: "1",
-      mastercard: "2",
-      promptpay: "3",
-      alipay: "4",
-      wechatpay: "5"
-    },
-    aoStatus: [
-      {
-        label: "UNDER REVIEW",
-        id: "0",
-        color: "gray"
-      },
-      {
-        label: "APPROVED",
-        id: "1",
-        color: "green"
-      },
-      {
-        label: "REJECTED",
-        id: "2",
-        color: "red"
-      }
-    ],
-    paymentChannelStatus: [
-      {
-        value: "-1",
-        name: "default",
-        label: "N/A",
-        color: "gray"
-      },
-      {
-        value: "0",
-        name: "pending",
-        label: "UNDER REVIEW",
-        color: "blue"
-      },
-      {
-        value: "1",
-        name: "enabled",
-        label: "ENABLED",
-        color: "green"
-      },
-      {
-        value: "2",
-        name: "rejected",
-        label: "REJECTED",
-        color: "red"
-      }
-    ],
-    merchantWorkingChannelStatus: [
-      {
-        value: "1",
-        name: "enabled",
-        label: "ENABLED",
-        color: "green"
-      },
-      {
-        value: "2",
-        name: "diabled",
-        label: "DISABLED",
-        color: "gray"
-      }
-    ],
+
     merchantApplyingChannelStatus: [
       {
         value: "-1",
@@ -164,53 +91,11 @@ export default new Vuex.Store({
         color: "gray"
       }
     ],
-    paymentChannelList: [
-      {
-        id: "1",
-        name: "visa",
-        img: require("@/assets/imgs/ico-visa.png"),
-        label: "VISA"
-      },
-      {
-        id: "2",
-        name: "mastercard",
-        img: require("@/assets/imgs/ico-mastercard.png"),
-        label: "Mastercard"
-      },
-      {
-        id: "3",
-        name: "promptpay",
-        img: require("@/assets/imgs/ico-promptpay.png"),
-        label: "Prompt Pay"
-      },
-      {
-        id: "4",
-        name: "alipay",
-        img: require("@/assets/imgs/ico-alipay.png"),
-        label: "Alipay"
-      },
-      {
-        id: "5",
-        name: "wechatpay",
-        img: require("@/assets/imgs/ico-wechat.png"),
-        label: "WeChat Pay"
-      }
-    ],
-    paymentChannelStatusWording: {
-      default: "PENDING REVIEW",
-      pending: "PENDING REVIEW",
-      enabled: "ENABLED",
-      rejected: "REJECTED"
-    },
-    idleTime: 600, // seconds
-    imageCompressRate: 0.6,
+
     maxFileSize: 8, // MB
-    messages: {
-      idleTimeout:
-        "You’ve been inactive for too long. For security reasons, please start your application over again."
-    },
-    OTPVerified: localStorage.getItem("OTPVerified") === "true",
-    logInWithPassword: localStorage.getItem("logInWithPassword") === "true",
+
+    OTPVerified: storage.getItem("OTPVerified") === "true",
+    logInWithPassword: storage.getItem("logInWithPassword") === "true",
     uploadImgUrl:
       process.env.VUE_APP_DEVICETYPE === "APP"
         ? process.env.VUE_APP_BASEURL + "/api/v1/self-onboarding/image/upload"
@@ -221,8 +106,8 @@ export default new Vuex.Store({
     completeLoanProfile: false,
     loanProfile: {},
     todayDate: "",
-    fortuneInfo: localStorage.getItem("fortuneInfo")
-      ? JSON.parse(localStorage.getItem("fortuneInfo"))
+    fortuneInfo: storage.getItem("fortuneInfo")
+      ? JSON.parse(storage.getItem("fortuneInfo"))
       : {
         fortuneResult: {},
         fortuneQuestionUsed: [],
@@ -239,32 +124,36 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    UpdateSettings(state, settings) {
+      Object.assign(state.settings, settings);
+      storage.setItem("lang", state.settings.lang);
+      i18n.locale = state.settings.lang;
+    },
     UpdateDownloadIcon(state) {
       const hide = false;
       state.showDownloadIcon = hide;
     },
     InitForm(state) {
       var originForm = state.form !== null ? state.form : {};
-      var formString = window.localStorage.getItem("form");
+      var formString = storage.getItem("form");
       formString = formString !== null ? formString : "{}";
       state.form = Object.assign(originForm, JSON.parse(formString));
     },
     UpdateForm(state, updateForm) {
       state.form = Object.assign(state.form, updateForm);
-      window.localStorage.setItem("form", JSON.stringify(state.form));
+      storage.setItem("form", JSON.stringify(state.form));
     },
     ClearForm(state) {
       state.form = {};
-      // window.localStorage.clear();
-      window.localStorage.setItem("form", "{}");
+      storage.setItem("form", "{}");
     },
     OTPVerified(state) {
       state.OTPVerified = true;
-      localStorage.setItem("OTPVerified", "true");
+      storage.setItem("OTPVerified", "true");
     },
     logInWithPassword(state) {
       state.logInWithPassword = true;
-      localStorage.setItem("logInWithPassword", "true");
+      storage.setItem("logInWithPassword", "true");
     },
     logOut(state) {
       util.removeCookies("SSID");
@@ -292,44 +181,21 @@ export default new Vuex.Store({
         "serviceOverviewVo",
         "credit"
       ].forEach(item => {
-        localStorage.removeItem(item);
+        storage.removeItem(item);
       });
 
       // update clientId when user logout
-      localStorage.setItem("ClientId", guid());
+      storage.setItem("ClientId", guid());
     },
-    // This is for settlement
-    updateSettlement(state, settlement) {
-      state.merchantProfile.merchantSettlementConfigVo.settlementType = settlement;
-      localStorage.setItem(
-        "merchantProfile",
-        JSON.stringify(state.merchantProfile)
-      );
-    },
-    // This is for channels
-    updateChannels(state, newList) {
-      state.merchantProfile.merchantChannelConfigVoList = newList;
-      localStorage.setItem(
-        "merchantProfile",
-        JSON.stringify(state.merchantProfile)
-      );
-    },
-    updateRecommendChannel(state, channels) {
-      state.recommendChannelsStore = channels;
-    },
-    // Fetch merchant profile
-    initMerchantProfile(state, merchantProfile) {
-      state.merchantProfile = merchantProfile;
-      localStorage.setItem("merchantProfile", JSON.stringify(merchantProfile));
-    },
+
     fetchDataFromLocal(state) {
       // fetch merchant profile
       if (
         Object.keys(state.merchantProfile).length === 0 &&
-        localStorage.getItem("merchantProfile")
+        storage.getItem("merchantProfile")
       ) {
         let localMerchantProfile = JSON.parse(
-          localStorage.getItem("merchantProfile")
+          storage.getItem("merchantProfile")
         );
         state.merchantProfile = {
           ...state.merchantProfile,
@@ -339,9 +205,9 @@ export default new Vuex.Store({
       // fetch application
       if (
         Object.keys(state.application).length === 0 &&
-        localStorage.getItem("application")
+        storage.getItem("application")
       ) {
-        let localApplication = JSON.parse(localStorage.getItem("application"));
+        let localApplication = JSON.parse(storage.getItem("application"));
         state.application = {
           ...state.application,
           ...localApplication
@@ -350,19 +216,19 @@ export default new Vuex.Store({
       // fetch loan Profile
       if (
         Object.keys(state.loanProfile).length === 0 &&
-        localStorage.getItem("loanProfile")
+        storage.getItem("loanProfile")
       ) {
-        let localLoanProfile = JSON.parse(localStorage.getItem("loanProfile"));
+        let localLoanProfile = JSON.parse(storage.getItem("loanProfile"));
         state.loanProfile = {
           ...state.loanProfile,
           ...localLoanProfile
         };
       }
       // fetch user Info
-      let localUserInfo = JSON.parse(localStorage.getItem("userInfo"));
+      let localUserInfo = JSON.parse(storage.getItem("userInfo"));
       if (
         Object.keys(state.userInfo).length === 0 &&
-        localStorage.getItem("userInfo")
+        storage.getItem("userInfo")
       ) {
         state.userInfo = {
           ...state.userInfo,
@@ -387,12 +253,12 @@ export default new Vuex.Store({
         }
       }
       state.form = form;
-      // window.localStorage.clear();
-      window.localStorage.setItem("form", JSON.stringify(form));
+      // storage.clear();
+      storage.setItem("form", JSON.stringify(form));
     },
     InitUserInfo(state) {
       var originUserInfo = state.userInfo !== null ? state.userInfo : {};
-      var userInfoString = window.localStorage.getItem("userInfo");
+      var userInfoString = storage.getItem("userInfo");
       userInfoString = userInfoString !== null ? userInfoString : "{}";
       state.userInfo = Object.assign(
         originUserInfo,
@@ -403,44 +269,35 @@ export default new Vuex.Store({
       // state.userInfo = Object.assign(state.userInfo, updateUserInfo);
       // change to spread
       state.userInfo = { ...state.userInfo, ...updateUserInfo };
-      window.localStorage.setItem("userInfo", JSON.stringify(state.userInfo));
+      storage.setItem("userInfo", JSON.stringify(state.userInfo));
     },
     ClearUserInfo(state) {
       state.userInfo = {};
-      window.localStorage.setItem("userInfo", "{}");
+      storage.setItem("userInfo", "{}");
     },
     UpdateApplicationInfo(state, applicationInfo) {
       state.application = Object.assign(state.application, applicationInfo);
-      window.localStorage.setItem(
-        "application",
-        JSON.stringify(state.application)
-      );
+      storage.setItem("application", JSON.stringify(state.application));
     },
     ClearApplicationInfo(state) {
       state.application = {};
-      window.localStorage.setItem("application", "{}");
+      storage.setItem("application", "{}");
     },
     // for Loan profile
     initLoanProfile(state, loanProfile) {
       state.loanProfile = loanProfile;
-      localStorage.setItem("loanProfile", JSON.stringify(loanProfile));
+      storage.setItem("loanProfile", JSON.stringify(loanProfile));
     },
     UpdateLoanProfile(state, updateLoanProfile) {
       state.loanProfile = Object.assign(state.loanProfile, updateLoanProfile);
-      window.localStorage.setItem(
-        "loanProfile",
-        JSON.stringify(state.loanProfile)
-      );
+      storage.setItem("loanProfile", JSON.stringify(state.loanProfile));
     },
     CompleteLoanProfile(state) {
       state.completeLoanProfile = true;
     },
     SaveFortuneInfo(state, updateFortuneInfo) {
       state.fortuneInfo = Object.assign(state.fortuneInfo, updateFortuneInfo);
-      window.localStorage.setItem(
-        "fortuneInfo",
-        JSON.stringify(state.fortuneInfo)
-      );
+      storage.setItem("fortuneInfo", JSON.stringify(state.fortuneInfo));
     },
     ClearFortunetellingResult(state) {
       state.fortuneInfo = {
@@ -448,7 +305,7 @@ export default new Vuex.Store({
         fortuneQuestionUsed: [],
         selectedMaster: {}
       };
-      window.localStorage.removeItem("fortuneInfo");
+      storage.removeItem("fortuneInfo");
     },
     // this is for record
     UpdateRecord(state, updateRecordInfo) {
@@ -466,16 +323,16 @@ export default new Vuex.Store({
         recordList.push(updateRecordInfo);
       }
       state.recordList = recordList;
-      window.localStorage.setItem("recordList", JSON.stringify(recordList));
+      storage.setItem("recordList", JSON.stringify(recordList));
     },
     // this is for credit
     InitCredit(state, credit) {
       state.credit = credit;
-      localStorage.setItem("credit", JSON.stringify(credit));
+      storage.setItem("credit", JSON.stringify(credit));
     },
     UpdateCreditLimit(state, creditLimit) {
       state.credit.currentCreditLimit = creditLimit;
-      window.localStorage.setItem("credit", JSON.stringify(state.credit));
+      storage.setItem("credit", JSON.stringify(state.credit));
     },
     UpdateCreditAnswer(state, creditAnswer) {
       let questionList = state.credit.questions;
@@ -484,28 +341,41 @@ export default new Vuex.Store({
           questionList[i].value = creditAnswer.value;
         }
       }
-      window.localStorage.setItem("credit", JSON.stringify(state.credit));
+      storage.setItem("credit", JSON.stringify(state.credit));
     },
     UnfirstLaunch(state) {
       state.firstLaunch = "No";
-      window.localStorage.setItem("firstLaunch", state.firstLaunch);
+      storage.setItem("firstLaunch", state.firstLaunch);
     },
     UpdateFurtuneQuestionInfo(state, fortuneQ) {
-      state.furtuneQuestion = Object.assign(state.furtuneQuestion, fortuneQ);
-      window.localStorage.setItem(
-        "furtuneQuestion",
-        JSON.stringify(state.furtuneQ)
-      );
+      // state.furtuneQuestion = Object.assign(state.furtuneQuestion, fortuneQ);
+
+      let furtuneQuestion = state.furtuneQuestion;
+      // if dont have, append it
+      if (state.furtuneQuestion.length === 0) {
+        state.furtuneQuestion = [fortuneQ];
+      }
+      for (let i = 0; i < furtuneQuestion.length; i++) {
+        if (furtuneQuestion[i].id === fortuneQ.id) {
+          furtuneQuestion[i] = fortuneQ;
+        } else {
+          // if not found, append it
+          if (i === furtuneQuestion.length - 1) {
+            state.furtuneQuestion = state.furtuneQuestion.concat(fortuneQ);
+          }
+        }
+      }
+      storage.setItem("furtuneQuestion", JSON.stringify(state.furtuneQuestion));
     },
     ClearFortuneQuestion(state) {
-      state.furtuneQuestion = {};
-      window.localStorage.removeItem("furtuneQuestion");
+      state.furtuneQuestion = [];
+      storage.removeItem("furtuneQuestion");
     }
   },
   actions: {
     updateAppSetting(state, allowBack) {
       state.allowBack = allowBack;
-      window.localStorage.setItem("allowBack", allowBack);
+      storage.setItem("allowBack", allowBack);
     }
   }
 });

@@ -20,12 +20,15 @@ export default {
     ...mapState({
       url: state =>
         state.deviceType === "APP"
-          ? state.WebUrl + "/#/tc-web"
+          ? state.WebUrl + "/tc-web"
           : location.href.replace("tc", "tc-web")
     })
   },
   mounted() {
     window.scrollTo(0, 0);
+    console.log("====================================");
+    console.log(this.url);
+    console.log("====================================");
   }
 };
 </script>

@@ -18,13 +18,13 @@
       </div>
       <div class="bottom-actions">
         <van-field
-          v-model="answer"
           class="answer-input"
           :border="true"
-          :placeholder="questionList[questionIndex].placeholder"
+          :placeholder="(questionList[questionIndex].placeholder)"
           v-if="questionList[questionIndex].answerType === 2"
-          :v-model="answer"
-        />
+          v-model="answer"
+        >
+        </van-field>
 
         <div
           class="flex-container"
@@ -36,7 +36,8 @@
             class="tab3"
             :class="{'tabSelected' : answer === item} "
             @click="onSelect(item)"
-          >{{ item }}
+          >
+            {{ item }}
           </van-button>
         </div>
 
@@ -59,10 +60,10 @@
       </div>
       <van-button
         class="bottom-btn"
-        :disabled="answer.length === 0"
+        :disabled="!answer.trim() || answer.length === 0"
         @click="next"
       >
-        {{index === 1 ? "Next" : "Get My Fortune"}}
+        {{index === 1 ? $t("FortuneTelling.next") : $t("FortuneTelling.getMyFortune")}}
       </van-button>
     </div>
   </div>
@@ -134,6 +135,9 @@ export default {
       }
     });
   },
+  mounted() {
+    this.answer = this.answer.trim();
+  },
   watch: {
     $route: {
       immediate: true,
@@ -147,7 +151,10 @@ export default {
   methods: {
     next() {
       this.answerForm[this.questionIndex].value = this.answer;
-      this.$store.commit("UpdateFurtuneQuestionInfo", this.answerForm);
+      this.$store.commit(
+        "UpdateFurtuneQuestionInfo",
+        this.answerForm[this.questionIndex]
+      );
 
       this.answer = "";
 
@@ -156,11 +163,14 @@ export default {
         this.$router.push({ name: "DailyFortuneQuestion", params: { id: 2 } });
         this.questionIndex += 1;
       } else if (this.index === 2 && this.isLogin) {
-        this.$api.postAnswerF(this.furtuneQuestion).then(res => {
-          if (res.data.code === 200) {
-            this.$router.push({ name: "DailyFortuneLoading" });
-          }
-        });
+        // this.$api.postAnswerF(
+        //   this.answerForm
+        // ).then(res => {
+        //   if (res.data.code === 200) {
+        //     this.$router.push({ name: "DailyFortuneLoading" });
+        //   }
+        // });
+        this.$router.push({ name: "DailyFortuneLoading" });
       } else if (this.index === 2 && !this.isLogin) {
         this.$router.push({
           name: "LoginPage",
@@ -210,7 +220,7 @@ export default {
     color: #2f3941;
     font-size: 20px;
     min-height: 24px;
-    max-height: 72px;
+    max-height: 78px;
     width: calc(100vw - 64px);
     text-align: center;
     margin-left: 20px;
@@ -226,7 +236,7 @@ export default {
     color: #68737d;
     font-size: 14px;
     min-height: 24px;
-    max-height: 54px;
+    max-height: 58px;
     width: calc(100vw - 64px);
     text-align: center;
     margin: 0 20px 10px;
