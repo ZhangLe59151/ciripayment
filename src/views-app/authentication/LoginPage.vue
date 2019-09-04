@@ -54,6 +54,8 @@
         :title="$t('Login.nationalCode')"
         :columns="columns"
         :default-index="2"
+        :confirm-button-text="$t('Login.confirm')"
+        :cancel-button-text="$t('Login.cancel')"
         @cancel="show = false;"
         @confirm="onConfirm"
       />

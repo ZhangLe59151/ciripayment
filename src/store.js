@@ -46,13 +46,11 @@ export default new Vuex.Store({
     },
     minBusinessWorthForLoan: 120000,
     allowBack: true,
-    serviceOverviewVo: {},
     form: {},
     userInfo: {},
     application: {},
     fortuneQuestion: [],
     showDownloadIcon: process.env.VUE_APP_DEVICETYPE === "WEB",
-    recordList: JSON.parse(storage.getItem("recordList")) || [],
     masterList: require("@/assets/data/fortuneMasterList.json"),
     localDateFormatter: "YYYYMMDD",
     nationalCodeList: require("@/assets/data/nationalCodeList.json"),
@@ -100,7 +98,7 @@ export default new Vuex.Store({
       process.env.VUE_APP_DEVICETYPE === "APP"
         ? process.env.VUE_APP_BASEURL + "/api/v1/self-onboarding/image/upload"
         : "/api/v1/self-onboarding/image/upload",
-    bankList: require("./assets/data/bankInfo.json").list,
+    //bankList: require("./assets/data/bankInfo.json").list,
     merchantProfile: {},
     recommendChannelsStore: [],
     completeLoanProfile: false,
@@ -178,7 +176,6 @@ export default new Vuex.Store({
         "application",
         "userInfo",
         "form",
-        "serviceOverviewVo",
         "credit"
       ].forEach(item => {
         storage.removeItem(item);
@@ -306,24 +303,6 @@ export default new Vuex.Store({
         selectedMaster: {}
       };
       storage.removeItem("fortuneInfo");
-    },
-    // this is for record
-    UpdateRecord(state, updateRecordInfo) {
-      const recordList = Array.from(state.recordList);
-      const itemIndex = findIndex(recordList, {
-        accountDate: updateRecordInfo.accountDate
-      });
-      const item = find(recordList, {
-        accountDate: updateRecordInfo.accountDate
-      });
-      if (item) {
-        // udpate
-        recordList[itemIndex] = updateRecordInfo;
-      } else {
-        recordList.push(updateRecordInfo);
-      }
-      state.recordList = recordList;
-      storage.setItem("recordList", JSON.stringify(recordList));
     },
     // this is for credit
     InitCredit(state, credit) {

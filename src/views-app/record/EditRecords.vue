@@ -25,7 +25,9 @@
         <div class="input_note">
           <van-field
             v-model="form.memo"
+            ref="inputText"
             @focus="inputNote"
+            @keyup.enter.native="$refs.inputText.blur()"
             maxlength="30"
             @input="checkLength"
             :placeholder="$t('Record.placeHolder')"
@@ -224,7 +226,7 @@ export default {
       this.$api.updateRecord(form).then(res => {
         if (res.data.code === 200) {
           this.viewRecord();
-          this.$notify({ message: "Update succeed!", background: "#04A777" });
+          this.$notify({ message: this.$t('Record.updateSucceed'), background: "#04A777" });
         }
       });
     },

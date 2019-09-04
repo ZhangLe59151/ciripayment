@@ -169,7 +169,7 @@
     "creditLimitTitle2": "{n} คำถามช่วยเพิ่มมูลค่าธุรกิจของคุณ| {n} คำถามช่วยเพิ่มมูลค่าธุรกิจของคุณ!",
     "creditLimitTitle3": "เสร็จแล้ว!กลับมาใหม่พรุ่งนี้นะ",
     "creditLimitBtn1": "เริ่มต้น",
-    "creditLimitBtn2": "เริ่มต้นh",
+    "creditLimitBtn2": "ดูมูลค่าธุรกิจของคุณ",
     "latestTransaction": "Latest Transactions",
     "applyNow": "สมัครเลย",
     "approximately": "Approximately",
@@ -203,7 +203,8 @@
     "addedwrong": "โปรดใส่เบอร์โทรศัพท์มือถือที่ใช้งานอยู่",
     "done": "เสร็จแล้ว",
     "confirm": "ยืนยัน",
-    "cancel": "ยกเลิก"
+    "cancel": "ยกเลิก",
+    "updateSucceed": "Update succeed!"
   },
   "Setting": {
     "Language": "ภาษา",
@@ -239,7 +240,9 @@
     "skipQuestion": "ข้าม",
     "loginPageTitle": "คุณก็เป็นเถ้าแก่ได้!",
     "announce": "ด้วยการใช้แอปพลิเคชันนี้ แสดงว่าคุณเข้าใจข้อกำหนดและเงื่อนไขแล้ว",
-    "nationalCode": "รหัสประเทศ"
+    "nationalCode": "รหัสประเทศ",
+    "confirm": "ยกเลิก",
+    "cancel": "ยกเลิก"
   },
   "Common": {
     "serverRequestError": "คำขอเซิร์ฟเวอร์ผิดพลาด โปรดลองอีกครั้ง!"

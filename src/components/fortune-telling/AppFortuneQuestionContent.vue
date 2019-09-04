@@ -19,8 +19,10 @@
       <div class="bottom-actions">
         <van-field
           class="answer-input"
+          ref="inputText"
           :border="true"
           :placeholder="(questionList[questionIndex].placeholder)"
+          @keyup.enter.native="$refs.inputText.blur()"
           v-if="questionList[questionIndex].answerType === 2"
           v-model="answer"
         >
