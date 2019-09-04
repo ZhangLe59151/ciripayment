@@ -52,24 +52,23 @@ export default {
   },
   methods: {
     returnHome() {
-      if (this.fortuneInfo.fortuneResult !== null) {
-        this.$router.push({ name: "MasterProfile" });
-      } else {
-        Dialog.confirm({
-          title: "Leaving Master" + this.fortuneInfo.selectedMaster.name + "?",
-          message:
-            this.$t("Fortune.poorMaster") +
-            this.fortuneInfo.selectedMaster.name +
-            this.$t("Fortune.leaveMessage")
+      Dialog.confirm({
+        title: this.$tc(
+          "FortuneTelling.leaveMsgTitle",
+          this.fortuneInfo.selectedMaster.name
+        ),
+        message:
+          this.$t("Fortune.poorMaster") +
+          this.fortuneInfo.selectedMaster.name +
+          this.$t("Fortune.leaveMessage")
+      })
+        .then(() => {
+          // on confirm
+          this.$router.push({ name: "DailyFortunePrepare" });
         })
-          .then(() => {
-            // on confirm
-            this.$router.push({ name: "DailyFortunePrepare" });
-          })
-          .catch(() => {
-            // on cancel
-          });
-      }
+        .catch(() => {
+          // on cancel
+        });
     }
   }
 };

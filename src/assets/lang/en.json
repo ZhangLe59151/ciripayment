@@ -34,7 +34,8 @@
     "question1": "Hang on, {n} would like to ask you a few questions.",
     "question2": "You are halfway towards your fortune!",
     "next": "Next",
-    "getMyFortune": "Get My Fortune"
+    "getMyFortune": "Get My Fortune",
+    "leaveMsgTitle": "Leaving Master {n}?"
   },
   "Income": "TODAY'S SALES",
   "Expenses": "SPENDINGS",

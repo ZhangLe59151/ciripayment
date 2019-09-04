@@ -42,8 +42,10 @@ export default {
       this.$router.replace({ name: "Home" });
     },
     chooseMaster(master) {
-      this.fortuneInfo.selectedMaster = master;
-      this.$store.commit("SaveFortuneInfo", this.fortuneInfo);
+      this.$store.commit(
+        "SaveFortuneInfo",
+        Object.assign({}, this.fortuneInfo, { selectedMaster: master })
+      );
       this.$router.push({ name: "DailyFortuneQuestion", params: { id: 1 } });
     },
     bindLikeObIntoMasterList(likeArr) {
