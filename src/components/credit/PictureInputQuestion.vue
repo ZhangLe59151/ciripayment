@@ -20,8 +20,11 @@
     class="picture-input-question"
   >
     <div class="title">{{question.question}}</div>
+    <div v-if="changingImgPreview">
+      <van-loading type="spinner" class="spinner"/>
+    </div>
     <el-form
-      v-if="!form.answering"
+      v-else-if="!form.answering"
       label-width="0px"
       :model="form"
       ref="elForm"
@@ -99,6 +102,7 @@
       class="error_msg"
     >{{$t("Credit.errorImgInput")}}</div>
     <van-button
+      v-if="!sendingRequest"
       class="submit-btn"
       @click="handleSubmit"
     >
@@ -107,6 +111,9 @@
         class="dollar-coin"
         src="../../assets/imgs/dollar_coin.png"
       >
+    </van-button>
+    <van-button v-else class="submit-btn" disabled>
+      <div class="btn-text"><van-loading type="spinner" color="#ffa702"/></div>
     </van-button>
   </div>
 </template>
@@ -121,6 +128,7 @@ export default {
   data() {
     return {
       sendingRequest: false,
+      changingImgPreview: false,
       url: "",
       backgroundStyle: `background: url(${this.question.value ||
         ""}) no-repeat`,
@@ -140,6 +148,7 @@ export default {
       this.error = !this.form.answering;
     },
     takePhoto() {
+      this.changingImgPreview = true;
       let opts = {
         quality: 80,
         destinationType: Camera.DestinationType.DATA_URL,
@@ -161,8 +170,11 @@ export default {
       vm[`${"error"}`] = false;
       vm[`${"photoFromCamera"}`] = true;
       vm[`${"backgroundStyle"}`] = `background: url(${dataURI}) no-repeat`;
+      this.changingImgPreview = false;
     },
-    onFailPhotoTaking() {},
+    onFailPhotoTaking() {
+      this.changingImgPreview = false;
+    },
     deleteImage() {
       this.form.answering = "";
       this.photoFromCamera = false;
@@ -177,6 +189,7 @@ export default {
       return new Blob([ab], { type: "image/jpeg" });
     },
     uploadImg(param) {
+      this.changingImgPreview = true;
       var vm = this;
       var UploadApi = this.$store.state.uploadImgUrl;
       var fileObj = param.file;
@@ -203,15 +216,15 @@ export default {
         if (res.code === 200) {
           vm[`${"form"}`] = { answering: res.data.url };
           vm[`${"error"}`] = false;
-          vm[
-            `${"backgroundStyle"}`
-          ] = `background: url(${res.data.url}) no-repeat`;
+          vm[`${"backgroundStyle"}`] = `background: url(${res.data.url}) no-repeat`;
+          vm[`${"changingImgPreview"}`] = false;
         } else {
           vm.$notify({
             message:
               "Upload failed. Please check your internet connection is stable before trying again.",
             duration: 3000
           });
+          vm[`${"changingImgPreview"}`] = false;
           return false;
         }
       };
@@ -360,6 +373,12 @@ export default {
     position: relative;
   }
 
+  .spinner {
+    margin-left: calc(50% - 25px);
+    width: 50px;
+    height: 50px;
+    margin-top: 60px;
+  }
   .upload-wrapper {
     width: 98%;
     height: 52px;
