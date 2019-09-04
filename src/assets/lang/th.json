@@ -195,7 +195,12 @@
     "recordHistory": "บันทึกประวัติ",
     "editRecord": "แก้ไขบันทึก",
     "today": "Today, ",
-    "yesterday": "Yesterday, "
+    "yesterday": "Yesterday, ",
+    "added": "Added Sucessfully",
+    "addedwrong": "Please input valid number",
+    "done": "Done",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
   },
   "Setting": {
     "Language": "ภาษา",
