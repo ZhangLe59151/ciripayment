@@ -238,7 +238,9 @@
     "skipQuestion": "Skip Question",
     "loginPageTitle": "Be a Happy TaoKae",
     "announce": "By using this app, you agree to the terms and conditions.",
-    "nationalCode": "National Code"
+    "nationalCode": "National Code",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
   },
   "Common": {
     "serverRequestError": "Server request error. Please try again!"
