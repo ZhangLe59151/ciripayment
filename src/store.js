@@ -371,7 +371,7 @@ export default new Vuex.Store({
       );
     },
     ClearFortuneQuestion(state) {
-      state.fortuneQuestion = {};
+      state.fortuneQuestion = [];
       window.localStorage.removeItem("fortuneQuestion");
     }
   },
