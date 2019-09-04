@@ -23,7 +23,7 @@
             v-model="form.memo"
             ref="inputText"
             @focus="inputNote"
-            @keyup.enter.native="handleKeyup"
+            @keyup.enter.native="$refs.inputText.blur()"
             maxlength="30"
             @input="checkLength"
             :placeholder="$t('Record.placeHolder')"
@@ -239,9 +239,6 @@ export default {
     }
   },
   methods: {
-    handleKeyup() {
-      alert(322)
-    },
     fetchData(form) {
       this.$api.addRecord(form).then(res => {
         console.log(form.accountDate);
