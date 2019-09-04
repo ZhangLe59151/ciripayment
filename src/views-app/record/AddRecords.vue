@@ -344,7 +344,7 @@ export default {
         // this.$store.commit("UpdateRecord", this.convertForm(form));
         form[this.type] = parseFloat(form[this.type]);
         this.fetchData(form);
-        this.$notify({ message: "Added Sucessfully", background: "#04A777" });
+        this.$notify({ message: this.$t('Record.added'), background: "#04A777" });
         return false;
       }
       this.$notify({

@@ -195,7 +195,8 @@
     "recordHistory": "Records History",
     "editRecord": "Edit Record",
     "today": "Today, ",
-    "yesterday": "Yesterday, "
+    "yesterday": "Yesterday, ",
+    "added": "Added Sucessfully"
   },
   "Setting": {
     "Language": "Language",
