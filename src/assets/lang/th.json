@@ -3,9 +3,9 @@
   "OTPErrorMsg": "ขอรหัสOTPถี่เกินไปโปรดรอสักครู่แล้วลองอีกครั้ง",
   "missingDocumentErrorMsg": "เอกสารไม่ครบโปรดอัปโหลดเอกสารที่จำเป็นทั้งหมดก่อนดำเนินการขั้นตอนถัดไป",
   "Tabbars": {
-    "Home": "Home",
-    "Loan": "Loan",
-    "Settings": "Settings"
+    "Home": "หน้าหลัก",
+    "Loan": "กู้ยืมเงิน",
+    "Settings": "ตั้งค่า"
   },
   "FortuneTelling": {
     "TapChestTips": "Tap on the treasure chest!",
@@ -19,33 +19,35 @@
     "like": "ถูกใจ",
     "liked": "ถูกใจแล้ว",
     "share": "แบ่งปัน",
-    "shareSuccess": "Sharing in progress!",
-    "shareFailed": "Sharing failed!",
+    "shareSuccess": "กำลังแบ่งปัน!",
+    "shareFailed": "การแบ่งปันล้มเหลว!",
     "sharePageDesc": "ดวงธุรกิจของฉันในวันนี้ดีมากเลยแล้วคุณล่ะ?",
-    "masterDes": "คำทำนายจาก {n}! | Here's your friend's fortune by {n}!",
+    "masterDes": "คำทำนายจาก {n}! | นี่คือดวงของเพื่อนคุณโดยหมอดู {n}!",
     "luckyDes": "ดวงค้าขายวันนี้",
     "luckyAmountDes": "วันนี้คุณอาจจะส้มหล่นได้เงิน",
     "recordDes": "บันทึกยอดขายเมื่อวานเพื่อทำนายยอดขายรายวันของคุณ",
-    "recordBtn": "Record Now",
+    "recordBtn": "ลองใหม่",
     "selectMasterDes": "เลือกหมอดูเพื่อทำนายดวง",
     "getFortuneBtn": "ดูดวงค้าขายของฉัน",
-    "likeDes": "คุณและ {n}+ และคนอื่นๆถูกใจ| Liked {n}+ others",
+    "likeDes": "คุณและ {n}+ คนถูกใจ| {n}+ คนถูกใจ",
     "downloadDes": "ดาวน์โหลดแอปเถ้าแก่เพื่อรับคำทำนายทุกวัน!",
-    "question1": "Hang on, {n} would like to ask you a few questions.",
-    "question2": "You are halfway towards your fortune!",
-    "next": "Next",
-    "getMyFortune": "Get My Fortune",
-    "leaveMsgTitle": "Leaving Master {n}?"
+    "question1": "เดี๋ยวก่อน {n} ต้องการถามอะไรหน่อย",
+    "question2": "อีกครึ่งทางคุณก็จะได้คำนายแล้ว!",
+    "next": "ถัดไป",
+    "getMyFortune": "รับคำทำนายของฉัน",
+    "leaveMsgTitle": "ไม่ดูดวงแล้วเหรอ {n}?",
+    "masterDetail1": "Hailed as the new Rock Star of the Feng Shui world, scientific Feng Shui researcher Master Mas has dedicated almost three decades of his life researching, learning, testing out theories and decoding hidden secrets of Feng Shui and Chinese metaphysics.",
+    "masterDetail2": "Hailed as the new Rock Star of the Feng Shui world, scientific Feng Shui researcher Master Mas has dedicated almost three decades of his life researching, learning, testing out theories and decoding hidden secrets of Feng Shui and Chinese metaphysics."
   },
   "Income": "ยอดขายวันนี้",
   "Expenses": "ค่าใช้จ่าย",
   "LoanTitle": "เงินด่วน",
   "LoanExceedLimitError": {
-    "title": "We need more information to understand you better before enabling loan services.",
+    "title": "เราต้องการข้อมูลของคุณเพิ่มเติม เพื่อทำความเข้าใจคุณให้มากขึ้นก่อนให้บริการกู้ยืมเงิน",
     "ins": {
-      "title": "Keep doing these to get closer to your first instant loan!",
-      "bullet1": "Record your daily sales using Add Record",
-      "bullet2": "Answer daily questions to increase how much your business is worth"
+      "title": "ดำเนินการต่อไปเพื่อทำการกู้ยืมเงินครั้งแรก!",
+      "bullet1": "กด เพิ่มบันทึก เพื่อบันทึกยอดขายประจำวันของคุณ",
+      "bullet2": "เพิ่มมูลค่าให้ธุรกิจคุณ ด้วยการตอบคำถามประจำวัน"
     }
   },
   "AppLoanOverview": {
@@ -92,7 +94,7 @@
     "discard": {
       "question": "ยกเลิกคำขอ?",
       "msg": "ข้อมูลที่กรอกและอัปโหลดจะถูกลบทั้งหมด",
-      "confirm": "Discard",
+      "confirm": "ยกเลิก",
       "cancel": "ยกเลิก"
     },
     "heading": "Profile Information",
@@ -105,7 +107,7 @@
     "subTitle2": "BUSINESS INFORMATION",
     "bizNameEng": "ชื่อร้านค้า",
     "bizCat": "ประเภทธุรกิจ",
-    "selectCat": "Select Category",
+    "selectCat": "เลือกประเภท",
     "bizAdd": "ที่ตั้งธุรกิจ/ร้านค้า",
     "province": "Province",
     "selectProvince": "Select Province",
@@ -142,11 +144,11 @@
     "errorImgInput": "อัปโหลดรูปภาพหรือไฟล์",
     "questionHasBeenDone": "คำถามทุกข้อของวันนี้ได้คำตอบแล้ว",
     "comeBack": "กลับมาพรุ่งนี้อีกเพื่อรับวงเงินเครดิตเพิ่ม",
-    "takePhoto": "Take a photo",
-    "credit": "Credit",
+    "takePhoto": "ถ่ายภาพ",
+    "credit": "เครดิต",
     "selectAlbum": "เลือกจากอัลบั้ม",
-    "earned": "Earned",
-    "remove": "Remove"
+    "earned": "ได้รับแล้ว",
+    "remove": "ลบ"
   },
   "Home": {
     "income": "ยอดขายวันนี้",
@@ -166,7 +168,7 @@
     "creditLimitTitle2": "{n} คำถามช่วยเพิ่มมูลค่าธุรกิจของคุณ| {n} คำถามช่วยเพิ่มมูลค่าธุรกิจของคุณ!",
     "creditLimitTitle3": "เสร็จแล้ว!กลับมาใหม่พรุ่งนี้นะ",
     "creditLimitBtn1": "เริ่มต้น",
-    "creditLimitBtn2": "View Business' Worth",
+    "creditLimitBtn2": "เริ่มต้นh",
     "latestTransaction": "Latest Transactions",
     "applyNow": "สมัครเลย",
     "approximately": "Approximately",
@@ -177,7 +179,7 @@
   },
   "Record": {
     "Income": "ยอดขาย",
-    "Incomes": "Sยอดขาย",
+    "Incomes": "ยอดขาย",
     "IncomeName": "คำอธิบาย(ถ้ามี)",
     "Expenses": "รายจ่าย",
     "ExpensesS": "รายจ่าย",
@@ -194,14 +196,14 @@
     "add": "เพิ่่ม",
     "recordHistory": "บันทึกประวัติ",
     "editRecord": "แก้ไขบันทึก",
-    "today": "Today, ",
-    "yesterday": "Yesterday, "
+    "today": "วันนี้, ",
+    "yesterday": "เมื่อวาน, "
   },
   "Setting": {
     "Language": "ภาษา",
     "SoL": "เข้าใช้งาน",
     "Logout": "ออกจากระบบ",
-    "Version": "version",
+    "Version": "เวอร์ชั่น",
     "tc": "ข้อกำหนดและเงื่อนไข",
     "support": "สนับสนุน",
     "feedbackTitle": "โปรดแจ้งเราหากพบปัญหาการใช้งาน?",
@@ -212,14 +214,14 @@
     "messagePlaceholder": "แจ้งปัญหาและข้อเสนอแนะ",
     "sendEmail": "ส่ง",
     "sendSucceed": "ได้รับข้อเสนอแนะของคุณแล้ว",
-    "sendFailed": "Failed to send"
+    "sendFailed": "การส่งล้มเหลว"
   },
   "Language": {
     "en": "English",
     "th": "Thai ภาษาไทย"
   },
   "Login": {
-    "loginTitle": "login",
+    "loginTitle": "เข้าสู่ระบบ",
     "getStart": "เริ่มต้น",
     "signIn": "เข้าใช้งานด้วยมือถือ",
     "enterOTP": "รหัสOTPถูกส่งไปยังเบอร์",
@@ -233,11 +235,12 @@
     "announce": "ด้วยการใช้แอปพลิเคชันนี้ แสดงว่าคุณเข้าใจข้อกำหนดและเงื่อนไขแล้ว"
   },
   "Common": {
-    "serverRequestError": "Server request error. Please try again!"
+    "serverRequestError": "คำขอเซิร์ฟเวอร์ผิดพลาด โปรดลองอีกครั้ง!"
   },
   "Fortune": {
     "dailyFortune": "ดูดวงรายวัน",
     "poorMaster": "อย่าเพิ่งไป",
+
     "leaveMessage": "? ไม่สามารถทำนายดวงให้ได้ ถ้าคุณไปตอนนี้ สิ่งที่คุณเลือกไว้จะสูญเปล่า",
     "question": "คำถามที่",
     "isCalc": "กำลังทำนายดวงของคุณ",
@@ -246,8 +249,8 @@
     "masterProfile": "รู้จักหมอดู"
   },
   "Offline": {
-    "title": "You’re offline.",
-    "ins": "Check your internet connection and try again.",
-    "button": "Refresh"
+    "title": "คุณกำลังออฟไลน์",
+    "ins": "โปรดตรวจสอบสัญญาณอินเทอร์เน็ตของคุณและลองอีกครั้ง",
+    "button": "ลองใหม่"
   }
 }

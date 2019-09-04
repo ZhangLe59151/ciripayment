@@ -35,7 +35,9 @@
     "question2": "You are halfway towards your fortune!",
     "next": "Next",
     "getMyFortune": "Get My Fortune",
-    "leaveMsgTitle": "Leaving Master {n}?"
+    "leaveMsgTitle": "Leaving Master {n}?",
+    "masterDetail1": "Hailed as the new Rock Star of the Feng Shui world, scientific Feng Shui researcher Master Mas has dedicated almost three decades of his life researching, learning, testing out theories and decoding hidden secrets of Feng Shui and Chinese metaphysics.",
+    "masterDetail2": "Hailed as the new Rock Star of the Feng Shui world, scientific Feng Shui researcher Master Mas has dedicated almost three decades of his life researching, learning, testing out theories and decoding hidden secrets of Feng Shui and Chinese metaphysics."
   },
   "Income": "TODAY'S SALES",
   "Expenses": "SPENDINGS",

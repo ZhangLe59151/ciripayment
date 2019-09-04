@@ -9,7 +9,7 @@
       <img :src="imgList[info.id]">
       <div class="name">{{info.name}}</div>
       <div class="subtitle">{{$route.query.subtitle}}</div>
-      <div class="detail">{{info.detail}}</div>
+      <div class="detail">{{$t(`FortuneTelling.masterDetail${info.id}`)}}</div>
       <div
         class="bottom-btn"
         @click="handleClick"
