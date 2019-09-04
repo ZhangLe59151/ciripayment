@@ -1,10 +1,16 @@
 <template>
   <div class="app-home-info">
     <div class="title">{{$t("Home.info")}}</div>
-
-    <div class="info-box" v-for="item in arr" :key="item.id">
+    <div
+      class="info-box"
+      v-for="item in arr"
+      :key="item.id"
+    >
       <div @click="$router.push({name: 'ArticleExternal', query: { url: item.link}})">
-        <van-row type="flex" justify="space-between">
+        <van-row
+          type="flex"
+          justify="space-between"
+        >
           <van-col span="16">
             <div class="arc-title">{{item.title}}</div>
             <!-- <div class="arc-des">{{item.des}}</div> -->
@@ -15,7 +21,7 @@
         </van-row>
       </div>
     </div>
-    <div class="app-home-info-bottom">Come back tomorrow for more articles!</div>
+    <div class="app-home-info-bottom">{{$t("Home.moreArticle")}}</div>
   </div>
 </template>
 

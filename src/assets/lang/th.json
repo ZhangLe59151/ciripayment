@@ -171,7 +171,8 @@
     "approximately": "Approximately",
     "min": "5 minutes",
     "nationalId": "เลขบัตรประชาชนของคุณ",
-    "require": "สิ่งที่คุณต้องใช้:"
+    "require": "สิ่งที่คุณต้องใช้:",
+    "moreArticle": "Come back tomorrow for more articles!"
   },
   "Record": {
     "Income": "ยอดขาย",

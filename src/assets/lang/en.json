@@ -171,7 +171,8 @@
     "approximately": "Approximately",
     "min": "5 minutes",
     "nationalId": "National ID",
-    "require": "What's required:"
+    "require": "What's required:",
+    "moreArticle": "Come back tomorrow for more articles!"
   },
   "Record": {
     "Income": "SALES",
