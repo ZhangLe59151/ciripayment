@@ -120,8 +120,8 @@
           v-show="appear"
           v-model="choosingDate"
           type="date"
-          confirm-button-text="$t(Record.confirm)"
-          cancel-button-text="$t(Record.cancel)"
+          :confirm-button-text="$t('Record.confirm')"
+          :cancel-button-text="$t('Record.cancel')"
           :min-date="minDate"
           :max-date="maxDate"
           @cancel="cancelSetDate"
@@ -133,7 +133,7 @@
     <van-number-keyboard
       :show="showNumber"
       extra-key="."
-      close-button-text="$t(Record.done)"
+      :close-button-text="$t('Record.done')"
       @blur="showNumber = false"
       @input="onInput"
       @delete="onDelete"
@@ -192,8 +192,13 @@ export default {
         this.$route.query.date ? this.$route.query.date : today
       ).format(this.localDateFormatter)
     );
-    if (this.$route.query.date === this.$moment().subtract(1, "days").format(this.localDateFormatter)) {
-      this.disableDatePicker = false
+    if (
+      this.$route.query.date ===
+      this.$moment()
+        .subtract(1, "days")
+        .format(this.localDateFormatter)
+    ) {
+      this.disableDatePicker = false;
     }
   },
   watch: {
@@ -265,7 +270,7 @@ export default {
     },
     onBeginInputDate() {
       if (!this.disableDatePicker) {
-        return
+        return;
       }
       this.appear = true;
       // increase height of app
@@ -346,11 +351,14 @@ export default {
         // this.$store.commit("UpdateRecord", this.convertForm(form));
         form[this.type] = parseFloat(form[this.type]);
         this.fetchData(form);
-        this.$notify({ message: this.$t('Record.added'), background: "#04A777" });
+        this.$notify({
+          message: this.$t("Record.added"),
+          background: "#04A777"
+        });
         return false;
       }
       this.$notify({
-        message: this.$t('Record.addedwrong'),
+        message: this.$t("Record.addedwrong"),
         background: "#b41800"
       });
     },

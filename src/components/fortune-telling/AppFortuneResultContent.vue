@@ -101,7 +101,7 @@ export default {
 .app-fortune-result-content {
   position: relative;
   top: 50px;
-  height: 65vh;
+  // height: 65vh;
   width: 100%;
   text-align: center;
   .background-card {

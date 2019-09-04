@@ -295,7 +295,8 @@ export default {
 
   .action {
     position: relative;
-    top: 44px;
+    // top: 44px;
+    padding: 60px 0 20px;
     display: flex;
     flex: 1 1;
     margin: 0 20px;
