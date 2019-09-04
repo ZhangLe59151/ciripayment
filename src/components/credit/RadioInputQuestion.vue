@@ -216,8 +216,10 @@ export default {
       margin: 2%;
       white-space: normal;
       height: 90px;
-      width: 45%;
+      width: 46%;
       font-size: 20px;
+      box-sizing: border-box;
+
     }
 
     .error-2 {
@@ -233,8 +235,10 @@ export default {
       margin: 2%;
       white-space: normal;
       height: 90px;
-      width: 45%;
+      width: 46%;
       font-size: 20px;
+      box-sizing: border-box;
+
     }
 
     .option-4 {
@@ -251,7 +255,9 @@ export default {
       white-space: normal;
       height: 60px;
       font-size: 14px;
-      width: 45%;
+      width: 46%;
+      box-sizing: border-box;
+
     }
 
     .error-4 {
@@ -268,7 +274,9 @@ export default {
       white-space: normal;
       height: 60px;
       font-size: 14px;
-      width: 45%;
+      width: 46%;
+      box-sizing: border-box;
+
     }
 
     .error-6 {
@@ -285,7 +293,9 @@ export default {
       white-space: normal;
       height: 40px;
       font-size: 16px;
-      width: 45%;
+      width: 46%;
+      box-sizing: border-box;
+
     }
 
     .option-6 {
@@ -302,7 +312,9 @@ export default {
       white-space: normal;
       height: 40px;
       font-size: 16px;
-      width: 45%;
+      width: 46%;
+      box-sizing: border-box;
+
     }
 
     .selecting {
