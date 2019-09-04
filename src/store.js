@@ -365,14 +365,13 @@ export default new Vuex.Store({
           }
         }
       }
-
       window.localStorage.setItem(
         "fortuneQuestion",
-        JSON.stringify(state.fortuneQ)
+        JSON.stringify(state.fortuneQuestion)
       );
     },
     ClearFortuneQuestion(state) {
-      state.fortuneQuestion = {};
+      state.fortuneQuestion = [];
       window.localStorage.removeItem("fortuneQuestion");
     }
   },
