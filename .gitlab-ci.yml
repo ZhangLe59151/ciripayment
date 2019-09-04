@@ -15,17 +15,17 @@ build:
   stage: build
   script:
     - npm install
-    - npm run build
+    - npm run build-pro-web
     - tar -zcvf frontend.tar.gz ./dist/*
     - mkdir -p build
     - mv frontend.tar.gz ./build/
-    - scp ./build/frontend.tar.gz silot@$DEPLOY_SERVER_DEV:/silot/mvp/self/
+    - scp ./build/frontend.tar.gz silot@$DEPLOY_SERVER_DEV:/silot/taokae/frontend/
 
   artifacts:
     name: "merchant-portal"
     paths:
       - $PWD/build/frontend.tar.gz
-  #when: manual
+  when: manual
   only:
     - dev-deploy
 
@@ -37,6 +37,6 @@ deploy:
     - ls -la
     - sh deploy.sh
     - exit
-  #when: manual
+  when: manual
   only:
     - dev-deploy
