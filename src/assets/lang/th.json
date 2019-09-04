@@ -196,13 +196,13 @@
     "add": "เพิ่่ม",
     "recordHistory": "บันทึกประวัติ",
     "editRecord": "แก้ไขบันทึก",
-    "today": "วันนี้, ",
-    "yesterday": "เมื่อวาน, ",
-    "added": "Added Sucessfully",
-    "addedwrong": "Please input valid number",
-    "done": "Done",
-    "confirm": "Confirm",
-    "cancel": "Cancel"
+    "today": "Today, ",
+    "yesterday": "Yesterday, ",
+    "added": "เพิ่มสำเร็จแล้ว",
+    "addedwrong": "โปรดกรอกหมายเลขที่ถูกต้อง",
+    "done": "เสร็จแล้ว",
+    "confirm": "ยืนยัน",
+    "cancel": "ยกเลิก"
   },
   "Setting": {
     "Language": "ภาษา",
