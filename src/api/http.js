@@ -8,9 +8,9 @@ import store from "@/store";
 // axios config
 axios.defaults.timeout = 30000;
 // axios.defaults.withCredentials = true
-axios.defaults.headers = {
-  lang: store.state.settings.lang
-};
+// axios.defaults.headers = {
+//   lang: store.state.settings.lang
+// };
 
 axios.defaults.baseURL = process.env.VUE_APP_BASEURL;
 
@@ -20,7 +20,8 @@ axios.interceptors.request.use(
     config.headers = {
       ...config.headers,
       _t: Date.parse(new Date()) / 1000,
-      clientId: clientId
+      clientId: clientId,
+      lang: store.state.settings.lang
     };
     Toast.loading({
       duration: 0,
