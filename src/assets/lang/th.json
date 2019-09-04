@@ -196,11 +196,11 @@
     "editRecord": "แก้ไขบันทึก",
     "today": "Today, ",
     "yesterday": "Yesterday, ",
-    "added": "Added Sucessfully",
-    "addedwrong": "Please input valid number",
-    "done": "Done",
-    "confirm": "Confirm",
-    "cancel": "Cancel"
+    "added": "เพิ่มสำเร็จแล้ว",
+    "addedwrong": "โปรดกรอกหมายเลขที่ถูกต้อง",
+    "done": "เสร็จแล้ว",
+    "confirm": "ยืนยัน",
+    "cancel": "ยกเลิก"
   },
   "Setting": {
     "Language": "ภาษา",
