@@ -301,7 +301,7 @@ export default {
     position: relative;
     display: flex;
     flex: 1 1;
-    margin: 0 66px;
+    margin: 0 40px;
     justify-content: space-between;
   }
 
