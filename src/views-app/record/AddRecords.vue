@@ -82,7 +82,7 @@
             :value="form.accountDate"
             confirm-button-text="confirm"
             cancel-button-text="cancel"
-            @focus="appear = true"
+            @focus="onBeginInputDate"
             maxlength="13"
             readonly
           />
@@ -169,7 +169,8 @@ export default {
       choosingDate: this.$route.query.date ? this.$route.query.date : today,
       currentDate: this.$route.query.date ? this.$route.query.date : today,
       dailyIncome: 0,
-      dailyExpense: 0
+      dailyExpense: 0,
+      disableDatePicker: true
     };
   },
   computed: {
@@ -189,6 +190,9 @@ export default {
         this.$route.query.date ? this.$route.query.date : today
       ).format(this.localDateFormatter)
     );
+    if (this.$route.query.date === this.$moment().subtract(1, "days").format(this.localDateFormatter)) {
+      this.disableDatePicker = false
+    }
   },
   watch: {
     tabActive: {
@@ -258,6 +262,9 @@ export default {
       }
     },
     onBeginInputDate() {
+      if (!this.disableDatePicker) {
+        return
+      }
       this.appear = true;
       // increase height of app
       if (window.innerHeight >= 700) {

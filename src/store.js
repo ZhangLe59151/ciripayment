@@ -50,7 +50,7 @@ export default new Vuex.Store({
     form: {},
     userInfo: {},
     application: {},
-    furtuneQuestion: [],
+    fortuneQuestion: [],
     showDownloadIcon: process.env.VUE_APP_DEVICETYPE === "WEB",
     recordList: JSON.parse(storage.getItem("recordList")) || [],
     masterList: require("@/assets/data/fortuneMasterList.json"),
@@ -347,29 +347,16 @@ export default new Vuex.Store({
       state.firstLaunch = "No";
       storage.setItem("firstLaunch", state.firstLaunch);
     },
-    UpdateFurtuneQuestionInfo(state, fortuneQ) {
-      // state.furtuneQuestion = Object.assign(state.furtuneQuestion, fortuneQ);
-
-      let furtuneQuestion = state.furtuneQuestion;
-      // if dont have, append it
-      if (state.furtuneQuestion.length === 0) {
-        state.furtuneQuestion = [fortuneQ];
-      }
-      for (let i = 0; i < furtuneQuestion.length; i++) {
-        if (furtuneQuestion[i].id === fortuneQ.id) {
-          furtuneQuestion[i] = fortuneQ;
-        } else {
-          // if not found, append it
-          if (i === furtuneQuestion.length - 1) {
-            state.furtuneQuestion = state.furtuneQuestion.concat(fortuneQ);
-          }
-        }
-      }
-      storage.setItem("furtuneQuestion", JSON.stringify(state.furtuneQuestion));
+    UpdateFortuneQuestionInfo(state, fortuneQ) {
+      state.fortuneQuestion = Object.assign(state.fortuneQuestion, fortuneQ);
+      window.localStorage.setItem(
+        "fortuneQuestion",
+        JSON.stringify(state.fortuneQ)
+      );
     },
     ClearFortuneQuestion(state) {
-      state.furtuneQuestion = [];
-      storage.removeItem("furtuneQuestion");
+      state.fortuneQuestion = {};
+      window.localStorage.removeItem("fortuneQuestion");
     }
   },
   actions: {
