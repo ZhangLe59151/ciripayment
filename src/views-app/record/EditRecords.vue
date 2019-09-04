@@ -264,6 +264,8 @@ export default {
       ).style.height = `${window.innerHeight - 50}px`;
     },
     onInput(value) {
+      var str = this.form[this.type].replace(',','')
+      str = str.replace(',','')
       if (this.form[this.type].indexOf(".") !== -1 && value === ".") {
         return false;
       }
@@ -272,7 +274,7 @@ export default {
       }
       const regex1 = /^(([1-9][0-9]*)|(([0]\.\d{2}|[1-9][0-9]*\.\d{2})))$/;
       if (
-        regex1.test(this.form[this.type]) &&
+        regex1.test(str) &&
         this.form[this.type].indexOf(".") != -1
       ) {
         return false;
