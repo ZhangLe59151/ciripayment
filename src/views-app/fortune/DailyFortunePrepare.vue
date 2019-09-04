@@ -18,6 +18,10 @@
         :key="index"
       />
     </div>
+
+    <div class="master-select-tip">
+      {{$t("FortuneTelling.selectMasterTips")}}
+    </div>
   </div>
 </template>
 
@@ -96,6 +100,17 @@ export default {
     .fortune-master-item {
       margin-bottom: 24px;
     }
+  }
+
+  .master-select-tip {
+    font-size: 14px;
+    color: #ffffff;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 20px;
+    width: 250px;
+    margin: 0 auto;
+    padding-bottom: 20px;
   }
 
   .powered-tips {

@@ -24,7 +24,7 @@
     "sharePageDesc": "My business will get extremely good luck today. How about yours ?",
     "masterDes": "Here’s your fortune by {n}! | Here's your friend's fortune by {n}!",
     "luckyDes": "Your Sales Luck Today",
-    "luckyAmountDes": "Today Luck Will Likely Bring You",
+    "luckyAmountDes": "Today's Luck Will Likely Bring You",
     "recordDes": "Record yesterday’s income for master to predict your daily sales.",
     "recordBtn": "Record Now",
     "selectMasterDes": "Select a Master to tell your fortune.",
@@ -37,7 +37,8 @@
     "getMyFortune": "Get My Fortune",
     "leaveMsgTitle": "Leaving Master {n}?",
     "masterDetail1": "Hailed as the new Rock Star of the Feng Shui world, scientific Feng Shui researcher Master Mas has dedicated almost three decades of his life researching, learning, testing out theories and decoding hidden secrets of Feng Shui and Chinese metaphysics.",
-    "masterDetail2": "Hailed as the new Rock Star of the Feng Shui world, scientific Feng Shui researcher Master Mas has dedicated almost three decades of his life researching, learning, testing out theories and decoding hidden secrets of Feng Shui and Chinese metaphysics."
+    "masterDetail2": "Hailed as the new Rock Star of the Feng Shui world, scientific Feng Shui researcher Master Mas has dedicated almost three decades of his life researching, learning, testing out theories and decoding hidden secrets of Feng Shui and Chinese metaphysics.",
+    "selectMasterTips": "Don't be too greedy, you can only select one Master a day!"
   },
   "Income": "TODAY'S SALES",
   "Expenses": "SPENDINGS",
