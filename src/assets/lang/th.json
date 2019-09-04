@@ -34,7 +34,8 @@
     "question1": "Hang on, {n} would like to ask you a few questions.",
     "question2": "You are halfway towards your fortune!",
     "next": "Next",
-    "getMyFortune": "Get My Fortune"
+    "getMyFortune": "Get My Fortune",
+    "leaveMsgTitle": "Leaving Master {n}?"
   },
   "Income": "ยอดขายวันนี้",
   "Expenses": "ค่าใช้จ่าย",
@@ -171,7 +172,8 @@
     "approximately": "Approximately",
     "min": "5 minutes",
     "nationalId": "เลขบัตรประชาชนของคุณ",
-    "require": "สิ่งที่คุณต้องใช้:"
+    "require": "สิ่งที่คุณต้องใช้:",
+    "moreArticle": "Come back tomorrow for more articles!"
   },
   "Record": {
     "Income": "ยอดขาย",

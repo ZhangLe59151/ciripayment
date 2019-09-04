@@ -34,7 +34,8 @@
     "question1": "Hang on, {n} would like to ask you a few questions.",
     "question2": "You are halfway towards your fortune!",
     "next": "Next",
-    "getMyFortune": "Get My Fortune"
+    "getMyFortune": "Get My Fortune",
+    "leaveMsgTitle": "Leaving Master {n}?"
   },
   "Income": "TODAY'S SALES",
   "Expenses": "SPENDINGS",
@@ -171,7 +172,8 @@
     "approximately": "Approximately",
     "min": "5 minutes",
     "nationalId": "National ID",
-    "require": "What's required:"
+    "require": "What's required:",
+    "moreArticle": "Come back tomorrow for more articles!"
   },
   "Record": {
     "Income": "SALES",

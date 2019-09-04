@@ -49,7 +49,7 @@
       class="submit-btn"
       @click="handleSubmit"
     >
-      <div class="btn-text">+{{question.limitAmount}} {{$store.state.currency}} {{$t("Credit.credit")}}</div>
+      <div class="btn-text">+{{question.limitAmount}} {{$store.state.currency}}</div>
       <img
         class="dollar-coin"
         src="../../assets/imgs/dollar_coin.png"
@@ -237,16 +237,15 @@ export default {
     color: white;
     font-size: 14px;
     .btn-text {
-      position: relative;
-      left: -20px;
-      top: -2px;
+      display: inline-block;
+      vertical-align: middle;
     }
     .dollar-coin {
+      display: inline-block;
       width: 24px;
       height: 24px;
-      position: absolute;
-      top: 7px;
-      right: 55px;
+      vertical-align: middle;
+      margin-left: 4px;
     }
   }
 }
