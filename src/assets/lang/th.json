@@ -202,7 +202,8 @@
     "addedwrong": "โปรดใส่เบอร์โทรศัพท์มือถือที่ใช้งานอยู่",
     "done": "เสร็จแล้ว",
     "confirm": "ยืนยัน",
-    "cancel": "ยกเลิก"
+    "cancel": "ยกเลิก",
+    "updateSucceed": "Update succeed!"
   },
   "Setting": {
     "Language": "ภาษา",

@@ -202,7 +202,8 @@
     "addedwrong": "Please input valid number",
     "done": "Done",
     "confirm": "Confirm",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "updateSucceed": "Update succeed!"
   },
   "Setting": {
     "Language": "Language",

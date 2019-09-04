@@ -226,7 +226,7 @@ export default {
       this.$api.updateRecord(form).then(res => {
         if (res.data.code === 200) {
           this.viewRecord();
-          this.$notify({ message: "Update succeed!", background: "#04A777" });
+          this.$notify({ message: this.$t('Record.updateSucceed'), background: "#04A777" });
         }
       });
     },
