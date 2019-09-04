@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
 import analytics from "../firebase/analytics";
-// import { Store } from "vuex";
 
 import store from "../store";
 
@@ -12,14 +11,6 @@ const routeArr = [
     path: "/",
     redirect: to => {
       return localStorage.getItem("firstLaunch") ? "/home" : "/landing-page";
-    }
-  },
-  {
-    path: "/enter-info",
-    name: "EnterInfo",
-    component: () => import("@/views-app/EnterInfo.vue"),
-    meta: {
-      title: ""
     }
   },
 
@@ -56,22 +47,6 @@ const routeArr = [
     }
   },
   {
-    path: "/success",
-    name: "Success",
-    component: () => import("@/views-app/Success.vue"),
-    meta: {
-      title: ""
-    }
-  },
-  {
-    path: "/view-application",
-    name: "ViewApplication",
-    component: () => import("@/views-app/ViewApplication.vue"),
-    meta: {
-      title: ""
-    }
-  },
-  {
     path: "/tc",
     name: "TermsAndConditions",
     component: () => import("@/views-app/TermsAndConditions.vue"),
@@ -84,41 +59,7 @@ const routeArr = [
     name: "TermsAndConditionsOnWeb",
     component: () => import("@/views-app/TermsAndConditionsOnWeb.vue"),
     meta: {
-      title: ""
-    }
-  },
-  {
-    path: "/preview-info",
-    name: "PreviewInfo",
-    component: () => import("@/views-app/PreviewInfo.vue"),
-    meta: {
-      title: ""
-    }
-  },
-
-  {
-    path: "/services-info",
-    name: "ServicesInfo",
-    component: () => import("@/views-app/ServicesInfo.vue"),
-    meta: {
-      title: ""
-    }
-  },
-  {
-    path: "/update-profile",
-    name: "UpdateProfile",
-    component: () => import("@/views-app/UpdateProfile.vue"),
-    meta: {
-      title: ""
-    }
-  },
-  // Other Area
-  {
-    path: "/admin",
-    name: "Admin",
-    component: () => import("@/views-app/Admin.vue"),
-    meta: {
-      title: ""
+      title: "SettingTnC"
     }
   }
 ];
@@ -155,14 +96,6 @@ const AppRouteArr = [
     component: () => import("@/views-app/record/RecordList.vue"),
     meta: {
       title: "LedgerRecordHistory"
-    }
-  },
-  {
-    path: "/services",
-    name: "Services",
-    component: () => import("@/views-app/service/Services.vue"),
-    meta: {
-      title: ""
     }
   },
   {
@@ -205,14 +138,7 @@ const AppRouteArr = [
       title: ""
     }
   },
-  {
-    path: "/services-apply-more-channel",
-    name: "ApplyMoreChannel",
-    component: () => import("@/views-app/service/ApplyMoreChannel.vue"),
-    meta: {
-      title: ""
-    }
-  },
+
   {
     path: "/settings",
     name: "Settings",
@@ -235,71 +161,6 @@ const AppRouteArr = [
     component: () => import("@/views-app/Support.vue"),
     meta: {
       title: "SettingFeedback"
-    }
-  },
-  {
-    path: "/manage-settlement",
-    name: "ManageSettlement",
-    component: () => import("@/views-app/service/ManageSettlement.vue"),
-    meta: {
-      title: ""
-    }
-  },
-  {
-    path: "/manage-channels",
-    name: "ManageChannels",
-    component: () => import("@/views-app/service/ManageChannels.vue"),
-    meta: {
-      title: ""
-    }
-  },
-  {
-    path: "/qrcode",
-    name: "Qrcode",
-    component: () => import("@/views-app/Qrcode.vue"),
-    meta: {
-      title: ""
-    }
-  },
-  {
-    path: "/scan",
-    name: "Scan",
-    component: () => import("@/views-app/Scan.vue"),
-    meta: {
-      title: ""
-    }
-  },
-
-  {
-    path: "/profile",
-    name: "Profile",
-    component: () => import("@/views-app/Profile.vue"),
-    meta: {
-      title: ""
-    }
-  },
-  {
-    path: "/select-bank",
-    name: "SelectBank",
-    component: () => import("@/views-app/SelectBank.vue"),
-    meta: {
-      title: ""
-    }
-  },
-  {
-    path: "/select-bank/:id",
-    name: "BankDetails",
-    component: () => import("@/views-app/BankDetails.vue"),
-    meta: {
-      title: ""
-    }
-  },
-  {
-    path: "/search",
-    name: "Search",
-    component: () => import("@/views-app/Search.vue"),
-    meta: {
-      title: ""
     }
   },
 
@@ -334,47 +195,6 @@ const AppRouteArr = [
     component: () => import("@/views-app/authentication/EnterOTP.vue"),
     meta: {
       title: "SigninVerify"
-    }
-  },
-  {
-    path: "/verified-first-time",
-    name: "VerifiedFirstTime",
-    component: () =>
-      import("@/views-app/authentication/VerifiedFirstTimeLogin.vue"),
-    meta: {
-      title: ""
-    }
-  },
-  {
-    path: "/create-password-sp",
-    name: "CreatePasswordSP",
-    component: () => import("@/views-app/authentication/CreatePassword.vue"),
-    meta: {
-      title: ""
-    }
-  },
-  {
-    path: "/enter-password-sp",
-    name: "EnterPasswordSP",
-    component: () => import("@/views-app/authentication/EnterPassword.vue"),
-    meta: {
-      title: ""
-    }
-  },
-  {
-    path: "/forgot-password-sp",
-    name: "ForgotPasswordSP",
-    component: () => import("@/views-app/authentication/ForgotPassword.vue"),
-    meta: {
-      title: ""
-    }
-  },
-  {
-    path: "/reset-password-sp",
-    name: "ResetPasswordSP",
-    component: () => import("@/views-app/authentication/ResetPassword.vue"),
-    meta: {
-      title: ""
     }
   },
   {
@@ -426,17 +246,9 @@ const ArticleArr = [
   {
     path: "/article",
     name: "ArticleExternal",
-    component: () => import("@/article/ArticleExternal.vue"),
+    component: () => import("@/views-app/article/ArticleExternal.vue"),
     meta: {
       title: "ArticleContent"
-    }
-  },
-  {
-    path: "/article-internal",
-    name: "ArticleInternal",
-    component: () => import("@/article/ArticleInternal.vue"),
-    meta: {
-      title: ""
     }
   }
 ];
@@ -486,33 +298,7 @@ router.beforeEach((to, from, next) => {
     next({ name: "NoConnectionError" });
     return false;
   }
-  // these pages can enter directly without logined
-  // if (
-  //   !store.state.logInWithPassword &&
-  //   ![
-  //     "LandingPage",
-  //     "EnterOtp",
-  //     "VerifiedFirstTime",
-  //     "CreatePasswordSP",
-  //     "EnterPasswordSP",
-  //     "ForgotPasswordSP",
-  //     "ResetPasswordSP",
-  //     "PageNotFound",
-  //     "ServerError"
-  //   ].includes(to.name)
-  // ) {
-  //   next({ name: "LandingPage" });
-  //   return false;
-  // }
-
-  // These page can go without OTP Verified
-  // if (
-  //   !store.state.OTPVerified &&
-  //   !["LandingPage", "EnterOtp", "Admin"].includes(to.name)
-  // ) {
-  //   next({ name: "LandingPage" });
-  //   return false;
-  // }
+  // GA for screen
   analytics.setCurrentScreen(to.meta.title);
   analytics.setCurrentScreen(to.fullPath);
   next();

@@ -18,13 +18,13 @@
       </div>
       <div class="bottom-actions">
         <van-field
-          v-model="answer"
           class="answer-input"
           :border="true"
-          :placeholder="questionList[questionIndex].placeholder"
+          :placeholder="(questionList[questionIndex].placeholder)"
           v-if="questionList[questionIndex].answerType === 2"
-          :v-model="answer"
-        />
+          v-model="answer"
+        >
+        </van-field>
 
         <div
           class="flex-container"
@@ -60,10 +60,10 @@
       </div>
       <van-button
         class="bottom-btn"
-        :disabled="answer.length === 0"
+        :disabled="!answer.trim() || answer.length === 0"
         @click="next"
       >
-        {{index === 1 ? "Next" : "Get My Fortune"}}
+        {{index === 1 ? $t("FortuneTelling.next") : $t("FortuneTelling.getMyFortune")}}
       </van-button>
     </div>
   </div>
@@ -134,6 +134,9 @@ export default {
         this.answerForm[1].id = res.data.data.questions[1].id;
       }
     });
+  },
+  mounted() {
+    this.answer = this.answer.trim();
   },
   watch: {
     $route: {
@@ -211,7 +214,7 @@ export default {
     color: #2f3941;
     font-size: 20px;
     min-height: 24px;
-    max-height: 72px;
+    max-height: 78px;
     width: calc(100vw - 64px);
     text-align: center;
     margin-left: 20px;
@@ -227,7 +230,7 @@ export default {
     color: #68737d;
     font-size: 14px;
     min-height: 24px;
-    max-height: 54px;
+    max-height: 58px;
     width: calc(100vw - 64px);
     text-align: center;
     margin: 0 20px 10px;

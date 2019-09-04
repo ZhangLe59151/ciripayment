@@ -1,10 +1,12 @@
 {
-  "noSelectServiceErrorMsg": "Select at least one service to proceed.",
-  "noSelectPaymentChannelErrorMsg": "At least one payment channel needs to be selected.",
-  "noSelectSettlementErrorMsg": "Please select one of the settlement options to proceed.",
   "marketingServiceErrorMsg": "There are errors in your form. Please correct them before trying again.",
   "OTPErrorMsg": "ขอรหัสOTPถี่เกินไปโปรดรอสักครู่แล้วลองอีกครั้ง",
   "missingDocumentErrorMsg": "เอกสารไม่ครบโปรดอัปโหลดเอกสารที่จำเป็นทั้งหมดก่อนดำเนินการขั้นตอนถัดไป",
+  "Tabbars": {
+    "Home": "Home",
+    "Loan": "Loan",
+    "Settings": "Settings"
+  },
   "FortuneTelling": {
     "TapChestTips": "Tap on the treasure chest!",
     "LuckyNumberLabel": "Lucky Number",
@@ -28,7 +30,11 @@
     "selectMasterDes": "เลือกหมอดูเพื่อทำนายดวง",
     "getFortuneBtn": "ดูดวงค้าขายของฉัน",
     "likeDes": "คุณและ {n}+ และคนอื่นๆถูกใจ| Liked {n}+ others",
-    "downloadDes": "ดาวน์โหลดแอปเถ้าแก่เพื่อรับคำทำนายทุกวัน!"
+    "downloadDes": "ดาวน์โหลดแอปเถ้าแก่เพื่อรับคำทำนายทุกวัน!",
+    "question1": "Hang on, {n} would like to ask you a few questions.",
+    "question2": "You are halfway towards your fortune!",
+    "next": "Next",
+    "getMyFortune": "Get My Fortune"
   },
   "Income": "ยอดขายวันนี้",
   "Expenses": "ค่าใช้จ่าย",
@@ -138,7 +144,8 @@
     "takePhoto": "Take a photo",
     "credit": "Credit",
     "selectAlbum": "เลือกจากอัลบั้ม",
-    "earned": "Earned"
+    "earned": "Earned",
+    "remove": "Remove"
   },
   "Home": {
     "income": "ยอดขายวันนี้",
@@ -184,7 +191,9 @@
     "placeHolderRent": "เช่นค่าเช่าที่(ไม่เกิน 20 ชื่อ)​",
     "add": "เพิ่่ม",
     "recordHistory": "บันทึกประวัติ",
-    "editRecord": "แก้ไขบันทึก"
+    "editRecord": "แก้ไขบันทึก",
+    "today": "Today, ",
+    "yesterday": "Yesterday, "
   },
   "Setting": {
     "Language": "ภาษา",
@@ -205,7 +214,7 @@
   },
   "Language": {
     "en": "English",
-    "thai": "Thai ภาษาไทย"
+    "th": "Thai ภาษาไทย"
   },
   "Login": {
     "loginTitle": "login",

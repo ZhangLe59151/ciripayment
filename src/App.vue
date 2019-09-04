@@ -35,11 +35,11 @@ export default {
     window.onpopstate = () => {
       if (!this.allowBack) {
         console.log(this.allowBack);
-        history.go(1)
+        history.go(1);
       } else {
         console.log(this.allowBack);
       }
-    }
+    };
     var vm = this;
     document.addEventListener(
       "backbutton",

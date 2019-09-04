@@ -5,7 +5,7 @@
       <van-cell
         :title="$t('Setting.Language')"
         is-link
-        :value="$t('Language.en')"
+        :value="$t(`Language.${lang}`)"
         :to="{name: 'LanguageSelect'}"
       />
       <van-cell
@@ -31,27 +31,6 @@
       />
     </van-cell-group>
 
-    <el-dialog
-      :visible="profileDialog"
-      :before-close="handleClose"
-      width="90%"
-    >
-      <div class="dialog-title">View Profile</div>
-      <div class="dialog-des">
-        Some information in the profile page may be sensitive. Please verify your identity to continue.
-      </div>
-      <div class="dialog-tip">
-        Enter last 4 digits of your National ID
-      </div>
-
-      <van-password-input
-        :value="value"
-        :length="4"
-        :gutter="15"
-        @focus="showKeyboard = true"
-        style="margin-left: -15px ; color : #929292;"
-      />
-    </el-dialog>
     <van-number-keyboard
       :show="showKeyboard"
       @input="onInput"
@@ -75,7 +54,8 @@ export default {
   },
   computed: {
     ...mapState({
-      isLogin: "OTPVerified"
+      isLogin: "OTPVerified",
+      lang: state => state.settings.lang
     })
   },
   watch: {

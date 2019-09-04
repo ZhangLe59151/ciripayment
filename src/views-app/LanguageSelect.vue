@@ -1,43 +1,59 @@
 <template>
   <div class="language-select">
     <app-common-header title="Language" />
+
     <div class="language">
 
-        <van-radio-group v-model="checked">
+      <van-radio-group v-model="checked">
         <div class="radio">
           <div class="title">{{$t("Language.en")}}</div>
           <van-radio
             class="icon"
-            name="english"
+            name="en"
             checked-color="#04A777"
-            />
+          />
         </div>
 
         <div class="radio">
-          <div class="title">{{$t("Language.thai")}}</div>
+          <div class="title">{{$t("Language.th")}}</div>
           <van-radio
             class="icon"
-            name="thai"
+            name="th"
             checked-color="#04A777"
-            />
+          />
         </div>
 
-        </van-radio-group>
+      </van-radio-group>
     </div>
 
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "LanguageSelect",
   data() {
     return {
-      checked: "english"
+      checked: ""
     };
   },
-  methods: {},
-  watch: {}
+  computed: {
+    ...mapState({
+      lang: state => state.settings.lang
+    })
+  },
+  watch: {
+    checked: {
+      handler(val, oldVal) {
+        if (!val) {
+          this.checked = this.lang;
+        }
+        this.$store.commit("UpdateSettings", { lang: val });
+      },
+      immediate: true
+    }
+  }
 };
 </script>
 
@@ -54,7 +70,7 @@ export default {
 }
 
 .radio {
-  height:50px;
+  height: 50px;
   line-height: 50px;
   background-color: white;
   margin: 1px 0 0 0;
@@ -69,8 +85,7 @@ export default {
   .icon {
     position: absolute;
     right: 16px;
-    top: 0;
+    top: -8px;
   }
 }
-
 </style>

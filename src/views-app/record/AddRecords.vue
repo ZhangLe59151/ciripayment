@@ -179,7 +179,10 @@ export default {
       isLogin: "OTPVerified",
       reg: "reg",
       currency: "currency"
-    })
+    }),
+    routeQuery() {
+      return this.$route.query;
+    }
   },
   created() {
     this.fetchDataUpdate(
@@ -211,7 +214,10 @@ export default {
           .subtract(1, "days")
           .format(this.localDateFormatter);
         const _selected = this.$moment(val).format(this.localDateFormatter);
-        const kv = { [_today]: "Today, ", [_yesterday]: "Yesterday, " };
+        const kv = {
+          [_today]: this.$t("Record.today"),
+          [_yesterday]: this.$t("Record.yesterday")
+        };
 
         this.$set(
           this.form,
@@ -232,8 +238,15 @@ export default {
           this.form.incomeAmount = "";
           this.form.expenseAmount = "";
           this.form.memo = "";
+
+          if (this.routeQuery.to === "DailyFortuneLoading") {
+            this.continueFortuneTelling();
+          }
         }
       });
+    },
+    continueFortuneTelling() {
+      this.$router.replace({ name: "DailyFortuneLoading" });
     },
     fetchDataUpdate(currentDate) {
       this.$api.viewRecordSum(currentDate).then(res => {
