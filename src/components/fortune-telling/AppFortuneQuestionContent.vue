@@ -144,7 +144,7 @@ export default {
       handler(val, oldVal) {
         this.index = +val.params.id;
         this.questionIndex = this.index - 1;
-        this.answer = this.answerForm[this.questionIndex].value;
+        this.answer = this.answerForm[this.questionIndex].value.trim();
       }
     }
   },
