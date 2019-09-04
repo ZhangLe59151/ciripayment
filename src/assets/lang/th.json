@@ -51,7 +51,7 @@
     }
   },
   "AppLoanOverview": {
-    "headerTitle": "Loan Application",
+    "headerTitle": "คำขอกู้ยืมเงิน",
     "bannerTitle": "รับเงินด่วนในไม่กี่นาที!",
     "lowerRate": "ดอกเบี้ยต่ำกว่า",
     "higherLimit": "วงเงินสูงกว่า",
@@ -175,7 +175,7 @@
     "min": "5 minutes",
     "nationalId": "เลขบัตรประชาชนของคุณ",
     "require": "สิ่งที่คุณต้องใช้:",
-    "moreArticle": "Come back tomorrow for more articles!"
+    "moreArticle": "แล้วกลับมาอ่านบทความใหม่ในวันพรุ่งนี้นะ!"
   },
   "Record": {
     "Income": "ยอดขาย",
@@ -223,7 +223,7 @@
   },
   "Language": {
     "en": "English",
-    "th": "Thai ภาษาไทย"
+    "th": "ภาษาไทย"
   },
   "Login": {
     "loginTitle": "เข้าสู่ระบบ",
