@@ -352,7 +352,7 @@ export default {
     position: absolute;
     bottom: 20px;
     left: 20px;
-    width: 85%;
+    width: calc(84vw - 40px);
     height: 40px;
     background-color: #ffa702;
     color: white;
@@ -374,7 +374,7 @@ export default {
     position: absolute;
     bottom: 20px;
     left: 20px;
-    width: 85%;
+    width: calc(84vw - 40px);
     height: 40px;
     background-color: #c2c8cc !important;
     color: white !important;
