@@ -26,6 +26,7 @@
           <van-field
             v-model="form.memo"
             @focus="inputNote"
+            @keyup.enter.native="$refs.inputText.blur()"
             maxlength="30"
             @input="checkLength"
             :placeholder="$t('Record.placeHolder')"
