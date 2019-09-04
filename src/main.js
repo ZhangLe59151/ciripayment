@@ -12,7 +12,6 @@ import "@/assets/js/main.js";
 import "vant/lib/index.css";
 import "@/assets/css/main.scss";
 
-import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 
 import moment from "moment-timezone";
@@ -22,7 +21,34 @@ import "@/amfe";
 
 import i18n from "./assets/lang/i18n";
 
-Vue.use(ElementUI);
+import {
+  Dialog,
+  Input,
+  Button,
+  ButtonGroup,
+  Form,
+  FormItem,
+  Icon,
+  Row,
+  Col,
+  Upload,
+  Card,
+  Steps,
+  Step
+} from "element-ui";
+Vue.use(Dialog);
+Vue.use(Input);
+Vue.use(Button);
+Vue.use(ButtonGroup);
+Vue.use(Form);
+Vue.use(FormItem);
+Vue.use(Icon);
+Vue.use(Row);
+Vue.use(Col);
+Vue.use(Upload);
+Vue.use(Card);
+Vue.use(Steps);
+Vue.use(Step);
 
 Vue.use(VueAxios, axios);
 Vue.use(Vant);
