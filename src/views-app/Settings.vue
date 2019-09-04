@@ -3,7 +3,7 @@
     <app-common-header
       :hasLeftArrow="false"
       :leftFunc="function(){}"
-      leftText="Settings"
+      :leftText="$t('Tabbars.Settings')"
     />
     <div
       v-if="isLogin + '' === 'false'"
