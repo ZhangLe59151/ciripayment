@@ -4,7 +4,7 @@
     class="app-loan-overview"
   >
     <div class="banner">
-      <div class="banner-title">Get instant cash in minutes!</div>
+      <div class="banner-title">{{$t("AppLoanOverview.bannerTitle")}}!</div>
     </div>
     <div class="ribbon">
       <div class="lower-rate">
