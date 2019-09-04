@@ -1,24 +1,19 @@
 <template>
   <div class="language-select">
-    <app-common-header title="Language" />
+    <app-common-header :title="$t('Setting.Language')" />
 
     <div class="language">
 
       <van-radio-group v-model="checked">
-        <div class="radio">
-          <div class="title">{{$t("Language.en")}}</div>
+        <div
+          class="radio"
+          v-for="item in langList"
+          :key="item"
+        >
+          <div class="title">{{$t(`Language.${item}`)}}</div>
           <van-radio
             class="icon"
-            name="en"
-            checked-color="#04A777"
-          />
-        </div>
-
-        <div class="radio">
-          <div class="title">{{$t("Language.th")}}</div>
-          <van-radio
-            class="icon"
-            name="th"
+            :name="item"
             checked-color="#04A777"
           />
         </div>
@@ -40,7 +35,8 @@ export default {
   },
   computed: {
     ...mapState({
-      lang: state => state.settings.lang
+      lang: state => state.settings.lang,
+      langList: () => process.env.VUE_APP_SUPPORTLANGS.split(",")
     })
   },
   watch: {
