@@ -1,24 +1,24 @@
 <template>
   <div class="app-credit-finish-questions-wrapper">
-    <van-swipe
-      :loop="false"
-      :show-indicators="false"
-      :initial-swipe="3"
-      :width="swipeWidth"
-      v-show="!finishedAll"
-    >
+<!--    <van-swipe-->
+<!--      :loop="false"-->
+<!--      :show-indicators="false"-->
+<!--      :initial-swipe="3"-->
+<!--      :width="swipeWidth"-->
+<!--      v-show="!finishedAll"-->
+<!--    >-->
 
-      <van-swipe-item
-        v-for="item in questionList"
-        :key="item.id"
-        class="swipe-item"
-      >
-        <app-credit-q-a-mapper
-          class="item-mapper"
-          :question="item"
-        />
-      </van-swipe-item>
-    </van-swipe>
+<!--      <van-swipe-item-->
+<!--        v-for="item in questionList"-->
+<!--        :key="item.id"-->
+<!--        class="swipe-item"-->
+<!--      >-->
+<!--        <app-credit-q-a-mapper-->
+<!--          class="item-mapper"-->
+<!--          :question="item"-->
+<!--        />-->
+<!--      </van-swipe-item>-->
+<!--    </van-swipe>-->
 
     <div class="app-credit-success">
       <div class="app-credit-finish-questions">
