@@ -16,6 +16,8 @@
       v-model="form.email"
       :placeholder="$t('Setting.emailPlaceholder')"
       @blur="validateEmail"
+      @keyup.enter.native="$refs.email.blur();"
+      ref="email"
       class="form-value"
       :error="emailError"
     />
