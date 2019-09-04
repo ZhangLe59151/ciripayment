@@ -37,10 +37,10 @@ export default {
     })
   },
   watch: {
-    creditLimit: function(newVal, oldVal) {
-      this.numberTo = newVal;
+    creditAnswers: function(newVal, oldVal) {
+      this.numberTo = this.creditLimit;
       this.creditLimitClass = this.returnStateBasedOnAnswered(
-        this.creditAnswers
+        newVal
       );
     }
   },
