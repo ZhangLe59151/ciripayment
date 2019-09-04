@@ -152,7 +152,7 @@ export default {
     next() {
       this.answerForm[this.questionIndex].value = this.answer;
       this.$store.commit(
-        "UpdateFurtuneQuestionInfo",
+        "UpdateFortuneQuestionInfo",
         this.answerForm[this.questionIndex]
       );
 
