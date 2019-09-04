@@ -237,7 +237,8 @@
     "completeQuestion": "Profile saved!| Let's get started",
     "skipQuestion": "Skip Question",
     "loginPageTitle": "Be a Happy TaoKae",
-    "announce": "By using this app, you agree to the terms and conditions."
+    "announce": "By using this app, you agree to the terms and conditions.",
+    "nationalCode": "National Code"
   },
   "Common": {
     "serverRequestError": "Server request error. Please try again!"

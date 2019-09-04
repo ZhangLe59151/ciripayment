@@ -45,7 +45,7 @@
     >
       <van-picker
         show-toolbar
-        title="National code"
+        :title="$t(Login.nationalCode)"
         :columns="columns"
         :default-index="2"
         @cancel="show = false;"
@@ -55,7 +55,7 @@
 
     <van-number-keyboard
       :show="showNumber"
-      close-button-text="Done"
+      :close-button-text="$t(Record.done)"
       @blur="showNumber = false"
       @input="onInput"
       @delete="onDelete"
