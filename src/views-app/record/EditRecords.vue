@@ -25,6 +25,7 @@
         <div class="input_note">
           <van-field
             v-model="form.memo"
+            ref="inputText"
             @focus="inputNote"
             @keyup.enter.native="$refs.inputText.blur()"
             maxlength="30"
