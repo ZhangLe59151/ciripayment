@@ -5,6 +5,7 @@
       :show-indicators="false"
       :width="swipeWidth"
       class="swipe-box"
+      @change="onChange"
     >
       <van-swipe-item
         v-for="item in questionList"
@@ -18,8 +19,8 @@
       </van-swipe-item>
 
     </van-swipe>
-    <div class="instruction">{{$t("Credit.swipe")}}</div>
-    <i class="iconfont iconswipe" />
+    <div v-if="!lastQuestion" class="instruction">{{$t("Credit.swipe")}}</div>
+    <i v-if="!lastQuestion" class="iconfont iconswipe" />
   </div>
 </template>
 
@@ -40,16 +41,26 @@ export default {
         radio: false
       },
       form: {},
-      swipeWidth: document.documentElement.clientWidth * 0.88
+      swipeWidth: document.documentElement.clientWidth * 0.88,
+      lastQuestion: false
     };
   },
   computed: {
     ...mapState({
-      questionList: state => state.credit.questions,
-      finishedAll: state =>
-        state.credit.questions.map(item => item.value).filter(Boolean)
-          .length === 3
+      questionList: state => state.credit.questions
     })
+  },
+  created() {
+    if (this.questionList.length === 1) {
+      this.lastQuestion = true;
+    }
+  },
+  methods: {
+    onChange(index) {
+      if (this.questionList.length > 0) {
+        this.lastQuestion = (index === (this.questionList.length - 1));
+      }
+    }
   }
 };
 </script>
