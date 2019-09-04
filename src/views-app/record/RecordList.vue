@@ -9,7 +9,11 @@
       @load="onLoad"
       v-if="list && list.length !== 0"
     >
-      <div class="group" v-for="item in list" :key="item.accountDate">
+      <div
+        class="group"
+        v-for="item in list"
+        :key="item.accountDate"
+      >
         <div class="header">
           <div class="date_title">{{ formatDate(item.accountDate) }}</div>
           <div class="sum">{{ formatTotalIncome(item.totalIncome) }}</div>
@@ -24,22 +28,34 @@
             :label="formatTime(record)"
             @click="$router.push({'name':'EditRecord', 'params':{ 'id': record.id }})"
           >
-            <div class="positive-amount" v-if="record.type===0">+{{formatAmount(record)}}</div>
-            <div class="negtive-amount" v-if="record.type===1">-{{formatAmount(record)}}</div>
+            <div
+              class="positive-amount"
+              v-if="record.type===0"
+            >+{{formatAmount(record)}}</div>
+            <div
+              class="negtive-amount"
+              v-if="record.type===1"
+            >-{{formatAmount(record)}}</div>
             <div class="baht">{{$store.state["currency"]}}</div>
           </van-cell>
         </div>
       </div>
     </van-list>
 
-    <div v-else class="empty-box">
+    <div
+      v-else
+      class="empty-box"
+    >
       <div>{{$t("Record.emptyMsg")}}</div>
       <div
         class="add-record"
         @click="$router.push({name: 'AddRecord'})"
         v-analytics="{event: 'RecordHistory_AddBtn'}"
       >
-        <van-icon name="plus" color="#ffa702" />
+        <van-icon
+          name="plus"
+          color="#ffa702"
+        />
         {{$t('Record.addRecord')}}
       </div>
     </div>
@@ -62,13 +78,13 @@ export default {
 
   methods: {
     formatDate(date) {
-      return this.$moment(date).format("D MMM YYYY");
+      return util.convertUTCTimeToBuddhistTime(date);
     },
     formatTime(record) {
       if (record["recordType"] === 1) {
-        return this.$moment(record["createTime"]).format("D MMM YYYY HH:mm");
+        return util.convertUTCTimeToBuddhistTime(record["createTime"], true);
       } else if (record["recordType"] === 0) {
-        return this.$moment(record["accountDate"]).format("D MMM YYYY");
+        return util.convertUTCTimeToBuddhistTime(record["accountDate"]);
       }
     },
     formatIncome(item) {

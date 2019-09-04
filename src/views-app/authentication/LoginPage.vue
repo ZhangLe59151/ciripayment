@@ -4,7 +4,10 @@
       :title="$t('Login.loginTitle')"
       :showLeftIcon="true"
     />
-    <div class="landingPageContent" id="login-content">
+    <div
+      class="landingPageContent"
+      id="login-content"
+    >
       <div class="slogan-title">{{ $t('Login.verifyPhone')}}</div>
       <div class="slogan-sub">{{ $t('Login.yourPhone')}}</div>
       <div class="input-block">
@@ -30,7 +33,10 @@
           @click="handleStart"
         >
         </van-button>
-        <van-button class="goBtn" @click="handleStart">
+        <van-button
+          class="goBtn"
+          @click="handleStart"
+        >
           <span class="icon iconfont iconPath"></span>
         </van-button>
 
@@ -45,7 +51,7 @@
     >
       <van-picker
         show-toolbar
-        title="National code"
+        :title="$t('Login.nationalCode')"
         :columns="columns"
         :default-index="2"
         @cancel="show = false;"
@@ -55,7 +61,7 @@
 
     <van-number-keyboard
       :show="showNumber"
-      close-button-text="Done"
+      :close-button-text="$t('Record.done')"
       @blur="showNumber = false"
       @input="onInput"
       @delete="onDelete"

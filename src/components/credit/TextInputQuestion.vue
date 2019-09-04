@@ -134,6 +134,7 @@ export default {
     font-size: 24px;
     text-align: center;
     position: relative;
+    overflow:hidden;
   }
   .submit-btn-disabled {
     position: absolute;

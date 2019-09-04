@@ -144,14 +144,17 @@ export default {
       handler(val, oldVal) {
         this.index = +val.params.id;
         this.questionIndex = this.index - 1;
-        this.answer = this.answerForm[this.questionIndex].value;
+        this.answer = this.answerForm[this.questionIndex].value.trim();
       }
     }
   },
   methods: {
     next() {
       this.answerForm[this.questionIndex].value = this.answer;
-      this.$store.commit("UpdateFortuneQuestionInfo", this.answerForm);
+      this.$store.commit(
+        "UpdateFortuneQuestionInfo",
+        this.answerForm[this.questionIndex]
+      );
 
       this.answer = "";
 
@@ -160,11 +163,14 @@ export default {
         this.$router.push({ name: "DailyFortuneQuestion", params: { id: 2 } });
         this.questionIndex += 1;
       } else if (this.index === 2 && this.isLogin) {
-        this.$api.postAnswerF(this.fortuneQuestion).then(res => {
-          if (res.data.code === 200) {
-            this.$router.push({ name: "DailyFortuneLoading" });
-          }
-        });
+        // this.$api.postAnswerF(
+        //   this.answerForm
+        // ).then(res => {
+        //   if (res.data.code === 200) {
+        //     this.$router.push({ name: "DailyFortuneLoading" });
+        //   }
+        // });
+        this.$router.push({ name: "DailyFortuneLoading" });
       } else if (this.index === 2 && !this.isLogin) {
         this.$router.push({
           name: "LoginPage",

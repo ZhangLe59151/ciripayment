@@ -20,8 +20,11 @@
     class="camera-input-question"
   >
     <div class="title">{{question.question}}</div>
+    <div v-if="changingImgPreview">
+      <van-loading type="spinner" class="spinner"/>
+    </div>
     <el-form
-      v-if="!form.answering"
+      v-else-if="!form.answering"
       label-width="0px"
       :model="form"
       ref="elForm"
@@ -66,6 +69,7 @@
       class="error_msg"
     >{{$t("Credit.errorImgInput")}}</div>
     <van-button
+      v-if="!sendingRequest"
       class="submit-btn"
       @click="handleSubmit"
     >
@@ -74,6 +78,9 @@
         class="dollar-coin"
         src="../../assets/imgs/dollar_coin.png"
       >
+    </van-button>
+    <van-button v-else class="submit-btn" disabled>
+      <div class="btn-text"><van-loading type="spinner" color="#ffa702"/></div>
     </van-button>
   </div>
 </template>
@@ -88,6 +95,7 @@ export default {
   data() {
     return {
       sendingRequest: false,
+      changingImgPreview: false,
       backgroundStyle: `background: url(${this.question.value ||
         ""}) no-repeat`,
       form: {
@@ -105,6 +113,7 @@ export default {
       this.error = !this.form.answering;
     },
     takePhoto() {
+      this.changingImgPreview = true;
       let opts = {
         quality: 80,
         destinationType: Camera.DestinationType.DATA_URL,
@@ -125,8 +134,11 @@ export default {
       vm[`${"form"}`] = { answering: dataURI };
       vm[`${"error"}`] = false;
       vm[`${"backgroundStyle"}`] = `background: url(${dataURI}) no-repeat`;
+      this.changingImgPreview = false;
     },
-    onFailPhotoTaking() {},
+    onFailPhotoTaking() {
+      this.changingImgPreview = false;
+    },
     deleteImage() {
       this.form.answering = "";
     },
@@ -236,7 +248,12 @@ export default {
     text-align: center;
     position: relative;
   }
-
+  .spinner {
+    margin-left: calc(50% - 25px);
+    width: 50px;
+    height: 50px;
+    margin-top: 60px;
+  }
   .upload-wrapper {
     width: 98%;
     height: 98px;
@@ -245,6 +262,7 @@ export default {
     .placeholder {
       margin-top: 18px;
       text-align: center;
+
       .iconcamera {
         color: #ffa702;
         font-size: 27px;

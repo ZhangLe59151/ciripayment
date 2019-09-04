@@ -1,16 +1,25 @@
 <template>
   <div class="app-fortune-master">
-    <van-row type="flex" justify="space-between">
+    <van-row
+      type="flex"
+      justify="space-between"
+    >
       <van-col span="8">
-        <fortune-telling-app-fortune-master-photo :masterId="master.id" class="icon" />
+        <fortune-telling-app-fortune-master-photo
+          :masterId="master.id"
+          class="icon"
+        />
       </van-col>
-      <van-col span="16" class="cnt">
+      <van-col
+        span="16"
+        class="cnt"
+      >
         <div :class="master.image"></div>
         <div class="name">{{master.name}}</div>
 
         <div
           class="view"
-          @click="$router.push({name: 'MasterProfile', params: {id: master.id},query: {subtitle: subtitle}})"
+          @click="handleViewMasterClick"
         >
           {{$t("FortuneTelling.viewProfile")}}
           <van-icon name="play" />
@@ -27,6 +36,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "AppFortuneMaster",
 
@@ -41,12 +51,29 @@ export default {
   },
 
   computed: {
+    ...mapState({
+      fortuneInfo: "fortuneInfo"
+    }),
     subtitle() {
       return this.$tc(
         "FortuneTelling.likeDes",
         this.master.like === 1 ? 1 : 2,
         { n: parseInt(this.master.likeCount / 10) * 10 }
       );
+    }
+  },
+
+  methods: {
+    handleViewMasterClick() {
+      this.$store.commit(
+        "SaveFortuneInfo",
+        Object.assign({}, this.fortuneInfo, { selectedMaster: this.master })
+      );
+      this.$router.push({
+        name: "MasterProfile",
+        params: { id: this.master.id },
+        query: { subtitle: this.subtitle }
+      });
     }
   }
 };

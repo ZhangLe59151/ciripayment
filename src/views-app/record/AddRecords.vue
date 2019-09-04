@@ -21,7 +21,9 @@
         <div class="input_note">
           <van-field
             v-model="form.memo"
+            ref="inputText"
             @focus="inputNote"
+            @keyup.enter.native="handleKeyup"
             maxlength="30"
             @input="checkLength"
             :placeholder="$t('Record.placeHolder')"
@@ -120,6 +122,8 @@
           v-show="appear"
           v-model="choosingDate"
           type="date"
+          :confirm-button-text="$t('Record.confirm')"
+          :cancel-button-text="$t('Record.cancel')"
           :min-date="minDate"
           :max-date="maxDate"
           @cancel="cancelSetDate"
@@ -131,7 +135,7 @@
     <van-number-keyboard
       :show="showNumber"
       extra-key="."
-      close-button-text="Done"
+      :close-button-text="$t('Record.done')"
       @blur="showNumber = false"
       @input="onInput"
       @delete="onDelete"
@@ -190,8 +194,13 @@ export default {
         this.$route.query.date ? this.$route.query.date : today
       ).format(this.localDateFormatter)
     );
-    if (this.$route.query.date === this.$moment().subtract(1, "days").format(this.localDateFormatter)) {
-      this.disableDatePicker = false
+    if (
+      this.$route.query.date ===
+      this.$moment()
+        .subtract(1, "days")
+        .format(this.localDateFormatter)
+    ) {
+      this.disableDatePicker = false;
     }
   },
   watch: {
@@ -230,6 +239,9 @@ export default {
     }
   },
   methods: {
+    handleKeyup() {
+      alert(322)
+    },
     fetchData(form) {
       this.$api.addRecord(form).then(res => {
         console.log(form.accountDate);
@@ -263,7 +275,7 @@ export default {
     },
     onBeginInputDate() {
       if (!this.disableDatePicker) {
-        return
+        return;
       }
       this.appear = true;
       // increase height of app
@@ -344,11 +356,14 @@ export default {
         // this.$store.commit("UpdateRecord", this.convertForm(form));
         form[this.type] = parseFloat(form[this.type]);
         this.fetchData(form);
-        this.$notify({ message: "Added Sucessfully", background: "#04A777" });
+        this.$notify({
+          message: this.$t("Record.added"),
+          background: "#04A777"
+        });
         return false;
       }
       this.$notify({
-        message: "Please input valid number",
+        message: this.$t("Record.addedwrong"),
         background: "#b41800"
       });
     },
