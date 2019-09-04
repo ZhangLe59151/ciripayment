@@ -202,17 +202,18 @@ export default {
           const _yesterday = this.$moment()
             .subtract(1, "days")
             .format(this.localDateFormatter);
-          var cDate = this.$moment(res.data.data.accountDate).format(
-            this.localDateFormatter
-          ); //"D MMM YYYY"
+          var cDate = this.$moment(res.data.data.accountDate).format(this.localDateFormatter);
+          //this.$moment(res.data.data.accountDate).format(this.localDateFormatter); //"D MMM YYYY"
+          //util.convertUTCTimeToBuddhistTime(res.data.data.accountDate);
           const kv = {
             [_today]: this.$t("Record.today"),
             [_yesterday]: this.$t("Record.yesterday")
           };
           this.currentDate = cDate
             ? (kv[cDate] ? kv[cDate] : "") +
-              this.$moment(res.data.data.accountDate).format("D MMM YYYY")
+              util.convertUTCTimeToBuddhistTime(res.data.data.accountDate)
             : "";
+          //this.$moment(res.data.data.accountDate).format("D MMM YYYY")
           this.form[this.type] = util.fmoney(res.data.data.amount);
           this.dailyIncome = util.fmoney(res.data.data.incomeSum);
           this.dailyExpense = util.fmoney(res.data.data.expensesSum);

@@ -217,7 +217,8 @@ export default {
         Object.entries(this.form).forEach(
           ([key, value]) => (this.form[`${key}`] = "")
         );
-        let formDate = this.$moment(val).format("D MMM YYYY");
+        let formDate = util.convertUTCTimeToBuddhistTime(val);
+        //formDate = this.$moment(val).format("D MMM YYYY");
         const _today = this.$moment().format(this.localDateFormatter);
         const _yesterday = this.$moment()
           .subtract(1, "days")
@@ -254,6 +255,9 @@ export default {
         }
       });
     },
+    formatDate(date) {
+      return util.convertUTCTimeToBuddhistTime(date);
+    },
     continueFortuneTelling() {
       this.$router.replace({ name: "DailyFortuneLoading" });
     },
@@ -275,18 +279,6 @@ export default {
         return;
       }
       this.appear = true;
-      // increase height of app
-      if (window.innerHeight >= 700) {
-        return false;
-      }
-      document.getElementById(
-        "add-record"
-      ).style.height = `${window.innerHeight + 250 - 50}px`;
-      // scroll to btn
-      var element = this.$refs["btn"];
-      var top = element.offsetTop;
-      console.log("scroll", element, top);
-      window.scrollTo(0, top);
     },
     showKeyboard(type) {
       this.appear = false;
