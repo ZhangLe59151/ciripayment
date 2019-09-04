@@ -37,7 +37,7 @@
 
     <van-number-keyboard
       :show="showNumber"
-      :close-button-text="$t(Record.done)"
+      :close-button-text="$t('Record.done')"
       @blur="showNumber = false"
       @input="onInput"
       @delete="onDelete"
