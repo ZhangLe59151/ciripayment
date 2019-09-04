@@ -120,6 +120,8 @@
           v-show="appear"
           v-model="choosingDate"
           type="date"
+          confirm-button-text="$t(Record.confirm)"
+          cancel-button-text="$t(Record.cancel)"
           :min-date="minDate"
           :max-date="maxDate"
           @cancel="cancelSetDate"
@@ -131,7 +133,7 @@
     <van-number-keyboard
       :show="showNumber"
       extra-key="."
-      close-button-text="Done"
+      close-button-text="$t(Record.done)"
       @blur="showNumber = false"
       @input="onInput"
       @delete="onDelete"
@@ -348,7 +350,7 @@ export default {
         return false;
       }
       this.$notify({
-        message: "Please input valid number",
+        message: this.$t('Record.addedwrong'),
         background: "#b41800"
       });
     },

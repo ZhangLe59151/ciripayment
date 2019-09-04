@@ -131,7 +131,7 @@
     <van-number-keyboard
       :show="showNumber"
       extra-key="."
-      close-button-text="Done"
+      close-button-text="$t(Record.done)"
       @blur="showNumber = false"
       @input="onInput"
       @delete="onDelete"

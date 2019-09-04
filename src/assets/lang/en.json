@@ -198,7 +198,11 @@
     "editRecord": "Edit Record",
     "today": "Today, ",
     "yesterday": "Yesterday, ",
-    "added": "Added Sucessfully"
+    "added": "Added Sucessfully",
+    "addedwrong": "Please input valid number",
+    "done": "Done",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
   },
   "Setting": {
     "Language": "Language",
