@@ -348,7 +348,24 @@ export default new Vuex.Store({
       storage.setItem("firstLaunch", state.firstLaunch);
     },
     UpdateFortuneQuestionInfo(state, fortuneQ) {
-      state.fortuneQuestion = Object.assign(state.fortuneQuestion, fortuneQ);
+      // state.fortuneQuestion = Object.assign(state.fortuneQuestion, fortuneQ);
+
+      let fortuneQuestion = state.fortuneQuestion;
+      // if dont have, append it
+      if (state.fortuneQuestion.length === 0) {
+        state.fortuneQuestion = [fortuneQ];
+      }
+      for (let i = 0; i < fortuneQuestion.length; i++) {
+        if (fortuneQuestion[i].id === fortuneQ.id) {
+          fortuneQuestion[i] = fortuneQ;
+        } else {
+          // if not found, append it
+          if (i === fortuneQuestion.length - 1) {
+            state.fortuneQuestion = state.fortuneQuestion.concat(fortuneQ);
+          }
+        }
+      }
+
       window.localStorage.setItem(
         "fortuneQuestion",
         JSON.stringify(state.fortuneQ)
