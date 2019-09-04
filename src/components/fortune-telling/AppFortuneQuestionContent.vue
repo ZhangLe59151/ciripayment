@@ -101,7 +101,7 @@ export default {
   computed: {
     ...mapState({
       isLogin: "OTPVerified",
-      furtuneQuestion: "furtuneQuestion"
+      fortuneQuestion: "fortuneQuestion"
     })
   },
 
@@ -148,7 +148,7 @@ export default {
   methods: {
     next() {
       this.answerForm[this.questionIndex].value = this.answer;
-      this.$store.commit("UpdateFurtuneQuestionInfo", this.answerForm);
+      this.$store.commit("UpdateFortuneQuestionInfo", this.answerForm);
 
       this.answer = "";
 
@@ -157,7 +157,7 @@ export default {
         this.$router.push({ name: "DailyFortuneQuestion", params: { id: 2 } });
         this.questionIndex += 1;
       } else if (this.index === 2 && this.isLogin) {
-        this.$api.postAnswerF(this.furtuneQuestion).then(res => {
+        this.$api.postAnswerF(this.fortuneQuestion).then(res => {
           if (res.data.code === 200) {
             this.$router.push({ name: "DailyFortuneLoading" });
           }

@@ -22,7 +22,7 @@ export default {
       localDateFormatter: "localDateFormatter",
       fortuneInfo: "fortuneInfo",
       isLogin: "OTPVerified",
-      answerForm: "furtuneQuestion"
+      answerForm: "fortuneQuestion"
     }),
     today() {
       return this.$moment().format(this.localDateFormatter);

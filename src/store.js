@@ -40,7 +40,7 @@ export default new Vuex.Store({
     form: {},
     userInfo: {},
     application: {},
-    furtuneQuestion: [],
+    fortuneQuestion: [],
     showDownloadIcon: process.env.VUE_APP_DEVICETYPE === "WEB",
     recordList: JSON.parse(localStorage.getItem("recordList")) || [],
     masterList: require("@/assets/data/fortuneMasterList.json"),
@@ -490,16 +490,16 @@ export default new Vuex.Store({
       state.firstLaunch = "No";
       window.localStorage.setItem("firstLaunch", state.firstLaunch);
     },
-    UpdateFurtuneQuestionInfo(state, fortuneQ) {
-      state.furtuneQuestion = Object.assign(state.furtuneQuestion, fortuneQ);
+    UpdateFortuneQuestionInfo(state, fortuneQ) {
+      state.fortuneQuestion = Object.assign(state.fortuneQuestion, fortuneQ);
       window.localStorage.setItem(
-        "furtuneQuestion",
-        JSON.stringify(state.furtuneQ)
+        "fortuneQuestion",
+        JSON.stringify(state.fortuneQ)
       );
     },
     ClearFortuneQuestion(state) {
-      state.furtuneQuestion = {};
-      window.localStorage.removeItem("furtuneQuestion");
+      state.fortuneQuestion = {};
+      window.localStorage.removeItem("fortuneQuestion");
     }
   },
   actions: {
