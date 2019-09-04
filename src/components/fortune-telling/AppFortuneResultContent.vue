@@ -111,7 +111,7 @@ export default {
     background-size: contain;
 
     width: 100%;
-    height: 400px;
+    height: 410px;
 
     img {
       height: 28px;

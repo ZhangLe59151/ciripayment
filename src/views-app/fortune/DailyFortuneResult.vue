@@ -252,8 +252,7 @@ export default {
   width: 100%;
   background: no-repeat center
     url("../../assets/imgs/fortune-telling/fortune_telling_bg.png");
-  background-size: cover;
-  // overflow: hidden;
+  background-size: 100% 100%;
 
   .web-get-fortune {
     height: 40px;
@@ -293,16 +292,14 @@ export default {
       left: 95px;
     }
   }
-  .app-fortune-result-content {
-    // margin-top: 20px;
-  }
 
   .action {
     position: relative;
+    top: 44px;
     display: flex;
     flex: 1 1;
-    margin: 0 40px;
-    justify-content: space-between;
+    margin: 0 20px;
+    justify-content: space-evenly;
   }
 
   .share {
@@ -316,7 +313,6 @@ export default {
   .like {
     color: #ffffff;
     text-align: left;
-    margin: 40px 20px 0 0;
 
     .iconunlike,
     .iconshare {

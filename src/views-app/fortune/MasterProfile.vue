@@ -3,7 +3,7 @@
     <fortune-telling-app-fortune-header
       :showLeftIcon="true"
       :showRightIcon="false"
-      :showTitle="this.title"
+      :showTitle="$t('Fortune.masterProfile')"
     />
     <div class="cnt">
       <img :src="imgList[info.id]">
@@ -25,7 +25,6 @@ export default {
   name: "MasterProfile",
   data() {
     return {
-      title: this.$t("Fortune.masterProfile"),
       imgList: {
         "1": require("@/assets/imgs/fortune-telling/master_01.png"),
         "2": require("@/assets/imgs/fortune-telling/master_02.png")
@@ -43,8 +42,6 @@ export default {
   },
   methods: {
     handleClick() {
-      this.fortuneInfo.selectedMaster = this.$route.params.id;
-      this.$store.commit("SaveFortuneInfo", this.fortuneInfo);
       this.$router.push({ name: "DailyFortuneQuestion", params: { id: 1 } });
     }
   }
