@@ -458,8 +458,11 @@ export default {
 
   .income {
     position: absolute;
-    bottom: 2px;
+    bottom: 0;
     left: 25px;
+    width: calc(100% - 50px);
+    border-style: none;
+    border-color: white;
     right: 25px;
     font-size: 24px;
 
