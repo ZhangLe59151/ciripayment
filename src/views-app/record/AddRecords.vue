@@ -214,9 +214,11 @@ export default {
     currentDate: {
       immediate: true,
       handler(val, oldVal) {
-        Object.entries(this.form).forEach(
+        if (this.$moment(val).format(this.localDateFormatter) !== this.$moment(oldVal).format(this.localDateFormatter)) { 
+          Object.entries(this.form).forEach(
           ([key, value]) => (this.form[`${key}`] = "")
-        );
+          );
+        }
         let formDate = util.convertUTCTimeToBuddhistTime(val);
         //formDate = this.$moment(val).format("D MMM YYYY");
         const _today = this.$moment().format(this.localDateFormatter);
