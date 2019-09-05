@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { find, findIndex } from "lodash";
 import util from "@/util";
 import i18n from "@/assets/lang/i18n";
 
@@ -98,7 +97,6 @@ export default new Vuex.Store({
       process.env.VUE_APP_DEVICETYPE === "APP"
         ? process.env.VUE_APP_BASEURL + "/api/v1/self-onboarding/image/upload"
         : "/api/v1/self-onboarding/image/upload",
-    //bankList: require("./assets/data/bankInfo.json").list,
     merchantProfile: {},
     recommendChannelsStore: [],
     completeLoanProfile: false,
