@@ -10,7 +10,9 @@
       color="#ffa702"
       title-active-color="#ffa702"
     >
-      <van-tab :title="$t('Record.Income')">
+      <van-tab 
+      :title="$t('Record.Income')"
+      :disabled="this.disable.expenseAmount">
         <div class="record-status">
           <span class="name">{{$t("Record.TotalIncome")}}</span>
           <span class="amount">+ {{ dailyIncome }} <i>{{currency}}</i></span>
@@ -32,7 +34,7 @@
 
         <div class="label-left"> {{$t("Record.Date")}}</div>
 
-        <div class="pick_date">
+        <div :class="disableDatePicker ? 'pick_date' : 'pick_date_grey'">
           <van-field
             :value="form.accountDate"
             confirm-button-text="confirm"
@@ -59,7 +61,9 @@
         </div>
 
       </van-tab>
-      <van-tab :title="$t('Record.Expenses')">
+      <van-tab 
+      :title="$t('Record.Expenses')"
+      :disabled="this.disable.incomeAmount">
 
         <div class="record-status expenses">
           <span class="name">{{$t("Record.TotalExpenses")}}</span>
@@ -174,7 +178,11 @@ export default {
       currentDate: this.$route.query.date ? this.$route.query.date : today,
       dailyIncome: 0,
       dailyExpense: 0,
-      disableDatePicker: true
+      disableDatePicker: true,
+      disable: {
+        incomeAmount: true,
+        expenseAmount: true
+      },
     };
   },
   computed: {
@@ -201,6 +209,8 @@ export default {
         .format(this.localDateFormatter)
     ) {
       this.disableDatePicker = false;
+      this.tabActive = 0;
+      this.incomeAmount = false;
     }
   },
   watch: {
@@ -401,6 +411,19 @@ export default {
   font-size: 16px;
   margin: 4px 16px 0 16px;
   position: relative;
+}
+
+.pick_date_grey {
+  height: 40px;
+  font-size: 16px;
+  margin: 4px 16px 0 16px;
+  position: relative;
+  > .van-field {
+    background: #e9ebed;
+    //box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 0 10px;
+  }
 }
 
 .van-icon-arrow-down {
