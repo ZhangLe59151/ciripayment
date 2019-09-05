@@ -50,6 +50,13 @@ export default {
       questionList: state => state.credit.questions
     })
   },
+  watch: {
+    questionList(newval, oldval) {
+      if (newval.length === 1) {
+        this.lastQuestion = true;
+      }
+    }
+  },
   created() {
     if (this.questionList.length === 1) {
       this.lastQuestion = true;

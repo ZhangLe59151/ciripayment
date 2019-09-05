@@ -13,7 +13,7 @@ export default {
       params = {};
     }
     params["login"] = store.state.OTPVerified ? "1" : "0";
-    params["lang"] = "en";
+    params["lang"] = store.state.settings.lang;
     console.log("logEvent:", event, "-", params);
     analyticsWithCondition(() => {
       cordova.plugins.firebase.analytics.logEvent(event, params);

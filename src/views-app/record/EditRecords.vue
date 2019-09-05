@@ -202,17 +202,18 @@ export default {
           const _yesterday = this.$moment()
             .subtract(1, "days")
             .format(this.localDateFormatter);
-          var cDate = this.$moment(res.data.data.accountDate).format(
-            this.localDateFormatter
-          ); //"D MMM YYYY"
+          var cDate = this.$moment(res.data.data.accountDate).format(this.localDateFormatter);
+          //this.$moment(res.data.data.accountDate).format(this.localDateFormatter); //"D MMM YYYY"
+          //util.convertUTCTimeToBuddhistTime(res.data.data.accountDate);
           const kv = {
             [_today]: this.$t("Record.today"),
             [_yesterday]: this.$t("Record.yesterday")
           };
           this.currentDate = cDate
             ? (kv[cDate] ? kv[cDate] : "") +
-              this.$moment(res.data.data.accountDate).format("D MMM YYYY")
+              util.convertUTCTimeToBuddhistTime(res.data.data.accountDate)
             : "";
+          //this.$moment(res.data.data.accountDate).format("D MMM YYYY")
           this.form[this.type] = util.fmoney(res.data.data.amount);
           this.dailyIncome = util.fmoney(res.data.data.incomeSum);
           this.dailyExpense = util.fmoney(res.data.data.expensesSum);
@@ -267,6 +268,8 @@ export default {
       if (this.form[this.type].length === 11) {
         return false;
       }
+      var str = this.form[this.type].replace(',','')
+      str = str.replace(',','')
       if (this.form[this.type].indexOf(".") !== -1 && value === ".") {
         return false;
       }
@@ -275,7 +278,7 @@ export default {
       }
       const regex1 = /^(([1-9][0-9]*)|(([0]\.\d{2}|[1-9][0-9]*\.\d{2})))$/;
       if (
-        regex1.test(this.form[this.type]) &&
+        regex1.test(str) &&
         this.form[this.type].indexOf(".") != -1
       ) {
         return false;

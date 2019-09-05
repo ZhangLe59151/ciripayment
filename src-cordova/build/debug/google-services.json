@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "111429919517",
+    "firebase_url": "https://taokae-test.firebaseio.com",
+    "project_id": "taokae-test",
+    "storage_bucket": "taokae-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:111429919517:android:3e0bbe13ed632f0d",
+        "android_client_info": {
+          "package_name": "ai.silot.taokae.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "111429919517-8kmv1fcugpfjnptd39eaufkdqi83f3e5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKUXb4UE-awklrACDh8X_j8uSWTInRQCQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "111429919517-8kmv1fcugpfjnptd39eaufkdqi83f3e5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

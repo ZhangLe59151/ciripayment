@@ -88,6 +88,7 @@ export default {
           ),
           background: "#04A777"
         });
+        this.remnant = 500;
         Object.entries(this.form).forEach(([key, value]) => {
           this.form[`${key}`] = "";
         });

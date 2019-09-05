@@ -21,7 +21,8 @@ axios.interceptors.request.use(
       ...config.headers,
       _t: Date.parse(new Date()) / 1000,
       clientId: clientId,
-      lang: store.state.settings.lang
+      // lang: store.state.settings.lang,
+      "Accept-Language": store.state.settings.lang
     };
     Toast.loading({
       duration: 0,
