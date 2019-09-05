@@ -180,8 +180,8 @@ export default {
       dailyExpense: 0,
       disableDatePicker: true,
       disable: {
-        incomeAmount: true,
-        expenseAmount: true
+        incomeAmount: false,
+        expenseAmount: false
       },
     };
   },
@@ -210,7 +210,7 @@ export default {
     ) {
       this.disableDatePicker = false;
       this.tabActive = 0;
-      this.incomeAmount = false;
+      this.incomeAmount = true;
     }
   },
   watch: {
