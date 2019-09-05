@@ -22,7 +22,7 @@
     "cordova-plugin-ionic-keyboard": "^2.1.3",
     "cordova-plugin-screen-orientation": "^3.0.2",
     "cordova-plugin-silot-analytics": "git+ssh://git@git.silot.tech:sbp/cordova-plugin/cordova-plugin-silot-analytics.git",
-    "cordova-plugin-x-socialsharing": "git+https://github.com/LIJI-Max/SocialSharing-PhoneGap-Plugin.git",
+    "cordova-plugin-x-socialsharing": "git+ssh://git@git.silot.tech:sbp/cordova-plugin/cordova-plugin-x-socialsharing.git",
     "cordova-support-android-plugin": "^1.0.1",
     "cordova-support-google-services": "^1.3.1",
     "es6-promise-plugin": "^4.2.2"
@@ -34,11 +34,6 @@
     "plugins": {
       "cordova-plugin-whitelist": {},
       "cordova-support-android-plugin": {},
-      "cordova-plugin-x-socialsharing": {
-        "ANDROIDX_CORE_VERSION": "1.0.+",
-        "PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION": "This app requires photo library access to function properly.",
-        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "This app requires photo library access to function properly."
-      },
       "cordova-plugin-androidx-adapter": {},
       "cordova-plugin-camera": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
@@ -53,6 +48,9 @@
         "ANDROID_SCHEME": " ",
         "ANDROID_HOST": " ",
         "ANDROID_PATHPREFIX": "/"
+      },
+      "cordova-plugin-x-socialsharing": {
+        "ANDROIDX_CORE_VERSION": "1.0.+"
       }
     },
     "platforms": [

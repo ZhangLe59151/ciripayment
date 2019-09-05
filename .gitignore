@@ -31,7 +31,6 @@ yarn-error.log*
 /src-cordova/platforms
 /src-cordova/plugins
 www
-google-services.json
 /public/cordova.js
 /signatural
 bundletool-all-0.10.2.jar
