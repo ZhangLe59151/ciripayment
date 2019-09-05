@@ -1,7 +1,7 @@
 def label = "slave-${UUID.randomUUID().toString()}"
 
 podTemplate(label: label, containers: [
-  containerTemplate(name: "npm", image: 'registry.silot.tech/common/jenkins-npm:latest', command: 'cat', ttyEnabled: true),
+  containerTemplate(name: "npm", image: 'registry.silot.tech/common/jenkins-npm:1.0.0', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true),
   containerTemplate(name: 'helm', image: 'cnych/helm', command: 'cat', ttyEnabled: true)
 ], volumes: [
@@ -14,8 +14,8 @@ podTemplate(label: label, containers: [
     def gitBranch = myRepo.GIT_BRANCH
     def imageTag = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
     def dockerRegistryUrl = "registry.silot.tech"
-    def imageEndpoint = "taokae_mvp"
-    def image = "${dockerRegistryUrl}/taokae/${imageEndpoint}"
+    #def imageEndpoint = "taokae_mvp"
+    #def image = "${dockerRegistryUrl}/taokae/${imageEndpoint}"
 
     stage('单元测试') {
         echo "1. 单元测试阶段"
@@ -28,6 +28,8 @@ podTemplate(label: label, containers: [
         passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
           container('npm') {
             sh """
+               npm --version
+               node --version
                npm install 
                npm run build-test-web
                """
