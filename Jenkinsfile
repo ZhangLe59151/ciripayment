@@ -14,8 +14,6 @@ podTemplate(label: label, containers: [
     def gitBranch = myRepo.GIT_BRANCH
     def imageTag = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
     def dockerRegistryUrl = "registry.silot.tech"
-    #def imageEndpoint = "taokae_mvp"
-    #def image = "${dockerRegistryUrl}/taokae/${imageEndpoint}"
 
     stage('单元测试') {
         echo "1. 单元测试阶段"
