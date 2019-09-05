@@ -22,6 +22,7 @@
     "element-ui": "^2.7.2",
     "idlejs": "^2.0.1",
     "lodash": "^4.17.15",
+    "mand-mobile": "^2.5.1",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.23",
     "signature_pad": "^3.0.0-beta.3",
