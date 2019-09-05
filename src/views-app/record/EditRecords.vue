@@ -55,7 +55,7 @@
             class="income"
             v-model="form.incomeAmount"
             @focus="showKeyboard('incomeAmount')"
-            maxlength="13"
+            maxlength="11"
             readonly
           />
           <div class="plus currency">{{currency}}</div>
@@ -105,7 +105,7 @@
             class="income expense"
             v-model="form.expenseAmount"
             @focus="showKeyboard('expenseAmount')"
-            maxlength="13"
+            maxlength="11"
             readonly
           />
           <div class="plus currency">{{currency}}</div>
@@ -264,6 +264,9 @@ export default {
       ).style.height = `${window.innerHeight - 50}px`;
     },
     onInput(value) {
+      if (this.form[this.type].length === 11) {
+        return false;
+      }
       if (this.form[this.type].indexOf(".") !== -1 && value === ".") {
         return false;
       }

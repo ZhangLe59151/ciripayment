@@ -165,7 +165,7 @@ export default {
     },
 
     sendOtp() {
-      this.$api
+  this.$api
         .sendOtp({
           phoneNumber: this.form.nationalCode + this.form.phone
         })
