@@ -100,10 +100,10 @@ const AppRouteArr = [
   },
   {
     path: "/social",
-    name: "Social",
+    name: "SocialPage",
     component: () => import("@/views-app/social/SocialPage.vue"),
     meta: {
-      title: "LedgerAddRecord"
+      title: "SocialPage"
     }
   },
   {
