@@ -14,6 +14,8 @@ podTemplate(label: label, containers: [
     def gitBranch = myRepo.GIT_BRANCH
     def imageTag = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
     def dockerRegistryUrl = "registry.silot.tech"
+    def imageEndpoint = "merchant-portal"
+    def image = "${dockerRegistryUrl}"/taokae/${imageEndpoint}
 
     stage('单元测试') {
         echo "1. 单元测试阶段"
@@ -30,6 +32,8 @@ podTemplate(label: label, containers: [
                node --version
                npm install 
                npm run build-test-web
+               tar zcvf dist.tar.gz dist
+               mv dist.tar.gz ./k8s/docker/registry/
                """
           }
         } 
@@ -43,6 +47,10 @@ podTemplate(label: label, containers: [
           container('docker') {
             sh """
               docker login ${dockerRegistryUrl} -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}
+              docker build -t ${image}:${imageTag} ./k8s/docker/registry
+              docker tag ${image}:${imageTag} ${image}:latest
+              docker push ${image}:${imageTag}
+              docker push ${image}:latest
               """
           }
       }
