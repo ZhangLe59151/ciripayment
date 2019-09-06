@@ -70,6 +70,12 @@ Vue.directive("analytics", {
   }
 });
 
+if (location.protocol === "https:") {
+  let metaHTTPSScript = document.createElement("meta");
+  metaHTTPSScript.httpEquiv = "Content-Security-Policy";
+  metaHTTPSScript.content = "upgrade-insecure-requests";
+  document.getElementsByTagName("head")[0].appendChild(metaHTTPSScript);
+}
 if (window.location.protocol === "file:") {
   let cordovaScript = document.createElement("script");
   cordovaScript.setAttribute("type", "text/javascript");

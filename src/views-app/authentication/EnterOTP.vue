@@ -280,8 +280,8 @@ export default {
                       res.data.data.verifyResult
                         ? this.$router.push({ name: "EnterLoanInfo" })
                         : this.$router.push({
-                            name: "LoanAmountExceedLimitError"
-                          });
+                          name: "LoanAmountExceedLimitError"
+                        });
                     } else {
                       this.$notify(res.data.msg);
                     }

@@ -230,7 +230,7 @@ export default {
           );
         }
         let formDate = util.convertUTCTimeToBuddhistTime(val);
-        //formDate = this.$moment(val).format("D MMM YYYY");
+        // formDate = this.$moment(val).format("D MMM YYYY");
         const _today = this.$moment().format(this.localDateFormatter);
         const _yesterday = this.$moment()
           .subtract(1, "days")
