@@ -8,4 +8,6 @@ ADD conf.tar.gz /silot/nginx/
 
 ADD dist.tar.gz /silot/mvp/taokae/merchant-portal/
 
-CMD ["/bin/bash"]
+COPY entrypoint.sh /
+
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]

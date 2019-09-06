@@ -31,7 +31,7 @@ podTemplate(label: label, containers: [
                npm --version
                node --version
                npm install 
-               npm run build-test-web
+               npm run build-qa-web
                tar zcvf dist.tar.gz dist
                mv dist.tar.gz ./k8s/docker/registry/
                """
@@ -59,7 +59,9 @@ podTemplate(label: label, containers: [
         echo "4. helm部署服务阶段"
         container('helm') {
             sh """
-               echo "Hello, World"
+               helm upgrade -f ./k8s/helm/merchant-portal/values.yaml --description=${imageTag} --set image.tag=${imageTag} merchant-portal ./k8s/helm/merchant-portal 
+               helm list
+               helm history merchant-portal
                """
         }
     }
