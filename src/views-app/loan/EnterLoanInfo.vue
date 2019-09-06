@@ -244,7 +244,7 @@ export default {
   name: "EnterLoanInfo",
   computed: {
     ...mapState({
-      columns: "nationalCodeList",
+      columns: "nationalCodeList"
     })
   },
   data() {
@@ -555,7 +555,7 @@ export default {
         certSize: this.certSize
       });
       this.ls.setItem("form", JSON.stringify(this.$store.state.form));
-    },
+    }
   }
 };
 </script>

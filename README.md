@@ -1,4 +1,9 @@
-# stardand-onboard
+# Taokae
+
+## Branch
+
+1. dev-deploy => the master branch of development
+2. deploy => the master branch of deployment
 
 ## Project setup
 

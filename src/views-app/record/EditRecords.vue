@@ -203,8 +203,8 @@ export default {
             .subtract(1, "days")
             .format(this.localDateFormatter);
           var cDate = this.$moment(res.data.data.accountDate).format(this.localDateFormatter);
-          //this.$moment(res.data.data.accountDate).format(this.localDateFormatter); //"D MMM YYYY"
-          //util.convertUTCTimeToBuddhistTime(res.data.data.accountDate);
+          // this.$moment(res.data.data.accountDate).format(this.localDateFormatter); //"D MMM YYYY"
+          // util.convertUTCTimeToBuddhistTime(res.data.data.accountDate);
           const kv = {
             [_today]: this.$t("Record.today"),
             [_yesterday]: this.$t("Record.yesterday")
@@ -213,7 +213,7 @@ export default {
             ? (kv[cDate] ? kv[cDate] : "") +
               util.convertUTCTimeToBuddhistTime(res.data.data.accountDate)
             : "";
-          //this.$moment(res.data.data.accountDate).format("D MMM YYYY")
+          // this.$moment(res.data.data.accountDate).format("D MMM YYYY")
           this.form[this.type] = util.fmoney(res.data.data.amount);
           this.dailyIncome = util.fmoney(res.data.data.incomeSum);
           this.dailyExpense = util.fmoney(res.data.data.expensesSum);
@@ -227,7 +227,7 @@ export default {
       this.$api.updateRecord(form).then(res => {
         if (res.data.code === 200) {
           this.viewRecord();
-          this.$notify({ message: this.$t('Record.updateSucceed'), background: "#04A777" });
+          this.$notify({ message: this.$t("Record.updateSucceed"), background: "#04A777" });
         }
       });
     },
@@ -265,8 +265,8 @@ export default {
       ).style.height = `${window.innerHeight - 50}px`;
     },
     onInput(value) {
-      var str = this.form[this.type].replace(',','')
-      str = str.replace(',','')
+      var str = this.form[this.type].replace(",", "")
+      str = str.replace(",", "")
       if (this.form[this.type].indexOf(".") !== -1 && value === ".") {
         return false;
       }
