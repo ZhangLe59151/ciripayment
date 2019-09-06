@@ -98,10 +98,18 @@ const AppRouteArr = [
       title: "LedgerRecordHistory"
     }
   },
-  {
+ /* {
     path: "/social",
     name: "SocialPage",
     component: () => import("@/views-app/social/SocialPage.vue"),
+    meta: {
+      title: "SocialPage"
+    }
+  },*/
+  {
+    path: "/social1",
+    name: "SocialPage",
+    component: () => import("@/views-app/SocialPage.vue"),
     meta: {
       title: "SocialPage"
     }
