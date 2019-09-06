@@ -44,7 +44,7 @@ export default {
       width:auto;
     }
     .ins {
-      width: 240px;
+      width: calc(100vw - 140px);
       font-size: 16px;
       margin-top: 32px;
       color: #68737D;

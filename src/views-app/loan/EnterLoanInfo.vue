@@ -28,27 +28,6 @@
           class="title"
         >{{$t("EnterLoanInfo.subTitle")}}</div>
         <div class="title-line"></div>
-
-        <!--        <el-form-item-->
-        <!--          label="Residential Address"-->
-        <!--          prop="resAddr"-->
-        <!--          :rules="[-->
-        <!--      { required: true, message: 'This field is required.', trigger: 'blur' }-->
-        <!--    ]"-->
-        <!--        >-->
-        <!--          <el-input-->
-        <!--            v-model="form.resAddr"-->
-        <!--            placeholder="Residential Address"-->
-        <!--            type="textarea"-->
-        <!--            :maxlength="110"-->
-        <!--            :autosize="{minRows: 0, maxRows: 3}"-->
-        <!--            @blur="validateResAddr"-->
-        <!--          >-->
-        <!--          </el-input>-->
-        <!--          <div v-if="resAddrValidated" class="bottom-right-position">-->
-        <!--            <i class="iconfont iconsuccess success-validator"/></div>-->
-        <!--        </el-form-item>-->
-
         <el-form-item
           :label="$t('EnterLoanInfo.bizNameEng')"
           prop="bizNameEn"
@@ -125,14 +104,6 @@
             class="action-area"
             v-if="frontStatus === 0"
           >
-            <!--            <el-upload-->
-            <!--              action="front"-->
-            <!--              :show-file-list="false"-->
-            <!--              :http-request="uploadImg"-->
-            <!--              :before-upload="fileCheck"-->
-            <!--            >-->
-            <!--              <i class="el-icon-camera-solid"></i>-->
-            <!--            </el-upload>-->
             <div
               class="camera-input-question"
               @click="takePhoto('front')"
@@ -238,48 +209,6 @@
             ></i>
           </div>
         </div>
-        <!-- business information -->
-        <!--        <template v-if="isBizRegNumberValid">-->
-        <!--          <div class="section-header">Business Registration</div>-->
-        <!--          &lt;!&ndash; personal information &ndash;&gt;-->
-        <!--          <div class="document-cell">-->
-        <!--            <div class="document-name-container">-->
-        <!--              <div class="label-title required double-line">Business Registration Document </div>-->
-        <!--              <div class="file-name">{{certName}}</div>-->
-        <!--            </div>-->
-        <!--            <div-->
-        <!--              class="action-area"-->
-        <!--              v-if="certStatus === 0"-->
-        <!--            >-->
-        <!--              <el-upload-->
-        <!--                action="cert"-->
-        <!--                :show-file-list="false"-->
-        <!--                :http-request="uploadImg"-->
-        <!--                :before-upload="fileCheck"-->
-        <!--              >-->
-        <!--                <i class="el-icon-camera-solid"></i>-->
-        <!--              </el-upload>-->
-        <!--            </div>-->
-        <!--            <div-->
-        <!--              class="action-area-spinner"-->
-        <!--              v-if="certStatus === 1"-->
-        <!--            >-->
-        <!--              <van-loading-->
-        <!--                style="padding: 14px 8px;width: 100%;"-->
-        <!--                type="spinner"-->
-        <!--              />-->
-        <!--            </div>-->
-        <!--            <div-->
-        <!--              class="action-area-delete"-->
-        <!--              v-if="certStatus === 2"-->
-        <!--            >-->
-        <!--              <i-->
-        <!--                class="el-icon-delete"-->
-        <!--                @click="deleteImage('cert')"-->
-        <!--              ></i>-->
-        <!--            </div>-->
-        <!--          </div>-->
-        <!--        </template>-->
       </el-card>
     </el-form>
     <van-popup
@@ -314,21 +243,8 @@ import { mapState } from "vuex";
 export default {
   name: "EnterLoanInfo",
   computed: {
-    isBizRegNumberValid: function() {
-      if (this.form.bizRegNumber) {
-        if (
-          this.$store.state.validationPatterns.nationaldID.exec(
-            this.form.bizRegNumber
-          )
-        ) {
-          return true;
-        }
-      }
-      return false;
-    },
     ...mapState({
       columns: "nationalCodeList",
-      applicationInfoId: state => state.merchantProfile.applicationInfoId
     })
   },
   data() {
@@ -364,16 +280,6 @@ export default {
       active: 0,
       value: "",
       show: false,
-      provinceHasError: false,
-      provinceError: "",
-      validateProvince: (rule, value, callback) => {
-        if (!this.isProvinceValid()) {
-          callback(new Error("Please enter a valid Postal Code"));
-          // show error;
-        } else {
-          callback();
-        }
-      },
       resAddrValidated: false,
       bizNameEnValidated: false,
       bizAddrValidated: false,
@@ -432,9 +338,6 @@ export default {
           this.$dialog.close();
         });
     },
-    validateResAddr() {
-      this.resAddrValidated = !!this.form.resAddr;
-    },
     validateBizName() {
       this.bizNameEnValidated = !!this.form.bizNameEn;
     },
@@ -453,51 +356,6 @@ export default {
           origin: "EnterLoanInfo"
         }
       });
-    },
-    handleGotoProvince() {
-      var savedPosition =
-        document.documentElement.scrollTop || document.body.scrollTop;
-      // go to select province page
-      this.$store.commit("UpdateForm", this.form);
-      this.$router.push({
-        name: "Province",
-        query: {
-          position: savedPosition,
-          origin: "EnterLoanInfo"
-        }
-      });
-    },
-    onPostalChange() {
-      if (this.form.postal && this.form.postal) {
-        if (!this.isProvinceValid()) {
-          this.provinceHasError = true;
-          this.provinceError = "Please enter a valid Postal Code";
-          // show error;
-        }
-      }
-      this.provinceError = "";
-      this.provinceHasError = false;
-    },
-    // onConfirm(value, index) {
-    //   this.form.contactPersonNationalCode = value;
-    //   this.show = false;
-    // },
-    // onCancel() {
-    //   this.show = false;
-    // },
-    isProvinceValid() {
-      if (this.form.postal && this.form.provinceName) {
-        if (
-          this.form.postal.toString().substring(0, 2) !==
-          this.form.provincePostalPrefix.toString()
-        ) {
-          return false;
-        } else {
-          return true;
-        }
-      } else {
-        return true;
-      }
     },
     takePhoto(field) {
       this.processingDoc = field;
@@ -564,7 +422,6 @@ export default {
               return false;
             }
           }
-          this.$store.commit("CompleteLoanProfile");
           this.gotoNextPage();
         } else {
           this.$notify({
@@ -593,11 +450,6 @@ export default {
           this.$router.push({ name: "Loan", query: { justSubmitted: "true" } });
         }
       });
-    },
-
-    handleBack() {
-      this.commitForm();
-      this.$router.back();
     },
     deleteImage(type) {
       var status = type + "Status";
@@ -704,23 +556,6 @@ export default {
       });
       this.ls.setItem("form", JSON.stringify(this.$store.state.form));
     },
-
-    checkSpecificKey(rule, value, callback) {
-      var specialKey = this.$store.state.validationPatterns.invalidCharset;
-      for (var i = 0; i < value.length; i++) {
-        if (specialKey.indexOf(value.substr(i, 1)) !== -1) {
-          callback(new Error(rule.message));
-        }
-      }
-      callback();
-    },
-    confirmRefresh(event) {
-      var e = event || window.event;
-      e.preventDefault();
-      this.$store.commit("removeUselessForm");
-      e.returnValue =
-        "Your previous application was discarded, please start your application over again.";
-    }
   }
 };
 </script>
