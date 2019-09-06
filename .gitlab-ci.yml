@@ -27,7 +27,7 @@ build:
       - $PWD/build/frontend.tar.gz
   when: manual
   only:
-    - dev-deploy
+    - deploy
 
 deploy:
   stage: deploy
@@ -39,4 +39,4 @@ deploy:
     - exit
   when: manual
   only:
-    - dev-deploy
+    - deploy
