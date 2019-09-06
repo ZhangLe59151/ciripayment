@@ -14,14 +14,15 @@ nameOverride: ""
 fullnameOverride: ""
 
 service:
-  type: ClusterIP
+  type: NodePort
   sshPort: 22
   sshNodePort: 30029 
   httpPort: 14002
   containerHttpPort: 14002
+  httpNodePort: 30034
 
 ingress:
-  enabled: true 
+  enabled: false 
   annotations: 
     kubernetes.io/ingress.class: nginx
   hosts:
