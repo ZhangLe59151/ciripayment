@@ -25,7 +25,7 @@ export default {
   font-size: 20px;
   font-weight: bold;
   line-height: 20px;
-  color: #ffffff;
+  color: #2F3941;
   display: inline-block;
 }
 

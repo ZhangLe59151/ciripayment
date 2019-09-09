@@ -69,7 +69,7 @@ export default {
   height: 132px;
   width: 100%;
   position: relative;
-  color: #ffffff;
+  color: #2F3941;
 
   .btn {
     margin: 10px 16px;

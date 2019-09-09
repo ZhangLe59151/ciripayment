@@ -61,7 +61,7 @@ export default {
   flex-direction: column;
   .header-title {
     font-size: 20px;
-    color: white;
+    color: #2F3941;
     font-weight: bold;
   }
 }
