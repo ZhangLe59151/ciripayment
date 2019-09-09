@@ -1,16 +1,13 @@
 <template>
-  <div class="socialPage">
-    <div class="whiteBackground">
-      <div class="title">{{ $t('Social.title') }}</div>
-      <div class="backgroundImg"></div>
-      <van-button class="joinBtn">{{ $t('Social.joinBtnTitle') }}</van-button>
-    </div>
+  <div class="socialHome">
+    <app-common-header :title="$t('Social.headTitle')" />
+    <social-app-sign-in-profile />
   </div>
 </template>
 
 <script>
 export default {
-  name: "socialPage",
+  name: "socialHome",
   data() {
     return {
 
@@ -20,10 +17,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.socialPage {
+.socialHome {
   height: 100vh;
   width: 100%;
-  background-color: black;
+  background-color: white;
 
   .whiteBackground {
     height: 100vh;
@@ -44,7 +41,7 @@ export default {
 
   .backgroundImg {
     margin: 32px 30px 0 30px;
-    background: url("../assets/imgs/social/Social5Icon.png") no-repeat;
+    background: url("../../assets/imgs/social/Social5Icon.png") no-repeat;
     background-size: contain;
     height: 360px;
     width: 300px;

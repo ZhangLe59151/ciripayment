@@ -1,6 +1,7 @@
 <template>
   <div class="appSocialSignIn">
-
+    <div class="profile"></div>
+    <van-button class="signInBtn">{{ $t('Social.signIn') }}</van-button>
   </div>
 </template>
 
@@ -52,5 +53,22 @@ export default {
 .appSocialSignIn {
   height: 200px;
   width: 100%;
+  background-color: white;
+
+  .profile {
+    margin: 22px 135px 0 135px;
+    background: url("../../assets/imgs/social/userSignout.png") no-repeat;
+    height: 90px;
+    width: 90px;
+  }
+
+  .signInBtn {
+    margin: 16px 16px 20px 16px;
+    height: 40px;
+    width: 328px;
+    background-color: #ffa702;
+    color: #052d46;
+    font-size: 14px;
+  }
 }
 </style>
