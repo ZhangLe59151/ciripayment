@@ -2,6 +2,7 @@
   <div class="socialHome">
     <app-common-header :title="$t('Social.headTitle')" />
     <social-app-sign-in-profile />
+    <social-app-merchant-list />
   </div>
 </template>
 
@@ -20,7 +21,7 @@ export default {
 .socialHome {
   height: 100vh;
   width: 100%;
-  background-color: white;
+  background-color: #EBE9ED;
 
   .whiteBackground {
     height: 100vh;

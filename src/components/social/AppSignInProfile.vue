@@ -1,7 +1,8 @@
 <template>
   <div class="appSocialSignIn">
-    <div class="profile"></div>
-    <van-button class="signInBtn">{{ $t('Social.signIn') }}</van-button>
+    <div :class="isLogin ? 'profileLogin' : 'profile'"></div>
+    <van-button class="signInBtn" @click="signIn" v-if="!isLogin">{{ $t('Social.signIn') }}</van-button>
+    <van-button class="signInBtn" @click="signIn" v-if="isLogin">{{ $t('Social.setUp') }}</van-button>
   </div>
 </template>
 
@@ -10,40 +11,17 @@ import { mapState } from "vuex";
 export default {
   name: "AppSocialSignIn",
 
-  props: {
-    master: {
-      default() {
-        return {};
-      },
-      required: true,
-      type: Object
-    }
-  },
-
   computed: {
     ...mapState({
-      fortuneInfo: "fortuneInfo"
-    }),
-    subtitle() {
-      return this.$tc(
-        "FortuneTelling.likeDes",
-        this.master.like === 1 ? 1 : 2,
-        { n: parseInt(this.master.likeCount / 10) * 10 }
-      );
-    }
+      isLogin: "OTPVerified"
+    })
   },
-
   methods: {
-    handleViewMasterClick() {
-      this.$store.commit(
-        "SaveFortuneInfo",
-        Object.assign({}, this.fortuneInfo, { selectedMaster: this.master })
-      );
+    signIn() {
       this.$router.push({
-        name: "MasterProfile",
-        params: { id: this.master.id },
-        query: { subtitle: this.subtitle }
-      });
+          name: "LoginPage",
+          query: { to: "SocialHome" }
+        });
     }
   }
 };
@@ -51,19 +29,30 @@ export default {
 
 <style lang="scss" scoped>
 .appSocialSignIn {
+  position: relative;
   height: 200px;
   width: 100%;
   background-color: white;
 
   .profile {
+    position: absolute;
     margin: 22px 135px 0 135px;
     background: url("../../assets/imgs/social/userSignout.png") no-repeat;
     height: 90px;
     width: 90px;
   }
 
+  .profileLogin {
+    position: absolute;
+    margin: 22px 135px 0 135px;
+    background: url("../../assets/imgs/social/userSignIn.png") no-repeat;
+    height: 90px;
+    width: 90px;
+  }
+
   .signInBtn {
-    margin: 16px 16px 20px 16px;
+    position: absolute;
+    margin: 128px 16px 20px 16px;
     height: 40px;
     width: 328px;
     background-color: #ffa702;
