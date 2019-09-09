@@ -109,7 +109,7 @@ const AppRouteArr = [
   {
     path: "/socialHome",
     name: "SocialHome",
-    component: () => import("../views-app/social/SocialHome.vue"),
+    component: () => import("@/views-app/SocialHome.vue"),
     meta: {
       title: "SocialHome"
     }

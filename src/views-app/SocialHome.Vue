@@ -1,10 +1,7 @@
 <template>
   <div class="socialHome">
-    <div class="whiteBackground">
-      <div class="title">{{ $t('Social.title') }}</div>
-      <div class="backgroundImg"></div>
-      <van-button class="joinBtn">{{ $t('Social.joinBtnTitle') }}</van-button>
-    </div>
+    <app-common-header :title="$t('Social.headTitle')" />
+    <app-social-sign-in-profile />
   </div>
 </template>
 
