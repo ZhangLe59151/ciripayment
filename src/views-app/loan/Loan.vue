@@ -14,8 +14,8 @@
         Loan
       </div>
     </van-nav-bar>
-    <loan-app-loan-overview v-if="showLoanEnterAmount"></loan-app-loan-overview>
-    <loan-app-loan-management v-else></loan-app-loan-management>
+    <loan-app-loan-overview v-if="showLoanOverview"></loan-app-loan-overview>
+    <loan-app-loan-management v-else :reApply.sync="reApply"></loan-app-loan-management>
     <app-tab-bar
       :active="1"
       v-if="!$route.query.origin && !$route.query.justSubmitted "
@@ -30,17 +30,12 @@ export default {
   data() {
     return {
       noLoan: true,
-      showLoanEnterAmount: true,
+      reApply: false
     }
   },
   computed: {
     showLoanOverview() {
-      return !this.noLoan || this.$route.query.reApply;
-    }
-  },
-  watch: {
-    showLoanOverview(newv, oldv) {
-      console.log("current", newv);
+      return this.noLoan || this.reApply;
     }
   },
   created() {
@@ -50,13 +45,11 @@ export default {
         if (res.data.code === 200) {
           if (res.data.data) {
             this.noLoan = false;
-            this.showLoanEnterAmount = false;
             this.$store.commit("initLoanProfile", res.data.data);
           }
         }
       });
     }
-    // this.$store.commit("fetchDataFromLocal");
   }
 };
 </script>

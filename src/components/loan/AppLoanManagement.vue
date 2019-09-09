@@ -1,5 +1,5 @@
 <template>
-  <div class="app-loan-management">
+  <div v-if="fetchedData" class="app-loan-management">
     <div v-show="loanApplicationHistory" class="loan-tab" v-for="loan in loanApplicationHistory" :key="loan.id" @click="handleClick(loan.id)">
       <div>
         <i class="iconfont iconnext"></i>
@@ -25,7 +25,7 @@
       v-if="displayReApplyButton"
       class="bottom-btn"
       size="large"
-      @click="reApply"
+      @click="handleReApply"
     >
       Apply Now
     </van-button>
@@ -38,6 +38,17 @@ import util from "@/util";
 
 export default {
   name: "AppLoanManagement",
+  props: {
+    reApply: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data() {
+    return {
+      fetchedData: false
+    }
+  },
   computed: {
     ...mapState({
       loanApplicationHistory: "loanApplicationHistory",
@@ -55,6 +66,7 @@ export default {
     // get loan list
     this.$api.getLoanHistory().then(res => {
       if (res.data.code === 200) {
+        this.fetchedData = true;
         this.$store.commit("initLoanApplicationHistory", res.data.data);
       }
     });
@@ -114,9 +126,10 @@ export default {
     handleClick(id) {
       this.$router.push({ name: "LoanApplicationResult", params: { id: id } });
     },
-    reApply() {
+    handleReApply() {
       event.preventDefault();
-      this.$router.push({ name: "Loan", query: { reApply: true } })
+      this.$emit("update:reApply", true);
+      // this.$router.push({ name: "Loan", query: { reApply: true } })
     }
   }
 }

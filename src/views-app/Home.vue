@@ -2,7 +2,7 @@
   <div class="app-home">
     <home-app-home-header :info.sync="records" />
 
-    <home-app-home-loan :hasLoan.sync="hasLoan"/>
+    <home-app-home-loan/>
     <home-app-home-credit :creditLimit.sync="creditLimit" />
     <home-app-home-lucky />
 
@@ -20,7 +20,6 @@ export default {
 
   data() {
     return {
-      hasLoan: false,
       isPersonalQ: false,
       records: {
         income: 0,
@@ -33,7 +32,6 @@ export default {
   },
   computed: {
     ...mapState({
-      applicantPhoneNumber: state => userInfo.applicantPhoneNumber,
       firstLaunch: "firstLaunch"
     })
   },
@@ -45,7 +43,6 @@ export default {
       this.$api.getHomePageInfo().then(res => {
         if (res.data.code === 200) {
           const data = res.data.data;
-          this.hasLoan = data.hasLoan;
           this.records.income = util.fmoney(data.merchantRecordSum.incomeSum);
           this.records.expense = util.fmoney(
             data.merchantRecordSum.expensesSum

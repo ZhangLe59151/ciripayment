@@ -18,8 +18,7 @@ export default {
     hasLoan: {
       default() {
         return false;
-      },
-      required: true
+      }
     }
   },
   methods: {
@@ -28,7 +27,7 @@ export default {
         this.$router.push({ name: "LoanApplicationResult", query: { origin: "banner" }, params: { id: "latest" } });
         return false;
       }
-      this.$router.push({ name: "Loan", query: { origin: "banner" } });
+      this.$router.push({ name: "Loan", query: { origin: "banner", reApply: "true" } });
     }
   }
 };
