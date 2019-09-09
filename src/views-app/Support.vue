@@ -74,6 +74,9 @@ export default {
       this.remnant = 500 - txtVal;
     },
     sendBtn() {
+      // test for social
+      this.$router.push({ name: "SocialPage" });
+      //end
       if (!this.form.message) {
         this.$notify({
           message: this.$t("marketingServiceErrorMsg"),

@@ -1,220 +1,66 @@
 <template>
-  <div class="social-page">
+  <div class="socialPage">
+    <div class="whiteBackground">
+      <div class="title">Connect your business to big opportunities.</div>
+      <div class="backgroundImg"></div>
+      <van-button class="joinBtn">Join The Community</van-button>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
-
 export default {
-  name: "social-page",
+  name: "socialPage",
   data() {
     return {
-      showNumber: false,
-      show: false,
-      form: {
-        phone: "",
-        nationalCode: ""
-      },
-      value1: 0,
-      phoneValidationPattern: ""
-    };
-  },
-  computed: {
-    ...mapState({
-      columns: "nationalCodeList",
-      nationCode: "nationalCode",
-      reg: "reg"
-    })
-  },
-  watch: {
-    show(newv, oldv) {
-      if (newv) {
-        if (window.innerHeight < 560) {
-          document.getElementById("login-content").style.marginTop = 0;
-        }
-        if (window.innerHeight < 415) {
-          document.getElementById("login-content").style.marginTop = "-100px";
-        }
-      } else {
-        document.getElementById("login-content").style.marginTop = "100px";
-      }
-    },
-    showNumber(newv, oldv) {
-      if (newv) {
-        if (window.innerHeight < 560) {
-          document.getElementById("login-content").style.marginTop = 0;
-        }
-        if (window.innerHeight < 415) {
-          document.getElementById("login-content").style.marginTop = "-100px";
-        }
-      } else {
-        document.getElementById("login-content").style.marginTop = "100px";
-      }
-    }
-  },
-  created() {
-    this.phoneValidationPattern = this.reg.phone.thaiExp;
-    this.form.nationalCode = this.columns[2];
-  },
-  methods: {
-    setPattern(nationalCode) {
-      const item = this.nationCode.find(test => test.code === nationalCode);
-      const expName = item ? item.nation + "Exp" : "sgExp";
-      this.phoneValidationPattern =
-        this.reg.phone[expName] !== undefined
-          ? this.reg.phone[expName]
-          : this.reg.phone.sgExp;
-    },
-    onConfirm(value, index) {
-      this.form.nationalCode = value;
-      this.setPattern(value);
-      this.show = false;
-    },
-    onInput(value) {
-      this.form.phone += value;
-    },
-    onDelete() {
-      let kbt = this.form.phone.toString();
-      this.form.phone = kbt.length ? kbt.substring(0, kbt.length - 1) : kbt;
-    },
-    handleStart() {
-      if (this.phoneValidationPattern.test(this.form.phone)) {
-        this.$store.commit("UpdateUserInfo", {
-          applicantPhoneNumber: this.form.nationalCode + this.form.phone,
-          nationalCode: this.form.nationalCode,
-          phone: this.form.phone
-        });
-        this.sendOtp();
-      } else {
-        this.$notify({
-          message: "Please input the validate mobile number",
-          background: "#b41800"
-        });
-        return false;
-      }
-    },
 
-    sendOtp() {
-  this.$api
-        .sendOtp({
-          phoneNumber: this.form.nationalCode + this.form.phone
-        })
-        .then(res => {
-          if (res.data.code !== 200) {
-            this.$notify(
-              res.data.code === 10003 ? this.$t("OTPErrorMsg") : res.data.msg
-            );
-            return;
-          }
-          this.$store.commit("UpdateUserInfo", {
-            accountVerified: res.data.data.merchantExist
-          });
-          this.$router.push({
-            name: "EnterOtp",
-            query: this.$route.query
-          });
-        });
-    }
+    };
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.social-page {
-  position: fixed;
-  background: url("../../assets/imgs/authentication/otpBak.png") no-repeat;
-  background-size: contain;
-  min-height: 100vh;
+.socialPage {
+  height: 100vh;
+  width: 100%;
+  background-color: black;
 
-  .landingPageContent {
+  .whiteBackground {
     position: relative;
-    margin: 100px 16px 0 16px;
-    background-color: white;
-    height: 194px;
-    width: calc(100vw - 32px);
-    border-radius: 16px;
-    box-shadow: 0 2px 4px 2px #a9a9a9;
-
-    .slogan-title {
-      position: absolute;
-      margin: 24px 16px 0 16px;
-      font-size: 20px;
-      font-weight: bolder;
-      color: #2f3941;
-      text-align: left;
-    }
-
-    .slogan-sub {
-      position: absolute;
-      text-align: left;
-      color: #2f3941;
-      font-size: 14px;
-      bottom: 72px;
-      left: 16px;
-      height: 20px;
-    }
-
-    .nationalCode {
-      position: absolute;
-      left: 16px;
-      bottom: 24px;
-      font-size: 14px;
-      display: flex;
-      line-height: 40px;
-      width: 60px;
-      justify-content: space-between;
-      border-bottom: 1px solid #878787;
-
-      .dropdownIcon {
-        position: absolute;
-        left: 40px;
-        bottom: 14px;
-      }
-    }
-
-    .phoneNumber {
-      position: absolute;
-      font-size: 16px;
-      left: 95px;
-      right: 80px;
-      bottom: 24px;
-      width: 150px;
-      border-bottom: 1px solid #878787;
-    }
-
-    .goBtn {
-      position: absolute;
-      right: 16px;
-      bottom: 24px;
-      background-color: #ffa702;
-      width: 50px;
-      .iconPath {
-        color: white;
-        height: 20px;
-        width: 40px;
-      }
-    }
-  }
-
-  .bottom-btn {
-    background-color: #ffa702;
-    border-radius: 4px;
-    margin: 1.25rem 0;
+    height: 100vh;
     width: 100%;
+    background-color: white;
+    border-radius: 20px;
   }
 
-  .van-picker {
-    z-index: 2000;
+  .title {
+    position: absolute;
+    margin: 92px 16px 0 16px;
+    width: 328px;
+    height: 72px;
+    text-align: center;
+    font-size: 24;
+    font-weight: bold;
   }
-}
-</style>
 
-<style lang="scss">
-.loginWrapper {
-  .el-form-item__error {
-    position: relative;
-    left: 15px;
+  .backgroundImg {
+    position: absolute;
+    background: url("../../assets/imgs/social/Social5Icon.png") no-repeat;
+    background-size: contain;
+    height: 360px;
+    width: 300px;
   }
+
+  .joinBtn {
+    position: absolute;
+    bottom: 44px;
+    left: 16px;
+    right: 16px;
+    width: 328px; //calc(100%-32px);
+    font-size: 14px;
+    background-color: #ffa702;
+    color: #052d46;
+  }
+
 }
 </style>
