@@ -204,12 +204,11 @@ export default {
             this.$store.commit("OTPVerified");
             this.$analytics.setUserId(res.data.data.uid);
             let to = this.$route.query.to;
-            // If first time, then go to personal question
+            // If first time, then go to personal question, no need to check query because no way have query
             if (this.isFirst === "Yes" && this.deviceType === "APP") {
               this.$router.push({
                 name: "PersonalQuestion",
-                params: { id: 0 },
-                query: { to: to }
+                params: { id: 0 }
               });
               return false;
             }

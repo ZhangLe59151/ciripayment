@@ -15,15 +15,15 @@ export default {
   name: "AppHomeLoan",
   computed: {},
   props: {
-    hasLoan: {
+    showLoanOverview: {
       default() {
-        return false;
+        return true;
       }
     }
   },
   methods: {
     handleLoanClick() {
-      if (this.hasLoan) {
+      if (!this.showLoanOverview) {
         this.$router.push({ name: "LoanApplicationResult", query: { origin: "banner" }, params: { id: "latest" } });
         return false;
       }

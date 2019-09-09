@@ -1,6 +1,7 @@
 <template>
   <div class="app-loan">
-    <loan-app-loan-header v-if="!$route.query.origin" :title="(showLoanOverview)?'Loan':'Loan Application History'"/>
+    <loan-app-loan-header v-if="!$route.query.origin"
+                          :title="(showLoanOverview)?$t('Tabbars.Loan'):$t('AppLoanOverview.managementTitle')"/>
     <van-nav-bar
       v-else
       :left-arrow="!!$route.query.origin"
@@ -11,7 +12,7 @@
         slot="title"
         class="header-title"
       >
-        Loan
+        {{(showLoanOverview)?$t('Tabbars.Loan'):$t('AppLoanOverview.resultTitle')}}
       </div>
     </van-nav-bar>
     <loan-app-loan-overview v-if="showLoanOverview"></loan-app-loan-overview>
@@ -35,7 +36,7 @@ export default {
   },
   computed: {
     showLoanOverview() {
-      return this.noLoan || this.reApply;
+      return this.noLoan || this.reApply || this.$route.query.reApply;
     }
   },
   created() {

@@ -121,7 +121,7 @@ export default {
       }
       this.$api.verifyLoanApplyAble().then(res => {
         if (res.data.code === 200) {
-          (res.data.data.verifyResult) ? this.$router.push({ name: "EnterLoanInfo", origin: this.$route.query.origin })
+          (res.data.data.verifyResult) ? this.$router.push({ name: "EnterLoanInfo", query: this.$route.query })
             : this.$router.push({ name: "LoanAmountExceedLimitError" });
         } else {
           this.$notify(res.data.msg);

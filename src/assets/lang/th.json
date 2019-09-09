@@ -53,6 +53,8 @@
   },
   "AppLoanOverview": {
     "headerTitle": "คำขอกู้ยืมเงิน",
+    "managementTitle": "Loan Application History",
+    "resultTitle": "Application Details",
     "bannerTitle": "รับเงินด่วนในไม่กี่นาที!",
     "lowerRate": "ดอกเบี้ยต่ำกว่า",
     "higherLimit": "วงเงินสูงกว่า",

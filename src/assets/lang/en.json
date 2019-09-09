@@ -53,6 +53,8 @@
   },
   "AppLoanOverview": {
     "headerTitle": "Loan Application",
+    "managementTitle": "Loan Application History",
+    "resultTitle": "Application Details",
     "bannerTitle": "Get instant cash in minutes!",
     "lowerRate": "Lower Rate",
     "higherLimit": "Higher Limit",

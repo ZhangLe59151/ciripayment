@@ -9,7 +9,7 @@
         slot="title"
         class="header-title"
       >
-        Application Details
+        {{$t("AppLoanOverview.resultTitle")}}
       </div>
     </van-nav-bar>
       <div class="loan-applied-wrapper">
@@ -239,7 +239,7 @@ export default {
       return val;
     },
     handleClickBack() {
-      if (this.$route.query.justSubmitted) {
+      if (this.$route.query.justSubmitted || this.$route.query.origin) {
         this.$router.push({ name: "Home" });
       } else {
         this.$router.back();

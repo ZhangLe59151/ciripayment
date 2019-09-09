@@ -328,7 +328,7 @@ export default {
         })
         .then(() => {
           this.$store.commit("ClearForm");
-          this.$router.push({ name: "Loan" });
+          this.$router.push({ name: "Loan", query: this.$route.query });
         })
         .catch(() => {
           // on cancel
