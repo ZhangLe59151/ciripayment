@@ -43,7 +43,6 @@ export default new Vuex.Store({
     settings: {
       lang: storage.getItem("lang")
     },
-    minBusinessWorthForLoan: 120000,
     allowBack: true,
     form: {},
     userInfo: {},
