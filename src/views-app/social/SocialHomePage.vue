@@ -3,7 +3,7 @@
     <app-common-header :title="$t('Social.headTitle')" />
     <social-app-sign-in-profile v-if="!showDetail" />
     <social-app-merchant-profile v-if="showDetail" />
-    <social-app-merchant-list v-on:childByValue="childByValue" />
+    <social-app-merchant-list />
   </div>
 </template>
 
@@ -16,9 +16,6 @@ export default {
     }
   }, 
   methods: {
-    childByValue: function (childValue) {
-      this.showDetail = childValue
-    }
   }
   
 };

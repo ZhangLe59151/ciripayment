@@ -16,7 +16,8 @@ export default {
   name: "appMerchantList",
   methods: {
     viewDetail() {
-      this.$emit('childByValue', true)
+      //this.$emit('childByValue', true)
+      this.$router.push({ name: "SocialMerchantDetailPage" });
     }
   }
 };
@@ -36,11 +37,13 @@ export default {
   
   .card {
     margin: 10px 16px 4px 16px;
+    border-radius: 4px;
     height: 191px;
     width: 160px;
     background-color: white;
 
     .imgBox {
+      border-radius: 4px;
       height: 120px;
       width: 100%;
       background-color: #A0B4C0;

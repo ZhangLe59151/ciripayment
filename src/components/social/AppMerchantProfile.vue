@@ -72,6 +72,7 @@ export default {
     width: 80px;
     margin: 10px 0 0 16px;
     background-color: #87929D;
+    border-radius: 4px;
   }
 
 }
