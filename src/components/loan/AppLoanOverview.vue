@@ -1,6 +1,5 @@
 <template>
   <div
-    v-if="!loanProfile || Object.keys(loanProfile).length === 0"
     class="app-loan-overview"
   >
     <div class="banner">
@@ -71,169 +70,14 @@
       </el-form>
     </div>
   </div>
-  <div
-    v-else
-    class="app-loan-overview"
-  >
-    <div class="loan-applied-wrapper">
-      <div>
-        <van-row style="margin-bottom: 14px;"
-          type="flex"
-          justify="space-between"
-        >
-          <van-col
-            class="loan-heading"
-            span="12"
-          >{{$t("AppLoanOverview.yourApplication")}}</van-col>
-          <van-col :class="formatStatus(loanProfile.status).color +' loan-status'">{{formatStatus(loanProfile.status).label}}</van-col>
-        </van-row>
-      </div>
-      <div>
-        <van-row
-          class="loan-details"
-          type="flex"
-          justify="space-between"
-        >
-          <van-col
-            class="label"
-            span="7"
-          >{{$t("AppLoanOverview.applicationID")}}</van-col>
-          <van-col
-            class="info"
-            span="17"
-          >{{loanProfile.applicationId}}</van-col>
-        </van-row>
-
-        <van-row
-          class="loan-details"
-          type="flex"
-          justify="space-between"
-        >
-          <van-col
-            class="label"
-            span="12"
-          >{{$t("AppLoanOverview.applicationTime")}}</van-col>
-          <van-col
-            class="info"
-            span="12"
-          >{{formatTime(loanProfile.createTime,true)}}</van-col>
-        </van-row>
-
-        <van-row v-if="String(loanProfile.status) === '0'"
-                 class="loan-details"
-                 type="flex"
-                 justify="space-between"
-        >
-          <van-col
-            class="label"
-            span="12"
-          >{{$t("AppLoanOverview.applicantPhone")}}</van-col>
-          <van-col
-            class="info"
-            span="12"
-          >{{loanProfile.phoneNumber}}</van-col>
-        </van-row>
-
-        <van-row v-if="String(loanProfile.status) !== '0'"
-                 class="loan-details"
-                 type="flex"
-                 justify="space-between"
-        >
-          <van-col
-            class="label"
-            span="12"
-          >{{$t("AppLoanOverview.applicant")}}</van-col>
-          <van-col
-            class="info"
-            span="12"
-          >{{loanProfile.applicant}}</van-col>
-        </van-row>
-
-        <van-row v-if="String(loanProfile.status) !== '2'"
-          class="loan-details"
-          type="flex"
-          justify="space-between"
-        >
-          <van-col
-            class="label"
-            span="12"
-          >{{$t("AppLoanOverview.applicationAmount")}}</van-col>
-          <van-col
-            class="info"
-            span="12"
-          >{{formatCurrency(loanProfile.amount)}} {{$store.state.currency}}</van-col>
-        </van-row>
-
-<!--        Only If APPROVED-->
-        <van-row v-if="String(loanProfile.status) === '1'"
-                 class="loan-details"
-                 type="flex"
-                 justify="space-between"
-        >
-          <van-col
-            class="label"
-            span="12"
-          >{{$t("AppLoanOverview.interestRate")}}</van-col>
-          <van-col
-            class="info"
-            span="12"
-          >{{loanProfile.loanInterestRate}}</van-col>
-        </van-row>
-        <van-row v-if="String(loanProfile.status) === '1'"
-                 class="loan-details"
-                 type="flex"
-                 justify="space-between"
-        >
-          <van-col
-            class="label"
-            span="12"
-          >{{$t("AppLoanOverview.loanTerm")}}</van-col>
-          <van-col
-            class="info"
-            span="12"
-          >{{loanProfile.loanTerm}}</van-col>
-        </van-row>
-        <van-row v-if="String(loanProfile.status) === '1'"
-                 class="loan-details"
-                 type="flex"
-                 justify="space-between"
-        >
-          <van-col
-            class="label"
-            span="12"
-          >{{$t("AppLoanOverview.repaymentDate")}}</van-col>
-          <van-col
-            class="info"
-            span="12"
-          >{{formatTime(loanProfile.firstRepaymentDate)}}</van-col>
-        </van-row>
-
-      </div>
-      <app-loan-result-msg :status="String(loanProfile.status)"/>
-      <van-button
-        v-if="$route.query.justSubmitted"
-        size="small"
-        class="back-to-home-btn bottom-btn"
-        @click="$router.push({name: 'Home'})"
-      >{{$t("AppLoanOverview.submittedBack")}}</van-button>
-      <van-popup
-        v-model="showPopUp"
-        class="success-popup"
-        position="top"
-        :overlay="false"
-      >{{$t("AppLoanOverview.submittedNotification")}}</van-popup>
-    </div>
-  </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import AppLoanResultMsg from "@/components/loan/AppLoanResultMsg";
 import util from "@/util";
 
 export default {
   name: "AppLoanOverview",
-  components: { AppLoanResultMsg },
   data() {
     return {
       showPopUp: false,
@@ -271,19 +115,18 @@ export default {
       if (!this.OTPVerified) {
         this.$router.push({
           name: "LoginPage",
-          query: { to: "EnterLoanInfo" }
+          query: { to: "EnterLoanInfo", origin: this.$route.query.origin }
         });
         return false;
       }
       this.$api.verifyLoanApplyAble().then(res => {
         if (res.data.code === 200) {
-          (res.data.data.verifyResult) ? this.$router.push({ name: "EnterLoanInfo" })
+          (res.data.data.verifyResult) ? this.$router.push({ name: "EnterLoanInfo", origin: this.$route.query.origin })
             : this.$router.push({ name: "LoanAmountExceedLimitError" });
         } else {
           this.$notify(res.data.msg);
         }
       });
-      // this.$router.push({ name: (parseInt(this.creditLimit) < this.$store.state.minBusinessWorthForLoan) ? "LoanAmountExceedLimitError" : "EnterLoanInfo" });
     },
     formatStatus(loanStatus) {
       return this.merchantApplyingChannelStatus.filter(

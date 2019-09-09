@@ -1,14 +1,20 @@
 <template>
   <div class="app-loan-header">
     <div class="title">
-      {{$t("LoanTitle")}}
+      {{this.title}}
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "AppLoanHeader"
+  name: "AppLoanHeader",
+  props: {
+    title: {
+      type: String,
+      default: "Loan"
+    }
+  }
 };
 </script>
 
@@ -17,8 +23,9 @@ export default {
   position: absolute;
   top: 10px;
   font-size: 20px;
-  line-height: 32px;
-  color: #ffffff;
+  font-weight: bold;
+  line-height: 20px;
+  color: #2F3941;
   display: inline-block;
 }
 

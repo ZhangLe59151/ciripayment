@@ -167,68 +167,19 @@ export default {
     onDelete() {
       this.value = this.value.slice(0, this.value.length - 1);
     },
-
-    // this is for VERIFIED account
-    handleVerifyOtpVerifiedAccount() {
-      console.log("on input");
-      var otpCodeErrorMessage =
-        "Incorrect OTP. Please double check and try again.";
-      if (this.value.length === 6) {
-        console.log("begin verify");
-        this.$api
-          .verifyOtp({
-            phoneNumber:
-              this.$store.state.userInfo.nationalCode +
-              this.$store.state.userInfo.phone,
-            otpCode: this.value
-          })
-          .then(res => {
-            if (res.data.code === 200) {
-              // Verified OTP
-              this.$store.commit("OTPVerified");
-              /*
-              // check password
-              this.$api
-                .checkPasswordExistence({
-                  params: {
-                    phoneNumber: this.form.applicantPhoneNumber
-                  }
-                })
-                .then(res => {
-                  this.$router.push({
-                    name:
-                      res.data.code === 10050
-                        ? "Home"
-                        : "Home"
-                  });
-                });
-                */
-              // TODO get Home information
-              const to = this.$route.query.to;
-              this.$api.getHomePageInfo().then(res => {
-                if (res.data.code === 200) {
-                  // check credit
-                  let creditLimit = res.data.data.creditLimit;
-                  this.$store.commit("InitCredit", creditLimit);
-                  const hasLoan = res.data.data.hasLoan;
-                  // if already got loan, move to Loan result page instead of Loan Form
-                  if (hasLoan && to === "EnterLoanInfo") {
-                    this.$router.push({ name: "Loan" });
-                    return false;
-                  }
-                }
-              });
-              this.$router.push(to ? { name: to } : { name: "Home" });
-            } else {
-              this.$notify({
-                message: otpCodeErrorMessage,
-                duration: 1000
-              });
-            }
-          });
-      }
+    checkIfCanApplyLoan() {
+      this.$api.verifyLoanApplyAble().then(res => {
+        if (res.data.code === 200) {
+          res.data.data.verifyResult
+            ? this.$router.push({ name: "EnterLoanInfo", query: this.$route.query })
+            : this.$router.push({
+              name: "LoanAmountExceedLimitError"
+            });
+        } else {
+          this.$notify(res.data.msg);
+        }
+      });
     },
-
     // this is for UN-VERIFIED account
     handleVerifyOtpUnverifiedAccount() {
       var otpCodeErrorMessage =
@@ -252,7 +203,6 @@ export default {
             // Verify OTP success
             this.$store.commit("OTPVerified");
             this.$analytics.setUserId(res.data.data.uid);
-            // TODO get Home information
             let to = this.$route.query.to;
             // If first time, then go to personal question
             if (this.isFirst === "Yes" && this.deviceType === "APP") {
@@ -263,29 +213,31 @@ export default {
               });
               return false;
             }
-            // If user come from Loan page
+            // If user what to apply loan
             if (to === "EnterLoanInfo") {
-              this.$api.getHomePageInfo().then(res => {
+              this.$api.getLatestLoan().then(res => {
                 if (res.data.code === 200) {
                   // check if user already has loan
-                  const hasLoan = res.data.data.hasLoan;
+                  const latestLoan = res.data.data;
                   // if already got loan, move to Loan result page instead of Loan Form
-                  if (hasLoan && ["EnterLoanInfo"].includes(to)) {
-                    this.$router.push({ name: "Loan" });
-                    return false;
-                  }
-                  // else- check credit limit to see if he can apply loan
-                  this.$api.verifyLoanApplyAble().then(res => {
-                    if (res.data.code === 200) {
-                      res.data.data.verifyResult
-                        ? this.$router.push({ name: "EnterLoanInfo" })
-                        : this.$router.push({
-                          name: "LoanAmountExceedLimitError"
-                        });
+                  if (latestLoan) {
+                    // If entry from tab, go to loan management history
+                    if (!this.$route.query.origin) {
+                      this.$router.push({ name: "Loan" });
+                      return false;
                     } else {
-                      this.$notify(res.data.msg);
+                      // else- entry from banner, check if latest loan is pending or approved
+                      if ([0, 1].includes(latestLoan.status)) {
+                        this.$router.push({ name: "LoanApplicationResult", query: this.$route.query });
+                        return false;
+                      }
+                      // if latest loan is rejected or repaid
+                      this.checkIfCanApplyLoan();
+                      return false;
                     }
-                  });
+                  }
+                  // else- not apply before - check credit limit to see if he can apply loan
+                  this.checkIfCanApplyLoan();
                 }
               });
               return false;

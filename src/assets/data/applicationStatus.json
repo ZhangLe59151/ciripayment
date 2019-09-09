@@ -1,0 +1,38 @@
+[
+  {
+    "value": "-1",
+    "name": "default",
+    "label": "N/A",
+    "color": "gray"
+  },
+  {
+    "value": "0",
+    "name": "pending",
+    "label": "UNDER REVIEW",
+    "color": "blue"
+  },
+  {
+    "value": "1",
+    "name": "approved",
+    "label": "APPROVED",
+    "color": "green"
+  },
+  {
+    "value": "2",
+    "name": "rejected",
+    "label": "REJECTED",
+    "color": "red"
+  },
+  {
+    "value": "3",
+    "name": "repaid",
+    "label": "REPAID",
+    "color": "green"
+  },
+  {
+    "value": "4",
+    "name": "on_hold",
+    "label": "ON HOLD",
+    "color": "gray"
+  }
+]

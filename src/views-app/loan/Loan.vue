@@ -1,6 +1,6 @@
 <template>
   <div class="app-loan">
-    <loan-app-loan-header v-if="!$route.query.origin" />
+    <loan-app-loan-header v-if="!$route.query.origin" :title="(showLoanOverview)?'Loan':'Loan Application History'"/>
     <van-nav-bar
       v-else
       :left-arrow="!!$route.query.origin"
@@ -11,10 +11,11 @@
         slot="title"
         class="header-title"
       >
-        {{$t("LoanTitle")}}
+        Loan
       </div>
     </van-nav-bar>
-    <loan-app-loan-overview />
+    <loan-app-loan-overview v-if="showLoanEnterAmount"></loan-app-loan-overview>
+    <loan-app-loan-management v-else></loan-app-loan-management>
     <app-tab-bar
       :active="1"
       v-if="!$route.query.origin && !$route.query.justSubmitted "
@@ -26,11 +27,32 @@
 <script>
 export default {
   name: "Loan",
+  data() {
+    return {
+      noLoan: true,
+      showLoanEnterAmount: true,
+    }
+  },
+  computed: {
+    showLoanOverview() {
+      return !this.noLoan || this.$route.query.reApply;
+    }
+  },
+  watch: {
+    showLoanOverview(newv, oldv) {
+      console.log("current", newv);
+    }
+  },
   created() {
     if (this.$store.state.OTPVerified) {
-      this.$api.getLoanProfile().then(res => {
+      // else check if have loan
+      this.$api.getLatestLoan().then(res => {
         if (res.data.code === 200) {
-          this.$store.commit("initLoanProfile", res.data.data);
+          if (res.data.data) {
+            this.noLoan = false;
+            this.showLoanEnterAmount = false;
+            this.$store.commit("initLoanProfile", res.data.data);
+          }
         }
       });
     }

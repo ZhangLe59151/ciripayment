@@ -2,7 +2,7 @@
   <div class="app-home">
     <home-app-home-header :info.sync="records" />
 
-    <home-app-home-loan />
+    <home-app-home-loan :hasLoan.sync="hasLoan"/>
     <home-app-home-credit :creditLimit.sync="creditLimit" />
     <home-app-home-lucky />
 

@@ -111,8 +111,14 @@ export default {
   applyLoan(params) {
     return Vue.axios.post(API_VERSION_V1 + "/loan-application?loanAmount", params);
   },
-  getLoanProfile() {
+  getLatestLoan() {
     return Vue.axios.get(API_VERSION_V1 + "/loan/view");
+  },
+  getLoanHistory() {
+    return Vue.axios.get(API_VERSION_V1 + "/loan/all");
+  },
+  getLoanById(params) {
+    return Vue.axios.get(API_VERSION_V1 + `/loan/id?id=${params}`);
   },
   getHomeInformation() {
     return Vue.axios.get(API_VERSION_V1 + "/information");
