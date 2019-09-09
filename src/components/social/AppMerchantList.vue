@@ -2,7 +2,7 @@
   <div class="appMerchantList">
     <div class="title">Merchants Similar To You</div>
     <div class="card" @click="viewDetail">
-      <img class="image" src="" />
+      <img class="imgBox" src="" />
       <div class="imgTitle">Little Thaus Co.</div>
       <div class="descriptText"><span class="iconfont iconretail" />128 Likes</div>
       <div class="descriptText"><span class="iconfont iconretail" />Retail Business</div>
@@ -14,15 +14,9 @@
 import { mapState } from "vuex";
 export default {
   name: "appMerchantList",
-  computed: {
-    ...mapState({
-      fortuneInfo: "fortuneInfo"
-    })
-  },
-
   methods: {
     viewDetail() {
-      this.$router.push({ name: "MerchantProfile" });
+      this.$emit('childByValue', true)
     }
   }
 };
@@ -41,13 +35,14 @@ export default {
   }
   
   .card {
-    margin: 4px 16px 4px 16px;
+    margin: 10px 16px 4px 16px;
     height: 191px;
     width: 160px;
     background-color: white;
 
-    .image {
+    .imgBox {
       height: 120px;
+      width: 100%;
       background-color: #A0B4C0;
     }
 

@@ -1,14 +1,26 @@
 <template>
   <div class="socialHome">
     <app-common-header :title="$t('Social.headTitle')" />
-    <social-app-sign-in-profile />
-    <social-app-merchant-list />
+    <social-app-sign-in-profile v-if="!showDetail" />
+    <social-app-merchant-profile v-if="showDetail" />
+    <social-app-merchant-list v-on:childByValue="childByValue" />
   </div>
 </template>
 
 <script>
 export default {
-  name: "socialHome"
+  name: "socialHome",
+  data() {
+    return {
+      showDetail: false
+    }
+  }, 
+  methods: {
+    childByValue: function (childValue) {
+      this.showDetail = childValue
+    }
+  }
+  
 };
 </script>
 

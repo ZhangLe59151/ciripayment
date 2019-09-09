@@ -1,8 +1,17 @@
 <template>
   <div class="appMerchantProfile">
+    <img class="bigImg" />
     <div class="merchantTitle">Gaggan Bangkok</div>
-    <div class="spanBox" >Resaurant</div>
-    <div class="spanBox" >888 Likes</div>
+    <van-row>
+      <van-col span="12" class="spanBox" >Resaurant</van-col>
+      <van-col span="12" class="spanBox" >888 Likes</van-col>
+    </van-row>
+    <div class="imgTitle">Your Photos</div>
+    <van-row>
+      <img class="imgBox" />
+      <img class="imgBox" />
+      <img class="imgBox" />
+    </van-row>
   </div>
 </template>
 
@@ -17,12 +26,6 @@ export default {
     })
   },
   methods: {
-    signIn() {
-      this.$router.push({
-          name: "LoginPage",
-          query: { to: "SocialHome" }
-        });
-    }
   }
 };
 </script>
@@ -34,6 +37,11 @@ export default {
   width: 100%;
   background-color: white;
 
+  .bigImg{
+    height: 199px;
+    width: 360px;
+  }
+
   .merchantTitle {
     color: black;
     font-size: 16px;
@@ -43,7 +51,8 @@ export default {
   }
 
   .spanBox {
-    width: 180px;
+    margin: 30px 0 0 0;
+    width: 50%;
     height: 40px;
     border: 1px solid #EFF6FF;
     text-align: center;
@@ -52,14 +61,18 @@ export default {
     color: #87929D;
   }
 
-  .signInBtn {
-    position: absolute;
-    margin: 128px 16px 20px 16px;
-    height: 40px;
-    width: 328px;
-    background-color: #ffa702;
-    color: #052d46;
+  .imgTitle {
+    color: #2F3941;
     font-size: 14px;
+    margin: 10px 16px 0 16px;
   }
+
+  .imgBox {
+    height: 80px;
+    width: 80px;
+    margin: 10px 0 0 16px;
+    background-color: #87929D;
+  }
+
 }
 </style>
