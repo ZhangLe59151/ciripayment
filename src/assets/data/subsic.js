@@ -3,96 +3,118 @@ export var SUBSIC =
      "subsic-1": [
        {
          "id": "1",
-         "name": "Food and Beverage"
+         "enName": "Food and Beverage",
+         "thName": "าหารและเครื่องดื่ม"
        },
        {
          "id": "2",
-         "name": "Fashion and Clothing"
+         "enName": "Fashion and Clothing",
+         "thName": "เสื้อผ้าและแฟชั่น"
        },
        {
          "id": "3",
-         "name": "Home and Garden"
+         "enName": "Home and Garden",
+         "thName": "บ้านและสวน"
        },
        {
          "id": "4",
-         "name": "Hardware and Building"
+         "enName": "Hardware and Building",
+         "thName": "อุปกรณ์และสิ่งก่อสร้าง"
        },
        {
          "id": "5",
-         "name": "General Merchandise"
+         "enName": "General Merchandise",
+         "thName": "จัดซื้อทั่วไป"
        },
        {
          "id": "6",
-         "name": "Automotive"
+         "enName": "Automotive",
+         "thName": "ยานพาหนะ"
        },
        {
          "id": "7",
-         "name": "Electronics and Appliances"
+         "enName": "Electronics and Appliances",
+         "thName": "อิเลกทรอนิกส์และอุปกรณ์"
        },
        {
          "id": "8",
-         "name": "Specialty, Hobby and Craft"
+         "enName": "Specialty, Hobby and Craft",
+         "thName": "ความเชี่ยวชาญเฉพาะทางงานอดิเรกและงานฝีมือ"
        },
        {
          "id": "9",
-         "name": "Health and Wellness"
+         "enName": "Health and Wellness",
+         "thName": "สุขภาพ"
        }
      ],
 
      "subsic-2": [
        {
          "id": "10",
-         "name": "Healthcare Services"
+         "enName": "Healthcare Services",
+         "thName": "บริการดูแลสุขภาพ"
        },
        {
          "id": "11",
-         "name": "Veterinary and Other Pet Services"
+         "enName": "Veterinary and Other Pet Services",
+         "thName": "สัตวแพทย์และบริการดูแลสัตว์เลี้ยงอื่นๆ"
        },
        {
          "id": "12",
-         "name": "Repairs"
+         "enName": "Repairs",
+         "thName": "การซ่อมแซม"
        },
        {
          "id": "13",
-         "name": "IT Services"
+         "enName": "IT Services",
+         "thName": "บริการไอที"
        },
        {
          "id": "14",
-         "name": "Lifestyle Services"
+         "enName": "Lifestyle Services",
+         "thName": "บริการไลฟ์สไตล์"
        },
        {
          "id": "15",
-         "name": "Cleaning and Waste Management"
+         "enName": "Cleaning and Waste Management",
+         "thName": "ทำความสะอาดและการจัดการขยะ"
        },
        {
          "id": "16",
-         "name": "Landscape and Agriculture"
+         "enName": "Landscape and Agriculture",
+         "thName": "ภูมิทัศน์และการเกษตร"
        },
        {
          "id": "17",
-         "name": "Automotive Rental and Services"
+         "enName": "Automotive Rental and Services",
+         "thName": "บริการเช่ายานพาหนะ"
        },
        {
          "id": "18",
-         "name": "Administrative and Business Services"
+         "enName": "Administrative and Business Services",
+         "thName": "ธุรการและจัดการธุรกิจ"
        },
        {
          "id": "19",
-         "name": "Entertainment"
+         "enName": "Entertainment",
+         "thName": "บันเทิง"
        }
      ],
      "subsic-3": [
        {
          "id": "20",
-         "name": "Construction and General Contractors"
+         "enName": "Construction and General Contractors",
+         "thName": "การก่อสร้างและรับเหมาทั่วไป"
        },
        {
          "id": "21",
-         "name": "Digital Media, Publishing and Communications"
+         "enName": "Digital Media, Publishing and Communications",
+         "thName": "สื่อดิจิทัลสื่อสิ่งพิมพ์และการสื่อสาร"
        },
        {
          "id": "22",
-         "name": "Manufacturing"
+         "enName": "Manufacturing",
+         "thName": "อุตสาหกรรม"
        }
      ]
    }

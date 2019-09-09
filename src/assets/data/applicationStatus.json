@@ -2,37 +2,43 @@
   {
     "value": "-1",
     "name": "default",
-    "label": "N/A",
+    "enLabel": "N/A",
+    "thLabel": "N/A",
     "color": "gray"
   },
   {
     "value": "0",
     "name": "pending",
-    "label": "UNDER REVIEW",
+    "enLabel": "UNDER REVIEW",
+    "thLabel": "กำลังพิจารณา",
     "color": "blue"
   },
   {
     "value": "1",
     "name": "approved",
-    "label": "APPROVED",
+    "enLabel": "APPROVED",
+    "thLabel": "อนุมัติ",
     "color": "green"
   },
   {
     "value": "2",
     "name": "rejected",
-    "label": "REJECTED",
+    "enLabel": "REJECTED",
+    "thLabel": "ไม่อนุมัติ",
     "color": "red"
   },
   {
     "value": "3",
     "name": "repaid",
-    "label": "REPAID",
+    "enLabel": "REPAID",
+    "thLabel": "REPAID",
     "color": "green"
   },
   {
     "value": "4",
     "name": "on_hold",
-    "label": "ON HOLD",
+    "enLabel": "ON HOLD",
+    "thLabel": "ON HOLD",
     "color": "gray"
   }
 ]

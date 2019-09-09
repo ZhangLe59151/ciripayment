@@ -90,8 +90,6 @@ export default {
     ...mapState({
       creditLimit: state => state.credit.currentCreditLimit,
       loanProfile: state => state.loanProfile,
-      merchantApplyingChannelStatus: state =>
-        state.merchantApplyingChannelStatus,
       OTPVerified: "OTPVerified"
     })
   },
@@ -127,11 +125,6 @@ export default {
           this.$notify(res.data.msg);
         }
       });
-    },
-    formatStatus(loanStatus) {
-      return this.merchantApplyingChannelStatus.filter(
-        status => String(status.value) === String(loanStatus)
-      )[0];
     },
     formatTime(time, withHour = false) {
       return util.convertUTCTimeToBuddhistTime(time, withHour);

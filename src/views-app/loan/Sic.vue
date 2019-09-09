@@ -1,7 +1,7 @@
 <template>
   <div class="sic" style="min-height: 100vh;">
     <van-nav-bar
-      title="Business Category"
+      :title="$t('EnterLoanInfo.bizCat')"
       left-text=""
       left-arrow
       @click-left="$router.push({name: $route.query.origin, query: {flag: 'back', position: $route.query.position}})"
@@ -15,13 +15,13 @@
     >
       <div class="category">
         <span></span>
-        <span class="header-line">Select Business Category</span>
+        <span class="header-line">{{$t("EnterLoanInfo.SICtitle")}}</span>
       </div>
       <van-cell
         v-for="item in list"
         :key="item.id"
         title-class="list-item-title"
-        :title="item.name"
+        :title="item[`${language}Name`]"
         @click="handleClick(item)"
       >
         <van-icon
@@ -43,7 +43,8 @@ export default {
       list: SIC,
       loading: false,
       finished: false,
-      sic: ""
+      sic: "",
+      language: localStorage.getItem("lang") || "th"
     };
   },
 
@@ -59,7 +60,7 @@ export default {
         name: "MCC",
         query: {
           sicId: this.sic.id,
-          sicName: value.name,
+          sicName: value[`${this.language}Name`],
           position: this.$route.query.position,
           origin: this.$route.query.origin
         }

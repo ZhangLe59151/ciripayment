@@ -1,17 +1,10 @@
 <template>
   <div class="enter-loan-info">
     <van-nav-bar
-      title="Loan Application"
+      :title="$t('AppLoanOverview.headerTitle')"
       @click-left="handleDiscard"
       left-arrow
     />
-
-    <div class="heading">
-      <h1>{{$t("EnterLoanInfo.heading")}}</h1>
-      <div class="description">
-        {{$t("EnterLoanInfo.headingDesc")}}
-      </div>
-    </div>
 
     <el-form
       label-width="0px"
@@ -19,7 +12,7 @@
       ref="elForm"
       size="small"
       label-position="top"
-      style="width: 100%; margin-top: 32px;"
+      style="width: 100%;"
     >
       <el-card class="box-card">
         <!-- merchant information -->
@@ -621,6 +614,7 @@ export default {
 
   .box-card {
     padding: 10px;
+    box-shadow: none;
     // margin: 30px 10px;
   }
   .success-validator {

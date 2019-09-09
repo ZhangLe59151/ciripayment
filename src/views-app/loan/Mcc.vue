@@ -1,17 +1,17 @@
 <template>
   <div class="sic">
     <van-nav-bar
-      title="Business Category"
+      :title="$t('EnterLoanInfo.bizCat')"
       left-text=""
       left-arrow
-      right-text="Confirm"
+      :right-text="$t('Record.confirm')"
       @click-left="$router.back()"
       @click-right="onClickRight"
       :border="false"
     ></van-nav-bar>
     <div class="category">
       <div>
-        <span class="header-line">{{sicName}} > {{subsicName}} > {{mccName}}</span>
+        <span class="header-line">{{sicName}} > {{mccName}}</span>
       </div>
     </div>
     <van-list
@@ -20,9 +20,9 @@
     >
       <template v-for="item in list">
         <van-cell
-          v-if="item.name==selectedValue"
+          v-if="item[`${language}Name`]==selectedValue"
           :key="item.id"
-          :title="item.name"
+          :title="item[`${language}Name`]"
           title-class="selected-title"
           @click="handleClick(item)"
           right-icon="passed"
@@ -37,7 +37,7 @@
         <van-cell
           v-else
           :key="item.id"
-          :title="item.name"
+          :title="item[`${language}Name`]"
           @click="handleClick(item)"
           title-class="list-item-title"
           right-icon="passed"
@@ -54,6 +54,7 @@ import { SUBSIC as MCC } from "@/assets/data/subsic.js";
 export default {
   data() {
     return {
+      language: localStorage.getItem("lang") || "th",
       list: [],
       loading: false,
       finished: false,
@@ -81,8 +82,8 @@ export default {
     handleClick(value) {
       console.log(value);
       this.mccID = value.id;
-      this.mccName = value.name;
-      this.selectedValue = value.name;
+      this.mccName = value[`${this.language}Name`];
+      this.selectedValue = value[`${this.language}Name`];
     },
     pad(num, size) {
       var s = num + "";
@@ -91,7 +92,7 @@ export default {
     },
     onClickRight(value) {
       if (!this.mccID) {
-        this.$toast("please choose MCC first.");
+        this.$toast(this.$t("categoryErrorMsg"));
         return false;
       }
       this.$store.commit("UpdateForm", {

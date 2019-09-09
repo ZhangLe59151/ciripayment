@@ -1,7 +1,7 @@
 <template>
   <div class="sic">
     <van-nav-bar
-      title="Business Category"
+      :title="$t('EnterLoanInfo.bizCat')"
       left-text=""
       left-arrow
       @click-left="$router.back()"
@@ -20,7 +20,7 @@
         v-for="item in list"
         :key="item.id"
         title-class="list-item-title"
-        :title="item.name"
+        :title="item[`${language}Name`]"
         @click="handleClick(item)"
       >
         <van-icon
@@ -39,6 +39,7 @@ import { SUBSIC } from "@/assets/data/subsic.js";
 export default {
   data() {
     return {
+      language: localStorage.getItem("lang") || "th",
       list: [],
       loading: false,
       finished: false,
@@ -55,7 +56,7 @@ export default {
     handleClick(value) {
       console.log(value.id);
       this.subsicId = value.id;
-      this.subsicName = value.name;
+      this.subsicName = value[`${this.language}Name`];
       this.$router.push({
         name: "MCC",
         query: {

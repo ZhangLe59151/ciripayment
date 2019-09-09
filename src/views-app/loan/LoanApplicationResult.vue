@@ -22,7 +22,8 @@
               class="loan-heading"
               span="12"
             >{{$t("AppLoanOverview.yourApplication")}}</van-col>
-            <van-col :class="formatStatus(loanProfile.status).color +' loan-status'">{{formatStatus(loanProfile.status).label}}</van-col>
+            <van-col :class="formatStatus(loanProfile.status).color +' loan-status'">
+              {{formatStatus(loanProfile.status)[`${language}Label`]}}</van-col>
           </van-row>
         </div>
         <div>
@@ -167,7 +168,8 @@ export default {
   data() {
     return {
       showPopUp: false,
-      fetchedData: false
+      fetchedData: false,
+      language: localStorage.getItem("lang") || "th"
     };
   },
   computed: {

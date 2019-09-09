@@ -4,7 +4,7 @@
       <div>
         <i class="iconfont iconnext"></i>
         <van-row>
-          <van-col :class="formatStatus(loan.status).color +' loan-status'">{{formatStatus(loan.status).label}}</van-col>
+          <van-col :class="formatStatus(loan.status).color +' loan-status'">{{formatStatus(loan.status)[`${language}Label`]}}</van-col>
           <van-col class="loan-time" offset="1">{{formatTime(loan.createTime, true)}}</van-col>
         </van-row>
         <van-row class="loan-details">
@@ -46,7 +46,8 @@ export default {
   },
   data() {
     return {
-      fetchedData: false
+      fetchedData: false,
+      language: localStorage.getItem("lang") || "th"
     }
   },
   computed: {
