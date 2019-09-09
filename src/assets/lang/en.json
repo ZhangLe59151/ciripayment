@@ -261,5 +261,9 @@
     "title": "You’re offline.",
     "ins": "Check your internet connection and try again.",
     "button": "Refresh"
+  },
+  "Social": {
+    "title": "Connect your business to big opportunities.",
+    "joinBtnTitle": "Join The Community"
   }
 }
