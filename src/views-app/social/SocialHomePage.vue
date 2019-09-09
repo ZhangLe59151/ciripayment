@@ -8,12 +8,7 @@
 
 <script>
 export default {
-  name: "socialHome",
-  data() {
-    return {
-
-    };
-  }
+  name: "socialHome"
 };
 </script>
 
