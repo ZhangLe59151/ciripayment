@@ -39,7 +39,7 @@
             <van-button
               class="card"
               :style="{'backgroundColor': formClass[`classId${i+1}`][index].btnBgColor}"
-              @click="answer(0, fm.id, item)"
+              @click="answer(i, fm.id, item)"
             >{{ item }}
               <i
                 :class="formClass[`classId${i+1}`][index].iconName"
