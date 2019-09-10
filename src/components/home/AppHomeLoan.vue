@@ -14,9 +14,20 @@
 export default {
   name: "AppHomeLoan",
   computed: {},
+  props: {
+    showLoanOverview: {
+      default() {
+        return true;
+      }
+    }
+  },
   methods: {
     handleLoanClick() {
-      this.$router.push({ name: "Loan", query: { origin: "banner" } });
+      if (!this.showLoanOverview) {
+        this.$router.push({ name: "LoanApplicationResult", query: { origin: "banner" }, params: { id: "latest" } });
+        return false;
+      }
+      this.$router.push({ name: "Loan", query: { origin: "banner", reApply: "true" } });
     }
   }
 };

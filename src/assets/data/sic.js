@@ -1,14 +1,17 @@
 export var SIC = [
   {
     "id": "1",
-    "name": "Retail Store (I sell...)"
+    "enName": "Retail Store (I sell...)",
+    "thName": "ร้านค้าปลีก (ฉันขาย...)"
   },
   {
     "id": "2",
-    "name": "Services (I provide...)"
+    "enName": "Services (I provide...)",
+    "thName": "บริการ (ฉันให้บริการ...)"
   },
   {
     "id": "3",
-    "name": "Production and Manufacturing (I create...)"
+    "enName": "Production and Manufacturing (I create...)",
+    "thName": "การผลิตและอุตสาหกรรม (ฉันผลิต...)"
   }
 ]

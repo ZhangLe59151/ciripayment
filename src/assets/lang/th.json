@@ -1,7 +1,8 @@
 {
-  "marketingServiceErrorMsg": "There are errors in your form. Please correct them before trying again.",
+  "marketingServiceErrorMsg": "มีข้อผิดพลาดในคำขอของคุณ โปรดแก้ไขให้ถูกต้องแล้วลองอีกครั้ง",
   "OTPErrorMsg": "ขอรหัสOTPถี่เกินไปโปรดรอสักครู่แล้วลองอีกครั้ง",
   "missingDocumentErrorMsg": "เอกสารไม่ครบโปรดอัปโหลดเอกสารที่จำเป็นทั้งหมดก่อนดำเนินการขั้นตอนถัดไป",
+  "categoryErrorMsg": "Please choose a category first",
   "Tabbars": {
     "Home": "หน้าหลัก",
     "Loan": "กู้ยืมเงิน",
@@ -53,6 +54,8 @@
   },
   "AppLoanOverview": {
     "headerTitle": "คำขอกู้ยืมเงิน",
+    "managementTitle": "Loan Application History",
+    "resultTitle": "Application Details",
     "bannerTitle": "รับเงินด่วนในไม่กี่นาที!",
     "lowerRate": "ดอกเบี้ยต่ำกว่า",
     "higherLimit": "วงเงินสูงกว่า",
@@ -108,6 +111,7 @@
     "subTitle2": "BUSINESS INFORMATION",
     "bizNameEng": "ชื่อร้านค้า",
     "bizCat": "ประเภทธุรกิจ",
+    "SICtitle": "Select Business Category",
     "selectCat": "เลือกประเภท",
     "bizAdd": "ที่ตั้งธุรกิจ/ร้านค้า",
     "province": "Province",

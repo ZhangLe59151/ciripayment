@@ -43,7 +43,6 @@ export default new Vuex.Store({
     settings: {
       lang: storage.getItem("lang")
     },
-    minBusinessWorthForLoan: 120000,
     allowBack: true,
     form: {},
     userInfo: {},
@@ -56,38 +55,7 @@ export default new Vuex.Store({
     nationalCode: require("@/assets/data/nationalCode.json"),
     reg: require("@/assets/reg/regEx.js").regEx,
 
-    merchantApplyingChannelStatus: [
-      {
-        value: "-1",
-        name: "default",
-        label: "N/A",
-        color: "gray"
-      },
-      {
-        value: "0",
-        name: "pending",
-        label: "UNDER REVIEW",
-        color: "blue"
-      },
-      {
-        value: "1",
-        name: "approved",
-        label: "APPROVED",
-        color: "green"
-      },
-      {
-        value: "2",
-        name: "rejected",
-        label: "REJECTED",
-        color: "red"
-      },
-      {
-        value: "4",
-        name: "on_hold",
-        label: "ON HOLD",
-        color: "gray"
-      }
-    ],
+    merchantApplyingChannelStatus: require("@/assets/data/applicationStatus.json"),
 
     maxFileSize: 8, // MB
 
@@ -99,8 +67,8 @@ export default new Vuex.Store({
         : "/api/v1/self-onboarding/image/upload",
     merchantProfile: {},
     recommendChannelsStore: [],
-    completeLoanProfile: false,
     loanProfile: {},
+    loanApplicationHistory: [],
     todayDate: "",
     fortuneInfo: storage.getItem("fortuneInfo")
       ? JSON.parse(storage.getItem("fortuneInfo"))
@@ -155,6 +123,7 @@ export default new Vuex.Store({
       util.removeCookies("SSID");
       state.userInfo.creditLimit = null;
       state.loanProfile = {};
+      state.loanApplicationHistory = [];
       state.credit = {};
       state.OTPVerified = false;
       state.logInWithPassword = false;
@@ -170,6 +139,7 @@ export default new Vuex.Store({
         "logInWithPassword",
         "recommendChannelsStore",
         "loanProfile",
+        "loanApplicationHistory",
         "fortuneInfo",
         "application",
         "userInfo",
@@ -287,8 +257,9 @@ export default new Vuex.Store({
       state.loanProfile = Object.assign(state.loanProfile, updateLoanProfile);
       storage.setItem("loanProfile", JSON.stringify(state.loanProfile));
     },
-    CompleteLoanProfile(state) {
-      state.completeLoanProfile = true;
+    initLoanApplicationHistory(state, loanApplicationHistory) {
+      state.loanApplicationHistory = loanApplicationHistory;
+      storage.setItem("loanApplicationHistory", JSON.stringify(loanApplicationHistory));
     },
     SaveFortuneInfo(state, updateFortuneInfo) {
       state.fortuneInfo = Object.assign(state.fortuneInfo, updateFortuneInfo);

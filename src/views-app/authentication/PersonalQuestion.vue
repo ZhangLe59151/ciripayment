@@ -39,7 +39,7 @@
             <van-button
               class="card"
               :style="{'backgroundColor': formClass[`classId${i+1}`][index].btnBgColor}"
-              @click="answer(0, fm.id, item)"
+              @click="answer(i, fm.id, item)"
             >{{ item }}
               <i
                 :class="formClass[`classId${i+1}`][index].iconName"
@@ -163,7 +163,7 @@ export default {
         this.$router.push({
           name: "PersonalQuestion",
           params: { id: 1 },
-          query: { to: to }
+          query: this.$route.query
         });
         this.tab1 = true;
         this.tabActive = 1;
@@ -171,39 +171,13 @@ export default {
         this.$router.push({
           name: "PersonalQuestion",
           params: { id: 2 },
-          query: { to: to }
+          query: this.$route.query
         });
         this.tab1 = this.tab2 = true;
         this.tabActive = 2;
       } else {
         if (this.allSkip) {
           this.$store.commit("UnfirstLaunch");
-          if (to === "EnterLoanInfo") {
-            this.$api.getHomePageInfo().then(res => {
-              if (res.data.code === 200) {
-                // check if user already has loan
-                const hasLoan = res.data.data.hasLoan;
-                // if already got loan, move to Loan result page instead of Loan Form
-                if (hasLoan && ["EnterLoanInfo"].includes(to)) {
-                  this.$router.push({ name: "Loan" });
-                  return false;
-                }
-                // else- check credit limit to see if he can apply loan
-                this.$api.verifyLoanApplyAble().then(res => {
-                  if (res.data.code === 200) {
-                    res.data.data.verifyResult
-                      ? this.$router.push({ name: "EnterLoanInfo" })
-                      : this.$router.push({
-                        name: "LoanAmountExceedLimitError"
-                      });
-                  } else {
-                    this.$notify(res.data.msg);
-                  }
-                });
-              }
-            });
-            return false;
-          }
           this.$router.push(to ? { name: to } : { name: "Home" });
         } else {
           this.sendAnswer();
@@ -218,32 +192,6 @@ export default {
           this.$store.commit("UnfirstLaunch");
           this.questionPage = false;
           setTimeout(() => {
-            if (to === "EnterLoanInfo") {
-              this.$api.getHomePageInfo().then(res => {
-                if (res.data.code === 200) {
-                  // check if user already has loan
-                  const hasLoan = res.data.data.hasLoan;
-                  // if already got loan, move to Loan result page instead of Loan Form
-                  if (hasLoan && ["EnterLoanInfo"].includes(to)) {
-                    this.$router.push({ name: "Loan" });
-                    return false;
-                  }
-                  // else- check credit limit to see if he can apply loan
-                  this.$api.verifyLoanApplyAble().then(res => {
-                    if (res.data.code === 200) {
-                      res.data.data.verifyResult
-                        ? this.$router.push({ name: "EnterLoanInfo" })
-                        : this.$router.push({
-                          name: "LoanAmountExceedLimitError"
-                        });
-                    } else {
-                      this.$notify(res.data.msg);
-                    }
-                  });
-                }
-              });
-              return false;
-            }
             this.$router.push(to ? { name: to } : { name: "Home" });
           }, 1000);
         }
@@ -257,7 +205,7 @@ export default {
       this.$router.push({
         name: "PersonalQuestion",
         params: { id: answerid },
-        query: { to: to }
+        query: this.$route.query
       });
       if (this.tabActive === 2) {
         this.sendAnswer();
@@ -266,7 +214,7 @@ export default {
         this.$router.replace({
           name: "PersonalQuestion",
           params: { id: this.tabActive },
-          query: { to: to }
+          query: this.$route.query
         });
       }
     }

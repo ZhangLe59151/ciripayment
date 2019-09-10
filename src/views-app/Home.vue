@@ -2,7 +2,7 @@
   <div class="app-home">
     <home-app-home-header :info.sync="records" />
 
-    <home-app-home-loan />
+    <home-app-home-loan :showLoanOverview = "showLoanOverview"/>
     <home-app-home-credit :creditLimit.sync="creditLimit" />
     <home-app-home-lucky />
 
@@ -20,12 +20,12 @@ export default {
 
   data() {
     return {
-      hasLoan: false,
       isPersonalQ: false,
       records: {
         income: 0,
         expense: 0
       },
+      showLoanOverview: true,
       creditLimit: {
         remaining: -1
       }
@@ -33,7 +33,6 @@ export default {
   },
   computed: {
     ...mapState({
-      applicantPhoneNumber: state => userInfo.applicantPhoneNumber,
       firstLaunch: "firstLaunch"
     })
   },
@@ -45,12 +44,17 @@ export default {
       this.$api.getHomePageInfo().then(res => {
         if (res.data.code === 200) {
           const data = res.data.data;
-          this.hasLoan = data.hasLoan;
+          // records
           this.records.income = util.fmoney(data.merchantRecordSum.incomeSum);
           this.records.expense = util.fmoney(
             data.merchantRecordSum.expensesSum
           );
-
+          // loan
+          if (data.hasLoan) {
+            // check if they got loan application approved or pending
+            this.showLoanOverview = ![0, 1].includes(data.loanDetailVo.status);
+          }
+          // credit
           this.creditLimit = data.creditLimit;
           this.$store.commit("SaveFortuneInfo", {
             fortuneResult: data.fortuneResult

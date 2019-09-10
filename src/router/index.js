@@ -139,6 +139,14 @@ const AppRouteArr = [
     }
   },
   {
+    path: "/loan-result/:id",
+    name: "LoanApplicationResult",
+    component: () => import("@/views-app/loan/LoanApplicationResult.vue"),
+    meta: {
+      title: "LoanResult"
+    }
+  },
+  {
     path: "/loan-exceed-limit",
     name: "LoanAmountExceedLimitError",
     component: () => import("@/views-app/loan/LoanAmountExceedLimitError.vue"),

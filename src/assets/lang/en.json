@@ -2,6 +2,7 @@
   "marketingServiceErrorMsg": "There are errors in your form. Please correct them before trying again.",
   "OTPErrorMsg": "OTP request too frequent. Please wait for a minute and try again.",
   "missingDocumentErrorMsg": "Missing documents. Please upload all the necessary documents before proceeding to the next step.",
+  "categoryErrorMsg": "Please choose a category first",
   "Tabbars": {
     "Home": "Home",
     "Loan": "Loan",
@@ -53,6 +54,8 @@
   },
   "AppLoanOverview": {
     "headerTitle": "Loan Application",
+    "managementTitle": "Loan Application History",
+    "resultTitle": "Application Details",
     "bannerTitle": "Get instant cash in minutes!",
     "lowerRate": "Lower Rate",
     "higherLimit": "Higher Limit",
@@ -108,6 +111,7 @@
     "subTitle2": "BUSINESS INFORMATION",
     "bizNameEng": "Business Name",
     "bizCat": "Business Category",
+    "SICtitle": "Select Business Category",
     "selectCat": "Select Category",
     "bizAdd": "Business Address",
     "province": "Province",

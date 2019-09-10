@@ -1,6 +1,7 @@
 <template>
   <div class="app-loan">
-    <loan-app-loan-header v-if="!$route.query.origin" />
+    <loan-app-loan-header v-if="!$route.query.origin"
+                          :title="(showLoanOverview)?$t('Tabbars.Loan'):$t('AppLoanOverview.managementTitle')"/>
     <van-nav-bar
       v-else
       :left-arrow="!!$route.query.origin"
@@ -11,10 +12,11 @@
         slot="title"
         class="header-title"
       >
-        {{$t("LoanTitle")}}
+        {{(showLoanOverview)?$t('Tabbars.Loan'):$t('AppLoanOverview.resultTitle')}}
       </div>
     </van-nav-bar>
-    <loan-app-loan-overview />
+    <loan-app-loan-overview v-if="showLoanOverview"></loan-app-loan-overview>
+    <loan-app-loan-management v-else :reApply.sync="reApply"></loan-app-loan-management>
     <app-tab-bar
       :active="1"
       v-if="!$route.query.origin && !$route.query.justSubmitted "
@@ -26,15 +28,29 @@
 <script>
 export default {
   name: "Loan",
+  data() {
+    return {
+      noLoan: true,
+      reApply: false
+    }
+  },
+  computed: {
+    showLoanOverview() {
+      return this.noLoan || this.reApply || this.$route.query.reApply;
+    }
+  },
   created() {
     if (this.$store.state.OTPVerified) {
-      this.$api.getLoanProfile().then(res => {
+      // else check if have loan
+      this.$api.getLatestLoan().then(res => {
         if (res.data.code === 200) {
-          this.$store.commit("initLoanProfile", res.data.data);
+          if (res.data.data) {
+            this.noLoan = false;
+            this.$store.commit("initLoanProfile", res.data.data);
+          }
         }
       });
     }
-    // this.$store.commit("fetchDataFromLocal");
   }
 };
 </script>
@@ -46,7 +62,7 @@ export default {
   flex-direction: column;
   .header-title {
     font-size: 20px;
-    color: white;
+    color: #2F3941;
     font-weight: bold;
   }
 }

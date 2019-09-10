@@ -3,7 +3,7 @@
     <div class="offline-title">
       {{$t("Offline.title")}}
     </div>
-    <img src="@/assets/imgs/authentication/noConnectionIcon.svg" />
+    <img src="@/assets/imgs/authentication/noConnection.png" />
     <div class="ins">
       {{$t("Offline.ins")}}
     </div>

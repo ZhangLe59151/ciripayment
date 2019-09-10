@@ -1,6 +1,6 @@
 <template>
   <div class="app-loan-exceed-limit-msg">
-    <img src="@/assets/imgs/loan/TaokaeIconWithShadow.svg" id="taokae_icon"/>
+    <img src="@/assets/imgs/loan/Taokae_Icon.png" id="taokae_icon"/>
     <div class="msg">
       {{$t("LoanExceedLimitError.title")}}
     </div>

@@ -9,7 +9,7 @@
         <div class="bullet-msg">
           {{$t("LoanExceedLimitError.ins.bullet1")}}
           <div class="img-wrapper" style="width: 100%">
-            <img src="@/assets/imgs/loan/addRecord.svg" class="add-record" />
+            <img src="@/assets/imgs/loan/ledger.png" class="add-record" />
           </div>
         </div>
       </div>
@@ -20,7 +20,7 @@
         <div class="bullet-msg">
           {{$t("LoanExceedLimitError.ins.bullet2")}}
           <div class="img-wrapper" style="width: 100%;">
-              <img src="@/assets/imgs/loan/credit.svg" class="credit" />
+              <img src="@/assets/imgs/loan/credit.png" class="credit" />
           </div>
         </div>
       </div>

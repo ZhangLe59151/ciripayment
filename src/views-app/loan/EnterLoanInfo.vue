@@ -1,17 +1,10 @@
 <template>
   <div class="enter-loan-info">
     <van-nav-bar
-      title="Loan Application"
+      :title="$t('AppLoanOverview.headerTitle')"
       @click-left="handleDiscard"
       left-arrow
     />
-
-    <div class="heading">
-      <h1>{{$t("EnterLoanInfo.heading")}}</h1>
-      <div class="description">
-        {{$t("EnterLoanInfo.headingDesc")}}
-      </div>
-    </div>
 
     <el-form
       label-width="0px"
@@ -19,7 +12,7 @@
       ref="elForm"
       size="small"
       label-position="top"
-      style="width: 100%; margin-top: 32px;"
+      style="width: 100%;"
     >
       <el-card class="box-card">
         <!-- merchant information -->
@@ -249,15 +242,12 @@ export default {
   },
   data() {
     return {
-      form: {
-        contactPersonFirstName: "",
-        contactPersonLastName: ""
-      },
+      form: {},
       // load file url
-      frontUrl: this.$store.state.form.frontUrl || "",
-      backUrl: this.$store.state.form.backUrl || "",
-      faceUrl: this.$store.state.form.faceUrl || "",
-      certUrl: this.$store.state.form.certUrl || "",
+      frontUrl: this.$store.state.form.frontUrl,
+      backUrl: this.$store.state.form.backUrl,
+      faceUrl: this.$store.state.form.faceUrl,
+      certUrl: this.$store.state.form.certUrl,
 
       // load file name
       frontName: this.$store.state.form.frontName || "",
@@ -331,7 +321,7 @@ export default {
         })
         .then(() => {
           this.$store.commit("ClearForm");
-          this.$router.push({ name: "Loan" });
+          this.$router.push({ name: "Loan", query: this.$route.query });
         })
         .catch(() => {
           // on cancel
@@ -379,7 +369,7 @@ export default {
       this.uploadImg({
         file: this.dataURItoBlob(dataURI),
         action: this.processingDoc,
-        name: "Checked"
+        name: `${this.$moment().format("YYYYMMDDHHmm")}_${this.processingDoc}.jpeg`
       });
     },
     onFailPhotoTaking() {},
@@ -393,16 +383,6 @@ export default {
       return new Blob([ab], { type: "image/jpeg" });
     },
     handleNext() {
-      this.form.contactPersonFirstName = this.form.applicantFirstName;
-      this.form.contactPersonLastName = this.form.applicantLastName;
-      this.form.contactPersonNationalCode = this.form.applicantPhoneNumber.substring(
-        0,
-        3
-      );
-      this.form.contactPersonPhoneNumber = this.form.applicantPhoneNumber.substring(
-        3
-      );
-
       this.$refs["elForm"].validate(valid => {
         if (valid) {
           var errMsg = this.$t("missingDocumentErrorMsg");
@@ -412,15 +392,6 @@ export default {
               duration: 5000
             });
             return false;
-          }
-          if (this.isBizRegNumberValid) {
-            if (!this.certUrl) {
-              this.$notify({
-                message: errMsg,
-                duration: 5000
-              });
-              return false;
-            }
           }
           this.gotoNextPage();
         } else {
@@ -447,7 +418,9 @@ export default {
       this.$api.applyLoan(submitForm).then(res => {
         if (res.data.code === 200 && res.data.data === true) {
           this.$store.commit("ClearForm");
-          this.$router.push({ name: "Loan", query: { justSubmitted: "true" } });
+          this.$router.push({ name: "LoanApplicationResult",
+            params: { id: "latest" },
+            query: { justSubmitted: "true", origin: this.$route.query.origin } });
         }
       });
     },
@@ -641,6 +614,7 @@ export default {
 
   .box-card {
     padding: 10px;
+    box-shadow: none;
     // margin: 30px 10px;
   }
   .success-validator {
