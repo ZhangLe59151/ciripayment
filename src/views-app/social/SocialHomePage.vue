@@ -1,20 +1,27 @@
 <template>
   <div class="socialHome">
     <app-common-header :title="$t('Social.headTitle')" />
-    <social-app-sign-in-profile v-if="!showDetail" />
-    <social-app-merchant-profile v-if="showDetail" />
+    <social-app-sign-in-profile v-if="!hasProfile || !isLogin" />
+    <social-app-merchant-profile v-if="hasProfile && isLogin" />
     <social-app-merchant-list />
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "socialHome",
   data() {
     return {
-      showDetail: false
+      hasProfile: true
     }
   }, 
+  computed: {
+    ...mapState({
+      isLogin: "OTPVerified"
+    })
+  },
   methods: {
   }
   
