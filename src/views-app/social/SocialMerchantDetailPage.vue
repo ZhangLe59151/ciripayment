@@ -7,7 +7,7 @@
       <van-button :class="isFirst ? 'alertBtnSelect' : 'alertBtn'" @click="selectFirst">Content is violent.</van-button>
       <van-button :class="isSecond ? 'alertBtnSelect' : 'alertBtn'" @click="selectSecond">Content is inappropriate.</van-button>
       <van-button :class="isThird ? 'alertBtnSelect' : 'alertBtn'" @click="selectThird">Content is spam.</van-button>
-      <van-button class="submitBtn">Report</van-button>
+      <van-button :class="isReport ? 'submitBtnSelect' : 'submitBtn'">Report</van-button>
     </div>
 
     <app-common-header :title="$t('Social.merchantTitle')" />
@@ -39,7 +39,11 @@ export default {
     }
   }, 
   watch: {
-
+    ifFirst: {
+      handler(val, oldVal) {
+        this.isReport = (this.isFirst || this.isSecond || this.isThird)
+      }
+    }
   },
   methods: {
     getUserInfo(event) {
@@ -168,7 +172,13 @@ export default {
     border: 1px solid #E9EBED;
     background-color: #E9EBED;
     text-align: center;
+    .submitBtnSelect {
+      border: 1px solid #ffa702;
+      background-color: #ffa702;
+    }
   }
+
+  
 
 }
 
