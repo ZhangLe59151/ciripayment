@@ -7,7 +7,7 @@
       <van-button :class="isFirst ? 'alertBtnSelect' : 'alertBtn'" @click="selectFirst">Content is violent.</van-button>
       <van-button :class="isSecond ? 'alertBtnSelect' : 'alertBtn'" @click="selectSecond">Content is inappropriate.</van-button>
       <van-button :class="isThird ? 'alertBtnSelect' : 'alertBtn'" @click="selectThird">Content is spam.</van-button>
-      <van-button :class="isReport ? 'submitBtnSelect' : 'submitBtn'">Report</van-button>
+      <van-button :class="isReport ? 'submitBtnSelect' : 'submitBtn'" @click="submitReport">Report</van-button>
     </div>
 
     <app-common-header :title="$t('Social.merchantTitle')" />
@@ -37,13 +37,6 @@ export default {
       isSecond: false,
       isThird: false
     }
-  }, 
-  watch: {
-    ifFirst: {
-      handler(val, oldVal) {
-        this.isReport = (this.isFirst || this.isSecond || this.isThird)
-      }
-    }
   },
   methods: {
     getUserInfo(event) {
@@ -51,12 +44,18 @@ export default {
     },
     selectFirst() {
       this.isFirst = (!this.isFirst);
+      this.isReport = (this.isFirst || this.isSecond || this.isThird)
     },
     selectSecond() {
       this.isSecond = (!this.isSecond);
+      this.isReport = (this.isFirst || this.isSecond || this.isThird)
     },
     selectThird() {
       this.isThird = (!this.isThird);
+      this.isReport = (this.isFirst || this.isSecond || this.isThird)
+    },
+    submitReport() {
+      this.show = false;
     }
   }
   
@@ -172,10 +171,14 @@ export default {
     border: 1px solid #E9EBED;
     background-color: #E9EBED;
     text-align: center;
-    .submitBtnSelect {
-      border: 1px solid #ffa702;
-      background-color: #ffa702;
-    }
+  }
+
+  .submitBtnSelect {
+    margin: 16px 16px 0 16px;
+    width: 296px;
+    border: 1px solid #ffa702;
+    background-color: #ffa702;
+    text-align: center;
   }
 
   
