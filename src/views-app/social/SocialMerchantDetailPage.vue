@@ -1,5 +1,15 @@
 <template>
   <div class="socialMerchantDetailPage">
+    <div class="alertPage" v-if="show"></div>
+    <div class="alertBox" v-if="show">
+      <van-icon class="iconfont iconclose" />
+      <div class="alertTitle">Why are you reporting this merchant? </div>
+      <van-button class="alertBtn">Content is violent.</van-button>
+      <van-button class="alertBtn">Content is inappropriate.</van-button>
+      <van-button class="alertBtn">Content is spam.</van-button>
+      <van-button class="submitBtn">Report</van-button>
+    </div>
+
     <app-common-header :title="$t('Social.merchantTitle')" />
     <img class="mainImg" />
     <van-row>
@@ -12,12 +22,6 @@
     <div class="descriptText"><span class="iconfont iconretail" />128 Likes</div>
     <van-button class="joinBtn">Send A Like</van-button>
     <van-button class="reportBtn" @click="showDialog">Report</van-button>
-    <div class="alert" v-if="show">
-      <div class="alertTitle">Why are you reporting this merchant?</div>
-      <van-button class="alertbtn">Content is violent.</van-button>
-      <van-button class="alertbtn">Content is inappropriate.</van-button>
-      <van-button class="alertbtn">Content is spam.</van-button>
-    </div>
   </div>
 </template>
 
@@ -100,32 +104,53 @@ export default {
   text-align: center;
 }
 
-.alert {
+.alertPage {
+  height: 100vh;
+  width: 100%;
+  background-color: #4C4C4C;
+  position: fixed;
+  z-index: 2;
+  opacity: 0.8;  
+}
+
+.alertBox {
   position: fixed;
   height: 324px;
   width: 328px;
-  left: 16px;
-  top: 134px;
+  margin: 100px 16px 100px 16px;
   background-color: white;
+  z-index: 3;
+  border-radius: 4px;
 
   .alertTitle {
-    position: fixed;
-    max-height: 221px;
-    min-width: 56px;
+    margin: 16px 16px 0 16px;
     font-size: 20px;
     font-weight: bolder;
+    max-width: 221px;
+  }
+
+  .iconfont {
+    position: absolute;
+    right: 16px;
+    top: 26px;
+    font-size: 25px;
   }
 
   .alertBtn {
-    position: absolute;
-    margin: 16px 16px 16px 16px;
-    font-size: 16px;
-    border: 1px solid black;
-    border-radius: 4px;
-    text-align: center;
+    margin: 16px 16px 0 16px;
     width: 296px;
-    height: 40px;
-    line-height: 40px;
+    border: 1px solid black;
+    text-align: left;
   }
+
+  .submitBtn {
+    margin: 16px 16px 0 16px;
+    width: 296px;
+    border: 1px solid #E9EBED;
+    background-color: #E9EBED;
+    text-align: center;
+  }
+
 }
+
 </style>
