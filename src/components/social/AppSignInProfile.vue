@@ -2,7 +2,7 @@
   <div class="appSocialSignIn">
     <div :class="isLogin ? 'profileLogin' : 'profile'"></div>
     <van-button class="signInBtn" @click="signIn" v-if="!isLogin">{{ $t('Social.signIn') }}</van-button>
-    <van-button class="signInBtn" @click="signIn" v-if="isLogin">{{ $t('Social.setUp') }}</van-button>
+    <van-button class="signInBtn" @click="setUp" v-if="isLogin">{{ $t('Social.setUp') }}</van-button>
   </div>
 </template>
 
@@ -19,9 +19,15 @@ export default {
   methods: {
     signIn() {
       this.$router.push({
-          name: "LoginPage",
-          query: { to: "SocialHome" }
-        });
+        name: "LoginPage",
+        query: { to: "SocialHome" }
+      });
+    },
+    setUp() {
+      this.$router.push({
+        name: "socialSetProfilePage",
+        query: { to: "SocialHome" }
+      });
     }
   }
 };

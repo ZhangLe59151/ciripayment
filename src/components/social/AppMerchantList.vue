@@ -4,7 +4,7 @@
     <div class="card" @click="viewDetail">
       <img class="imgBox" src="" />
       <div class="imgTitle">Little Thaus Co.</div>
-      <div class="descriptText"><span class="iconfont iconretail" />128 Likes</div>
+      <div class="descriptText"><span class="iconfont iconsociallikeoutline" />128 Likes</div>
       <div class="descriptText"><span class="iconfont iconretail" />Retail Business</div>
     </div>
   </div>

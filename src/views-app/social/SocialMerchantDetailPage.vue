@@ -19,7 +19,7 @@
     </van-row>
     <div class="title">Little Thais Co.</div>
     <div class="descriptText"><span class="iconfont iconretail" />Retail Business</div>
-    <div class="descriptText"><span class="iconfont iconretail" />128 Likes</div>
+    <div class="descriptText"><span class="iconfont iconsocial-like-outline" />128 Likes</div>
     <van-button class="joinBtn">Send A Like</van-button>
     <van-button class="reportBtn" @click="show = true">Report</van-button>
   </div>

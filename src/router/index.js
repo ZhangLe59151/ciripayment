@@ -123,6 +123,14 @@ const AppRouteArr = [
     }
   },
   {
+    path: "/socialSetProfile",
+    name: "socialSetProfilePage",
+    component: () => import("@/views-app/social/socialSetProfilePage.vue"),
+    meta: {
+      title: "socialSetProfilePage"
+    }
+  },
+  {
     path: "/credit",
     name: "Credit",
     component: () => import("@/views-app/credit/Credit.vue"),
