@@ -32,6 +32,11 @@
 </template>
 
 <script>
+import { ImageReader } from 'mand-mobile'
+import imageProcessor from 'mand-mobile/lib/image-reader/image-processor'
+
+Vue.component(ImageReader.name, ImageReader)
+
 export default {
   name: "socialSetProfilePage",
 
