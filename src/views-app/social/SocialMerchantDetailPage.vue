@@ -2,11 +2,11 @@
   <div class="socialMerchantDetailPage">
     <div class="alertPage" v-if="show"></div>
     <div class="alertBox" v-if="show">
-      <van-icon class="iconfont iconclose" />
+      <van-icon class="iconfont iconclose" @click="show = false"/>
       <div class="alertTitle">Why are you reporting this merchant? </div>
-      <van-button class="alertBtn">Content is violent.</van-button>
-      <van-button class="alertBtn">Content is inappropriate.</van-button>
-      <van-button class="alertBtn">Content is spam.</van-button>
+      <van-button :class="isFirst ? 'alertBtnSelect' : 'alertBtn'" @click="selectFirst">Content is violent.</van-button>
+      <van-button :class="isSecond ? 'alertBtnSelect' : 'alertBtn'" @click="selectSecond">Content is inappropriate.</van-button>
+      <van-button :class="isThird ? 'alertBtnSelect' : 'alertBtn'" @click="selectThird">Content is spam.</van-button>
       <van-button class="submitBtn">Report</van-button>
     </div>
 
@@ -21,7 +21,7 @@
     <div class="descriptText"><span class="iconfont iconretail" />Retail Business</div>
     <div class="descriptText"><span class="iconfont iconretail" />128 Likes</div>
     <van-button class="joinBtn">Send A Like</van-button>
-    <van-button class="reportBtn" @click="showDialog">Report</van-button>
+    <van-button class="reportBtn" @click="show = true">Report</van-button>
   </div>
 </template>
 
@@ -31,18 +31,28 @@ export default {
   data() {
     return {
       showDetail: false,
-      show: false
+      show: false,
+      isReport: false,
+      isFirst: false,
+      isSecond: false,
+      isThird: false
     }
   }, 
+  watch: {
+
+  },
   methods: {
-    showDialog() {
-      this.show = true
-    },
     getUserInfo(event) {
       console.log(event.detail);
     },
-    onClose() {
-      this.setData({ close: false });
+    selectFirst() {
+      this.isFirst = (!this.isFirst);
+    },
+    selectSecond() {
+      this.isSecond = (!this.isSecond);
+    },
+    selectThird() {
+      this.isThird = (!this.isThird);
     }
   }
   
@@ -141,6 +151,15 @@ export default {
     width: 296px;
     border: 1px solid black;
     text-align: left;
+  }
+
+  .alertBtnSelect {
+    margin: 16px 16px 0 16px;
+    width: 296px;
+    border: 1px solid #2F3941;
+    text-align: left;
+    background-color: #2F3941;
+    color: white;
   }
 
   .submitBtn {
