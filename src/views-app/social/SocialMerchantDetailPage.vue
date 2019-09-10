@@ -3,11 +3,11 @@
     <div class="alertPage" v-if="show"></div>
     <div class="alertBox" v-if="show">
       <van-icon class="iconfont iconclose" @click="show = false"/>
-      <div class="alertTitle">Why are you reporting this merchant? </div>
-      <van-button :class="isFirst ? 'alertBtnSelect' : 'alertBtn'" @click="selectFirst">Content is violent.</van-button>
-      <van-button :class="isSecond ? 'alertBtnSelect' : 'alertBtn'" @click="selectSecond">Content is inappropriate.</van-button>
-      <van-button :class="isThird ? 'alertBtnSelect' : 'alertBtn'" @click="selectThird">Content is spam.</van-button>
-      <van-button :class="isReport ? 'submitBtnSelect' : 'submitBtn'" @click="submitReport">Report</van-button>
+      <div class="alertTitle">{{ $t('Social.reportQuestion') }}</div>
+      <van-button :class="isFirst ? 'alertBtnSelect' : 'alertBtn'" @click="selectFirst">{{ $t('Social.reasonOne') }}</van-button>
+      <van-button :class="isSecond ? 'alertBtnSelect' : 'alertBtn'" @click="selectSecond">{{ $t('Social.reasonTwo') }}</van-button>
+      <van-button :class="isThird ? 'alertBtnSelect' : 'alertBtn'" @click="selectThird">{{ $t('Social.reasonThree') }}</van-button>
+      <van-button :class="isReport ? 'submitBtnSelect' : 'submitBtn'" @click="submitReport">{{ $t('Social.report') }}</van-button>
     </div>
 
     <app-common-header :title="$t('Social.merchantTitle')" />
@@ -20,8 +20,8 @@
     <div class="title">Little Thais Co.</div>
     <div class="descriptText"><span class="iconfont iconretail" />Retail Business</div>
     <div class="descriptText"><span class="iconfont iconsocial-like-outline" />128 Likes</div>
-    <van-button class="joinBtn">Send A Like</van-button>
-    <van-button class="reportBtn" @click="show = true">Report</van-button>
+    <van-button class="joinBtn">{{ $t('Social.like') }}</van-button>
+    <van-button class="reportBtn" @click="show = true">{{ $t('Social.report') }}</van-button>
   </div>
 </template>
 

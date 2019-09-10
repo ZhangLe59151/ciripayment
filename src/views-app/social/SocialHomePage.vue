@@ -14,7 +14,7 @@ export default {
   name: "socialHome",
   data() {
     return {
-      hasProfile: true
+      hasProfile: false
     }
   }, 
   computed: {

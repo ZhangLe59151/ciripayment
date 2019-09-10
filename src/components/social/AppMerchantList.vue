@@ -1,6 +1,6 @@
 <template>
   <div class="appMerchantList">
-    <div class="title">Merchants Similar To You</div>
+    <div class="title">{{ $t('Social.merchantListTitle') }}</div>
     <div class="card" @click="viewDetail">
       <img class="imgBox" src="" />
       <div class="imgTitle">Little Thaus Co.</div>
@@ -25,7 +25,7 @@ export default {
 
 <style lang="scss" scoped>
 .appMerchantList {
-  height: 200px;
+  height: 300px;
   width: 100%;
   background-color: #EBE9ED;
 
@@ -61,6 +61,8 @@ export default {
       font-size: 12px;
       margin: 3px 3px 0 3px;
     }
+
+    
   }
 
 }

@@ -273,6 +273,20 @@
     "signIn": "Sign In To View Your Profile",
     "setUp": "Set Up Your Profile",
     "merchantTitle": "Merchant Profile",
-    "profileTitle": "Profile Setup"
+    "profileTitle": "Profile Setup",
+    "merchantListTitle": "Merchants Similar To You",
+    "yourPhoto": "Your Photos",
+    "reportQuestion": "Why are you reporting this merchant?",
+    "reasonOne": "Content is violent.",
+    "reasonTwo": "Content is inappropriate.",
+    "reasonThree": "Content is spam.",
+    "report": "Report",
+    "like": "Send A Like",
+    "businessName": "Name of Your Business",
+    "merchantPhoto": "Photos of Your Shop or Products",
+    "photoText": "Only JPG and PNG files are accepted. Max file size: 8 MB",
+    "takePhoto": "Take Photo",
+    "saveBtn": "Save Profile",
+    "placeHolder": "E.g. Sell clothes, sell food"
   }
 }

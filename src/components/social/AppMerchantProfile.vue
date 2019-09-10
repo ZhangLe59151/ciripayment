@@ -6,7 +6,7 @@
       <van-col span="12" class="spanBox" >Resaurant</van-col>
       <van-col span="12" class="spanBox" >888 Likes</van-col>
     </van-row>
-    <div class="imgTitle">Your Photos</div>
+    <div class="imgTitle">{{ $t('Social.myPhoto') }}</div>
     <van-row>
       <img class="imgBox" />
       <img class="imgBox" />

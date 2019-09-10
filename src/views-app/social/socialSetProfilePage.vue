@@ -2,19 +2,19 @@
   <div class="socialSetProfilePage">
     <app-common-header :title="$t('Social.profileTitle')" />
     <div class="nameCard">
-      <div class="title">Name of Your Business</div>
+      <div class="title">{{ $t('Social.businessName') }}</div>
       <van-field
           class="answerInput"
           ref="inputText"
           :border="true"
-          placeholder="E.g. Sell clothes, sell food"
+          :placeholder="$t('Social.placeHolder')"
           @keyup.enter.native="$refs.inputText.blur()"
           v-model="answer"
         ></van-field>
     </div>
     <div class="profileCard">
-      <div class="title">Photos of Your Shop or Products</div>
-      <div class="subTitle">Only JPG and PNG files are accepted. Max file size: 8 MB</div>
+      <div class="title">{{ $t('Social.merchantPhoto') }}</div>
+      <div class="subTitle">{{ $t('Social.photoText') }}</div>
       <div 
         class="takePhoto" 
         type="file" 
@@ -22,12 +22,12 @@
         capture 
         @click="takePhoto">
         <van-icon class="iconfont iconcamera" />
-        <div class="textMsg">Take Photo</div>
+        <div class="textMsg">{{ $t('Social.takePhoto') }}</div>
       </div>
       <div class="takePhoto"><van-icon class="iconfont iconcamera" /><div class="textMsg">Take Photo</div></div>
       <div class="takePhoto"><van-icon class="iconfont iconcamera" /><div class="textMsg">Take Photo</div></div>
     </div>
-    <van-button class="saveBtn">Save Profile</van-button>
+    <van-button class="saveBtn">{{ $t('Social.saveBtn') }}</van-button>
   </div>
 </template>
 
