@@ -172,5 +172,11 @@ export default {
   },
   getLikeCount() {
     return Vue.axios.get(API_VERSION_V1 + "/lucky-draw/like-count");
+  },
+  getSimilarMerchant() {
+    return Vue.axios.get(API_VERSION_V1 + "/social/profile/similarList");
+  },
+  getProfileView(params) {
+    return Vue.axios.get(API_VERSION_V1 + "/social/profile/view", params);
   }
 };

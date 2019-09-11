@@ -15,73 +15,113 @@
     <div class="profileCard">
       <div class="title">{{ $t('Social.merchantPhoto') }}</div>
       <div class="subTitle">{{ $t('Social.photoText') }}</div>
-      <div 
-        class="takePhoto" 
-        type="file" 
-        accept="image/*"  
-        capture 
-        @click="takePhoto">
+      <!-- <md-image-reader
+        class="takePhoto"
+        name="reader0"
+        @select="onReaderSelect"
+        @complete="onReaderComplete"
+        @error="onReaderError"
+        is-multiple
+        ></md-image-reader>
+      <div class="takePhoto"><van-icon class="iconfont iconcamera" /><div class="textMsg">Take Photo</div></div>
+      <div class="takePhoto"><van-icon class="iconfont iconcamera" /><div class="textMsg">Take Photo</div></div> -->
+      <ul class="image-reader-list">
+      <li
+        class="image-reader-item"
+        v-for="(img, index) in imageList['reader1']"
+        :key="index"
+        :style="{
+          'backgroundImage': `url(${img})`,
+          'backgroundPosition': 'center center',
+          'backgroundRepeat': 'no-repeat',
+          'backgroundSize': 'cover'
+        }">
+        <md-tag
+          class="image-reader-item-del"
+          size="small"
+          shape="quarter"
+          fill-color="#111A34"
+          type="fill"
+          font-color="#fff"
+          @click.native="onDeleteImage('reader1', index)"
+        >
+          <md-icon name="close"></md-icon>
+        </md-tag>
+      </li>
+      <li class="image-reader-item add">
+        <md-image-reader
+          name="reader1"
+          @select="onReaderSelect"
+          @complete="onReaderComplete"
+          @error="onReaderError"
+          is-multiple
+        ></md-image-reader>
         <van-icon class="iconfont iconcamera" />
-        <div class="textMsg">{{ $t('Social.takePhoto') }}</div>
-      </div>
-      <div class="takePhoto"><van-icon class="iconfont iconcamera" /><div class="textMsg">Take Photo</div></div>
-      <div class="takePhoto"><van-icon class="iconfont iconcamera" /><div class="textMsg">Take Photo</div></div>
+        <div class="textMsg">Take Photo</div>
+      </li>
+      </ul>
     </div>
     <van-button class="saveBtn">{{ $t('Social.saveBtn') }}</van-button>
   </div>
 </template>
 
 <script>
-import { ImageReader } from 'mand-mobile'
-import imageProcessor from 'mand-mobile/lib/image-reader/image-processor'
+import Vue from 'vue'
+import {Icon, ImageReader, Tag, Toast} from 'mand-mobile'
+import imageProcessor from 'mand-mobile/components/image-reader/image-processor'
 
 Vue.component(ImageReader.name, ImageReader)
 
 export default {
   name: "socialSetProfilePage",
-
+  components: {
+    [Icon.name]: Icon,
+    [ImageReader.name]: ImageReader,
+    [Tag.name]: Tag,
+  },
   data() {
     return {
-      answer: ""
+      answer: "",
+      imageList: {
+        reader0: [
+          '//img-hxy021.didistatic.com/static/strategymis/insurancePlatform_spu/uploads/27fb7f097ca218d743f816836bc7ea4a',
+          '//manhattan.didistatic.com/static/manhattan/insurancePlatform_spu/uploads/c2912793a222eb24b606a582fd849ab7',
+        ],
+        reader1: [],
+      }
     }
-  },
-  mounted() {
-    // this is to activate cordova camera plugin
-    document.addEventListener("deviceready", () => console.log("device-ready"));
-    if (!this.$route.query.position) {
-      // Scroll to top whenever apply new application
-      window.scrollTo(0, 0);
-    }
-
-    // scroll to saved position - change to refs, position value somehow not working in Vue with refs
-    /*
-    if (this.$route.query.position) {
-      var element = this.$refs["bizInfo"];
-      var top = element.offsetTop;
-      window.scrollTo(0, top);
-    }
-    if (this.$route.query.flag && this.$route.query.flag === "back") {
-      this.$refs["elForm"].validate();
-    }*/
   },
   methods: {
     goNextPage(){
       this.$router.push({ name: "SocialHome" });
     },
     takePhoto() {
-      let opts = {
-        quality: 80,
-        destinationType: Camera.DestinationType.DATA_URL,
-        sourceType: Camera.PictureSourceType.CAMERA,
-        mediaType: Camera.MediaType.PICTURE,
-        encodingType: Camera.EncodingType.JPEG,
-        cameraDirection: Camera.Direction.BACK
-      };
-      navigator.camera.getPicture(
-        this.onSuccessPhotoTaking,
-        this.onFailPhotoTaking,
-        opts
-      );
+    },
+    onReaderSelect() {
+      Toast.loading('图片读取中...')
+    },
+    onReaderComplete(name, {dataUrl}) {
+      const demoImageList = this.imageList[name] || []
+
+      imageProcessor({
+        dataUrl,
+        width: 200,
+        height: 200,
+        quality: 0.1,
+      }).then(({dataUrl}) => {
+        dataUrl && demoImageList.push(dataUrl)
+      })
+      this.$set(this.imageList, name, demoImageList)
+
+      Toast.hide()
+    },
+    onReaderError(name, {msg}) {
+      Toast.failed(msg)
+    },
+    onDeleteImage(name, index) {
+      const demoImageList = this.imageList[name] || []
+      demoImageList.splice(index, 1)
+      this.$set(this.imageList, name, demoImageList)
     }
   }
 };

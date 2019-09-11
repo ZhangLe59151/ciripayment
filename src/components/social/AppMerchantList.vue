@@ -12,8 +12,16 @@
 
 <script>
 import { mapState } from "vuex";
+
 export default {
   name: "appMerchantList",
+  created() {
+    this.$api.getSimilarMerchant().then(res => {
+        if (res.data.code === 200) {
+          //debugger
+        }
+    });
+  },
   methods: {
     viewDetail() {
       //this.$emit('childByValue', true)

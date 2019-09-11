@@ -12,6 +12,8 @@ import { mapState } from "vuex";
 
 export default {
   name: "socialHome",
+  created() {
+  },
   data() {
     return {
       hasProfile: false
