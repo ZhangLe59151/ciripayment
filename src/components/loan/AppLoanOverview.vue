@@ -2,34 +2,7 @@
   <div
     class="app-loan-overview"
   >
-    <div class="banner">
-      <div class="banner-title">{{$t("AppLoanOverview.bannerTitle")}}!</div>
-    </div>
-    <div class="ribbon">
-      <div class="lower-rate">
-        <i class="iconfont iconcheck" />
-        <div>{{$t("AppLoanOverview.lowerRate")}}</div>
-      </div>
-      <div class="higher-limit">
-        <i class="iconfont iconcheck" />
-        <div>{{$t("AppLoanOverview.higherLimit")}}</div>
-      </div>
-      <div class="faster-approval">
-        <i class="iconfont iconcheck" />
-        <div>{{$t("AppLoanOverview.fasterApproval")}}</div>
-      </div>
-    </div>
-    <div class="instruction">
-      <div class="instruction-qs">
-        {{$t("AppLoanOverview.instruction.qs")}}
-      </div>
-      <div class="requirements">
-        <i class="iconfont iconidcard" /> {{$t("AppLoanOverview.instruction.requirements")}}
-      </div>
-      <div class="instruction-msg">
-        {{$t("AppLoanOverview.instruction.msg")}}
-      </div>
-    </div>
+    
     <div class="enter-loan-amount">
       <el-form
         label-width="0px"

@@ -1,5 +1,6 @@
 <template>
   <div class="socialSetProfilePage">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
     <app-common-header :title="$t('Social.profileTitle')" />
     <div class="nameCard">
       <div class="title">{{ $t('Social.businessName') }}</div>
@@ -15,51 +16,16 @@
     <div class="profileCard">
       <div class="title">{{ $t('Social.merchantPhoto') }}</div>
       <div class="subTitle">{{ $t('Social.photoText') }}</div>
-      <!-- <md-image-reader
+      <md-image-reader
         class="takePhoto"
-        name="reader0"
+        name="img0"
         @select="onReaderSelect"
         @complete="onReaderComplete"
         @error="onReaderError"
-        is-multiple
         ></md-image-reader>
       <div class="takePhoto"><van-icon class="iconfont iconcamera" /><div class="textMsg">Take Photo</div></div>
-      <div class="takePhoto"><van-icon class="iconfont iconcamera" /><div class="textMsg">Take Photo</div></div> -->
-      <ul class="image-reader-list">
-      <li
-        class="image-reader-item"
-        v-for="(img, index) in imageList['reader1']"
-        :key="index"
-        :style="{
-          'backgroundImage': `url(${img})`,
-          'backgroundPosition': 'center center',
-          'backgroundRepeat': 'no-repeat',
-          'backgroundSize': 'cover'
-        }">
-        <md-tag
-          class="image-reader-item-del"
-          size="small"
-          shape="quarter"
-          fill-color="#111A34"
-          type="fill"
-          font-color="#fff"
-          @click.native="onDeleteImage('reader1', index)"
-        >
-          <md-icon name="close"></md-icon>
-        </md-tag>
-      </li>
-      <li class="image-reader-item add">
-        <md-image-reader
-          name="reader1"
-          @select="onReaderSelect"
-          @complete="onReaderComplete"
-          @error="onReaderError"
-          is-multiple
-        ></md-image-reader>
-        <van-icon class="iconfont iconcamera" />
-        <div class="textMsg">Take Photo</div>
-      </li>
-      </ul>
+      <div class="takePhoto"><van-icon class="iconfont iconcamera" /><div class="textMsg">Take Photo</div></div>
+      
     </div>
     <van-button class="saveBtn">{{ $t('Social.saveBtn') }}</van-button>
   </div>
@@ -82,11 +48,9 @@ export default {
   data() {
     return {
       answer: "",
+      img0: [],
       imageList: {
-        reader0: [
-          '//img-hxy021.didistatic.com/static/strategymis/insurancePlatform_spu/uploads/27fb7f097ca218d743f816836bc7ea4a',
-          '//manhattan.didistatic.com/static/manhattan/insurancePlatform_spu/uploads/c2912793a222eb24b606a582fd849ab7',
-        ],
+        reader0: [],
         reader1: [],
       }
     }

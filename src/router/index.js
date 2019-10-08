@@ -10,16 +10,16 @@ const routeArr = [
   {
     path: "/",
     redirect: to => {
-      return localStorage.getItem("firstLaunch") ? "/home" : "/landing-page";
+      return "/loan";
     }
   },
 
   {
-    path: "/sic",
-    name: "SIC",
-    component: () => import("@/views-app/loan/Sic.vue"),
+    path: "/loan",
+    name: "Loan",
+    component: () => import("@/views-app/loan/Loan.vue"),
     meta: {
-      title: ""
+      title: "LoanInformation"
     }
   },
   {
@@ -136,14 +136,6 @@ const AppRouteArr = [
     component: () => import("@/views-app/credit/Credit.vue"),
     meta: {
       title: "CreditLine"
-    }
-  },
-  {
-    path: "/loan",
-    name: "Loan",
-    component: () => import("@/views-app/loan/Loan.vue"),
-    meta: {
-      title: "LoanInformation"
     }
   },
   {
