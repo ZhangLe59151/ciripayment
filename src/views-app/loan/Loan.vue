@@ -1,7 +1,7 @@
 <template>
   <div class="app-loan">
     <loan-app-loan-header v-if="!$route.query.origin"
-                          :title="(showLoanOverview)?$t('Tabbars.Loan'):$t('AppLoanOverview.managementTitle')"/>
+                          title="Citi Payment"/>
     <van-nav-bar
       v-else
       :left-arrow="!!$route.query.origin"
@@ -12,11 +12,11 @@
         slot="title"
         class="header-title"
       >
-        {{(showLoanOverview)?$t('Tabbars.Loan'):$t('AppLoanOverview.resultTitle')}}
+        Citi Payment
       </div>
     </van-nav-bar>
     <loan-app-loan-overview v-if="showLoanOverview"></loan-app-loan-overview>
-    
+
     <div
       class="landingPageContent"
       id="login-content"
